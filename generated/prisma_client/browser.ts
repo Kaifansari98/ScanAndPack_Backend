@@ -93,6 +93,11 @@ export type BoxMaster = Prisma.BoxMasterModel
  */
 export type FactoryOutRevertLog = Prisma.FactoryOutRevertLogModel
 /**
+ * Model BoxUnpackLog
+ * 
+ */
+export type BoxUnpackLog = Prisma.BoxUnpackLogModel
+/**
  * Model ScanAndPackItem
  * 
  */

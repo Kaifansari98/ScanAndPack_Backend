@@ -439,6 +439,7 @@ export type BoxMasterWhereInput = {
   items?: Prisma.ScanAndPackItemListRelationFilter
   leadMaster?: Prisma.LeadMasterListRelationFilter
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
 }
 
 export type BoxMasterOrderByWithRelationInput = {
@@ -478,6 +479,7 @@ export type BoxMasterOrderByWithRelationInput = {
   items?: Prisma.ScanAndPackItemOrderByRelationAggregateInput
   leadMaster?: Prisma.LeadMasterOrderByRelationAggregateInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogOrderByRelationAggregateInput
+  box_unpack_logs?: Prisma.BoxUnpackLogOrderByRelationAggregateInput
 }
 
 export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -521,6 +523,7 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   items?: Prisma.ScanAndPackItemListRelationFilter
   leadMaster?: Prisma.LeadMasterListRelationFilter
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
 }, "id" | "project_id_sequence_no">
 
 export type BoxMasterOrderByWithAggregationInput = {
@@ -617,6 +620,7 @@ export type BoxMasterCreateInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateInput = {
@@ -650,6 +654,7 @@ export type BoxMasterUncheckedCreateInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUpdateInput = {
@@ -682,6 +687,7 @@ export type BoxMasterUpdateInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateInput = {
@@ -715,6 +721,7 @@ export type BoxMasterUncheckedUpdateInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterCreateManyInput = {
@@ -1207,6 +1214,20 @@ export type BoxMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput 
   update?: Prisma.XOR<Prisma.XOR<Prisma.BoxMasterUpdateToOneWithWhereWithoutFactory_out_revert_logsInput, Prisma.BoxMasterUpdateWithoutFactory_out_revert_logsInput>, Prisma.BoxMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
 }
 
+export type BoxMasterCreateNestedOneWithoutBox_unpack_logsInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutBox_unpack_logsInput, Prisma.BoxMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutBox_unpack_logsInput
+  connect?: Prisma.BoxMasterWhereUniqueInput
+}
+
+export type BoxMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutBox_unpack_logsInput, Prisma.BoxMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutBox_unpack_logsInput
+  upsert?: Prisma.BoxMasterUpsertWithoutBox_unpack_logsInput
+  connect?: Prisma.BoxMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoxMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput, Prisma.BoxMasterUpdateWithoutBox_unpack_logsInput>, Prisma.BoxMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+}
+
 export type BoxMasterCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutItemsInput, Prisma.BoxMasterUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutItemsInput
@@ -1318,6 +1339,7 @@ export type BoxMasterCreateWithoutVendorInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutVendorInput = {
@@ -1350,6 +1372,7 @@ export type BoxMasterUncheckedCreateWithoutVendorInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutVendorInput = {
@@ -1438,6 +1461,7 @@ export type BoxMasterCreateWithoutFactoryOutByUserInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutFactoryOutByUserInput = {
@@ -1470,6 +1494,7 @@ export type BoxMasterUncheckedCreateWithoutFactoryOutByUserInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutFactoryOutByUserInput = {
@@ -1511,6 +1536,7 @@ export type BoxMasterCreateWithoutPackedByUserInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutPackedByUserInput = {
@@ -1543,6 +1569,7 @@ export type BoxMasterUncheckedCreateWithoutPackedByUserInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutPackedByUserInput = {
@@ -1584,6 +1611,7 @@ export type BoxMasterCreateWithoutSiteInByUserInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutSiteInByUserInput = {
@@ -1616,6 +1644,7 @@ export type BoxMasterUncheckedCreateWithoutSiteInByUserInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutSiteInByUserInput = {
@@ -1705,6 +1734,7 @@ export type BoxMasterCreateWithoutProjectInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutProjectInput = {
@@ -1737,6 +1767,7 @@ export type BoxMasterUncheckedCreateWithoutProjectInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutProjectInput = {
@@ -1794,6 +1825,7 @@ export type BoxMasterCreateWithoutDetailsInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutDetailsInput = {
@@ -1826,6 +1858,7 @@ export type BoxMasterUncheckedCreateWithoutDetailsInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutDetailsInput = {
@@ -1883,6 +1916,7 @@ export type BoxMasterCreateWithoutFactory_out_revert_logsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
@@ -1915,6 +1949,7 @@ export type BoxMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutFactory_out_revert_logsInput = {
@@ -1962,6 +1997,7 @@ export type BoxMasterUpdateWithoutFactory_out_revert_logsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
@@ -1994,6 +2030,153 @@ export type BoxMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
+}
+
+export type BoxMasterCreateWithoutBox_unpack_logsInput = {
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  factory_out_at?: Date | string | null
+  lead_id?: number | null
+  site_in_at?: Date | string | null
+  packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+}
+
+export type BoxMasterUncheckedCreateWithoutBox_unpack_logsInput = {
+  id?: number
+  project_id: number
+  vendor_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
+  factory_out_at?: Date | string | null
+  factory_out_by?: number | null
+  lead_id?: number | null
+  site_in_at?: Date | string | null
+  site_in_by?: number | null
+  packed_at?: Date | string | null
+  packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
+  items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+}
+
+export type BoxMasterCreateOrConnectWithoutBox_unpack_logsInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutBox_unpack_logsInput, Prisma.BoxMasterUncheckedCreateWithoutBox_unpack_logsInput>
+}
+
+export type BoxMasterUpsertWithoutBox_unpack_logsInput = {
+  update: Prisma.XOR<Prisma.BoxMasterUpdateWithoutBox_unpack_logsInput, Prisma.BoxMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutBox_unpack_logsInput, Prisma.BoxMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  where?: Prisma.BoxMasterWhereInput
+}
+
+export type BoxMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput = {
+  where?: Prisma.BoxMasterWhereInput
+  data: Prisma.XOR<Prisma.BoxMasterUpdateWithoutBox_unpack_logsInput, Prisma.BoxMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+}
+
+export type BoxMasterUpdateWithoutBox_unpack_logsInput = {
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+}
+
+export type BoxMasterUncheckedUpdateWithoutBox_unpack_logsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
+  items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterCreateWithoutItemsInput = {
@@ -2025,6 +2208,7 @@ export type BoxMasterCreateWithoutItemsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutItemsInput = {
@@ -2057,6 +2241,7 @@ export type BoxMasterUncheckedCreateWithoutItemsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutItemsInput = {
@@ -2104,6 +2289,7 @@ export type BoxMasterUpdateWithoutItemsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutItemsInput = {
@@ -2136,6 +2322,7 @@ export type BoxMasterUncheckedUpdateWithoutItemsInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterCreateWithoutLeadMasterInput = {
@@ -2167,6 +2354,7 @@ export type BoxMasterCreateWithoutLeadMasterInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutLeadMasterInput = {
@@ -2199,6 +2387,7 @@ export type BoxMasterUncheckedCreateWithoutLeadMasterInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutLeadMasterInput = {
@@ -2251,6 +2440,7 @@ export type BoxMasterCreateWithoutCutListMachineMappingInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -2283,6 +2473,7 @@ export type BoxMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -2330,6 +2521,7 @@ export type BoxMasterUpdateWithoutCutListMachineMappingInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -2362,6 +2554,7 @@ export type BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterCreateWithoutBox_info_valuesInput = {
@@ -2393,6 +2586,7 @@ export type BoxMasterCreateWithoutBox_info_valuesInput = {
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterUncheckedCreateWithoutBox_info_valuesInput = {
@@ -2425,6 +2619,7 @@ export type BoxMasterUncheckedCreateWithoutBox_info_valuesInput = {
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutBoxInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxMasterCreateOrConnectWithoutBox_info_valuesInput = {
@@ -2472,6 +2667,7 @@ export type BoxMasterUpdateWithoutBox_info_valuesInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutBox_info_valuesInput = {
@@ -2504,6 +2700,7 @@ export type BoxMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterCreateManyVendorInput = {
@@ -2562,6 +2759,7 @@ export type BoxMasterUpdateWithoutVendorInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutVendorInput = {
@@ -2594,6 +2792,7 @@ export type BoxMasterUncheckedUpdateWithoutVendorInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -2733,6 +2932,7 @@ export type BoxMasterUpdateWithoutFactoryOutByUserInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput = {
@@ -2765,6 +2965,7 @@ export type BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserInput = {
@@ -2823,6 +3024,7 @@ export type BoxMasterUpdateWithoutPackedByUserInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutPackedByUserInput = {
@@ -2855,6 +3057,7 @@ export type BoxMasterUncheckedUpdateWithoutPackedByUserInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutPackedByUserInput = {
@@ -2913,6 +3116,7 @@ export type BoxMasterUpdateWithoutSiteInByUserInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutSiteInByUserInput = {
@@ -2945,6 +3149,7 @@ export type BoxMasterUncheckedUpdateWithoutSiteInByUserInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutSiteInByUserInput = {
@@ -3030,6 +3235,7 @@ export type BoxMasterUpdateWithoutProjectInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutProjectInput = {
@@ -3062,6 +3268,7 @@ export type BoxMasterUncheckedUpdateWithoutProjectInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutProjectInput = {
@@ -3147,6 +3354,7 @@ export type BoxMasterUpdateWithoutDetailsInput = {
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
@@ -3179,6 +3387,7 @@ export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
@@ -3237,6 +3446,7 @@ export type BoxMasterUpdateWithoutLeadMasterInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutLeadMasterInput = {
@@ -3269,6 +3479,7 @@ export type BoxMasterUncheckedUpdateWithoutLeadMasterInput = {
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutBoxNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutLeadMasterInput = {
@@ -3310,6 +3521,7 @@ export type BoxMasterCountOutputType = {
   items: number
   leadMaster: number
   factory_out_revert_logs: number
+  box_unpack_logs: number
 }
 
 export type BoxMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3318,6 +3530,7 @@ export type BoxMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   items?: boolean | BoxMasterCountOutputTypeCountItemsArgs
   leadMaster?: boolean | BoxMasterCountOutputTypeCountLeadMasterArgs
   factory_out_revert_logs?: boolean | BoxMasterCountOutputTypeCountFactory_out_revert_logsArgs
+  box_unpack_logs?: boolean | BoxMasterCountOutputTypeCountBox_unpack_logsArgs
 }
 
 /**
@@ -3365,6 +3578,13 @@ export type BoxMasterCountOutputTypeCountFactory_out_revert_logsArgs<ExtArgs ext
   where?: Prisma.FactoryOutRevertLogWhereInput
 }
 
+/**
+ * BoxMasterCountOutputType without action
+ */
+export type BoxMasterCountOutputTypeCountBox_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxUnpackLogWhereInput
+}
+
 
 export type BoxMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3403,6 +3623,7 @@ export type BoxMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   items?: boolean | Prisma.BoxMaster$itemsArgs<ExtArgs>
   leadMaster?: boolean | Prisma.BoxMaster$leadMasterArgs<ExtArgs>
   factory_out_revert_logs?: boolean | Prisma.BoxMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.BoxMaster$box_unpack_logsArgs<ExtArgs>
   _count?: boolean | Prisma.BoxMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boxMaster"]>
 
@@ -3515,6 +3736,7 @@ export type BoxMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   items?: boolean | Prisma.BoxMaster$itemsArgs<ExtArgs>
   leadMaster?: boolean | Prisma.BoxMaster$leadMasterArgs<ExtArgs>
   factory_out_revert_logs?: boolean | Prisma.BoxMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.BoxMaster$box_unpack_logsArgs<ExtArgs>
   _count?: boolean | Prisma.BoxMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoxMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3548,6 +3770,7 @@ export type $BoxMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     items: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
     leadMaster: Prisma.$LeadMasterPayload<ExtArgs>[]
     factory_out_revert_logs: Prisma.$FactoryOutRevertLogPayload<ExtArgs>[]
+    box_unpack_logs: Prisma.$BoxUnpackLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3980,6 +4203,7 @@ export interface Prisma__BoxMasterClient<T, Null = never, ExtArgs extends runtim
   items<T extends Prisma.BoxMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadMaster<T extends Prisma.BoxMaster$leadMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$leadMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   factory_out_revert_logs<T extends Prisma.BoxMaster$factory_out_revert_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$factory_out_revert_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FactoryOutRevertLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  box_unpack_logs<T extends Prisma.BoxMaster$box_unpack_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$box_unpack_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxUnpackLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4609,6 +4833,30 @@ export type BoxMaster$factory_out_revert_logsArgs<ExtArgs extends runtime.Types.
   take?: number
   skip?: number
   distinct?: Prisma.FactoryOutRevertLogScalarFieldEnum | Prisma.FactoryOutRevertLogScalarFieldEnum[]
+}
+
+/**
+ * BoxMaster.box_unpack_logs
+ */
+export type BoxMaster$box_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxUnpackLog
+   */
+  select?: Prisma.BoxUnpackLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxUnpackLog
+   */
+  omit?: Prisma.BoxUnpackLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxUnpackLogInclude<ExtArgs> | null
+  where?: Prisma.BoxUnpackLogWhereInput
+  orderBy?: Prisma.BoxUnpackLogOrderByWithRelationInput | Prisma.BoxUnpackLogOrderByWithRelationInput[]
+  cursor?: Prisma.BoxUnpackLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxUnpackLogScalarFieldEnum | Prisma.BoxUnpackLogScalarFieldEnum[]
 }
 
 /**

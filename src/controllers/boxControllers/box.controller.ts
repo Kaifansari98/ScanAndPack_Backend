@@ -298,12 +298,21 @@ export const markBoxAsUnpacked = async (req: Request, res: Response) => {
   try {
     const {
       user_id,
-    } =
-      req.body;
+      reason,
+    } = req.body;
     const boxId = Number(req.params.boxId);
     if (isNaN(boxId)) return res.status(400).json({ error: 'Invalid boxId' });
 
-    const updatedBox = await updateBoxStatus(boxId, BoxStatus.unpacked,user_id);
+    if (!reason || !String(reason).trim()) {
+      return res.status(400).json({ error: 'Reason is required to unpack box' });
+    }
+
+    const updatedBox = await updateBoxStatus(
+      boxId,
+      BoxStatus.unpacked,
+      Number(user_id),
+      String(reason).trim()
+    );
     res.status(200).json(updatedBox);
   } catch (err: any) {
     res.status(400).json({ error: err.message });

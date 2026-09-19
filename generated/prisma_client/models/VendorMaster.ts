@@ -564,6 +564,7 @@ export type VendorMasterWhereInput = {
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
   brands?: Prisma.BrandMasterListRelationFilter
   broadcastCategories?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
@@ -773,6 +774,7 @@ export type VendorMasterOrderByWithRelationInput = {
   box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogOrderByRelationAggregateInput
+  box_unpack_logs?: Prisma.BoxUnpackLogOrderByRelationAggregateInput
   brands?: Prisma.BrandMasterOrderByRelationAggregateInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterOrderByRelationAggregateInput
   broadcasts?: Prisma.BroadcastMasterOrderByRelationAggregateInput
@@ -985,6 +987,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
   brands?: Prisma.BrandMasterListRelationFilter
   broadcastCategories?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
@@ -1298,6 +1301,7 @@ export type VendorMasterCreateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -1507,6 +1511,7 @@ export type VendorMasterUncheckedCreateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -1713,6 +1718,7 @@ export type VendorMasterUpdateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -1922,6 +1928,7 @@ export type VendorMasterUncheckedUpdateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -2589,6 +2596,20 @@ export type VendorMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInp
   upsert?: Prisma.VendorMasterUpsertWithoutFactory_out_revert_logsInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUpdateWithoutFactory_out_revert_logsInput>, Prisma.VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutBox_unpack_logsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_unpack_logsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_unpack_logsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutBox_unpack_logsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput, Prisma.VendorMasterUpdateWithoutBox_unpack_logsInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutScanItemsInput = {
@@ -4762,6 +4783,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -4970,6 +4992,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5191,6 +5214,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -5399,6 +5423,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5604,6 +5629,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -5812,6 +5838,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6033,6 +6060,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -6241,6 +6269,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6446,6 +6475,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -6654,6 +6684,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6875,6 +6906,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -7083,6 +7115,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7288,6 +7321,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -7496,6 +7530,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7717,6 +7752,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -7925,6 +7961,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8130,6 +8167,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -8338,6 +8376,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8559,6 +8598,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -8767,6 +8807,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8972,6 +9013,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -9180,6 +9222,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9401,6 +9444,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -9609,6 +9653,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9814,6 +9859,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -10022,6 +10068,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10243,6 +10290,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -10451,6 +10499,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10656,6 +10705,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -10864,6 +10914,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11085,6 +11136,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -11293,6 +11345,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11498,6 +11551,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -11706,6 +11760,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11927,6 +11982,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -12135,6 +12191,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12339,6 +12396,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -12547,6 +12605,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12768,6 +12827,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -12976,6 +13036,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13181,6 +13242,7 @@ export type VendorMasterCreateWithoutFactory_out_revert_logsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -13389,6 +13451,7 @@ export type VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13610,6 +13673,7 @@ export type VendorMasterUpdateWithoutFactory_out_revert_logsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -13818,6 +13882,853 @@ export type VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutBox_unpack_logsInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutBox_unpack_logsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutBox_unpack_logsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+}
+
+export type VendorMasterUpsertWithoutBox_unpack_logsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+}
+
+export type VendorMasterUpdateWithoutBox_unpack_logsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14024,6 +14935,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -14232,6 +15144,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14453,6 +15366,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -14661,6 +15575,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14866,6 +15781,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -15074,6 +15990,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15295,6 +16212,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -15503,6 +16421,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15708,6 +16627,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -15916,6 +16836,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16137,6 +17058,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -16345,6 +17267,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16550,6 +17473,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -16758,6 +17682,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16979,6 +17904,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -17187,6 +18113,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17392,6 +18319,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -17600,6 +18528,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17821,6 +18750,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -18029,6 +18959,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18234,6 +19165,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -18442,6 +19374,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18663,6 +19596,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -18871,6 +19805,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19076,6 +20011,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -19284,6 +20220,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19505,6 +20442,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -19713,6 +20651,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19918,6 +20857,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -20126,6 +21066,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20347,6 +21288,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -20555,6 +21497,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20760,6 +21703,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -20968,6 +21912,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21189,6 +22134,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -21397,6 +22343,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21602,6 +22549,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -21810,6 +22758,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22031,6 +22980,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -22239,6 +23189,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22444,6 +23395,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -22652,6 +23604,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22873,6 +23826,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -23081,6 +24035,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23286,6 +24241,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -23494,6 +24450,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23715,6 +24672,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -23923,6 +24881,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24128,6 +25087,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -24336,6 +25296,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24557,6 +25518,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -24765,6 +25727,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24970,6 +25933,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -25178,6 +26142,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25399,6 +26364,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -25607,6 +26573,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25812,6 +26779,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -26020,6 +26988,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26241,6 +27210,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -26449,6 +27419,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26653,6 +27624,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -26861,6 +27833,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27082,6 +28055,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -27290,6 +28264,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27496,6 +28471,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -27704,6 +28680,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27925,6 +28902,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -28133,6 +29111,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28338,6 +29317,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -28546,6 +29526,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28767,6 +29748,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -28975,6 +29957,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29180,6 +30163,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -29388,6 +30372,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29609,6 +30594,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -29817,6 +30803,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30022,6 +31009,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -30230,6 +31218,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30451,6 +31440,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -30659,6 +31649,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30864,6 +31855,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -31072,6 +32064,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31293,6 +32286,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -31501,6 +32495,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31706,6 +32701,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -31914,6 +32910,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32135,6 +33132,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -32343,6 +33341,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32548,6 +33547,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -32756,6 +33756,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32977,6 +33978,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -33185,6 +34187,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33390,6 +34393,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -33598,6 +34602,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33819,6 +34824,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -34027,6 +35033,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34232,6 +35239,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -34440,6 +35448,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34661,6 +35670,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -34869,6 +35879,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35074,6 +36085,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -35282,6 +36294,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35503,6 +36516,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -35711,6 +36725,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35916,6 +36931,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -36124,6 +37140,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36345,6 +37362,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -36553,6 +37571,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36758,6 +37777,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -36966,6 +37986,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37187,6 +38208,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -37395,6 +38417,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37600,6 +38623,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -37808,6 +38832,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38029,6 +39054,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -38237,6 +39263,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38442,6 +39469,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -38650,6 +39678,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38871,6 +39900,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -39079,6 +40109,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39284,6 +40315,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -39492,6 +40524,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39713,6 +40746,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -39921,6 +40955,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40126,6 +41161,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -40334,6 +41370,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40555,6 +41592,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -40763,6 +41801,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40968,6 +42007,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -41176,6 +42216,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41397,6 +42438,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -41605,6 +42647,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41810,6 +42853,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -42018,6 +43062,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42239,6 +43284,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -42447,6 +43493,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42652,6 +43699,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -42860,6 +43908,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43081,6 +44130,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -43289,6 +44339,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43494,6 +44545,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -43702,6 +44754,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43923,6 +44976,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -44131,6 +45185,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44336,6 +45391,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -44544,6 +45600,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44765,6 +45822,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -44973,6 +46031,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45178,6 +46237,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -45386,6 +46446,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -45607,6 +46668,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -45815,6 +46877,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46020,6 +47083,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -46228,6 +47292,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46449,6 +47514,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -46657,6 +47723,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46862,6 +47929,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -47070,6 +48138,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47291,6 +48360,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -47499,6 +48569,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47704,6 +48775,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -47912,6 +48984,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48133,6 +49206,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -48341,6 +49415,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48546,6 +49621,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -48754,6 +49830,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48975,6 +50052,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -49183,6 +50261,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49388,6 +50467,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -49596,6 +50676,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -49817,6 +50898,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -50025,6 +51107,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -50230,6 +51313,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -50438,6 +51522,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50659,6 +51744,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -50867,6 +51953,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51072,6 +52159,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -51280,6 +52368,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -51501,6 +52590,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -51709,6 +52799,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51914,6 +53005,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -52122,6 +53214,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52343,6 +53436,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -52551,6 +53645,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -52756,6 +53851,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -52964,6 +54060,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -53185,6 +54282,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -53393,6 +54491,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53598,6 +54697,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -53806,6 +54906,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54027,6 +55128,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -54235,6 +55337,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -54440,6 +55543,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -54648,6 +55752,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54869,6 +55974,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -55077,6 +56183,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55282,6 +56389,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -55490,6 +56598,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55711,6 +56820,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -55919,6 +57029,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56124,6 +57235,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -56332,6 +57444,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56553,6 +57666,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -56761,6 +57875,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56966,6 +58081,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -57174,6 +58290,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57395,6 +58512,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -57603,6 +58721,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57808,6 +58927,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -58016,6 +59136,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -58237,6 +59358,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -58445,6 +59567,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58650,6 +59773,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -58858,6 +59982,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59079,6 +60204,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -59287,6 +60413,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -59492,6 +60619,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -59700,6 +60828,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59921,6 +61050,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -60129,6 +61259,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60334,6 +61465,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -60542,6 +61674,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60763,6 +61896,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -60971,6 +62105,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61176,6 +62311,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -61384,6 +62520,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61605,6 +62742,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -61813,6 +62951,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62018,6 +63157,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -62226,6 +63366,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -62447,6 +63588,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -62655,6 +63797,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62860,6 +64003,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -63068,6 +64212,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63289,6 +64434,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -63497,6 +64643,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -63702,6 +64849,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -63910,6 +65058,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -64131,6 +65280,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -64339,6 +65489,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64544,6 +65695,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -64752,6 +65904,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -64973,6 +66126,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -65181,6 +66335,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -65386,6 +66541,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -65594,6 +66750,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65815,6 +66972,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -66023,6 +67181,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66228,6 +67387,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -66436,6 +67596,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -66657,6 +67818,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -66865,6 +68027,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -67070,6 +68233,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -67278,6 +68442,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67499,6 +68664,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -67707,6 +68873,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -67912,6 +69079,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -68120,6 +69288,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68341,6 +69510,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -68549,6 +69719,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68754,6 +69925,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -68962,6 +70134,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -69183,6 +70356,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -69391,6 +70565,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69596,6 +70771,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -69804,6 +70980,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70025,6 +71202,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -70233,6 +71411,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -70438,6 +71617,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -70646,6 +71826,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70867,6 +72048,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -71075,6 +72257,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71280,6 +72463,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -71488,6 +72672,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -71709,6 +72894,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -71917,6 +73103,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72122,6 +73309,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -72330,6 +73518,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -72551,6 +73740,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -72759,6 +73949,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72964,6 +74155,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -73172,6 +74364,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73393,6 +74586,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -73601,6 +74795,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -73806,6 +75001,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -74014,6 +75210,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -74235,6 +75432,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -74443,6 +75641,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74648,6 +75847,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -74856,6 +76056,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75077,6 +76278,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -75285,6 +76487,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -75490,6 +76693,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -75698,6 +76902,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75919,6 +77124,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -76127,6 +77333,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76332,6 +77539,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -76540,6 +77748,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -76761,6 +77970,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -76969,6 +78179,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -77174,6 +78385,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -77382,6 +78594,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77603,6 +78816,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -77811,6 +79025,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78016,6 +79231,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -78224,6 +79440,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -78445,6 +79662,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -78653,6 +79871,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78858,6 +80077,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -79066,6 +80286,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79287,6 +80508,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -79495,6 +80717,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -79700,6 +80923,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -79908,6 +81132,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -80129,6 +81354,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -80337,6 +81563,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80542,6 +81769,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -80750,6 +81978,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -80971,6 +82200,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -81179,6 +82409,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -81384,6 +82615,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -81592,6 +82824,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81813,6 +83046,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -82021,6 +83255,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -82226,6 +83461,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -82434,6 +83670,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -82655,6 +83892,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -82863,6 +84101,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83068,6 +84307,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -83276,6 +84516,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -83497,6 +84738,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -83705,6 +84947,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83910,6 +85153,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -84118,6 +85362,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -84339,6 +85584,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -84547,6 +85793,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -84752,6 +85999,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -84960,6 +86208,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -85181,6 +86430,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -85389,6 +86639,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -85594,6 +86845,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -85802,6 +87054,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -86023,6 +87276,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -86231,6 +87485,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -86436,6 +87691,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -86644,6 +87900,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -86865,6 +88122,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -87073,6 +88331,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -87278,6 +88537,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -87486,6 +88746,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -87707,6 +88968,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -87915,6 +89177,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -88120,6 +89383,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -88328,6 +89592,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -88549,6 +89814,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -88757,6 +90023,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -88962,6 +90229,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -89170,6 +90438,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -89391,6 +90660,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -89599,6 +90869,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -89804,6 +91075,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -90012,6 +91284,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -90233,6 +91506,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -90441,6 +91715,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -90646,6 +91921,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -90854,6 +92130,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -91075,6 +92352,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -91283,6 +92561,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -91488,6 +92767,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -91696,6 +92976,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -91917,6 +93198,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -92125,6 +93407,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -92330,6 +93613,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -92538,6 +93822,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -92759,6 +94044,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -92967,6 +94253,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -93172,6 +94459,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -93380,6 +94668,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -93601,6 +94890,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -93809,6 +95099,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -94014,6 +95305,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -94222,6 +95514,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -94443,6 +95736,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -94651,6 +95945,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -94856,6 +96151,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -95064,6 +96360,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -95285,6 +96582,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -95493,6 +96791,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -95698,6 +96997,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -95906,6 +97206,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -96127,6 +97428,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -96335,6 +97637,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -96540,6 +97843,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -96748,6 +98052,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -96969,6 +98274,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -97177,6 +98483,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -97382,6 +98689,7 @@ export type VendorMasterCreateWithoutStateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -97589,6 +98897,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -97873,6 +99182,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -98081,6 +99391,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -98302,6 +99613,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -98510,6 +99822,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -98715,6 +100028,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -98923,6 +100237,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -99144,6 +100459,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -99352,6 +100668,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -99557,6 +100874,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -99765,6 +101083,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -99986,6 +101305,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -100194,6 +101514,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -100399,6 +101720,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -100607,6 +101929,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -100828,6 +102151,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -101036,6 +102360,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -101241,6 +102566,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -101449,6 +102775,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -101670,6 +102997,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -101878,6 +103206,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -102083,6 +103412,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -102291,6 +103621,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -102512,6 +103843,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -102720,6 +104052,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -102925,6 +104258,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -103133,6 +104467,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -103354,6 +104689,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -103562,6 +104898,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -103767,6 +105104,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
@@ -103975,6 +105313,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -104196,6 +105535,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
@@ -104404,6 +105744,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -104609,6 +105950,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -104817,6 +106159,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -105038,6 +106381,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -105246,6 +106590,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -105451,6 +106796,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -105659,6 +107005,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -105880,6 +107227,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -106088,6 +107436,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -106293,6 +107642,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -106501,6 +107851,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -106722,6 +108073,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -106930,6 +108282,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -107135,6 +108488,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -107343,6 +108697,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -107564,6 +108919,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -107772,6 +109128,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -107977,6 +109334,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -108185,6 +109543,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -108406,6 +109765,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -108614,6 +109974,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -108819,6 +110180,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -109027,6 +110389,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -109248,6 +110611,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -109456,6 +110820,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -109661,6 +111026,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -109869,6 +111235,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -110090,6 +111457,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -110298,6 +111666,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -110503,6 +111872,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -110711,6 +112081,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -110932,6 +112303,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -111140,6 +112512,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -111345,6 +112718,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -111553,6 +112927,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -111774,6 +113149,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -111982,6 +113358,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -112187,6 +113564,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -112395,6 +113773,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -112616,6 +113995,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -112824,6 +114204,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -113029,6 +114410,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -113237,6 +114619,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -113458,6 +114841,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -113666,6 +115050,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -113871,6 +115256,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -114079,6 +115465,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -114300,6 +115687,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -114508,6 +115896,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -114713,6 +116102,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -114921,6 +116311,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -115142,6 +116533,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -115350,6 +116742,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -115555,6 +116948,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -115763,6 +117157,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -115984,6 +117379,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -116192,6 +117588,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -116397,6 +117794,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -116605,6 +118003,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -116826,6 +118225,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -117034,6 +118434,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -117239,6 +118640,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -117447,6 +118849,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -117668,6 +119071,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -117876,6 +119280,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -118081,6 +119486,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -118289,6 +119695,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -118510,6 +119917,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -118718,6 +120126,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -118923,6 +120332,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -119131,6 +120541,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -119352,6 +120763,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -119560,6 +120972,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -119765,6 +121178,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -119973,6 +121387,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -120194,6 +121609,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -120402,6 +121818,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -120607,6 +122024,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -120815,6 +122233,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -121036,6 +122455,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -121244,6 +122664,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -121448,6 +122869,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -121656,6 +123078,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -121877,6 +123300,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -122085,6 +123509,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -122290,6 +123715,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -122498,6 +123924,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -122719,6 +124146,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -122927,6 +124355,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -123133,6 +124562,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -123341,6 +124771,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -123562,6 +124993,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -123770,6 +125202,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -123975,6 +125408,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -124183,6 +125617,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -124404,6 +125839,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -124612,6 +126048,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -124817,6 +126254,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -125025,6 +126463,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -125246,6 +126685,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -125454,6 +126894,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -125658,6 +127099,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -125866,6 +127308,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -126087,6 +127530,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -126295,6 +127739,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -126501,6 +127946,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
@@ -126709,6 +128155,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -126930,6 +128377,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
@@ -127138,6 +128586,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -127343,6 +128792,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
@@ -127551,6 +129001,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -127772,6 +129223,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
@@ -127980,6 +129432,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -128184,6 +129637,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -128392,6 +129846,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -128613,6 +130068,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -128821,6 +130277,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -129027,6 +130484,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -129235,6 +130693,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -129456,6 +130915,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -129664,6 +131124,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -129869,6 +131330,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -130077,6 +131539,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -130298,6 +131761,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -130506,6 +131970,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -130711,6 +132176,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -130919,6 +132385,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -131140,6 +132607,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -131348,6 +132816,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -131553,6 +133022,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -131761,6 +133231,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -131982,6 +133453,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -132190,6 +133662,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -132395,6 +133868,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -132603,6 +134077,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -132824,6 +134299,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -133032,6 +134508,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -133237,6 +134714,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -133445,6 +134923,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -133666,6 +135145,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -133874,6 +135354,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -134079,6 +135560,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -134287,6 +135769,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -134508,6 +135991,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -134716,6 +136200,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -134921,6 +136406,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -135129,6 +136615,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -135350,6 +136837,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -135558,6 +137046,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -135763,6 +137252,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -135971,6 +137461,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -136192,6 +137683,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -136400,6 +137892,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -136604,6 +138097,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -136812,6 +138306,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -137033,6 +138528,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -137241,6 +138737,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -137447,6 +138944,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -137655,6 +139153,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -137876,6 +139375,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -138084,6 +139584,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -138289,6 +139790,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -138497,6 +139999,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -138718,6 +140221,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -138926,6 +140430,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -139179,6 +140684,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -139386,6 +140892,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
   factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -139601,6 +141108,7 @@ export type VendorMasterCountOutputType = {
   box_info_values: number
   boxes: number
   factory_out_revert_logs: number
+  box_unpack_logs: number
   brands: number
   broadcastCategories: number
   broadcasts: number
@@ -139763,6 +141271,7 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   box_info_values?: boolean | VendorMasterCountOutputTypeCountBox_info_valuesArgs
   boxes?: boolean | VendorMasterCountOutputTypeCountBoxesArgs
   factory_out_revert_logs?: boolean | VendorMasterCountOutputTypeCountFactory_out_revert_logsArgs
+  box_unpack_logs?: boolean | VendorMasterCountOutputTypeCountBox_unpack_logsArgs
   brands?: boolean | VendorMasterCountOutputTypeCountBrandsArgs
   broadcastCategories?: boolean | VendorMasterCountOutputTypeCountBroadcastCategoriesArgs
   broadcasts?: boolean | VendorMasterCountOutputTypeCountBroadcastsArgs
@@ -139980,6 +141489,13 @@ export type VendorMasterCountOutputTypeCountBoxesArgs<ExtArgs extends runtime.Ty
  */
 export type VendorMasterCountOutputTypeCountFactory_out_revert_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FactoryOutRevertLogWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountBox_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxUnpackLogWhereInput
 }
 
 /**
@@ -141095,6 +142611,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   box_info_values?: boolean | Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
   factory_out_revert_logs?: boolean | Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs>
   brands?: boolean | Prisma.VendorMaster$brandsArgs<ExtArgs>
   broadcastCategories?: boolean | Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>
   broadcasts?: boolean | Prisma.VendorMaster$broadcastsArgs<ExtArgs>
@@ -141409,6 +142926,7 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   box_info_values?: boolean | Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
   factory_out_revert_logs?: boolean | Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs>
   brands?: boolean | Prisma.VendorMaster$brandsArgs<ExtArgs>
   broadcastCategories?: boolean | Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>
   broadcasts?: boolean | Prisma.VendorMaster$broadcastsArgs<ExtArgs>
@@ -141581,6 +143099,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     box_info_values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
     boxes: Prisma.$BoxMasterPayload<ExtArgs>[]
     factory_out_revert_logs: Prisma.$FactoryOutRevertLogPayload<ExtArgs>[]
+    box_unpack_logs: Prisma.$BoxUnpackLogPayload<ExtArgs>[]
     brands: Prisma.$BrandMasterPayload<ExtArgs>[]
     broadcastCategories: Prisma.$BroadcastCategoryMasterPayload<ExtArgs>[]
     broadcasts: Prisma.$BroadcastMasterPayload<ExtArgs>[]
@@ -142183,6 +143702,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   box_info_values<T extends Prisma.VendorMaster$box_info_valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boxes<T extends Prisma.VendorMaster$boxesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$boxesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   factory_out_revert_logs<T extends Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FactoryOutRevertLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  box_unpack_logs<T extends Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxUnpackLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   brands<T extends Prisma.VendorMaster$brandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcastCategories<T extends Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastCategoryMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcasts<T extends Prisma.VendorMaster$broadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$broadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -143000,6 +144520,30 @@ export type VendorMaster$factory_out_revert_logsArgs<ExtArgs extends runtime.Typ
   take?: number
   skip?: number
   distinct?: Prisma.FactoryOutRevertLogScalarFieldEnum | Prisma.FactoryOutRevertLogScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.box_unpack_logs
+ */
+export type VendorMaster$box_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxUnpackLog
+   */
+  select?: Prisma.BoxUnpackLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxUnpackLog
+   */
+  omit?: Prisma.BoxUnpackLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxUnpackLogInclude<ExtArgs> | null
+  where?: Prisma.BoxUnpackLogWhereInput
+  orderBy?: Prisma.BoxUnpackLogOrderByWithRelationInput | Prisma.BoxUnpackLogOrderByWithRelationInput[]
+  cursor?: Prisma.BoxUnpackLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxUnpackLogScalarFieldEnum | Prisma.BoxUnpackLogScalarFieldEnum[]
 }
 
 /**

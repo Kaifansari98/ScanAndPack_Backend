@@ -961,6 +961,7 @@ export const updateBoxStatus = async (
   boxId: number,
   newStatus: BoxStatus,
   user_id: number,
+  reason?: string,
 ) => {
   const box = await prisma.boxMaster.findFirst({
     where: {
@@ -998,6 +999,57 @@ export const updateBoxStatus = async (
         "Cannot unpack box: Box is already at the site (Site In has been recorded)",
       );
     }
+
+    if (box.factory_out_at !== null && box.factory_out_by !== null) {
+      throw new Error(
+        "Cannot unpack box: Box has already been marked as Factory Out",
+      );
+    }
+
+    if (!reason || !reason.trim()) {
+      throw new Error("Reason is required to unpack box");
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+      const log = await tx.boxUnpackLog.create({
+        data: {
+          box_id: box.id,
+          project_id: box.project_id,
+          vendor_id: box.vendor_id,
+          packed_at: box.packed_at,
+          packed_by: box.packed_by,
+          box_created_by: box.created_by,
+          box_created_at: box.created_date,
+          unpacked_by: user_id,
+          unpacked_at: new Date(),
+          reason: reason.trim(),
+        },
+        include: {
+          unpackedByUser: {
+            select: { id: true, user_name: true },
+          },
+          packedByUser: {
+            select: { id: true, user_name: true },
+          },
+          boxCreatedByUser: {
+            select: { id: true, user_name: true },
+          },
+        },
+      });
+
+      const updatedBox = await tx.boxMaster.update({
+        where: { id: boxId },
+        data: {
+          box_status: BoxStatus.unpacked,
+          packed_at: null,
+          packed_by: null,
+        },
+      });
+
+      return { ...updatedBox, log };
+    });
+
+    return result;
   }
 
   const now = new Date();
