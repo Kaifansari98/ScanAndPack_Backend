@@ -991,13 +991,10 @@ export const updateScannedItem = async (
       },
     });
 
-    const showStatusSettingPromise = is_check
-      ? getVendorSettingValue(vendor_id, "SHOW_STATUS_ON_SCAN")
-      : Promise.resolve(null);
-
-    const [selectedBox, pendingMappings, showStatusSetting] = await Promise.all(
-      [selectedBoxPromise, pendingMappingsPromise, showStatusSettingPromise],
-    );
+    const [selectedBox, pendingMappings] = await Promise.all([
+      selectedBoxPromise,
+      pendingMappingsPromise,
+    ]);
 
     if (box_id && !selectedBox) {
       return validationResponse(
@@ -1204,18 +1201,9 @@ export const updateScannedItem = async (
       );
     }
 
-    /*
-     * When status display is disabled, continue below. Do not recursively call
-     * updateScannedItem because that repeats every lookup and validation.
-     */
-    const mustPreviewBeforeCustomGroupPacking =
-      eligibleMapping.machine.machine_type_id === 18 &&
-      eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP;
-
-    if (
-      is_check &&
-      (showStatusSetting === "1" || mustPreviewBeforeCustomGroupPacking)
-    ) {
+    // /scan/check-item is validation-only. Never fall through to the update
+    // logic below; /scan/item is the endpoint that completes the item.
+    if (is_check) {
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
           cut_list_id,
@@ -1266,7 +1254,6 @@ export const updateScannedItem = async (
       return validationResponse(1, "", {
         mappedItem: eligibleMapping,
         activeDefect,
-        countdown_timer: 3,
       });
     }
 
