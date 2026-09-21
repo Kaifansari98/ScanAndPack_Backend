@@ -81,6 +81,10 @@ interface UpdateMiscPayload {
   teams?: number[];
   files?: { originalName: string; sysName: string }[];
   updated_by: number;
+  return_order_date?: Date | string | null;
+  return_order_delivery_method?: string | null;
+  orderlogindetails_ids?: number[];
+  instance_id?: number;
 }
 
 interface UpdateERDInput {
@@ -2406,6 +2410,10 @@ export class UnderInstallationStageService {
       teams,
       files,
       updated_by,
+      return_order_date,
+      return_order_delivery_method,
+      orderlogindetails_ids,
+      instance_id,
     } = payload;
 
     const result = await prisma.$transaction(async (tx) => {
@@ -2486,11 +2494,38 @@ export class UnderInstallationStageService {
       if (solution !== undefined) {
         dataToUpdate.solution = solution?.trim() || null;
       }
+      if (return_order_date !== undefined) {
+        dataToUpdate.return_order_date = return_order_date
+          ? new Date(return_order_date)
+          : null;
+      }
+      if (return_order_delivery_method !== undefined) {
+        dataToUpdate.return_order_delivery_method = return_order_delivery_method || null;
+      }
 
       const updated = await tx.miscellaneousMaster.update({
         where: { id: misc_id },
         data: dataToUpdate,
       });
+
+      // Update return order material mappings if provided
+      if (orderlogindetails_ids !== undefined && Array.isArray(orderlogindetails_ids)) {
+        await tx.miscellaneousReorderInstancesMaterialMapping.deleteMany({
+          where: { misc_id },
+        });
+        const uniqueIds = Array.from(new Set(orderlogindetails_ids)).filter(Boolean);
+        if (uniqueIds.length > 0) {
+          await tx.miscellaneousReorderInstancesMaterialMapping.createMany({
+            data: uniqueIds.map((orderLoginId) => ({
+              vendor_id,
+              lead_id: lead_id || existing.lead_id,
+              misc_id,
+              orderlogindetails_id: Number(orderLoginId),
+              created_by: updated_by,
+            })),
+          });
+        }
+      }
 
       // Update teams if provided
       if (teams && Array.isArray(teams)) {
