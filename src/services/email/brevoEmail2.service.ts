@@ -6253,7 +6253,8 @@ export const sendReturnOrderRequestApprovedFactoryEmail = async (
 
   return sendBrevoEmail(
     {
-      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
       toEmail: payload.toEmail,
       toName: payload.toName || factoryUser,
       subject,
@@ -6428,7 +6429,8 @@ export const sendReturnOrderApprovedToFactoryEmail = async (
 
   return sendBrevoEmail(
     {
-      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
       toEmail: payload.toEmail,
       toName: payload.toName || factoryUser,
       subject,
@@ -6603,7 +6605,8 @@ export const sendReturnOrderPickupConfirmedFactoryEmail = async (
 
   return sendBrevoEmail(
     {
-      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
       toEmail: payload.toEmail,
       toName: payload.toName || factoryUser,
       subject,

@@ -493,9 +493,14 @@ export const resolveMiscStage = (
     is_resolved: boolean;
     expected_ready_date: Date | string | null;
     required_delivery_date: Date | string | null;
+    return_order_delivery_method?: string | null;
+    is_returned?: boolean | null;
   },
   taskForMisc?: { status: string } | null,
   deliveryTaskForMisc?: { status: string } | null,
+  returnPickupTask?: { status: string } | null,
+  returnHandoverTask?: { status: string } | null,
+  returnConfirmTask?: { status: string } | null,
 ): { slug: string; label: string } => {
   if (m.is_resolved) {
     return { slug: "resolved", label: "RESOLVED" };
@@ -508,6 +513,39 @@ export const resolveMiscStage = (
   }
 
   // At this point, m.misc_approved === true
+  const isReturnOrder = Boolean(m.return_order_delivery_method);
+
+  if (isReturnOrder) {
+    const method = m.return_order_delivery_method;
+
+    if (method === "SELF_DELIVERY") {
+      // 1. Confirmed / Resolved
+      if (returnConfirmTask?.status === "completed" || m.is_resolved) {
+        return { slug: "resolved", label: "RESOLVED" };
+      }
+      // 2. Pending confirmation -> under-process
+      return { slug: "under-process", label: "UNDER PROCESS" };
+    }
+
+    if (method === "PICKUP_SCHEDULE") {
+      // 1. Final confirmation receipt at factory / resolved
+      if (returnConfirmTask?.status === "completed" || m.is_resolved) {
+        return { slug: "resolved", label: "RESOLVED" };
+      }
+      // 2. Supervisor marked as returned / handover completed -> dispatched
+      if (m.is_returned || returnHandoverTask?.status === "completed") {
+        return { slug: "dispatched", label: "DISPATCHED" };
+      }
+      // 3. Factory confirmed pickup schedule date -> dispatch-scheduled
+      if (returnPickupTask?.status === "completed") {
+        return { slug: "dispatch-scheduled", label: "DISPATCH SCHEDULED" };
+      }
+      // 4. While factory schedule confirmation is pending -> under-process
+      return { slug: "under-process", label: "UNDER PROCESS" };
+    }
+  }
+
+  // Standard Miscellaneous (non-return order):
   if (deliveryTaskForMisc?.status === "completed") {
     return { slug: "dispatched", label: "DISPATCHED" };
   }
@@ -573,6 +611,57 @@ export const findDeliveryTask = (
   );
 };
 
+export const findReturnPickupTask = (
+  m: { id: number; lead_id: number; return_order_delivery_method?: string | null },
+  tasks: any[],
+) => {
+  if (m.return_order_delivery_method !== "PICKUP_SCHEDULE") return null;
+  const key = `[misc-pickup:${m.id}]`;
+  return (
+    tasks.find(
+      (t) =>
+        t.lead_id === m.lead_id &&
+        t.task_type === "Return Order Pickup Schedule" &&
+        typeof t.remark === "string" &&
+        t.remark.includes(key)
+    ) || null
+  );
+};
+
+export const findReturnHandoverTask = (
+  m: { id: number; lead_id: number; return_order_delivery_method?: string | null },
+  tasks: any[],
+) => {
+  if (m.return_order_delivery_method !== "PICKUP_SCHEDULE") return null;
+  const key = `[misc-return-handover:${m.id}]`;
+  return (
+    tasks.find(
+      (t) =>
+        t.lead_id === m.lead_id &&
+        t.task_type === "Return Material Handover" &&
+        typeof t.remark === "string" &&
+        t.remark.includes(key)
+    ) || null
+  );
+};
+
+export const findReturnConfirmTask = (
+  m: { id: number; lead_id: number; return_order_delivery_method?: string | null },
+  tasks: any[],
+) => {
+  if (!m.return_order_delivery_method) return null;
+  const key = `[misc-return-confirm:${m.id}]`;
+  return (
+    tasks.find(
+      (t) =>
+        t.lead_id === m.lead_id &&
+        t.task_type === "Return Order Confirmation" &&
+        typeof t.remark === "string" &&
+        t.remark.includes(key)
+    ) || null
+  );
+};
+
 /* -------------------------------------------------------------------------- */
 /* 🔹 Helper: Build Prisma condition for Miscellaneous status                */
 /* -------------------------------------------------------------------------- */
@@ -593,6 +682,7 @@ export const buildMiscStatusWhereCondition = (
         misc_approved: true,
         expected_ready_date: null,
         required_delivery_date: null,
+        return_order_delivery_method: null,
       };
     case "awaiting-approval":
     case "awaiting_approval":
@@ -602,6 +692,20 @@ export const buildMiscStatusWhereCondition = (
       };
     case "under-process":
     case "under_process":
+      return {
+        is_resolved: false,
+        misc_approved: true,
+        OR: [
+          {
+            expected_ready_date: { not: null },
+            required_delivery_date: null,
+            return_order_delivery_method: null,
+          },
+          {
+            return_order_delivery_method: { in: ["SELF_DELIVERY", "PICKUP_SCHEDULE"] },
+          },
+        ],
+      };
     case "rtd":
     case "ready-to-dispatch":
     case "ready_to_dispatch":
@@ -610,14 +714,38 @@ export const buildMiscStatusWhereCondition = (
         misc_approved: true,
         expected_ready_date: { not: null },
         required_delivery_date: null,
+        return_order_delivery_method: null,
       };
     case "dispatch-scheduled":
     case "dispatch_scheduled":
+      return {
+        is_resolved: false,
+        misc_approved: true,
+        OR: [
+          {
+            required_delivery_date: { not: null },
+            return_order_delivery_method: null,
+          },
+          {
+            return_order_delivery_method: "PICKUP_SCHEDULE",
+            is_returned: false,
+          },
+        ],
+      };
     case "dispatched":
       return {
         is_resolved: false,
         misc_approved: true,
-        required_delivery_date: { not: null },
+        OR: [
+          {
+            required_delivery_date: { not: null },
+            return_order_delivery_method: null,
+          },
+          {
+            return_order_delivery_method: "PICKUP_SCHEDULE",
+            is_returned: true,
+          },
+        ],
       };
     default:
       return {};
@@ -739,6 +867,7 @@ export const getMiscellaneousLeadsByStatusService = async (
     type: true,
     createdBy: { select: { id: true, user_name: true } },
     updatedBy: { select: { id: true, user_name: true } },
+    returnedBy: { select: { id: true, user_name: true } },
     teams: {
       include: {
         team: true,
@@ -812,7 +941,7 @@ export const getMiscellaneousLeadsByStatusService = async (
         where: {
           vendor_id: vendorId,
           lead_id: { in: leadIds },
-          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          task_type: { in: ["Miscellaneous", "Pending Materials", "Return Order Pickup Schedule", "Return Material Handover", "Return Order Confirmation"] },
         },
         orderBy: { id: "desc" },
         select: {
@@ -844,7 +973,7 @@ export const getMiscellaneousLeadsByStatusService = async (
             where: {
               vendor_id: vendorId,
               lead_id: { in: leadIds },
-              task_type: { in: ["Miscellaneous", "Pending Materials"] },
+              task_type: { in: ["Miscellaneous", "Pending Materials", "Return Order Pickup Schedule", "Return Material Handover", "Return Order Confirmation"] },
             },
             orderBy: { id: "desc" },
             select: {
@@ -864,7 +993,17 @@ export const getMiscellaneousLeadsByStatusService = async (
     const filteredCandidates = rawCandidates.filter((m) => {
       const taskForMisc = findMiscTask(m, allRelevantTasks);
       const deliveryTaskForMisc = findDeliveryTask(m, allRelevantTasks);
-      const stage = resolveMiscStage(m, taskForMisc, deliveryTaskForMisc);
+      const returnPickupTask = findReturnPickupTask(m, allRelevantTasks);
+      const returnHandoverTask = findReturnHandoverTask(m, allRelevantTasks);
+      const returnConfirmTask = findReturnConfirmTask(m, allRelevantTasks);
+      const stage = resolveMiscStage(
+        m,
+        taskForMisc,
+        deliveryTaskForMisc,
+        returnPickupTask,
+        returnHandoverTask,
+        returnConfirmTask,
+      );
       return stage.slug === targetSlug;
     });
 
@@ -900,7 +1039,17 @@ export const getMiscellaneousLeadsByStatusService = async (
 
       const taskForMisc = findMiscTask(m, allRelevantTasks);
       const deliveryTaskForMisc = findDeliveryTask(m, allRelevantTasks);
-      const stage = resolveMiscStage(m, taskForMisc, deliveryTaskForMisc);
+      const returnPickupTask = findReturnPickupTask(m, allRelevantTasks);
+      const returnHandoverTask = findReturnHandoverTask(m, allRelevantTasks);
+      const returnConfirmTask = findReturnConfirmTask(m, allRelevantTasks);
+      const stage = resolveMiscStage(
+        m,
+        taskForMisc,
+        deliveryTaskForMisc,
+        returnPickupTask,
+        returnHandoverTask,
+        returnConfirmTask,
+      );
 
       return {
         id: m.id,
@@ -920,8 +1069,15 @@ export const getMiscellaneousLeadsByStatusService = async (
         cost: m.cost,
         supervisor_remark: m.supervisor_remark,
         expected_ready_date: m.expected_ready_date,
+        return_order_date: m.return_order_date ?? null,
+        return_order_delivery_method: m.return_order_delivery_method ?? null,
+        is_returned: m.is_returned ?? false,
+        returned_at: m.returned_at ?? null,
+        returned_by: m.returned_by ?? null,
+        returned_user: (m as any).returnedBy ?? null,
+        return_handover_remark: m.return_handover_remark ?? null,
         solution: (m as any).solution ?? null,
-        required_delivery_date: deliveryTaskForMisc?.due_date ?? m.required_delivery_date,
+        required_delivery_date: m.return_order_delivery_method ? null : (deliveryTaskForMisc?.due_date ?? m.required_delivery_date),
         is_resolved: m.is_resolved,
         resolved_at: m.resolved_at,
         created_by: m.created_by,
@@ -933,7 +1089,58 @@ export const getMiscellaneousLeadsByStatusService = async (
         })),
         documents: docs,
         task: taskForMisc || null,
-        delivery_task: deliveryTaskForMisc || null,
+        delivery_task: m.return_order_delivery_method ? null : (deliveryTaskForMisc || null),
+        return_pickup_task: returnPickupTask
+          ? {
+              id: returnPickupTask.id,
+              task_type: returnPickupTask.task_type,
+              status: returnPickupTask.status,
+              due_date: returnPickupTask.due_date ?? null,
+              remark: returnPickupTask.remark ?? null,
+              closed_at: returnPickupTask.closed_at ?? null,
+              closed_by: returnPickupTask.closed_by ?? null,
+              closed_user: (returnPickupTask as any).closedBy
+                ? {
+                    id: (returnPickupTask as any).closedBy.id,
+                    user_name: (returnPickupTask as any).closedBy.user_name,
+                  }
+                : null,
+            }
+          : null,
+        return_handover_task: returnHandoverTask
+          ? {
+              id: returnHandoverTask.id,
+              task_type: returnHandoverTask.task_type,
+              status: returnHandoverTask.status,
+              due_date: returnHandoverTask.due_date ?? null,
+              remark: returnHandoverTask.remark ?? null,
+              closed_at: returnHandoverTask.closed_at ?? null,
+              closed_by: returnHandoverTask.closed_by ?? null,
+              closed_user: (returnHandoverTask as any).closedBy
+                ? {
+                    id: (returnHandoverTask as any).closedBy.id,
+                    user_name: (returnHandoverTask as any).closedBy.user_name,
+                  }
+                : null,
+            }
+          : null,
+        return_confirm_task: returnConfirmTask
+          ? {
+              id: returnConfirmTask.id,
+              task_type: returnConfirmTask.task_type,
+              status: returnConfirmTask.status,
+              due_date: returnConfirmTask.due_date ?? null,
+              remark: returnConfirmTask.remark ?? null,
+              closed_at: returnConfirmTask.closed_at ?? null,
+              closed_by: returnConfirmTask.closed_by ?? null,
+              closed_user: (returnConfirmTask as any).closedBy
+                ? {
+                    id: (returnConfirmTask as any).closedBy.id,
+                    user_name: (returnConfirmTask as any).closedBy.user_name,
+                  }
+                : null,
+            }
+          : null,
         status_label: stage.label,
         status_slug: stage.slug,
       };
@@ -986,7 +1193,7 @@ export const getMiscellaneousStatusCountsService = async (
     ...(Object.keys(leadFilter).length > 0 ? { lead: leadFilter } : {}),
   };
 
-  const [awaitingCount, miscApprovedCount, resolvedCount, rejectedCount] = await Promise.all([
+  const [awaitingCount, miscApprovedCountInitial, resolvedCount, rejectedCount] = await Promise.all([
     prisma.miscellaneousMaster.count({
       where: {
         ...baseWhere,
@@ -1001,6 +1208,7 @@ export const getMiscellaneousStatusCountsService = async (
         misc_approved: true,
         expected_ready_date: null,
         required_delivery_date: null,
+        return_order_delivery_method: null,
       },
     }),
     prisma.miscellaneousMaster.count({
@@ -1017,14 +1225,17 @@ export const getMiscellaneousStatusCountsService = async (
     }),
   ]);
 
-  // Candidates for ERD (under-process vs rtd)
-  const erdCandidates = await prisma.miscellaneousMaster.findMany({
+  // Active candidates requiring task evaluation
+  const activeCandidates = await prisma.miscellaneousMaster.findMany({
     where: {
       ...baseWhere,
       is_resolved: false,
       misc_approved: true,
-      expected_ready_date: { not: null },
-      required_delivery_date: null,
+      OR: [
+        { expected_ready_date: { not: null } },
+        { required_delivery_date: { not: null } },
+        { return_order_delivery_method: { in: ["SELF_DELIVERY", "PICKUP_SCHEDULE"] } },
+      ],
     },
     select: {
       id: true,
@@ -1033,37 +1244,14 @@ export const getMiscellaneousStatusCountsService = async (
       is_resolved: true,
       expected_ready_date: true,
       required_delivery_date: true,
+      return_order_delivery_method: true,
+      is_returned: true,
       reorder_material_details: true,
       problem_description: true,
     },
   });
 
-  // Candidates for Delivery (dispatch-scheduled vs dispatched)
-  const deliveryCandidates = await prisma.miscellaneousMaster.findMany({
-    where: {
-      ...baseWhere,
-      is_resolved: false,
-      misc_approved: true,
-      required_delivery_date: { not: null },
-    },
-    select: {
-      id: true,
-      lead_id: true,
-      misc_approved: true,
-      is_resolved: true,
-      expected_ready_date: true,
-      required_delivery_date: true,
-      reorder_material_details: true,
-      problem_description: true,
-    },
-  });
-
-  const allCandidateLeadIds = Array.from(
-    new Set([
-      ...erdCandidates.map((m) => m.lead_id),
-      ...deliveryCandidates.map((m) => m.lead_id),
-    ]),
-  );
+  const allCandidateLeadIds = Array.from(new Set(activeCandidates.map((m) => m.lead_id)));
 
   const candidateTasks =
     allCandidateLeadIds.length > 0
@@ -1071,7 +1259,15 @@ export const getMiscellaneousStatusCountsService = async (
           where: {
             vendor_id: vendorId,
             lead_id: { in: allCandidateLeadIds },
-            task_type: { in: ["Miscellaneous", "Pending Materials"] },
+            task_type: {
+              in: [
+                "Miscellaneous",
+                "Pending Materials",
+                "Return Order Pickup Schedule",
+                "Return Material Handover",
+                "Return Order Confirmation",
+              ],
+            },
           },
           orderBy: { id: "desc" },
           select: {
@@ -1086,25 +1282,36 @@ export const getMiscellaneousStatusCountsService = async (
 
   let rtdCount = 0;
   let underProcessCount = 0;
-  for (const m of erdCandidates) {
-    const task = findMiscTask(m, candidateTasks);
-    const stage = resolveMiscStage(m, task, null);
-    if (stage.slug === "rtd") {
-      rtdCount++;
-    } else {
-      underProcessCount++;
-    }
-  }
-
   let dispatchedCount = 0;
   let dispatchScheduledCount = 0;
-  for (const m of deliveryCandidates) {
-    const delTask = findDeliveryTask(m, candidateTasks);
-    const stage = resolveMiscStage(m, null, delTask);
-    if (stage.slug === "dispatched") {
+  let miscApprovedCount = miscApprovedCountInitial;
+
+  for (const m of activeCandidates) {
+    const taskForMisc = findMiscTask(m, candidateTasks);
+    const deliveryTaskForMisc = findDeliveryTask(m, candidateTasks);
+    const returnPickupTask = findReturnPickupTask(m, candidateTasks);
+    const returnHandoverTask = findReturnHandoverTask(m, candidateTasks);
+    const returnConfirmTask = findReturnConfirmTask(m, candidateTasks);
+
+    const stage = resolveMiscStage(
+      m,
+      taskForMisc,
+      deliveryTaskForMisc,
+      returnPickupTask,
+      returnHandoverTask,
+      returnConfirmTask,
+    );
+
+    if (stage.slug === "rtd") {
+      rtdCount++;
+    } else if (stage.slug === "under-process") {
+      underProcessCount++;
+    } else if (stage.slug === "dispatched") {
       dispatchedCount++;
-    } else {
+    } else if (stage.slug === "dispatch-scheduled") {
       dispatchScheduledCount++;
+    } else if (stage.slug === "misc-approved") {
+      miscApprovedCount++;
     }
   }
 
