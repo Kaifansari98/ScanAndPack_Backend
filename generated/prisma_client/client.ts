@@ -675,6 +675,11 @@ export type VendorModulesMapping = Prisma.VendorModulesMappingModel
  */
 export type MachineMaster = Prisma.MachineMasterModel
 /**
+ * Model CutlistHeadersMapping
+ * 
+ */
+export type CutlistHeadersMapping = Prisma.CutlistHeadersMappingModel
+/**
  * Model CutList
  * 
  */

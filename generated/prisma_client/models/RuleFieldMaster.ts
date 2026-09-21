@@ -232,6 +232,7 @@ export type RuleFieldMasterWhereInput = {
   status?: Prisma.EnumRuleStatusFilter<"RuleFieldMaster"> | $Enums.RuleStatus
   created_at?: Prisma.DateTimeFilter<"RuleFieldMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"RuleFieldMaster"> | Date | string
+  cutlistHeaderMappings?: Prisma.CutlistHeadersMappingListRelationFilter
 }
 
 export type RuleFieldMasterOrderByWithRelationInput = {
@@ -242,6 +243,7 @@ export type RuleFieldMasterOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  cutlistHeaderMappings?: Prisma.CutlistHeadersMappingOrderByRelationAggregateInput
 }
 
 export type RuleFieldMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +257,7 @@ export type RuleFieldMasterWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumRuleStatusFilter<"RuleFieldMaster"> | $Enums.RuleStatus
   created_at?: Prisma.DateTimeFilter<"RuleFieldMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"RuleFieldMaster"> | Date | string
+  cutlistHeaderMappings?: Prisma.CutlistHeadersMappingListRelationFilter
 }, "id" | "field_key">
 
 export type RuleFieldMasterOrderByWithAggregationInput = {
@@ -292,6 +295,7 @@ export type RuleFieldMasterCreateInput = {
   status?: $Enums.RuleStatus
   created_at?: Date | string
   updated_at?: Date | string
+  cutlistHeaderMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutRuleFieldInput
 }
 
 export type RuleFieldMasterUncheckedCreateInput = {
@@ -302,6 +306,7 @@ export type RuleFieldMasterUncheckedCreateInput = {
   status?: $Enums.RuleStatus
   created_at?: Date | string
   updated_at?: Date | string
+  cutlistHeaderMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutRuleFieldInput
 }
 
 export type RuleFieldMasterUpdateInput = {
@@ -311,6 +316,7 @@ export type RuleFieldMasterUpdateInput = {
   status?: Prisma.EnumRuleStatusFieldUpdateOperationsInput | $Enums.RuleStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cutlistHeaderMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutRuleFieldNestedInput
 }
 
 export type RuleFieldMasterUncheckedUpdateInput = {
@@ -321,6 +327,7 @@ export type RuleFieldMasterUncheckedUpdateInput = {
   status?: Prisma.EnumRuleStatusFieldUpdateOperationsInput | $Enums.RuleStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cutlistHeaderMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutRuleFieldNestedInput
 }
 
 export type RuleFieldMasterCreateManyInput = {
@@ -350,6 +357,11 @@ export type RuleFieldMasterUncheckedUpdateManyInput = {
   status?: Prisma.EnumRuleStatusFieldUpdateOperationsInput | $Enums.RuleStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type RuleFieldMasterNullableScalarRelationFilter = {
+  is?: Prisma.RuleFieldMasterWhereInput | null
+  isNot?: Prisma.RuleFieldMasterWhereInput | null
 }
 
 export type RuleFieldMasterCountOrderByAggregateInput = {
@@ -390,10 +402,109 @@ export type RuleFieldMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type RuleFieldMasterCreateNestedOneWithoutCutlistHeaderMappingsInput = {
+  create?: Prisma.XOR<Prisma.RuleFieldMasterCreateWithoutCutlistHeaderMappingsInput, Prisma.RuleFieldMasterUncheckedCreateWithoutCutlistHeaderMappingsInput>
+  connectOrCreate?: Prisma.RuleFieldMasterCreateOrConnectWithoutCutlistHeaderMappingsInput
+  connect?: Prisma.RuleFieldMasterWhereUniqueInput
+}
+
+export type RuleFieldMasterUpdateOneWithoutCutlistHeaderMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.RuleFieldMasterCreateWithoutCutlistHeaderMappingsInput, Prisma.RuleFieldMasterUncheckedCreateWithoutCutlistHeaderMappingsInput>
+  connectOrCreate?: Prisma.RuleFieldMasterCreateOrConnectWithoutCutlistHeaderMappingsInput
+  upsert?: Prisma.RuleFieldMasterUpsertWithoutCutlistHeaderMappingsInput
+  disconnect?: Prisma.RuleFieldMasterWhereInput | boolean
+  delete?: Prisma.RuleFieldMasterWhereInput | boolean
+  connect?: Prisma.RuleFieldMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RuleFieldMasterUpdateToOneWithWhereWithoutCutlistHeaderMappingsInput, Prisma.RuleFieldMasterUpdateWithoutCutlistHeaderMappingsInput>, Prisma.RuleFieldMasterUncheckedUpdateWithoutCutlistHeaderMappingsInput>
+}
+
 export type EnumRuleFieldDataTypeFieldUpdateOperationsInput = {
   set?: $Enums.RuleFieldDataType
 }
 
+export type RuleFieldMasterCreateWithoutCutlistHeaderMappingsInput = {
+  field_key: string
+  field_name: string
+  data_type: $Enums.RuleFieldDataType
+  status?: $Enums.RuleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type RuleFieldMasterUncheckedCreateWithoutCutlistHeaderMappingsInput = {
+  id?: number
+  field_key: string
+  field_name: string
+  data_type: $Enums.RuleFieldDataType
+  status?: $Enums.RuleStatus
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type RuleFieldMasterCreateOrConnectWithoutCutlistHeaderMappingsInput = {
+  where: Prisma.RuleFieldMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.RuleFieldMasterCreateWithoutCutlistHeaderMappingsInput, Prisma.RuleFieldMasterUncheckedCreateWithoutCutlistHeaderMappingsInput>
+}
+
+export type RuleFieldMasterUpsertWithoutCutlistHeaderMappingsInput = {
+  update: Prisma.XOR<Prisma.RuleFieldMasterUpdateWithoutCutlistHeaderMappingsInput, Prisma.RuleFieldMasterUncheckedUpdateWithoutCutlistHeaderMappingsInput>
+  create: Prisma.XOR<Prisma.RuleFieldMasterCreateWithoutCutlistHeaderMappingsInput, Prisma.RuleFieldMasterUncheckedCreateWithoutCutlistHeaderMappingsInput>
+  where?: Prisma.RuleFieldMasterWhereInput
+}
+
+export type RuleFieldMasterUpdateToOneWithWhereWithoutCutlistHeaderMappingsInput = {
+  where?: Prisma.RuleFieldMasterWhereInput
+  data: Prisma.XOR<Prisma.RuleFieldMasterUpdateWithoutCutlistHeaderMappingsInput, Prisma.RuleFieldMasterUncheckedUpdateWithoutCutlistHeaderMappingsInput>
+}
+
+export type RuleFieldMasterUpdateWithoutCutlistHeaderMappingsInput = {
+  field_key?: Prisma.StringFieldUpdateOperationsInput | string
+  field_name?: Prisma.StringFieldUpdateOperationsInput | string
+  data_type?: Prisma.EnumRuleFieldDataTypeFieldUpdateOperationsInput | $Enums.RuleFieldDataType
+  status?: Prisma.EnumRuleStatusFieldUpdateOperationsInput | $Enums.RuleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type RuleFieldMasterUncheckedUpdateWithoutCutlistHeaderMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  field_key?: Prisma.StringFieldUpdateOperationsInput | string
+  field_name?: Prisma.StringFieldUpdateOperationsInput | string
+  data_type?: Prisma.EnumRuleFieldDataTypeFieldUpdateOperationsInput | $Enums.RuleFieldDataType
+  status?: Prisma.EnumRuleStatusFieldUpdateOperationsInput | $Enums.RuleStatus
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type RuleFieldMasterCountOutputType
+ */
+
+export type RuleFieldMasterCountOutputType = {
+  cutlistHeaderMappings: number
+}
+
+export type RuleFieldMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cutlistHeaderMappings?: boolean | RuleFieldMasterCountOutputTypeCountCutlistHeaderMappingsArgs
+}
+
+/**
+ * RuleFieldMasterCountOutputType without action
+ */
+export type RuleFieldMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RuleFieldMasterCountOutputType
+   */
+  select?: Prisma.RuleFieldMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RuleFieldMasterCountOutputType without action
+ */
+export type RuleFieldMasterCountOutputTypeCountCutlistHeaderMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CutlistHeadersMappingWhereInput
+}
 
 
 export type RuleFieldMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -404,6 +515,8 @@ export type RuleFieldMasterSelect<ExtArgs extends runtime.Types.Extensions.Inter
   status?: boolean
   created_at?: boolean
   updated_at?: boolean
+  cutlistHeaderMappings?: boolean | Prisma.RuleFieldMaster$cutlistHeaderMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.RuleFieldMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ruleFieldMaster"]>
 
 export type RuleFieldMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -437,10 +550,18 @@ export type RuleFieldMasterSelectScalar = {
 }
 
 export type RuleFieldMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "field_key" | "field_name" | "data_type" | "status" | "created_at" | "updated_at", ExtArgs["result"]["ruleFieldMaster"]>
+export type RuleFieldMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cutlistHeaderMappings?: boolean | Prisma.RuleFieldMaster$cutlistHeaderMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.RuleFieldMasterCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type RuleFieldMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type RuleFieldMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $RuleFieldMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RuleFieldMaster"
-  objects: {}
+  objects: {
+    cutlistHeaderMappings: Prisma.$CutlistHeadersMappingPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     field_key: string
@@ -843,6 +964,7 @@ readonly fields: RuleFieldMasterFieldRefs;
  */
 export interface Prisma__RuleFieldMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  cutlistHeaderMappings<T extends Prisma.RuleFieldMaster$cutlistHeaderMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RuleFieldMaster$cutlistHeaderMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutlistHeadersMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -896,6 +1018,10 @@ export type RuleFieldMasterFindUniqueArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
+  /**
    * Filter, which RuleFieldMaster to fetch.
    */
   where: Prisma.RuleFieldMasterWhereUniqueInput
@@ -914,6 +1040,10 @@ export type RuleFieldMasterFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.E
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
+  /**
    * Filter, which RuleFieldMaster to fetch.
    */
   where: Prisma.RuleFieldMasterWhereUniqueInput
@@ -931,6 +1061,10 @@ export type RuleFieldMasterFindFirstArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the RuleFieldMaster
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
   /**
    * Filter, which RuleFieldMaster to fetch.
    */
@@ -980,6 +1114,10 @@ export type RuleFieldMasterFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
+  /**
    * Filter, which RuleFieldMaster to fetch.
    */
   where?: Prisma.RuleFieldMasterWhereInput
@@ -1027,6 +1165,10 @@ export type RuleFieldMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the RuleFieldMaster
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
   /**
    * Filter, which RuleFieldMasters to fetch.
    */
@@ -1076,6 +1218,10 @@ export type RuleFieldMasterCreateArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
+  /**
    * The data needed to create a RuleFieldMaster.
    */
   data: Prisma.XOR<Prisma.RuleFieldMasterCreateInput, Prisma.RuleFieldMasterUncheckedCreateInput>
@@ -1123,6 +1269,10 @@ export type RuleFieldMasterUpdateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the RuleFieldMaster
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
   /**
    * The data needed to update a RuleFieldMaster.
    */
@@ -1190,6 +1340,10 @@ export type RuleFieldMasterUpsertArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
+  /**
    * The filter to search for the RuleFieldMaster to update in case it exists.
    */
   where: Prisma.RuleFieldMasterWhereUniqueInput
@@ -1216,6 +1370,10 @@ export type RuleFieldMasterDeleteArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
+  /**
    * Filter which RuleFieldMaster to delete.
    */
   where: Prisma.RuleFieldMasterWhereUniqueInput
@@ -1236,6 +1394,30 @@ export type RuleFieldMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * RuleFieldMaster.cutlistHeaderMappings
+ */
+export type RuleFieldMaster$cutlistHeaderMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CutlistHeadersMapping
+   */
+  select?: Prisma.CutlistHeadersMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CutlistHeadersMapping
+   */
+  omit?: Prisma.CutlistHeadersMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CutlistHeadersMappingInclude<ExtArgs> | null
+  where?: Prisma.CutlistHeadersMappingWhereInput
+  orderBy?: Prisma.CutlistHeadersMappingOrderByWithRelationInput | Prisma.CutlistHeadersMappingOrderByWithRelationInput[]
+  cursor?: Prisma.CutlistHeadersMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CutlistHeadersMappingScalarFieldEnum | Prisma.CutlistHeadersMappingScalarFieldEnum[]
+}
+
+/**
  * RuleFieldMaster without action
  */
 export type RuleFieldMasterDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1247,4 +1429,8 @@ export type RuleFieldMasterDefaultArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the RuleFieldMaster
    */
   omit?: Prisma.RuleFieldMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleFieldMasterInclude<ExtArgs> | null
 }

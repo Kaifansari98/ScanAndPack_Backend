@@ -76,6 +76,7 @@ model VendorMaster {
   CompanyVendorsMaster                   CompanyVendorsMaster[]
   coreProducts                           CoreProductMaster[]
   CutList                                CutList[]
+  cutlistHeadersMappings                 CutlistHeadersMapping[]
   cutListMachineMapping                  CutListMachineMapping[]
   cutListRules                           CutListRuleMaster[]
   ruleActions                            RuleActionMaster[]
@@ -3130,6 +3131,21 @@ model MachineMaster {
   @@index([vendor_id, status])
 }
 
+model CutlistHeadersMapping {
+  id                Int              @id @default(autoincrement())
+  vendor_id         Int
+  source_header     String           @db.VarChar(255)
+  normalized_header String           @db.VarChar(255)
+  rule_field_id     Int?
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+  vendor            VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  ruleField         RuleFieldMaster? @relation(fields: [rule_field_id], references: [id])
+
+  @@unique([vendor_id, normalized_header])
+  @@unique([vendor_id, rule_field_id])
+}
+
 model CutList {
   id                       Int                      @id @default(autoincrement())
   project_id               Int
@@ -5776,6 +5792,8 @@ model RuleFieldMaster {
   status     RuleStatus        @default(ACTIVE)
   created_at DateTime          @default(now())
   updated_at DateTime          @updatedAt
+
+  cutlistHeaderMappings CutlistHeadersMapping[]
 }
 
 model RuleActionMaster {

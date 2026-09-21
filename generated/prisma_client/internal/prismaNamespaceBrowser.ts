@@ -178,6 +178,7 @@ export const ModelName = {
   ModulesMaster: 'ModulesMaster',
   VendorModulesMapping: 'VendorModulesMapping',
   MachineMaster: 'MachineMaster',
+  CutlistHeadersMapping: 'CutlistHeadersMapping',
   CutList: 'CutList',
   CutListMachineMapping: 'CutListMachineMapping',
   UserMachineMapping: 'UserMachineMapping',
@@ -2440,6 +2441,19 @@ export const MachineMasterScalarFieldEnum = {
 } as const
 
 export type MachineMasterScalarFieldEnum = (typeof MachineMasterScalarFieldEnum)[keyof typeof MachineMasterScalarFieldEnum]
+
+
+export const CutlistHeadersMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  source_header: 'source_header',
+  normalized_header: 'normalized_header',
+  rule_field_id: 'rule_field_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutlistHeadersMappingScalarFieldEnum = (typeof CutlistHeadersMappingScalarFieldEnum)[keyof typeof CutlistHeadersMappingScalarFieldEnum]
 
 
 export const CutListScalarFieldEnum = {
