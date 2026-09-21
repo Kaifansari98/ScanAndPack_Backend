@@ -147,8 +147,21 @@ export class MetaWebhookController {
         body.phone_number ||
         body.mobile ||
         body.contact_no ||
-        (body.lead && (body.lead.contact || body.lead.phone || body.lead.phone_number)) ||
-        (body.entry?.[0]?.changes?.[0]?.value?.phone_number) ||
+        body["Contact"] ||
+        body["Phone"] ||
+        body["Mobile"] ||
+        body["Phone Number"] ||
+        body["Contact Number"] ||
+        body["Mobile Number"] ||
+        body["Contact No"] ||
+        body["Contact No."] ||
+        (body.lead &&
+          (body.lead.contact ||
+            body.lead.phone ||
+            body.lead.phone_number ||
+            body.lead.mobile ||
+            body.lead.contact_no)) ||
+        body.entry?.[0]?.changes?.[0]?.value?.phone_number ||
         null;
 
       const leadsName =
@@ -157,24 +170,48 @@ export class MetaWebhookController {
         body.customer_name ||
         body.fullName ||
         body.lead_name ||
-        (body.lead && (body.lead.leads_name || body.lead.name || body.lead.customer_name)) ||
-        (body.entry?.[0]?.changes?.[0]?.value?.customer_name) ||
+        body["Name"] ||
+        body["Full Name"] ||
+        body["Customer Name"] ||
+        body["Lead Name"] ||
+        body["Client Name"] ||
+        (body.lead &&
+          (body.lead.leads_name ||
+            body.lead.name ||
+            body.lead.customer_name ||
+            body.lead.fullName)) ||
+        body.entry?.[0]?.changes?.[0]?.value?.customer_name ||
         null;
 
-      // If contact or name is present, process into Lead Pool
-      if (rawContact || leadsName) {
-        // Dynamically resolve target vendor based on is_online_lead_feature_enabled
+      const queryVendorToken = req.query.vendor_token || req.query.vendorToken;
+      const headerVendorToken =
+        req.headers["x-vendor-token"] ||
+        req.headers["vendor_token"] ||
+        req.headers["vendor-token"];
+      const bodyVendorToken = req.body?.vendor_token || req.body?.vendorToken;
+      const hasVendorToken = Boolean(
+        queryVendorToken || headerVendorToken || bodyVendorToken,
+      );
+
+      // If contact or name is present OR vendor_token is explicitly passed, process into Lead Pool
+      if (rawContact || leadsName || hasVendorToken) {
+        // Dynamically resolve target vendor strictly from vendor_token
         const vendorResolution = await resolveTargetOnlineLeadVendor(req);
         if (vendorResolution.error) {
           logger.warn(
-            `[WEBHOOK] Vendor resolution failed: ${vendorResolution.error}`
+            `[WEBHOOK] Vendor resolution failed: ${vendorResolution.error}`,
           );
-          return res.status(vendorResolution.ambiguous ? 422 : 400).json({
-            success: false,
-            error: vendorResolution.error,
-            eligible_vendors: vendorResolution.eligibleVendors,
-            metaWebhookId: savedPayloadId,
-          });
+          return res
+            .status(
+              vendorResolution.statusCode ||
+                (vendorResolution.ambiguous ? 422 : 400),
+            )
+            .json({
+              success: false,
+              error: vendorResolution.error,
+              eligible_vendors: vendorResolution.eligibleVendors,
+              metaWebhookId: savedPayloadId,
+            });
         }
 
         const vendorId = vendorResolution.vendorId!;
@@ -182,18 +219,22 @@ export class MetaWebhookController {
         const email =
           body.email ||
           body.email_id ||
+          body["Email"] ||
+          body["Email ID"] ||
           (body.lead && body.lead.email) ||
-          (body.entry?.[0]?.changes?.[0]?.value?.email) ||
+          body.entry?.[0]?.changes?.[0]?.value?.email ||
           null;
 
         const city =
           body.city ||
+          body["City"] ||
           (body.lead && body.lead.city) ||
-          (body.entry?.[0]?.changes?.[0]?.value?.city) ||
+          body.entry?.[0]?.changes?.[0]?.value?.city ||
           null;
 
         const source =
           body.source ||
+          body["Source"] ||
           (body.lead && body.lead.source) ||
           "Google Sheet";
 
@@ -201,11 +242,16 @@ export class MetaWebhookController {
           body.remark ||
           body.notes ||
           body.comments ||
+          body["Remark"] ||
+          body["Remarks"] ||
+          body["Notes"] ||
+          body["Comments"] ||
           (body.lead && body.lead.remark) ||
           null;
 
         const priority =
           body.priority ||
+          body["Priority"] ||
           (body.lead && body.lead.priority) ||
           "Medium";
 

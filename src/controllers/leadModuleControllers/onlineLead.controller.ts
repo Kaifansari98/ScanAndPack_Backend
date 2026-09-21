@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import { prisma } from "../../prisma/client";
 import { unmarkDraftAndSeparate } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
@@ -28,6 +29,36 @@ import {
 export { ensureDefaultStatuses };
 
 const authService = new AuthService();
+
+const getRequestingUser = async (req: Request): Promise<any> => {
+  let requestingUser: any = (req as any).user;
+  if (!requestingUser) {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader?.split(" ")[1];
+    if (token) {
+      try {
+        requestingUser = await authService.verifySessionToken(token);
+      } catch {
+        try {
+          requestingUser = jwt.decode(token);
+        } catch {}
+      }
+    }
+  }
+  return requestingUser;
+};
+
+const isUserAuthorizedForVendor = (user: any, targetVendorId: number): boolean => {
+  if (!user || !user.vendor_id) return true;
+  const userRole = (
+    user.user_type?.user_type ||
+    user.user_type ||
+    ""
+  ).toLowerCase().trim();
+  const isSuperAdmin = userRole === "super-admin" || userRole === "superadmin";
+  if (isSuperAdmin) return true;
+  return Number(user.vendor_id) === Number(targetVendorId);
+};
 
 // Helpers to get path params
 const getParam = (param: any): string => {
@@ -574,26 +605,37 @@ export class OnlineLeadController {
         });
       }
 
-      const where: any = {
-        vendor_id: vendorId,
-        OR: [
-          { approval_status: "PENDING" },
-          {
-            NOT: {
-              online_lead_followup_status: {
-                status_name: {
-                  in: ["Store Assigned", "Store Visit Done"],
-                  mode: "insensitive",
+      // Verify authenticated user's vendor isolation
+      const requestingUser = await getRequestingUser(req);
+      if (!isUserAuthorizedForVendor(requestingUser, vendorId)) {
+        return res.status(403).json({
+          success: false,
+          error: "Access denied: Cannot access another vendor's leads.",
+        });
+      }
+
+      const andConditions: any[] = [
+        { vendor_id: vendorId },
+        {
+          OR: [
+            { approval_status: "PENDING" },
+            {
+              NOT: {
+                online_lead_followup_status: {
+                  status_name: {
+                    in: ["Store Assigned", "Store Visit Done"],
+                    mode: "insensitive",
+                  },
                 },
               },
             },
-          },
-        ],
-      };
+          ],
+        },
+      ];
 
       // Apply tab filters
       if (tab === "pool") {
-        where.assign_to = null;
+        andConditions.push({ assign_to: null });
       } else if (tab === "my") {
         if (!userId) {
           return res.status(400).json({
@@ -601,36 +643,43 @@ export class OnlineLeadController {
             error: "userId parameter is required for 'my' tab",
           });
         }
-        where.OR = [{ assign_to: userId }, { final_assigned_leads: userId }];
+        andConditions.push({
+          OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
+        });
       } else if (tab === "overall") {
         // Overall leads has no assignment filter (shows all unassigned + assigned leads for that vendor)
       }
 
       // Apply search filters
       if (search) {
-        where.OR = [
-          { leads_name: { contains: search, mode: "insensitive" } },
-          { email: { contains: search, mode: "insensitive" } },
-          { contact: { contains: search, mode: "insensitive" } },
-        ];
+        andConditions.push({
+          OR: [
+            { leads_name: { contains: search, mode: "insensitive" } },
+            { email: { contains: search, mode: "insensitive" } },
+            { contact: { contains: search, mode: "insensitive" } },
+            { lead_code: { contains: search, mode: "insensitive" } },
+          ],
+        });
       }
 
       // Apply status, store and source filters
       if (statusId) {
-        where.status = statusId;
+        andConditions.push({ status: statusId });
       }
       if (storeId) {
-        where.store_id = storeId;
+        andConditions.push({ store_id: storeId });
       }
       if (source) {
         if (source === "WALK_IN") {
-          where.lead_entry_type = "WALK_IN";
+          andConditions.push({ lead_entry_type: "WALK_IN" });
         } else if (source === "ONLINE") {
-          where.lead_entry_type = "ONLINE";
+          andConditions.push({ lead_entry_type: "ONLINE" });
         } else {
-          where.source = source;
+          andConditions.push({ source: source });
         }
       }
+
+      const where = { AND: andConditions };
 
       const leads = await prisma.online_leads.findMany({
         where,
@@ -1031,23 +1080,32 @@ export class OnlineLeadController {
         });
       }
 
-      // Access control: If requesting user is a Sales Executive, verify they are assigned to this lead
-      let requestingUser: any = (req as any).user;
-      if (!requestingUser) {
-        const authHeader = req.headers["authorization"];
-        const token = authHeader?.split(" ")[1];
-        if (token) {
-          try {
-            requestingUser = await authService.verifySessionToken(token);
-          } catch {}
-        }
-      }
+      // Access control: Verify vendor isolation
+      const queryVendorId = req.query.vendor_id ? Number(req.query.vendor_id) : null;
+      let requestingUser = await getRequestingUser(req);
       if (!requestingUser && req.query.userId) {
         requestingUser = await prisma.userMaster.findUnique({
           where: { id: Number(req.query.userId) },
           include: { user_type: true },
         });
       }
+
+      if (lead.vendor_id) {
+        if (queryVendorId && !isNaN(queryVendorId) && Number(lead.vendor_id) !== queryVendorId) {
+          return res.status(404).json({
+            success: false,
+            error: "Lead not found",
+          });
+        }
+        if (!isUserAuthorizedForVendor(requestingUser, lead.vendor_id)) {
+          return res.status(404).json({
+            success: false,
+            error: "Lead not found",
+          });
+        }
+      }
+
+      // Access control: If requesting user is a Sales Executive, verify they are assigned to this lead
 
       if (requestingUser) {
         const userRole = (
@@ -2973,6 +3031,14 @@ export class OnlineLeadController {
         });
       }
 
+      const requestingUser = await getRequestingUser(req);
+      if (!isUserAuthorizedForVendor(requestingUser, vendorId)) {
+        return res.status(403).json({
+          success: false,
+          error: "Access denied: Cannot access another vendor's statuses.",
+        });
+      }
+
       await ensureDefaultStatuses(vendorId);
 
       const statuses = await prisma.online_lead_followup_status.findMany({
@@ -3091,6 +3157,14 @@ export class OnlineLeadController {
         return res.status(400).json({
           success: false,
           error: "Invalid or missing vendor_id parameter",
+        });
+      }
+
+      const requestingUser = await getRequestingUser(req);
+      if (!isUserAuthorizedForVendor(requestingUser, vendorId)) {
+        return res.status(403).json({
+          success: false,
+          error: "Access denied: Cannot access another vendor's telecallers.",
         });
       }
 
@@ -4042,6 +4116,27 @@ export class OnlineLeadController {
           .json({ success: false, error: "Lead not found" });
       }
 
+      const vendorIdParam = req.query.vendor_id
+        ? Number(req.query.vendor_id)
+        : req.body?.vendor_id
+        ? Number(req.body.vendor_id)
+        : null;
+      if (lead.vendor_id) {
+        if (vendorIdParam && !isNaN(vendorIdParam) && Number(lead.vendor_id) !== vendorIdParam) {
+          return res.status(403).json({
+            success: false,
+            error: "Access denied: Cannot delete lead belonging to another vendor.",
+          });
+        }
+        const requestingUser = await getRequestingUser(req);
+        if (!isUserAuthorizedForVendor(requestingUser, lead.vendor_id)) {
+          return res.status(403).json({
+            success: false,
+            error: "Access denied: Cannot delete lead belonging to another vendor.",
+          });
+        }
+      }
+
       await prisma.$transaction(async (tx) => {
         if (lead.lead_master_id) {
           await tx.leadMaster.updateMany({
@@ -4094,6 +4189,13 @@ export class OnlineLeadController {
       }
 
       const vendorId = Number(vendor_id);
+      const requestingUser = await getRequestingUser(req);
+      if (!isUserAuthorizedForVendor(requestingUser, vendorId)) {
+        return res.status(403).json({
+          success: false,
+          error: "Access denied: Cannot delete another vendor's leads.",
+        });
+      }
       const leads = await prisma.online_leads.findMany({
         where: { vendor_id: vendorId },
         select: { id: true, lead_master_id: true },
