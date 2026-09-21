@@ -65,6 +65,8 @@ export const ModelName = {
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
   BoxMaster: 'BoxMaster',
+  FactoryOutRevertLog: 'FactoryOutRevertLog',
+  BoxUnpackLog: 'BoxUnpackLog',
   ScanAndPackItem: 'ScanAndPackItem',
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
@@ -313,6 +315,7 @@ export const VendorMasterScalarFieldEnum = {
   state_id: 'state_id',
   is_inventory_enabled: 'is_inventory_enabled',
   is_tracktrace_enabled: 'is_tracktrace_enabled',
+  cutlist_configuration: 'cutlist_configuration',
   is_approval_task_enabled: 'is_approval_task_enabled',
   eligible_booking_days: 'eligible_booking_days',
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
@@ -501,6 +504,7 @@ export const ProjectLocationProductQuantityScalarFieldEnum = {
   project_id: 'project_id',
   vendor_id: 'vendor_id',
   location_name: 'location_name',
+  contact_no: 'contact_no',
   group_name: 'group_name',
   qty: 'qty',
   created_at: 'created_at',
@@ -576,6 +580,40 @@ export const BoxMasterScalarFieldEnum = {
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
+
+
+export const FactoryOutRevertLogScalarFieldEnum = {
+  id: 'id',
+  box_id: 'box_id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  factory_out_at: 'factory_out_at',
+  factory_out_by: 'factory_out_by',
+  reverted_by: 'reverted_by',
+  reverted_at: 'reverted_at',
+  description: 'description',
+  created_at: 'created_at'
+} as const
+
+export type FactoryOutRevertLogScalarFieldEnum = (typeof FactoryOutRevertLogScalarFieldEnum)[keyof typeof FactoryOutRevertLogScalarFieldEnum]
+
+
+export const BoxUnpackLogScalarFieldEnum = {
+  id: 'id',
+  box_id: 'box_id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  packed_at: 'packed_at',
+  packed_by: 'packed_by',
+  box_created_by: 'box_created_by',
+  box_created_at: 'box_created_at',
+  unpacked_by: 'unpacked_by',
+  unpacked_at: 'unpacked_at',
+  reason: 'reason',
+  created_at: 'created_at'
+} as const
+
+export type BoxUnpackLogScalarFieldEnum = (typeof BoxUnpackLogScalarFieldEnum)[keyof typeof BoxUnpackLogScalarFieldEnum]
 
 
 export const ScanAndPackItemScalarFieldEnum = {
@@ -4041,6 +4079,7 @@ export const BoxItemDeleteLogScalarFieldEnum = {
   scanned_at: 'scanned_at',
   deleted_by: 'deleted_by',
   deleted_at: 'deleted_at',
+  reason: 'reason',
   created_at: 'created_at'
 } as const
 

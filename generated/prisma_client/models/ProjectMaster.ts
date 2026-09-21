@@ -418,6 +418,8 @@ export type ProjectMasterWhereInput = {
   userMasterId?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   defectedItems?: Prisma.DefectedItemListRelationFilter
@@ -463,6 +465,8 @@ export type ProjectMasterOrderByWithRelationInput = {
   userMasterId?: Prisma.SortOrderInput | Prisma.SortOrder
   box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogOrderByRelationAggregateInput
+  box_unpack_logs?: Prisma.BoxUnpackLogOrderByRelationAggregateInput
   CutList?: Prisma.CutListOrderByRelationAggregateInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
   defectedItems?: Prisma.DefectedItemOrderByRelationAggregateInput
@@ -511,6 +515,8 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   userMasterId?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   defectedItems?: Prisma.DefectedItemListRelationFilter
@@ -615,6 +621,8 @@ export type ProjectMasterCreateInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -660,6 +668,8 @@ export type ProjectMasterUncheckedCreateInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -692,6 +702,8 @@ export type ProjectMasterUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -737,6 +749,8 @@ export type ProjectMasterUncheckedUpdateInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -1181,6 +1195,34 @@ export type ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectMasterUpdateToOneWithWhereWithoutBoxesInput, Prisma.ProjectMasterUpdateWithoutBoxesInput>, Prisma.ProjectMasterUncheckedUpdateWithoutBoxesInput>
 }
 
+export type ProjectMasterCreateNestedOneWithoutFactory_out_revert_logsInput = {
+  create?: Prisma.XOR<Prisma.ProjectMasterCreateWithoutFactory_out_revert_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+  connectOrCreate?: Prisma.ProjectMasterCreateOrConnectWithoutFactory_out_revert_logsInput
+  connect?: Prisma.ProjectMasterWhereUniqueInput
+}
+
+export type ProjectMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectMasterCreateWithoutFactory_out_revert_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+  connectOrCreate?: Prisma.ProjectMasterCreateOrConnectWithoutFactory_out_revert_logsInput
+  upsert?: Prisma.ProjectMasterUpsertWithoutFactory_out_revert_logsInput
+  connect?: Prisma.ProjectMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectMasterUpdateToOneWithWhereWithoutFactory_out_revert_logsInput, Prisma.ProjectMasterUpdateWithoutFactory_out_revert_logsInput>, Prisma.ProjectMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
+}
+
+export type ProjectMasterCreateNestedOneWithoutBox_unpack_logsInput = {
+  create?: Prisma.XOR<Prisma.ProjectMasterCreateWithoutBox_unpack_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.ProjectMasterCreateOrConnectWithoutBox_unpack_logsInput
+  connect?: Prisma.ProjectMasterWhereUniqueInput
+}
+
+export type ProjectMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectMasterCreateWithoutBox_unpack_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.ProjectMasterCreateOrConnectWithoutBox_unpack_logsInput
+  upsert?: Prisma.ProjectMasterUpsertWithoutBox_unpack_logsInput
+  connect?: Prisma.ProjectMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput, Prisma.ProjectMasterUpdateWithoutBox_unpack_logsInput>, Prisma.ProjectMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+}
+
 export type ProjectMasterCreateNestedOneWithoutScanItemsInput = {
   create?: Prisma.XOR<Prisma.ProjectMasterCreateWithoutScanItemsInput, Prisma.ProjectMasterUncheckedCreateWithoutScanItemsInput>
   connectOrCreate?: Prisma.ProjectMasterCreateOrConnectWithoutScanItemsInput
@@ -1371,6 +1413,8 @@ export type ProjectMasterCreateWithoutVendorInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -1414,6 +1458,8 @@ export type ProjectMasterUncheckedCreateWithoutVendorInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -1504,6 +1550,8 @@ export type ProjectMasterCreateWithoutCreatedByUserInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -1547,6 +1595,8 @@ export type ProjectMasterUncheckedCreateWithoutCreatedByUserInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -1589,6 +1639,8 @@ export type ProjectMasterCreateWithoutUserMasterInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -1632,6 +1684,8 @@ export type ProjectMasterUncheckedCreateWithoutUserMasterInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -1674,6 +1728,8 @@ export type ProjectMasterCreateWithoutDeletedByUserInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -1717,6 +1773,8 @@ export type ProjectMasterUncheckedCreateWithoutDeletedByUserInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -1807,6 +1865,8 @@ export type ProjectMasterCreateWithoutLocationQuantitiesInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -1851,6 +1911,8 @@ export type ProjectMasterUncheckedCreateWithoutLocationQuantitiesInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -1898,6 +1960,8 @@ export type ProjectMasterUpdateWithoutLocationQuantitiesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -1942,6 +2006,8 @@ export type ProjectMasterUncheckedUpdateWithoutLocationQuantitiesInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -1973,6 +2039,8 @@ export type ProjectMasterCreateWithoutDetailsInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -2017,6 +2085,8 @@ export type ProjectMasterUncheckedCreateWithoutDetailsInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -2064,6 +2134,8 @@ export type ProjectMasterUpdateWithoutDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -2108,6 +2180,8 @@ export type ProjectMasterUncheckedUpdateWithoutDetailsInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -2139,6 +2213,8 @@ export type ProjectMasterCreateWithoutItemsInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -2183,6 +2259,8 @@ export type ProjectMasterUncheckedCreateWithoutItemsInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -2230,6 +2308,8 @@ export type ProjectMasterUpdateWithoutItemsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -2274,6 +2354,8 @@ export type ProjectMasterUncheckedUpdateWithoutItemsInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -2304,6 +2386,8 @@ export type ProjectMasterCreateWithoutBoxesInput = {
   isDeleted?: boolean
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -2348,6 +2432,8 @@ export type ProjectMasterUncheckedCreateWithoutBoxesInput = {
   deleted_at?: Date | string | null
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -2395,6 +2481,8 @@ export type ProjectMasterUpdateWithoutBoxesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -2439,6 +2527,356 @@ export type ProjectMasterUncheckedUpdateWithoutBoxesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
+  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
+  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectMasterCreateWithoutFactory_out_revert_logsInput = {
+  project_name: string
+  project_status?: string
+  created_at?: Date | string
+  unique_project_id: string
+  is_grouping?: boolean
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
+  client_address?: string | null
+  client_contact_no?: string | null
+  client_name?: string | null
+  order_no?: string | null
+  updated_at?: Date | string | null
+  updated_by?: number | null
+  packing_type?: $Enums.PackingType
+  is_multi_location?: boolean
+  no_of_boxes?: number
+  isDeleted?: boolean
+  deleted_at?: Date | string | null
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
+  details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
+  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
+  createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityCreateNestedManyWithoutProjectInput
+  deletedByUser?: Prisma.UserMasterCreateNestedOneWithoutDeletedProjectsInput
+  userMaster?: Prisma.UserMasterCreateNestedOneWithoutProjectMastersInput
+}
+
+export type ProjectMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
+  id?: number
+  project_name: string
+  vendor_id: number
+  client_id?: number | null
+  created_by: number
+  project_status?: string
+  created_at?: Date | string
+  unique_project_id: string
+  is_grouping?: boolean
+  lead_id?: number | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
+  client_address?: string | null
+  client_contact_no?: string | null
+  client_name?: string | null
+  order_no?: string | null
+  updated_at?: Date | string | null
+  updated_by?: number | null
+  packing_type?: $Enums.PackingType
+  is_multi_location?: boolean
+  no_of_boxes?: number
+  isDeleted?: boolean
+  deleted_by?: number | null
+  deleted_at?: Date | string | null
+  userMasterId?: number | null
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
+  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
+  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectMasterCreateOrConnectWithoutFactory_out_revert_logsInput = {
+  where: Prisma.ProjectMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectMasterCreateWithoutFactory_out_revert_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+}
+
+export type ProjectMasterUpsertWithoutFactory_out_revert_logsInput = {
+  update: Prisma.XOR<Prisma.ProjectMasterUpdateWithoutFactory_out_revert_logsInput, Prisma.ProjectMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
+  create: Prisma.XOR<Prisma.ProjectMasterCreateWithoutFactory_out_revert_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+  where?: Prisma.ProjectMasterWhereInput
+}
+
+export type ProjectMasterUpdateToOneWithWhereWithoutFactory_out_revert_logsInput = {
+  where?: Prisma.ProjectMasterWhereInput
+  data: Prisma.XOR<Prisma.ProjectMasterUpdateWithoutFactory_out_revert_logsInput, Prisma.ProjectMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
+}
+
+export type ProjectMasterUpdateWithoutFactory_out_revert_logsInput = {
+  project_name?: Prisma.StringFieldUpdateOperationsInput | string
+  project_status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
+  is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  is_multi_location?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
+  details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
+  items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
+  createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityUpdateManyWithoutProjectNestedInput
+  deletedByUser?: Prisma.UserMasterUpdateOneWithoutDeletedProjectsNestedInput
+  userMaster?: Prisma.UserMasterUpdateOneWithoutProjectMastersNestedInput
+}
+
+export type ProjectMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  project_status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
+  is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  is_multi_location?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
+  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput
+  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutProjectNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutProjectNestedInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectMasterCreateWithoutBox_unpack_logsInput = {
+  project_name: string
+  project_status?: string
+  created_at?: Date | string
+  unique_project_id: string
+  is_grouping?: boolean
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
+  client_address?: string | null
+  client_contact_no?: string | null
+  client_name?: string | null
+  order_no?: string | null
+  updated_at?: Date | string | null
+  updated_by?: number | null
+  packing_type?: $Enums.PackingType
+  is_multi_location?: boolean
+  no_of_boxes?: number
+  isDeleted?: boolean
+  deleted_at?: Date | string | null
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
+  details?: Prisma.ProjectDetailsCreateNestedManyWithoutProjectInput
+  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutProjectInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutProjectsInput
+  createdByUser: Prisma.UserMasterCreateNestedOneWithoutCreatedProjectsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutProjectsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProjectsInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutProjectInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityCreateNestedManyWithoutProjectInput
+  deletedByUser?: Prisma.UserMasterCreateNestedOneWithoutDeletedProjectsInput
+  userMaster?: Prisma.UserMasterCreateNestedOneWithoutProjectMastersInput
+}
+
+export type ProjectMasterUncheckedCreateWithoutBox_unpack_logsInput = {
+  id?: number
+  project_name: string
+  vendor_id: number
+  client_id?: number | null
+  created_by: number
+  project_status?: string
+  created_at?: Date | string
+  unique_project_id: string
+  is_grouping?: boolean
+  lead_id?: number | null
+  track_trace_status?: string
+  track_completed_at?: Date | string | null
+  track_started_at?: Date | string | null
+  client_address?: string | null
+  client_contact_no?: string | null
+  client_name?: string | null
+  order_no?: string | null
+  updated_at?: Date | string | null
+  updated_by?: number | null
+  packing_type?: $Enums.PackingType
+  is_multi_location?: boolean
+  no_of_boxes?: number
+  isDeleted?: boolean
+  deleted_by?: number | null
+  deleted_at?: Date | string | null
+  userMasterId?: number | null
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
+  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutProjectInput
+  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutProjectInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutProjectInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectMasterCreateOrConnectWithoutBox_unpack_logsInput = {
+  where: Prisma.ProjectMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectMasterCreateWithoutBox_unpack_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutBox_unpack_logsInput>
+}
+
+export type ProjectMasterUpsertWithoutBox_unpack_logsInput = {
+  update: Prisma.XOR<Prisma.ProjectMasterUpdateWithoutBox_unpack_logsInput, Prisma.ProjectMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+  create: Prisma.XOR<Prisma.ProjectMasterCreateWithoutBox_unpack_logsInput, Prisma.ProjectMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  where?: Prisma.ProjectMasterWhereInput
+}
+
+export type ProjectMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput = {
+  where?: Prisma.ProjectMasterWhereInput
+  data: Prisma.XOR<Prisma.ProjectMasterUpdateWithoutBox_unpack_logsInput, Prisma.ProjectMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+}
+
+export type ProjectMasterUpdateWithoutBox_unpack_logsInput = {
+  project_name?: Prisma.StringFieldUpdateOperationsInput | string
+  project_status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
+  is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  is_multi_location?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
+  details?: Prisma.ProjectDetailsUpdateManyWithoutProjectNestedInput
+  items?: Prisma.ProjectItemsMasterUpdateManyWithoutProjectNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutProjectsNestedInput
+  createdByUser?: Prisma.UserMasterUpdateOneRequiredWithoutCreatedProjectsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutProjectsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProjectsNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutProjectNestedInput
+  locationQuantities?: Prisma.ProjectLocationProductQuantityUpdateManyWithoutProjectNestedInput
+  deletedByUser?: Prisma.UserMasterUpdateOneWithoutDeletedProjectsNestedInput
+  userMaster?: Prisma.UserMasterUpdateOneWithoutProjectMastersNestedInput
+}
+
+export type ProjectMasterUncheckedUpdateWithoutBox_unpack_logsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  project_status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unique_project_id?: Prisma.StringFieldUpdateOperationsInput | string
+  is_grouping?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  track_trace_status?: Prisma.StringFieldUpdateOperationsInput | string
+  track_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  track_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  client_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  client_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  is_multi_location?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -2471,6 +2909,8 @@ export type ProjectMasterCreateWithoutScanItemsInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -2515,6 +2955,8 @@ export type ProjectMasterUncheckedCreateWithoutScanItemsInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -2562,6 +3004,8 @@ export type ProjectMasterUpdateWithoutScanItemsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -2606,6 +3050,8 @@ export type ProjectMasterUncheckedUpdateWithoutScanItemsInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -2637,6 +3083,8 @@ export type ProjectMasterCreateWithoutClientInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -2680,6 +3128,8 @@ export type ProjectMasterUncheckedCreateWithoutClientInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -2738,6 +3188,8 @@ export type ProjectMasterCreateWithoutLeadInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -2781,6 +3233,8 @@ export type ProjectMasterUncheckedCreateWithoutLeadInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -2839,6 +3293,8 @@ export type ProjectMasterCreateWithoutCutListInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
@@ -2883,6 +3339,8 @@ export type ProjectMasterUncheckedCreateWithoutCutListInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
@@ -2930,6 +3388,8 @@ export type ProjectMasterUpdateWithoutCutListInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
@@ -2974,6 +3434,8 @@ export type ProjectMasterUncheckedUpdateWithoutCutListInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
@@ -3005,6 +3467,8 @@ export type ProjectMasterCreateWithoutCutListMachineMappingInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
@@ -3049,6 +3513,8 @@ export type ProjectMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
@@ -3096,6 +3562,8 @@ export type ProjectMasterUpdateWithoutCutListMachineMappingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
@@ -3140,6 +3608,8 @@ export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
@@ -3171,6 +3641,8 @@ export type ProjectMasterCreateWithoutDefectedItemsInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutProjectInput
@@ -3215,6 +3687,8 @@ export type ProjectMasterUncheckedCreateWithoutDefectedItemsInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutProjectInput
@@ -3262,6 +3736,8 @@ export type ProjectMasterUpdateWithoutDefectedItemsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutProjectNestedInput
@@ -3306,6 +3782,8 @@ export type ProjectMasterUncheckedUpdateWithoutDefectedItemsInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutProjectNestedInput
@@ -3337,6 +3815,8 @@ export type ProjectMasterCreateWithoutBox_info_fieldsInput = {
   deleted_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -3381,6 +3861,8 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   userMasterId?: number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -3428,6 +3910,8 @@ export type ProjectMasterUpdateWithoutBox_info_fieldsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -3472,6 +3956,8 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -3502,6 +3988,8 @@ export type ProjectMasterCreateWithoutBox_info_valuesInput = {
   isDeleted?: boolean
   deleted_at?: Date | string | null
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutProjectInput
@@ -3546,6 +4034,8 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_valuesInput = {
   deleted_at?: Date | string | null
   userMasterId?: number | null
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutProjectInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutProjectInput
@@ -3593,6 +4083,8 @@ export type ProjectMasterUpdateWithoutBox_info_valuesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -3637,6 +4129,8 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -3697,6 +4191,8 @@ export type ProjectMasterUpdateWithoutVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -3740,6 +4236,8 @@ export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -3884,6 +4382,8 @@ export type ProjectMasterUpdateWithoutCreatedByUserInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -3927,6 +4427,8 @@ export type ProjectMasterUncheckedUpdateWithoutCreatedByUserInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -3987,6 +4489,8 @@ export type ProjectMasterUpdateWithoutUserMasterInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -4030,6 +4534,8 @@ export type ProjectMasterUncheckedUpdateWithoutUserMasterInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -4090,6 +4596,8 @@ export type ProjectMasterUpdateWithoutDeletedByUserInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -4133,6 +4641,8 @@ export type ProjectMasterUncheckedUpdateWithoutDeletedByUserInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -4221,6 +4731,8 @@ export type ProjectMasterUpdateWithoutClientInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -4264,6 +4776,8 @@ export type ProjectMasterUncheckedUpdateWithoutClientInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -4352,6 +4866,8 @@ export type ProjectMasterUpdateWithoutLeadInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutProjectNestedInput
@@ -4395,6 +4911,8 @@ export type ProjectMasterUncheckedUpdateWithoutLeadInput = {
   userMasterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutProjectNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -4441,6 +4959,8 @@ export type ProjectMasterUncheckedUpdateManyWithoutLeadInput = {
 export type ProjectMasterCountOutputType = {
   box_info_values: number
   boxes: number
+  factory_out_revert_logs: number
+  box_unpack_logs: number
   CutList: number
   cutListMachineMapping: number
   defectedItems: number
@@ -4454,6 +4974,8 @@ export type ProjectMasterCountOutputType = {
 export type ProjectMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   box_info_values?: boolean | ProjectMasterCountOutputTypeCountBox_info_valuesArgs
   boxes?: boolean | ProjectMasterCountOutputTypeCountBoxesArgs
+  factory_out_revert_logs?: boolean | ProjectMasterCountOutputTypeCountFactory_out_revert_logsArgs
+  box_unpack_logs?: boolean | ProjectMasterCountOutputTypeCountBox_unpack_logsArgs
   CutList?: boolean | ProjectMasterCountOutputTypeCountCutListArgs
   cutListMachineMapping?: boolean | ProjectMasterCountOutputTypeCountCutListMachineMappingArgs
   defectedItems?: boolean | ProjectMasterCountOutputTypeCountDefectedItemsArgs
@@ -4486,6 +5008,20 @@ export type ProjectMasterCountOutputTypeCountBox_info_valuesArgs<ExtArgs extends
  */
 export type ProjectMasterCountOutputTypeCountBoxesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BoxMasterWhereInput
+}
+
+/**
+ * ProjectMasterCountOutputType without action
+ */
+export type ProjectMasterCountOutputTypeCountFactory_out_revert_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FactoryOutRevertLogWhereInput
+}
+
+/**
+ * ProjectMasterCountOutputType without action
+ */
+export type ProjectMasterCountOutputTypeCountBox_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxUnpackLogWhereInput
 }
 
 /**
@@ -4574,6 +5110,8 @@ export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   userMasterId?: boolean
   box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
+  factory_out_revert_logs?: boolean | Prisma.ProjectMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.ProjectMaster$box_unpack_logsArgs<ExtArgs>
   CutList?: boolean | Prisma.ProjectMaster$CutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>
   defectedItems?: boolean | Prisma.ProjectMaster$defectedItemsArgs<ExtArgs>
@@ -4694,6 +5232,8 @@ export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalA
 export type ProjectMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
+  factory_out_revert_logs?: boolean | Prisma.ProjectMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.ProjectMaster$box_unpack_logsArgs<ExtArgs>
   CutList?: boolean | Prisma.ProjectMaster$CutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>
   defectedItems?: boolean | Prisma.ProjectMaster$defectedItemsArgs<ExtArgs>
@@ -4732,6 +5272,8 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     box_info_values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
     boxes: Prisma.$BoxMasterPayload<ExtArgs>[]
+    factory_out_revert_logs: Prisma.$FactoryOutRevertLogPayload<ExtArgs>[]
+    box_unpack_logs: Prisma.$BoxUnpackLogPayload<ExtArgs>[]
     CutList: Prisma.$CutListPayload<ExtArgs>[]
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
     defectedItems: Prisma.$DefectedItemPayload<ExtArgs>[]
@@ -5170,6 +5712,8 @@ export interface Prisma__ProjectMasterClient<T, Null = never, ExtArgs extends ru
   readonly [Symbol.toStringTag]: "PrismaPromise"
   box_info_values<T extends Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boxes<T extends Prisma.ProjectMaster$boxesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$boxesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  factory_out_revert_logs<T extends Prisma.ProjectMaster$factory_out_revert_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$factory_out_revert_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FactoryOutRevertLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  box_unpack_logs<T extends Prisma.ProjectMaster$box_unpack_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$box_unpack_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxUnpackLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   CutList<T extends Prisma.ProjectMaster$CutListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$CutListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutListMachineMapping<T extends Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   defectedItems<T extends Prisma.ProjectMaster$defectedItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMaster$defectedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectedItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5685,6 +6229,54 @@ export type ProjectMaster$boxesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
+}
+
+/**
+ * ProjectMaster.factory_out_revert_logs
+ */
+export type ProjectMaster$factory_out_revert_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FactoryOutRevertLog
+   */
+  select?: Prisma.FactoryOutRevertLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FactoryOutRevertLog
+   */
+  omit?: Prisma.FactoryOutRevertLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FactoryOutRevertLogInclude<ExtArgs> | null
+  where?: Prisma.FactoryOutRevertLogWhereInput
+  orderBy?: Prisma.FactoryOutRevertLogOrderByWithRelationInput | Prisma.FactoryOutRevertLogOrderByWithRelationInput[]
+  cursor?: Prisma.FactoryOutRevertLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FactoryOutRevertLogScalarFieldEnum | Prisma.FactoryOutRevertLogScalarFieldEnum[]
+}
+
+/**
+ * ProjectMaster.box_unpack_logs
+ */
+export type ProjectMaster$box_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxUnpackLog
+   */
+  select?: Prisma.BoxUnpackLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxUnpackLog
+   */
+  omit?: Prisma.BoxUnpackLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxUnpackLogInclude<ExtArgs> | null
+  where?: Prisma.BoxUnpackLogWhereInput
+  orderBy?: Prisma.BoxUnpackLogOrderByWithRelationInput | Prisma.BoxUnpackLogOrderByWithRelationInput[]
+  cursor?: Prisma.BoxUnpackLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxUnpackLogScalarFieldEnum | Prisma.BoxUnpackLogScalarFieldEnum[]
 }
 
 /**

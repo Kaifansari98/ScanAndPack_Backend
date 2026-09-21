@@ -62,6 +62,7 @@ export type BoxItemDeleteLogMinAggregateOutputType = {
   scanned_at: Date | null
   deleted_by: number | null
   deleted_at: Date | null
+  reason: string | null
   created_at: Date | null
 }
 
@@ -77,6 +78,7 @@ export type BoxItemDeleteLogMaxAggregateOutputType = {
   scanned_at: Date | null
   deleted_by: number | null
   deleted_at: Date | null
+  reason: string | null
   created_at: Date | null
 }
 
@@ -92,6 +94,7 @@ export type BoxItemDeleteLogCountAggregateOutputType = {
   scanned_at: number
   deleted_by: number
   deleted_at: number
+  reason: number
   created_at: number
   _all: number
 }
@@ -133,6 +136,7 @@ export type BoxItemDeleteLogMinAggregateInputType = {
   scanned_at?: true
   deleted_by?: true
   deleted_at?: true
+  reason?: true
   created_at?: true
 }
 
@@ -148,6 +152,7 @@ export type BoxItemDeleteLogMaxAggregateInputType = {
   scanned_at?: true
   deleted_by?: true
   deleted_at?: true
+  reason?: true
   created_at?: true
 }
 
@@ -163,6 +168,7 @@ export type BoxItemDeleteLogCountAggregateInputType = {
   scanned_at?: true
   deleted_by?: true
   deleted_at?: true
+  reason?: true
   created_at?: true
   _all?: true
 }
@@ -265,6 +271,7 @@ export type BoxItemDeleteLogGroupByOutputType = {
   scanned_at: Date | null
   deleted_by: number | null
   deleted_at: Date
+  reason: string | null
   created_at: Date
   _count: BoxItemDeleteLogCountAggregateOutputType | null
   _avg: BoxItemDeleteLogAvgAggregateOutputType | null
@@ -303,6 +310,7 @@ export type BoxItemDeleteLogWhereInput = {
   scanned_at?: Prisma.DateTimeNullableFilter<"BoxItemDeleteLog"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"BoxItemDeleteLog"> | number | null
   deleted_at?: Prisma.DateTimeFilter<"BoxItemDeleteLog"> | Date | string
+  reason?: Prisma.StringNullableFilter<"BoxItemDeleteLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"BoxItemDeleteLog"> | Date | string
 }
 
@@ -318,6 +326,7 @@ export type BoxItemDeleteLogOrderByWithRelationInput = {
   scanned_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  reason?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -336,6 +345,7 @@ export type BoxItemDeleteLogWhereUniqueInput = Prisma.AtLeast<{
   scanned_at?: Prisma.DateTimeNullableFilter<"BoxItemDeleteLog"> | Date | string | null
   deleted_by?: Prisma.IntNullableFilter<"BoxItemDeleteLog"> | number | null
   deleted_at?: Prisma.DateTimeFilter<"BoxItemDeleteLog"> | Date | string
+  reason?: Prisma.StringNullableFilter<"BoxItemDeleteLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"BoxItemDeleteLog"> | Date | string
 }, "id">
 
@@ -351,6 +361,7 @@ export type BoxItemDeleteLogOrderByWithAggregationInput = {
   scanned_at?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  reason?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.BoxItemDeleteLogCountOrderByAggregateInput
   _avg?: Prisma.BoxItemDeleteLogAvgOrderByAggregateInput
@@ -374,6 +385,7 @@ export type BoxItemDeleteLogScalarWhereWithAggregatesInput = {
   scanned_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxItemDeleteLog"> | Date | string | null
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"BoxItemDeleteLog"> | number | null
   deleted_at?: Prisma.DateTimeWithAggregatesFilter<"BoxItemDeleteLog"> | Date | string
+  reason?: Prisma.StringNullableWithAggregatesFilter<"BoxItemDeleteLog"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"BoxItemDeleteLog"> | Date | string
 }
 
@@ -388,6 +400,7 @@ export type BoxItemDeleteLogCreateInput = {
   scanned_at?: Date | string | null
   deleted_by?: number | null
   deleted_at?: Date | string
+  reason?: string | null
   created_at?: Date | string
 }
 
@@ -403,6 +416,7 @@ export type BoxItemDeleteLogUncheckedCreateInput = {
   scanned_at?: Date | string | null
   deleted_by?: number | null
   deleted_at?: Date | string
+  reason?: string | null
   created_at?: Date | string
 }
 
@@ -417,6 +431,7 @@ export type BoxItemDeleteLogUpdateInput = {
   scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -432,6 +447,7 @@ export type BoxItemDeleteLogUncheckedUpdateInput = {
   scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -447,6 +463,7 @@ export type BoxItemDeleteLogCreateManyInput = {
   scanned_at?: Date | string | null
   deleted_by?: number | null
   deleted_at?: Date | string
+  reason?: string | null
   created_at?: Date | string
 }
 
@@ -461,6 +478,7 @@ export type BoxItemDeleteLogUpdateManyMutationInput = {
   scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -476,6 +494,7 @@ export type BoxItemDeleteLogUncheckedUpdateManyInput = {
   scanned_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deleted_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -491,6 +510,7 @@ export type BoxItemDeleteLogCountOrderByAggregateInput = {
   scanned_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -518,6 +538,7 @@ export type BoxItemDeleteLogMaxOrderByAggregateInput = {
   scanned_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -533,6 +554,7 @@ export type BoxItemDeleteLogMinOrderByAggregateInput = {
   scanned_at?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
+  reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -562,6 +584,7 @@ export type BoxItemDeleteLogSelect<ExtArgs extends runtime.Types.Extensions.Inte
   scanned_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
+  reason?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["boxItemDeleteLog"]>
 
@@ -577,6 +600,7 @@ export type BoxItemDeleteLogSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   scanned_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
+  reason?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["boxItemDeleteLog"]>
 
@@ -592,6 +616,7 @@ export type BoxItemDeleteLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   scanned_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
+  reason?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["boxItemDeleteLog"]>
 
@@ -607,10 +632,11 @@ export type BoxItemDeleteLogSelectScalar = {
   scanned_at?: boolean
   deleted_by?: boolean
   deleted_at?: boolean
+  reason?: boolean
   created_at?: boolean
 }
 
-export type BoxItemDeleteLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cut_list_machine_mapping_id" | "cut_list_id" | "qty" | "box_id" | "project_id" | "vendor_id" | "scanned_by" | "scanned_at" | "deleted_by" | "deleted_at" | "created_at", ExtArgs["result"]["boxItemDeleteLog"]>
+export type BoxItemDeleteLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cut_list_machine_mapping_id" | "cut_list_id" | "qty" | "box_id" | "project_id" | "vendor_id" | "scanned_by" | "scanned_at" | "deleted_by" | "deleted_at" | "reason" | "created_at", ExtArgs["result"]["boxItemDeleteLog"]>
 
 export type $BoxItemDeleteLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoxItemDeleteLog"
@@ -627,6 +653,7 @@ export type $BoxItemDeleteLogPayload<ExtArgs extends runtime.Types.Extensions.In
     scanned_at: Date | null
     deleted_by: number | null
     deleted_at: Date
+    reason: string | null
     created_at: Date
   }, ExtArgs["result"]["boxItemDeleteLog"]>
   composites: {}
@@ -1062,6 +1089,7 @@ export interface BoxItemDeleteLogFieldRefs {
   readonly scanned_at: Prisma.FieldRef<"BoxItemDeleteLog", 'DateTime'>
   readonly deleted_by: Prisma.FieldRef<"BoxItemDeleteLog", 'Int'>
   readonly deleted_at: Prisma.FieldRef<"BoxItemDeleteLog", 'DateTime'>
+  readonly reason: Prisma.FieldRef<"BoxItemDeleteLog", 'String'>
   readonly created_at: Prisma.FieldRef<"BoxItemDeleteLog", 'DateTime'>
 }
     

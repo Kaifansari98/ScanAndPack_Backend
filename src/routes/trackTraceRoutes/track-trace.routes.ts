@@ -67,6 +67,8 @@ import {
   unsetBoxFromMapping,
   markBoxFactoryOut,
   markBoxSiteIn,
+  revertBoxFactoryOut,
+  getBoxFactoryOutRevertLogs,
   checkToken,
   syncCategories,
   getProjectDetail,
@@ -223,6 +225,8 @@ router.post("/units", createUnitMaster);
 
 router.patch("/boxes/:box_id/factory-out", markBoxFactoryOut);
 router.patch("/boxes/:box_id/site-in", markBoxSiteIn);
+router.patch("/boxes/:box_id/revert-factory-out", revertBoxFactoryOut);
+router.get("/boxes/:box_id/revert-logs", getBoxFactoryOutRevertLogs);
 
 router.get("/category/project-categories/check-token", checkToken);
 router.post("/category/project-categories/sync", syncCategories);

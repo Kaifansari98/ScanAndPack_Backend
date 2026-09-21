@@ -961,6 +961,7 @@ export const updateBoxStatus = async (
   boxId: number,
   newStatus: BoxStatus,
   user_id: number,
+  reason?: string,
 ) => {
   const box = await prisma.boxMaster.findFirst({
     where: {
@@ -991,6 +992,66 @@ export const updateBoxStatus = async (
   ) {
     throw new Error("Project is deleted or deactivated");
   }
+
+  if (newStatus === BoxStatus.unpacked) {
+    if (box.site_in_at !== null || box.site_in_by !== null) {
+      throw new Error(
+        "Cannot unpack box: Box is already at the site (Site In has been recorded)",
+      );
+    }
+
+    if (box.factory_out_at !== null && box.factory_out_by !== null) {
+      throw new Error(
+        "Cannot unpack box: Box has already been marked as Factory Out",
+      );
+    }
+
+    if (!reason || !reason.trim()) {
+      throw new Error("Reason is required to unpack box");
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+      const log = await tx.boxUnpackLog.create({
+        data: {
+          box_id: box.id,
+          project_id: box.project_id,
+          vendor_id: box.vendor_id,
+          packed_at: box.packed_at,
+          packed_by: box.packed_by,
+          box_created_by: box.created_by,
+          box_created_at: box.created_date,
+          unpacked_by: user_id,
+          unpacked_at: new Date(),
+          reason: reason.trim(),
+        },
+        include: {
+          unpackedByUser: {
+            select: { id: true, user_name: true },
+          },
+          packedByUser: {
+            select: { id: true, user_name: true },
+          },
+          boxCreatedByUser: {
+            select: { id: true, user_name: true },
+          },
+        },
+      });
+
+      const updatedBox = await tx.boxMaster.update({
+        where: { id: boxId },
+        data: {
+          box_status: BoxStatus.unpacked,
+          packed_at: null,
+          packed_by: null,
+        },
+      });
+
+      return { ...updatedBox, log };
+    });
+
+    return result;
+  }
+
   const now = new Date();
 
   return await prisma.boxMaster.update({
@@ -1014,6 +1075,7 @@ export const generateBoxPdfServiceWeb = async (
   box_id: number,
   project_id: string,
   vendor_id: number,
+  locationNameParam?: string,
 ) => {
   try {
     /*
@@ -1044,7 +1106,12 @@ export const generateBoxPdfServiceWeb = async (
     |--------------------------------------------------------------------------
     */
 
-    return await generateBoxPdfService(box_id, project.id, vendor_id);
+    return await generateBoxPdfService(
+      box_id,
+      project.id,
+      vendor_id,
+      locationNameParam,
+    );
   } catch (error) {
     console.error("generateBoxPdfServiceWeb:", error);
 
@@ -1076,6 +1143,7 @@ export const generateBoxPdfService = async (
   box_id: number,
   project_id: number,
   vendor_id: number,
+  locationNameParam?: string,
 ) => {
   const calibriRegularPath = path.resolve(
     __dirname,
@@ -1484,8 +1552,9 @@ export const generateBoxPdfService = async (
       (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
       "N/A";
 
-    const clientContact =
-      project.client_contact_no || lead?.contact_no || "N/A";
+    const projectContact =
+      project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+    let clientContact = projectContact || "N/A";
 
     const deliveryAddress =
       project.client_address || lead?.site_address || "N/A";
@@ -1516,6 +1585,7 @@ export const generateBoxPdfService = async (
             select: {
               id: true,
               location_name: true,
+              contact_no: true,
             },
           },
 
@@ -1769,15 +1839,88 @@ export const generateBoxPdfService = async (
       (isCustomGroupPacking && box.product_group_name?.trim()) ||
       resolveProductName(items);
 
-    const automaticLocationName =
-      mappingRows
-        .find((mapping) => mapping.projectLocationProductQuantity)
-        ?.projectLocationProductQuantity?.location_name.trim() || "";
+    const mappedLocations = Array.from(
+      new Set(
+        mappingRows
+          .map((mapping) =>
+            mapping.projectLocationProductQuantity?.location_name?.trim(),
+          )
+          .filter(Boolean),
+      ),
+    ).join(", ");
 
-    const floorName =
-      automaticLocationName ||
+    const packingLocation =
+      mappedLocations ||
+      locationNameParam?.trim() ||
+      "" ||
+      findBoxInfoValue(boxInfoValues, [
+        "packing location",
+        "packing_location",
+        "location",
+        "location_name",
+        "location name",
+      ]) ||
+      "";
+
+    const mappedLocationContacts = Array.from(
+      new Set(
+        mappingRows
+          .map((mapping) =>
+            mapping.projectLocationProductQuantity?.contact_no?.trim(),
+          )
+          .filter(Boolean),
+      ),
+    );
+    const locationContacts = [...mappedLocationContacts];
+
+    if (locationContacts.length === 0 && packingLocation) {
+      const locationRecord =
+        await prisma.projectLocationProductQuantity.findFirst({
+          where: {
+            project_id,
+            vendor_id,
+            location_name: {
+              equals: packingLocation,
+              mode: "insensitive",
+            },
+            contact_no: {
+              not: null,
+            },
+          },
+          select: {
+            contact_no: true,
+          },
+        });
+      if (locationRecord?.contact_no?.trim()) {
+        locationContacts.push(locationRecord.contact_no.trim());
+      }
+    }
+
+    const resolvedContacts = Array.from(
+      new Set([projectContact, ...locationContacts].filter(Boolean)),
+    );
+    clientContact =
+      resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "N/A";
+
+    const floorValue =
       findBoxInfoValue(boxInfoValues, ["floor", "floor_name", "floor name"]) ||
-      "-";
+      "";
+
+    const hasBothLocations = Boolean(
+      packingLocation &&
+      floorValue &&
+      packingLocation.toLowerCase() !== floorValue.toLowerCase(),
+    );
+
+    const locationLabel = hasBothLocations
+      ? "LOCATION / FLOOR"
+      : packingLocation || isCustomGroupPacking
+        ? "LOCATION"
+        : "FLOOR";
+
+    const locationDisplayValue = hasBothLocations
+      ? `${packingLocation} / ${floorValue}`
+      : packingLocation || floorValue || "-";
 
     const customPackingLabel = [
       box.packing_group_name?.trim(),
@@ -2195,11 +2338,19 @@ padding-top:25px;
 }
 
 .row-2col {
-  grid-template-columns: 62% 38%;
+  grid-template-columns: 62fr 38fr;
 }
 
 .row-3col {
-  grid-template-columns: 30% 40% 30%;
+  grid-template-columns: 28fr 36fr 36fr;
+}
+
+.row-3col .field-label {
+  white-space: nowrap;
+}
+
+.row-3col .info-cell:nth-child(3) {
+  padding-left: 3mm;
 }
 
 .info-cell {
@@ -2214,7 +2365,7 @@ padding-top:25px;
 .field-label {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.25;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
@@ -2224,7 +2375,7 @@ padding-top:25px;
 .field-value {
   color: #111827;
   font-size: 8px !important;
-  line-height: 8px;
+  line-height: 1.25;
   font-weight: 800;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
@@ -2232,7 +2383,14 @@ padding-top:25px;
 
 .filed-value-item-no{
 font-size: 18px !important;
-line-height: 12px;
+line-height: 1.2;
+}
+
+.field-value-location {
+  font-size: 13px !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .section-separator {
@@ -2248,25 +2406,55 @@ line-height: 12px;
 |--------------------------------------------------------------------------
 */
 
-.product-title {
+.product-title-container {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.35;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
-  margin: 0 0 1.1mm;
+  margin: 0.5mm 0 1.2mm;
+  flex: 0 0 auto;
+}
+
+.product-title-label {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  vertical-align: baseline;
+  margin-right: 3px;
+  display: inline;
+}
+
+.product-title {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  margin: 0.5mm 0 1.2mm;
   flex: 0 0 auto;
 }
 
 .project-value{
 color: #111827;
-  font-size: 12pt;
-  line-height: 6px;
-  font-weight: 600;
+  font-size: 11.5pt;
+  line-height: 1.35;
+  font-weight: 700;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
    text-transform: uppercase;
+  vertical-align: baseline;
+  display: inline;
+}
+
+.field-label .project-value {
+  line-height: 1.35;
+  display: inline;
 }
 
 
@@ -2291,7 +2479,7 @@ color: #111827;
 }
 
 .col-component {
-  width: 55%;
+  width: 51%;
 }
 
 .col-qty {
@@ -2299,11 +2487,11 @@ color: #111827;
 }
 
 .col-unit {
-  width: 12%;
+  width: 13%;
 }
 
 .col-total {
-  width: 14%;
+  width: 17%;
 }
 
 .component-table th {
@@ -2396,15 +2584,17 @@ color: #111827;
   border-left: 1px solid #111827 !important;
   border-right: 1px solid #111827 !important;
   border-bottom: 1px solid #111827;
+  white-space: nowrap;
 }
 
 .component-table tfoot td {
   background: #fff;
   border: 1px solid #111827;
   font-size: 8px !important;
-  line-height: 5.8px;
+  line-height: 1.2;
   font-weight: 800;
-  padding: 1mm 0.65mm;
+  padding: 1mm 0.5mm;
+  white-space: nowrap;
 }
 
 .total-title {
@@ -2778,11 +2968,11 @@ color: #111827;
     <div class="info-row row-3col">
       <div class="info-cell">
         <div class="field-label">
-          ${isCustomGroupPacking ? "LOCATION" : "FLOOR"}
+          ${locationLabel}
         </div>
 
-        <div class="field-value">
-          ${escapeHtml(floorName)}
+        <div class="field-value field-value-location">
+          ${escapeHtml(locationDisplayValue)}
         </div>
       </div>
 
@@ -2821,7 +3011,7 @@ color: #111827;
                   </div>
                 </div>
               `
-          : ""
+            : ""
       }
     </div>
 
@@ -2833,8 +3023,8 @@ color: #111827;
             <!-- ============================== -->
             <!-- PRODUCT TITLE                  -->
             <!-- ============================== -->
-            <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
-              PRODUCT :
+            <div class="product-title-container" style="padding-top:2px;padding-bottom:2px;">
+              <span class="product-title-label">PRODUCT :</span>
               <span class="project-value">
                 ${escapeHtml(productName)}
               </span>
@@ -2931,7 +3121,7 @@ color: #111827;
           </td>
 
           <td class="total-cell">
-            ${totalWeight.toFixed(2)}KG
+            ${totalWeight.toFixed(2)} KG
           </td>
         </tr>
       </tfoot>
@@ -2997,7 +3187,7 @@ color: #111827;
 
       boxes_per_product: box.boxes_per_product,
 
-      location_name: automaticLocationName || null,
+      location_name: packingLocation || floorValue || null,
 
       total_quantity: totalQuantity,
 
@@ -3031,7 +3221,7 @@ export async function generatePdf(html: string, filePath: string) {
     const page = await browser.newPage();
 
     await page.setContent(html, {
-      waitUntil: "networkidle0",
+      waitUntil: "load",
     });
 
     const pdfBuffer = await page.pdf({
@@ -3069,7 +3259,7 @@ export const generateProjectBoxPdfService = async (
 
   try {
     // ── 1. Fetch project, vendor ─────────────────────────────────────────────
-    const [project, vendor] = await Promise.all([
+    const [project, vendor, locationRecords] = await Promise.all([
       prisma.projectMaster.findFirst({
         where: { id: project_id, vendor_id },
         select: {
@@ -3077,6 +3267,9 @@ export const generateProjectBoxPdfService = async (
           project_name: true,
           lead_id: true,
           project_status: true,
+          client_name: true,
+          client_contact_no: true,
+          client_address: true,
         },
       }),
       prisma.vendorMaster.findUnique({
@@ -3086,6 +3279,17 @@ export const generateProjectBoxPdfService = async (
           primary_contact_number: true,
           primary_contact_email: true,
           logo: true,
+        },
+      }),
+      prisma.projectLocationProductQuantity.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          contact_no: { not: null },
+        },
+        select: {
+          location_name: true,
+          contact_no: true,
         },
       }),
     ]);
@@ -3114,6 +3318,27 @@ export const generateProjectBoxPdfService = async (
         },
       });
     }
+
+    const clientName =
+      project.client_name ||
+      (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
+      "N/A";
+    const projectContact =
+      project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+    const locationContacts = Array.from(
+      new Set(
+        (locationRecords || [])
+          .map((r) => r.contact_no?.trim())
+          .filter(Boolean),
+      ),
+    );
+    const resolvedContacts = Array.from(
+      new Set([projectContact, ...locationContacts].filter(Boolean)),
+    );
+    const clientContact =
+      resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "-";
+    const clientAddress =
+      project.client_address || lead?.site_address || "";
 
     // ── 3. Fetch boxes + item counts from CutListMachineMapping ─────────────
     const packagingMachine = await prisma.machineMaster.findFirst({
@@ -3210,12 +3435,12 @@ export const generateProjectBoxPdfService = async (
   <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;">
     <div>
       ${
-        lead
+        clientName !== "N/A" || clientContact !== "-"
           ? `
-        <p style="font-size:13px;margin-bottom:3px;"><strong>Client Name:</strong> ${escapeHtml(`${lead.firstname} ${lead.lastname}`)}</p>
-        <p style="font-size:13px;margin-bottom:3px;"><strong>Contact:</strong> ${escapeHtml(lead.contact_no)}</p>
-        ${lead.email ? `<p style="font-size:13px;margin-bottom:3px;"><strong>Email:</strong> ${escapeHtml(lead.email)}</p>` : ""}
-        ${lead.site_address ? `<p style="font-size:13px;"><strong>Address:</strong> ${escapeHtml(lead.site_address)}</p>` : ""}
+        <p style="font-size:13px;margin-bottom:3px;"><strong>Client Name:</strong> ${escapeHtml(clientName)}</p>
+        <p style="font-size:13px;margin-bottom:3px;"><strong>Contact:</strong> ${escapeHtml(clientContact)}</p>
+        ${lead?.email ? `<p style="font-size:13px;margin-bottom:3px;"><strong>Email:</strong> ${escapeHtml(lead.email)}</p>` : ""}
+        ${clientAddress ? `<p style="font-size:13px;"><strong>Address:</strong> ${escapeHtml(clientAddress)}</p>` : ""}
       `
           : `<p style="font-size:13px;color:#888;">No client information available</p>`
       }
@@ -3343,65 +3568,80 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [project, vendor, packagingMachine] = await Promise.all([
-      prisma.projectMaster.findFirst({
-        where: {
-          id: project_id,
+    const [project, vendor, packagingMachine, locationRecords] =
+      await Promise.all([
+        prisma.projectMaster.findFirst({
+          where: {
+            id: project_id,
 
-          vendor_id,
-        },
+            vendor_id,
+          },
 
-        select: {
-          id: true,
+          select: {
+            id: true,
 
-          project_name: true,
+            project_name: true,
 
-          project_status: true,
+            project_status: true,
 
-          lead_id: true,
+            lead_id: true,
 
-          order_no: true,
+            order_no: true,
 
-          client_name: true,
+            client_name: true,
 
-          client_address: true,
+            client_address: true,
 
-          client_contact_no: true,
-        },
-      }),
+            client_contact_no: true,
+          },
+        }),
 
-      prisma.vendorMaster.findUnique({
-        where: {
-          id: vendor_id,
-        },
+        prisma.vendorMaster.findUnique({
+          where: {
+            id: vendor_id,
+          },
 
-        select: {
-          vendor_name: true,
+          select: {
+            vendor_name: true,
 
-          primary_contact_number: true,
+            primary_contact_number: true,
 
-          primary_contact_email: true,
+            primary_contact_email: true,
 
-          logo: true,
-        },
-      }),
+            logo: true,
+          },
+        }),
 
-      prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
+        prisma.machineMaster.findFirst({
+          where: {
+            vendor_id,
 
-          machine_type_id: 18,
-        },
+            machine_type_id: 18,
+          },
 
-        select: {
-          id: true,
-        },
+          select: {
+            id: true,
+          },
 
-        orderBy: {
-          id: "asc",
-        },
-      }),
-    ]);
+          orderBy: {
+            id: "asc",
+          },
+        }),
+
+        prisma.projectLocationProductQuantity.findMany({
+          where: {
+            project_id,
+            vendor_id,
+            contact_no: {
+              not: null,
+            },
+          },
+          select: {
+            location_name: true,
+            contact_no: true,
+          },
+        }),
+      ]);
 
     if (!project) {
       return validationResponse(0, "Project not found");
@@ -3468,8 +3708,20 @@ export const generateAllBoxesPdfService = async (
       (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
       "N/A";
 
+    const projectContact =
+      project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+    const locationContacts = Array.from(
+      new Set(
+        (locationRecords || [])
+          .map((r) => r.contact_no?.trim())
+          .filter(Boolean),
+      ),
+    );
+    const resolvedContacts = Array.from(
+      new Set([projectContact, ...locationContacts].filter(Boolean)),
+    );
     const clientContact =
-      project.client_contact_no || lead?.contact_no || "N/A";
+      resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "N/A";
 
     const deliveryAddress =
       project.client_address || lead?.site_address || "N/A";
@@ -5415,7 +5667,8 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [project, vendor, packagingMachine] = await Promise.all([
+    const [project, vendor, packagingMachine, locationRecords] =
+      await Promise.all([
       prisma.projectMaster.findFirst({
         where: {
           id: project_id,
@@ -5475,7 +5728,33 @@ export const generateProjectFullReportService = async (
           id: "asc",
         },
       }),
+
+      prisma.projectLocationProductQuantity.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          contact_no: {
+            not: null,
+          },
+        },
+        select: {
+          location_name: true,
+          contact_no: true,
+        },
+      }),
     ]);
+
+    const locationContactMap = new Map<string, string>();
+    for (const record of locationRecords) {
+      const locKey = record.location_name?.trim().toLowerCase();
+      if (
+        locKey &&
+        record.contact_no?.trim() &&
+        !locationContactMap.has(locKey)
+      ) {
+        locationContactMap.set(locKey, record.contact_no.trim());
+      }
+    }
 
     if (!project) {
       return validationResponse(0, "Project not found");
@@ -5637,6 +5916,14 @@ export const generateProjectFullReportService = async (
           select: {
             id: true,
 
+            projectLocationProductQuantity: {
+              select: {
+                id: true,
+                location_name: true,
+                contact_no: true,
+              },
+            },
+
             cut_list: {
               select: {
                 id: true,
@@ -5755,8 +6042,87 @@ export const generateProjectFullReportService = async (
             field_value: item.field_value || "",
           }));
 
+        const mappedLocations = Array.from(
+          new Set(
+            mappings
+              .map((mapping) =>
+                mapping.projectLocationProductQuantity?.location_name?.trim(),
+              )
+              .filter(Boolean),
+          ),
+        ).join(", ");
+
+        const packingLocation =
+          mappedLocations ||
+          findBoxInfoValue(boxInfoValues, [
+            "packing location",
+            "packing_location",
+            "location",
+            "location_name",
+            "location name",
+          ]) ||
+          "";
+
+        const floorValue =
+          findBoxInfoValue(boxInfoValues, [
+            "floor",
+            "floor_name",
+            "floor name",
+          ]) || "";
+
+        const hasBothLocations = Boolean(
+          packingLocation &&
+          floorValue &&
+          packingLocation.toLowerCase() !== floorValue.toLowerCase(),
+        );
+
+        const isCustomGroupPacking =
+          String(project.packing_type || "")
+            .trim()
+            .replace(/[\s_-]/g, "")
+            .toUpperCase() === "CUSTOMGROUP";
+
+        const locationLabel = hasBothLocations
+          ? "LOCATION / FLOOR"
+          : packingLocation || isCustomGroupPacking
+            ? "LOCATION"
+            : "FLOOR";
+
+        const locationDisplayValue = hasBothLocations
+          ? `${packingLocation} / ${floorValue}`
+          : packingLocation || floorValue || "-";
+
+        const mappedLocationContacts = Array.from(
+          new Set(
+            mappings
+              .map((mapping) =>
+                mapping.projectLocationProductQuantity?.contact_no?.trim(),
+              )
+              .filter(Boolean),
+          ),
+        );
+        const locationContacts = [...mappedLocationContacts];
+        if (locationContacts.length === 0 && packingLocation) {
+          const locContact = locationContactMap.get(
+            packingLocation.trim().toLowerCase(),
+          );
+          if (locContact) {
+            locationContacts.push(locContact);
+          }
+        }
+
+        const projectContact =
+          project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+        const boxContacts = Array.from(
+          new Set([projectContact, ...locationContacts].filter(Boolean)),
+        );
+        const boxContact =
+          boxContacts.length > 0 ? boxContacts.join(" / ") : "N/A";
+
         return {
           ...box,
+
+          box_contact: boxContact,
 
           items,
 
@@ -5778,12 +6144,11 @@ export const generateProjectFullReportService = async (
 
           product_name: resolveProductName(items),
 
-          floor_name:
-            findBoxInfoValue(boxInfoValues, [
-              "floor",
-              "floor_name",
-              "floor name",
-            ]) || "-",
+          location_label: locationLabel,
+
+          location_value: locationDisplayValue,
+
+          floor_name: locationDisplayValue,
 
           item_no:
             Array.from(
@@ -6249,7 +6614,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(clientContact)}
+                        ${escapeHtml((box as any).box_contact || clientContact)}
                       </div>
                     </div>
                   </div>
@@ -6322,11 +6687,11 @@ export const generateProjectFullReportService = async (
                   <div class="info-row row-3col">
                     <div class="info-cell">
                       <div class="field-label">
-                        FLOOR
+                        ${box.location_label}
                       </div>
 
-                      <div class="field-value">
-                        ${escapeHtml(box.floor_name)}
+                      <div class="field-value field-value-location">
+                        ${escapeHtml(box.location_value)}
                       </div>
                     </div>
 
@@ -6356,8 +6721,8 @@ export const generateProjectFullReportService = async (
                   <!-- ============================== -->
                   <!-- PRODUCT TITLE                  -->
                   <!-- ============================== -->
-                  <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
-                    PRODUCT :
+                  <div class="product-title-container" style="padding-top:2px;padding-bottom:2px;">
+                    <span class="product-title-label">PRODUCT :</span>
                     <span class="project-value">
                     ${escapeHtml(box.product_name)}
                     </span>
@@ -6451,7 +6816,7 @@ export const generateProjectFullReportService = async (
                         </td>
 
                         <td class="total-cell">
-                          ${box.total_weight.toFixed(2)}KG
+                          ${box.total_weight.toFixed(2)} KG
                         </td>
                       </tr>
                     </tfoot>
@@ -6778,11 +7143,19 @@ padding-top:25px;
 }
 
 .row-2col {
-  grid-template-columns: 62% 38%;
+  grid-template-columns: 62fr 38fr;
 }
 
 .row-3col {
-  grid-template-columns: 30% 40% 30%;
+  grid-template-columns: 28fr 36fr 36fr;
+}
+
+.row-3col .field-label {
+  white-space: nowrap;
+}
+
+.row-3col .info-cell:nth-child(3) {
+  padding-left: 3mm;
 }
 
 .info-cell {
@@ -6797,7 +7170,7 @@ padding-top:25px;
 .field-label {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.25;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
@@ -6807,7 +7180,7 @@ padding-top:25px;
 .field-value {
   color: #111827;
   font-size: 8px !important;
-  line-height: 8px;
+  line-height: 1.25;
   font-weight: 800;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
@@ -6815,7 +7188,14 @@ padding-top:25px;
 
 .filed-value-item-no {
   font-size: 18px !important;
-  line-height: 12px;
+  line-height: 1.2;
+}
+
+.field-value-location {
+  font-size: 13px !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .section-separator {
@@ -6831,25 +7211,55 @@ padding-top:25px;
 |--------------------------------------------------------------------------
 */
 
-.product-title {
+.product-title-container {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.35;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
-  margin: 0 0 1.1mm;
+  margin: 0.5mm 0 1.2mm;
+  flex: 0 0 auto;
+}
+
+.product-title-label {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  vertical-align: baseline;
+  margin-right: 3px;
+  display: inline;
+}
+
+.product-title {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  margin: 0.5mm 0 1.2mm;
   flex: 0 0 auto;
 }
 
 .project-value{
 color: #111827;
-  font-size: 12pt;
-  line-height: 6px;
-  font-weight: 600;
+  font-size: 11.5pt;
+  line-height: 1.35;
+  font-weight: 700;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
    text-transform: uppercase;
+  vertical-align: baseline;
+  display: inline;
+}
+
+.field-label .project-value {
+  line-height: 1.35;
+  display: inline;
 }
 
 
@@ -6866,7 +7276,7 @@ color: #111827;
 }
 
 .col-component {
-  width: 55%;
+  width: 51%;
 }
 
 .col-qty {
@@ -6874,11 +7284,11 @@ color: #111827;
 }
 
 .col-unit {
-  width: 12%;
+  width: 13%;
 }
 
 .col-total {
-  width: 14%;
+  width: 17%;
 }
 
 .component-table th {
@@ -6971,15 +7381,17 @@ color: #111827;
   border-left: 1px solid #111827 !important;
   border-right: 1px solid #111827 !important;
   border-bottom: 1px solid #111827;
+  white-space: nowrap;
 }
 
 .component-table tfoot td {
   background: #fff;
   border: 1px solid #111827;
   font-size: 8px !important;
-  line-height: 5.8px;
+  line-height: 1.2;
   font-weight: 800;
-  padding: 1mm 0.65mm;
+  padding: 1mm 0.5mm;
+  white-space: nowrap;
 }
 
 .total-title {

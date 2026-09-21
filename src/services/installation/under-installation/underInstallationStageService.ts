@@ -22,7 +22,13 @@ import {
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
-import { sendSmallOrderDispatchedForInstallationEmail, sendSmallOrderDispatchedEmail } from "../../email/brevoEmail2.service";
+import {
+  sendSmallOrderDispatchedForInstallationEmail,
+  sendSmallOrderDispatchedEmail,
+  sendReturnOrderApprovedToFactoryEmail,
+  sendReturnOrderPickupScheduledSupervisorEmail,
+  sendReturnOrderPickupConfirmedFactoryEmail,
+} from "../../email/brevoEmail2.service";
 
 interface MiscPayload {
   vendor_id: number;
@@ -75,6 +81,10 @@ interface UpdateMiscPayload {
   teams?: number[];
   files?: { originalName: string; sysName: string }[];
   updated_by: number;
+  return_order_date?: Date | string | null;
+  return_order_delivery_method?: string | null;
+  orderlogindetails_ids?: number[];
+  instance_id?: number;
 }
 
 interface UpdateERDInput {
@@ -1502,8 +1512,8 @@ export class UnderInstallationStageService {
             user_id: supervisor.id,
             sender_id: completed_by,
             type: NotificationType.LEAD_ACTION,
-            title: "Return Order Picked Up by Factory",
-            message: `Factory has completed pickup for "${materialDetails}" on ${leadCode} - ${leadName}. Please upload handover photo proof and mark as returned.`,
+            title: "Return Order Pickup Confirmed by Factory",
+            message: `Factory has confirmed the pickup schedule for "${materialDetails}" on ${leadCode} - ${leadName}. Please keep the return items ready for pickup and upload handover photo proof.`,
             entity_type: "miscellaneous",
             entity_id: misc_id,
             redirect_url: redirectPath,
@@ -1520,8 +1530,8 @@ export class UnderInstallationStageService {
             user_id: miscUser.id,
             sender_id: completed_by,
             type: NotificationType.LEAD_ACTION,
-            title: "Return Order Picked Up by Factory",
-            message: `Factory has completed the pickup schedule for "${materialDetails}" on ${leadCode} - ${leadName}.`,
+            title: "Return Order Pickup Confirmed by Factory",
+            message: `Factory has confirmed the pickup schedule for "${materialDetails}" on ${leadCode} - ${leadName}.`,
             entity_type: "miscellaneous",
             entity_id: misc_id,
             redirect_url: redirectPath,
@@ -1543,7 +1553,7 @@ export class UnderInstallationStageService {
   }) {
     const { vendor_id, lead_id, misc_id, returned_by, baseUrl = "", confirmTaskId } = payload;
     try {
-      const [factoryUsers, miscUsers, leadMeta, miscRecord, firstInstance] = await Promise.all([
+      const [factoryUsers, miscUsers, leadMeta, miscRecord, firstInstance, supervisorUser] = await Promise.all([
         UnderInstallationStageService.getFactoryRecipients(vendor_id, lead_id),
         UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, lead_id),
         prisma.leadMaster.findUnique({
@@ -1565,11 +1575,16 @@ export class UnderInstallationStageService {
           select: { id: true },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
+        prisma.userMaster.findUnique({
+          where: { id: returned_by },
+          select: { id: true, user_name: true },
+        }),
       ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
       const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
       const materialDetails = miscRecord?.reorder_material_details || "material";
+      const siteSupervisorName = supervisorUser?.user_name || "Site Supervisor";
 
       const stageTag = leadMeta?.statusType?.tag;
       const stagePath = stageTag && STAGE_PATH_BY_TAG[stageTag]
@@ -1584,12 +1599,26 @@ export class UnderInstallationStageService {
       qp.set("miscTab", "actions-scheduling");
       if (confirmTaskId) qp.set("taskId", String(confirmTaskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
+      const projectUrl = baseUrl ? `${baseUrl}${redirectPath}` : redirectPath;
 
-      // 1. Notify Factory users: verify & confirm receipt
+      // 1. Notify Factory users: verify & confirm receipt (In-app + Email)
       const factoryRecipients = factoryUsers.filter((u) => u.id !== returned_by);
+      console.log("[EMAIL DEBUG] notifyReturnOrderHandoverCompleted", {
+        vendor_id,
+        lead_id,
+        misc_id,
+        returned_by,
+        totalFactoryUsers: factoryUsers.length,
+        factoryUsersList: factoryUsers.map((u) => ({ id: u.id, name: u.user_name, email: u.user_email })),
+        factoryRecipientsAfterFilter: factoryRecipients.map((u) => ({ id: u.id, name: u.user_name, email: u.user_email })),
+      });
+
+      // Fallback: If filter removed all users because returned_by is testing with factory account, still notify factory users
+      const effectiveRecipients = factoryRecipients.length > 0 ? factoryRecipients : factoryUsers;
+
       await Promise.allSettled(
-        factoryRecipients.map((factoryUser) =>
-          NotificationService.createAndSend({
+        effectiveRecipients.map(async (factoryUser) => {
+          await NotificationService.createAndSend({
             vendor_id,
             user_id: factoryUser.id,
             sender_id: returned_by,
@@ -1599,8 +1628,28 @@ export class UnderInstallationStageService {
             entity_type: "miscellaneous",
             entity_id: misc_id,
             redirect_url: redirectPath,
-          })
-        )
+          });
+
+          if (factoryUser.user_email) {
+            console.log(`[EMAIL DEBUG] Sending Return Order Pickup Confirmed email to: ${factoryUser.user_email}...`);
+            const emailRes = await sendReturnOrderPickupConfirmedFactoryEmail({
+              vendor_id,
+              toEmail: factoryUser.user_email,
+              toName: factoryUser.user_name ?? undefined,
+              factoryUserName: factoryUser.user_name ?? undefined,
+              leadCode,
+              leadName,
+              siteSupervisorName,
+              returnOrderUrl: projectUrl,
+              projectUrl,
+              ctaLink: projectUrl,
+              allowSuperAdmin: true,
+            });
+            console.log(`[EMAIL DEBUG] Return Order Pickup Confirmed email result for ${factoryUser.user_email}:`, emailRes);
+          } else {
+            console.warn(`[EMAIL DEBUG] Factory user ${factoryUser.user_name} (ID: ${factoryUser.id}) has no email address!`);
+          }
+        })
       );
 
       // 2. Notify Miscellaneous users
@@ -1825,7 +1874,7 @@ export class UnderInstallationStageService {
       // Teams Mapping
       // -----------------------------
 
-      if (teams.length) {
+      if (teams && teams.length) {
         await tx.miscellaneousTeamMapping.createMany({
           data: teams.map((teamId) => ({
             miscellaneous_id: misc.id,
@@ -2361,6 +2410,10 @@ export class UnderInstallationStageService {
       teams,
       files,
       updated_by,
+      return_order_date,
+      return_order_delivery_method,
+      orderlogindetails_ids,
+      instance_id,
     } = payload;
 
     const result = await prisma.$transaction(async (tx) => {
@@ -2380,13 +2433,26 @@ export class UnderInstallationStageService {
         ?.toLowerCase()
         .trim()
         .replace(/_/g, "-");
+      const userRole = ((updatingUser as any)?.user_role || "").toLowerCase().trim().replace(/_/g, "-");
 
-      const isSuperAdmin = normalizedType === "super-admin";
-      const isMiscellaneousUser = normalizedType === "miscellaneous";
+      const isSuperAdmin =
+        normalizedType === "super-admin" ||
+        normalizedType === "superadmin" ||
+        normalizedType === "auditor" ||
+        userRole === "super-admin" ||
+        userRole === "superadmin" ||
+        userRole === "auditor";
+      const isMiscellaneousUser =
+        normalizedType === "miscellaneous" || userRole.includes("miscellaneous");
+      const isSupervisorUser =
+        normalizedType === "site-supervisor" ||
+        normalizedType === "head-site-supervisor" ||
+        normalizedType?.includes("supervisor") ||
+        userRole.includes("supervisor");
 
-      if (!isSuperAdmin && !isMiscellaneousUser) {
+      if (!isSuperAdmin && !isMiscellaneousUser && !isSupervisorUser) {
         throw new Error(
-          "Only Miscellaneous user and Super Admin are permitted to edit miscellaneous details",
+          "Only Miscellaneous user, Site Supervisor, and Super Admin are permitted to edit miscellaneous details",
         );
       }
 
@@ -2428,11 +2494,38 @@ export class UnderInstallationStageService {
       if (solution !== undefined) {
         dataToUpdate.solution = solution?.trim() || null;
       }
+      if (return_order_date !== undefined) {
+        dataToUpdate.return_order_date = return_order_date
+          ? new Date(return_order_date)
+          : null;
+      }
+      if (return_order_delivery_method !== undefined) {
+        dataToUpdate.return_order_delivery_method = return_order_delivery_method || null;
+      }
 
       const updated = await tx.miscellaneousMaster.update({
         where: { id: misc_id },
         data: dataToUpdate,
       });
+
+      // Update return order material mappings if provided
+      if (orderlogindetails_ids !== undefined && Array.isArray(orderlogindetails_ids)) {
+        await tx.miscellaneousReorderInstancesMaterialMapping.deleteMany({
+          where: { misc_id },
+        });
+        const uniqueIds = Array.from(new Set(orderlogindetails_ids)).filter(Boolean);
+        if (uniqueIds.length > 0) {
+          await tx.miscellaneousReorderInstancesMaterialMapping.createMany({
+            data: uniqueIds.map((orderLoginId) => ({
+              vendor_id,
+              lead_id: lead_id || existing.lead_id,
+              misc_id,
+              orderlogindetails_id: Number(orderLoginId),
+              created_by: updated_by,
+            })),
+          });
+        }
+      }
 
       // Update teams if provided
       if (teams && Array.isArray(teams)) {
@@ -3578,14 +3671,32 @@ export class UnderInstallationStageService {
                 });
 
                 if (factoryUser.user_email) {
-                  await sendMiscApprovedFactoryEmail({
-                    vendor_id,
-                    toEmail: factoryUser.user_email,
-                    toName: factoryUser.user_name ?? undefined,
-                    leadCode,
-                    leadName,
-                    projectUrl,
-                  });
+                  if (isReturnOrder) {
+                    console.log(`[EMAIL DEBUG] Sending Return Order Request Approved email to: ${factoryUser.user_email}...`);
+                    const emailRes = await sendReturnOrderApprovedToFactoryEmail({
+                      vendor_id,
+                      toEmail: factoryUser.user_email,
+                      toName: factoryUser.user_name ?? undefined,
+                      factoryUserName: factoryUser.user_name ?? undefined,
+                      leadCode,
+                      leadName,
+                      miscellaneousUserName: actionBy,
+                      returnOrderUrl: projectUrl,
+                      projectUrl,
+                      ctaLink: projectUrl,
+                      allowSuperAdmin: true,
+                    });
+                    console.log(`[EMAIL DEBUG] Return Order Request Approved email result for ${factoryUser.user_email}:`, emailRes);
+                  } else {
+                    await sendMiscApprovedFactoryEmail({
+                      vendor_id,
+                      toEmail: factoryUser.user_email,
+                      toName: factoryUser.user_name ?? undefined,
+                      leadCode,
+                      leadName,
+                      projectUrl,
+                    });
+                  }
                 }
               }),
             );
@@ -4047,7 +4158,7 @@ export class UnderInstallationStageService {
         },
       });
 
-      return { updated, lead_id: task.lead_id, misc_id: misc.id };
+      return { updated, lead_id: task.lead_id, misc_id: misc.id, isPickup };
     });
 
     // ===============================
@@ -4106,79 +4217,149 @@ export class UnderInstallationStageService {
       const redirectPath = `${stagePath}?${qp.toString()}`;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      if (factoryRole) {
-        const factoryMapping = await prisma.leadUserMapping.findFirst({
-          where: {
-            vendor_id,
-            lead_id: result.lead_id,
-            status: "active",
-            user: { user_type_id: factoryRole.id },
-          },
-          select: { user: { select: { id: true, user_name: true, user_email: true } } },
-        });
+      if (result.isPickup) {
+        // ====================================================================
+        // RETURN ORDER PICKUP SCHEDULED -> NOTIFY SITE SUPERVISORS (In-App + Email)
+        // ====================================================================
+        const supervisors = await UnderInstallationStageService.getSiteSupervisorRecipients(
+          vendor_id,
+          result.lead_id,
+        );
+        const notifySupervisors = supervisors.filter((u) => u.id !== updated_by);
 
-        if (factoryMapping?.user) {
-          const { user } = factoryMapping;
+        const supervisorTitle = "Return Order Pickup Scheduled";
+        const supervisorMessage = `Pickup for the Return Order of ${leadCode} - ${leadName} has been scheduled for ${deliveryDate}. Please keep the return items ready for pickup.`;
 
-          await NotificationService.createAndSend({
-            vendor_id,
-            user_id: user.id,
-            sender_id: updated_by,
-            type: NotificationType.LEAD_ACTION,
-            title: "Required Delivery Date Set",
-            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
-            entity_type: "miscellaneous",
-            entity_id: result.misc_id,
-            redirect_url: redirectPath,
+        await Promise.allSettled(
+          notifySupervisors.map(async (supervisor) => {
+            await NotificationService.createAndSend({
+              vendor_id,
+              user_id: supervisor.id,
+              sender_id: updated_by,
+              type: NotificationType.LEAD_ACTION,
+              title: supervisorTitle,
+              message: supervisorMessage,
+              entity_type: "miscellaneous",
+              entity_id: result.misc_id,
+              redirect_url: redirectPath,
+            });
+
+            if (supervisor.user_email) {
+              await sendReturnOrderPickupScheduledSupervisorEmail({
+                vendor_id,
+                toEmail: supervisor.user_email,
+                toName: supervisor.user_name ?? undefined,
+                siteSupervisorName: supervisor.user_name ?? undefined,
+                leadCode,
+                leadName,
+                pickup_date: deliveryDate,
+                factoryUserName: setBy,
+                projectUrl,
+                returnOrderUrl: projectUrl,
+                ctaLink: projectUrl,
+              });
+            }
+          }),
+        );
+
+        // Also notify miscellaneous users (In-App)
+        const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(
+          vendor_id,
+          result.lead_id,
+        );
+        const notifyMiscUsers = miscUsers.filter((u) => u.id !== updated_by);
+
+        await Promise.allSettled(
+          notifyMiscUsers.map(async (user) => {
+            await NotificationService.createAndSend({
+              vendor_id,
+              user_id: user.id,
+              sender_id: updated_by,
+              type: NotificationType.LEAD_ACTION,
+              title: supervisorTitle,
+              message: supervisorMessage,
+              entity_type: "miscellaneous",
+              entity_id: result.misc_id,
+              redirect_url: redirectPath,
+            });
+          }),
+        );
+      } else {
+        // Standard Miscellaneous delivery date handling
+        if (factoryRole) {
+          const factoryMapping = await prisma.leadUserMapping.findFirst({
+            where: {
+              vendor_id,
+              lead_id: result.lead_id,
+              status: "active",
+              user: { user_type_id: factoryRole.id },
+            },
+            select: { user: { select: { id: true, user_name: true, user_email: true } } },
           });
 
-          if (user.user_email) {
-            await sendMiscRequiredDeliveryDateEmail({
+          if (factoryMapping?.user) {
+            const { user } = factoryMapping;
+
+            await NotificationService.createAndSend({
               vendor_id,
-              toEmail: user.user_email,
-              toName: user.user_name ?? undefined,
-              leadCode,
-              leadName,
-              setBy,
-              deliveryDate,
-              projectUrl,
+              user_id: user.id,
+              sender_id: updated_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Required Delivery Date Set",
+              message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+              entity_type: "miscellaneous",
+              entity_id: result.misc_id,
+              redirect_url: redirectPath,
             });
+
+            if (user.user_email) {
+              await sendMiscRequiredDeliveryDateEmail({
+                vendor_id,
+                toEmail: user.user_email,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName,
+                setBy,
+                deliveryDate,
+                projectUrl,
+              });
+            }
           }
         }
-      }
 
-      // Notify miscellaneous users (In-App + Email, excluding updater)
-      const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, result.lead_id);
-      const notifyMiscUsers = miscUsers.filter((u) => u.id !== updated_by);
+        // Notify miscellaneous users (In-App + Email, excluding updater)
+        const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, result.lead_id);
+        const notifyMiscUsers = miscUsers.filter((u) => u.id !== updated_by);
 
-      await Promise.allSettled(
-        notifyMiscUsers.map(async (user) => {
-          await NotificationService.createAndSend({
-            vendor_id,
-            user_id: user.id,
-            sender_id: updated_by,
-            type: NotificationType.LEAD_ACTION,
-            title: "Required Delivery Date Set",
-            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
-            entity_type: "miscellaneous",
-            entity_id: result.misc_id,
-            redirect_url: redirectPath,
-          });
-
-          if (user.user_email) {
-            await sendMiscRequiredDeliveryDateEmail({
+        await Promise.allSettled(
+          notifyMiscUsers.map(async (user) => {
+            await NotificationService.createAndSend({
               vendor_id,
-              toEmail: user.user_email,
-              toName: user.user_name ?? undefined,
-              leadCode,
-              leadName,
-              setBy,
-              deliveryDate,
-              projectUrl,
+              user_id: user.id,
+              sender_id: updated_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Required Delivery Date Set",
+              message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+              entity_type: "miscellaneous",
+              entity_id: result.misc_id,
+              redirect_url: redirectPath,
             });
-          }
-        }),
-      );
+
+            if (user.user_email) {
+              await sendMiscRequiredDeliveryDateEmail({
+                vendor_id,
+                toEmail: user.user_email,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName,
+                setBy,
+                deliveryDate,
+                projectUrl,
+              });
+            }
+          }),
+        );
+      }
     } catch (err: any) {
       logger.warn("Required delivery date (by task) notification failed", {
         task_id,
@@ -5552,15 +5733,15 @@ export class UnderInstallationStageService {
       throw Object.assign(new Error("User not found"), { statusCode: 404 });
     }
 
-    const userRole = ((user as any).user_role || "").toLowerCase().trim();
-    const userType = (user.user_type?.user_type || "").toLowerCase().trim();
+    const userRole = ((user as any).user_role || "").toLowerCase().trim().replace(/_/g, "-");
+    const userType = (user.user_type?.user_type || "").toLowerCase().trim().replace(/_/g, "-");
     const isSuperAdmin =
       userRole === "super-admin" ||
       userType === "super-admin" ||
       userRole === "superadmin" ||
       userType === "superadmin" ||
-      userRole === "super_admin" ||
-      userType === "super_admin";
+      userRole === "auditor" ||
+      userType === "auditor";
 
     if (!isSuperAdmin) {
       throw Object.assign(
@@ -6232,6 +6413,17 @@ export class UnderInstallationStageService {
         closedTask = createdTask;
       }
 
+      if (isReturnOrder) {
+        await tx.miscellaneousMaster.update({
+          where: { id: misc_id },
+          data: {
+            is_resolved: true,
+            resolved_at: new Date(),
+            updated_by: ready_by,
+          },
+        });
+      }
+
       return {
         account_id: existing.account_id,
         taskId: closedTask?.id,
@@ -6772,8 +6964,9 @@ export class UnderInstallationStageService {
         });
       }
 
+      let confirmationTask: any = null;
       if (existing.return_order_delivery_method === "PICKUP_SCHEDULE") {
-        await UnderInstallationStageService.createReturnOrderConfirmationTaskOnPickupReturned(
+        confirmationTask = await UnderInstallationStageService.createReturnOrderConfirmationTaskOnPickupReturned(
           tx,
           vendor_id,
           existing,
@@ -6792,16 +6985,17 @@ export class UnderInstallationStageService {
         created_at: new Date(),
       });
 
-      return updatedMisc;
+      return { updatedMisc, confirmationTaskId: confirmationTask?.id };
     });
 
     try {
       await UnderInstallationStageService.notifyReturnOrderHandoverCompleted({
         vendor_id,
-        lead_id: result.lead_id,
-        misc_id: result.id,
+        lead_id: result.updatedMisc.lead_id,
+        misc_id: result.updatedMisc.id,
         returned_by,
         baseUrl,
+        confirmTaskId: result.confirmationTaskId,
       });
     } catch (notifyErr: any) {
       logger.warn("Return handover notification failed", {
@@ -6810,7 +7004,7 @@ export class UnderInstallationStageService {
       });
     }
 
-    return result;
+    return result.updatedMisc;
   }
 
   /**

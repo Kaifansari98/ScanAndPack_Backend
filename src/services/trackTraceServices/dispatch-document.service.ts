@@ -271,6 +271,7 @@ const formatDate = (value: Date | null): string => {
 const buildDispatchHtml = ({
   project,
   locationPages,
+  locationContactMap = new Map<string, string>(),
 }: {
   project: {
     id: number;
@@ -284,6 +285,7 @@ const buildDispatchHtml = ({
       lead_code: string;
       firstname: string;
       lastname: string;
+      contact_no?: string | null;
       site_address: string | null;
       vehicle_no: string | null;
       driver_number: string | null;
@@ -297,6 +299,7 @@ const buildDispatchHtml = ({
     totalPages: number;
     totalLocationBoxes: number;
   }>;
+  locationContactMap?: Map<string, string>;
 }) => {
   const generatedOn = formatDate(new Date());
   const jobNumber = project.order_no?.trim() || project.lead?.lead_code || project.id;
@@ -318,6 +321,18 @@ const buildDispatchHtml = ({
       totalPages,
       totalLocationBoxes,
     }) => {
+      const locationContact = locationName
+        ? locationContactMap.get(normalizeLocation(locationName))
+        : null;
+      const projectContact =
+        project.client_contact_no?.trim() ||
+        project.lead?.contact_no?.trim() ||
+        "";
+      const resolvedContacts = Array.from(
+        new Set([projectContact, locationContact].filter(Boolean)),
+      );
+      const contactNo =
+        resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "-";
       const dispatchedBoxes = loadingBoxes.filter((box) => box.factory_out_at);
       const siteReceivedBoxes = unloadingBoxes.filter((box) => box.site_in_at);
       const dispatcherNames = Array.from(
@@ -379,7 +394,7 @@ const buildDispatchHtml = ({
               <th>Client</th>
               <td>${escapeHtml(clientName)}</td>
               <th>Contact No.</th>
-              <td colspan="2">${escapeHtml(project.client_contact_no || "-")}</td>
+              <td colspan="2">${escapeHtml(contactNo)}</td>
             </tr>
             <tr>
               <th>Location</th>
@@ -538,6 +553,7 @@ export const generateDispatchDocumentService = async (
           lead_code: true,
           firstname: true,
           lastname: true,
+          contact_no: true,
           site_address: true,
           vehicle_no: true,
           driver_number: true,
@@ -557,7 +573,7 @@ export const generateDispatchDocumentService = async (
   const [locationRows, boxes] = await Promise.all([
     prisma.projectLocationProductQuantity.findMany({
       where: { project_id: project.id, vendor_id: vendorId },
-      select: { location_name: true },
+      select: { location_name: true, contact_no: true },
       distinct: ["location_name"],
       orderBy: { location_name: "asc" },
     }),
@@ -611,6 +627,14 @@ export const generateDispatchDocumentService = async (
       .filter(Boolean)
       .map((name) => [normalizeLocation(name), name]),
   );
+
+  const locationContactMap = new Map<string, string>();
+  for (const row of locationRows) {
+    const locKey = normalizeLocation(row.location_name);
+    if (locKey && row.contact_no?.trim() && !locationContactMap.has(locKey)) {
+      locationContactMap.set(locKey, row.contact_no.trim());
+    }
+  }
 
   let selectedLocations: Array<string | null>;
 
@@ -686,12 +710,16 @@ export const generateDispatchDocumentService = async (
     });
   });
 
-  const html = buildDispatchHtml({ project, locationPages });
+  const html = buildDispatchHtml({
+    project,
+    locationPages,
+    locationContactMap,
+  });
   const browser = await puppeteer.launch(getPuppeteerOptions());
 
   try {
     const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: "networkidle0" });
+    await page.setContent(html, { waitUntil: "load" });
 
     const pdf = await page.pdf({
       format: "A4",

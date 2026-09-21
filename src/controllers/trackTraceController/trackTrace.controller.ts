@@ -1484,6 +1484,83 @@ export const markBoxSiteIn = async (req: Request, res: Response) => {
   }
 };
 
+export const revertBoxFactoryOut = async (req: Request, res: Response) => {
+  try {
+    const box_id = Number(req.params.box_id);
+    const project_id = Number(req.body.project_id);
+    const vendor_id = Number(req.body.vendor_id);
+    const user_id = Number(req.body.user_id);
+    const description = String(req.body.description ?? "").trim();
+
+    if ([box_id, project_id, vendor_id, user_id].some(isNaN)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+
+    if (!description) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error("Description is compulsory to revert factory out", 400),
+        );
+    }
+
+    const result = await trackTraceService.revertBoxFactoryOutService(
+      box_id,
+      project_id,
+      vendor_id,
+      user_id,
+      description,
+    );
+
+    if (result.status === 0) {
+      return res.status(400).json(ApiResponse.error(result.message, 400));
+    }
+
+    return res
+      .status(200)
+      .json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("revertBoxFactoryOut error:", err);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+export const getBoxFactoryOutRevertLogs = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const box_id = Number(req.params.box_id);
+    const project_id = Number(req.query.project_id ?? req.body.project_id);
+    const vendor_id = Number(req.query.vendor_id ?? req.body.vendor_id);
+
+    if ([box_id, project_id, vendor_id].some(isNaN)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+
+    const result = await trackTraceService.getBoxFactoryOutRevertLogsService(
+      box_id,
+      project_id,
+      vendor_id,
+    );
+
+    if (result.status === 0) {
+      return res.status(400).json(ApiResponse.error(result.message, 400));
+    }
+
+    return res
+      .status(200)
+      .json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("getBoxFactoryOutRevertLogs error:", err);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
 // POST /project-categories/sync
 export const syncCategories = async (req: Request, res: Response) => {
   try {
