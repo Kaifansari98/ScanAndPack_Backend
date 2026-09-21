@@ -36,133 +36,173 @@ export interface ResolvedVendorResult {
   error?: string;
   ambiguous?: boolean;
   eligibleVendors?: Array<{ id: number; vendor_name: string; vendor_code: string }>;
+  statusCode?: number;
 }
 
 /**
- * Resolves the target vendor dynamically based on is_online_lead_feature_enabled:
- * 1. If explicit vendor is provided (header/query/body), validates is_online_lead_feature_enabled === true.
- * 2. If not provided, finds active vendors with is_online_lead_feature_enabled === true.
- * 3. If exactly 1 vendor matches, uses it.
- * 4. If 0 vendors match, reports feature is disabled.
- * 5. If >1 vendors match, reports ambiguity without guessing.
+ * Resolves the target vendor strictly using vendor_token:
+ * 1. Reads vendor_token from query or headers.
+ * 2. Never accepts vendor_id from Google Sheet payload.
+ * 3. Validates that the vendor token exists, is not expired, vendor is active,
+ *    and is_online_lead_feature_enabled === true.
+ * 4. Preserves legacy Meta Webhook event handling if applicable.
  */
 export async function resolveTargetOnlineLeadVendor(
   req: Request,
 ): Promise<ResolvedVendorResult> {
-  const headerVendorId =
-    req.headers["x-vendor-id"] ||
-    req.headers["vendor_id"] ||
-    req.headers["vendor-id"];
-  const headerVendorCode =
-    req.headers["x-vendor-code"] ||
-    req.headers["vendor_code"] ||
-    req.headers["vendor-code"];
-  const queryVendorId = req.query.vendor_id || req.query.vendorId;
-  const queryVendorCode = req.query.vendor_code || req.query.vendorCode;
-  const bodyVendorId = req.body?.vendor_id || req.body?.vendorId;
-  const bodyVendorCode = req.body?.vendor_code || req.body?.vendorCode;
+  const queryVendorToken = req.query.vendor_token || req.query.vendorToken;
+  const headerVendorToken =
+    req.headers["x-vendor-token"] ||
+    req.headers["vendor_token"] ||
+    req.headers["vendor-token"];
+  const bodyVendorToken = req.body?.vendor_token || req.body?.vendorToken;
 
-  const rawVendorId = Array.isArray(queryVendorId)
-    ? queryVendorId[0]
-    : (headerVendorId || queryVendorId || bodyVendorId);
-  const rawVendorCode = Array.isArray(queryVendorCode)
-    ? queryVendorCode[0]
-    : (headerVendorCode || queryVendorCode || bodyVendorCode);
+  const rawToken = Array.isArray(queryVendorToken)
+    ? queryVendorToken[0]
+    : (queryVendorToken || headerVendorToken || bodyVendorToken);
 
-  const explicitVendorId = Number(rawVendorId);
-  const explicitVendorCode = String(rawVendorCode || "").trim();
+  const vendorToken = typeof rawToken === "string" ? rawToken.trim() : "";
 
-  // If explicit vendor ID was supplied:
-  if (explicitVendorId && !isNaN(explicitVendorId)) {
-    const vendor = await prisma.vendorMaster.findUnique({
-      where: { id: explicitVendorId },
-      select: {
-        id: true,
-        vendor_name: true,
-        vendor_code: true,
-        status: true,
-        is_online_lead_feature_enabled: true,
-      },
-    });
-    if (!vendor) {
-      return { error: `Specified vendor ID ${explicitVendorId} does not exist.` };
-    }
-    if (vendor.status !== "active") {
-      return {
-        error: `Specified vendor '${vendor.vendor_name}' (ID: ${vendor.id}) is inactive.`,
-      };
-    }
-    if (!vendor.is_online_lead_feature_enabled) {
-      return {
-        error: `Online Lead feature is disabled for vendor '${vendor.vendor_name}' (ID: ${vendor.id}). 'is_online_lead_feature_enabled' must be true.`,
-      };
-    }
-    return { vendorId: vendor.id };
-  }
-
-  // If explicit vendor code was supplied:
-  if (explicitVendorCode) {
-    const vendor = await prisma.vendorMaster.findFirst({
+  // 1. Primary: If vendor_token is provided, resolve strictly by token
+  if (vendorToken) {
+    const tokenEntry = await prisma.vendorTokens.findFirst({
       where: {
-        vendor_code: { equals: explicitVendorCode, mode: "insensitive" },
+        token: vendorToken,
+      },
+      include: {
+        vendor: {
+          select: {
+            id: true,
+            vendor_name: true,
+            vendor_code: true,
+            status: true,
+            is_online_lead_feature_enabled: true,
+          },
+        },
+      },
+    });
+
+    if (!tokenEntry || !tokenEntry.vendor) {
+      return {
+        statusCode: 401,
+        error: "Invalid vendor_token. No matching vendor found for this token.",
+      };
+    }
+
+    if (tokenEntry.expiry_date && new Date(tokenEntry.expiry_date) <= new Date()) {
+      return {
+        statusCode: 401,
+        error: "vendor_token has expired or been revoked.",
+      };
+    }
+
+    if (tokenEntry.vendor.status !== "active") {
+      return {
+        statusCode: 403,
+        error: `Vendor '${tokenEntry.vendor.vendor_name}' (ID: ${tokenEntry.vendor.id}) is inactive.`,
+      };
+    }
+
+    if (!tokenEntry.vendor.is_online_lead_feature_enabled) {
+      return {
+        statusCode: 403,
+        error: `Online Lead feature is disabled for vendor '${tokenEntry.vendor.vendor_name}' (ID: ${tokenEntry.vendor.id}). 'is_online_lead_feature_enabled' must be true.`,
+      };
+    }
+
+    return { vendorId: tokenEntry.vendor.id };
+  }
+
+  // 2. Preserved Meta Webhook fallback behavior (if body is a Meta Graph event)
+  const isMetaEvent =
+    req.body?.object === "page" ||
+    Array.isArray(req.body?.entry);
+
+  if (isMetaEvent) {
+    const headerVendorCode =
+      req.headers["x-vendor-code"] ||
+      req.headers["vendor_code"] ||
+      req.headers["vendor-code"];
+    const queryVendorCode = req.query.vendor_code || req.query.vendorCode;
+    const rawVendorCode = Array.isArray(queryVendorCode)
+      ? queryVendorCode[0]
+      : (headerVendorCode || queryVendorCode);
+    const explicitVendorCode = String(rawVendorCode || "").trim();
+
+    if (explicitVendorCode) {
+      const vendor = await prisma.vendorMaster.findFirst({
+        where: {
+          vendor_code: { equals: explicitVendorCode, mode: "insensitive" },
+        },
+        select: {
+          id: true,
+          vendor_name: true,
+          vendor_code: true,
+          status: true,
+          is_online_lead_feature_enabled: true,
+        },
+      });
+      if (!vendor) {
+        return {
+          statusCode: 400,
+          error: `Specified vendor_code '${explicitVendorCode}' does not exist.`,
+        };
+      }
+      if (vendor.status !== "active") {
+        return {
+          statusCode: 403,
+          error: `Specified vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}) is inactive.`,
+        };
+      }
+      if (!vendor.is_online_lead_feature_enabled) {
+        return {
+          statusCode: 403,
+          error: `Online Lead feature is disabled for vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}). 'is_online_lead_feature_enabled' must be true.`,
+        };
+      }
+      return { vendorId: vendor.id };
+    }
+
+    // Automatically find active vendors with is_online_lead_feature_enabled === true
+    const eligibleVendors = await prisma.vendorMaster.findMany({
+      where: {
+        status: "active",
+        is_online_lead_feature_enabled: true,
       },
       select: {
         id: true,
         vendor_name: true,
         vendor_code: true,
-        status: true,
-        is_online_lead_feature_enabled: true,
       },
+      orderBy: { id: "asc" },
     });
-    if (!vendor) {
-      return {
-        error: `Specified vendor_code '${explicitVendorCode}' does not exist.`,
-      };
-    }
-    if (vendor.status !== "active") {
-      return {
-        error: `Specified vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}) is inactive.`,
-      };
-    }
-    if (!vendor.is_online_lead_feature_enabled) {
-      return {
-        error: `Online Lead feature is disabled for vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}). 'is_online_lead_feature_enabled' must be true.`,
-      };
-    }
-    return { vendorId: vendor.id };
-  }
 
-  // Automatically find active vendors with is_online_lead_feature_enabled === true
-  const eligibleVendors = await prisma.vendorMaster.findMany({
-    where: {
-      status: "active",
-      is_online_lead_feature_enabled: true,
-    },
-    select: {
-      id: true,
-      vendor_name: true,
-      vendor_code: true,
-    },
-    orderBy: { id: "asc" },
-  });
+    if (eligibleVendors.length === 0) {
+      return {
+        statusCode: 400,
+        error:
+          "No active vendor has 'is_online_lead_feature_enabled' set to true in VendorMaster.",
+      };
+    }
 
-  if (eligibleVendors.length === 0) {
+    if (eligibleVendors.length === 1) {
+      return { vendorId: eligibleVendors[0].id };
+    }
+
     return {
+      statusCode: 422,
+      ambiguous: true,
       error:
-        "No active vendor has 'is_online_lead_feature_enabled' set to true in VendorMaster.",
+        "Multiple active vendors have 'is_online_lead_feature_enabled' set to true. Please specify 'vendor_token' or 'vendor_code'.",
+      eligibleVendors,
     };
   }
 
-  if (eligibleVendors.length === 1) {
-    return { vendorId: eligibleVendors[0].id };
-  }
-
-  // Ambiguous: multiple vendors with is_online_lead_feature_enabled === true
+  // 3. For Google Sheet or external webhooks, vendor_token is strictly required
   return {
-    ambiguous: true,
+    statusCode: 401,
     error:
-      "Multiple active vendors have 'is_online_lead_feature_enabled' set to true. Please specify the target vendor by passing 'vendor_code' parameter or 'x-vendor-code' header.",
-    eligibleVendors,
+      "vendor_token is required. Please specify a valid vendor_token in the webhook URL query parameters (e.g. /webhook?vendor_token=<VENDOR_TOKEN>).",
   };
 }
 
