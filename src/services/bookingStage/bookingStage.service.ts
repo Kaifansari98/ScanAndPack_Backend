@@ -5358,7 +5358,20 @@ export class BookingStageService {
         ? "onGoing"
         : { in: ["onGoing", "lostApproval"] },
     };
-    if (shouldIncludeFranchise && effectiveFranchiseId && !ignoreFranchiseForStage) {
+
+    // Site supervisors can be mapped to leads across multiple franchises
+    // (see SiteSupervisorFranchiseMapping); leads individually assigned to
+    // them via LeadUserMapping/UserLeadTask (the `leadIds` gate above) must
+    // surface regardless of the lead's franchise, so franchise scoping is
+    // skipped for this role here.
+    const isSiteSupervisorLeadOwner = normalizedUserType === "site-supervisor";
+
+    if (
+      shouldIncludeFranchise &&
+      effectiveFranchiseId &&
+      !ignoreFranchiseForStage &&
+      !isSiteSupervisorLeadOwner
+    ) {
       baseWhere.franchise_id = effectiveFranchiseId;
     }
 
@@ -5372,7 +5385,8 @@ export class BookingStageService {
     const includeFranchise =
       (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
       effectiveFranchiseId &&
-      !ignoreFranchiseForStage;
+      !ignoreFranchiseForStage &&
+      !isSiteSupervisorLeadOwner;
     if (includeFranchise) {
       baseWhere.franchise_id = effectiveFranchiseId;
     }
