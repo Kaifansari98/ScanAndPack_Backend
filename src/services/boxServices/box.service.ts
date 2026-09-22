@@ -381,6 +381,7 @@ export const getBoxesByVendorAndProject = async (
               select: {
                 weight: true,
                 qty: true,
+                group_name: true,
               },
             },
           },
@@ -400,10 +401,16 @@ export const getBoxesByVendorAndProject = async (
       }
     >
   >();
+  const boxGroupMap = new Map<number, string>();
 
   for (const mapping of mappingRows) {
     if (mapping.box_id === null || !mapping.cut_list) {
       continue;
+    }
+
+    const groupName = mapping.cut_list.group_name?.trim();
+    if (groupName && !boxGroupMap.has(mapping.box_id)) {
+      boxGroupMap.set(mapping.box_id, groupName);
     }
 
     const mappingQuantityValue = Number(mapping.qty || 0);
@@ -490,6 +497,11 @@ export const getBoxesByVendorAndProject = async (
 
       // Total calculated weight of items packed in the box
       weight: Number(totalWeight.toFixed(2)),
+
+      // Manual groupwise boxes may not have this column populated yet. Use the
+      // first packed item's group so the workstation can lock the box in the UI.
+      packing_group_name:
+        box.packing_group_name?.trim() || boxGroupMap.get(box.id) || null,
 
       box_info_values: boxInfoValues,
     };

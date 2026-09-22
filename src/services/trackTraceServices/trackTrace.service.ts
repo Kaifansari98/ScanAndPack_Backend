@@ -12379,6 +12379,7 @@ export const addManualPackingItemService = async (
         id: true,
         box_name: true,
         box_status: true,
+        packing_group_name: true,
       },
     });
 
@@ -12547,25 +12548,25 @@ export const addManualPackingItemService = async (
         },
       });
 
-      if (existingBoxItem?.cut_list) {
-        const existingGroupName = existingBoxItem.cut_list.group_name?.trim();
+      const existingGroupName =
+        box.packing_group_name?.trim() ||
+        existingBoxItem?.cut_list?.group_name?.trim();
 
         const existingGroup = existingGroupName?.toLowerCase();
 
         if (!existingGroup) {
-          return validationResponse(
-            0,
-            `Existing item "${existingBoxItem.cut_list.item_name}" in this box does not have a group configured`,
-          );
-        }
-
-        if (existingGroup !== incomingGroup) {
+          if (existingBoxItem?.cut_list) {
+            return validationResponse(
+              0,
+              `Existing item "${existingBoxItem.cut_list.item_name}" in this box does not have a group configured`,
+            );
+          }
+        } else if (existingGroup !== incomingGroup) {
           return validationResponse(
             0,
             `This box belongs to group "${existingGroupName}". Item from group "${incomingGroupName}" cannot be packed in this box.`,
           );
         }
-      }
     }
 
     /*
