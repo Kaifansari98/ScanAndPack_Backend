@@ -1,4 +1,5 @@
 import { prisma } from "../../prisma/client";
+import type { Prisma } from "../../../generated/prisma_client/client";
 import bcrypt from "bcryptjs";
 import { redis } from "../../config/redis";
 
@@ -127,9 +128,81 @@ const revokeUserActiveSessions = async (
   return activeSessions.length;
 };
 
+const validateUserFranchises = async (vendorId: number, input: unknown): Promise<number[]> => {
+  if (!Array.isArray(input) || input.length === 0 ||
+      input.some((id) => typeof id !== "number" || !Number.isSafeInteger(id) || id <= 0)) {
+    throw Object.assign(new Error("Select at least one valid franchise."), { statusCode: 400 });
+  }
+  const ids = [...new Set(input as number[])];
+  const count = await prisma.franchiseMaster.count({
+    where: { vendor_id: vendorId, id: { in: ids } },
+  });
+  if (count !== ids.length) {
+    throw Object.assign(new Error("Invalid franchise selection for the given vendor."), { statusCode: 400 });
+  }
+  return ids;
+};
+
+const syncUserFranchises = async (
+  tx: Prisma.TransactionClient, vendorId: number, userId: number,
+  ids: number[], actorId?: number,
+) => {
+  const mappedIds = ids.length > 1 ? ids : [];
+  await tx.siteSupervisorFranchiseMapping.deleteMany({
+    where: { vendor_id: vendorId, supervisor_id: userId,
+      ...(mappedIds.length ? { franchise_id: { notIn: mappedIds } } : {}) },
+  });
+  for (const franchiseId of mappedIds) {
+    await tx.siteSupervisorFranchiseMapping.upsert({
+      where: { vendor_supervisor_franchise_unique: {
+        vendor_id: vendorId, supervisor_id: userId, franchise_id: franchiseId,
+      } },
+      create: { vendor_id: vendorId, supervisor_id: userId, franchise_id: franchiseId,
+        created_by: actorId, updated_by: actorId },
+      update: { updated_by: actorId },
+    });
+  }
+};
+
+const requireSupervisorConfirmation = async (
+  vendorId: number, franchiseIds: number[], userType: string,
+  confirmed: unknown, excludeUserId?: number,
+) => {
+  if (confirmed === true || userType.trim().toLowerCase().replace(/[ _]+/g, "-") !== "site-supervisor") return;
+
+  const supervisorWhere = {
+    vendor_id: vendorId,
+    ...(excludeUserId === undefined ? {} : { id: { not: excludeUserId } }),
+    user_type: { user_type: { in: ["site-supervisor", "site supervisor", "site_supervisor"], mode: "insensitive" as const } },
+  };
+  const franchises = await prisma.franchiseMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      id: { in: franchiseIds },
+      OR: [
+        { users: { some: supervisorWhere } },
+        { siteSupervisorFranchiseMappings: { some: {
+          vendor_id: vendorId, supervisor: supervisorWhere,
+        } } },
+      ],
+    },
+    select: { id: true, franchise_name: true },
+    orderBy: { franchise_name: "asc" },
+  });
+  if (franchises.length) {
+    throw Object.assign(new Error("Selected franchises already have a site supervisor. Confirm to add another."), {
+      statusCode: 409,
+      code: "SUPERVISOR_CONFIRMATION_REQUIRED",
+      franchises,
+    });
+  }
+};
+
 export const createUserService = async (data: {
   vendor_id: number;
-  franchise_id: number;
+  franchise_id?: number;
+  franchise_ids?: number[];
+  confirm_additional_supervisor?: boolean;
   user_name: string;
   user_contact: string;
   user_email: string;
@@ -137,26 +210,10 @@ export const createUserService = async (data: {
   password: string;
   user_type_id: number;
   status?: string;
-}) => {
-  if (!data.franchise_id) {
-    const error = new Error("franchise_id is required.");
-    (error as any).statusCode = 400;
-    throw error;
-  }
-
-  const franchise = await prisma.franchiseMaster.findFirst({
-    where: {
-      id: Number(data.franchise_id),
-      vendor_id: Number(data.vendor_id),
-    },
-    select: { id: true },
-  });
-
-  if (!franchise) {
-    const error = new Error("Invalid franchise_id for the given vendor_id.");
-    (error as any).statusCode = 400;
-    throw error;
-  }
+}, actorId?: number) => {
+  const franchiseIds = await validateUserFranchises(Number(data.vendor_id),
+    data.franchise_ids === undefined ? [data.franchise_id] : data.franchise_ids);
+  const { franchise_ids: _franchiseIds, confirm_additional_supervisor, ...userData } = data;
 
   const hashedPassword = await bcrypt.hash(data.password, 10);
   const userType = await prisma.userTypeMaster.findUnique({
@@ -170,11 +227,15 @@ export const createUserService = async (data: {
     throw error;
   }
 
-  const createdUser = await prisma.userMaster.create({
-    data: {
-      ...data,
-      password: hashedPassword,
-    },
+  await requireSupervisorConfirmation(Number(data.vendor_id), franchiseIds, userType.user_type,
+    confirm_additional_supervisor);
+
+  const createdUser = await prisma.$transaction(async (tx) => {
+    const user = await tx.userMaster.create({
+      data: { ...userData, franchise_id: franchiseIds[0], password: hashedPassword },
+    });
+    await syncUserFranchises(tx, user.vendor_id, user.id, franchiseIds, actorId);
+    return user;
   });
 
   if (userType.user_type.trim().toLowerCase() === "custom") {
@@ -232,12 +293,18 @@ export const updateUserService = async (
     password?: string;
     user_type_id?: number;
     franchise_id?: number | null;
+    franchise_ids?: number[];
+    confirm_additional_supervisor?: boolean;
     status?: string;
   },
+  actorId?: number,
 ) => {
   const user = await prisma.userMaster.findUnique({
     where: { id: userId },
-    select: { id: true, vendor_id: true },
+    select: {
+      id: true, vendor_id: true, franchise_id: true, user_type_id: true,
+      siteSupervisorFranchiseMappings: { select: { franchise_id: true } },
+    },
   });
 
   if (!user) {
@@ -253,7 +320,11 @@ export const updateUserService = async (
   if (data.user_email !== undefined) updateData.user_email = data.user_email;
   if (data.user_timezone !== undefined) updateData.user_timezone = data.user_timezone;
   if (data.user_type_id !== undefined) updateData.user_type_id = data.user_type_id;
-  if (data.franchise_id !== undefined) updateData.franchise_id = data.franchise_id;
+  const franchiseIds = data.franchise_ids !== undefined || data.franchise_id !== undefined
+    ? await validateUserFranchises(user.vendor_id,
+        data.franchise_ids === undefined ? [data.franchise_id] : data.franchise_ids)
+    : undefined;
+  if (franchiseIds) updateData.franchise_id = franchiseIds[0];
   if (data.status !== undefined) updateData.status = data.status;
 
   if (data.password) {
@@ -264,9 +335,24 @@ export const updateUserService = async (
     return { message: "No changes to update" };
   }
 
-  const updatedUser = await prisma.userMaster.update({
-    where: { id: userId },
-    data: updateData,
+  const effectiveUserType = await prisma.userTypeMaster.findUnique({
+    where: { id: Number(data.user_type_id ?? user.user_type_id) },
+    select: { user_type: true },
+  });
+  if (!effectiveUserType) {
+    throw Object.assign(new Error("Invalid user_type_id."), { statusCode: 400 });
+  }
+  const selectedFranchiseIds = franchiseIds ?? [...new Set([
+    ...(user.franchise_id ? [user.franchise_id] : []),
+    ...user.siteSupervisorFranchiseMappings.map((mapping) => mapping.franchise_id),
+  ])];
+  await requireSupervisorConfirmation(user.vendor_id, selectedFranchiseIds,
+    effectiveUserType.user_type, data.confirm_additional_supervisor, userId);
+
+  const updatedUser = await prisma.$transaction(async (tx) => {
+    const updated = await tx.userMaster.update({ where: { id: userId }, data: updateData });
+    if (franchiseIds) await syncUserFranchises(tx, user.vendor_id, userId, franchiseIds, actorId);
+    return updated;
   });
 
   if (data.password) {
@@ -317,7 +403,10 @@ export const getUsersByVendorService = async ({
 
   const where = {
     vendor_id: vendorId,
-    ...(franchise_id ? { franchise_id } : {}),
+    ...(franchise_id ? { AND: [{ OR: [
+      { franchise_id },
+      { siteSupervisorFranchiseMappings: { some: { vendor_id: vendorId, franchise_id } } },
+    ] }] } : {}),
     ...(normalizedSearch
       ? {
           OR: [
@@ -353,6 +442,10 @@ export const getUsersByVendorService = async ({
         id: true,
         vendor_id: true,
         franchise_id: true,
+        siteSupervisorFranchiseMappings: {
+          orderBy: { id: "asc" },
+          select: { franchise: { select: { id: true, franchise_name: true } } },
+        },
         user_name: true,
         user_contact: true,
         user_email: true,
@@ -376,7 +469,13 @@ export const getUsersByVendorService = async ({
 
   return {
     count,
-    data: users,
+    data: users.map(({ siteSupervisorFranchiseMappings, ...user }) => {
+      const mapped = siteSupervisorFranchiseMappings.map((mapping) => mapping.franchise);
+      const franchises = user.franchise_id && user.franchise
+        ? [{ id: user.franchise_id, ...user.franchise }, ...mapped.filter((fr) => fr.id !== user.franchise_id)]
+        : mapped;
+      return { ...user, franchises, franchise_ids: franchises.map((fr) => fr.id) };
+    }),
     pagination: {
       currentPage: pageNum,
       totalPages: Math.ceil(count / limitNum),

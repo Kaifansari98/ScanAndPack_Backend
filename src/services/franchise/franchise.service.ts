@@ -265,3 +265,40 @@ export const getHeadSiteSupervisorFranchiseMapping = async (
     },
   });
 };
+
+export const getSiteSupervisorFranchiseMapping = async (
+  vendorId: number,
+  franchiseId: number,
+) => {
+  if (!vendorId || Number.isNaN(vendorId)) {
+    const error = new Error("Valid vendor_id is required.");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+  if (!franchiseId || Number.isNaN(franchiseId)) {
+    const error = new Error("Valid franchise_id is required.");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  const mappings = await prisma.siteSupervisorFranchiseMapping.findMany({
+    where: {
+      vendor_id: Number(vendorId),
+      franchise_id: Number(franchiseId),
+      supervisor: {
+        status: "active",
+      },
+    },
+    select: {
+      supervisor: {
+        select: {
+          id: true,
+          user_name: true,
+          user_contact: true,
+        },
+      },
+    },
+  });
+
+  return mappings.map((mapping) => mapping.supervisor);
+};

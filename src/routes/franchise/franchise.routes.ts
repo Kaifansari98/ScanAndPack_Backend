@@ -5,6 +5,7 @@ import {
   createHeadSiteSupervisorFranchiseMappingController,
   updateHeadSiteSupervisorFranchiseMappingStatusController,
   getHeadSiteSupervisorFranchiseMappingController,
+  getSiteSupervisorFranchiseMappingController,
 } from "../../controllers/franchise/franchise.controller";
 import { verifyToken } from "../../middlewares/auth.middleware";
 
@@ -23,6 +24,10 @@ franchiseRoutes.put(
 franchiseRoutes.get(
   "/head-site-supervisor-mapping",
   getHeadSiteSupervisorFranchiseMappingController
+);
+franchiseRoutes.get(
+  "/site-supervisor-mapping",
+  getSiteSupervisorFranchiseMappingController
 );
 
 export default franchiseRoutes;

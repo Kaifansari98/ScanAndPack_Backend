@@ -101,6 +101,7 @@ export class BookingStageController {
         bookingAmountPaymentDetailsText,
         finalBookingAmount,
         siteSupervisorId,
+        realSiteSupervisorId,
         mrpValue,
       } = req.body;
 
@@ -290,6 +291,11 @@ export class BookingStageController {
           siteSupervisorId && Number(siteSupervisorId) > 0
             ? parseInt(siteSupervisorId)
             : undefined,
+        realSiteSupervisorId:
+          realSiteSupervisorId && Number(realSiteSupervisorId) > 0
+            ? parseInt(realSiteSupervisorId)
+            : undefined,
+        isCustomUserTypeVendor: useCustomUsersOnly,
         baseUrl,
         finalDocuments: uploadedFinalDocuments,
         bookingAmountPaymentDetailsFile: uploadedPaymentFile,

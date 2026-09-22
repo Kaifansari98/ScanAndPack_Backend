@@ -276,7 +276,8 @@ export const ModelName = {
   CutListRuleCondition: 'CutListRuleCondition',
   CutListRuleAction: 'CutListRuleAction',
   RuleFieldMaster: 'RuleFieldMaster',
-  RuleActionMaster: 'RuleActionMaster'
+  RuleActionMaster: 'RuleActionMaster',
+  SiteSupervisorFranchiseMapping: 'SiteSupervisorFranchiseMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4215,6 +4216,20 @@ export const RuleActionMasterScalarFieldEnum = {
 } as const
 
 export type RuleActionMasterScalarFieldEnum = (typeof RuleActionMasterScalarFieldEnum)[keyof typeof RuleActionMasterScalarFieldEnum]
+
+
+export const SiteSupervisorFranchiseMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  supervisor_id: 'supervisor_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by'
+} as const
+
+export type SiteSupervisorFranchiseMappingScalarFieldEnum = (typeof SiteSupervisorFranchiseMappingScalarFieldEnum)[keyof typeof SiteSupervisorFranchiseMappingScalarFieldEnum]
 
 
 export const SortOrder = {

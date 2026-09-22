@@ -718,6 +718,7 @@ export type VendorMasterWhereInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterListRelationFilter
   specificationDocumentMappings?: Prisma.SpecificationDocumentMappingListRelationFilter
   leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
 }
 
 export type VendorMasterOrderByWithRelationInput = {
@@ -929,6 +930,7 @@ export type VendorMasterOrderByWithRelationInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterOrderByRelationAggregateInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingOrderByRelationAggregateInput
   leadBillingAddresses?: Prisma.LeadBillingAddressOrderByRelationAggregateInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingOrderByRelationAggregateInput
 }
 
 export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -1143,6 +1145,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterListRelationFilter
   specificationDocumentMappings?: Prisma.SpecificationDocumentMappingListRelationFilter
   leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
 }, "id">
 
 export type VendorMasterOrderByWithAggregationInput = {
@@ -1458,6 +1461,7 @@ export type VendorMasterCreateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateInput = {
@@ -1668,6 +1672,7 @@ export type VendorMasterUncheckedCreateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUpdateInput = {
@@ -1877,6 +1882,7 @@ export type VendorMasterUpdateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateInput = {
@@ -2087,6 +2093,7 @@ export type VendorMasterUncheckedUpdateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateManyInput = {
@@ -4751,6 +4758,20 @@ export type VendorMasterUpdateOneRequiredWithoutRuleActionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutRuleActionsInput, Prisma.VendorMasterUpdateWithoutRuleActionsInput>, Prisma.VendorMasterUncheckedUpdateWithoutRuleActionsInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutSiteSupervisorFranchiseMappingsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutSiteSupervisorFranchiseMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutSiteSupervisorFranchiseMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput>, Prisma.VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput>
+}
+
 export type VendorMasterCreateWithoutAddressesInput = {
   vendor_name: string
   vendor_code: string
@@ -4957,6 +4978,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAddressesInput = {
@@ -5166,6 +5188,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAddressesInput = {
@@ -5390,6 +5413,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
@@ -5599,6 +5623,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTaxInfoInput = {
@@ -5807,6 +5832,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
@@ -6016,6 +6042,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTaxInfoInput = {
@@ -6240,6 +6267,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
@@ -6449,6 +6477,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPrivilegeMastersInput = {
@@ -6657,6 +6686,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
@@ -6866,6 +6896,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPrivilegeMastersInput = {
@@ -7090,6 +7121,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
@@ -7299,6 +7331,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUsersInput = {
@@ -7507,6 +7540,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUsersInput = {
@@ -7716,6 +7750,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUsersInput = {
@@ -7940,6 +7975,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUsersInput = {
@@ -8149,6 +8185,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserSessionsInput = {
@@ -8357,6 +8394,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
@@ -8566,6 +8604,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserSessionsInput = {
@@ -8790,6 +8829,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
@@ -8999,6 +9039,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
@@ -9207,6 +9248,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
@@ -9416,6 +9458,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
@@ -9640,6 +9683,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
@@ -9849,6 +9893,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectsInput = {
@@ -10057,6 +10102,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectsInput = {
@@ -10266,6 +10312,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectsInput = {
@@ -10490,6 +10537,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
@@ -10699,6 +10747,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectDetailsInput = {
@@ -10907,6 +10956,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
@@ -11116,6 +11166,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectDetailsInput = {
@@ -11340,6 +11391,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
@@ -11549,6 +11601,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectItemsInput = {
@@ -11757,6 +11810,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
@@ -11966,6 +12020,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectItemsInput = {
@@ -12190,6 +12245,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
@@ -12399,6 +12455,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBoxesInput = {
@@ -12607,6 +12664,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBoxesInput = {
@@ -12816,6 +12874,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBoxesInput = {
@@ -13040,6 +13099,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
@@ -13249,6 +13309,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFactory_out_revert_logsInput = {
@@ -13457,6 +13518,7 @@ export type VendorMasterCreateWithoutFactory_out_revert_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
@@ -13666,6 +13728,7 @@ export type VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFactory_out_revert_logsInput = {
@@ -13890,6 +13953,7 @@ export type VendorMasterUpdateWithoutFactory_out_revert_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
@@ -14099,6 +14163,7 @@ export type VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBox_unpack_logsInput = {
@@ -14307,6 +14372,7 @@ export type VendorMasterCreateWithoutBox_unpack_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBox_unpack_logsInput = {
@@ -14516,6 +14582,7 @@ export type VendorMasterUncheckedCreateWithoutBox_unpack_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBox_unpack_logsInput = {
@@ -14740,6 +14807,7 @@ export type VendorMasterUpdateWithoutBox_unpack_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput = {
@@ -14949,6 +15017,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutScanItemsInput = {
@@ -15157,6 +15226,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
@@ -15366,6 +15436,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutScanItemsInput = {
@@ -15590,6 +15661,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
@@ -15799,6 +15871,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTokensInput = {
@@ -16007,6 +16080,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTokensInput = {
@@ -16216,6 +16290,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTokensInput = {
@@ -16440,6 +16515,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTokensInput = {
@@ -16649,6 +16725,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientsInput = {
@@ -16857,6 +16934,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientsInput = {
@@ -17066,6 +17144,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientsInput = {
@@ -17290,6 +17369,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientsInput = {
@@ -17499,6 +17579,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientBankAccountsInput = {
@@ -17707,6 +17788,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
@@ -17916,6 +17998,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientBankAccountsInput = {
@@ -18140,6 +18223,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
@@ -18349,6 +18433,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientTypesInput = {
@@ -18557,6 +18642,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
@@ -18766,6 +18852,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientTypesInput = {
@@ -18990,6 +19077,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
@@ -19199,6 +19287,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadsInput = {
@@ -19407,6 +19496,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadsInput = {
@@ -19616,6 +19706,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadsInput = {
@@ -19840,6 +19931,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
@@ -20049,6 +20141,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadSpecificationsInput = {
@@ -20257,6 +20350,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
@@ -20466,6 +20560,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadSpecificationsInput = {
@@ -20690,6 +20785,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
@@ -20899,6 +20995,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
@@ -21107,6 +21204,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput = {
@@ -21316,6 +21414,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadCarcassMaterialMappingsInput = {
@@ -21540,6 +21639,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput = {
@@ -21749,6 +21849,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
@@ -21957,6 +22058,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput = {
@@ -22166,6 +22268,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadShutterMaterialMappingsInput = {
@@ -22390,6 +22493,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput = {
@@ -22599,6 +22703,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -22807,6 +22912,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -23016,6 +23122,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -23240,6 +23347,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -23449,6 +23557,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadUserMappingsInput = {
@@ -23657,6 +23766,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
@@ -23866,6 +23976,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadUserMappingsInput = {
@@ -24090,6 +24201,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
@@ -24299,6 +24411,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -24507,6 +24620,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -24716,6 +24830,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -24940,6 +25055,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -25149,6 +25265,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
@@ -25357,6 +25474,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = {
@@ -25566,6 +25684,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsInput = {
@@ -25790,6 +25909,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = {
@@ -25999,6 +26119,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteTypesInput = {
@@ -26207,6 +26328,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
@@ -26416,6 +26538,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteTypesInput = {
@@ -26640,6 +26763,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
@@ -26849,6 +26973,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSourcesInput = {
@@ -27057,6 +27182,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSourcesInput = {
@@ -27266,6 +27392,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSourcesInput = {
@@ -27490,6 +27617,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
@@ -27699,6 +27827,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutAccountsInput = {
@@ -27907,6 +28036,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAccountsInput = {
@@ -28116,6 +28246,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAccountsInput = {
@@ -28340,6 +28471,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
@@ -28549,6 +28681,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductMapsInput = {
@@ -28757,6 +28890,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
@@ -28966,6 +29100,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductMapsInput = {
@@ -29190,6 +29325,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
@@ -29399,6 +29535,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductTypesInput = {
@@ -29607,6 +29744,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
@@ -29816,6 +29954,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductTypesInput = {
@@ -30040,6 +30179,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
@@ -30249,6 +30389,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProcessBriefsInput = {
@@ -30457,6 +30598,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
@@ -30666,6 +30808,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProcessBriefsInput = {
@@ -30890,6 +31033,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
@@ -31099,6 +31243,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
@@ -31307,6 +31452,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
@@ -31516,6 +31662,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProcessBriefsInput = {
@@ -31740,6 +31887,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
@@ -31949,6 +32097,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
@@ -32157,6 +32306,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput = {
@@ -32366,6 +32516,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProcessBriefMachineMappingsInput = {
@@ -32590,6 +32741,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput = {
@@ -32799,6 +32951,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
@@ -33007,6 +33160,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
@@ -33216,6 +33370,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadRequirementMaterialsInput = {
@@ -33440,6 +33595,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
@@ -33649,6 +33805,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcassTypesInput = {
@@ -33857,6 +34014,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
@@ -34066,6 +34224,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcassTypesInput = {
@@ -34290,6 +34449,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
@@ -34499,6 +34659,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcasMaterialsInput = {
@@ -34707,6 +34868,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
@@ -34916,6 +35078,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcasMaterialsInput = {
@@ -35140,6 +35303,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
@@ -35349,6 +35513,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutShutterTypesInput = {
@@ -35557,6 +35722,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
@@ -35766,6 +35932,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutShutterTypesInput = {
@@ -35990,6 +36157,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
@@ -36199,6 +36367,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutShutterMaterialsInput = {
@@ -36407,6 +36576,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
@@ -36616,6 +36786,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutShutterMaterialsInput = {
@@ -36840,6 +37011,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
@@ -37049,6 +37221,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcassLegsInput = {
@@ -37257,6 +37430,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
@@ -37466,6 +37640,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcassLegsInput = {
@@ -37690,6 +37865,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
@@ -37899,6 +38075,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
@@ -38107,6 +38284,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
@@ -38316,6 +38494,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadHardwareMappingsInput = {
@@ -38540,6 +38719,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
@@ -38749,6 +38929,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLightCarcasTypesInput = {
@@ -38957,6 +39138,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
@@ -39166,6 +39348,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLightCarcasTypesInput = {
@@ -39390,6 +39573,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
@@ -39599,6 +39783,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
@@ -39807,6 +39992,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
@@ -40016,6 +40202,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLightCarcasUnitsInput = {
@@ -40240,6 +40427,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
@@ -40449,6 +40637,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -40657,6 +40846,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -40866,6 +41056,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadLightCarcasUnitMappingsInput = {
@@ -41090,6 +41281,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -41299,6 +41491,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOtherAppliancesInput = {
@@ -41507,6 +41700,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
@@ -41716,6 +41910,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOtherAppliancesInput = {
@@ -41940,6 +42135,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
@@ -42149,6 +42345,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
@@ -42357,6 +42554,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput = {
@@ -42566,6 +42764,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadOtherAppliancesMappingsInput = {
@@ -42790,6 +42989,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput = {
@@ -42999,6 +43199,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHandleTypesInput = {
@@ -43207,6 +43408,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
@@ -43416,6 +43618,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHandleTypesInput = {
@@ -43640,6 +43843,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
@@ -43849,6 +44053,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTimelineRulesInput = {
@@ -44057,6 +44262,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
@@ -44266,6 +44472,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTimelineRulesInput = {
@@ -44490,6 +44697,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
@@ -44699,6 +44907,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
@@ -44907,6 +45116,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput = {
@@ -45116,6 +45326,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSpecificationDocumentMappingsInput = {
@@ -45340,6 +45551,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput = {
@@ -45549,6 +45761,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentsInput = {
@@ -45757,6 +45970,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
@@ -45966,6 +46180,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentsInput = {
@@ -46190,6 +46405,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -46399,6 +46615,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutB2bDocumentsInput = {
@@ -46607,6 +46824,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
@@ -46816,6 +47034,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutB2bDocumentsInput = {
@@ -47040,6 +47259,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
@@ -47249,6 +47469,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatRoomsInput = {
@@ -47457,6 +47678,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
@@ -47666,6 +47888,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatRoomsInput = {
@@ -47890,6 +48113,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
@@ -48099,6 +48323,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
@@ -48307,6 +48532,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
@@ -48516,6 +48742,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatDocumentsInput = {
@@ -48740,6 +48967,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
@@ -48949,6 +49177,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInput = {
@@ -49157,6 +49386,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
@@ -49366,6 +49596,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInput = {
@@ -49590,6 +49821,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
@@ -49799,6 +50031,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductSubStructuresInput = {
@@ -50007,6 +50240,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
@@ -50216,6 +50450,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductSubStructuresInput = {
@@ -50440,6 +50675,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
@@ -50649,6 +50885,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductItemCodesInput = {
@@ -50857,6 +51094,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
@@ -51066,6 +51304,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductItemCodesInput = {
@@ -51290,6 +51529,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
@@ -51499,6 +51739,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -51707,6 +51948,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -51916,6 +52158,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -52140,6 +52383,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -52349,6 +52593,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInstancesInput = {
@@ -52557,6 +52802,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -52766,6 +53012,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -52990,6 +53237,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -53199,6 +53447,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -53407,6 +53656,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -53616,6 +53866,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput = {
@@ -53840,6 +54091,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
@@ -54049,6 +54301,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentsInput = {
@@ -54257,6 +54510,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
@@ -54466,6 +54720,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentsInput = {
@@ -54690,6 +54945,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -54899,6 +55155,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLedgersInput = {
@@ -55107,6 +55364,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLedgersInput = {
@@ -55316,6 +55574,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLedgersInput = {
@@ -55540,6 +55799,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
@@ -55749,6 +56009,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentTypesInput = {
@@ -55957,6 +56218,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
@@ -56166,6 +56428,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentTypesInput = {
@@ -56390,6 +56653,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
@@ -56599,6 +56863,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -56807,6 +57072,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -57016,6 +57282,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestTypeMastersInput = {
@@ -57240,6 +57507,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput = {
@@ -57449,6 +57717,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
@@ -57657,6 +57926,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
@@ -57866,6 +58136,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestsInput = {
@@ -58090,6 +58361,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
@@ -58299,6 +58571,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -58507,6 +58780,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -58716,6 +58990,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestDocumentsInput = {
@@ -58940,6 +59215,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = {
@@ -59149,6 +59425,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadAmcContractsInput = {
@@ -59357,6 +59634,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
@@ -59566,6 +59844,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadAmcContractsInput = {
@@ -59790,6 +60069,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
@@ -59999,6 +60279,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
@@ -60207,6 +60488,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
@@ -60416,6 +60698,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadServiceSchedulesInput = {
@@ -60640,6 +60923,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
@@ -60849,6 +61133,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStatusTypesInput = {
@@ -61057,6 +61342,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
@@ -61266,6 +61552,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStatusTypesInput = {
@@ -61490,6 +61777,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
@@ -61699,6 +61987,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadStatusLogsInput = {
@@ -61907,6 +62196,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -62116,6 +62406,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -62340,6 +62631,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -62549,6 +62841,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingInput = {
@@ -62757,6 +63050,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -62966,6 +63260,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -63190,6 +63485,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -63399,6 +63695,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitsInput = {
@@ -63607,6 +63904,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
@@ -63816,6 +64114,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitsInput = {
@@ -64040,6 +64339,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
@@ -64249,6 +64549,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMeetingTypesInput = {
@@ -64457,6 +64758,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
@@ -64666,6 +64968,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMeetingTypesInput = {
@@ -64890,6 +65193,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
@@ -65099,6 +65403,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -65307,6 +65612,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -65516,6 +65822,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -65740,6 +66047,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -65949,6 +66257,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
@@ -66157,6 +66466,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
@@ -66366,6 +66676,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
@@ -66590,6 +66901,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
@@ -66799,6 +67111,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignSelectionInput = {
@@ -67007,6 +67320,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -67216,6 +67530,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -67440,6 +67755,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -67649,6 +67965,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
@@ -67857,6 +68174,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
@@ -68066,6 +68384,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -68290,6 +68609,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
@@ -68499,6 +68819,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
@@ -68707,6 +69028,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
@@ -68916,6 +69238,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTypeMasterInput = {
@@ -69140,6 +69463,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
@@ -69349,6 +69673,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteSupervisorsInput = {
@@ -69557,6 +69882,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -69766,6 +70092,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -69990,6 +70317,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -70199,6 +70527,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserLeadTasksInput = {
@@ -70407,6 +70736,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
@@ -70616,6 +70946,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserLeadTasksInput = {
@@ -70840,6 +71171,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
@@ -71049,6 +71381,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
@@ -71257,6 +71590,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = {
@@ -71466,6 +71800,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFastProductionRequestBatchesInput = {
@@ -71690,6 +72025,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = {
@@ -71899,6 +72235,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestsInput = {
@@ -72107,6 +72444,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
@@ -72316,6 +72654,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFastProductionRequestsInput = {
@@ -72540,6 +72879,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
@@ -72749,6 +73089,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
@@ -72957,6 +73298,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -73166,6 +73508,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -73390,6 +73733,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -73599,6 +73943,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
@@ -73807,6 +74152,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -74016,6 +74362,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -74240,6 +74587,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -74449,6 +74797,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -74657,6 +75006,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -74866,6 +75216,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -75090,6 +75441,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -75299,6 +75651,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
@@ -75507,6 +75860,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
@@ -75716,6 +76070,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompanyVendorsMasterInput = {
@@ -75940,6 +76295,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
@@ -76149,6 +76505,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
@@ -76357,6 +76714,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -76566,6 +76924,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -76790,6 +77149,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -76999,6 +77359,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteReadinessInput = {
@@ -77207,6 +77568,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -77416,6 +77778,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -77640,6 +78003,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -77849,6 +78213,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallersInput = {
@@ -78057,6 +78422,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallersInput = {
@@ -78266,6 +78632,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallersInput = {
@@ -78490,6 +78857,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
@@ -78699,6 +79067,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallerMappingsInput = {
@@ -78907,6 +79276,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -79116,6 +79486,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -79340,6 +79711,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -79549,6 +79921,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdatesInput = {
@@ -79757,6 +80130,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -79966,6 +80340,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -80190,6 +80565,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -80399,6 +80775,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
@@ -80607,6 +80984,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
@@ -80816,6 +81194,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdateDocsInput = {
@@ -81040,6 +81419,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
@@ -81249,6 +81629,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
@@ -81457,6 +81838,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -81666,6 +82048,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -81890,6 +82273,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -82099,6 +82483,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
@@ -82307,6 +82692,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
@@ -82516,6 +82902,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTypeMasterInput = {
@@ -82740,6 +83127,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
@@ -82949,6 +83337,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
@@ -83157,6 +83546,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
@@ -83366,6 +83756,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTeamMasterInput = {
@@ -83590,6 +83981,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
@@ -83799,6 +84191,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
@@ -84007,6 +84400,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
@@ -84216,6 +84610,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousDocumentInput = {
@@ -84440,6 +84835,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
@@ -84649,6 +85045,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
@@ -84857,6 +85254,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
@@ -85066,6 +85464,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousFollowupsInput = {
@@ -85290,6 +85689,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
@@ -85499,6 +85899,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -85707,6 +86108,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -85916,6 +86318,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -86140,6 +86543,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -86349,6 +86753,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -86557,6 +86962,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -86766,6 +87172,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -86990,6 +87397,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -87199,6 +87607,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
@@ -87407,6 +87816,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
@@ -87616,6 +88026,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutIssueLogTypeMasterInput = {
@@ -87840,6 +88251,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
@@ -88049,6 +88461,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationMastersInput = {
@@ -88257,6 +88670,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
@@ -88466,6 +88880,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationMastersInput = {
@@ -88690,6 +89105,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
@@ -88899,6 +89315,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationsInput = {
@@ -89107,6 +89524,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
@@ -89316,6 +89734,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationsInput = {
@@ -89540,6 +89959,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
@@ -89749,6 +90169,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPushTokensInput = {
@@ -89957,6 +90378,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
@@ -90166,6 +90588,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPushTokensInput = {
@@ -90390,6 +90813,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
@@ -90599,6 +91023,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
@@ -90807,6 +91232,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
@@ -91016,6 +91442,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorModulesMappingsInput = {
@@ -91240,6 +91667,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
@@ -91449,6 +91877,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMachineMasterInput = {
@@ -91657,6 +92086,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
@@ -91866,6 +92296,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMachineMasterInput = {
@@ -92090,6 +92521,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
@@ -92299,6 +92731,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
@@ -92507,6 +92940,7 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
@@ -92716,6 +93150,7 @@ export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutlistHeadersMappingsInput = {
@@ -92940,6 +93375,7 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
@@ -93149,6 +93585,7 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListInput = {
@@ -93357,6 +93794,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListInput = {
@@ -93566,6 +94004,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListInput = {
@@ -93790,6 +94229,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListInput = {
@@ -93999,6 +94439,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListMachineMappingInput = {
@@ -94207,6 +94648,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -94416,6 +94858,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -94640,6 +95083,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -94849,6 +95293,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserMachineMappingInput = {
@@ -95057,6 +95502,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
@@ -95266,6 +95712,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserMachineMappingInput = {
@@ -95490,6 +95937,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
@@ -95699,6 +96147,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorSettingInput = {
@@ -95907,6 +96356,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
@@ -96116,6 +96566,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorSettingInput = {
@@ -96340,6 +96791,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
@@ -96549,6 +97001,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectMasterInput = {
@@ -96757,6 +97210,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
@@ -96966,6 +97420,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectMasterInput = {
@@ -97190,6 +97645,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
@@ -97399,6 +97855,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectedItemsInput = {
@@ -97607,6 +98064,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
@@ -97816,6 +98274,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectedItemsInput = {
@@ -98040,6 +98499,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
@@ -98249,6 +98709,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFranchisesInput = {
@@ -98457,6 +98918,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
@@ -98666,6 +99128,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFranchisesInput = {
@@ -98890,6 +99353,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
@@ -99099,6 +99563,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -99307,6 +99772,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -99516,6 +99982,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -99740,6 +100207,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -99949,6 +100417,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStateInput = {
@@ -100157,6 +100626,7 @@ export type VendorMasterCreateWithoutStateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStateInput = {
@@ -100366,6 +100836,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStateInput = {
@@ -100652,6 +101123,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutThemesInput = {
@@ -100861,6 +101333,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutThemesInput = {
@@ -101085,6 +101558,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutThemesInput = {
@@ -101294,6 +101768,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
@@ -101502,6 +101977,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
@@ -101711,6 +102187,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutExternalPlatformTokensInput = {
@@ -101935,6 +102412,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
@@ -102144,6 +102622,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -102352,6 +102831,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -102561,6 +103041,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -102785,6 +103266,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -102994,6 +103476,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompletionPhotosInput = {
@@ -103202,6 +103685,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
@@ -103411,6 +103895,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompletionPhotosInput = {
@@ -103635,6 +104120,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -103844,6 +104330,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
@@ -104052,6 +104539,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
@@ -104261,6 +104749,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesMasterInput = {
@@ -104485,6 +104974,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
@@ -104694,6 +105184,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
@@ -104902,6 +105393,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
@@ -105111,6 +105603,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCategoryNamingStructuresInput = {
@@ -105335,6 +105828,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
@@ -105544,6 +106038,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -105752,6 +106247,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -105961,6 +106457,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsInput = {
@@ -106185,6 +106682,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInput = {
@@ -106394,6 +106892,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBrandsInput = {
@@ -106602,6 +107101,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBrandsInput = {
@@ -106811,6 +107311,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBrandsInput = {
@@ -107035,6 +107536,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
@@ -107244,6 +107746,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductsInput = {
@@ -107452,6 +107955,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsInput = {
@@ -107661,6 +108165,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductsInput = {
@@ -107885,6 +108390,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsInput = {
@@ -108094,6 +108600,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCoreProductsInput = {
@@ -108302,6 +108809,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
@@ -108511,6 +109019,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCoreProductsInput = {
@@ -108735,6 +109244,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
@@ -108944,6 +109454,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutGradesInput = {
@@ -109152,6 +109663,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutGradesInput = {
@@ -109361,6 +109873,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutGradesInput = {
@@ -109585,6 +110098,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutGradesInput = {
@@ -109794,6 +110308,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFinishesInput = {
@@ -110002,6 +110517,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFinishesInput = {
@@ -110211,6 +110727,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFinishesInput = {
@@ -110435,6 +110952,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
@@ -110644,6 +111162,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTypesInput = {
@@ -110852,6 +111371,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTypesInput = {
@@ -111061,6 +111581,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTypesInput = {
@@ -111285,6 +111806,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTypesInput = {
@@ -111494,6 +112016,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutItemTypesInput = {
@@ -111702,6 +112225,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
@@ -111911,6 +112435,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutItemTypesInput = {
@@ -112135,6 +112660,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
@@ -112344,6 +112870,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseIntentsInput = {
@@ -112552,6 +113079,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
@@ -112761,6 +113289,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseIntentsInput = {
@@ -112985,6 +113514,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
@@ -113194,6 +113724,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseOrdersInput = {
@@ -113402,6 +113933,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -113611,6 +114143,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -113835,6 +114368,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -114044,6 +114578,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutGrnsInput = {
@@ -114252,6 +114787,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutGrnsInput = {
@@ -114461,6 +114997,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutGrnsInput = {
@@ -114685,6 +115222,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
@@ -114894,6 +115432,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDebitCreditNotesInput = {
@@ -115102,6 +115641,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
@@ -115311,6 +115851,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDebitCreditNotesInput = {
@@ -115535,6 +116076,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
@@ -115744,6 +116286,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
@@ -115952,6 +116495,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
@@ -116161,6 +116705,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutRedeliveryRequestsInput = {
@@ -116385,6 +116930,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
@@ -116594,6 +117140,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHsnMappingsInput = {
@@ -116802,6 +117349,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
@@ -117011,6 +117559,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHsnMappingsInput = {
@@ -117235,6 +117784,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
@@ -117444,6 +117994,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStockHistoriesInput = {
@@ -117652,6 +118203,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
@@ -117861,6 +118413,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -118085,6 +118638,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
@@ -118294,6 +118848,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTermsInput = {
@@ -118502,6 +119057,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
@@ -118711,6 +119267,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTermsInput = {
@@ -118935,6 +119492,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
@@ -119144,6 +119702,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
@@ -119352,6 +119911,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
@@ -119561,6 +120121,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentSchedulesInput = {
@@ -119785,6 +120346,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
@@ -119994,6 +120556,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentsInput = {
@@ -120202,6 +120765,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
@@ -120411,6 +120975,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentsInput = {
@@ -120635,6 +121200,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
@@ -120844,6 +121410,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUnitsInput = {
@@ -121052,6 +121619,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUnitsInput = {
@@ -121261,6 +121829,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUnitsInput = {
@@ -121485,6 +122054,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
@@ -121694,6 +122264,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutItemGroupsInput = {
@@ -121902,6 +122473,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
@@ -122111,6 +122683,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutItemGroupsInput = {
@@ -122335,6 +122908,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
@@ -122544,6 +123118,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
@@ -122752,6 +123327,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
@@ -122961,6 +123537,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductSupplierMappingsInput = {
@@ -123185,6 +123762,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
@@ -123394,6 +123972,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
@@ -123602,6 +124181,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = {
@@ -123811,6 +124391,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPopaymentScheduleHistoriesInput = {
@@ -124035,6 +124616,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = {
@@ -124244,6 +124826,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutArchitechuremastersInput = {
@@ -124452,6 +125035,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
@@ -124661,6 +125245,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutArchitechuremastersInput = {
@@ -124885,6 +125470,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
@@ -125094,6 +125680,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
@@ -125302,6 +125889,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
@@ -125511,6 +126099,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAdditionalCostMastersInput = {
@@ -125735,6 +126324,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
@@ -125944,6 +126534,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
@@ -126152,6 +126743,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
@@ -126361,6 +126953,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPiSupplierAdditionalCostsInput = {
@@ -126585,6 +127178,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
@@ -126794,6 +127388,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
@@ -127002,6 +127597,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
@@ -127211,6 +127807,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoSupplierAdditionalCostsInput = {
@@ -127435,6 +128032,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
@@ -127644,6 +128242,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBox_info_fieldsInput = {
@@ -127852,6 +128451,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
@@ -128061,6 +128661,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBox_info_fieldsInput = {
@@ -128285,6 +128886,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
@@ -128494,6 +129096,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBox_info_valuesInput = {
@@ -128702,6 +129305,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
@@ -128911,6 +129515,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBox_info_valuesInput = {
@@ -129135,6 +129740,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
@@ -129344,6 +129950,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBroadcastsInput = {
@@ -129552,6 +130159,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
@@ -129761,6 +130369,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBroadcastsInput = {
@@ -129985,6 +130594,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
@@ -130194,6 +130804,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
@@ -130402,6 +131013,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
@@ -130611,6 +131223,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBroadcastCategoriesInput = {
@@ -130835,6 +131448,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
@@ -131044,6 +131658,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
@@ -131252,6 +131867,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
@@ -131461,6 +132077,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutB2bRequirementTypesInput = {
@@ -131685,6 +132302,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
@@ -131894,6 +132512,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
@@ -132102,6 +132721,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
@@ -132311,6 +132931,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadB2BReqMappingsInput = {
@@ -132535,6 +133156,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
@@ -132744,6 +133366,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -132952,6 +133575,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -133161,6 +133785,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -133385,6 +134010,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -133594,6 +134220,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
@@ -133802,6 +134429,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
@@ -134011,6 +134639,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserTypePrivilegeMappingInput = {
@@ -134235,6 +134864,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
@@ -134444,6 +135074,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
@@ -134652,6 +135283,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
@@ -134861,6 +135493,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_call_logInput = {
@@ -135085,6 +135718,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
@@ -135294,6 +135928,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
@@ -135502,6 +136137,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput = {
@@ -135711,6 +136347,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_followup_statusInput = {
@@ -135935,6 +136572,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput = {
@@ -136144,6 +136782,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_historyInput = {
@@ -136352,6 +136991,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
@@ -136561,6 +137201,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_historyInput = {
@@ -136785,6 +137426,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
@@ -136994,6 +137636,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
@@ -137202,6 +137845,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
@@ -137411,6 +138055,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_store_logInput = {
@@ -137635,6 +138280,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
@@ -137844,6 +138490,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_leadsInput = {
@@ -138052,6 +138699,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
@@ -138261,6 +138909,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_leadsInput = {
@@ -138485,6 +139134,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
@@ -138694,6 +139344,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
@@ -138902,6 +139553,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
@@ -139111,6 +139763,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadBillingAddressesInput = {
@@ -139335,6 +139988,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
@@ -139544,6 +140198,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
@@ -139752,6 +140407,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
@@ -139961,6 +140617,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductsRequiredForProductionInput = {
@@ -140185,6 +140842,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
@@ -140394,6 +141052,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListRulesInput = {
@@ -140602,6 +141261,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
@@ -140811,6 +141471,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListRulesInput = {
@@ -141035,6 +141696,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
@@ -141244,6 +141906,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutRuleActionsInput = {
@@ -141452,6 +142115,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
@@ -141661,6 +142325,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutRuleActionsInput = {
@@ -141885,6 +142550,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
@@ -141959,6 +142625,861 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
   cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+}
+
+export type VendorMasterUpsertWithoutSiteSupervisorFranchiseMappingsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput>
+}
+
+export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -142350,6 +143871,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStateInput = {
@@ -142559,6 +144081,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
@@ -142776,6 +144299,7 @@ export type VendorMasterCountOutputType = {
   smallOrderRequestTypeMasters: number
   specificationDocumentMappings: number
   leadBillingAddresses: number
+  siteSupervisorFranchiseMappings: number
 }
 
 export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -142940,6 +144464,7 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   smallOrderRequestTypeMasters?: boolean | VendorMasterCountOutputTypeCountSmallOrderRequestTypeMastersArgs
   specificationDocumentMappings?: boolean | VendorMasterCountOutputTypeCountSpecificationDocumentMappingsArgs
   leadBillingAddresses?: boolean | VendorMasterCountOutputTypeCountLeadBillingAddressesArgs
+  siteSupervisorFranchiseMappings?: boolean | VendorMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsArgs
 }
 
 /**
@@ -144079,6 +145604,13 @@ export type VendorMasterCountOutputTypeCountLeadBillingAddressesArgs<ExtArgs ext
   where?: Prisma.LeadBillingAddressWhereInput
 }
 
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+}
+
 
 export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -144289,6 +145821,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   smallOrderRequestTypeMasters?: boolean | Prisma.VendorMaster$smallOrderRequestTypeMastersArgs<ExtArgs>
   specificationDocumentMappings?: boolean | Prisma.VendorMaster$specificationDocumentMappingsArgs<ExtArgs>
   leadBillingAddresses?: boolean | Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs>
+  siteSupervisorFranchiseMappings?: boolean | Prisma.VendorMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -144605,6 +146138,7 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   smallOrderRequestTypeMasters?: boolean | Prisma.VendorMaster$smallOrderRequestTypeMastersArgs<ExtArgs>
   specificationDocumentMappings?: boolean | Prisma.VendorMaster$specificationDocumentMappingsArgs<ExtArgs>
   leadBillingAddresses?: boolean | Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs>
+  siteSupervisorFranchiseMappings?: boolean | Prisma.VendorMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VendorMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -144779,6 +146313,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     smallOrderRequestTypeMasters: Prisma.$SmallOrderRequestTypeMasterPayload<ExtArgs>[]
     specificationDocumentMappings: Prisma.$specificationDocumentMappingPayload<ExtArgs>[]
     leadBillingAddresses: Prisma.$LeadBillingAddressPayload<ExtArgs>[]
+    siteSupervisorFranchiseMappings: Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -145383,6 +146918,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   smallOrderRequestTypeMasters<T extends Prisma.VendorMaster$smallOrderRequestTypeMastersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$smallOrderRequestTypeMastersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmallOrderRequestTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   specificationDocumentMappings<T extends Prisma.VendorMaster$specificationDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$specificationDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$specificationDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadBillingAddresses<T extends Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadBillingAddressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadBillingAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteSupervisorFranchiseMappings<T extends Prisma.VendorMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -149739,6 +151275,30 @@ export type VendorMaster$leadBillingAddressesArgs<ExtArgs extends runtime.Types.
   take?: number
   skip?: number
   distinct?: Prisma.LeadBillingAddressScalarFieldEnum | Prisma.LeadBillingAddressScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.siteSupervisorFranchiseMappings
+ */
+export type VendorMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteSupervisorFranchiseMapping
+   */
+  select?: Prisma.SiteSupervisorFranchiseMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteSupervisorFranchiseMapping
+   */
+  omit?: Prisma.SiteSupervisorFranchiseMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteSupervisorFranchiseMappingInclude<ExtArgs> | null
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+  orderBy?: Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput | Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput[]
+  cursor?: Prisma.SiteSupervisorFranchiseMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum | Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum[]
 }
 
 /**

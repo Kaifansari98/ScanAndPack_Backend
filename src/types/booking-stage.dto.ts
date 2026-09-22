@@ -15,6 +15,8 @@ export interface CreateBookingStageDto {
   bookingAmountPaymentDetailsText?: string;
   finalBookingAmount: number;
   siteSupervisorId?: number;
+  realSiteSupervisorId?: number;
+  isCustomUserTypeVendor?: boolean;
   mrpValue: number;
   baseUrl: string;
   scopedInstanceIds?: number[];

@@ -469,6 +469,9 @@ export type UserMasterWhereInput = {
   specificationDocumentMappingsCreated?: Prisma.SpecificationDocumentMappingListRelationFilter
   projectMasters?: Prisma.ProjectMasterListRelationFilter
   deletedProjects?: Prisma.ProjectMasterListRelationFilter
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
 }
 
 export type UserMasterOrderByWithRelationInput = {
@@ -669,6 +672,9 @@ export type UserMasterOrderByWithRelationInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingOrderByRelationAggregateInput
   projectMasters?: Prisma.ProjectMasterOrderByRelationAggregateInput
   deletedProjects?: Prisma.ProjectMasterOrderByRelationAggregateInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingOrderByRelationAggregateInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingOrderByRelationAggregateInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingOrderByRelationAggregateInput
 }
 
 export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -872,6 +878,9 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   specificationDocumentMappingsCreated?: Prisma.SpecificationDocumentMappingListRelationFilter
   projectMasters?: Prisma.ProjectMasterListRelationFilter
   deletedProjects?: Prisma.ProjectMasterListRelationFilter
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingListRelationFilter
 }, "id" | "user_contact">
 
 export type UserMasterOrderByWithAggregationInput = {
@@ -1106,6 +1115,9 @@ export type UserMasterCreateInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateInput = {
@@ -1303,6 +1315,9 @@ export type UserMasterUncheckedCreateInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUpdateInput = {
@@ -1499,6 +1514,9 @@ export type UserMasterUpdateInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateInput = {
@@ -1696,6 +1714,9 @@ export type UserMasterUncheckedUpdateInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateManyInput = {
@@ -4642,6 +4663,52 @@ export type UserMasterUpdateOneWithoutCutListRulesUpdatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutCutListRulesUpdatedInput, Prisma.UserMasterUpdateWithoutCutListRulesUpdatedInput>, Prisma.UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput>
 }
 
+export type UserMasterCreateNestedOneWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsCreatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterCreateNestedOneWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsUpdatedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterCreateNestedOneWithoutSiteSupervisorFranchiseMappingsInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneWithoutSiteSupervisorFranchiseMappingsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsCreatedInput
+  upsert?: Prisma.UserMasterUpsertWithoutSiteSupervisorFranchiseMappingsCreatedInput
+  disconnect?: Prisma.UserMasterWhereInput | boolean
+  delete?: Prisma.UserMasterWhereInput | boolean
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsCreatedInput, Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput>, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput>
+}
+
+export type UserMasterUpdateOneWithoutSiteSupervisorFranchiseMappingsUpdatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsUpdatedInput
+  upsert?: Prisma.UserMasterUpsertWithoutSiteSupervisorFranchiseMappingsUpdatedInput
+  disconnect?: Prisma.UserMasterWhereInput | boolean
+  delete?: Prisma.UserMasterWhereInput | boolean
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsUpdatedInput, Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>
+}
+
+export type UserMasterUpdateOneRequiredWithoutSiteSupervisorFranchiseMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsInput
+  upsert?: Prisma.UserMasterUpsertWithoutSiteSupervisorFranchiseMappingsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsInput, Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput>, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput>
+}
+
 export type UserMasterCreateWithoutVendorInput = {
   user_name: string
   user_contact: string
@@ -4835,6 +4902,9 @@ export type UserMasterCreateWithoutVendorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutVendorInput = {
@@ -5031,6 +5101,9 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutVendorInput = {
@@ -5270,6 +5343,9 @@ export type UserMasterCreateWithoutUser_typeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUser_typeInput = {
@@ -5466,6 +5542,9 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUser_typeInput = {
@@ -5687,6 +5766,9 @@ export type UserMasterCreateWithoutDocumentsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsInput = {
@@ -5883,6 +5965,9 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsInput = {
@@ -6094,6 +6179,9 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -6290,6 +6378,9 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutRevokedSessionsInput = {
@@ -6485,6 +6576,9 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
@@ -6681,6 +6775,9 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutRevokedSessionsInput = {
@@ -6881,6 +6978,9 @@ export type UserMasterCreateWithoutSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSessionsInput = {
@@ -7077,6 +7177,9 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSessionsInput = {
@@ -7288,6 +7391,9 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
@@ -7484,6 +7590,9 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutSessionsInput = {
@@ -7690,6 +7799,9 @@ export type UserMasterUpdateWithoutSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSessionsInput = {
@@ -7886,6 +7998,9 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
@@ -8081,6 +8196,9 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
@@ -8277,6 +8395,9 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
@@ -8488,6 +8609,9 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
@@ -8684,6 +8808,9 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedProjectsInput = {
@@ -8879,6 +9006,9 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
@@ -9075,6 +9205,9 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedProjectsInput = {
@@ -9275,6 +9408,9 @@ export type UserMasterCreateWithoutDeletedProjectsInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDeletedProjectsInput = {
@@ -9471,6 +9607,9 @@ export type UserMasterUncheckedCreateWithoutDeletedProjectsInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDeletedProjectsInput = {
@@ -9671,6 +9810,9 @@ export type UserMasterCreateWithoutProjectMastersInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProjectMastersInput = {
@@ -9867,6 +10009,9 @@ export type UserMasterUncheckedCreateWithoutProjectMastersInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProjectMastersInput = {
@@ -10078,6 +10223,9 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
@@ -10274,6 +10422,9 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDeletedProjectsInput = {
@@ -10480,6 +10631,9 @@ export type UserMasterUpdateWithoutDeletedProjectsInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDeletedProjectsInput = {
@@ -10676,6 +10830,9 @@ export type UserMasterUncheckedUpdateWithoutDeletedProjectsInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutProjectMastersInput = {
@@ -10882,6 +11039,9 @@ export type UserMasterUpdateWithoutProjectMastersInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
@@ -11078,6 +11238,9 @@ export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBoxesFactoryOutInput = {
@@ -11273,6 +11436,9 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
@@ -11469,6 +11635,9 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxesFactoryOutInput = {
@@ -11669,6 +11838,9 @@ export type UserMasterCreateWithoutBoxesPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
@@ -11865,6 +12037,9 @@ export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxesPackedByInput = {
@@ -12065,6 +12240,9 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
@@ -12261,6 +12439,9 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxesSiteInInput = {
@@ -12472,6 +12653,9 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
@@ -12668,6 +12852,9 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBoxesPackedByInput = {
@@ -12874,6 +13061,9 @@ export type UserMasterUpdateWithoutBoxesPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
@@ -13070,6 +13260,9 @@ export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBoxesSiteInInput = {
@@ -13276,6 +13469,9 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
@@ -13472,6 +13668,9 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFactoryOutRevertsMadeInput = {
@@ -13667,6 +13866,9 @@ export type UserMasterCreateWithoutFactoryOutRevertsMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFactoryOutRevertsMadeInput = {
@@ -13863,6 +14065,9 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFactoryOutRevertsMadeInput = {
@@ -14063,6 +14268,9 @@ export type UserMasterCreateWithoutFactoryOutRevertsOriginalInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFactoryOutRevertsOriginalInput = {
@@ -14259,6 +14467,9 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsOriginalInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFactoryOutRevertsOriginalInput = {
@@ -14470,6 +14681,9 @@ export type UserMasterUpdateWithoutFactoryOutRevertsMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsMadeInput = {
@@ -14666,6 +14880,9 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutFactoryOutRevertsOriginalInput = {
@@ -14872,6 +15089,9 @@ export type UserMasterUpdateWithoutFactoryOutRevertsOriginalInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsOriginalInput = {
@@ -15068,6 +15288,9 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsOriginalInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBoxUnpacksMadeInput = {
@@ -15263,6 +15486,9 @@ export type UserMasterCreateWithoutBoxUnpacksMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxUnpacksMadeInput = {
@@ -15459,6 +15685,9 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxUnpacksMadeInput = {
@@ -15659,6 +15888,9 @@ export type UserMasterCreateWithoutBoxUnpacksPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxUnpacksPackedByInput = {
@@ -15855,6 +16087,9 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxUnpacksPackedByInput = {
@@ -16055,6 +16290,9 @@ export type UserMasterCreateWithoutBoxUnpacksCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxUnpacksCreatedByInput = {
@@ -16251,6 +16489,9 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxUnpacksCreatedByInput = {
@@ -16462,6 +16703,9 @@ export type UserMasterUpdateWithoutBoxUnpacksMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxUnpacksMadeInput = {
@@ -16658,6 +16902,9 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksMadeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBoxUnpacksPackedByInput = {
@@ -16864,6 +17111,9 @@ export type UserMasterUpdateWithoutBoxUnpacksPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxUnpacksPackedByInput = {
@@ -17060,6 +17310,9 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksPackedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBoxUnpacksCreatedByInput = {
@@ -17266,6 +17519,9 @@ export type UserMasterUpdateWithoutBoxUnpacksCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxUnpacksCreatedByInput = {
@@ -17462,6 +17718,9 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutScanItemsCreatedInput = {
@@ -17657,6 +17916,9 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
@@ -17853,6 +18115,9 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutScanItemsCreatedInput = {
@@ -18064,6 +18329,9 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
@@ -18260,6 +18528,9 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadsAssignedInput = {
@@ -18455,6 +18726,9 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
@@ -18651,6 +18925,9 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsAssignedInput = {
@@ -18851,6 +19128,9 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
@@ -19047,6 +19327,9 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsDelegatedInput = {
@@ -19247,6 +19530,9 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
@@ -19443,6 +19729,9 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsCreatedInput = {
@@ -19643,6 +19932,9 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
@@ -19839,6 +20131,9 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsUpdatedInput = {
@@ -20050,6 +20345,9 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
@@ -20246,6 +20544,9 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsDelegatedInput = {
@@ -20452,6 +20753,9 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
@@ -20648,6 +20952,9 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsCreatedInput = {
@@ -20854,6 +21161,9 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
@@ -21050,6 +21360,9 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsUpdatedInput = {
@@ -21256,6 +21569,9 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
@@ -21452,6 +21768,9 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
@@ -21647,6 +21966,9 @@ export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
@@ -21843,6 +22165,9 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSpecificationsCreatedInput = {
@@ -22054,6 +22379,9 @@ export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
@@ -22250,6 +22578,9 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -22445,6 +22776,9 @@ export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -22641,6 +22975,9 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -22852,6 +23189,9 @@ export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -23048,6 +23388,9 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -23243,6 +23586,9 @@ export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -23439,6 +23785,9 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -23650,6 +23999,9 @@ export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -23846,6 +24198,9 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -24041,6 +24396,9 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -24237,6 +24595,9 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -24437,6 +24798,9 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -24633,6 +24997,9 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -24844,6 +25211,9 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -25040,6 +25410,9 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -25246,6 +25619,9 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -25442,6 +25818,9 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadUserCreatedInput = {
@@ -25637,6 +26016,9 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
@@ -25833,6 +26215,9 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserCreatedInput = {
@@ -26033,6 +26418,9 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
@@ -26229,6 +26617,9 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserUpdatedInput = {
@@ -26429,6 +26820,9 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
@@ -26625,6 +27019,9 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserAsUserInput = {
@@ -26836,6 +27233,9 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
@@ -27032,6 +27432,9 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserUpdatedInput = {
@@ -27238,6 +27641,9 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
@@ -27434,6 +27840,9 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserAsUserInput = {
@@ -27640,6 +28049,9 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
@@ -27836,6 +28248,9 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -28031,6 +28446,9 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -28227,6 +28645,9 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -28438,6 +28859,9 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -28634,6 +29058,9 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
@@ -28829,6 +29256,9 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
@@ -29025,6 +29455,9 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsCreatedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsCreatedInput = {
@@ -29225,6 +29658,9 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsReleasedInput = {
@@ -29421,6 +29857,9 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsReleased
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsReleasedInput = {
@@ -29632,6 +30071,9 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsCreatedInput = {
@@ -29828,6 +30270,9 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsCreatedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadScopedActivityStatusLogsReleasedInput = {
@@ -30034,6 +30479,9 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleasedInput = {
@@ -30230,6 +30678,9 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleased
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutAccountsCreatedInput = {
@@ -30425,6 +30876,9 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
@@ -30621,6 +31075,9 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsCreatedInput = {
@@ -30821,6 +31278,9 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
@@ -31017,6 +31477,9 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsUpdatedInput = {
@@ -31228,6 +31691,9 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
@@ -31424,6 +31890,9 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutAccountsUpdatedInput = {
@@ -31630,6 +32099,9 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
@@ -31826,6 +32298,9 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadProductsCreatedInput = {
@@ -32021,6 +32496,9 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
@@ -32217,6 +32695,9 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadProductsCreatedInput = {
@@ -32428,6 +32909,9 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
@@ -32624,6 +33108,9 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutProcessBriefsCreatedInput = {
@@ -32819,6 +33306,9 @@ export type UserMasterCreateWithoutProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProcessBriefsCreatedInput = {
@@ -33015,6 +33505,9 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProcessBriefsCreatedInput = {
@@ -33215,6 +33708,9 @@ export type UserMasterCreateWithoutProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProcessBriefsUpdatedInput = {
@@ -33411,6 +33907,9 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProcessBriefsUpdatedInput = {
@@ -33622,6 +34121,9 @@ export type UserMasterUpdateWithoutProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProcessBriefsCreatedInput = {
@@ -33818,6 +34320,9 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutProcessBriefsUpdatedInput = {
@@ -34024,6 +34529,9 @@ export type UserMasterUpdateWithoutProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
@@ -34220,6 +34728,9 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadProcessBriefsCreatedInput = {
@@ -34415,6 +34926,9 @@ export type UserMasterCreateWithoutLeadProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadProcessBriefsCreatedInput = {
@@ -34611,6 +35125,9 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadProcessBriefsCreatedInput = {
@@ -34811,6 +35328,9 @@ export type UserMasterCreateWithoutLeadProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadProcessBriefsUpdatedInput = {
@@ -35007,6 +35527,9 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadProcessBriefsUpdatedInput = {
@@ -35218,6 +35741,9 @@ export type UserMasterUpdateWithoutLeadProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsCreatedInput = {
@@ -35414,6 +35940,9 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadProcessBriefsUpdatedInput = {
@@ -35620,6 +36149,9 @@ export type UserMasterUpdateWithoutLeadProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
@@ -35816,6 +36348,9 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPbmCreatedInput = {
@@ -36011,6 +36546,9 @@ export type UserMasterCreateWithoutPbmCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPbmCreatedInput = {
@@ -36207,6 +36745,9 @@ export type UserMasterUncheckedCreateWithoutPbmCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPbmCreatedInput = {
@@ -36407,6 +36948,9 @@ export type UserMasterCreateWithoutPbmUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPbmUpdatedInput = {
@@ -36603,6 +37147,9 @@ export type UserMasterUncheckedCreateWithoutPbmUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPbmUpdatedInput = {
@@ -36814,6 +37361,9 @@ export type UserMasterUpdateWithoutPbmCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPbmCreatedInput = {
@@ -37010,6 +37560,9 @@ export type UserMasterUncheckedUpdateWithoutPbmCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPbmUpdatedInput = {
@@ -37216,6 +37769,9 @@ export type UserMasterUpdateWithoutPbmUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
@@ -37412,6 +37968,9 @@ export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadReqMaterialsCreatedInput = {
@@ -37607,6 +38166,9 @@ export type UserMasterCreateWithoutLeadReqMaterialsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadReqMaterialsCreatedInput = {
@@ -37803,6 +38365,9 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadReqMaterialsCreatedInput = {
@@ -38003,6 +38568,9 @@ export type UserMasterCreateWithoutLeadReqMaterialsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadReqMaterialsUpdatedInput = {
@@ -38199,6 +38767,9 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadReqMaterialsUpdatedInput = {
@@ -38410,6 +38981,9 @@ export type UserMasterUpdateWithoutLeadReqMaterialsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsCreatedInput = {
@@ -38606,6 +39180,9 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadReqMaterialsUpdatedInput = {
@@ -38812,6 +39389,9 @@ export type UserMasterUpdateWithoutLeadReqMaterialsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
@@ -39008,6 +39588,9 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
@@ -39203,6 +39786,9 @@ export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
@@ -39399,6 +39985,9 @@ export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadHardwareMappingsCreatedInput = {
@@ -39610,6 +40199,9 @@ export type UserMasterUpdateWithoutLeadHardwareMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
@@ -39806,6 +40398,9 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
@@ -40001,6 +40596,9 @@ export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
@@ -40197,6 +40795,9 @@ export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadLightCarcasUnitMappingsCreatedInput = {
@@ -40408,6 +41009,9 @@ export type UserMasterUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
@@ -40604,6 +41208,9 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
@@ -40799,6 +41406,9 @@ export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
@@ -40995,6 +41605,9 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadOtherAppliancesMappingsCreatedInput = {
@@ -41206,6 +41819,9 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
@@ -41402,6 +42018,9 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSpecificationDocumentMappingsCreatedInput = {
@@ -41597,6 +42216,9 @@ export type UserMasterCreateWithoutSpecificationDocumentMappingsCreatedInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSpecificationDocumentMappingsCreatedInput = {
@@ -41793,6 +42415,9 @@ export type UserMasterUncheckedCreateWithoutSpecificationDocumentMappingsCreated
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSpecificationDocumentMappingsCreatedInput = {
@@ -42004,6 +42629,9 @@ export type UserMasterUpdateWithoutSpecificationDocumentMappingsCreatedInput = {
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreatedInput = {
@@ -42200,6 +42828,9 @@ export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreated
   smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDocumentsCreatedInput = {
@@ -42395,6 +43026,9 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
@@ -42591,6 +43225,9 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsCreatedInput = {
@@ -42791,6 +43428,9 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
@@ -42987,6 +43627,9 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsDeletedInput = {
@@ -43198,6 +43841,9 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
@@ -43394,6 +44040,9 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDocumentsDeletedInput = {
@@ -43600,6 +44249,9 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
@@ -43796,6 +44448,9 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutB2bDocumentsCreatedInput = {
@@ -43991,6 +44646,9 @@ export type UserMasterCreateWithoutB2bDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutB2bDocumentsCreatedInput = {
@@ -44187,6 +44845,9 @@ export type UserMasterUncheckedCreateWithoutB2bDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutB2bDocumentsCreatedInput = {
@@ -44398,6 +45059,9 @@ export type UserMasterUpdateWithoutB2bDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
@@ -44594,6 +45258,9 @@ export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
@@ -44789,6 +45456,9 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
@@ -44985,6 +45655,9 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersAddedInput = {
@@ -45185,6 +45858,9 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
@@ -45381,6 +46057,9 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersInput = {
@@ -45592,6 +46271,9 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
@@ -45788,6 +46470,9 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatMembersInput = {
@@ -45994,6 +46679,9 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
@@ -46190,6 +46878,9 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
@@ -46385,6 +47076,9 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
@@ -46581,6 +47275,9 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMessagesSentInput = {
@@ -46792,6 +47489,9 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
@@ -46988,6 +47688,9 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMentionsInput = {
@@ -47183,6 +47886,9 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
@@ -47379,6 +48085,9 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMentionsInput = {
@@ -47590,6 +48299,9 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
@@ -47786,6 +48498,9 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -47981,6 +48696,9 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -48177,6 +48895,9 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsCreatedInput = {
@@ -48377,6 +49098,9 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
@@ -48573,6 +49297,9 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsDeletedInput = {
@@ -48784,6 +49511,9 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
@@ -48980,6 +49710,9 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatDocumentsDeletedInput = {
@@ -49186,6 +49919,9 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
@@ -49382,6 +50118,9 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutProductStructureInstancesInput = {
@@ -49577,6 +50316,9 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -49773,6 +50515,9 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -49984,6 +50729,9 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -50180,6 +50928,9 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPaymentsCreatedInput = {
@@ -50375,6 +51126,9 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
@@ -50571,6 +51325,9 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPaymentsCreatedInput = {
@@ -50782,6 +51539,9 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
@@ -50978,6 +51738,9 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLedgersCreatedInput = {
@@ -51173,6 +51936,9 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
@@ -51369,6 +52135,9 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLedgersCreatedInput = {
@@ -51580,6 +52349,9 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
@@ -51776,6 +52548,9 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
@@ -51971,6 +52746,9 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
@@ -52167,6 +52945,9 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestsCreatedInput = {
@@ -52367,6 +53148,9 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
@@ -52563,6 +53347,9 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestsUpdatedInput = {
@@ -52774,6 +53561,9 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
@@ -52970,6 +53760,9 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutSmallOrderRequestsUpdatedInput = {
@@ -53176,6 +53969,9 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
@@ -53372,6 +54168,9 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -53567,6 +54366,9 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -53763,6 +54565,9 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -53974,6 +54779,9 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -54170,6 +54978,9 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
@@ -54365,6 +55176,9 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
@@ -54561,6 +55375,9 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadAmcContractsCreatedInput = {
@@ -54761,6 +55578,9 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
@@ -54957,6 +55777,9 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadAmcContractsUpdatedInput = {
@@ -55168,6 +55991,9 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
@@ -55364,6 +56190,9 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadAmcContractsUpdatedInput = {
@@ -55570,6 +56399,9 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
@@ -55766,6 +56598,9 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
@@ -55961,6 +56796,9 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput = {
@@ -56157,6 +56995,9 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCompletedInput = {
@@ -56357,6 +57198,9 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
@@ -56553,6 +57397,9 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCreatedInput = {
@@ -56753,6 +57600,9 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = {
@@ -56949,6 +57799,9 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesRejectedInput = {
@@ -57149,6 +58002,9 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
@@ -57345,6 +58201,9 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesUpdatedInput = {
@@ -57556,6 +58415,9 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput = {
@@ -57752,6 +58614,9 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesCreatedInput = {
@@ -57958,6 +58823,9 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
@@ -58154,6 +59022,9 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesRejectedInput = {
@@ -58360,6 +59231,9 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = {
@@ -58556,6 +59430,9 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesUpdatedInput = {
@@ -58762,6 +59639,9 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
@@ -58958,6 +59838,9 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadStatusLogsInput = {
@@ -59153,6 +60036,9 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -59349,6 +60235,9 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -59560,6 +60449,9 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -59756,6 +60648,9 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
@@ -59951,6 +60846,9 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
@@ -60147,6 +61045,9 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsCreatedInput = {
@@ -60347,6 +61248,9 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
@@ -60543,6 +61447,9 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsUpdatedInput = {
@@ -60754,6 +61661,9 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
@@ -60950,6 +61860,9 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignMeetingsUpdatedInput = {
@@ -61156,6 +62069,9 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
@@ -61352,6 +62268,9 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutClientVisitsCreatedInput = {
@@ -61547,6 +62466,9 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
@@ -61743,6 +62665,9 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitsCreatedInput = {
@@ -61943,6 +62868,9 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
@@ -62139,6 +63067,9 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitsUpdatedInput = {
@@ -62350,6 +63281,9 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
@@ -62546,6 +63480,9 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutClientVisitsUpdatedInput = {
@@ -62752,6 +63689,9 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
@@ -62948,6 +63888,9 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -63143,6 +64086,9 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -63339,6 +64285,9 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -63550,6 +64499,9 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -63746,6 +64698,9 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -63941,6 +64896,9 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -64137,6 +65095,9 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -64348,6 +65309,9 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -64544,6 +65508,9 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
@@ -64739,6 +65706,9 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
@@ -64935,6 +65905,9 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsCreatedInput = {
@@ -65135,6 +66108,9 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
@@ -65331,6 +66307,9 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsUpdatedInput = {
@@ -65542,6 +66521,9 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
@@ -65738,6 +66720,9 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignSelectionsUpdatedInput = {
@@ -65944,6 +66929,9 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
@@ -66140,6 +67128,9 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutChsMappingCreatedByInput = {
@@ -66335,6 +67326,9 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
@@ -66531,6 +67525,9 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutChsMappingCreatedByInput = {
@@ -66731,6 +67728,9 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
@@ -66927,6 +67927,9 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutChsMappingUpdatedByInput = {
@@ -67138,6 +68141,9 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
@@ -67334,6 +68340,9 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutChsMappingUpdatedByInput = {
@@ -67540,6 +68549,9 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
@@ -67736,6 +68748,9 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
@@ -67931,6 +68946,9 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
@@ -68127,6 +69145,9 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsCreatedInput = {
@@ -68327,6 +69348,9 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
@@ -68523,6 +69547,9 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsInput = {
@@ -68734,6 +69761,9 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
@@ -68930,6 +69960,9 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutSupervisorMappingsInput = {
@@ -69136,6 +70169,9 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
@@ -69332,6 +70368,9 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadTasksClosedInput = {
@@ -69527,6 +70566,9 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
@@ -69723,6 +70765,9 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksClosedInput = {
@@ -69923,6 +70968,9 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
@@ -70119,6 +71167,9 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksCreatedInput = {
@@ -70319,6 +71370,9 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
@@ -70515,6 +71569,9 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksAssignedInput = {
@@ -70726,6 +71783,9 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
@@ -70922,6 +71982,9 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksCreatedInput = {
@@ -71128,6 +72191,9 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
@@ -71324,6 +72390,9 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksAssignedInput = {
@@ -71530,6 +72599,9 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
@@ -71726,6 +72798,9 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
@@ -71921,6 +72996,9 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedInput = {
@@ -72117,6 +73195,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesCreatedInput = {
@@ -72317,6 +73398,9 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -72513,6 +73597,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -72713,6 +73800,9 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedInput = {
@@ -72909,6 +73999,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesRevokedInput = {
@@ -73109,6 +74202,9 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -73305,6 +74401,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -73516,6 +74615,9 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedInput = {
@@ -73712,6 +74814,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -73918,6 +75023,9 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -74114,6 +75222,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestBatchesRevokedInput = {
@@ -74320,6 +75431,9 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedInput = {
@@ -74516,6 +75630,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -74722,6 +75839,9 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -74918,6 +76038,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
@@ -75113,6 +76236,9 @@ export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput = {
@@ -75309,6 +76435,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsCreatedInput = {
@@ -75509,6 +76638,9 @@ export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInput = {
@@ -75705,6 +76837,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsAsRequesterInput = {
@@ -75905,6 +77040,9 @@ export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput = {
@@ -76101,6 +77239,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsRevokedInput = {
@@ -76301,6 +77442,9 @@ export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput = {
@@ -76497,6 +77641,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsUpdatedInput = {
@@ -76708,6 +77855,9 @@ export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput = {
@@ -76904,6 +78054,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestsAsRequesterInput = {
@@ -77110,6 +78263,9 @@ export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInput = {
@@ -77306,6 +78462,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestsRevokedInput = {
@@ -77512,6 +78671,9 @@ export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput = {
@@ -77708,6 +78870,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestsUpdatedInput = {
@@ -77914,6 +79079,9 @@ export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput = {
@@ -78110,6 +79278,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionApprovalsInput = {
@@ -78305,6 +79476,9 @@ export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
@@ -78501,6 +79675,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionApprovalsInput = {
@@ -78712,6 +79889,9 @@ export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
@@ -78908,6 +80088,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -79103,6 +80286,9 @@ export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -79299,6 +80485,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -79510,6 +80699,9 @@ export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = 
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -79706,6 +80898,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
@@ -79901,6 +81096,9 @@ export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
@@ -80097,6 +81295,9 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionStatusLogsInput = {
@@ -80308,6 +81509,9 @@ export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
@@ -80504,6 +81708,9 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDetailedLogsInput = {
@@ -80699,6 +81906,9 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -80895,6 +82105,9 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -81106,6 +82319,9 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -81302,6 +82518,9 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDocumentLogsInput = {
@@ -81497,6 +82716,9 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -81693,6 +82915,9 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -81904,6 +83129,9 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -82100,6 +83328,9 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -82295,6 +83526,9 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -82491,6 +83725,9 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -82702,6 +83939,9 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -82898,6 +84138,9 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
@@ -83093,6 +84336,9 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
@@ -83289,6 +84535,9 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsCreatedInput = {
@@ -83489,6 +84738,9 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
@@ -83685,6 +84937,9 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsDeletedInput = {
@@ -83885,6 +85140,9 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
@@ -84081,6 +85339,9 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsUpdatedInput = {
@@ -84292,6 +85553,9 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
@@ -84488,6 +85752,9 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsDeletedInput = {
@@ -84694,6 +85961,9 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
@@ -84890,6 +86160,9 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsUpdatedInput = {
@@ -85096,6 +86369,9 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
@@ -85292,6 +86568,9 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginDetailsInput = {
@@ -85487,6 +86766,9 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -85683,6 +86965,9 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -85883,6 +87168,9 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
@@ -86079,6 +87367,9 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginsUpdatedInput = {
@@ -86290,6 +87581,9 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -86486,6 +87780,9 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginsUpdatedInput = {
@@ -86692,6 +87989,9 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
@@ -86888,6 +88188,9 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
@@ -87083,6 +88386,9 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
@@ -87279,6 +88585,9 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessCreatedInput = {
@@ -87479,6 +88788,9 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
@@ -87675,6 +88987,9 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessUpdatedInput = {
@@ -87886,6 +89201,9 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
@@ -88082,6 +89400,9 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutSiteReadinessUpdatedInput = {
@@ -88288,6 +89609,9 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
@@ -88484,6 +89808,9 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersCreatedInput = {
@@ -88679,6 +90006,9 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
@@ -88875,6 +90205,9 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersCreatedInput = {
@@ -89086,6 +90419,9 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
@@ -89282,6 +90618,9 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersAssignedInput = {
@@ -89477,6 +90816,9 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
@@ -89673,6 +91015,9 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersAssignedInput = {
@@ -89884,6 +91229,9 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
@@ -90080,6 +91428,9 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
@@ -90275,6 +91626,9 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
@@ -90471,6 +91825,9 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationUpdatesCreatedInput = {
@@ -90682,6 +92039,9 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
@@ -90878,6 +92238,9 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutMiscCreatedInput = {
@@ -91073,6 +92436,9 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
@@ -91269,6 +92635,9 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscCreatedInput = {
@@ -91469,6 +92838,9 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
@@ -91665,6 +93037,9 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscUpdatedInput = {
@@ -91865,6 +93240,9 @@ export type UserMasterCreateWithoutMiscReturnedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscReturnedInput = {
@@ -92061,6 +93439,9 @@ export type UserMasterUncheckedCreateWithoutMiscReturnedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscReturnedInput = {
@@ -92272,6 +93653,9 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
@@ -92468,6 +93852,9 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutMiscUpdatedInput = {
@@ -92674,6 +94061,9 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
@@ -92870,6 +94260,9 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutMiscReturnedInput = {
@@ -93076,6 +94469,9 @@ export type UserMasterUpdateWithoutMiscReturnedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
@@ -93272,6 +94668,9 @@ export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
@@ -93467,6 +94866,9 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
@@ -93663,6 +95065,9 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscDocumentsCreatedInput = {
@@ -93874,6 +95279,9 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
@@ -94070,6 +95478,9 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutMiscFollowupsCreatedInput = {
@@ -94265,6 +95676,9 @@ export type UserMasterCreateWithoutMiscFollowupsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscFollowupsCreatedInput = {
@@ -94461,6 +95875,9 @@ export type UserMasterUncheckedCreateWithoutMiscFollowupsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscFollowupsCreatedInput = {
@@ -94672,6 +96089,9 @@ export type UserMasterUpdateWithoutMiscFollowupsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
@@ -94868,6 +96288,9 @@ export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInput = {
@@ -95063,6 +96486,9 @@ export type UserMasterCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInput = {
@@ -95259,6 +96685,9 @@ export type UserMasterUncheckedCreateWithoutMiscReorderInstanceMaterialMappingsC
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscReorderInstanceMaterialMappingsCreatedInput = {
@@ -95470,6 +96899,9 @@ export type UserMasterUpdateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsCreatedInput = {
@@ -95666,6 +97098,9 @@ export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsC
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -95861,6 +97296,9 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -96057,6 +97495,9 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -96268,6 +97709,9 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -96464,6 +97908,9 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutNotificationsSentInput = {
@@ -96659,6 +98106,9 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
@@ -96855,6 +98305,9 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsSentInput = {
@@ -97055,6 +98508,9 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
@@ -97251,6 +98707,9 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsReceivedInput = {
@@ -97462,6 +98921,9 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
@@ -97658,6 +99120,9 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutNotificationsReceivedInput = {
@@ -97864,6 +99329,9 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
@@ -98060,6 +99528,9 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPushTokensInput = {
@@ -98255,6 +99726,9 @@ export type UserMasterCreateWithoutPushTokensInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPushTokensInput = {
@@ -98451,6 +99925,9 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPushTokensInput = {
@@ -98662,6 +100139,9 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
@@ -98858,6 +100338,9 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOperatorInput = {
@@ -99053,6 +100536,9 @@ export type UserMasterCreateWithoutOperatorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOperatorInput = {
@@ -99249,6 +100735,9 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOperatorInput = {
@@ -99449,6 +100938,9 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
@@ -99645,6 +101137,9 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMappingSiteInsInput = {
@@ -99856,6 +101351,9 @@ export type UserMasterUpdateWithoutOperatorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOperatorInput = {
@@ -100052,6 +101550,9 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutMappingSiteInsInput = {
@@ -100258,6 +101759,9 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
@@ -100454,6 +101958,9 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
@@ -100649,6 +102156,9 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
@@ -100845,6 +102355,9 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedUserMachineMappingsInput = {
@@ -101045,6 +102558,9 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
@@ -101241,6 +102757,9 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUpdatedUserMachineMappingsInput = {
@@ -101441,6 +102960,9 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
@@ -101637,6 +103159,9 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserMachineMappingsInput = {
@@ -101848,6 +103373,9 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
@@ -102044,6 +103572,9 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutUpdatedUserMachineMappingsInput = {
@@ -102250,6 +103781,9 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
@@ -102446,6 +103980,9 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutUserMachineMappingsInput = {
@@ -102652,6 +104189,9 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
@@ -102848,6 +104388,9 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -103043,6 +104586,9 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -103239,6 +104785,9 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput = {
@@ -103439,6 +104988,9 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
@@ -103635,6 +105187,9 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesDeletedInput = {
@@ -103846,6 +105401,9 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
@@ -104042,6 +105600,9 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginPoFilesDeletedInput = {
@@ -104248,6 +105809,9 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
@@ -104444,6 +106008,9 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedDefectsInput = {
@@ -104639,6 +106206,9 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
@@ -104835,6 +106405,9 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedDefectsInput = {
@@ -105046,6 +106619,9 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
@@ -105242,6 +106818,9 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFranchiseInput = {
@@ -105437,6 +107016,9 @@ export type UserMasterCreateWithoutFranchiseInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFranchiseInput = {
@@ -105633,6 +107215,9 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFranchiseInput = {
@@ -105854,6 +107439,9 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -106050,6 +107638,9 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -106250,6 +107841,9 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -106446,6 +108040,9 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -106657,6 +108254,9 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -106853,6 +108453,9 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -107059,6 +108662,9 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -107255,6 +108861,9 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
@@ -107450,6 +109059,9 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
@@ -107646,6 +109258,9 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserGeographicalMappingsInput = {
@@ -107857,6 +109472,9 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
@@ -108053,6 +109671,9 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutActivityLogsInput = {
@@ -108248,6 +109869,9 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
@@ -108444,6 +110068,9 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutActivityLogsInput = {
@@ -108655,6 +110282,9 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
@@ -108851,6 +110481,9 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
@@ -109046,6 +110679,9 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput = {
@@ -109242,6 +110878,9 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutExternalPlatformTokensCreatedInput = {
@@ -109442,6 +111081,9 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput = {
@@ -109638,6 +111280,9 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutExternalPlatformTokensUpdatedInput = {
@@ -109849,6 +111494,9 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput = {
@@ -110045,6 +111693,9 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutExternalPlatformTokensUpdatedInput = {
@@ -110251,6 +111902,9 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput = {
@@ -110447,6 +112101,9 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCompletionPhotosInput = {
@@ -110642,6 +112299,9 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
@@ -110838,6 +112498,9 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompletionPhotosInput = {
@@ -111049,6 +112712,9 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -111245,6 +112911,9 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -111440,6 +113109,9 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -111636,6 +113308,9 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -111836,6 +113511,9 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -112032,6 +113710,9 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -112243,6 +113924,9 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -112439,6 +114123,9 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -112645,6 +114332,9 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -112841,6 +114531,9 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
@@ -113036,6 +114729,9 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
@@ -113232,6 +114928,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsApprovedInput = {
@@ -113432,6 +115131,9 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
@@ -113628,6 +115330,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsCreatedInput = {
@@ -113828,6 +115533,9 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
@@ -114024,6 +115732,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsDeletedInput = {
@@ -114224,6 +115935,9 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
@@ -114420,6 +116134,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsRejectedInput = {
@@ -114620,6 +116337,9 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
@@ -114816,6 +116536,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsUpdatedInput = {
@@ -115027,6 +116750,9 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
@@ -115223,6 +116949,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsCreatedInput = {
@@ -115429,6 +117158,9 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
@@ -115625,6 +117357,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsDeletedInput = {
@@ -115831,6 +117566,9 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
@@ -116027,6 +117765,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsRejectedInput = {
@@ -116233,6 +117974,9 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
@@ -116429,6 +118173,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsUpdatedInput = {
@@ -116635,6 +118382,9 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
@@ -116831,6 +118581,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
@@ -117026,6 +118779,9 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
@@ -117222,6 +118978,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentStatusLogsInput = {
@@ -117433,6 +119192,9 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
@@ -117629,6 +119391,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
@@ -117824,6 +119589,9 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
@@ -118020,6 +119788,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseOrdersCreatedInput = {
@@ -118220,6 +119991,9 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
@@ -118416,6 +120190,9 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseOrdersUpdatedInput = {
@@ -118627,6 +120404,9 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
@@ -118823,6 +120603,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseOrdersUpdatedInput = {
@@ -119029,6 +120812,9 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
@@ -119225,6 +121011,9 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPoItemsCreatedInput = {
@@ -119420,6 +121209,9 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
@@ -119616,6 +121408,9 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsCreatedInput = {
@@ -119816,6 +121611,9 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
@@ -120012,6 +121810,9 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsDeletedInput = {
@@ -120212,6 +122013,9 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
@@ -120408,6 +122212,9 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsUpdatedInput = {
@@ -120619,6 +122426,9 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
@@ -120815,6 +122625,9 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPoItemsDeletedInput = {
@@ -121021,6 +122834,9 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
@@ -121217,6 +123033,9 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPoItemsUpdatedInput = {
@@ -121423,6 +123242,9 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
@@ -121619,6 +123441,9 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutGrnsConfirmedInput = {
@@ -121814,6 +123639,9 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
@@ -122010,6 +123838,9 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsConfirmedInput = {
@@ -122210,6 +124041,9 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
@@ -122406,6 +124240,9 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsCreatedInput = {
@@ -122606,6 +124443,9 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
@@ -122802,6 +124642,9 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsUpdatedInput = {
@@ -123013,6 +124856,9 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
@@ -123209,6 +125055,9 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutGrnsCreatedInput = {
@@ -123415,6 +125264,9 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
@@ -123611,6 +125463,9 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutGrnsUpdatedInput = {
@@ -123817,6 +125672,9 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
@@ -124013,6 +125871,9 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDcnsCreatedInput = {
@@ -124208,6 +126069,9 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
@@ -124404,6 +126268,9 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDcnsCreatedInput = {
@@ -124604,6 +126471,9 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
@@ -124800,6 +126670,9 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDcnsSettledInput = {
@@ -125011,6 +126884,9 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
@@ -125207,6 +127083,9 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDcnsSettledInput = {
@@ -125413,6 +127292,9 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
@@ -125609,6 +127491,9 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
@@ -125804,6 +127689,9 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
@@ -126000,6 +127888,9 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutRedeliveriesCreatedInput = {
@@ -126211,6 +128102,9 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
@@ -126407,6 +128301,9 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutStockHistoriesInput = {
@@ -126602,6 +128499,9 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
@@ -126798,6 +128698,9 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -127009,6 +128912,9 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
@@ -127205,6 +129111,9 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
@@ -127400,6 +129309,9 @@ export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
@@ -127596,6 +129508,9 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoPaymentScheduleHistoriesInput = {
@@ -127807,6 +129722,9 @@ export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
@@ -128003,6 +129921,9 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutArchitechuremastersInput = {
@@ -128198,6 +130119,9 @@ export type UserMasterCreateWithoutArchitechuremastersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
@@ -128394,6 +130318,9 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutArchitechuremastersInput = {
@@ -128605,6 +130532,9 @@ export type UserMasterUpdateWithoutArchitechuremastersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
@@ -128801,6 +130731,9 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBroadcastsCreatedInput = {
@@ -128996,6 +130929,9 @@ export type UserMasterCreateWithoutBroadcastsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
@@ -129192,6 +131128,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastsCreatedInput = {
@@ -129392,6 +131331,9 @@ export type UserMasterCreateWithoutBroadcastsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
@@ -129588,6 +131530,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastsUpdatedInput = {
@@ -129799,6 +131744,9 @@ export type UserMasterUpdateWithoutBroadcastsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
@@ -129995,6 +131943,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBroadcastsUpdatedInput = {
@@ -130201,6 +132152,9 @@ export type UserMasterUpdateWithoutBroadcastsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
@@ -130397,6 +132351,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
@@ -130592,6 +132549,9 @@ export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
@@ -130788,6 +132748,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastCategoriesCreatedInput = {
@@ -130999,6 +132962,9 @@ export type UserMasterUpdateWithoutBroadcastCategoriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
@@ -131195,6 +133161,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
@@ -131390,6 +133359,9 @@ export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
@@ -131586,6 +133558,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastAudienceCreatedInput = {
@@ -131786,6 +133761,9 @@ export type UserMasterCreateWithoutBroadcastAudienceUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
@@ -131982,6 +133960,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastAudienceUpdatedInput = {
@@ -132193,6 +134174,9 @@ export type UserMasterUpdateWithoutBroadcastAudienceCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
@@ -132389,6 +134373,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBroadcastAudienceUpdatedInput = {
@@ -132595,6 +134582,9 @@ export type UserMasterUpdateWithoutBroadcastAudienceUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
@@ -132791,6 +134781,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
@@ -132986,6 +134979,9 @@ export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
@@ -133182,6 +135178,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastAttachmentsCreatedInput = {
@@ -133382,6 +135381,9 @@ export type UserMasterCreateWithoutBroadcastAttachmentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
@@ -133578,6 +135580,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastAttachmentsUpdatedInput = {
@@ -133789,6 +135794,9 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
@@ -133985,6 +135993,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBroadcastAttachmentsUpdatedInput = {
@@ -134191,6 +136202,9 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
@@ -134387,6 +136401,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
@@ -134582,6 +136599,9 @@ export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
@@ -134778,6 +136798,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastReadsCreatedInput = {
@@ -134978,6 +137001,9 @@ export type UserMasterCreateWithoutBroadcastReadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
@@ -135174,6 +137200,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastReadsUpdatedInput = {
@@ -135374,6 +137403,9 @@ export type UserMasterCreateWithoutBroadcastReadsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
@@ -135570,6 +137602,9 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBroadcastReadsInput = {
@@ -135781,6 +137816,9 @@ export type UserMasterUpdateWithoutBroadcastReadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
@@ -135977,6 +138015,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBroadcastReadsUpdatedInput = {
@@ -136183,6 +138224,9 @@ export type UserMasterUpdateWithoutBroadcastReadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
@@ -136379,6 +138423,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBroadcastReadsInput = {
@@ -136585,6 +138632,9 @@ export type UserMasterUpdateWithoutBroadcastReadsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
@@ -136781,6 +138831,9 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
@@ -136976,6 +139029,9 @@ export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
@@ -137172,6 +139228,9 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationQueuesCreatedInput = {
@@ -137372,6 +139431,9 @@ export type UserMasterCreateWithoutNotificationQueuesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
@@ -137568,6 +139630,9 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationQueuesUpdatedInput = {
@@ -137779,6 +139844,9 @@ export type UserMasterUpdateWithoutNotificationQueuesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
@@ -137975,6 +140043,9 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutNotificationQueuesUpdatedInput = {
@@ -138181,6 +140252,9 @@ export type UserMasterUpdateWithoutNotificationQueuesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
@@ -138377,6 +140451,9 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadB2BReqMappingsCreatedInput = {
@@ -138572,6 +140649,9 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsCreatedInput = {
@@ -138768,6 +140848,9 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadB2BReqMappingsCreatedInput = {
@@ -138968,6 +141051,9 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsUpdatedInput = {
@@ -139164,6 +141250,9 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadB2BReqMappingsUpdatedInput = {
@@ -139375,6 +141464,9 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsCreatedInput = {
@@ -139571,6 +141663,9 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadB2BReqMappingsUpdatedInput = {
@@ -139777,6 +141872,9 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
@@ -139973,6 +142071,9 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -140168,6 +142269,9 @@ export type UserMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -140364,6 +142468,9 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -140575,6 +142682,9 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -140771,6 +142881,9 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOnline_lead_call_logInput = {
@@ -140966,6 +143079,9 @@ export type UserMasterCreateWithoutOnline_lead_call_logInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
@@ -141162,6 +143278,9 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_lead_call_logInput = {
@@ -141373,6 +143492,9 @@ export type UserMasterUpdateWithoutOnline_lead_call_logInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
@@ -141569,6 +143691,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_followup_status_created_byToUserMasterInput = {
@@ -141764,6 +143889,9 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_lead_followup_status_created_byToUserMasterInput = {
@@ -141960,6 +144088,9 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_lead_followup_status_online_lead_followup_status_created_byToUserMasterInput = {
@@ -142160,6 +144291,9 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_lead_followup_status_updated_byToUserMasterInput = {
@@ -142356,6 +144490,9 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_lead_followup_status_online_lead_followup_status_updated_byToUserMasterInput = {
@@ -142567,6 +144704,9 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_lead_followup_status_created_byToUserMasterInput = {
@@ -142763,6 +144903,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOnline_lead_followup_status_online_lead_followup_status_updated_byToUserMasterInput = {
@@ -142969,6 +145112,9 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_lead_followup_status_updated_byToUserMasterInput = {
@@ -143165,6 +145311,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOnline_lead_historyInput = {
@@ -143360,6 +145509,9 @@ export type UserMasterCreateWithoutOnline_lead_historyInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_lead_historyInput = {
@@ -143556,6 +145708,9 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_lead_historyInput = {
@@ -143767,6 +145922,9 @@ export type UserMasterUpdateWithoutOnline_lead_historyInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
@@ -143963,6 +146121,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_assigned_toToUserMasterInput = {
@@ -144158,6 +146319,9 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_a
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_store_log_assigned_toToUserMasterInput = {
@@ -144354,6 +146518,9 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_lead_store_log_online_lead_store_log_assigned_toToUserMasterInput = {
@@ -144554,6 +146721,9 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_s
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_store_log_selected_byToUserMasterInput = {
@@ -144750,6 +146920,9 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_lead_store_log_online_lead_store_log_selected_byToUserMasterInput = {
@@ -144961,6 +147134,9 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_a
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_store_log_assigned_toToUserMasterInput = {
@@ -145157,6 +147333,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOnline_lead_store_log_online_lead_store_log_selected_byToUserMasterInput = {
@@ -145363,6 +147542,9 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_s
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_store_log_selected_byToUserMasterInput = {
@@ -145559,6 +147741,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOnline_leads_online_leads_assign_toToUserMasterInput = {
@@ -145754,6 +147939,9 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_assign_toToUserMast
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_assign_toToUserMasterInput = {
@@ -145950,6 +148138,9 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_assign_toT
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_leads_online_leads_assign_toToUserMasterInput = {
@@ -146150,6 +148341,9 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_created_byToUserMas
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_created_byToUserMasterInput = {
@@ -146346,6 +148540,9 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_created_by
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_leads_online_leads_created_byToUserMasterInput = {
@@ -146546,6 +148743,9 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_final_assigned_lead
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput = {
@@ -146742,6 +148942,9 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_final_assi
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput = {
@@ -146942,6 +149145,9 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_updated_byToUserMas
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_updated_byToUserMasterInput = {
@@ -147138,6 +149344,9 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_updated_by
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOnline_leads_online_leads_updated_byToUserMasterInput = {
@@ -147349,6 +149558,9 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_assign_toToUserMast
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_assign_toToUserMasterInput = {
@@ -147545,6 +149757,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_assign_toT
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOnline_leads_online_leads_created_byToUserMasterInput = {
@@ -147751,6 +149966,9 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_created_byToUserMas
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_created_byToUserMasterInput = {
@@ -147947,6 +150165,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_created_by
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput = {
@@ -148153,6 +150374,9 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_final_assigned_lead
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput = {
@@ -148349,6 +150573,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_final_assi
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOnline_leads_online_leads_updated_byToUserMasterInput = {
@@ -148555,6 +150782,9 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_updated_byToUserMas
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_byToUserMasterInput = {
@@ -148751,6 +150981,9 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_by
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutProductsRequiredForProductionInput = {
@@ -148946,6 +151179,9 @@ export type UserMasterCreateWithoutProductsRequiredForProductionInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
@@ -149142,6 +151378,9 @@ export type UserMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProductsRequiredForProductionInput = {
@@ -149353,6 +151592,9 @@ export type UserMasterUpdateWithoutProductsRequiredForProductionInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
@@ -149549,6 +151791,9 @@ export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCutListRulesCreatedInput = {
@@ -149744,6 +151989,9 @@ export type UserMasterCreateWithoutCutListRulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCutListRulesCreatedInput = {
@@ -149940,6 +152188,9 @@ export type UserMasterUncheckedCreateWithoutCutListRulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCutListRulesCreatedInput = {
@@ -150140,6 +152391,9 @@ export type UserMasterCreateWithoutCutListRulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCutListRulesUpdatedInput = {
@@ -150336,6 +152590,9 @@ export type UserMasterUncheckedCreateWithoutCutListRulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
   projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
   deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCutListRulesUpdatedInput = {
@@ -150547,6 +152804,9 @@ export type UserMasterUpdateWithoutCutListRulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCutListRulesCreatedInput = {
@@ -150743,6 +153003,9 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesCreatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutCutListRulesUpdatedInput = {
@@ -150949,6 +153212,9 @@ export type UserMasterUpdateWithoutCutListRulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
@@ -151145,6 +153411,2439 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput>
+}
+
+export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>
+}
+
+export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+}
+
+export type UserMasterUpsertWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput>
+}
+
+export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserMasterUpsertWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput>
+}
+
+export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserMasterUpsertWithoutSiteSupervisorFranchiseMappingsInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput, Prisma.UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput>
+}
+
+export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterCreateManyVendorInput = {
@@ -151354,6 +156053,9 @@ export type UserMasterUpdateWithoutVendorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutVendorInput = {
@@ -151550,6 +156252,9 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -151773,6 +156478,9 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
@@ -151969,6 +156677,9 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
@@ -152192,6 +156903,9 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
@@ -152388,6 +157102,9 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
   deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
@@ -152592,6 +157309,9 @@ export type UserMasterCountOutputType = {
   specificationDocumentMappingsCreated: number
   projectMasters: number
   deletedProjects: number
+  siteSupervisorFranchiseMappings: number
+  siteSupervisorFranchiseMappingsCreated: number
+  siteSupervisorFranchiseMappingsUpdated: number
 }
 
 export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -152777,6 +157497,9 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   specificationDocumentMappingsCreated?: boolean | UserMasterCountOutputTypeCountSpecificationDocumentMappingsCreatedArgs
   projectMasters?: boolean | UserMasterCountOutputTypeCountProjectMastersArgs
   deletedProjects?: boolean | UserMasterCountOutputTypeCountDeletedProjectsArgs
+  siteSupervisorFranchiseMappings?: boolean | UserMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsArgs
+  siteSupervisorFranchiseMappingsCreated?: boolean | UserMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsCreatedArgs
+  siteSupervisorFranchiseMappingsUpdated?: boolean | UserMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsUpdatedArgs
 }
 
 /**
@@ -154063,6 +158786,27 @@ export type UserMasterCountOutputTypeCountDeletedProjectsArgs<ExtArgs extends ru
   where?: Prisma.ProjectMasterWhereInput
 }
 
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountSiteSupervisorFranchiseMappingsUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+}
+
 
 export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -154262,6 +159006,9 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   specificationDocumentMappingsCreated?: boolean | Prisma.UserMaster$specificationDocumentMappingsCreatedArgs<ExtArgs>
   projectMasters?: boolean | Prisma.UserMaster$projectMastersArgs<ExtArgs>
   deletedProjects?: boolean | Prisma.UserMaster$deletedProjectsArgs<ExtArgs>
+  siteSupervisorFranchiseMappings?: boolean | Prisma.UserMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs>
+  siteSupervisorFranchiseMappingsCreated?: boolean | Prisma.UserMaster$siteSupervisorFranchiseMappingsCreatedArgs<ExtArgs>
+  siteSupervisorFranchiseMappingsUpdated?: boolean | Prisma.UserMaster$siteSupervisorFranchiseMappingsUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMaster"]>
 
@@ -154503,6 +159250,9 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   specificationDocumentMappingsCreated?: boolean | Prisma.UserMaster$specificationDocumentMappingsCreatedArgs<ExtArgs>
   projectMasters?: boolean | Prisma.UserMaster$projectMastersArgs<ExtArgs>
   deletedProjects?: boolean | Prisma.UserMaster$deletedProjectsArgs<ExtArgs>
+  siteSupervisorFranchiseMappings?: boolean | Prisma.UserMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs>
+  siteSupervisorFranchiseMappingsCreated?: boolean | Prisma.UserMaster$siteSupervisorFranchiseMappingsCreatedArgs<ExtArgs>
+  siteSupervisorFranchiseMappingsUpdated?: boolean | Prisma.UserMaster$siteSupervisorFranchiseMappingsUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -154704,6 +159454,9 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     specificationDocumentMappingsCreated: Prisma.$specificationDocumentMappingPayload<ExtArgs>[]
     projectMasters: Prisma.$ProjectMasterPayload<ExtArgs>[]
     deletedProjects: Prisma.$ProjectMasterPayload<ExtArgs>[]
+    siteSupervisorFranchiseMappings: Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>[]
+    siteSupervisorFranchiseMappingsCreated: Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>[]
+    siteSupervisorFranchiseMappingsUpdated: Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -155297,6 +160050,9 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   specificationDocumentMappingsCreated<T extends Prisma.UserMaster$specificationDocumentMappingsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$specificationDocumentMappingsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$specificationDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectMasters<T extends Prisma.UserMaster$projectMastersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$projectMastersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deletedProjects<T extends Prisma.UserMaster$deletedProjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$deletedProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteSupervisorFranchiseMappings<T extends Prisma.UserMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteSupervisorFranchiseMappingsCreated<T extends Prisma.UserMaster$siteSupervisorFranchiseMappingsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$siteSupervisorFranchiseMappingsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteSupervisorFranchiseMappingsUpdated<T extends Prisma.UserMaster$siteSupervisorFranchiseMappingsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$siteSupervisorFranchiseMappingsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteSupervisorFranchiseMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -160123,6 +164879,78 @@ export type UserMaster$deletedProjectsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ProjectMasterScalarFieldEnum | Prisma.ProjectMasterScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.siteSupervisorFranchiseMappings
+ */
+export type UserMaster$siteSupervisorFranchiseMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteSupervisorFranchiseMapping
+   */
+  select?: Prisma.SiteSupervisorFranchiseMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteSupervisorFranchiseMapping
+   */
+  omit?: Prisma.SiteSupervisorFranchiseMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteSupervisorFranchiseMappingInclude<ExtArgs> | null
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+  orderBy?: Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput | Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput[]
+  cursor?: Prisma.SiteSupervisorFranchiseMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum | Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.siteSupervisorFranchiseMappingsCreated
+ */
+export type UserMaster$siteSupervisorFranchiseMappingsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteSupervisorFranchiseMapping
+   */
+  select?: Prisma.SiteSupervisorFranchiseMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteSupervisorFranchiseMapping
+   */
+  omit?: Prisma.SiteSupervisorFranchiseMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteSupervisorFranchiseMappingInclude<ExtArgs> | null
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+  orderBy?: Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput | Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput[]
+  cursor?: Prisma.SiteSupervisorFranchiseMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum | Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.siteSupervisorFranchiseMappingsUpdated
+ */
+export type UserMaster$siteSupervisorFranchiseMappingsUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteSupervisorFranchiseMapping
+   */
+  select?: Prisma.SiteSupervisorFranchiseMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteSupervisorFranchiseMapping
+   */
+  omit?: Prisma.SiteSupervisorFranchiseMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteSupervisorFranchiseMappingInclude<ExtArgs> | null
+  where?: Prisma.SiteSupervisorFranchiseMappingWhereInput
+  orderBy?: Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput | Prisma.SiteSupervisorFranchiseMappingOrderByWithRelationInput[]
+  cursor?: Prisma.SiteSupervisorFranchiseMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum | Prisma.SiteSupervisorFranchiseMappingScalarFieldEnum[]
 }
 
 /**

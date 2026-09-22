@@ -713,6 +713,136 @@ export class BookingStageService {
         }
 
         // -----------------------------
+        // ⭐ Auto-resolve & assign the real Site Supervisor via
+        // SiteSupervisorFranchiseMapping (vendor_id + lead's franchise_id).
+        // If exactly one supervisor is mapped, assign it directly. If more
+        // than one is mapped, the frontend must supply realSiteSupervisorId.
+        // -----------------------------
+        if (!data.isCustomUserTypeVendor) {
+          const franchiseIdForLead = lead.franchise_id;
+
+          if (!franchiseIdForLead) {
+            throw new Error(
+              "Lead has no franchise assigned; cannot resolve a site supervisor.",
+            );
+          }
+
+          const mappedSupervisors =
+            await tx.siteSupervisorFranchiseMapping.findMany({
+              where: {
+                vendor_id: data.vendor_id,
+                franchise_id: franchiseIdForLead,
+                supervisor: { status: "active" },
+              },
+              select: { supervisor_id: true },
+            });
+
+          const mappedSupervisorIds = mappedSupervisors.map(
+            (mapping: { supervisor_id: number }) => mapping.supervisor_id,
+          );
+
+          if (mappedSupervisorIds.length === 0) {
+            throw new Error(
+              "No site supervisor is mapped to this lead's franchise. Please map a site supervisor before creating a booking.",
+            );
+          }
+
+          const resolvedSiteSupervisorId: number =
+            mappedSupervisorIds.length === 1
+              ? mappedSupervisorIds[0]
+              : (() => {
+                  if (
+                    !data.realSiteSupervisorId ||
+                    !mappedSupervisorIds.includes(data.realSiteSupervisorId)
+                  ) {
+                    throw new Error(
+                      "Please select a valid site supervisor for this franchise.",
+                    );
+                  }
+                  return data.realSiteSupervisorId;
+                })();
+
+          if (resolvedSiteSupervisorId !== data.siteSupervisorId) {
+            const existingRealSupervisorMapping =
+              await tx.leadSiteSupervisorMapping.findFirst({
+                where: {
+                  lead_id: data.lead_id,
+                  vendor_id: data.vendor_id,
+                  account_id: data.account_id,
+                  user_id: resolvedSiteSupervisorId,
+                },
+                select: { id: true },
+              });
+
+            if (!existingRealSupervisorMapping) {
+              await tx.leadSiteSupervisorMapping.create({
+                data: {
+                  lead_id: data.lead_id,
+                  user_id: resolvedSiteSupervisorId,
+                  vendor_id: data.vendor_id,
+                  account_id: data.account_id,
+                  created_by: data.created_by,
+                },
+              });
+
+              await tx.leadUserMapping.create({
+                data: {
+                  vendor_id: data.vendor_id,
+                  account_id: data.account_id,
+                  lead_id: data.lead_id,
+                  user_id: resolvedSiteSupervisorId,
+                  type: "site-supervisor" as any,
+                  status: "active",
+                  created_by: data.created_by,
+                },
+              });
+            }
+
+            response.realSiteSupervisorAssigned = {
+              user_id: resolvedSiteSupervisorId,
+            };
+
+            let realSupervisorChatRoom = await tx.leadChatRoom.findFirst({
+              where: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+              },
+              select: { id: true },
+            });
+
+            if (!realSupervisorChatRoom) {
+              realSupervisorChatRoom = await tx.leadChatRoom.create({
+                data: {
+                  lead_id: data.lead_id,
+                  vendor_id: data.vendor_id,
+                  created_by: data.created_by,
+                },
+                select: { id: true },
+              });
+            }
+
+            const existingRealSupervisorMember =
+              await tx.leadChatMember.findFirst({
+                where: {
+                  chat_room_id: realSupervisorChatRoom.id,
+                  user_id: resolvedSiteSupervisorId,
+                },
+                select: { id: true },
+              });
+
+            if (!existingRealSupervisorMember) {
+              await tx.leadChatMember.create({
+                data: {
+                  chat_room_id: realSupervisorChatRoom.id,
+                  user_id: resolvedSiteSupervisorId,
+                  added_by: data.created_by,
+                },
+              });
+            }
+          }
+        }
+
+        // -----------------------------
         // ⭐ 7️⃣ LeadStatusLogs (NEW)
         // -----------------------------
         await tx.leadStatusLogs.create({
@@ -1164,6 +1294,7 @@ export class BookingStageService {
       bookingAmount: lead.booking_amount,
       mrpValue: lead.mrp_value,
       vendorId: lead.vendor_id,
+      franchiseId: lead.franchise_id,
       documents: documentsWithUrls,
       payments: await Promise.all(
         lead.payments.map(async (p: any) => {

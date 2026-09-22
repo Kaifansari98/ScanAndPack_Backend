@@ -19,8 +19,6 @@ export const CUTLIST_HEADER_FIELDS = [
   { field: "custom_packing_group", label: "Custom Packing Group", importField: "customPackingGroup", required: false, aliases: [] },
 ] as const;
 
-export const CUTLIST_HEADER_FIELD_KEYS = CUTLIST_HEADER_FIELDS.map((field) => field.field);
-
 export const normalizeCutlistHeader = (value: string) => value.trim().toLowerCase().replace(/[_-]+/g, " ").replace(/\s+/g, " ");
 
 // Internal, import-time shape keyed by RuleFieldMaster.field_key.
