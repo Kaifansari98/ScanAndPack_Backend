@@ -70,6 +70,7 @@ export type VendorMasterMinAggregateOutputType = {
   subdomain_url: string | null
   is_crm_enabled: boolean | null
   is_custom_doc_nomenclature_enabled: boolean | null
+  is_miscellaneous_enabled: boolean | null
   handlesLargeScaleProjects: boolean | null
   is_email_noti_enabled: boolean | null
   is_in_app_noti_enabled: boolean | null
@@ -119,6 +120,7 @@ export type VendorMasterMaxAggregateOutputType = {
   subdomain_url: string | null
   is_crm_enabled: boolean | null
   is_custom_doc_nomenclature_enabled: boolean | null
+  is_miscellaneous_enabled: boolean | null
   handlesLargeScaleProjects: boolean | null
   is_email_noti_enabled: boolean | null
   is_in_app_noti_enabled: boolean | null
@@ -168,6 +170,7 @@ export type VendorMasterCountAggregateOutputType = {
   subdomain_url: number
   is_crm_enabled: number
   is_custom_doc_nomenclature_enabled: number
+  is_miscellaneous_enabled: number
   handlesLargeScaleProjects: number
   is_email_noti_enabled: number
   is_in_app_noti_enabled: number
@@ -233,6 +236,7 @@ export type VendorMasterMinAggregateInputType = {
   subdomain_url?: true
   is_crm_enabled?: true
   is_custom_doc_nomenclature_enabled?: true
+  is_miscellaneous_enabled?: true
   handlesLargeScaleProjects?: true
   is_email_noti_enabled?: true
   is_in_app_noti_enabled?: true
@@ -282,6 +286,7 @@ export type VendorMasterMaxAggregateInputType = {
   subdomain_url?: true
   is_crm_enabled?: true
   is_custom_doc_nomenclature_enabled?: true
+  is_miscellaneous_enabled?: true
   handlesLargeScaleProjects?: true
   is_email_noti_enabled?: true
   is_in_app_noti_enabled?: true
@@ -331,6 +336,7 @@ export type VendorMasterCountAggregateInputType = {
   subdomain_url?: true
   is_crm_enabled?: true
   is_custom_doc_nomenclature_enabled?: true
+  is_miscellaneous_enabled?: true
   handlesLargeScaleProjects?: true
   is_email_noti_enabled?: true
   is_in_app_noti_enabled?: true
@@ -467,6 +473,7 @@ export type VendorMasterGroupByOutputType = {
   subdomain_url: string | null
   is_crm_enabled: boolean
   is_custom_doc_nomenclature_enabled: boolean
+  is_miscellaneous_enabled: boolean
   handlesLargeScaleProjects: boolean
   is_email_noti_enabled: boolean
   is_in_app_noti_enabled: boolean
@@ -539,6 +546,7 @@ export type VendorMasterWhereInput = {
   subdomain_url?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_crm_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   handlesLargeScaleProjects?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -751,6 +759,7 @@ export type VendorMasterOrderByWithRelationInput = {
   subdomain_url?: Prisma.SortOrderInput | Prisma.SortOrder
   is_crm_enabled?: Prisma.SortOrder
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
+  is_miscellaneous_enabled?: Prisma.SortOrder
   handlesLargeScaleProjects?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
@@ -966,6 +975,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   subdomain_url?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_crm_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   handlesLargeScaleProjects?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -1178,6 +1188,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   subdomain_url?: Prisma.SortOrderInput | Prisma.SortOrder
   is_crm_enabled?: Prisma.SortOrder
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
+  is_miscellaneous_enabled?: Prisma.SortOrder
   handlesLargeScaleProjects?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
@@ -1235,6 +1246,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   subdomain_url?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
   is_crm_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_miscellaneous_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   handlesLargeScaleProjects?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
@@ -1282,6 +1294,7 @@ export type VendorMasterCreateInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -1494,6 +1507,7 @@ export type VendorMasterUncheckedCreateInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -1703,6 +1717,7 @@ export type VendorMasterUpdateInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1915,6 +1930,7 @@ export type VendorMasterUncheckedUpdateInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2126,6 +2142,7 @@ export type VendorMasterCreateManyInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -2173,6 +2190,7 @@ export type VendorMasterUpdateManyMutationInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2222,6 +2240,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2271,6 +2290,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   subdomain_url?: Prisma.SortOrder
   is_crm_enabled?: Prisma.SortOrder
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
+  is_miscellaneous_enabled?: Prisma.SortOrder
   handlesLargeScaleProjects?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
@@ -2327,6 +2347,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   subdomain_url?: Prisma.SortOrder
   is_crm_enabled?: Prisma.SortOrder
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
+  is_miscellaneous_enabled?: Prisma.SortOrder
   handlesLargeScaleProjects?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
@@ -2376,6 +2397,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   subdomain_url?: Prisma.SortOrder
   is_crm_enabled?: Prisma.SortOrder
   is_custom_doc_nomenclature_enabled?: Prisma.SortOrder
+  is_miscellaneous_enabled?: Prisma.SortOrder
   handlesLargeScaleProjects?: Prisma.SortOrder
   is_email_noti_enabled?: Prisma.SortOrder
   is_in_app_noti_enabled?: Prisma.SortOrder
@@ -4800,6 +4822,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -5011,6 +5034,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -5235,6 +5259,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5446,6 +5471,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5654,6 +5680,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -5865,6 +5892,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -6089,6 +6117,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6300,6 +6329,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6508,6 +6538,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -6719,6 +6750,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -6943,6 +6975,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7154,6 +7187,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7362,6 +7396,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -7573,6 +7608,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -7797,6 +7833,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8008,6 +8045,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8216,6 +8254,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -8427,6 +8466,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -8651,6 +8691,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8862,6 +8903,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9070,6 +9112,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -9281,6 +9324,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -9505,6 +9549,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9716,6 +9761,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9924,6 +9970,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -10135,6 +10182,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -10359,6 +10407,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10570,6 +10619,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10778,6 +10828,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -10989,6 +11040,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -11213,6 +11265,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11424,6 +11477,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11632,6 +11686,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -11843,6 +11898,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -12067,6 +12123,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12278,6 +12335,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12486,6 +12544,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -12697,6 +12756,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -12921,6 +12981,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13132,6 +13193,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13340,6 +13402,7 @@ export type VendorMasterCreateWithoutFactory_out_revert_logsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -13551,6 +13614,7 @@ export type VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -13775,6 +13839,7 @@ export type VendorMasterUpdateWithoutFactory_out_revert_logsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13986,6 +14051,7 @@ export type VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14194,6 +14260,7 @@ export type VendorMasterCreateWithoutBox_unpack_logsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -14405,6 +14472,7 @@ export type VendorMasterUncheckedCreateWithoutBox_unpack_logsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -14629,6 +14697,7 @@ export type VendorMasterUpdateWithoutBox_unpack_logsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14840,6 +14909,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15048,6 +15118,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -15259,6 +15330,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -15483,6 +15555,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15694,6 +15767,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15902,6 +15976,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -16113,6 +16188,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -16337,6 +16413,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16548,6 +16625,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16756,6 +16834,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -16967,6 +17046,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -17191,6 +17271,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17402,6 +17483,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17610,6 +17692,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -17821,6 +17904,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -18045,6 +18129,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18256,6 +18341,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18464,6 +18550,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -18675,6 +18762,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -18899,6 +18987,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19110,6 +19199,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19318,6 +19408,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -19529,6 +19620,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -19753,6 +19845,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19964,6 +20057,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20172,6 +20266,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -20383,6 +20478,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -20607,6 +20703,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20818,6 +20915,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21026,6 +21124,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -21237,6 +21336,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -21461,6 +21561,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21672,6 +21773,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21880,6 +21982,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -22091,6 +22194,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -22315,6 +22419,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22526,6 +22631,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22734,6 +22840,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -22945,6 +23052,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -23169,6 +23277,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23380,6 +23489,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23588,6 +23698,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -23799,6 +23910,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -24023,6 +24135,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24234,6 +24347,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24442,6 +24556,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -24653,6 +24768,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -24877,6 +24993,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25088,6 +25205,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25296,6 +25414,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -25507,6 +25626,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -25731,6 +25851,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25942,6 +26063,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26150,6 +26272,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -26361,6 +26484,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -26585,6 +26709,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26796,6 +26921,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27004,6 +27130,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -27215,6 +27342,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -27439,6 +27567,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27650,6 +27779,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27858,6 +27988,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -28069,6 +28200,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -28293,6 +28425,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28504,6 +28637,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28712,6 +28846,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -28923,6 +29058,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -29147,6 +29283,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29358,6 +29495,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29566,6 +29704,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -29777,6 +29916,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -30001,6 +30141,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30212,6 +30353,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30420,6 +30562,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -30631,6 +30774,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -30855,6 +30999,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31066,6 +31211,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31274,6 +31420,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -31485,6 +31632,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -31709,6 +31857,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31920,6 +32069,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32128,6 +32278,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -32339,6 +32490,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -32563,6 +32715,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32774,6 +32927,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32982,6 +33136,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -33193,6 +33348,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -33417,6 +33573,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33628,6 +33785,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33836,6 +33994,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -34047,6 +34206,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -34271,6 +34431,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34482,6 +34643,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34690,6 +34852,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -34901,6 +35064,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -35125,6 +35289,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35336,6 +35501,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35544,6 +35710,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -35755,6 +35922,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -35979,6 +36147,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36190,6 +36359,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36398,6 +36568,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -36609,6 +36780,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -36833,6 +37005,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37044,6 +37217,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37252,6 +37426,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -37463,6 +37638,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -37687,6 +37863,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37898,6 +38075,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38106,6 +38284,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -38317,6 +38496,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -38541,6 +38721,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38752,6 +38933,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38960,6 +39142,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -39171,6 +39354,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -39395,6 +39579,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39606,6 +39791,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39814,6 +40000,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -40025,6 +40212,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -40249,6 +40437,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40460,6 +40649,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40668,6 +40858,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -40879,6 +41070,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -41103,6 +41295,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41314,6 +41507,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41522,6 +41716,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -41733,6 +41928,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -41957,6 +42153,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42168,6 +42365,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42376,6 +42574,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -42587,6 +42786,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -42811,6 +43011,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43022,6 +43223,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43230,6 +43432,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -43441,6 +43644,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -43665,6 +43869,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43876,6 +44081,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44084,6 +44290,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -44295,6 +44502,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -44519,6 +44727,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44730,6 +44939,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44938,6 +45148,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -45149,6 +45360,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -45373,6 +45585,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45584,6 +45797,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45792,6 +46006,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -46003,6 +46218,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -46227,6 +46443,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46438,6 +46655,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46646,6 +46864,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -46857,6 +47076,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -47081,6 +47301,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47292,6 +47513,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47500,6 +47722,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -47711,6 +47934,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -47935,6 +48159,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48146,6 +48371,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48354,6 +48580,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -48565,6 +48792,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -48789,6 +49017,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49000,6 +49229,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49208,6 +49438,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -49419,6 +49650,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -49643,6 +49875,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49854,6 +50087,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50062,6 +50296,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -50273,6 +50508,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -50497,6 +50733,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50708,6 +50945,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50916,6 +51154,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -51127,6 +51366,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -51351,6 +51591,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51562,6 +51803,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51770,6 +52012,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -51981,6 +52224,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -52205,6 +52449,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52416,6 +52661,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52624,6 +52870,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -52835,6 +53082,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -53059,6 +53307,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53270,6 +53519,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53478,6 +53728,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -53689,6 +53940,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -53913,6 +54165,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54124,6 +54377,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54332,6 +54586,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -54543,6 +54798,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -54767,6 +55023,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54978,6 +55235,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55186,6 +55444,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -55397,6 +55656,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -55621,6 +55881,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55832,6 +56093,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56040,6 +56302,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -56251,6 +56514,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -56475,6 +56739,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56686,6 +56951,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56894,6 +57160,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -57105,6 +57372,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -57329,6 +57597,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57540,6 +57809,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57748,6 +58018,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -57959,6 +58230,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -58183,6 +58455,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58394,6 +58667,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58602,6 +58876,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -58813,6 +59088,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -59037,6 +59313,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59248,6 +59525,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59456,6 +59734,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -59667,6 +59946,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -59891,6 +60171,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60102,6 +60383,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60310,6 +60592,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -60521,6 +60804,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -60745,6 +61029,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60956,6 +61241,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61164,6 +61450,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -61375,6 +61662,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -61599,6 +61887,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61810,6 +62099,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62018,6 +62308,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -62229,6 +62520,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -62453,6 +62745,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62664,6 +62957,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62872,6 +63166,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -63083,6 +63378,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -63307,6 +63603,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63518,6 +63815,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63726,6 +64024,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -63937,6 +64236,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -64161,6 +64461,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64372,6 +64673,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64580,6 +64882,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -64791,6 +65094,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -65015,6 +65319,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65226,6 +65531,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65434,6 +65740,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -65645,6 +65952,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -65869,6 +66177,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66080,6 +66389,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66288,6 +66598,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -66499,6 +66810,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -66723,6 +67035,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66934,6 +67247,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67142,6 +67456,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -67353,6 +67668,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -67577,6 +67893,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67788,6 +68105,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67996,6 +68314,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -68207,6 +68526,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -68431,6 +68751,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68642,6 +68963,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68850,6 +69172,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -69061,6 +69384,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -69285,6 +69609,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69496,6 +69821,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69704,6 +70030,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -69915,6 +70242,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -70139,6 +70467,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70350,6 +70679,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70558,6 +70888,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -70769,6 +71100,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -70993,6 +71325,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71204,6 +71537,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71412,6 +71746,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -71623,6 +71958,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -71847,6 +72183,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72058,6 +72395,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72266,6 +72604,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -72477,6 +72816,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -72701,6 +73041,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72912,6 +73253,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73120,6 +73462,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -73331,6 +73674,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -73555,6 +73899,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73766,6 +74111,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73974,6 +74320,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -74185,6 +74532,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -74409,6 +74757,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74620,6 +74969,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74828,6 +75178,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -75039,6 +75390,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -75263,6 +75615,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75474,6 +75827,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75682,6 +76036,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -75893,6 +76248,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -76117,6 +76473,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76328,6 +76685,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76536,6 +76894,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -76747,6 +77106,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -76971,6 +77331,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77182,6 +77543,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77390,6 +77752,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -77601,6 +77964,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -77825,6 +78189,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78036,6 +78401,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78244,6 +78610,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -78455,6 +78822,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -78679,6 +79047,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78890,6 +79259,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79098,6 +79468,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -79309,6 +79680,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -79533,6 +79905,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79744,6 +80117,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79952,6 +80326,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -80163,6 +80538,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -80387,6 +80763,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80598,6 +80975,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80806,6 +81184,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -81017,6 +81396,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -81241,6 +81621,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81452,6 +81833,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81660,6 +82042,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -81871,6 +82254,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -82095,6 +82479,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82306,6 +82691,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82514,6 +82900,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -82725,6 +83112,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -82949,6 +83337,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83160,6 +83549,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83368,6 +83758,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -83579,6 +83970,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -83803,6 +84195,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84014,6 +84407,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84222,6 +84616,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -84433,6 +84828,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -84657,6 +85053,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84868,6 +85265,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85076,6 +85474,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -85287,6 +85686,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -85511,6 +85911,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85722,6 +86123,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85930,6 +86332,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -86141,6 +86544,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -86365,6 +86769,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86576,6 +86981,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86784,6 +87190,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -86995,6 +87402,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -87219,6 +87627,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87430,6 +87839,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87638,6 +88048,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -87849,6 +88260,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -88073,6 +88485,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88284,6 +88697,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88492,6 +88906,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -88703,6 +89118,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -88927,6 +89343,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89138,6 +89555,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89346,6 +89764,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -89557,6 +89976,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -89781,6 +90201,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89992,6 +90413,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90200,6 +90622,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -90411,6 +90834,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -90635,6 +91059,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90846,6 +91271,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91054,6 +91480,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -91265,6 +91692,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -91489,6 +91917,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91700,6 +92129,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91908,6 +92338,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -92119,6 +92550,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -92343,6 +92775,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92554,6 +92987,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92762,6 +93196,7 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -92973,6 +93408,7 @@ export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -93197,6 +93633,7 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93408,6 +93845,7 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93616,6 +94054,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -93827,6 +94266,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -94051,6 +94491,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94262,6 +94703,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94470,6 +94912,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -94681,6 +95124,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -94905,6 +95349,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95116,6 +95561,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95324,6 +95770,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -95535,6 +95982,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -95759,6 +96207,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95970,6 +96419,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96178,6 +96628,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -96389,6 +96840,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -96613,6 +97065,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96824,6 +97277,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97032,6 +97486,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -97243,6 +97698,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -97467,6 +97923,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97678,6 +98135,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97886,6 +98344,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -98097,6 +98556,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -98321,6 +98781,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98532,6 +98993,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98740,6 +99202,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -98951,6 +99414,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -99175,6 +99639,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99386,6 +99851,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99594,6 +100060,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -99805,6 +100272,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -100029,6 +100497,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100240,6 +100709,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100448,6 +100918,7 @@ export type VendorMasterCreateWithoutStateInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -100658,6 +101129,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -100898,6 +101370,7 @@ export type VendorMasterScalarWhereInput = {
   subdomain_url?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_crm_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   handlesLargeScaleProjects?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -100945,6 +101418,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -101156,6 +101630,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -101380,6 +101855,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -101591,6 +102067,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -101799,6 +102276,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -102010,6 +102488,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -102234,6 +102713,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102445,6 +102925,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102653,6 +103134,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -102864,6 +103346,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -103088,6 +103571,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103299,6 +103783,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103507,6 +103992,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -103718,6 +104204,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -103942,6 +104429,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104153,6 +104641,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104361,6 +104850,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -104572,6 +105062,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -104796,6 +105287,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105007,6 +105499,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105215,6 +105708,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -105426,6 +105920,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -105650,6 +106145,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105861,6 +106357,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106069,6 +106566,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -106280,6 +106778,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -106504,6 +107003,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106715,6 +107215,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106923,6 +107424,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -107134,6 +107636,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -107358,6 +107861,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107569,6 +108073,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107777,6 +108282,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -107988,6 +108494,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -108212,6 +108719,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108423,6 +108931,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108631,6 +109140,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -108842,6 +109352,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -109066,6 +109577,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109277,6 +109789,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109485,6 +109998,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -109696,6 +110210,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -109920,6 +110435,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110131,6 +110647,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110339,6 +110856,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -110550,6 +111068,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -110774,6 +111293,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110985,6 +111505,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111193,6 +111714,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -111404,6 +111926,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -111628,6 +112151,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111839,6 +112363,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112047,6 +112572,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -112258,6 +112784,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -112482,6 +113009,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112693,6 +113221,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112901,6 +113430,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -113112,6 +113642,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -113336,6 +113867,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113547,6 +114079,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113755,6 +114288,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -113966,6 +114500,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -114190,6 +114725,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114401,6 +114937,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114609,6 +115146,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -114820,6 +115358,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -115044,6 +115583,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115255,6 +115795,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115463,6 +116004,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -115674,6 +116216,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -115898,6 +116441,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116109,6 +116653,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116317,6 +116862,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -116528,6 +117074,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -116752,6 +117299,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116963,6 +117511,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117171,6 +117720,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -117382,6 +117932,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -117606,6 +118157,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117817,6 +118369,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118025,6 +118578,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -118236,6 +118790,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -118460,6 +119015,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118671,6 +119227,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118879,6 +119436,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -119090,6 +119648,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -119314,6 +119873,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119525,6 +120085,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119733,6 +120294,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -119944,6 +120506,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -120168,6 +120731,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120379,6 +120943,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120587,6 +121152,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -120798,6 +121364,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -121022,6 +121589,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121233,6 +121801,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121441,6 +122010,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -121652,6 +122222,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -121876,6 +122447,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122087,6 +122659,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122295,6 +122868,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -122506,6 +123080,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -122730,6 +123305,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122941,6 +123517,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123149,6 +123726,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -123360,6 +123938,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -123584,6 +124163,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123795,6 +124375,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124003,6 +124584,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -124214,6 +124796,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -124438,6 +125021,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124649,6 +125233,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124857,6 +125442,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -125068,6 +125654,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -125292,6 +125879,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125503,6 +126091,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125711,6 +126300,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -125922,6 +126512,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -126146,6 +126737,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126357,6 +126949,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126565,6 +127158,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -126776,6 +127370,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -127000,6 +127595,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127211,6 +127807,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127419,6 +128016,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -127630,6 +128228,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -127854,6 +128453,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128065,6 +128665,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128273,6 +128874,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -128484,6 +129086,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -128708,6 +129311,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128919,6 +129523,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129127,6 +129732,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -129338,6 +129944,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -129562,6 +130169,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129773,6 +130381,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129981,6 +130590,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -130192,6 +130802,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -130416,6 +131027,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130627,6 +131239,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130835,6 +131448,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -131046,6 +131660,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -131270,6 +131885,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131481,6 +132097,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131689,6 +132306,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -131900,6 +132518,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -132124,6 +132743,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132335,6 +132955,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132543,6 +133164,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -132754,6 +133376,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -132978,6 +133601,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133189,6 +133813,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133397,6 +134022,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -133608,6 +134234,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -133832,6 +134459,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134043,6 +134671,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134251,6 +134880,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -134462,6 +135092,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -134686,6 +135317,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134897,6 +135529,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135105,6 +135738,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -135316,6 +135950,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -135540,6 +136175,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135751,6 +136387,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135959,6 +136596,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -136170,6 +136808,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -136394,6 +137033,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136605,6 +137245,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136813,6 +137454,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -137024,6 +137666,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -137248,6 +137891,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137459,6 +138103,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137667,6 +138312,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -137878,6 +138524,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -138102,6 +138749,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -138313,6 +138961,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -138521,6 +139170,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -138732,6 +139382,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -138956,6 +139607,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -139167,6 +139819,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -139375,6 +140028,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -139586,6 +140240,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -139810,6 +140465,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -140021,6 +140677,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -140229,6 +140886,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -140440,6 +141098,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -140664,6 +141323,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -140875,6 +141535,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -141083,6 +141744,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -141294,6 +141956,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -141518,6 +142181,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -141729,6 +142393,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -141937,6 +142602,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -142148,6 +142814,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -142372,6 +143039,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -142583,6 +143251,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -142791,6 +143460,7 @@ export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -143002,6 +143672,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInp
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -143226,6 +143897,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -143437,6 +144109,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInp
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -143646,6 +144319,7 @@ export type VendorMasterCreateManyStateInput = {
   subdomain_url?: string | null
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -143693,6 +144367,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -143903,6 +144578,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -144113,6 +144789,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -145642,6 +146319,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   subdomain_url?: boolean
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -145855,6 +146533,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   subdomain_url?: boolean
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -145905,6 +146584,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   subdomain_url?: boolean
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -145955,6 +146635,7 @@ export type VendorMasterSelectScalar = {
   subdomain_url?: boolean
   is_crm_enabled?: boolean
   is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
   handlesLargeScaleProjects?: boolean
   is_email_noti_enabled?: boolean
   is_in_app_noti_enabled?: boolean
@@ -145974,7 +146655,7 @@ export type VendorMasterSelectScalar = {
   is_available_unique_code?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
@@ -146345,6 +147026,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     subdomain_url: string | null
     is_crm_enabled: boolean
     is_custom_doc_nomenclature_enabled: boolean
+    is_miscellaneous_enabled: boolean
     handlesLargeScaleProjects: boolean
     is_email_noti_enabled: boolean
     is_in_app_noti_enabled: boolean
@@ -146977,6 +147659,7 @@ export interface VendorMasterFieldRefs {
   readonly subdomain_url: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly is_crm_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_custom_doc_nomenclature_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_miscellaneous_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly handlesLargeScaleProjects: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_email_noti_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_in_app_noti_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>

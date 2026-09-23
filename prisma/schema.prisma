@@ -38,6 +38,7 @@ model VendorMaster {
   subdomain_url                                String?
   is_crm_enabled                               Boolean                                        @default(true)
   is_custom_doc_nomenclature_enabled           Boolean                                        @default(false)
+  is_miscellaneous_enabled                     Boolean                                        @default(false)
   handlesLargeScaleProjects                    Boolean                                        @default(false)
   is_email_noti_enabled                        Boolean                                        @default(true)
   is_in_app_noti_enabled                       Boolean                                        @default(true)
