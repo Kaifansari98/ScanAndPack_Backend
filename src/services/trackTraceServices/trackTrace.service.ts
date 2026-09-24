@@ -5240,6 +5240,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
 export const getTraceTraceDashboard = async (
   vendor_id: number,
   statusFilter: string = "all",
+  scope: { lead_id?: number; project_id?: number } = {},
 ) => {
   try {
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
@@ -5248,6 +5249,8 @@ export const getTraceTraceDashboard = async (
         where: {
           vendor_id,
           isDeleted: false,
+          ...(scope.lead_id ? { lead_id: scope.lead_id } : {}),
+          ...(scope.project_id ? { id: scope.project_id } : {}),
           NOT: [
             { project_status: { equals: "Deactivated", mode: "insensitive" } },
             { project_status: { equals: "Deleted", mode: "insensitive" } },
@@ -5258,6 +5261,7 @@ export const getTraceTraceDashboard = async (
         select: {
           id: true,
           project_name: true,
+          lead_id: true,
           project_status: true,
           track_trace_status: true,
           created_at: true,
@@ -5317,6 +5321,7 @@ export const getTraceTraceDashboard = async (
       machine_id: number;
       machine_name: string;
       sequence_no: number;
+      assigned: number;
       total: number;
       scanned: number;
       pending: number;
@@ -5451,6 +5456,7 @@ export const getTraceTraceDashboard = async (
             machine_id: machine.id,
             machine_name: machine.machine_name,
             sequence_no: machine.sequence_no ?? 0,
+            assigned,
             total,
             scanned,
             pending,
@@ -5476,6 +5482,7 @@ export const getTraceTraceDashboard = async (
 
       return {
         project_id: project.id,
+        lead_id: project.lead_id,
         project_name: project.project_name,
         project_status: project.project_status,
         track_trace_status: project.track_trace_status,

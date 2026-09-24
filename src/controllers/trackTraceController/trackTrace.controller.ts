@@ -1137,9 +1137,20 @@ export const getQualityCheckProjects = async (req: Request, res: Response) => {
 export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
   const { vendor_id } = _req.params;
   const status = (_req.query.status as string) || (_req.query.filter as string) || "all";
+  const scope: { lead_id?: number; project_id?: number } = {};
+  for (const key of ["lead_id", "project_id"] as const) {
+    if (_req.query[key] !== undefined) {
+      const value = Number(_req.query[key]);
+      if (typeof _req.query[key] !== "string" || !Number.isSafeInteger(value) || value <= 0) {
+        return res.status(400).json(ApiResponse.error(`Invalid ${key}`, 400));
+      }
+      scope[key] = value;
+    }
+  }
   const serviceResponse = await trackTraceService.getTraceTraceDashboard(
     Number(vendor_id),
     status,
+    scope,
   );
   if (serviceResponse.status == 0) {
     return res
