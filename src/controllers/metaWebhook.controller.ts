@@ -145,6 +145,7 @@ export class MetaWebhookController {
         body.contact ||
         body.phone ||
         body.phone_number ||
+        body["phone_number"] ||
         body.mobile ||
         body.contact_no ||
         body["Contact"] ||
@@ -166,6 +167,8 @@ export class MetaWebhookController {
 
       const leadsName =
         body.leads_name ||
+        body.full_name ||
+        body["full_name"] ||
         body.name ||
         body.customer_name ||
         body.fullName ||
@@ -177,6 +180,7 @@ export class MetaWebhookController {
         body["Client Name"] ||
         (body.lead &&
           (body.lead.leads_name ||
+            body.lead.full_name ||
             body.lead.name ||
             body.lead.customer_name ||
             body.lead.fullName)) ||
@@ -221,6 +225,7 @@ export class MetaWebhookController {
           body.email_id ||
           body["Email"] ||
           body["Email ID"] ||
+          body["email_id"] ||
           (body.lead && body.lead.email) ||
           body.entry?.[0]?.changes?.[0]?.value?.email ||
           null;
@@ -235,6 +240,13 @@ export class MetaWebhookController {
         const source =
           body.source ||
           body["Source"] ||
+          (body.platform
+            ? String(body.platform).toLowerCase() === "fb"
+              ? "Facebook"
+              : String(body.platform).toLowerCase() === "ig"
+              ? "Instagram"
+              : String(body.platform)
+            : null) ||
           (body.lead && body.lead.source) ||
           "Google Sheet";
 
@@ -255,34 +267,44 @@ export class MetaWebhookController {
           (body.lead && body.lead.priority) ||
           "Medium";
 
-        // Parse product_types (array or comma-separated string)
-        let productTypes: string[] = [];
-        const rawTypes =
-          body.product_types ||
-          body.productTypes ||
-          (body.lead && (body.lead.product_types || body.lead.productTypes));
-        if (Array.isArray(rawTypes)) {
-          productTypes = rawTypes.map(String).filter(Boolean);
-        } else if (typeof rawTypes === "string" && rawTypes.trim()) {
-          productTypes = rawTypes
-            .split(",")
-            .map((s: string) => s.trim())
-            .filter(Boolean);
-        }
+        // Check if lead originates from Google Sheet
+        const isGoogleSheet =
+          Boolean(body.source && String(body.source).toLowerCase().includes("sheet")) ||
+          Boolean(body["Source"] && String(body["Source"]).toLowerCase().includes("sheet")) ||
+          Boolean(body["source"] && String(body["source"]).toLowerCase().includes("sheet")) ||
+          String(source || "").toLowerCase().includes("sheet");
 
-        // Parse product_structures (array or comma-separated string)
+        // Parse product_types (array or comma-separated string)
+        // If coming from Google Sheet into Lead Pool, product_types and product_structures MUST remain empty []
+        let productTypes: string[] = [];
         let productStructures: string[] = [];
-        const rawStructs =
-          body.product_structures ||
-          body.productStructures ||
-          (body.lead && (body.lead.product_structures || body.lead.productStructures));
-        if (Array.isArray(rawStructs)) {
-          productStructures = rawStructs.map(String).filter(Boolean);
-        } else if (typeof rawStructs === "string" && rawStructs.trim()) {
-          productStructures = rawStructs
-            .split(",")
-            .map((s: string) => s.trim())
-            .filter(Boolean);
+
+        if (!isGoogleSheet) {
+          const rawTypes =
+            body.product_types ||
+            body.productTypes ||
+            (body.lead && (body.lead.product_types || body.lead.productTypes));
+          if (Array.isArray(rawTypes)) {
+            productTypes = rawTypes.map(String).filter(Boolean);
+          } else if (typeof rawTypes === "string" && rawTypes.trim()) {
+            productTypes = rawTypes
+              .split(",")
+              .map((s: string) => s.trim())
+              .filter(Boolean);
+          }
+
+          const rawStructs =
+            body.product_structures ||
+            body.productStructures ||
+            (body.lead && (body.lead.product_structures || body.lead.productStructures));
+          if (Array.isArray(rawStructs)) {
+            productStructures = rawStructs.map(String).filter(Boolean);
+          } else if (typeof rawStructs === "string" && rawStructs.trim()) {
+            productStructures = rawStructs
+              .split(",")
+              .map((s: string) => s.trim())
+              .filter(Boolean);
+          }
         }
 
         // Extract survey details and format Design Remarks reusing exact Bulk Upload logic
@@ -291,6 +313,10 @@ export class MetaWebhookController {
           ...body,
         });
         const formattedRemark = formatDesignRemarks(surveyDetails, remark);
+
+        // NOTE: Never fallback product_types from surveyDetails.modularSolution!
+        // Survey answers belong in Design Remarks, not CRM Product Types.
+        // For Google Sheet / Lead Pool leads, product types must remain empty.
 
         // Fallback city from survey project location if city is missing
         const resolvedCity =
@@ -312,8 +338,8 @@ export class MetaWebhookController {
           source,
           remark: formattedRemark,
           priority,
-          product_types: productTypes,
-          product_structures: productStructures,
+          product_types: isGoogleSheet ? [] : productTypes,
+          product_structures: isGoogleSheet ? [] : productStructures,
           assign_to: null, // Lead Pool
         });
 

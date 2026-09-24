@@ -24,6 +24,7 @@ import {
   generateOnlineLeadCode as generateCodeHelper,
   ensureDefaultStatuses,
   formatDesignRemarks,
+  extractSurveyDetails,
 } from "../../services/leadModuleServices/onlineLead.service";
 
 export { ensureDefaultStatuses };
@@ -3500,7 +3501,8 @@ export class OnlineLeadController {
       }
 
       const headers: string[] = [];
-      const rows: Record<string, string>[] = [];
+      const rawHeaders: string[] = [];
+      const rows: { normalized: Record<string, string>; raw: Record<string, string> }[] = [];
 
       worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
         if (rowNumber === 1) {
@@ -3520,6 +3522,7 @@ export class OnlineLeadController {
                 strVal = String(val);
               }
             }
+            rawHeaders.push(strVal.trim());
             // Strip spaces, underscores, and lowercase
             headers.push(
               strVal
@@ -3530,9 +3533,11 @@ export class OnlineLeadController {
           });
         } else {
           const rowData: Record<string, string> = {};
+          const rawRowData: Record<string, string> = {};
           row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
             const headerName = headers[colNumber - 1];
-            if (headerName) {
+            const rawHeaderName = rawHeaders[colNumber - 1];
+            if (headerName || rawHeaderName) {
               const val = cell.value;
               let strVal = "";
               if (val !== null && val !== undefined) {
@@ -3548,10 +3553,11 @@ export class OnlineLeadController {
                   strVal = String(val);
                 }
               }
-              rowData[headerName] = strVal.trim();
+              if (headerName) rowData[headerName] = strVal.trim();
+              if (rawHeaderName) rawRowData[rawHeaderName] = strVal.trim();
             }
           });
-          rows.push(rowData);
+          rows.push({ normalized: rowData, raw: rawRowData });
         }
       });
 
@@ -3654,7 +3660,7 @@ export class OnlineLeadController {
       });
 
       for (let i = 0; i < rows.length; i++) {
-        const rowData = rows[i];
+        const { normalized: rowData, raw: rawRowData } = rows[i];
         const rowNum = i + 2; // Row numbers are 1-based, index 0 is row 2 (row 1 was headers)
 
         // Find keys in parsed headers mapping to fields (keys are already lowercased and stripped of spaces/underscores)
@@ -3869,18 +3875,17 @@ export class OnlineLeadController {
           }
         }
 
-        // Append Budget, Property Type, and Survey Details to remark via shared helper
-        remark = formatDesignRemarks(
-          {
-            budget,
-            propertyType,
-            modularSolution,
-            whenNeedReady,
-            preferredShowroom,
-            projectLocation,
-          },
-          remark,
-        );
+        // Append dynamic survey details (excluding 16 static columns) to remark
+        const surveyDetails = extractSurveyDetails({
+          budget,
+          propertyType,
+          modularSolution,
+          whenNeedReady,
+          preferredShowroom,
+          projectLocation,
+          ...rawRowData,
+        });
+        remark = formatDesignRemarks(surveyDetails, remark);
 
         // Default remark to "-" if not specified
         remark = remark ? remark.trim() : "-";
