@@ -1881,10 +1881,22 @@ export const getPendingDefects = async (req: Request, res: Response) => {
     const page = Math.max(1, Number(req.query.page) || 1);
     if (isNaN(vendor_id))
       return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    const scope: { lead_id?: number; page_size?: number } = {};
+    for (const key of ["lead_id", "page_size"] as const) {
+      if (req.query[key] !== undefined) {
+        const value = Number(req.query[key]);
+        if (typeof req.query[key] !== "string" || !Number.isSafeInteger(value) || value <= 0 || (key === "page_size" && value > 100)) {
+          return res.status(400).json(ApiResponse.error(`Invalid ${key}`, 400));
+        }
+        scope[key] = value;
+      }
+    }
     const result = await trackTraceService.getPendingDefectsService(
       vendor_id,
       page,
+      scope,
     );
+    if (result.status === 0) return res.status(500).json(ApiResponse.error(result.message, 500));
     return res
       .status(200)
       .json(ApiResponse.success(result.data, result.message, 200));
@@ -1902,10 +1914,22 @@ export const getResolvedDefects = async (req: Request, res: Response) => {
     const page = Math.max(1, Number(req.query.page) || 1);
     if (isNaN(vendor_id))
       return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    const scope: { lead_id?: number; page_size?: number } = {};
+    for (const key of ["lead_id", "page_size"] as const) {
+      if (req.query[key] !== undefined) {
+        const value = Number(req.query[key]);
+        if (typeof req.query[key] !== "string" || !Number.isSafeInteger(value) || value <= 0 || (key === "page_size" && value > 100)) {
+          return res.status(400).json(ApiResponse.error(`Invalid ${key}`, 400));
+        }
+        scope[key] = value;
+      }
+    }
     const result = await trackTraceService.getResolvedDefectsService(
       vendor_id,
       page,
+      scope,
     );
+    if (result.status === 0) return res.status(500).json(ApiResponse.error(result.message, 500));
     return res
       .status(200)
       .json(ApiResponse.success(result.data, result.message, 200));

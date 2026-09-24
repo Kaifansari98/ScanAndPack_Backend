@@ -11908,19 +11908,22 @@ export const getDefectSummaryService = async (vendor_id: number) => {
 export const getPendingDefectsService = async (
   vendor_id: number,
   page: number,
+  scope: { lead_id?: number; page_size?: number } = {},
 ) => {
   try {
-    const skip = (page - 1) * PAGE_SIZE;
+    const pageSize = scope.page_size ?? PAGE_SIZE;
+    const skip = (page - 1) * pageSize;
+    const projectScope = scope.lead_id ? { project: { lead_id: scope.lead_id, vendor_id, isDeleted: false } } : {};
 
     const [total, items] = await Promise.all([
       prisma.defectedItem.count({
-        where: { vendor_id, defect_status: "Pending" },
+        where: { vendor_id, ...projectScope, defect_status: "Pending" },
       }),
       prisma.defectedItem.findMany({
-        where: { vendor_id, defect_status: "Pending" },
+        where: { vendor_id, ...projectScope, defect_status: "Pending" },
         orderBy: { created_at: "desc" },
         skip,
-        take: PAGE_SIZE,
+        take: pageSize,
         select: {
           id: true,
           defect_status: true,
@@ -11953,8 +11956,8 @@ export const getPendingDefectsService = async (
       defects: defectsWithUrls,
       total,
       page,
-      page_size: PAGE_SIZE,
-      total_pages: Math.ceil(total / PAGE_SIZE),
+      page_size: pageSize,
+      total_pages: Math.ceil(total / pageSize),
     });
   } catch (error) {
     console.error("getPendingDefectsService error:", error);
@@ -11967,19 +11970,22 @@ export const getPendingDefectsService = async (
 export const getResolvedDefectsService = async (
   vendor_id: number,
   page: number,
+  scope: { lead_id?: number; page_size?: number } = {},
 ) => {
   try {
-    const skip = (page - 1) * PAGE_SIZE;
+    const pageSize = scope.page_size ?? PAGE_SIZE;
+    const skip = (page - 1) * pageSize;
+    const projectScope = scope.lead_id ? { project: { lead_id: scope.lead_id, vendor_id, isDeleted: false } } : {};
 
     const [total, items] = await Promise.all([
       prisma.defectedItem.count({
-        where: { vendor_id, defect_status: "Completed" },
+        where: { vendor_id, ...projectScope, defect_status: "Completed" },
       }),
       prisma.defectedItem.findMany({
-        where: { vendor_id, defect_status: "Completed" },
+        where: { vendor_id, ...projectScope, defect_status: "Completed" },
         orderBy: { defect_completed_at: "desc" },
         skip,
-        take: PAGE_SIZE,
+        take: pageSize,
         select: {
           id: true,
           defect_status: true,
@@ -12018,8 +12024,8 @@ export const getResolvedDefectsService = async (
       defects: defectsWithUrls,
       total,
       page,
-      page_size: PAGE_SIZE,
-      total_pages: Math.ceil(total / PAGE_SIZE),
+      page_size: pageSize,
+      total_pages: Math.ceil(total / pageSize),
     });
   } catch (error) {
     console.error("getResolvedDefectsService error:", error);
