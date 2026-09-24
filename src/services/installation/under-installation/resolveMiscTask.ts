@@ -44,8 +44,16 @@ export async function resolveMiscTask(
     ].some((candidate) => candidate?.trim() === remark);
   });
 
-  if (matches.length > 1) {
-    throw new Error("Multiple miscellaneous entries match this task");
-  }
-  return matches[0] ?? null;
+  if (matches.length === 0) return null;
+  if (matches.length === 1) return matches[0];
+
+  // If multiple entries match (e.g. duplicate material & problem in legacy format),
+  // prioritize unresolved and approved entries instead of throwing an error.
+  const unresolvedMatches = matches.filter((e) => !e.is_resolved);
+  if (unresolvedMatches.length === 1) return unresolvedMatches[0];
+
+  const approvedUnresolved = unresolvedMatches.filter((e) => e.misc_approved === true);
+  if (approvedUnresolved.length > 0) return approvedUnresolved[0];
+
+  return unresolvedMatches[0] ?? matches[0] ?? null;
 }

@@ -596,18 +596,11 @@ export const findDeliveryTask = (
         typeof t.remark === "string" &&
         (t.remark.includes(miscDeliveryKey) ||
           (t.remark.includes("Required delivery date set for") &&
-            ((m.reorder_material_details &&
-              t.remark.includes(m.reorder_material_details)) ||
-              (m.problem_description &&
-                t.remark.includes(m.problem_description))))),
-    ) ||
-    tasks.find(
-      (t) =>
-        t.lead_id === m.lead_id &&
-        typeof t.remark === "string" &&
-        t.remark.includes("Required delivery date set for"),
-    ) ||
-    null
+            Boolean(m.reorder_material_details) &&
+            t.remark.includes(m.reorder_material_details) &&
+            Boolean(m.problem_description) &&
+            t.remark.includes(m.problem_description))),
+    ) || null
   );
 };
 
