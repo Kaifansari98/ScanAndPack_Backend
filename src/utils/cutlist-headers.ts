@@ -31,6 +31,7 @@ export function validateHeaderMappings(value: unknown, allowedFields: AllowedRul
   const fail = (message: string): never => { throw Object.assign(new Error(message), { statusCode: 400 }); };
   if (!Array.isArray(value) || value.length > 200) return fail("Provide at most 200 header mappings.");
   const allowedById = new Map(allowedFields.map((field) => [field.id, field.field_key]));
+  const allowedByKey = new Map(allowedFields.map((field) => [field.field_key, field.id]));
   const headers = new Set<string>();
   const usedFieldKeys = new Set<string>();
   const result: RuleFieldHeaderMapping[] = [];
@@ -40,8 +41,15 @@ export function validateHeaderMappings(value: unknown, allowedFields: AllowedRul
     if (headers.has(header)) return fail(`Duplicate Excel header: ${row.source_header}`);
     headers.add(header);
     let rule_field_id: number | null = null;
-    if (row.rule_field_id !== null && row.rule_field_id !== undefined) {
+    // Resolve stable field keys server-side so a new mapping does not depend on a prior GET.
+    if (row.field_key !== null && row.field_key !== undefined) {
+      if (typeof row.field_key !== "string" || !allowedByKey.has(row.field_key)) return fail("Unsupported CutList field.");
+      rule_field_id = allowedByKey.get(row.field_key)!;
+      if (row.rule_field_id != null && Number(row.rule_field_id) !== rule_field_id) return fail("CutList field key and ID do not match.");
+    } else if (row.rule_field_id !== null && row.rule_field_id !== undefined) {
       rule_field_id = Number(row.rule_field_id);
+    }
+    if (rule_field_id !== null) {
       const fieldKey = Number.isInteger(rule_field_id) ? allowedById.get(rule_field_id) : undefined;
       if (!fieldKey) return fail("Unsupported CutList field.");
       if (usedFieldKeys.has(fieldKey)) return fail(`Map ${fieldKey} only once.`);
