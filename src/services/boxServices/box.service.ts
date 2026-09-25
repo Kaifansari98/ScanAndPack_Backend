@@ -384,6 +384,9 @@ export const getBoxesByVendorAndProject = async (
                 group_name: true,
               },
             },
+            projectLocationProductQuantity: {
+              select: { location_name: true },
+            },
           },
         })
       : [];
@@ -489,8 +492,18 @@ export const getBoxesByVendorAndProject = async (
         field_value: item.field_value || "",
       }));
 
+    const mappedLocations = Array.from(
+      new Set(
+        mappingRows
+          .filter((mapping) => mapping.box_id === box.id)
+          .map((mapping) => mapping.projectLocationProductQuantity?.location_name?.trim())
+          .filter((location): location is string => Boolean(location)),
+      ),
+    );
+
     return {
       ...box,
+      location_name: mappedLocations.join(", ") || null,
 
       // Sum of CutListMachineMapping.qty, clubbed by cut_list_id
       items_count: itemsCount,

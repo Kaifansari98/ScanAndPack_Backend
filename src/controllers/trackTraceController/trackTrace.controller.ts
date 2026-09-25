@@ -1424,6 +1424,10 @@ export const markBoxFactoryOut = async (req: Request, res: Response) => {
     const project_id = Number(req.body.project_id);
     const vendor_id = Number(req.body.vendor_id);
     const user_id = Number(req.body.user_id);
+    const target_location =
+      typeof req.body.target_location === "string"
+        ? req.body.target_location.trim() || undefined
+        : undefined;
 
     if ([box_id, project_id, vendor_id, user_id].some(isNaN)) {
       return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
@@ -1434,6 +1438,7 @@ export const markBoxFactoryOut = async (req: Request, res: Response) => {
       project_id,
       vendor_id,
       user_id,
+      target_location,
     );
 
     if (result.status === 0) {
