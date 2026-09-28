@@ -908,7 +908,68 @@ export const updateScannedItem = async (
       location_name,
     } = payload;
 
-    const projectFilter = project_id ? { project_id } : {};
+    // Packaging scans must always be project-scoped. This check belongs in the
+    // service as well as the controller because this function is also called by
+    // the legacy /scan/item and /scan/check-item endpoints. Without it, a
+    // missing/zero project_id makes the barcode query vendor-wide and can map a
+    const machine = await prisma.machineMaster.findFirst({
+      where: {
+        id: machine_id,
+        vendor_id,
+        status: "ACTIVE",
+      },
+      select: {
+        machine_type_id: true,
+      },
+    });
+
+    if (!machine) {
+      return validationResponse(0, "Active machine not found");
+    }
+
+    const isPackagingMachine = machine.machine_type_id === 18;
+    if (
+      isPackagingMachine &&
+      (!Number.isInteger(project_id) || project_id <= 0)
+    ) {
+      return validationResponse(
+        0,
+        "project_id is required for packaging scans",
+      );
+    }
+
+    if (isPackagingMachine) {
+      // CutListMachineMapping is the existing source of truth for whether a
+      // project has work assigned to this workstation. Validate this before
+      // looking up the scanned barcode so a project cannot be selected on an
+      // unrelated packaging machine.
+      const projectMachineAssignment =
+        await prisma.cutListMachineMapping.findFirst({
+          where: {
+            vendor_id,
+            machine_id,
+            project_id: project_id!,
+          },
+          select: {
+            id: true,
+          },
+        });
+
+      if (!projectMachineAssignment) {
+        return validationResponse(
+          0,
+          "Project is not assigned to this packaging workstation",
+        );
+      }
+    }
+
+    // Non-packaging machines intentionally retain vendor-wide lookup. Only
+    // packaging scans require the project constraint.
+    const projectFilter = isPackagingMachine
+      ? { project_id: project_id! }
+      : project_id
+        ? { project_id }
+        : {};
     //const normalizedUniqueCode = unique_code.trim();
     const normalizedUniqueCode = unique_code.trim().toUpperCase();
     const barcodeRelationFilter = {
