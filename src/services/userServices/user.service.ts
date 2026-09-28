@@ -298,12 +298,14 @@ export const getUsersByVendorService = async ({
   limit = 20,
   search = "",
   franchise_id,
+  user_type,
 }: {
   vendorId: number;
   page?: number;
   limit?: number;
   search?: string;
   franchise_id?: number;
+  user_type?: string;
 }) => {
   if (!vendorId) {
     const error = new Error("vendorId is required");
@@ -314,34 +316,44 @@ export const getUsersByVendorService = async ({
   const pageNum = Number.isFinite(page) && page > 0 ? page : 1;
   const limitNum = Number.isFinite(limit) && limit > 0 ? limit : 20;
   const normalizedSearch = search.trim();
+  const normalizedUserType = user_type?.trim();
 
-  const where = {
+  const where: any = {
     vendor_id: vendorId,
     ...(franchise_id ? { franchise_id } : {}),
-    ...(normalizedSearch
-      ? {
-          OR: [
-            { user_name: { contains: normalizedSearch, mode: "insensitive" as const } },
-            { user_contact: { contains: normalizedSearch, mode: "insensitive" as const } },
-            { user_email: { contains: normalizedSearch, mode: "insensitive" as const } },
-            { status: { contains: normalizedSearch, mode: "insensitive" as const } },
+  };
+
+  if (normalizedUserType) {
+    where.user_type = {
+      user_type: { equals: normalizedUserType, mode: "insensitive" as const },
+    };
+  }
+
+  if (normalizedSearch) {
+    where.OR = [
+      { user_name: { contains: normalizedSearch, mode: "insensitive" as const } },
+      { user_contact: { contains: normalizedSearch, mode: "insensitive" as const } },
+      { user_email: { contains: normalizedSearch, mode: "insensitive" as const } },
+      { status: { contains: normalizedSearch, mode: "insensitive" as const } },
+      ...(normalizedUserType
+        ? []
+        : [
             {
               user_type: {
                 user_type: { contains: normalizedSearch, mode: "insensitive" as const },
               },
             },
-            {
-              franchise: {
-                franchise_name: {
-                  contains: normalizedSearch,
-                  mode: "insensitive" as const,
-                },
-              },
-            },
-          ],
-        }
-      : {}),
-  };
+          ]),
+      {
+        franchise: {
+          franchise_name: {
+            contains: normalizedSearch,
+            mode: "insensitive" as const,
+          },
+        },
+      },
+    ];
+  }
 
   const [users, count] = await Promise.all([
     prisma.userMaster.findMany({

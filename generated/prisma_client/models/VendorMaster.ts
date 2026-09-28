@@ -83,6 +83,7 @@ export type VendorMasterMinAggregateOutputType = {
   website_link: string | null
   is_broadcast_enabled: boolean | null
   is_scanpack_enabled: boolean | null
+  is_hrms_master_enabled: boolean | null
   is_online_lead_feature_enabled: boolean | null
   push_lead_to_cadbid: boolean | null
   is_available_unique_code: boolean | null
@@ -131,6 +132,7 @@ export type VendorMasterMaxAggregateOutputType = {
   website_link: string | null
   is_broadcast_enabled: boolean | null
   is_scanpack_enabled: boolean | null
+  is_hrms_master_enabled: boolean | null
   is_online_lead_feature_enabled: boolean | null
   push_lead_to_cadbid: boolean | null
   is_available_unique_code: boolean | null
@@ -179,6 +181,7 @@ export type VendorMasterCountAggregateOutputType = {
   website_link: number
   is_broadcast_enabled: number
   is_scanpack_enabled: number
+  is_hrms_master_enabled: number
   is_online_lead_feature_enabled: number
   push_lead_to_cadbid: number
   is_available_unique_code: number
@@ -243,6 +246,7 @@ export type VendorMasterMinAggregateInputType = {
   website_link?: true
   is_broadcast_enabled?: true
   is_scanpack_enabled?: true
+  is_hrms_master_enabled?: true
   is_online_lead_feature_enabled?: true
   push_lead_to_cadbid?: true
   is_available_unique_code?: true
@@ -291,6 +295,7 @@ export type VendorMasterMaxAggregateInputType = {
   website_link?: true
   is_broadcast_enabled?: true
   is_scanpack_enabled?: true
+  is_hrms_master_enabled?: true
   is_online_lead_feature_enabled?: true
   push_lead_to_cadbid?: true
   is_available_unique_code?: true
@@ -339,6 +344,7 @@ export type VendorMasterCountAggregateInputType = {
   website_link?: true
   is_broadcast_enabled?: true
   is_scanpack_enabled?: true
+  is_hrms_master_enabled?: true
   is_online_lead_feature_enabled?: true
   push_lead_to_cadbid?: true
   is_available_unique_code?: true
@@ -474,6 +480,7 @@ export type VendorMasterGroupByOutputType = {
   website_link: string | null
   is_broadcast_enabled: boolean
   is_scanpack_enabled: boolean
+  is_hrms_master_enabled: boolean
   is_online_lead_feature_enabled: boolean
   push_lead_to_cadbid: boolean
   is_available_unique_code: boolean
@@ -545,6 +552,7 @@ export type VendorMasterWhereInput = {
   website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_hrms_master_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -752,6 +760,7 @@ export type VendorMasterOrderByWithRelationInput = {
   website_link?: Prisma.SortOrderInput | Prisma.SortOrder
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
+  is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
@@ -962,6 +971,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_hrms_master_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -1169,6 +1179,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   website_link?: Prisma.SortOrderInput | Prisma.SortOrder
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
+  is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
@@ -1225,6 +1236,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   website_link?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
   is_broadcast_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_hrms_master_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
@@ -1271,6 +1283,7 @@ export type VendorMasterCreateInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -1478,6 +1491,7 @@ export type VendorMasterUncheckedCreateInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -1682,6 +1696,7 @@ export type VendorMasterUpdateInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1889,6 +1904,7 @@ export type VendorMasterUncheckedUpdateInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2095,6 +2111,7 @@ export type VendorMasterCreateManyInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -2141,6 +2158,7 @@ export type VendorMasterUpdateManyMutationInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2189,6 +2207,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2237,6 +2256,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   website_link?: Prisma.SortOrder
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
+  is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
@@ -2292,6 +2312,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   website_link?: Prisma.SortOrder
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
+  is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
@@ -2340,6 +2361,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   website_link?: Prisma.SortOrder
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
+  is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
@@ -4707,6 +4729,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -4913,6 +4936,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -5132,6 +5156,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5338,6 +5363,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5541,6 +5567,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -5747,6 +5774,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -5966,6 +5994,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6172,6 +6201,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6375,6 +6405,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -6581,6 +6612,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -6800,6 +6832,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7006,6 +7039,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7209,6 +7243,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -7415,6 +7450,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -7634,6 +7670,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7840,6 +7877,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8043,6 +8081,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -8249,6 +8288,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -8468,6 +8508,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8674,6 +8715,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8877,6 +8919,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -9083,6 +9126,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -9302,6 +9346,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9508,6 +9553,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9711,6 +9757,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -9917,6 +9964,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -10136,6 +10184,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10342,6 +10391,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10545,6 +10595,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -10751,6 +10802,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -10970,6 +11022,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11176,6 +11229,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11379,6 +11433,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -11585,6 +11640,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -11804,6 +11860,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12010,6 +12067,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12213,6 +12271,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -12419,6 +12478,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -12638,6 +12698,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12844,6 +12905,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13047,6 +13109,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -13253,6 +13316,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -13472,6 +13536,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13678,6 +13743,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13881,6 +13947,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -14087,6 +14154,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -14306,6 +14374,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14512,6 +14581,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14715,6 +14785,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -14921,6 +14992,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -15140,6 +15212,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15346,6 +15419,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15549,6 +15623,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -15755,6 +15830,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -15974,6 +16050,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16180,6 +16257,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16383,6 +16461,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -16589,6 +16668,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -16808,6 +16888,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17014,6 +17095,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17217,6 +17299,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -17423,6 +17506,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -17642,6 +17726,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17848,6 +17933,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18051,6 +18137,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -18257,6 +18344,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -18476,6 +18564,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18682,6 +18771,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18885,6 +18975,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -19091,6 +19182,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -19310,6 +19402,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19516,6 +19609,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19719,6 +19813,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -19925,6 +20020,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -20144,6 +20240,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20350,6 +20447,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20553,6 +20651,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -20759,6 +20858,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -20978,6 +21078,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21184,6 +21285,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21387,6 +21489,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -21593,6 +21696,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -21812,6 +21916,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22018,6 +22123,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22221,6 +22327,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -22427,6 +22534,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -22646,6 +22754,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22852,6 +22961,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23055,6 +23165,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -23261,6 +23372,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -23480,6 +23592,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23686,6 +23799,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23889,6 +24003,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -24095,6 +24210,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -24314,6 +24430,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24520,6 +24637,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24723,6 +24841,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -24929,6 +25048,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -25148,6 +25268,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25354,6 +25475,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25557,6 +25679,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -25763,6 +25886,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -25982,6 +26106,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26188,6 +26313,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26391,6 +26517,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -26597,6 +26724,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -26816,6 +26944,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27022,6 +27151,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27225,6 +27355,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -27431,6 +27562,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -27650,6 +27782,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27856,6 +27989,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28059,6 +28193,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -28265,6 +28400,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -28484,6 +28620,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28690,6 +28827,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28893,6 +29031,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -29099,6 +29238,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -29318,6 +29458,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29524,6 +29665,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29727,6 +29869,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -29933,6 +30076,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -30152,6 +30296,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30358,6 +30503,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30561,6 +30707,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -30767,6 +30914,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -30986,6 +31134,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31192,6 +31341,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31395,6 +31545,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -31601,6 +31752,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -31820,6 +31972,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32026,6 +32179,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32229,6 +32383,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -32435,6 +32590,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -32654,6 +32810,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32860,6 +33017,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33063,6 +33221,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -33269,6 +33428,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -33488,6 +33648,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33694,6 +33855,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33897,6 +34059,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -34103,6 +34266,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -34322,6 +34486,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34528,6 +34693,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34731,6 +34897,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -34937,6 +35104,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -35156,6 +35324,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35362,6 +35531,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35565,6 +35735,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -35771,6 +35942,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -35990,6 +36162,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36196,6 +36369,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36399,6 +36573,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -36605,6 +36780,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -36824,6 +37000,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37030,6 +37207,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37233,6 +37411,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -37439,6 +37618,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -37658,6 +37838,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37864,6 +38045,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38067,6 +38249,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -38273,6 +38456,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -38492,6 +38676,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38698,6 +38883,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38901,6 +39087,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -39107,6 +39294,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -39326,6 +39514,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39532,6 +39721,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39735,6 +39925,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -39941,6 +40132,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -40160,6 +40352,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40366,6 +40559,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40569,6 +40763,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -40775,6 +40970,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -40994,6 +41190,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41200,6 +41397,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41403,6 +41601,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -41609,6 +41808,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -41828,6 +42028,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42034,6 +42235,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42237,6 +42439,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -42443,6 +42646,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -42662,6 +42866,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42868,6 +43073,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43071,6 +43277,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -43277,6 +43484,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -43496,6 +43704,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43702,6 +43911,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43905,6 +44115,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -44111,6 +44322,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -44330,6 +44542,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44536,6 +44749,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44739,6 +44953,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -44945,6 +45160,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -45164,6 +45380,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45370,6 +45587,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45573,6 +45791,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -45779,6 +45998,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -45998,6 +46218,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46204,6 +46425,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46407,6 +46629,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -46613,6 +46836,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -46832,6 +47056,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47038,6 +47263,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47241,6 +47467,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -47447,6 +47674,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -47666,6 +47894,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47872,6 +48101,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48075,6 +48305,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -48281,6 +48512,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -48500,6 +48732,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48706,6 +48939,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48909,6 +49143,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -49115,6 +49350,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -49334,6 +49570,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49540,6 +49777,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49743,6 +49981,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -49949,6 +50188,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -50168,6 +50408,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50374,6 +50615,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50577,6 +50819,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -50783,6 +51026,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -51002,6 +51246,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51208,6 +51453,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51411,6 +51657,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -51617,6 +51864,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -51836,6 +52084,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52042,6 +52291,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52245,6 +52495,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -52451,6 +52702,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -52670,6 +52922,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52876,6 +53129,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53079,6 +53333,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -53285,6 +53540,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -53504,6 +53760,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53710,6 +53967,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53913,6 +54171,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -54119,6 +54378,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -54338,6 +54598,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54544,6 +54805,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54747,6 +55009,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -54953,6 +55216,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -55172,6 +55436,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55378,6 +55643,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55581,6 +55847,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -55787,6 +56054,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -56006,6 +56274,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56212,6 +56481,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56415,6 +56685,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -56621,6 +56892,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -56840,6 +57112,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57046,6 +57319,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57249,6 +57523,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -57455,6 +57730,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -57674,6 +57950,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57880,6 +58157,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58083,6 +58361,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -58289,6 +58568,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -58508,6 +58788,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58714,6 +58995,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58917,6 +59199,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -59123,6 +59406,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -59342,6 +59626,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59548,6 +59833,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59751,6 +60037,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -59957,6 +60244,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -60176,6 +60464,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60382,6 +60671,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60585,6 +60875,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -60791,6 +61082,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -61010,6 +61302,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61216,6 +61509,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61419,6 +61713,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -61625,6 +61920,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -61844,6 +62140,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62050,6 +62347,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62253,6 +62551,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -62459,6 +62758,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -62678,6 +62978,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62884,6 +63185,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63087,6 +63389,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -63293,6 +63596,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -63512,6 +63816,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63718,6 +64023,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63921,6 +64227,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -64127,6 +64434,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -64346,6 +64654,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64552,6 +64861,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64755,6 +65065,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -64961,6 +65272,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -65180,6 +65492,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65386,6 +65699,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65589,6 +65903,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -65795,6 +66110,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -66014,6 +66330,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66220,6 +66537,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66423,6 +66741,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -66629,6 +66948,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -66848,6 +67168,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67054,6 +67375,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67257,6 +67579,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -67463,6 +67786,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -67682,6 +68006,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67888,6 +68213,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68091,6 +68417,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -68297,6 +68624,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -68516,6 +68844,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68722,6 +69051,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68925,6 +69255,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -69131,6 +69462,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -69350,6 +69682,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69556,6 +69889,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69759,6 +70093,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -69965,6 +70300,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -70184,6 +70520,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70390,6 +70727,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70593,6 +70931,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -70799,6 +71138,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -71018,6 +71358,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71224,6 +71565,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71427,6 +71769,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -71633,6 +71976,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -71852,6 +72196,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72058,6 +72403,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72261,6 +72607,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -72467,6 +72814,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -72686,6 +73034,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72892,6 +73241,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73095,6 +73445,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -73301,6 +73652,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -73520,6 +73872,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73726,6 +74079,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73929,6 +74283,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -74135,6 +74490,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -74354,6 +74710,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74560,6 +74917,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74763,6 +75121,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -74969,6 +75328,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -75188,6 +75548,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75394,6 +75755,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75597,6 +75959,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -75803,6 +76166,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -76022,6 +76386,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76228,6 +76593,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76431,6 +76797,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -76637,6 +77004,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -76856,6 +77224,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77062,6 +77431,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77265,6 +77635,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -77471,6 +77842,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -77690,6 +78062,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77896,6 +78269,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78099,6 +78473,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -78305,6 +78680,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -78524,6 +78900,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78730,6 +79107,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78933,6 +79311,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -79139,6 +79518,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -79358,6 +79738,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79564,6 +79945,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79767,6 +80149,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -79973,6 +80356,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -80192,6 +80576,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80398,6 +80783,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80601,6 +80987,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -80807,6 +81194,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -81026,6 +81414,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81232,6 +81621,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81435,6 +81825,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -81641,6 +82032,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -81860,6 +82252,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82066,6 +82459,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82269,6 +82663,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -82475,6 +82870,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -82694,6 +83090,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82900,6 +83297,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83103,6 +83501,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -83309,6 +83708,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -83528,6 +83928,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83734,6 +84135,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83937,6 +84339,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -84143,6 +84546,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -84362,6 +84766,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84568,6 +84973,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84771,6 +85177,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -84977,6 +85384,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -85196,6 +85604,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85402,6 +85811,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85605,6 +86015,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -85811,6 +86222,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -86030,6 +86442,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86236,6 +86649,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86439,6 +86853,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -86645,6 +87060,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -86864,6 +87280,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87070,6 +87487,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87273,6 +87691,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -87479,6 +87898,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -87698,6 +88118,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87904,6 +88325,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88107,6 +88529,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -88313,6 +88736,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -88532,6 +88956,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88738,6 +89163,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88941,6 +89367,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -89147,6 +89574,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -89366,6 +89794,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89572,6 +90001,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89775,6 +90205,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -89981,6 +90412,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -90200,6 +90632,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90406,6 +90839,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90609,6 +91043,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -90815,6 +91250,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -91034,6 +91470,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91240,6 +91677,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91443,6 +91881,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -91649,6 +92088,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -91868,6 +92308,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92074,6 +92515,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92277,6 +92719,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -92483,6 +92926,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -92702,6 +93146,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92908,6 +93353,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93111,6 +93557,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -93317,6 +93764,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -93536,6 +93984,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93742,6 +94191,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93945,6 +94395,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -94151,6 +94602,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -94370,6 +94822,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94576,6 +95029,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94779,6 +95233,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -94985,6 +95440,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -95204,6 +95660,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95410,6 +95867,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95613,6 +96071,7 @@ export type VendorMasterCreateWithoutStateInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -95818,6 +96277,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -96053,6 +96513,7 @@ export type VendorMasterScalarWhereInput = {
   website_link?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_hrms_master_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -96099,6 +96560,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -96305,6 +96767,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -96524,6 +96987,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96730,6 +97194,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96933,6 +97398,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -97139,6 +97605,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -97358,6 +97825,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97564,6 +98032,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97767,6 +98236,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -97973,6 +98443,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -98192,6 +98663,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98398,6 +98870,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98601,6 +99074,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -98807,6 +99281,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -99026,6 +99501,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99232,6 +99708,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99435,6 +99912,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -99641,6 +100119,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -99860,6 +100339,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100066,6 +100546,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100269,6 +100750,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -100475,6 +100957,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -100694,6 +101177,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100900,6 +101384,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -101103,6 +101588,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -101309,6 +101795,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -101528,6 +102015,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -101734,6 +102222,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -101937,6 +102426,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -102143,6 +102633,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -102362,6 +102853,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102568,6 +103060,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102771,6 +103264,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -102977,6 +103471,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -103196,6 +103691,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103402,6 +103898,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103605,6 +104102,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -103811,6 +104309,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -104030,6 +104529,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104236,6 +104736,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104439,6 +104940,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -104645,6 +105147,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -104864,6 +105367,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105070,6 +105574,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105273,6 +105778,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -105479,6 +105985,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -105698,6 +106205,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105904,6 +106412,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106107,6 +106616,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -106313,6 +106823,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -106532,6 +107043,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106738,6 +107250,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106941,6 +107454,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -107147,6 +107661,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -107366,6 +107881,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107572,6 +108088,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107775,6 +108292,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -107981,6 +108499,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -108200,6 +108719,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108406,6 +108926,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108609,6 +109130,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -108815,6 +109337,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -109034,6 +109557,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109240,6 +109764,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109443,6 +109968,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -109649,6 +110175,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -109868,6 +110395,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110074,6 +110602,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110277,6 +110806,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -110483,6 +111013,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -110702,6 +111233,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110908,6 +111440,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111111,6 +111644,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -111317,6 +111851,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -111536,6 +112071,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111742,6 +112278,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111945,6 +112482,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -112151,6 +112689,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -112370,6 +112909,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112576,6 +113116,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112779,6 +113320,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -112985,6 +113527,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -113204,6 +113747,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113410,6 +113954,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113613,6 +114158,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -113819,6 +114365,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -114038,6 +114585,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114244,6 +114792,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114447,6 +114996,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -114653,6 +115203,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -114872,6 +115423,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115078,6 +115630,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115281,6 +115834,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -115487,6 +116041,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -115706,6 +116261,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115912,6 +116468,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116115,6 +116672,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -116321,6 +116879,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -116540,6 +117099,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116746,6 +117306,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116949,6 +117510,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -117155,6 +117717,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -117374,6 +117937,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117580,6 +118144,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117783,6 +118348,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -117989,6 +118555,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -118208,6 +118775,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118414,6 +118982,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118617,6 +119186,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -118823,6 +119393,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -119042,6 +119613,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119248,6 +119820,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119451,6 +120024,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -119657,6 +120231,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -119876,6 +120451,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120082,6 +120658,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120285,6 +120862,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -120491,6 +121069,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -120710,6 +121289,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120916,6 +121496,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121119,6 +121700,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -121325,6 +121907,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -121544,6 +122127,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121750,6 +122334,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121953,6 +122538,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -122159,6 +122745,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -122378,6 +122965,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122584,6 +123172,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122787,6 +123376,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -122993,6 +123583,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -123212,6 +123803,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123418,6 +124010,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123621,6 +124214,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -123827,6 +124421,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -124046,6 +124641,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124252,6 +124848,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124455,6 +125052,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -124661,6 +125259,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -124880,6 +125479,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125086,6 +125686,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125289,6 +125890,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -125495,6 +126097,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -125714,6 +126317,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125920,6 +126524,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126123,6 +126728,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -126329,6 +126935,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -126548,6 +127155,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126754,6 +127362,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126957,6 +127566,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -127163,6 +127773,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -127382,6 +127993,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127588,6 +128200,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127791,6 +128404,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -127997,6 +128611,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -128216,6 +128831,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128422,6 +129038,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128625,6 +129242,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -128831,6 +129449,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -129050,6 +129669,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129256,6 +129876,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129459,6 +130080,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -129665,6 +130287,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -129884,6 +130507,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130090,6 +130714,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130293,6 +130918,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -130499,6 +131125,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -130718,6 +131345,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130924,6 +131552,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131127,6 +131756,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -131333,6 +131963,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -131552,6 +132183,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131758,6 +132390,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131961,6 +132594,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -132167,6 +132801,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -132386,6 +133021,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132592,6 +133228,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132795,6 +133432,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -133001,6 +133639,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -133220,6 +133859,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133426,6 +134066,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133629,6 +134270,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -133835,6 +134477,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -134054,6 +134697,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134260,6 +134904,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134463,6 +135108,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -134669,6 +135315,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -134888,6 +135535,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135094,6 +135742,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135297,6 +135946,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -135503,6 +136153,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -135722,6 +136373,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135928,6 +136580,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136131,6 +136784,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -136337,6 +136991,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -136556,6 +137211,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136762,6 +137418,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136966,6 +137623,7 @@ export type VendorMasterCreateManyStateInput = {
   website_link?: string | null
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -137012,6 +137670,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137217,6 +137876,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137422,6 +138082,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -138914,6 +139575,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   website_link?: boolean
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -139122,6 +139784,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   website_link?: boolean
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -139171,6 +139834,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   website_link?: boolean
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
@@ -139220,12 +139884,13 @@ export type VendorMasterSelectScalar = {
   website_link?: boolean
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
@@ -139601,6 +140266,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     website_link: string | null
     is_broadcast_enabled: boolean
     is_scanpack_enabled: boolean
+    is_hrms_master_enabled: boolean
     is_online_lead_feature_enabled: boolean
     push_lead_to_cadbid: boolean
     is_available_unique_code: boolean
@@ -140228,6 +140894,7 @@ export interface VendorMasterFieldRefs {
   readonly website_link: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly is_broadcast_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_scanpack_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_hrms_master_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_online_lead_feature_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly push_lead_to_cadbid: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_available_unique_code: Prisma.FieldRef<"VendorMaster", 'Boolean'>

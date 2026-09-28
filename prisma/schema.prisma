@@ -51,6 +51,7 @@ model VendorMaster {
   website_link                           String?
   is_broadcast_enabled                   Boolean                                @default(false)
   is_scanpack_enabled                    Boolean                                @default(false)
+  is_hrms_master_enabled                 Boolean                                @default(false)
   is_online_lead_feature_enabled         Boolean                                @default(false)
   push_lead_to_cadbid                    Boolean                                @default(false)
   is_available_unique_code               Boolean                                @default(false)

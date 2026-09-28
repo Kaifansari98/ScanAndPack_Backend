@@ -130,6 +130,7 @@ export const createVendor = async (data: any) => {
     is_tracktrace_enabled,
     is_available_unique_code,
     is_year_wise_lead_code_enabled,
+    is_hrms_master_enabled,
     push_lead_to_cadbid,
   } = data;
 
@@ -151,6 +152,7 @@ export const createVendor = async (data: any) => {
       is_tracktrace_enabled,
       is_available_unique_code,
       is_year_wise_lead_code_enabled,
+      is_hrms_master_enabled,
       push_lead_to_cadbid,
     },
   });
@@ -233,6 +235,7 @@ export const getAllVendorsPaginated = async ({
         is_tracktrace_enabled: true,
         is_available_unique_code: true,
         is_scanpack_enabled: true,
+        is_hrms_master_enabled: true,
         push_lead_to_cadbid: true,
         is_this_vendor_is_custom_usertype_only: true,
         is_year_wise_lead_code_enabled: true,
@@ -1934,6 +1937,7 @@ export const onboardVendor = async (data: any) => {
     is_available_unique_code,
     is_year_wise_lead_code_enabled,
     is_scanpack_enabled,
+    is_hrms_master_enabled,
     push_lead_to_cadbid,
   } = data;
 
@@ -1966,6 +1970,7 @@ export const onboardVendor = async (data: any) => {
       is_available_unique_code,
       is_year_wise_lead_code_enabled,
       is_scanpack_enabled,
+      is_hrms_master_enabled,
       push_lead_to_cadbid,
     },
   });
@@ -2047,6 +2052,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
     handlesLargeScaleProjects,
     is_year_wise_lead_code_enabled,
     is_scanpack_enabled,
+    is_hrms_master_enabled,
     push_lead_to_cadbid,
   } = data;
 
@@ -2079,6 +2085,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
       handlesLargeScaleProjects,
       is_year_wise_lead_code_enabled,
       is_scanpack_enabled,
+      is_hrms_master_enabled,
       push_lead_to_cadbid,
     },
   });

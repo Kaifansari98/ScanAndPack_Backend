@@ -208,6 +208,9 @@ export const updateVendorController = async (req: Request, res: Response) => {
       is_scanpack_enabled: req.body.is_scanpack_enabled !== undefined
         ? (req.body.is_scanpack_enabled === "true" || req.body.is_scanpack_enabled === true)
         : undefined,
+      is_hrms_master_enabled: req.body.is_hrms_master_enabled !== undefined
+        ? (req.body.is_hrms_master_enabled === "true" || req.body.is_hrms_master_enabled === true)
+        : undefined,
       push_lead_to_cadbid: req.body.push_lead_to_cadbid !== undefined
         ? req.body.push_lead_to_cadbid === "true" ||
         req.body.push_lead_to_cadbid === true : undefined,
@@ -398,6 +401,7 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
       head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
       is_scanpack_enabled: req.body.is_scanpack_enabled === "true" || req.body.is_scanpack_enabled === true,
+      is_hrms_master_enabled: req.body.is_hrms_master_enabled === "true" || req.body.is_hrms_master_enabled === true,
       push_lead_to_cadbid: req.body.push_lead_to_cadbid === "true" || req.body.push_lead_to_cadbid === true,
 
     };

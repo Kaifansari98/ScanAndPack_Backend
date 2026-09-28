@@ -100,6 +100,7 @@ export const getUsersByVendorController = async (req: Request, res: Response) =>
     const limit = Number(req.query.limit ?? 20);
     const search = String(req.query.search ?? "");
     const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+    const user_type = req.query.user_type ? String(req.query.user_type).trim() : undefined;
 
     if (!vendorId) {
       return res.status(400).json({
@@ -114,6 +115,7 @@ export const getUsersByVendorController = async (req: Request, res: Response) =>
       limit,
       search,
       franchise_id,
+      user_type,
     });
 
     return res.status(200).json({
