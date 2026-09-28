@@ -1470,33 +1470,50 @@ export const assignDesignerToLead = async (
         id: data.assign_to_user_id,
         vendor_id: data.vendor_id,
         status: "active",
-        ...(lead.franchise_id ? { franchise_id: lead.franchise_id } : {}),
-        ...(vendor?.is_this_vendor_is_custom_usertype_only === true
-          ? {
+        OR: [
+          {
             user_type: {
-              user_type: {
-                equals: "custom",
-                mode: "insensitive",
-              },
+              user_type: { equals: "super-admin", mode: "insensitive" },
             },
-            userPrivilegeMappings: {
-              some: {
-                is_allowed: true,
-                privilege: {
-                  code: requiredPrivilegeCode,
-                  is_active: true,
+            ...(lead.franchise_id
+              ? {
+                  OR: [
+                    { franchise_id: lead.franchise_id },
+                    { franchise_id: null },
+                  ],
+                }
+              : {}),
+          },
+          {
+            ...(lead.franchise_id ? { franchise_id: lead.franchise_id } : {}),
+            ...(vendor?.is_this_vendor_is_custom_usertype_only === true
+              ? {
+                user_type: {
+                  user_type: {
+                    equals: "custom",
+                    mode: "insensitive",
+                  },
                 },
-              },
-            },
-          }
-          : {
-            user_type: {
-              user_type: {
-                equals: "designer",
-                mode: "insensitive",
-              },
-            },
-          }),
+                userPrivilegeMappings: {
+                  some: {
+                    is_allowed: true,
+                    privilege: {
+                      code: requiredPrivilegeCode,
+                      is_active: true,
+                    },
+                  },
+                },
+              }
+              : {
+                user_type: {
+                  user_type: {
+                    equals: "designer",
+                    mode: "insensitive",
+                  },
+                },
+              }),
+          },
+        ],
       },
       select: {
         id: true,
