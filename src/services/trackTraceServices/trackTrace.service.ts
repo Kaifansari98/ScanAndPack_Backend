@@ -1265,6 +1265,116 @@ export const updateScannedItem = async (
     // /scan/check-item is validation-only. Never fall through to the update
     // logic below; /scan/item is the endpoint that completes the item.
     if (is_check) {
+      if (
+        eligibleMapping.machine.machine_type_id === 18 &&
+        eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP
+      ) {
+        const productGroupName = eligibleMapping.cut_list.group_name?.trim();
+        const packingGroupName =
+          eligibleMapping.cut_list.custom_packing_group?.trim();
+
+        if (productGroupName && packingGroupName) {
+          const userOpenBox = await prisma.boxMaster.findFirst({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              created_by,
+              is_deleted: false,
+              is_auto_created: true,
+              box_status: BoxStatus.unpacked,
+              product_group_name: {
+                equals: productGroupName,
+                mode: "insensitive",
+              },
+              packing_group_name: {
+                equals: packingGroupName,
+                mode: "insensitive",
+              },
+            },
+            select: {
+              id: true,
+              box_name: true,
+              cutListMachineMapping: {
+                where: {
+                  actual_in_at: {
+                    not: null,
+                  },
+                },
+                select: {
+                  cut_list_id: true,
+                  qty: true,
+                },
+              },
+            },
+          });
+
+          if (userOpenBox) {
+            const packedQty = userOpenBox.cutListMachineMapping
+              .filter((m) => m.cut_list_id === cut_list_id)
+              .reduce((sum, m) => sum + Math.max(1, Number(m.qty || 1)), 0);
+
+            const qtyPerBox = Math.max(
+              1,
+              Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
+            );
+
+            if (packedQty >= qtyPerBox) {
+              const groupCutLists = await prisma.cutList.findMany({
+                where: {
+                  project_id: eligibleMapping.project_id,
+                  vendor_id,
+                  status: { equals: "active", mode: "insensitive" },
+                  group_name: { equals: productGroupName, mode: "insensitive" },
+                  custom_packing_group: {
+                    equals: packingGroupName,
+                    mode: "insensitive",
+                  },
+                },
+                select: {
+                  id: true,
+                  item_name: true,
+                  no_of_qty_in_boxes: true,
+                },
+              });
+
+              const packedQtyMap = new Map<number, number>();
+              for (const m of userOpenBox.cutListMachineMapping) {
+                packedQtyMap.set(
+                  m.cut_list_id,
+                  (packedQtyMap.get(m.cut_list_id) ?? 0) +
+                    Math.max(1, Number(m.qty || 1)),
+                );
+              }
+
+              const pendingItems = groupCutLists
+                .filter(
+                  (item) =>
+                    (packedQtyMap.get(item.id) ?? 0) <
+                    Math.max(1, Number(item.no_of_qty_in_boxes || 1)),
+                )
+                .map((item) => {
+                  const req = Math.max(
+                    1,
+                    Number(item.no_of_qty_in_boxes || 1),
+                  );
+                  const remaining = req - (packedQtyMap.get(item.id) ?? 0);
+                  return `${item.item_name} (${remaining} more)`;
+                });
+
+              const pendingText =
+                pendingItems.length > 0
+                  ? `pending item(s): ${pendingItems.join(", ")}`
+                  : "other required items";
+
+              return validationResponse(
+                0,
+                `Box "${userOpenBox.box_name}" already has item "${eligibleMapping.cut_list.item_name}". Please scan the ${pendingText} to complete Box "${userOpenBox.box_name}" first.`,
+              );
+            }
+          }
+        }
+      }
+
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
           cut_list_id,
@@ -1415,6 +1525,7 @@ export const updateScannedItem = async (
       packingGroupName: string;
       packingGroupItems: Array<{
         cutListId: number;
+        itemName: string;
         qtyPerBox: number;
       }>;
       projectLocationProductQuantityId: number | null;
@@ -1504,6 +1615,7 @@ export const updateScannedItem = async (
         )
         .map((row) => ({
           cutListId: row.id,
+          itemName: row.item_name,
           qtyPerBox: Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
         }));
 
@@ -1767,6 +1879,7 @@ export const updateScannedItem = async (
         const automaticBoxFilter = {
           project_id: eligibleMapping.project_id,
           vendor_id,
+          created_by,
           is_deleted: false,
           is_auto_created: true,
           product_group_name: {
@@ -1789,6 +1902,7 @@ export const updateScannedItem = async (
           select: {
             id: true,
             box_name: true,
+            created_by: true,
             product_set_no: true,
             box_position: true,
             boxes_per_product: true,
@@ -1806,6 +1920,7 @@ export const updateScannedItem = async (
           },
           orderBy: [{ sequence_no: "asc" }, { id: "asc" }],
         });
+
         let targetBox = openBoxes.find(
           (candidate) => {
             const packedIncomingQuantity =
@@ -1820,6 +1935,41 @@ export const updateScannedItem = async (
             return packedIncomingQuantity < incomingItemRequirement.qtyPerBox;
           },
         );
+
+        // If the operator already has an open box for this group, but that box
+        // already has all required pieces of this item, do not silently open a
+        // new box. Prevent accidental duplicate scans until the current box is completed.
+        if (!targetBox && openBoxes.length > 0) {
+          const currentOpenBox = openBoxes[0];
+          const packedQtyMap = new Map<number, number>();
+          for (const m of currentOpenBox.cutListMachineMapping) {
+            packedQtyMap.set(
+              m.cut_list_id,
+              (packedQtyMap.get(m.cut_list_id) ?? 0) +
+                Math.max(1, Number(m.qty || 1)),
+            );
+          }
+
+          const pendingItems = automaticPackingDefinition.packingGroupItems
+            .filter(
+              (item) =>
+                (packedQtyMap.get(item.cutListId) ?? 0) < item.qtyPerBox,
+            )
+            .map((item) => {
+              const remaining =
+                item.qtyPerBox - (packedQtyMap.get(item.cutListId) ?? 0);
+              return `${item.itemName} (${remaining} more)`;
+            });
+
+          const pendingText =
+            pendingItems.length > 0
+              ? `pending item(s): ${pendingItems.join(", ")}`
+              : "other required items";
+
+          throw new Error(
+            `Box "${currentOpenBox.box_name}" already has item "${eligibleMapping.cut_list.item_name}". Please scan the ${pendingText} to complete Box "${currentOpenBox.box_name}" first.`,
+          );
+        }
 
         if (!targetBox) {
           const [sequenceAggregate, totalProjectBoxes, packingGroupSetAggregate] =
@@ -1884,6 +2034,7 @@ export const updateScannedItem = async (
             select: {
               id: true,
               box_name: true,
+              created_by: true,
               product_set_no: true,
               box_position: true,
               boxes_per_product: true,
@@ -1895,6 +2046,10 @@ export const updateScannedItem = async (
               },
             },
           });
+        }
+
+        if (!targetBox) {
+          throw new Error("Unable to determine or create packing box");
         }
 
         assignedBoxId = targetBox.id;
