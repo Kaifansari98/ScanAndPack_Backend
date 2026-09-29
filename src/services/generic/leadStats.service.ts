@@ -67,13 +67,19 @@ export class LeadStatsService {
         "super-admin",
         "auditor",
       ].includes(userType);
+      // Site supervisors can be mapped to leads across multiple franchises
+      // (see SiteSupervisorFranchiseMapping); leads individually assigned to
+      // them via LeadUserMapping/UserLeadTask (the `leadIds` gate below) must
+      // count regardless of the lead's franchise, so franchise scoping is
+      // skipped for this role here.
+      const isSiteSupervisorLeadOwner = userType === "site-supervisor";
       console.log("[LeadStatsService] role flags", {
         userType,
         targetFranchiseId,
         shouldUseMapping,
       });
 
-      if (targetFranchiseId) {
+      if (targetFranchiseId && !isSiteSupervisorLeadOwner) {
         whereClause = {
           ...whereClause,
           franchise_id: targetFranchiseId,
@@ -82,11 +88,13 @@ export class LeadStatsService {
 
       // My Task is a personal queue. Admin-level users can work across
       // franchises, so its badge must not be limited by the active franchise.
-      const taskFranchiseId = ["admin", "super-admin", "auditor"].includes(
-        userType,
-      )
-        ? undefined
-        : targetFranchiseId;
+      // Site supervisors are excluded for the same cross-franchise-mapping
+      // reason as above.
+      const taskFranchiseId =
+        ["admin", "super-admin", "auditor"].includes(userType) ||
+        isSiteSupervisorLeadOwner
+          ? undefined
+          : targetFranchiseId;
 
       totalMyTasks = await prisma.userLeadTask.count({
         where: {

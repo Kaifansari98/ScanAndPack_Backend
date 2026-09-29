@@ -298,12 +298,21 @@ export const markBoxAsUnpacked = async (req: Request, res: Response) => {
   try {
     const {
       user_id,
-    } =
-      req.body;
+      reason,
+    } = req.body;
     const boxId = Number(req.params.boxId);
     if (isNaN(boxId)) return res.status(400).json({ error: 'Invalid boxId' });
 
-    const updatedBox = await updateBoxStatus(boxId, BoxStatus.unpacked,user_id);
+    if (!reason || !String(reason).trim()) {
+      return res.status(400).json({ error: 'Reason is required to unpack box' });
+    }
+
+    const updatedBox = await updateBoxStatus(
+      boxId,
+      BoxStatus.unpacked,
+      Number(user_id),
+      String(reason).trim()
+    );
     res.status(200).json(updatedBox);
   } catch (err: any) {
     res.status(400).json({ error: err.message });
@@ -355,13 +364,19 @@ export const generateBoxPdf = async (req: Request, res: Response) => {
     const project_id = req.params.project_id;
     const vendor_id = Number(req.params.vendor_id);
 
-    console.log(project_id)
+    const locationParam =
+      typeof req.query.location === "string"
+        ? req.query.location
+        : typeof req.query.location_name === "string"
+          ? req.query.location_name
+          : undefined;
+
     if (isNaN(box_id) || isNaN(vendor_id)) {
       return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
     }
     if (isNaN(Number(project_id))) {
       console.log("generateBoxPdfService")
-      const result = await boxService.generateBoxPdfServiceWeb(box_id, String(project_id), vendor_id);
+      const result = await boxService.generateBoxPdfServiceWeb(box_id, String(project_id), vendor_id, locationParam);
       
       if (result.status === 0) {
         return res.status(200).json(ApiResponse.error(result.message, 500));
@@ -372,7 +387,7 @@ export const generateBoxPdf = async (req: Request, res: Response) => {
       );
     } else {
       console.log("generateBoxPdfServiceWeb")
-      const result = await generateBoxPdfService(box_id, Number(project_id), vendor_id);
+      const result = await generateBoxPdfService(box_id, Number(project_id), vendor_id, locationParam);
       if (result.status === 0) {
         return res.status(200).json(ApiResponse.error(result.message, 500));
       }

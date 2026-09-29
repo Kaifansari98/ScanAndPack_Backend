@@ -119,6 +119,7 @@ export const deleteScanAndPackItemById = async (
   project_id: number,
   box_id: number,
   deleted_by?: number | null,
+  reason?: string,
 ) => {
   /*
   |--------------------------------------------------------------------------
@@ -128,6 +129,10 @@ export const deleteScanAndPackItemById = async (
 
   if (!id || !vendor_id || !project_id || !box_id) {
     throw new Error("id, vendor_id, project_id and box_id are required");
+  }
+
+  if (!reason || !reason.trim()) {
+    throw new Error("Reason is required to remove item from box");
   }
 
   /*
@@ -228,6 +233,7 @@ export const deleteScanAndPackItemById = async (
         scanned_at:
           existingMapping.actual_in_at || existingMapping.created_at || null,
         deleted_by: deleted_by ? Number(deleted_by) : null,
+        reason: reason.trim(),
       },
     });
   } catch (logError) {

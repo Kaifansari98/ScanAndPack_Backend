@@ -991,13 +991,10 @@ export const updateScannedItem = async (
       },
     });
 
-    const showStatusSettingPromise = is_check
-      ? getVendorSettingValue(vendor_id, "SHOW_STATUS_ON_SCAN")
-      : Promise.resolve(null);
-
-    const [selectedBox, pendingMappings, showStatusSetting] = await Promise.all(
-      [selectedBoxPromise, pendingMappingsPromise, showStatusSettingPromise],
-    );
+    const [selectedBox, pendingMappings] = await Promise.all([
+      selectedBoxPromise,
+      pendingMappingsPromise,
+    ]);
 
     if (box_id && !selectedBox) {
       return validationResponse(
@@ -1204,18 +1201,9 @@ export const updateScannedItem = async (
       );
     }
 
-    /*
-     * When status display is disabled, continue below. Do not recursively call
-     * updateScannedItem because that repeats every lookup and validation.
-     */
-    const mustPreviewBeforeCustomGroupPacking =
-      eligibleMapping.machine.machine_type_id === 18 &&
-      eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP;
-
-    if (
-      is_check &&
-      (showStatusSetting === "1" || mustPreviewBeforeCustomGroupPacking)
-    ) {
+    // /scan/check-item is validation-only. Never fall through to the update
+    // logic below; /scan/item is the endpoint that completes the item.
+    if (is_check) {
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
           cut_list_id,
@@ -1266,7 +1254,6 @@ export const updateScannedItem = async (
       return validationResponse(1, "", {
         mappedItem: eligibleMapping,
         activeDefect,
-        countdown_timer: 3,
       });
     }
 
@@ -5253,6 +5240,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
 export const getTraceTraceDashboard = async (
   vendor_id: number,
   statusFilter: string = "all",
+  scope: { lead_id?: number; project_id?: number } = {},
 ) => {
   try {
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
@@ -5261,6 +5249,8 @@ export const getTraceTraceDashboard = async (
         where: {
           vendor_id,
           isDeleted: false,
+          ...(scope.lead_id ? { lead_id: scope.lead_id } : {}),
+          ...(scope.project_id ? { id: scope.project_id } : {}),
           NOT: [
             { project_status: { equals: "Deactivated", mode: "insensitive" } },
             { project_status: { equals: "Deleted", mode: "insensitive" } },
@@ -5271,6 +5261,7 @@ export const getTraceTraceDashboard = async (
         select: {
           id: true,
           project_name: true,
+          lead_id: true,
           project_status: true,
           track_trace_status: true,
           created_at: true,
@@ -5330,6 +5321,7 @@ export const getTraceTraceDashboard = async (
       machine_id: number;
       machine_name: string;
       sequence_no: number;
+      assigned: number;
       total: number;
       scanned: number;
       pending: number;
@@ -5464,6 +5456,7 @@ export const getTraceTraceDashboard = async (
             machine_id: machine.id,
             machine_name: machine.machine_name,
             sequence_no: machine.sequence_no ?? 0,
+            assigned,
             total,
             scanned,
             pending,
@@ -5489,6 +5482,7 @@ export const getTraceTraceDashboard = async (
 
       return {
         project_id: project.id,
+        lead_id: project.lead_id,
         project_name: project.project_name,
         project_status: project.project_status,
         track_trace_status: project.track_trace_status,
@@ -6470,6 +6464,168 @@ export const markBoxSiteInService = async (
   } catch (error) {
     console.error("Error in markBoxSiteInService:", error);
     return validationResponse(0, "Failed to mark site in");
+  }
+};
+
+// ── Revert factory_out_at on a box ─────────────────────────────────────────────
+export const revertBoxFactoryOutService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+  user_id: number,
+  description: string,
+) => {
+  try {
+    if (!description || !description.trim()) {
+      return validationResponse(
+        0,
+        "Description is compulsory to revert factory out",
+      );
+    }
+
+    const box = await prisma.boxMaster.findFirst({
+      where: { id: box_id, project_id, vendor_id, is_deleted: false },
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        factory_out_at: true,
+        factory_out_by: true,
+        site_in_at: true,
+        site_in_by: true,
+        packed_at: true,
+        packed_by: true,
+      },
+    });
+
+    if (!box) return validationResponse(0, "Box not found");
+
+    if (!box.factory_out_at) {
+      return validationResponse(
+        0,
+        "Box has not been marked as factory out yet, cannot revert",
+      );
+    }
+
+    // Packed date and packed user must not be null
+    if (!box.packed_at || !box.packed_by) {
+      return validationResponse(
+        0,
+        "Factory out revert is not possible because box packing information is incomplete (packed_at and packed_by cannot be null)",
+      );
+    }
+
+    // Revert not possible if already at site
+    if (box.site_in_at !== null || box.site_in_by !== null) {
+      return validationResponse(
+        0,
+        "Factory out revert is not possible because the box is already at the site (Site In has been recorded)",
+      );
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Create revert log entry
+      const log = await tx.factoryOutRevertLog.create({
+        data: {
+          box_id: box.id,
+          project_id,
+          vendor_id,
+          factory_out_at: box.factory_out_at!,
+          factory_out_by: box.factory_out_by,
+          reverted_by: user_id,
+          reverted_at: new Date(),
+          description: description.trim(),
+        },
+        include: {
+          revertedByUser: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+          factoryOutByUser: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+      });
+
+      // 2. Clear factory_out_at and factory_out_by on BoxMaster
+      const updatedBox = await tx.boxMaster.update({
+        where: { id: box_id },
+        data: {
+          factory_out_at: null,
+          factory_out_by: null,
+        },
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+          factory_out_at: true,
+          factory_out_by: true,
+          site_in_at: true,
+          site_in_by: true,
+          packed_at: true,
+          packed_by: true,
+        },
+      });
+
+      return { updatedBox, log };
+    });
+
+    return validationResponse(
+      1,
+      "Factory out reverted successfully",
+      result,
+    );
+  } catch (error) {
+    console.error("Error in revertBoxFactoryOutService:", error);
+    return validationResponse(0, "Failed to revert factory out");
+  }
+};
+
+// ── Get Factory Out Revert Logs for a box ─────────────────────────────────────
+export const getBoxFactoryOutRevertLogsService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+) => {
+  try {
+    const logs = await prisma.factoryOutRevertLog.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+      },
+      include: {
+        revertedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        factoryOutByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        reverted_at: "desc",
+      },
+    });
+
+    return validationResponse(
+      1,
+      "Factory out revert logs fetched successfully",
+      logs,
+    );
+  } catch (error) {
+    console.error("Error in getBoxFactoryOutRevertLogsService:", error);
+    return validationResponse(0, "Failed to fetch factory out revert logs");
   }
 };
 
@@ -9498,7 +9654,22 @@ export const getBoxItemsService = async (
         box_name: true,
         box_status: true,
         factory_out_at: true,
+        factory_out_by: true,
         site_in_at: true,
+        site_in_by: true,
+        packed_at: true,
+        packed_by: true,
+        created_by: true,
+        created_date: true,
+        factoryOutByUser: {
+          select: { id: true, user_name: true },
+        },
+        siteInByUser: {
+          select: { id: true, user_name: true },
+        },
+        packedByUser: {
+          select: { id: true, user_name: true },
+        },
       },
     });
 
@@ -9556,10 +9727,10 @@ export const getBoxItemsService = async (
     const opIds = [
       ...new Set([
         ...mappings.map((mapping) => mapping.in_operator).filter(Boolean),
-
         ...mappings.map((mapping) => mapping.site_in_by).filter(Boolean),
+        box.created_by,
       ]),
-    ] as number[];
+    ].filter(Boolean) as number[];
 
     const ops =
       opIds.length > 0
@@ -9633,13 +9804,78 @@ export const getBoxItemsService = async (
       0,
     );
 
+    const revert_logs = await prisma.factoryOutRevertLog.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+      },
+      include: {
+        revertedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        factoryOutByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        reverted_at: "desc",
+      },
+    });
+
+    const unpack_logs = await prisma.boxUnpackLog.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+      },
+      include: {
+        unpackedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        packedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        boxCreatedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        unpacked_at: "desc",
+      },
+    });
+
+    const createdByUser = box.created_by
+      ? {
+          id: box.created_by,
+          user_name: opMap.get(box.created_by) ?? `User #${box.created_by}`,
+        }
+      : null;
+
     return validationResponse(1, "Box items fetched", {
       box: {
         ...box,
+        createdByUser,
         total_weight: Number(totalBoxWeight.toFixed(2)),
       },
-
       items,
+      revert_logs,
+      unpack_logs,
     });
   } catch (error) {
     console.error("getBoxItemsService error:", error);
@@ -11672,19 +11908,22 @@ export const getDefectSummaryService = async (vendor_id: number) => {
 export const getPendingDefectsService = async (
   vendor_id: number,
   page: number,
+  scope: { lead_id?: number; page_size?: number } = {},
 ) => {
   try {
-    const skip = (page - 1) * PAGE_SIZE;
+    const pageSize = scope.page_size ?? PAGE_SIZE;
+    const skip = (page - 1) * pageSize;
+    const projectScope = scope.lead_id ? { project: { lead_id: scope.lead_id, vendor_id, isDeleted: false } } : {};
 
     const [total, items] = await Promise.all([
       prisma.defectedItem.count({
-        where: { vendor_id, defect_status: "Pending" },
+        where: { vendor_id, ...projectScope, defect_status: "Pending" },
       }),
       prisma.defectedItem.findMany({
-        where: { vendor_id, defect_status: "Pending" },
+        where: { vendor_id, ...projectScope, defect_status: "Pending" },
         orderBy: { created_at: "desc" },
         skip,
-        take: PAGE_SIZE,
+        take: pageSize,
         select: {
           id: true,
           defect_status: true,
@@ -11717,8 +11956,8 @@ export const getPendingDefectsService = async (
       defects: defectsWithUrls,
       total,
       page,
-      page_size: PAGE_SIZE,
-      total_pages: Math.ceil(total / PAGE_SIZE),
+      page_size: pageSize,
+      total_pages: Math.ceil(total / pageSize),
     });
   } catch (error) {
     console.error("getPendingDefectsService error:", error);
@@ -11731,19 +11970,22 @@ export const getPendingDefectsService = async (
 export const getResolvedDefectsService = async (
   vendor_id: number,
   page: number,
+  scope: { lead_id?: number; page_size?: number } = {},
 ) => {
   try {
-    const skip = (page - 1) * PAGE_SIZE;
+    const pageSize = scope.page_size ?? PAGE_SIZE;
+    const skip = (page - 1) * pageSize;
+    const projectScope = scope.lead_id ? { project: { lead_id: scope.lead_id, vendor_id, isDeleted: false } } : {};
 
     const [total, items] = await Promise.all([
       prisma.defectedItem.count({
-        where: { vendor_id, defect_status: "Completed" },
+        where: { vendor_id, ...projectScope, defect_status: "Completed" },
       }),
       prisma.defectedItem.findMany({
-        where: { vendor_id, defect_status: "Completed" },
+        where: { vendor_id, ...projectScope, defect_status: "Completed" },
         orderBy: { defect_completed_at: "desc" },
         skip,
-        take: PAGE_SIZE,
+        take: pageSize,
         select: {
           id: true,
           defect_status: true,
@@ -11782,8 +12024,8 @@ export const getResolvedDefectsService = async (
       defects: defectsWithUrls,
       total,
       page,
-      page_size: PAGE_SIZE,
-      total_pages: Math.ceil(total / PAGE_SIZE),
+      page_size: pageSize,
+      total_pages: Math.ceil(total / pageSize),
     });
   } catch (error) {
     console.error("getResolvedDefectsService error:", error);

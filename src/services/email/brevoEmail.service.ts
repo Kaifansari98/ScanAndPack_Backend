@@ -419,6 +419,11 @@ export const sendBrevoEmail = async (
   const replyToName = identity?.senderName;
 
   if (!brevoEnabled) {
+    console.warn("⚠️ [BREVO EMAIL SKIPPED] Brevo is disabled", {
+      to: payload.toEmail,
+      subject: payload.subject,
+      vendor_id: payload.vendor_id,
+    });
     logger.info("Brevo email skipped: disabled", {
       to: payload.toEmail,
       subject: payload.subject,
@@ -439,6 +444,9 @@ export const sendBrevoEmail = async (
     recipientUser?.user_type?.user_type?.toLowerCase() === "super-admin" &&
     !payload.allowSuperAdmin
   ) {
+    console.warn("⚠️ [BREVO EMAIL SKIPPED] Recipient is super-admin and allowSuperAdmin is false", {
+      to: payload.toEmail,
+    });
     logger.info("Email skipped: recipient is super-admin", {
       to: payload.toEmail,
     });
@@ -450,6 +458,10 @@ export const sendBrevoEmail = async (
   }
 
   if (!apiKey || !senderEmail) {
+    console.error("❌ [BREVO EMAIL SKIPPED] Missing Brevo configuration", {
+      missing_api_key: !apiKey,
+      missing_sender_email: !senderEmail,
+    });
     logger.warn("Brevo email skipped: missing configuration", {
       missing_api_key: !apiKey,
       missing_sender_email: !senderEmail,
@@ -496,6 +508,13 @@ export const sendBrevoEmail = async (
 
     if (!response.ok) {
       const body = await response.text();
+      console.error("❌ [BREVO EMAIL FAILED]", {
+        status: response.status,
+        to: payload.toEmail,
+        subject: payload.subject,
+        sender: senderEmail,
+        error: body,
+      });
       logger.warn("Brevo email failed", {
         status: response.status,
         body,
@@ -507,6 +526,12 @@ export const sendBrevoEmail = async (
       };
     }
 
+    console.log("✅ [BREVO EMAIL SENT SUCCESSFULLY]", {
+      to: payload.toEmail,
+      subject: payload.subject,
+      sender: senderEmail,
+    });
+
     logger.info("Brevo email sent", {
       to: payload.toEmail,
       subject: payload.subject,
@@ -514,6 +539,11 @@ export const sendBrevoEmail = async (
 
     return { success: true };
   } catch (error: any) {
+    console.error("❌ [BREVO EMAIL EXCEPTION]", {
+      to: payload.toEmail,
+      subject: payload.subject,
+      error: error?.message,
+    });
     logger.warn("Brevo email error", {
       error: error?.message,
     });

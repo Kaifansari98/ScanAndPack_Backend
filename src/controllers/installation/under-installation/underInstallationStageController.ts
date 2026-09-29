@@ -1017,6 +1017,10 @@ export class UnderInstallationStageController {
         solution,
         teams, // comma-separated string "1,2,3" or array
         updated_by,
+        return_order_date,
+        return_order_delivery_method,
+        orderlogindetails_ids,
+        instance_id,
       } = req.body;
 
       const files = req.files as Express.Multer.File[];
@@ -1028,6 +1032,39 @@ export class UnderInstallationStageController {
           : typeof teams === "string" && teams.trim().length > 0
           ? teams.split(",").map((t: string) => Number(t.trim()))
           : [];
+      }
+
+      let parsedOrderLoginDetailsIds: number[] | undefined = undefined;
+      if (orderlogindetails_ids !== undefined) {
+        if (Array.isArray(orderlogindetails_ids)) {
+          parsedOrderLoginDetailsIds = orderlogindetails_ids.map(Number).filter((n: number) => !isNaN(n) && n > 0);
+        } else if (typeof orderlogindetails_ids === "string" && orderlogindetails_ids.trim().length > 0) {
+          try {
+            const parsed = JSON.parse(orderlogindetails_ids);
+            parsedOrderLoginDetailsIds = (Array.isArray(parsed) ? parsed : [parsed])
+              .map(Number)
+              .filter((n: number) => !isNaN(n) && n > 0);
+          } catch {
+            parsedOrderLoginDetailsIds = orderlogindetails_ids
+              .split(",")
+              .map((s: string) => Number(s.trim()))
+              .filter((n: number) => !isNaN(n) && n > 0);
+          }
+        } else if (typeof orderlogindetails_ids === "number" && !isNaN(orderlogindetails_ids) && orderlogindetails_ids > 0) {
+          parsedOrderLoginDetailsIds = [orderlogindetails_ids];
+        } else {
+          parsedOrderLoginDetailsIds = [];
+        }
+      }
+
+      let normalizedDeliveryMethod: ReturnOrderDeliveryMethod | undefined = undefined;
+      if (return_order_delivery_method !== undefined && return_order_delivery_method !== null && String(return_order_delivery_method).trim().length > 0) {
+        const cleaned = String(return_order_delivery_method).toUpperCase().replace(/[\s-]/g, "_");
+        if (cleaned === "PICKUP_SCHEDULE") {
+          normalizedDeliveryMethod = ReturnOrderDeliveryMethod.PICKUP_SCHEDULE;
+        } else {
+          normalizedDeliveryMethod = ReturnOrderDeliveryMethod.SELF_DELIVERY;
+        }
       }
 
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
@@ -1075,6 +1112,10 @@ export class UnderInstallationStageController {
         updated_by: Number(updated_by),
         teams: parsedTeams,
         files: uploadedFiles,
+        return_order_date: return_order_date ? new Date(return_order_date) : (return_order_date === null ? null : undefined),
+        return_order_delivery_method: normalizedDeliveryMethod,
+        orderlogindetails_ids: parsedOrderLoginDetailsIds,
+        instance_id: instance_id ? Number(instance_id) : undefined,
       };
 
       const result =

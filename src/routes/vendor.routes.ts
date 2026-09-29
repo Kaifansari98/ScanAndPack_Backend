@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { getCutlistHeaders, saveCutlistHeaders } from "../controllers/cutlistHeaders.controller";
 import {
   createVendor,
   getAllVendors,
@@ -24,6 +25,9 @@ import { handleMulterUpload } from "../middlewares/handleMulterUpload";
 import { uploadVendorAssets } from "../middlewares/uploadWasabi";
 
 const router = Router();
+
+router.get("/:vendor_id/cutlist-header-mappings", verifyToken, getCutlistHeaders);
+router.put("/:vendor_id/cutlist-header-mappings", verifyToken, saveCutlistHeaders);
 
 const vendorUploadFields = uploadVendorAssets.fields([
   { name: "logo", maxCount: 1 },

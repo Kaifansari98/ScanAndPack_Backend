@@ -1137,9 +1137,20 @@ export const getQualityCheckProjects = async (req: Request, res: Response) => {
 export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
   const { vendor_id } = _req.params;
   const status = (_req.query.status as string) || (_req.query.filter as string) || "all";
+  const scope: { lead_id?: number; project_id?: number } = {};
+  for (const key of ["lead_id", "project_id"] as const) {
+    if (_req.query[key] !== undefined) {
+      const value = Number(_req.query[key]);
+      if (typeof _req.query[key] !== "string" || !Number.isSafeInteger(value) || value <= 0) {
+        return res.status(400).json(ApiResponse.error(`Invalid ${key}`, 400));
+      }
+      scope[key] = value;
+    }
+  }
   const serviceResponse = await trackTraceService.getTraceTraceDashboard(
     Number(vendor_id),
     status,
+    scope,
   );
   if (serviceResponse.status == 0) {
     return res
@@ -1484,6 +1495,83 @@ export const markBoxSiteIn = async (req: Request, res: Response) => {
   }
 };
 
+export const revertBoxFactoryOut = async (req: Request, res: Response) => {
+  try {
+    const box_id = Number(req.params.box_id);
+    const project_id = Number(req.body.project_id);
+    const vendor_id = Number(req.body.vendor_id);
+    const user_id = Number(req.body.user_id);
+    const description = String(req.body.description ?? "").trim();
+
+    if ([box_id, project_id, vendor_id, user_id].some(isNaN)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+
+    if (!description) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error("Description is compulsory to revert factory out", 400),
+        );
+    }
+
+    const result = await trackTraceService.revertBoxFactoryOutService(
+      box_id,
+      project_id,
+      vendor_id,
+      user_id,
+      description,
+    );
+
+    if (result.status === 0) {
+      return res.status(400).json(ApiResponse.error(result.message, 400));
+    }
+
+    return res
+      .status(200)
+      .json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("revertBoxFactoryOut error:", err);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+export const getBoxFactoryOutRevertLogs = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const box_id = Number(req.params.box_id);
+    const project_id = Number(req.query.project_id ?? req.body.project_id);
+    const vendor_id = Number(req.query.vendor_id ?? req.body.vendor_id);
+
+    if ([box_id, project_id, vendor_id].some(isNaN)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+
+    const result = await trackTraceService.getBoxFactoryOutRevertLogsService(
+      box_id,
+      project_id,
+      vendor_id,
+    );
+
+    if (result.status === 0) {
+      return res.status(400).json(ApiResponse.error(result.message, 400));
+    }
+
+    return res
+      .status(200)
+      .json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("getBoxFactoryOutRevertLogs error:", err);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
 // POST /project-categories/sync
 export const syncCategories = async (req: Request, res: Response) => {
   try {
@@ -1793,10 +1881,22 @@ export const getPendingDefects = async (req: Request, res: Response) => {
     const page = Math.max(1, Number(req.query.page) || 1);
     if (isNaN(vendor_id))
       return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    const scope: { lead_id?: number; page_size?: number } = {};
+    for (const key of ["lead_id", "page_size"] as const) {
+      if (req.query[key] !== undefined) {
+        const value = Number(req.query[key]);
+        if (typeof req.query[key] !== "string" || !Number.isSafeInteger(value) || value <= 0 || (key === "page_size" && value > 100)) {
+          return res.status(400).json(ApiResponse.error(`Invalid ${key}`, 400));
+        }
+        scope[key] = value;
+      }
+    }
     const result = await trackTraceService.getPendingDefectsService(
       vendor_id,
       page,
+      scope,
     );
+    if (result.status === 0) return res.status(500).json(ApiResponse.error(result.message, 500));
     return res
       .status(200)
       .json(ApiResponse.success(result.data, result.message, 200));
@@ -1814,10 +1914,22 @@ export const getResolvedDefects = async (req: Request, res: Response) => {
     const page = Math.max(1, Number(req.query.page) || 1);
     if (isNaN(vendor_id))
       return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    const scope: { lead_id?: number; page_size?: number } = {};
+    for (const key of ["lead_id", "page_size"] as const) {
+      if (req.query[key] !== undefined) {
+        const value = Number(req.query[key]);
+        if (typeof req.query[key] !== "string" || !Number.isSafeInteger(value) || value <= 0 || (key === "page_size" && value > 100)) {
+          return res.status(400).json(ApiResponse.error(`Invalid ${key}`, 400));
+        }
+        scope[key] = value;
+      }
+    }
     const result = await trackTraceService.getResolvedDefectsService(
       vendor_id,
       page,
+      scope,
     );
+    if (result.status === 0) return res.status(500).json(ApiResponse.error(result.message, 500));
     return res
       .status(200)
       .json(ApiResponse.success(result.data, result.message, 200));

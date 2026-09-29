@@ -67,6 +67,8 @@ import {
   unsetBoxFromMapping,
   markBoxFactoryOut,
   markBoxSiteIn,
+  revertBoxFactoryOut,
+  getBoxFactoryOutRevertLogs,
   checkToken,
   syncCategories,
   getProjectDetail,
@@ -108,10 +110,12 @@ router.patch(
   deleteTrackTraceProject
 );
 
+// Step 1: validate the scan and return item details for the bottom sheet.
+router.post("/scan/check-item", check_item);
+// Step 2: persist completion only after the user confirms Mark Completed.
 router.post("/scan/item", uploadDisk.array("photos[]", 10), scan_item);
 router.post("/scan/machine-item", scan_machine_item);
 // router.post('/scan/item', scan_item);
-router.post("/scan/check-item", check_item);
 
 router.get("/machines/:vendor_id/:user_id", getAllMachines);
 
@@ -221,6 +225,8 @@ router.post("/units", createUnitMaster);
 
 router.patch("/boxes/:box_id/factory-out", markBoxFactoryOut);
 router.patch("/boxes/:box_id/site-in", markBoxSiteIn);
+router.patch("/boxes/:box_id/revert-factory-out", revertBoxFactoryOut);
+router.get("/boxes/:box_id/revert-logs", getBoxFactoryOutRevertLogs);
 
 router.get("/category/project-categories/check-token", checkToken);
 router.post("/category/project-categories/sync", syncCategories);

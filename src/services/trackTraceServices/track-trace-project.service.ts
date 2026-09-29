@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { resolveCutlistColumns } from "../../utils/cutlist-headers";
 import fs from "fs";
 import ExcelJS from "exceljs";
 import { prisma } from "../../../src/prisma/client";
@@ -62,14 +63,6 @@ export interface CadbidItem {
 const cleanText = (value: unknown): string => {
   if (value === null || value === undefined) return "";
   return String(value).trim();
-};
-
-const normalizeHeader = (header: string): string => {
-  return header
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .replace(/[_-]/g, " ");
 };
 
 const toNullableString = (value: unknown): string | null => {
@@ -706,7 +699,7 @@ function getCellValue(cell: ExcelJS.Cell): unknown {
   return cell.text !== "" ? cell.text : value;
 }
 
-async function parseProjectExcel(filePath: string): Promise<{
+async function parseProjectExcel(filePath: string, vendorId: number): Promise<{
   customerIdFromExcel: number | null;
   hasCustomPackingGroupColumn: boolean;
   items: CadbidItem[];
@@ -720,42 +713,21 @@ async function parseProjectExcel(filePath: string): Promise<{
     throw new Error("Excel sheet not found");
   }
 
-  const headerMap: Record<number, keyof CadbidItem | "customer_id"> = {};
-  let customerIdFromExcel: number | null = null;
-  let hasCustomPackingGroupColumn = false;
-
-  const headerRow = sheet.getRow(1);
-
-  headerRow.eachCell({ includeEmpty: true }, (cell, colNumber) => {
-    const rawHeader = cleanText(getCellValue(cell));
-    const normalized = normalizeHeader(rawHeader);
-
-    if (!normalized) return;
-
-    if (normalized === "custom packing group") {
-      hasCustomPackingGroupColumn = true;
-    }
-
-    const mappedField = HEADER_FIELD_MAP[normalized];
-
-    /**
-     * Your shared Excel has duplicate ELB headers:
-     * ELF | ELB | ELB | ESR
-     *
-     * First ELB should be el2.
-     * Second ELB is treated as sl1 fallback.
-     */
-    if (normalized === "elb") {
-      const alreadyHasEl2 = Object.values(headerMap).includes("el2");
-
-      headerMap[colNumber] = alreadyHasEl2 ? "sl1" : "el2";
-      return;
-    }
-
-    if (mappedField) {
-      headerMap[colNumber] = mappedField;
-    }
+  const savedMappingRows = await prisma.cutlistHeadersMapping.findMany({
+    where: { vendor_id: vendorId },
+    select: { source_header: true, ruleField: { select: { field_key: true } } },
   });
+  const savedMappings = savedMappingRows.map((row) => ({
+    source_header: row.source_header,
+    cutlist_field: row.ruleField?.field_key ?? null,
+  }));
+  const headers: { column: number; header: string }[] = [];
+  sheet.getRow(1).eachCell({ includeEmpty: true }, (cell, column) => {
+    headers.push({ column, header: cleanText(getCellValue(cell)) });
+  });
+  const headerMap = resolveCutlistColumns(headers, savedMappings, HEADER_FIELD_MAP);
+  let customerIdFromExcel: number | null = null;
+  const hasCustomPackingGroupColumn = Object.values(headerMap).includes("customPackingGroup");
 
   const items: CadbidItem[] = [];
 
@@ -1178,7 +1150,7 @@ export const createProjectService_old = async (
     | STEP 1 — Parse Excel
     |--------------------------------------------------------------------------
     */
-    const parsedExcel = await parseProjectExcel(file.path);
+    const parsedExcel = await parseProjectExcel(file.path, resolvedVendorId);
     console.log(parsedExcel);
 
     logger.info("Excel parsed", {
@@ -2078,7 +2050,7 @@ export const createProjectService = async (
     | STEP 1 — Parse Excel
     |--------------------------------------------------------------------------
     */
-    const parsedExcel = await parseProjectExcel(file.path);
+    const parsedExcel = await parseProjectExcel(file.path, resolvedVendorId);
     console.log(parsedExcel);
 
     logger.info("Excel parsed", {
@@ -3163,6 +3135,7 @@ export const getPackagingProjectContextService = async (
           },
           select: {
             location_name: true,
+            contact_no: true,
           },
           distinct: ["location_name"],
           orderBy: {
@@ -3191,8 +3164,9 @@ export const getPackagingProjectContextService = async (
       group_names: Array.from(groupNameMap.values()).sort((a, b) =>
         a.localeCompare(b),
       ),
-      locations: locationRows.map((location) => ({
+      locations: locationRows.map((location: any) => ({
         location_name: location.location_name,
+        contact_no: location.contact_no ?? null,
       })),
     },
   };
@@ -3359,13 +3333,18 @@ export const generateMultiLocationTemplateService = async (
       },
       select: {
         location_name: true,
+        contact_no: true,
         group_name: true,
         qty: true,
       },
     });
   const locations = new Map<
     string,
-    { locationName: string; quantities: Record<string, number> }
+    {
+      locationName: string;
+      contactNo: string;
+      quantities: Record<string, number>;
+    }
   >();
 
   for (const savedQuantity of savedLocationQuantities) {
@@ -3383,16 +3362,21 @@ export const generateMultiLocationTemplateService = async (
 
     const location = locations.get(normalizedLocationName) ?? {
       locationName,
+      contactNo: savedQuantity.contact_no?.trim() ?? "",
       quantities: Object.fromEntries(
         groupNames.map((groupName) => [groupName, 0])
       ),
     };
 
+    if (savedQuantity.contact_no && !location.contactNo) {
+      location.contactNo = savedQuantity.contact_no.trim();
+    }
+
     location.quantities[canonicalGroupName] = savedQuantity.qty;
     locations.set(normalizedLocationName, location);
   }
 
-  const headers = ["Location Name", ...groupNames];
+  const headers = ["Location Name", "Contact No", ...groupNames];
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet("Locations");
   const headerRow = worksheet.addRow(headers);
@@ -3423,16 +3407,19 @@ export const generateMultiLocationTemplateService = async (
     .forEach((location) => {
       const row = worksheet.addRow([
         location.locationName,
+        location.contactNo || "",
         ...groupNames.map((groupName) => location.quantities[groupName] ?? 0),
       ]);
 
       row.eachCell((cell, columnNumber) => {
         cell.alignment = {
-          horizontal: columnNumber === 1 ? "left" : "center",
+          horizontal: columnNumber <= 2 ? "left" : "center",
           vertical: "middle",
         };
 
-        if (columnNumber > 1) {
+        if (columnNumber === 2) {
+          cell.numFmt = "@";
+        } else if (columnNumber > 2) {
           cell.numFmt = "0";
         }
       });
