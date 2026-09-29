@@ -228,7 +228,10 @@ export class LeadStatsService {
       },
     });
 
-    const totalOpenLeads = await countByTag("Type 1", { is_draft: { not: true } });
+    const totalOpenLeads = await countByTag("Type 1", {
+      is_draft: undefined,
+      AND: [{ OR: [{ is_draft: false }, { draft_in_open_leads: true }] }],
+    });
 
     let totalDraftLeads = 0;
     if (isOnlineLeadFeatureEnabled) {

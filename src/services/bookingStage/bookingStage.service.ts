@@ -1488,6 +1488,14 @@ export class BookingStageService {
   /**
    * Fetch all leads for a vendor filtered by tag (Type 1, 2, 3, etc.)
    */
+  private static draftVisibilityFilter(tag: string): Prisma.LeadMasterWhereInput {
+    return tag.trim().toLowerCase() === "type 1"
+      ? {
+          AND: [{ OR: [{ is_draft: false }, { draft_in_open_leads: true }] }],
+        }
+      : { is_draft: { not: true } };
+  }
+
   public static async getVendorLeadsByTag(
     vendorId: number,
     tag: string,
@@ -1542,7 +1550,7 @@ export class BookingStageService {
     const whereClause: Prisma.LeadMasterWhereInput = {
       vendor_id: vendorId,
       is_deleted: false,
-      is_draft: { not: true },
+      ...BookingStageService.draftVisibilityFilter(tag),
       statusType: { tag, vendor_id: vendorId },
       activity_status: "onGoing",
       ...(excludedLeadIds.length > 0 && { id: { notIn: excludedLeadIds } }),
@@ -1618,7 +1626,7 @@ export class BookingStageService {
         where: {
           vendor_id: vendorId,
           is_deleted: false,
-          is_draft: { not: true },
+          ...BookingStageService.draftVisibilityFilter("Type 1"),
           statusType: { tag: "Type 1", vendor_id: vendorId },
           activity_status: { in: ["onGoing", "lostApproval"] },
         },
@@ -1695,7 +1703,7 @@ export class BookingStageService {
       where: {
         id: { in: leadIds },
         is_deleted: false,
-        is_draft: { not: true },
+        ...BookingStageService.draftVisibilityFilter("Type 1"),
         vendor_id: vendorId,
         statusType: { tag: "Type 1", vendor_id: vendorId },
         activity_status: { in: ["onGoing", "lostApproval"] },
@@ -2305,7 +2313,7 @@ export class BookingStageService {
         ? { franchise_id: franchiseId }
         : {}),
       is_deleted: false,
-      is_draft: { not: true },
+      ...BookingStageService.draftVisibilityFilter(tag),
       ...(statusIds !== null && { status_id: { in: statusIds } }),
       ...(materialIssueReadyOnly &&
         (vendorForFeature?.handlesLargeScaleProjects === true
@@ -5216,7 +5224,7 @@ export class BookingStageService {
       const baseWhere: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
-        is_draft: { not: true },
+        ...BookingStageService.draftVisibilityFilter(tag),
         status_id: { in: statusIds },
         statusType: shouldExcludeLaterStageTags
           ? {
@@ -5345,7 +5353,7 @@ export class BookingStageService {
     const baseWhere: Prisma.LeadMasterWhereInput = {
       id: { in: leadIds },
       is_deleted: false,
-      is_draft: { not: true },
+      ...BookingStageService.draftVisibilityFilter(tag),
       vendor_id: vendorId,
       status_id: { in: statusIds },
       statusType: shouldExcludeLaterStageTags

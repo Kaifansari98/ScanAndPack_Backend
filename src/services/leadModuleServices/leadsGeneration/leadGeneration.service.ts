@@ -351,6 +351,7 @@ export const createLeadService = async (
           assigned_by,
           initial_site_measurement_date,
           is_draft: !!payload.is_draft,
+          draft_in_open_leads: !!payload.is_draft && payload.draft_in_open_leads === true,
           client_id: client_id ?? null,
           order_number: order_number || null,
         };
@@ -1105,6 +1106,8 @@ export const getLeadById = async (
 
     // 4️⃣ Fetch the lead
     const leadIncludeConfig = {
+      vendor: { select: { handlesLargeScaleProjects: true } },
+      franchise: { select: { moduled_for_b2b: true } },
       account: {
         select: { id: true, name: true, email: true, contact_no: true },
       },
@@ -1242,6 +1245,7 @@ export const getLeadById = async (
     if (lead.is_draft && isLeadComplete(lead)) {
       await unmarkDraftAndSeparate(prisma, lead.id);
       lead.is_draft = false;
+      lead.draft_in_open_leads = false;
     }
 
     const latestActivityStatus = await prisma.leadActivityStatusLog.findFirst({
@@ -2567,6 +2571,7 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
       where: { id: leadId },
       data: {
         is_draft: false,
+        draft_in_open_leads: false,
         created_at: primaryTimestamp,
         updated_at: primaryTimestamp,
         ...(isOnlineLead || !lead.lead_code || lead.lead_code.startsWith("DRAFT") ? { lead_code: convertedLeadCode } : {}),
@@ -2645,6 +2650,7 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
             priority: lead.priority,
             account_id: lead.account_id,
             is_draft: false,
+            draft_in_open_leads: false,
             assign_to: resolvedAssignTo || lead.assign_to,
             created_at: itemTimestamp,
             updated_at: itemTimestamp,
@@ -2902,7 +2908,7 @@ export const updateLeadService = async (
     if (order_number !== undefined) leadUpdateData.order_number = order_number;
     if (refered_by !== undefined) leadUpdateData.refered_by = refered_by;
 
-    const updatedLead = await tx.leadMaster.update({
+    let updatedLead = await tx.leadMaster.update({
       where: { id: leadId },
       data: leadUpdateData,
     });
@@ -2914,15 +2920,26 @@ export const updateLeadService = async (
         include: {
           productMappings: { include: { productType: true } },
           leadProductStructureMapping: { include: { productStructure: true } },
+          vendor: { select: { handlesLargeScaleProjects: true } },
+          franchise: { select: { moduled_for_b2b: true } },
           assignedTo: { select: { user_email: true, user_name: true } },
           createdBy: { select: { user_name: true } },
           statusType: { select: { tag: true } },
         },
       });
 
-      if (hydratedLead && isLeadComplete(hydratedLead)) {
+      const canConvert = hydratedLead && isLeadComplete(hydratedLead);
+      if (payload.convert_to_lead && !canConvert) {
+        throw Object.assign(
+          new Error("Lead cannot be converted until all required details are completed."),
+          { statusCode: 400 },
+        );
+      }
+
+      if (hydratedLead && canConvert) {
         // Unmark draft and separate lead if multiple furniture types/structures exist
         await unmarkDraftAndSeparate(tx, leadId);
+        updatedLead = await tx.leadMaster.findUniqueOrThrow({ where: { id: leadId } });
 
         const assigneeEmail = hydratedLead.assignedTo?.user_email?.trim();
         if (hydratedLead.assign_to && assigneeEmail) {

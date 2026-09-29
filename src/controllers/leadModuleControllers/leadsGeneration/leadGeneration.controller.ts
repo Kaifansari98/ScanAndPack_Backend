@@ -1453,6 +1453,8 @@ export class LeadController {
           {
             lead: {
               id: result.lead.id,
+              is_draft: result.lead.is_draft,
+              draft_in_open_leads: result.lead.draft_in_open_leads,
               firstname: result.lead.firstname,
               lastname: result.lead.lastname,
               contact_no: result.lead.contact_no,
@@ -1478,6 +1480,11 @@ export class LeadController {
     } catch (error: any) {
       console.error("[ERROR] Failed to update lead:", error.message);
       console.error("[ERROR] Stack trace:", error.stack);
+
+      if (error.statusCode === 400) {
+        res.status(400).json(ApiResponse.error(error.message, 400));
+        return;
+      }
 
       // Handle specific error types
       if (error.message.includes("not found")) {

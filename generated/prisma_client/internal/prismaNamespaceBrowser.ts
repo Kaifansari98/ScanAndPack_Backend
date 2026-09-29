@@ -742,6 +742,7 @@ export const LeadMasterScalarFieldEnum = {
   pending_amount: 'pending_amount',
   total_project_amount: 'total_project_amount',
   is_draft: 'is_draft',
+  draft_in_open_leads: 'draft_in_open_leads',
   lead_code: 'lead_code',
   is_client_approval_submitted: 'is_client_approval_submitted',
   client_required_order_login_complition_date: 'client_required_order_login_complition_date',
