@@ -588,6 +588,81 @@ export class OnlineLeadController {
     }
   };
 
+  // 2.5 Fetch tab counts (pool, overall, my)
+  fetchTabCounts = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const vendorId = Number(req.query.vendor_id);
+      const userId = req.query.userId ? Number(req.query.userId) : null;
+
+      if (isNaN(vendorId)) {
+        return res.status(400).json({
+          success: false,
+          error: "Invalid or missing vendor_id parameter",
+        });
+      }
+
+      const requestingUser = await getRequestingUser(req);
+      if (!isUserAuthorizedForVendor(requestingUser, vendorId)) {
+        return res.status(403).json({
+          success: false,
+          error: "Access denied: Cannot access another vendor's leads.",
+        });
+      }
+
+      const baseConditions: any = {
+        vendor_id: vendorId,
+        OR: [
+          { approval_status: "PENDING" },
+          {
+            NOT: {
+              online_lead_followup_status: {
+                status_name: {
+                  in: ["Store Assigned", "Store Visit Done"],
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+        ],
+      };
+
+      const [poolCount, overallCount, myCount] = await Promise.all([
+        prisma.online_leads.count({
+          where: {
+            ...baseConditions,
+            assign_to: null,
+          },
+        }),
+        prisma.online_leads.count({
+          where: baseConditions,
+        }),
+        userId
+          ? prisma.online_leads.count({
+              where: {
+                ...baseConditions,
+                OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
+              },
+            })
+          : Promise.resolve(0),
+      ]);
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          pool: poolCount,
+          overall: overallCount,
+          my: myCount,
+        },
+      });
+    } catch (error: any) {
+      console.error("[ONLINE LEAD CONTROLLER] fetchTabCounts error:", error);
+      return res.status(500).json({
+        success: false,
+        error: error.message || "Failed to fetch tab counts",
+      });
+    }
+  };
+
   // 3. Fetch online leads with filters
   fetchLeads = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -754,9 +829,51 @@ export class OnlineLeadController {
         ],
       });
 
+      const baseCountConditions: any = {
+        vendor_id: vendorId,
+        OR: [
+          { approval_status: "PENDING" },
+          {
+            NOT: {
+              online_lead_followup_status: {
+                status_name: {
+                  in: ["Store Assigned", "Store Visit Done"],
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+        ],
+      };
+
+      const [poolCount, overallCount, myCount] = await Promise.all([
+        prisma.online_leads.count({
+          where: {
+            ...baseCountConditions,
+            assign_to: null,
+          },
+        }),
+        prisma.online_leads.count({
+          where: baseCountConditions,
+        }),
+        userId
+          ? prisma.online_leads.count({
+              where: {
+                ...baseCountConditions,
+                OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
+              },
+            })
+          : Promise.resolve(0),
+      ]);
+
       return res.status(200).json({
         success: true,
         data: leads.map(mapOnlineLeadToFrontend),
+        counts: {
+          pool: poolCount,
+          overall: overallCount,
+          my: myCount,
+        },
       });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] fetchLeads error:", error);

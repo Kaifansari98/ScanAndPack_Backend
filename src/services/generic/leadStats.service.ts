@@ -30,6 +30,7 @@ export class LeadStatsService {
     let totalMyTasks: number | null = null;
     let userType = "";
     let targetFranchiseId: number | undefined = franchiseId;
+    let isHO = false;
 
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
@@ -48,7 +49,7 @@ export class LeadStatsService {
         throw new Error("User does not belong to the specified vendor");
       }
 
-      const isHO = user.franchise_id
+      isHO = user.franchise_id
         ? (
             await prisma.franchiseMaster.findUnique({
               where: { id: user.franchise_id },
@@ -235,6 +236,15 @@ export class LeadStatsService {
 
     let totalDraftLeads = 0;
     if (isOnlineLeadFeatureEnabled) {
+      const shouldIncludeFranchise = userId
+        ? (userType === "admin" ||
+            userType === "auditor" ||
+            userType === "sales-executive") &&
+          !isHO
+        : Boolean(franchiseId);
+
+      const effectiveFranchiseId = userId ? targetFranchiseId : franchiseId;
+
       const pendingOnlineWhere: any = {
         vendor_id: vendorId,
         approval_status: "PENDING",
@@ -253,12 +263,12 @@ export class LeadStatsService {
           ],
         };
 
-        if (targetFranchiseId) {
+        if (shouldIncludeFranchise && effectiveFranchiseId) {
           pendingOnlineWhere.AND = [
             {
               OR: [
-                { pending_store_id: targetFranchiseId },
-                { store_id: targetFranchiseId },
+                { pending_store_id: effectiveFranchiseId },
+                { store_id: effectiveFranchiseId },
               ],
             },
             userCondition,
@@ -266,10 +276,10 @@ export class LeadStatsService {
         } else {
           Object.assign(pendingOnlineWhere, userCondition);
         }
-      } else if (targetFranchiseId) {
+      } else if (shouldIncludeFranchise && effectiveFranchiseId) {
         pendingOnlineWhere.OR = [
-          { pending_store_id: targetFranchiseId },
-          { store_id: targetFranchiseId },
+          { pending_store_id: effectiveFranchiseId },
+          { store_id: effectiveFranchiseId },
         ];
       }
 

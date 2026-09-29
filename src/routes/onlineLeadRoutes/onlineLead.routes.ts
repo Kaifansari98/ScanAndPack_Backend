@@ -13,6 +13,7 @@ router.post("/webhook/facebook", facebookWebhookController.handleWebhook);
 
 // Lead pool, My leads, Overall leads, and detailed views
 router.get("/", onlineLeadController.fetchLeads);
+router.get("/tab-counts", onlineLeadController.fetchTabCounts);
 router.post("/", onlineLeadController.createOnlineLead);
 router.post("/walk-in", onlineLeadController.createWalkInLead);
 router.post("/bulk-upload", upload.single("file"), onlineLeadController.bulkUploadLeads);

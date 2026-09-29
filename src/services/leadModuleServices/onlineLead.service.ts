@@ -382,6 +382,21 @@ export const STATIC_LEAD_COLUMNS = new Set([
   "hubmode",
   "hubchallenge",
   "hubverifytoken",
+  // Standard survey field names (to avoid camelCase duplicates in dynamic survey fields)
+  "modularsolution",
+  "modular_solution",
+  "whenneedready",
+  "when_need_ready",
+  "preferredshowroom",
+  "preferred_showroom",
+  "projectlocation",
+  "project_location",
+  "siteaddress",
+  "site_address",
+  "propertytype",
+  "property_type",
+  "budget",
+  "leadbudget",
 ]);
 
 /**
@@ -646,7 +661,7 @@ export function formatDesignRemarks(
  * Deduplicate questionnaire remarks by question key/group, ensuring only the latest unique questions remain.
  */
 export function deduplicateRemark(remarkText: string | null): string | null {
-  if (!remarkText || !remarkText.includes("**•")) return remarkText;
+  if (!remarkText || !remarkText.includes("**")) return remarkText;
 
   const blocks = remarkText
     .split(/\n\s*\n/)
@@ -655,37 +670,62 @@ export function deduplicateRemark(remarkText: string | null): string | null {
   const seenQuestions = new Map<string, string>();
   const nonQuestionBlocks: string[] = [];
 
+  const getCleanHeader = (h: string) => {
+    return h.replace(/^\*\*|\*\*$/g, "").replace(/^(?:•|ΓÇó)\s*/, "").trim();
+  };
+
+  const getQuestionKey = (header: string) => {
+    const norm = header.toLowerCase().replace(/[\s_\/|\-?.:*•]+/g, "");
+    if (
+      norm.includes("whenneedready") ||
+      norm.includes("whendoyouneed") ||
+      norm.includes("needready") ||
+      norm.includes("readyby")
+    ) return "when_need_ready";
+    if (
+      norm.includes("whereisyourproject") ||
+      norm.includes("projectlocated") ||
+      norm.includes("projectlocation") ||
+      norm.includes("siteaddress")
+    ) return "project_location";
+    if (
+      norm.includes("whatmodular") ||
+      norm.includes("modularsolution") ||
+      (norm.includes("modular") && norm.includes("solution"))
+    ) return "modular_solution";
+    if (
+      norm.includes("showroom") ||
+      norm.includes("shambhala") ||
+      norm.includes("preferredshowroom")
+    ) return "preferred_showroom";
+    if (norm.includes("budget") || norm.includes("leadbudget")) return "budget";
+    if (norm.includes("propertytype") || norm.includes("property")) return "property_type";
+    return norm;
+  };
+
   for (const block of blocks) {
-    if (block.startsWith("**•") || block.startsWith("•")) {
-      const firstLine = block.split("\n")[0] || "";
-      const normQ = firstLine.toLowerCase().replace(/[\s_\/|\-?.:*•]+/g, "");
+    if (block.startsWith("**•") || block.startsWith("•") || block.includes("?")) {
+      const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+      const headerLine = lines[0] || "";
+      const matchedGroup = getQuestionKey(headerLine);
 
-      let matchedGroup: string = normQ;
-      if (
-        normQ.includes("whereisyourproject") ||
-        normQ.includes("projectlocated")
-      ) {
-        matchedGroup = "project_location";
-      } else if (
-        normQ.includes("modularsolution") ||
-        normQ.includes("whatmodular")
-      ) {
-        matchedGroup = "modular_solution";
-      } else if (
-        normQ.includes("whenneedready") ||
-        normQ.includes("whendoyouneed") ||
-        normQ.includes("kitchenwardrobe")
-      ) {
-        matchedGroup = "when_need_ready";
-      } else if (
-        normQ.includes("showroom") ||
-        normQ.includes("shambhala")
-      ) {
-        matchedGroup = "preferred_showroom";
+      const existingBlock = seenQuestions.get(matchedGroup);
+      if (existingBlock) {
+        const existingLines = existingBlock.split("\n").map((l) => l.trim()).filter(Boolean);
+        const existingHeader = existingLines[0] || "";
+        const cleanHeader = getCleanHeader(headerLine);
+        const cleanExisting = getCleanHeader(existingHeader);
+        const isCurrentBetterHeader =
+          (cleanHeader.includes(" ") || cleanHeader.endsWith("?")) &&
+          (!cleanExisting.includes(" ") && !cleanExisting.endsWith("?"));
+        const currentAnswer = lines.slice(1).join("\n").trim();
+        const existingAnswer = existingLines.slice(1).join("\n").trim();
+        const chosenAnswer = currentAnswer || existingAnswer;
+        const chosenHeader = isCurrentBetterHeader ? headerLine : existingHeader;
+        seenQuestions.set(matchedGroup, chosenAnswer ? `${chosenHeader}\n${chosenAnswer}` : chosenHeader);
+      } else {
+        seenQuestions.set(matchedGroup, block);
       }
-
-      // Overwrite with the latest occurrence so updated headers/answers replace older ones
-      seenQuestions.set(matchedGroup, block);
     } else {
       nonQuestionBlocks.push(block);
     }
