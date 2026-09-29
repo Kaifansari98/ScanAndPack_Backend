@@ -288,6 +288,7 @@ export interface CreateLeadDTO {
   }[];
   initial_site_measurement_date?: Date;
   is_draft?: boolean;
+  draft_in_open_leads?: boolean;
   client_id?: number;
   order_number?: string;
 }
@@ -298,6 +299,7 @@ export interface DocumentUpload {
 }
 
 export interface UpdateLeadDTO {
+  convert_to_lead?: boolean;
   firstname: string;
   lastname: string;
   country_code: string;

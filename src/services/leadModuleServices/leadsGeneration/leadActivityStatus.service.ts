@@ -2062,6 +2062,8 @@ export class LeadActivityStatusService {
     const openOnGoingCount = await prisma.leadMaster.count({
       where: {
         ...whereClause,
+        is_draft: undefined,
+        AND: [{ OR: [{ is_draft: false }, { draft_in_open_leads: true }] }],
         activity_status: "onGoing",
         statusType: {
           type: "open",
