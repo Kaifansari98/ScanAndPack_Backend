@@ -1265,116 +1265,6 @@ export const updateScannedItem = async (
     // /scan/check-item is validation-only. Never fall through to the update
     // logic below; /scan/item is the endpoint that completes the item.
     if (is_check) {
-      if (
-        eligibleMapping.machine.machine_type_id === 18 &&
-        eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP
-      ) {
-        const productGroupName = eligibleMapping.cut_list.group_name?.trim();
-        const packingGroupName =
-          eligibleMapping.cut_list.custom_packing_group?.trim();
-
-        if (productGroupName && packingGroupName) {
-          const userOpenBox = await prisma.boxMaster.findFirst({
-            where: {
-              project_id: eligibleMapping.project_id,
-              vendor_id,
-              created_by,
-              is_deleted: false,
-              is_auto_created: true,
-              box_status: BoxStatus.unpacked,
-              product_group_name: {
-                equals: productGroupName,
-                mode: "insensitive",
-              },
-              packing_group_name: {
-                equals: packingGroupName,
-                mode: "insensitive",
-              },
-            },
-            select: {
-              id: true,
-              box_name: true,
-              cutListMachineMapping: {
-                where: {
-                  actual_in_at: {
-                    not: null,
-                  },
-                },
-                select: {
-                  cut_list_id: true,
-                  qty: true,
-                },
-              },
-            },
-          });
-
-          if (userOpenBox) {
-            const packedQty = userOpenBox.cutListMachineMapping
-              .filter((m) => m.cut_list_id === cut_list_id)
-              .reduce((sum, m) => sum + Math.max(1, Number(m.qty || 1)), 0);
-
-            const qtyPerBox = Math.max(
-              1,
-              Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
-            );
-
-            if (packedQty >= qtyPerBox) {
-              const groupCutLists = await prisma.cutList.findMany({
-                where: {
-                  project_id: eligibleMapping.project_id,
-                  vendor_id,
-                  status: { equals: "active", mode: "insensitive" },
-                  group_name: { equals: productGroupName, mode: "insensitive" },
-                  custom_packing_group: {
-                    equals: packingGroupName,
-                    mode: "insensitive",
-                  },
-                },
-                select: {
-                  id: true,
-                  item_name: true,
-                  no_of_qty_in_boxes: true,
-                },
-              });
-
-              const packedQtyMap = new Map<number, number>();
-              for (const m of userOpenBox.cutListMachineMapping) {
-                packedQtyMap.set(
-                  m.cut_list_id,
-                  (packedQtyMap.get(m.cut_list_id) ?? 0) +
-                    Math.max(1, Number(m.qty || 1)),
-                );
-              }
-
-              const pendingItems = groupCutLists
-                .filter(
-                  (item) =>
-                    (packedQtyMap.get(item.id) ?? 0) <
-                    Math.max(1, Number(item.no_of_qty_in_boxes || 1)),
-                )
-                .map((item) => {
-                  const req = Math.max(
-                    1,
-                    Number(item.no_of_qty_in_boxes || 1),
-                  );
-                  const remaining = req - (packedQtyMap.get(item.id) ?? 0);
-                  return `${item.item_name} (${remaining} more)`;
-                });
-
-              const pendingText =
-                pendingItems.length > 0
-                  ? `pending item(s): ${pendingItems.join(", ")}`
-                  : "other required items";
-
-              return validationResponse(
-                0,
-                `Box "${userOpenBox.box_name}" already has item "${eligibleMapping.cut_list.item_name}". Please scan the ${pendingText} to complete Box "${userOpenBox.box_name}" first.`,
-              );
-            }
-          }
-        }
-      }
-
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
           cut_list_id,
@@ -1441,6 +1331,7 @@ export const updateScannedItem = async (
     let selectedLocationAllocation: {
       id: number;
       locationName: string;
+      allocatedProductQty: number;
       maximumItemQty: number;
     } | null = null;
 
@@ -1516,6 +1407,7 @@ export const updateScannedItem = async (
       selectedLocationAllocation = {
         id: locationAllocation.id,
         locationName: locationAllocation.location_name,
+        allocatedProductQty: locationAllocation.qty,
         maximumItemQty,
       };
     }
@@ -1527,6 +1419,7 @@ export const updateScannedItem = async (
         cutListId: number;
         itemName: string;
         qtyPerBox: number;
+        availableQty: number;
       }>;
       projectLocationProductQuantityId: number | null;
       locationName: string | null;
@@ -1579,6 +1472,7 @@ export const updateScannedItem = async (
         select: {
           id: true,
           item_name: true,
+          qty: true,
           custom_packing_group: true,
           no_of_qty_in_boxes: true,
         },
@@ -1617,6 +1511,7 @@ export const updateScannedItem = async (
           cutListId: row.id,
           itemName: row.item_name,
           qtyPerBox: Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
+          availableQty: Math.max(0, Number(row.qty || 0)),
         }));
 
       if (packingGroupItems.length === 0) {
@@ -1827,6 +1722,94 @@ export const updateScannedItem = async (
         };
       }
 
+      if (automaticPackingDefinition) {
+        const groupCutListIds = automaticPackingDefinition.packingGroupItems.map(
+          (item) => item.cutListId,
+        );
+        const scannedGroupMappings = await tx.cutListMachineMapping.findMany({
+          where: {
+            project_id: eligibleMapping.project_id,
+            vendor_id,
+            machine_id,
+            expected_in: true,
+            actual_in_at: {
+              not: null,
+            },
+            in_operator: {
+              not: null,
+            },
+            cut_list_id: {
+              in: groupCutListIds,
+            },
+            ...(selectedLocationAllocation
+              ? {
+                  project_location_product_quantity_id:
+                    selectedLocationAllocation.id,
+                }
+              : {
+                  project_location_product_quantity_id: null,
+                }),
+          },
+          select: {
+            cut_list_id: true,
+            in_operator: true,
+            qty: true,
+          },
+        });
+
+        const quantitiesByOperator = new Map<number, Map<number, number>>();
+
+        for (const mapping of scannedGroupMappings) {
+          if (!mapping.in_operator) continue;
+
+          const operatorQuantities =
+            quantitiesByOperator.get(mapping.in_operator) ?? new Map();
+          operatorQuantities.set(
+            mapping.cut_list_id,
+            (operatorQuantities.get(mapping.cut_list_id) ?? 0) +
+              Math.max(1, Number(mapping.qty || 1)),
+          );
+          quantitiesByOperator.set(mapping.in_operator, operatorQuantities);
+        }
+
+        const reservedQuantities = new Map<number, number>();
+
+        for (const operatorQuantities of quantitiesByOperator.values()) {
+          const requiredBoxCount = Math.max(
+            ...automaticPackingDefinition.packingGroupItems.map((item) =>
+              Math.ceil(
+                (operatorQuantities.get(item.cutListId) ?? 0) /
+                  item.qtyPerBox,
+              ),
+            ),
+            0,
+          );
+
+          for (const item of automaticPackingDefinition.packingGroupItems) {
+            reservedQuantities.set(
+              item.cutListId,
+              (reservedQuantities.get(item.cutListId) ?? 0) +
+                requiredBoxCount * item.qtyPerBox,
+            );
+          }
+        }
+
+        for (const item of automaticPackingDefinition.packingGroupItems) {
+          const availableQty = selectedLocationAllocation
+            ? selectedLocationAllocation.allocatedProductQty * item.qtyPerBox
+            : item.availableQty;
+          const reservedQty = reservedQuantities.get(item.cutListId) ?? 0;
+
+          if (reservedQty > availableQty) {
+            throw new Error(
+              `Cannot scan "${eligibleMapping.cut_list.item_name}". ` +
+                `The scan would require ${reservedQty} "${item.itemName}" ` +
+                `items for this custom group, but only ${availableQty} are available.`,
+            );
+          }
+        }
+      }
+
       if (
         selectedLocationAllocation
       ) {
@@ -1936,42 +1919,10 @@ export const updateScannedItem = async (
           },
         );
 
-        // If the operator already has an open box for this group, but that box
-        // already has all required pieces of this item, do not silently open a
-        // new box. Prevent accidental duplicate scans until the current box is completed.
-        if (!targetBox && openBoxes.length > 0) {
-          const currentOpenBox = openBoxes[0];
-          const packedQtyMap = new Map<number, number>();
-          for (const m of currentOpenBox.cutListMachineMapping) {
-            packedQtyMap.set(
-              m.cut_list_id,
-              (packedQtyMap.get(m.cut_list_id) ?? 0) +
-                Math.max(1, Number(m.qty || 1)),
-            );
-          }
-
-          const pendingItems = automaticPackingDefinition.packingGroupItems
-            .filter(
-              (item) =>
-                (packedQtyMap.get(item.cutListId) ?? 0) < item.qtyPerBox,
-            )
-            .map((item) => {
-              const remaining =
-                item.qtyPerBox - (packedQtyMap.get(item.cutListId) ?? 0);
-              return `${item.itemName} (${remaining} more)`;
-            });
-
-          const pendingText =
-            pendingItems.length > 0
-              ? `pending item(s): ${pendingItems.join(", ")}`
-              : "other required items";
-
-          throw new Error(
-            `Box "${currentOpenBox.box_name}" already has item "${eligibleMapping.cut_list.item_name}". Please scan the ${pendingText} to complete Box "${currentOpenBox.box_name}" first.`,
-          );
-        }
 
         if (!targetBox) {
+          // Do not claim or wait on another operator's open box. Each
+          // operator gets an independent sequence of automatic boxes.
           const [sequenceAggregate, totalProjectBoxes, packingGroupSetAggregate] =
             await Promise.all([
               tx.boxMaster.aggregate({
