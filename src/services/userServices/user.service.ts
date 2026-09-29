@@ -131,6 +131,7 @@ export const createUserService = async (data: {
   vendor_id: number;
   franchise_id: number;
   user_name: string;
+  designation?: string | null;
   user_contact: string;
   user_email: string;
   user_timezone: string;
@@ -226,6 +227,7 @@ export const updateUserService = async (
   userId: number,
   data: {
     user_name?: string;
+    designation?: string | null;
     user_contact?: string;
     user_email?: string;
     user_timezone?: string;
@@ -249,6 +251,7 @@ export const updateUserService = async (
   const updateData: Record<string, any> = {};
 
   if (data.user_name !== undefined) updateData.user_name = data.user_name;
+  if (data.designation !== undefined) updateData.designation = data.designation;
   if (data.user_contact !== undefined) updateData.user_contact = data.user_contact;
   if (data.user_email !== undefined) updateData.user_email = data.user_email;
   if (data.user_timezone !== undefined) updateData.user_timezone = data.user_timezone;
@@ -299,6 +302,7 @@ export const getUsersByVendorService = async ({
   search = "",
   franchise_id,
   user_type,
+  exclude_user_type,
 }: {
   vendorId: number;
   page?: number;
@@ -306,6 +310,7 @@ export const getUsersByVendorService = async ({
   search?: string;
   franchise_id?: number;
   user_type?: string;
+  exclude_user_type?: string;
 }) => {
   if (!vendorId) {
     const error = new Error("vendorId is required");
@@ -317,6 +322,7 @@ export const getUsersByVendorService = async ({
   const limitNum = Number.isFinite(limit) && limit > 0 ? limit : 20;
   const normalizedSearch = search.trim();
   const normalizedUserType = user_type?.trim();
+  const normalizedExcludeUserType = exclude_user_type?.trim();
 
   const where: any = {
     vendor_id: vendorId,
@@ -327,11 +333,18 @@ export const getUsersByVendorService = async ({
     where.user_type = {
       user_type: { equals: normalizedUserType, mode: "insensitive" as const },
     };
+  } else if (normalizedExcludeUserType) {
+    where.user_type = {
+      isNot: {
+        user_type: { equals: normalizedExcludeUserType, mode: "insensitive" as const },
+      },
+    };
   }
 
   if (normalizedSearch) {
     where.OR = [
       { user_name: { contains: normalizedSearch, mode: "insensitive" as const } },
+      { designation: { contains: normalizedSearch, mode: "insensitive" as const } },
       { user_contact: { contains: normalizedSearch, mode: "insensitive" as const } },
       { user_email: { contains: normalizedSearch, mode: "insensitive" as const } },
       { status: { contains: normalizedSearch, mode: "insensitive" as const } },
@@ -366,6 +379,7 @@ export const getUsersByVendorService = async ({
         vendor_id: true,
         franchise_id: true,
         user_name: true,
+        designation: true,
         user_contact: true,
         user_email: true,
         user_timezone: true,

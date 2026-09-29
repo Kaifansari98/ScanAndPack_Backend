@@ -17288,6 +17288,7 @@ export const UserMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   user_name: 'user_name',
+  designation: 'designation',
   user_contact: 'user_contact',
   user_email: 'user_email',
   user_timezone: 'user_timezone',

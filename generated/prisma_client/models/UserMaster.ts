@@ -44,6 +44,7 @@ export type UserMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   user_name: string | null
+  designation: string | null
   user_contact: string | null
   user_email: string | null
   user_timezone: string | null
@@ -59,6 +60,7 @@ export type UserMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   user_name: string | null
+  designation: string | null
   user_contact: string | null
   user_email: string | null
   user_timezone: string | null
@@ -74,6 +76,7 @@ export type UserMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
   user_name: number
+  designation: number
   user_contact: number
   user_email: number
   user_timezone: number
@@ -105,6 +108,7 @@ export type UserMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
   user_name?: true
+  designation?: true
   user_contact?: true
   user_email?: true
   user_timezone?: true
@@ -120,6 +124,7 @@ export type UserMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   user_name?: true
+  designation?: true
   user_contact?: true
   user_email?: true
   user_timezone?: true
@@ -135,6 +140,7 @@ export type UserMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
   user_name?: true
+  designation?: true
   user_contact?: true
   user_email?: true
   user_timezone?: true
@@ -237,6 +243,7 @@ export type UserMasterGroupByOutputType = {
   id: number
   vendor_id: number
   user_name: string
+  designation: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -275,6 +282,7 @@ export type UserMasterWhereInput = {
   id?: Prisma.IntFilter<"UserMaster"> | number
   vendor_id?: Prisma.IntFilter<"UserMaster"> | number
   user_name?: Prisma.StringFilter<"UserMaster"> | string
+  designation?: Prisma.StringNullableFilter<"UserMaster"> | string | null
   user_contact?: Prisma.StringFilter<"UserMaster"> | string
   user_email?: Prisma.StringFilter<"UserMaster"> | string
   user_timezone?: Prisma.StringFilter<"UserMaster"> | string
@@ -470,6 +478,7 @@ export type UserMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
+  designation?: Prisma.SortOrderInput | Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
   user_timezone?: Prisma.SortOrder
@@ -669,6 +678,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserMasterWhereInput | Prisma.UserMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"UserMaster"> | number
   user_name?: Prisma.StringFilter<"UserMaster"> | string
+  designation?: Prisma.StringNullableFilter<"UserMaster"> | string | null
   user_email?: Prisma.StringFilter<"UserMaster"> | string
   user_timezone?: Prisma.StringFilter<"UserMaster"> | string
   password?: Prisma.StringFilter<"UserMaster"> | string
@@ -863,6 +873,7 @@ export type UserMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
+  designation?: Prisma.SortOrderInput | Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
   user_timezone?: Prisma.SortOrder
@@ -886,6 +897,7 @@ export type UserMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"UserMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"UserMaster"> | number
   user_name?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
+  designation?: Prisma.StringNullableWithAggregatesFilter<"UserMaster"> | string | null
   user_contact?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
   user_email?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
   user_timezone?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
@@ -899,6 +911,7 @@ export type UserMasterScalarWhereWithAggregatesInput = {
 
 export type UserMasterCreateInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -1092,6 +1105,7 @@ export type UserMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -1282,6 +1296,7 @@ export type UserMasterUncheckedCreateInput = {
 
 export type UserMasterUpdateInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1475,6 +1490,7 @@ export type UserMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1667,6 +1683,7 @@ export type UserMasterCreateManyInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -1680,6 +1697,7 @@ export type UserMasterCreateManyInput = {
 
 export type UserMasterUpdateManyMutationInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1693,6 +1711,7 @@ export type UserMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1718,6 +1737,7 @@ export type UserMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
+  designation?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
   user_timezone?: Prisma.SortOrder
@@ -1740,6 +1760,7 @@ export type UserMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
+  designation?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
   user_timezone?: Prisma.SortOrder
@@ -1755,6 +1776,7 @@ export type UserMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_name?: Prisma.SortOrder
+  designation?: Prisma.SortOrder
   user_contact?: Prisma.SortOrder
   user_email?: Prisma.SortOrder
   user_timezone?: Prisma.SortOrder
@@ -4533,6 +4555,7 @@ export type UserMasterUpdateOneWithoutCutListRulesUpdatedNestedInput = {
 
 export type UserMasterCreateWithoutVendorInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -4724,6 +4747,7 @@ export type UserMasterCreateWithoutVendorInput = {
 export type UserMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -4945,6 +4969,7 @@ export type UserMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"UserMaster"> | number
   vendor_id?: Prisma.IntFilter<"UserMaster"> | number
   user_name?: Prisma.StringFilter<"UserMaster"> | string
+  designation?: Prisma.StringNullableFilter<"UserMaster"> | string | null
   user_contact?: Prisma.StringFilter<"UserMaster"> | string
   user_email?: Prisma.StringFilter<"UserMaster"> | string
   user_timezone?: Prisma.StringFilter<"UserMaster"> | string
@@ -4958,6 +4983,7 @@ export type UserMasterScalarWhereInput = {
 
 export type UserMasterCreateWithoutUser_typeInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -5150,6 +5176,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -5365,6 +5392,7 @@ export type UserMasterUpdateManyWithWhereWithoutUser_typeInput = {
 
 export type UserMasterCreateWithoutDocumentsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -5557,6 +5585,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -5762,6 +5791,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDocumentsInput = {
 
 export type UserMasterUpdateWithoutDocumentsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5954,6 +5984,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6143,6 +6174,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
 
 export type UserMasterCreateWithoutRevokedSessionsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -6335,6 +6367,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -6529,6 +6562,7 @@ export type UserMasterCreateOrConnectWithoutRevokedSessionsInput = {
 
 export type UserMasterCreateWithoutSessionsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -6721,6 +6755,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -6926,6 +6961,7 @@ export type UserMasterUpdateToOneWithWhereWithoutRevokedSessionsInput = {
 
 export type UserMasterUpdateWithoutRevokedSessionsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7118,6 +7154,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7318,6 +7355,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSessionsInput = {
 
 export type UserMasterUpdateWithoutSessionsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7510,6 +7548,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7699,6 +7738,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
 
 export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -7891,6 +7931,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -8096,6 +8137,7 @@ export type UserMasterUpdateToOneWithWhereWithoutUserPrivilegeMappingsInput = {
 
 export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8288,6 +8330,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8477,6 +8520,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
 
 export type UserMasterCreateWithoutCreatedProjectsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -8669,6 +8713,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -8863,6 +8908,7 @@ export type UserMasterCreateOrConnectWithoutCreatedProjectsInput = {
 
 export type UserMasterCreateWithoutDeletedProjectsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -9055,6 +9101,7 @@ export type UserMasterUncheckedCreateWithoutDeletedProjectsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -9249,6 +9296,7 @@ export type UserMasterCreateOrConnectWithoutDeletedProjectsInput = {
 
 export type UserMasterCreateWithoutProjectMastersInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -9441,6 +9489,7 @@ export type UserMasterUncheckedCreateWithoutProjectMastersInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -9646,6 +9695,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCreatedProjectsInput = {
 
 export type UserMasterUpdateWithoutCreatedProjectsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9838,6 +9888,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10038,6 +10089,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDeletedProjectsInput = {
 
 export type UserMasterUpdateWithoutDeletedProjectsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10230,6 +10282,7 @@ export type UserMasterUncheckedUpdateWithoutDeletedProjectsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10430,6 +10483,7 @@ export type UserMasterUpdateToOneWithWhereWithoutProjectMastersInput = {
 
 export type UserMasterUpdateWithoutProjectMastersInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10622,6 +10676,7 @@ export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10811,6 +10866,7 @@ export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
 
 export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -11003,6 +11059,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -11197,6 +11254,7 @@ export type UserMasterCreateOrConnectWithoutBoxesFactoryOutInput = {
 
 export type UserMasterCreateWithoutBoxesPackedByInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -11389,6 +11447,7 @@ export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -11583,6 +11642,7 @@ export type UserMasterCreateOrConnectWithoutBoxesPackedByInput = {
 
 export type UserMasterCreateWithoutBoxesSiteInInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -11775,6 +11835,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -11980,6 +12041,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBoxesFactoryOutInput = {
 
 export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12172,6 +12234,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12372,6 +12435,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBoxesPackedByInput = {
 
 export type UserMasterUpdateWithoutBoxesPackedByInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12564,6 +12628,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12764,6 +12829,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBoxesSiteInInput = {
 
 export type UserMasterUpdateWithoutBoxesSiteInInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12956,6 +13022,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13145,6 +13212,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
 
 export type UserMasterCreateWithoutScanItemsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -13337,6 +13405,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -13542,6 +13611,7 @@ export type UserMasterUpdateToOneWithWhereWithoutScanItemsCreatedInput = {
 
 export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13734,6 +13804,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13923,6 +13994,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadsAssignedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -14115,6 +14187,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -14309,6 +14382,7 @@ export type UserMasterCreateOrConnectWithoutLeadsAssignedInput = {
 
 export type UserMasterCreateWithoutLeadsDelegatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -14501,6 +14575,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -14695,6 +14770,7 @@ export type UserMasterCreateOrConnectWithoutLeadsDelegatedInput = {
 
 export type UserMasterCreateWithoutLeadsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -14887,6 +14963,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -15081,6 +15158,7 @@ export type UserMasterCreateOrConnectWithoutLeadsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -15273,6 +15351,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -15478,6 +15557,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadsAssignedInput = {
 
 export type UserMasterUpdateWithoutLeadsAssignedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15670,6 +15750,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15870,6 +15951,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadsDelegatedInput = {
 
 export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16062,6 +16144,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16262,6 +16345,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadsCreatedInput = {
 
 export type UserMasterUpdateWithoutLeadsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16454,6 +16538,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16654,6 +16739,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadsUpdatedInput = {
 
 export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16846,6 +16932,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17035,6 +17122,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -17227,6 +17315,7 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -17432,6 +17521,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadSpecificationsCreatedInput 
 
 export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17624,6 +17714,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17813,6 +17904,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -18005,6 +18097,7 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -18210,6 +18303,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadCarcassMaterialMappingsCrea
 
 export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18402,6 +18496,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18591,6 +18686,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
 
 export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -18783,6 +18879,7 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -18988,6 +19085,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadShutterMaterialMappingsCrea
 
 export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19180,6 +19278,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19369,6 +19468,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
 
 export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -19561,6 +19661,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -19755,6 +19856,7 @@ export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsApprovedInput
 
 export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -19947,6 +20049,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -20152,6 +20255,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadSuperAdminApprovalsApproved
 
 export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20344,6 +20448,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20544,6 +20649,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadSuperAdminApprovalsCreatedI
 
 export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20736,6 +20842,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20925,6 +21032,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
 
 export type UserMasterCreateWithoutLeadUserCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -21117,6 +21225,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -21311,6 +21420,7 @@ export type UserMasterCreateOrConnectWithoutLeadUserCreatedInput = {
 
 export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -21503,6 +21613,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -21697,6 +21808,7 @@ export type UserMasterCreateOrConnectWithoutLeadUserUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadUserAsUserInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -21889,6 +22001,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -22094,6 +22207,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadUserCreatedInput = {
 
 export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22286,6 +22400,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22486,6 +22601,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadUserUpdatedInput = {
 
 export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22678,6 +22794,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22878,6 +22995,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadUserAsUserInput = {
 
 export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -23070,6 +23188,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -23259,6 +23378,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
 
 export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -23451,6 +23571,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -23656,6 +23777,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadActivityStatusLogInput = {
 
 export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -23848,6 +23970,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -24037,6 +24160,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
 
 export type UserMasterCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -24229,6 +24353,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsCreatedI
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -24423,6 +24548,7 @@ export type UserMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsCreatedI
 
 export type UserMasterCreateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -24615,6 +24741,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsReleased
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -24820,6 +24947,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadScopedActivityStatusLogsCre
 
 export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -25012,6 +25140,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsCreatedI
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -25212,6 +25341,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadScopedActivityStatusLogsRel
 
 export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -25404,6 +25534,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleased
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -25593,6 +25724,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleased
 
 export type UserMasterCreateWithoutAccountsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -25785,6 +25917,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -25979,6 +26112,7 @@ export type UserMasterCreateOrConnectWithoutAccountsCreatedInput = {
 
 export type UserMasterCreateWithoutAccountsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -26171,6 +26305,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -26376,6 +26511,7 @@ export type UserMasterUpdateToOneWithWhereWithoutAccountsCreatedInput = {
 
 export type UserMasterUpdateWithoutAccountsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -26568,6 +26704,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -26768,6 +26905,7 @@ export type UserMasterUpdateToOneWithWhereWithoutAccountsUpdatedInput = {
 
 export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -26960,6 +27098,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -27149,6 +27288,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -27341,6 +27481,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -27546,6 +27687,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadProductsCreatedInput = {
 
 export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -27738,6 +27880,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -27927,6 +28070,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
 
 export type UserMasterCreateWithoutProcessBriefsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -28119,6 +28263,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -28313,6 +28458,7 @@ export type UserMasterCreateOrConnectWithoutProcessBriefsCreatedInput = {
 
 export type UserMasterCreateWithoutProcessBriefsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -28505,6 +28651,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -28710,6 +28857,7 @@ export type UserMasterUpdateToOneWithWhereWithoutProcessBriefsCreatedInput = {
 
 export type UserMasterUpdateWithoutProcessBriefsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -28902,6 +29050,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -29102,6 +29251,7 @@ export type UserMasterUpdateToOneWithWhereWithoutProcessBriefsUpdatedInput = {
 
 export type UserMasterUpdateWithoutProcessBriefsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -29294,6 +29444,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -29483,6 +29634,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadProcessBriefsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -29675,6 +29827,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -29869,6 +30022,7 @@ export type UserMasterCreateOrConnectWithoutLeadProcessBriefsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadProcessBriefsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -30061,6 +30215,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -30266,6 +30421,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadProcessBriefsCreatedInput =
 
 export type UserMasterUpdateWithoutLeadProcessBriefsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -30458,6 +30614,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -30658,6 +30815,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadProcessBriefsUpdatedInput =
 
 export type UserMasterUpdateWithoutLeadProcessBriefsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -30850,6 +31008,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -31039,6 +31198,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
 
 export type UserMasterCreateWithoutPbmCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -31231,6 +31391,7 @@ export type UserMasterUncheckedCreateWithoutPbmCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -31425,6 +31586,7 @@ export type UserMasterCreateOrConnectWithoutPbmCreatedInput = {
 
 export type UserMasterCreateWithoutPbmUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -31617,6 +31779,7 @@ export type UserMasterUncheckedCreateWithoutPbmUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -31822,6 +31985,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPbmCreatedInput = {
 
 export type UserMasterUpdateWithoutPbmCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -32014,6 +32178,7 @@ export type UserMasterUncheckedUpdateWithoutPbmCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -32214,6 +32379,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPbmUpdatedInput = {
 
 export type UserMasterUpdateWithoutPbmUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -32406,6 +32572,7 @@ export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -32595,6 +32762,7 @@ export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadReqMaterialsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -32787,6 +32955,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -32981,6 +33150,7 @@ export type UserMasterCreateOrConnectWithoutLeadReqMaterialsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadReqMaterialsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -33173,6 +33343,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -33378,6 +33549,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadReqMaterialsCreatedInput = 
 
 export type UserMasterUpdateWithoutLeadReqMaterialsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -33570,6 +33742,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -33770,6 +33943,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadReqMaterialsUpdatedInput = 
 
 export type UserMasterUpdateWithoutLeadReqMaterialsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -33962,6 +34136,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -34151,6 +34326,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -34343,6 +34519,7 @@ export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -34548,6 +34725,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadHardwareMappingsCreatedInpu
 
 export type UserMasterUpdateWithoutLeadHardwareMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -34740,6 +34918,7 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -34929,6 +35108,7 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -35121,6 +35301,7 @@ export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedIn
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -35326,6 +35507,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadLightCarcasUnitMappingsCrea
 
 export type UserMasterUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -35518,6 +35700,7 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -35707,6 +35890,7 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
 
 export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -35899,6 +36083,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedIn
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -36104,6 +36289,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadOtherAppliancesMappingsCrea
 
 export type UserMasterUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -36296,6 +36482,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -36485,6 +36672,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
 
 export type UserMasterCreateWithoutSpecificationDocumentMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -36677,6 +36865,7 @@ export type UserMasterUncheckedCreateWithoutSpecificationDocumentMappingsCreated
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -36882,6 +37071,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSpecificationDocumentMappingsCr
 
 export type UserMasterUpdateWithoutSpecificationDocumentMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -37074,6 +37264,7 @@ export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreated
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -37263,6 +37454,7 @@ export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreated
 
 export type UserMasterCreateWithoutDocumentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -37455,6 +37647,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -37649,6 +37842,7 @@ export type UserMasterCreateOrConnectWithoutDocumentsCreatedInput = {
 
 export type UserMasterCreateWithoutDocumentsDeletedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -37841,6 +38035,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -38046,6 +38241,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDocumentsCreatedInput = {
 
 export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -38238,6 +38434,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -38438,6 +38635,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDocumentsDeletedInput = {
 
 export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -38630,6 +38828,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -38819,6 +39018,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
 
 export type UserMasterCreateWithoutB2bDocumentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -39011,6 +39211,7 @@ export type UserMasterUncheckedCreateWithoutB2bDocumentsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -39216,6 +39417,7 @@ export type UserMasterUpdateToOneWithWhereWithoutB2bDocumentsCreatedInput = {
 
 export type UserMasterUpdateWithoutB2bDocumentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -39408,6 +39610,7 @@ export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -39597,6 +39800,7 @@ export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -39789,6 +39993,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -39983,6 +40188,7 @@ export type UserMasterCreateOrConnectWithoutLeadChatMembersAddedInput = {
 
 export type UserMasterCreateWithoutLeadChatMembersInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -40175,6 +40381,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -40380,6 +40587,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadChatMembersAddedInput = {
 
 export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -40572,6 +40780,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -40772,6 +40981,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadChatMembersInput = {
 
 export type UserMasterUpdateWithoutLeadChatMembersInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -40964,6 +41174,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -41153,6 +41364,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
 
 export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -41345,6 +41557,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -41550,6 +41763,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadChatMessagesSentInput = {
 
 export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -41742,6 +41956,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -41931,6 +42146,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
 
 export type UserMasterCreateWithoutLeadChatMentionsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -42123,6 +42339,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -42328,6 +42545,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadChatMentionsInput = {
 
 export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -42520,6 +42738,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -42709,6 +42928,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
 
 export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -42901,6 +43121,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -43095,6 +43316,7 @@ export type UserMasterCreateOrConnectWithoutLeadChatDocumentsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -43287,6 +43509,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -43492,6 +43715,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadChatDocumentsCreatedInput =
 
 export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -43684,6 +43908,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -43884,6 +44109,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadChatDocumentsDeletedInput =
 
 export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -44076,6 +44302,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -44265,6 +44492,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
 
 export type UserMasterCreateWithoutProductStructureInstancesInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -44457,6 +44685,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -44662,6 +44891,7 @@ export type UserMasterUpdateToOneWithWhereWithoutProductStructureInstancesInput 
 
 export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -44854,6 +45084,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -45043,6 +45274,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
 
 export type UserMasterCreateWithoutPaymentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -45235,6 +45467,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -45440,6 +45673,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPaymentsCreatedInput = {
 
 export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -45632,6 +45866,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -45821,6 +46056,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
 
 export type UserMasterCreateWithoutLedgersCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -46013,6 +46249,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -46218,6 +46455,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLedgersCreatedInput = {
 
 export type UserMasterUpdateWithoutLedgersCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -46410,6 +46648,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -46599,6 +46838,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
 
 export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -46791,6 +47031,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -46985,6 +47226,7 @@ export type UserMasterCreateOrConnectWithoutSmallOrderRequestsCreatedInput = {
 
 export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -47177,6 +47419,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -47382,6 +47625,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSmallOrderRequestsCreatedInput 
 
 export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -47574,6 +47818,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -47774,6 +48019,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSmallOrderRequestsUpdatedInput 
 
 export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -47966,6 +48212,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -48155,6 +48402,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
 
 export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -48347,6 +48595,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -48552,6 +48801,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSmallOrderRequestDocumentsCreat
 
 export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -48744,6 +48994,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -48933,6 +49184,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
 
 export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -49125,6 +49377,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -49319,6 +49572,7 @@ export type UserMasterCreateOrConnectWithoutLeadAmcContractsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -49511,6 +49765,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -49716,6 +49971,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadAmcContractsCreatedInput = 
 
 export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -49908,6 +50164,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -50108,6 +50365,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadAmcContractsUpdatedInput = 
 
 export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -50300,6 +50558,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -50489,6 +50748,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -50681,6 +50941,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -50875,6 +51136,7 @@ export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCompletedInput =
 
 export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -51067,6 +51329,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -51261,6 +51524,7 @@ export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCreatedInput = {
 
 export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -51453,6 +51717,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -51647,6 +51912,7 @@ export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesRejectedInput = 
 
 export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -51839,6 +52105,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -52044,6 +52311,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadServiceSchedulesCompletedIn
 
 export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -52236,6 +52504,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -52436,6 +52705,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadServiceSchedulesCreatedInpu
 
 export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -52628,6 +52898,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -52828,6 +53099,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadServiceSchedulesRejectedInp
 
 export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -53020,6 +53292,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -53220,6 +53493,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadServiceSchedulesUpdatedInpu
 
 export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -53412,6 +53686,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -53601,6 +53876,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadStatusLogsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -53793,6 +54069,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -53998,6 +54275,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadStatusLogsInput = {
 
 export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -54190,6 +54468,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -54379,6 +54658,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
 
 export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -54571,6 +54851,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -54765,6 +55046,7 @@ export type UserMasterCreateOrConnectWithoutDesignMeetingsCreatedInput = {
 
 export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -54957,6 +55239,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -55162,6 +55445,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDesignMeetingsCreatedInput = {
 
 export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -55354,6 +55638,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -55554,6 +55839,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDesignMeetingsUpdatedInput = {
 
 export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -55746,6 +56032,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -55935,6 +56222,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
 
 export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -56127,6 +56415,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -56321,6 +56610,7 @@ export type UserMasterCreateOrConnectWithoutClientVisitsCreatedInput = {
 
 export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -56513,6 +56803,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -56718,6 +57009,7 @@ export type UserMasterUpdateToOneWithWhereWithoutClientVisitsCreatedInput = {
 
 export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -56910,6 +57202,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -57110,6 +57403,7 @@ export type UserMasterUpdateToOneWithWhereWithoutClientVisitsUpdatedInput = {
 
 export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -57302,6 +57596,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -57491,6 +57786,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
 
 export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -57683,6 +57979,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -57888,6 +58185,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDesignMeetingDocsMappingForCrea
 
 export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -58080,6 +58378,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -58269,6 +58568,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
 
 export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -58461,6 +58761,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -58666,6 +58967,7 @@ export type UserMasterUpdateToOneWithWhereWithoutClientVisitDocumentMappingsCrea
 
 export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -58858,6 +59160,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -59047,6 +59350,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
 
 export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -59239,6 +59543,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -59433,6 +59738,7 @@ export type UserMasterCreateOrConnectWithoutDesignSelectionsCreatedInput = {
 
 export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -59625,6 +59931,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -59830,6 +60137,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDesignSelectionsCreatedInput = 
 
 export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -60022,6 +60330,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -60222,6 +60531,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDesignSelectionsUpdatedInput = 
 
 export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -60414,6 +60724,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -60603,6 +60914,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
 
 export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -60795,6 +61107,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -60989,6 +61302,7 @@ export type UserMasterCreateOrConnectWithoutChsMappingCreatedByInput = {
 
 export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -61181,6 +61495,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -61386,6 +61701,7 @@ export type UserMasterUpdateToOneWithWhereWithoutChsMappingCreatedByInput = {
 
 export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -61578,6 +61894,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -61778,6 +62095,7 @@ export type UserMasterUpdateToOneWithWhereWithoutChsMappingUpdatedByInput = {
 
 export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -61970,6 +62288,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -62159,6 +62478,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
 
 export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -62351,6 +62671,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -62545,6 +62866,7 @@ export type UserMasterCreateOrConnectWithoutSupervisorMappingsCreatedInput = {
 
 export type UserMasterCreateWithoutSupervisorMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -62737,6 +63059,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -62942,6 +63265,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSupervisorMappingsCreatedInput 
 
 export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -63134,6 +63458,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -63334,6 +63659,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSupervisorMappingsInput = {
 
 export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -63526,6 +63852,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -63715,6 +64042,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
 
 export type UserMasterCreateWithoutLeadTasksClosedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -63907,6 +64235,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -64101,6 +64430,7 @@ export type UserMasterCreateOrConnectWithoutLeadTasksClosedInput = {
 
 export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -64293,6 +64623,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -64487,6 +64818,7 @@ export type UserMasterCreateOrConnectWithoutLeadTasksCreatedInput = {
 
 export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -64679,6 +65011,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -64884,6 +65217,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadTasksClosedInput = {
 
 export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -65076,6 +65410,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -65276,6 +65611,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadTasksCreatedInput = {
 
 export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -65468,6 +65804,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -65668,6 +66005,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadTasksAssignedInput = {
 
 export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -65860,6 +66198,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -66049,6 +66388,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
 
 export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -66241,6 +66581,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -66435,6 +66776,7 @@ export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesCreatedI
 
 export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -66627,6 +66969,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -66821,6 +67164,7 @@ export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesAsReques
 
 export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -67013,6 +67357,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -67207,6 +67552,7 @@ export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesRevokedI
 
 export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -67399,6 +67745,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -67604,6 +67951,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestBatchesCre
 
 export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -67796,6 +68144,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -67996,6 +68345,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestBatchesAsR
 
 export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -68188,6 +68538,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -68388,6 +68739,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestBatchesRev
 
 export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -68580,6 +68932,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -68780,6 +69133,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestBatchesUpd
 
 export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -68972,6 +69326,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -69161,6 +69516,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
 
 export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -69353,6 +69709,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -69547,6 +69904,7 @@ export type UserMasterCreateOrConnectWithoutFastProductionRequestsCreatedInput =
 
 export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -69739,6 +70097,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -69933,6 +70292,7 @@ export type UserMasterCreateOrConnectWithoutFastProductionRequestsAsRequesterInp
 
 export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -70125,6 +70485,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -70319,6 +70680,7 @@ export type UserMasterCreateOrConnectWithoutFastProductionRequestsRevokedInput =
 
 export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -70511,6 +70873,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -70716,6 +71079,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestsCreatedIn
 
 export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -70908,6 +71272,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -71108,6 +71473,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestsAsRequest
 
 export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -71300,6 +71666,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -71500,6 +71867,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestsRevokedIn
 
 export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -71692,6 +72060,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -71892,6 +72261,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestsUpdatedIn
 
 export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -72084,6 +72454,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -72273,6 +72644,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
 
 export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -72465,6 +72837,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -72670,6 +73043,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionApprovalsInput = 
 
 export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -72862,6 +73236,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -73051,6 +73426,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
 
 export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -73243,6 +73619,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -73448,6 +73825,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionRequestDocumentsC
 
 export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -73640,6 +74018,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -73829,6 +74208,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
 
 export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -74021,6 +74401,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -74226,6 +74607,7 @@ export type UserMasterUpdateToOneWithWhereWithoutFastProductionStatusLogsInput =
 
 export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -74418,6 +74800,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -74607,6 +74990,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
 
 export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -74799,6 +75183,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -75004,6 +75389,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadDetailedLogsInput = {
 
 export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -75196,6 +75582,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -75385,6 +75772,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
 
 export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -75577,6 +75965,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -75782,6 +76171,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadDocumentLogsInput = {
 
 export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -75974,6 +76364,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -76163,6 +76554,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
 
 export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -76355,6 +76747,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -76560,6 +76953,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadApprovalRequestDocumentMapp
 
 export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -76752,6 +77146,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -76941,6 +77336,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
 
 export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -77133,6 +77529,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -77327,6 +77724,7 @@ export type UserMasterCreateOrConnectWithoutCompanyVendorsCreatedInput = {
 
 export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -77519,6 +77917,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -77713,6 +78112,7 @@ export type UserMasterCreateOrConnectWithoutCompanyVendorsDeletedInput = {
 
 export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -77905,6 +78305,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -78110,6 +78511,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCompanyVendorsCreatedInput = {
 
 export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -78302,6 +78704,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -78502,6 +78905,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCompanyVendorsDeletedInput = {
 
 export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -78694,6 +79098,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -78894,6 +79299,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCompanyVendorsUpdatedInput = {
 
 export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -79086,6 +79492,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -79275,6 +79682,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
 
 export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -79467,6 +79875,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -79661,6 +80070,7 @@ export type UserMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
 
 export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -79853,6 +80263,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -80058,6 +80469,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOrderLoginDetailsInput = {
 
 export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -80250,6 +80662,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -80450,6 +80863,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOrderLoginsUpdatedInput = {
 
 export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -80642,6 +81056,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -80831,6 +81246,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
 
 export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -81023,6 +81439,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -81217,6 +81634,7 @@ export type UserMasterCreateOrConnectWithoutSiteReadinessCreatedInput = {
 
 export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -81409,6 +81827,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -81614,6 +82033,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSiteReadinessCreatedInput = {
 
 export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -81806,6 +82226,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -82006,6 +82427,7 @@ export type UserMasterUpdateToOneWithWhereWithoutSiteReadinessUpdatedInput = {
 
 export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -82198,6 +82620,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -82387,6 +82810,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
 
 export type UserMasterCreateWithoutInstallersCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -82579,6 +83003,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -82784,6 +83209,7 @@ export type UserMasterUpdateToOneWithWhereWithoutInstallersCreatedInput = {
 
 export type UserMasterUpdateWithoutInstallersCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -82976,6 +83402,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -83165,6 +83592,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
 
 export type UserMasterCreateWithoutInstallersAssignedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -83357,6 +83785,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -83562,6 +83991,7 @@ export type UserMasterUpdateToOneWithWhereWithoutInstallersAssignedInput = {
 
 export type UserMasterUpdateWithoutInstallersAssignedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -83754,6 +84184,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -83943,6 +84374,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
 
 export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -84135,6 +84567,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -84340,6 +84773,7 @@ export type UserMasterUpdateToOneWithWhereWithoutInstallationUpdatesCreatedInput
 
 export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -84532,6 +84966,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -84721,6 +85156,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
 
 export type UserMasterCreateWithoutMiscCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -84913,6 +85349,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -85107,6 +85544,7 @@ export type UserMasterCreateOrConnectWithoutMiscCreatedInput = {
 
 export type UserMasterCreateWithoutMiscUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -85299,6 +85737,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -85493,6 +85932,7 @@ export type UserMasterCreateOrConnectWithoutMiscUpdatedInput = {
 
 export type UserMasterCreateWithoutMiscReturnedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -85685,6 +86125,7 @@ export type UserMasterUncheckedCreateWithoutMiscReturnedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -85890,6 +86331,7 @@ export type UserMasterUpdateToOneWithWhereWithoutMiscCreatedInput = {
 
 export type UserMasterUpdateWithoutMiscCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -86082,6 +86524,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -86282,6 +86725,7 @@ export type UserMasterUpdateToOneWithWhereWithoutMiscUpdatedInput = {
 
 export type UserMasterUpdateWithoutMiscUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -86474,6 +86918,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -86674,6 +87119,7 @@ export type UserMasterUpdateToOneWithWhereWithoutMiscReturnedInput = {
 
 export type UserMasterUpdateWithoutMiscReturnedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -86866,6 +87312,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -87055,6 +87502,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
 
 export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -87247,6 +87695,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -87452,6 +87901,7 @@ export type UserMasterUpdateToOneWithWhereWithoutMiscDocumentsCreatedInput = {
 
 export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -87644,6 +88094,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -87833,6 +88284,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
 
 export type UserMasterCreateWithoutMiscFollowupsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -88025,6 +88477,7 @@ export type UserMasterUncheckedCreateWithoutMiscFollowupsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -88230,6 +88683,7 @@ export type UserMasterUpdateToOneWithWhereWithoutMiscFollowupsCreatedInput = {
 
 export type UserMasterUpdateWithoutMiscFollowupsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -88422,6 +88876,7 @@ export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -88611,6 +89066,7 @@ export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
 
 export type UserMasterCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -88803,6 +89259,7 @@ export type UserMasterUncheckedCreateWithoutMiscReorderInstanceMaterialMappingsC
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -89008,6 +89465,7 @@ export type UserMasterUpdateToOneWithWhereWithoutMiscReorderInstanceMaterialMapp
 
 export type UserMasterUpdateWithoutMiscReorderInstanceMaterialMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -89200,6 +89658,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsC
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -89389,6 +89848,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsC
 
 export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -89581,6 +90041,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -89786,6 +90247,7 @@ export type UserMasterUpdateToOneWithWhereWithoutInstallationIssueLogMasterInput
 
 export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -89978,6 +90440,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -90167,6 +90630,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
 
 export type UserMasterCreateWithoutNotificationsSentInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -90359,6 +90823,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -90553,6 +91018,7 @@ export type UserMasterCreateOrConnectWithoutNotificationsSentInput = {
 
 export type UserMasterCreateWithoutNotificationsReceivedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -90745,6 +91211,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -90950,6 +91417,7 @@ export type UserMasterUpdateToOneWithWhereWithoutNotificationsSentInput = {
 
 export type UserMasterUpdateWithoutNotificationsSentInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -91142,6 +91610,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -91342,6 +91811,7 @@ export type UserMasterUpdateToOneWithWhereWithoutNotificationsReceivedInput = {
 
 export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -91534,6 +92004,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -91723,6 +92194,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
 
 export type UserMasterCreateWithoutPushTokensInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -91915,6 +92387,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -92120,6 +92593,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPushTokensInput = {
 
 export type UserMasterUpdateWithoutPushTokensInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -92312,6 +92786,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -92501,6 +92976,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
 
 export type UserMasterCreateWithoutOperatorInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -92693,6 +93169,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -92887,6 +93364,7 @@ export type UserMasterCreateOrConnectWithoutOperatorInput = {
 
 export type UserMasterCreateWithoutMappingSiteInsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -93079,6 +93557,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -93284,6 +93763,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOperatorInput = {
 
 export type UserMasterUpdateWithoutOperatorInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -93476,6 +93956,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -93676,6 +94157,7 @@ export type UserMasterUpdateToOneWithWhereWithoutMappingSiteInsInput = {
 
 export type UserMasterUpdateWithoutMappingSiteInsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -93868,6 +94350,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -94057,6 +94540,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
 
 export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -94249,6 +94733,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -94443,6 +94928,7 @@ export type UserMasterCreateOrConnectWithoutCreatedUserMachineMappingsInput = {
 
 export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -94635,6 +95121,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -94829,6 +95316,7 @@ export type UserMasterCreateOrConnectWithoutUpdatedUserMachineMappingsInput = {
 
 export type UserMasterCreateWithoutUserMachineMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -95021,6 +95509,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -95226,6 +95715,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCreatedUserMachineMappingsInput
 
 export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -95418,6 +95908,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -95618,6 +96109,7 @@ export type UserMasterUpdateToOneWithWhereWithoutUpdatedUserMachineMappingsInput
 
 export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -95810,6 +96302,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -96010,6 +96503,7 @@ export type UserMasterUpdateToOneWithWhereWithoutUserMachineMappingsInput = {
 
 export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -96202,6 +96696,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -96391,6 +96886,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
 
 export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -96583,6 +97079,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -96777,6 +97274,7 @@ export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput = {
 
 export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -96969,6 +97467,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -97174,6 +97673,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOrderLoginPoFilesCreatedInput =
 
 export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -97366,6 +97866,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -97566,6 +98067,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOrderLoginPoFilesDeletedInput =
 
 export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -97758,6 +98260,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -97947,6 +98450,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
 
 export type UserMasterCreateWithoutCreatedDefectsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -98139,6 +98643,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -98344,6 +98849,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCreatedDefectsInput = {
 
 export type UserMasterUpdateWithoutCreatedDefectsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -98536,6 +99042,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -98725,6 +99232,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
 
 export type UserMasterCreateWithoutFranchiseInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -98917,6 +99425,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -99132,6 +99641,7 @@ export type UserMasterUpdateManyWithWhereWithoutFranchiseInput = {
 
 export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -99324,6 +99834,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -99518,6 +100029,7 @@ export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsC
 
 export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -99710,6 +100222,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -99915,6 +100428,7 @@ export type UserMasterUpdateToOneWithWhereWithoutHeadSiteSupervisorFranchiseMapp
 
 export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -100107,6 +100621,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -100307,6 +100822,7 @@ export type UserMasterUpdateToOneWithWhereWithoutHeadSiteSupervisorFranchiseMapp
 
 export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -100499,6 +101015,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -100688,6 +101205,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
 
 export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -100880,6 +101398,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -101085,6 +101604,7 @@ export type UserMasterUpdateToOneWithWhereWithoutUserGeographicalMappingsInput =
 
 export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -101277,6 +101797,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -101466,6 +101987,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
 
 export type UserMasterCreateWithoutActivityLogsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -101658,6 +102180,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -101863,6 +102386,7 @@ export type UserMasterUpdateToOneWithWhereWithoutActivityLogsInput = {
 
 export type UserMasterUpdateWithoutActivityLogsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -102055,6 +102579,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -102244,6 +102769,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
 
 export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -102436,6 +102962,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -102630,6 +103157,7 @@ export type UserMasterCreateOrConnectWithoutExternalPlatformTokensCreatedInput =
 
 export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -102822,6 +103350,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -103027,6 +103556,7 @@ export type UserMasterUpdateToOneWithWhereWithoutExternalPlatformTokensCreatedIn
 
 export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -103219,6 +103749,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -103419,6 +103950,7 @@ export type UserMasterUpdateToOneWithWhereWithoutExternalPlatformTokensUpdatedIn
 
 export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -103611,6 +104143,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -103800,6 +104333,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
 
 export type UserMasterCreateWithoutCompletionPhotosInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -103992,6 +104526,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -104197,6 +104732,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCompletionPhotosInput = {
 
 export type UserMasterUpdateWithoutCompletionPhotosInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -104389,6 +104925,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -104578,6 +105115,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
 
 export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -104770,6 +105308,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -104964,6 +105503,7 @@ export type UserMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsCreat
 
 export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -105156,6 +105696,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -105361,6 +105902,7 @@ export type UserMasterUpdateToOneWithWhereWithoutProjectCategoriesVendorMappings
 
 export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -105553,6 +106095,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -105753,6 +106296,7 @@ export type UserMasterUpdateToOneWithWhereWithoutProjectCategoriesVendorMappings
 
 export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -105945,6 +106489,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -106134,6 +106679,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
 
 export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -106326,6 +106872,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -106520,6 +107067,7 @@ export type UserMasterCreateOrConnectWithoutPurchaseIntentsApprovedInput = {
 
 export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -106712,6 +107260,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -106906,6 +107455,7 @@ export type UserMasterCreateOrConnectWithoutPurchaseIntentsCreatedInput = {
 
 export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -107098,6 +107648,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -107292,6 +107843,7 @@ export type UserMasterCreateOrConnectWithoutPurchaseIntentsDeletedInput = {
 
 export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -107484,6 +108036,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -107678,6 +108231,7 @@ export type UserMasterCreateOrConnectWithoutPurchaseIntentsRejectedInput = {
 
 export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -107870,6 +108424,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -108075,6 +108630,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseIntentsApprovedInput = 
 
 export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -108267,6 +108823,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -108467,6 +109024,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseIntentsCreatedInput = {
 
 export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -108659,6 +109217,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -108859,6 +109418,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseIntentsDeletedInput = {
 
 export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -109051,6 +109611,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -109251,6 +109812,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseIntentsRejectedInput = 
 
 export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -109443,6 +110005,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -109643,6 +110206,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseIntentsUpdatedInput = {
 
 export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -109835,6 +110399,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -110024,6 +110589,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
 
 export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -110216,6 +110782,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -110421,6 +110988,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseIntentStatusLogsInput =
 
 export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -110613,6 +111181,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -110802,6 +111371,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
 
 export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -110994,6 +111564,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -111188,6 +111759,7 @@ export type UserMasterCreateOrConnectWithoutPurchaseOrdersCreatedInput = {
 
 export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -111380,6 +111952,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -111585,6 +112158,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseOrdersCreatedInput = {
 
 export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -111777,6 +112351,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -111977,6 +112552,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPurchaseOrdersUpdatedInput = {
 
 export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -112169,6 +112745,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -112358,6 +112935,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
 
 export type UserMasterCreateWithoutPoItemsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -112550,6 +113128,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -112744,6 +113323,7 @@ export type UserMasterCreateOrConnectWithoutPoItemsCreatedInput = {
 
 export type UserMasterCreateWithoutPoItemsDeletedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -112936,6 +113516,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -113130,6 +113711,7 @@ export type UserMasterCreateOrConnectWithoutPoItemsDeletedInput = {
 
 export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -113322,6 +113904,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -113527,6 +114110,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPoItemsCreatedInput = {
 
 export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -113719,6 +114303,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -113919,6 +114504,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPoItemsDeletedInput = {
 
 export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -114111,6 +114697,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -114311,6 +114898,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPoItemsUpdatedInput = {
 
 export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -114503,6 +115091,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -114692,6 +115281,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
 
 export type UserMasterCreateWithoutGrnsConfirmedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -114884,6 +115474,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -115078,6 +115669,7 @@ export type UserMasterCreateOrConnectWithoutGrnsConfirmedInput = {
 
 export type UserMasterCreateWithoutGrnsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -115270,6 +115862,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -115464,6 +116057,7 @@ export type UserMasterCreateOrConnectWithoutGrnsCreatedInput = {
 
 export type UserMasterCreateWithoutGrnsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -115656,6 +116250,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -115861,6 +116456,7 @@ export type UserMasterUpdateToOneWithWhereWithoutGrnsConfirmedInput = {
 
 export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -116053,6 +116649,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -116253,6 +116850,7 @@ export type UserMasterUpdateToOneWithWhereWithoutGrnsCreatedInput = {
 
 export type UserMasterUpdateWithoutGrnsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -116445,6 +117043,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -116645,6 +117244,7 @@ export type UserMasterUpdateToOneWithWhereWithoutGrnsUpdatedInput = {
 
 export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -116837,6 +117437,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -117026,6 +117627,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
 
 export type UserMasterCreateWithoutDcnsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -117218,6 +117820,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -117412,6 +118015,7 @@ export type UserMasterCreateOrConnectWithoutDcnsCreatedInput = {
 
 export type UserMasterCreateWithoutDcnsSettledInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -117604,6 +118208,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -117809,6 +118414,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDcnsCreatedInput = {
 
 export type UserMasterUpdateWithoutDcnsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -118001,6 +118607,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -118201,6 +118808,7 @@ export type UserMasterUpdateToOneWithWhereWithoutDcnsSettledInput = {
 
 export type UserMasterUpdateWithoutDcnsSettledInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -118393,6 +119001,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -118582,6 +119191,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
 
 export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -118774,6 +119384,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -118979,6 +119590,7 @@ export type UserMasterUpdateToOneWithWhereWithoutRedeliveriesCreatedInput = {
 
 export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -119171,6 +119783,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -119360,6 +119973,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
 
 export type UserMasterCreateWithoutStockHistoriesInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -119552,6 +120166,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -119757,6 +120372,7 @@ export type UserMasterUpdateToOneWithWhereWithoutStockHistoriesInput = {
 
 export type UserMasterUpdateWithoutStockHistoriesInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -119949,6 +120565,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -120138,6 +120755,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
 
 export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -120330,6 +120948,7 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -120535,6 +121154,7 @@ export type UserMasterUpdateToOneWithWhereWithoutPoPaymentScheduleHistoriesInput
 
 export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -120727,6 +121347,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -120916,6 +121537,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
 
 export type UserMasterCreateWithoutArchitechuremastersInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -121108,6 +121730,7 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -121313,6 +121936,7 @@ export type UserMasterUpdateToOneWithWhereWithoutArchitechuremastersInput = {
 
 export type UserMasterUpdateWithoutArchitechuremastersInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -121505,6 +122129,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -121694,6 +122319,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
 
 export type UserMasterCreateWithoutBroadcastsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -121886,6 +122512,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -122080,6 +122707,7 @@ export type UserMasterCreateOrConnectWithoutBroadcastsCreatedInput = {
 
 export type UserMasterCreateWithoutBroadcastsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -122272,6 +122900,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -122477,6 +123106,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastsCreatedInput = {
 
 export type UserMasterUpdateWithoutBroadcastsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -122669,6 +123299,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -122869,6 +123500,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastsUpdatedInput = {
 
 export type UserMasterUpdateWithoutBroadcastsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -123061,6 +123693,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -123250,6 +123883,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
 
 export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -123442,6 +124076,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -123647,6 +124282,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastCategoriesCreatedInput
 
 export type UserMasterUpdateWithoutBroadcastCategoriesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -123839,6 +124475,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -124028,6 +124665,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
 
 export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -124220,6 +124858,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -124414,6 +125053,7 @@ export type UserMasterCreateOrConnectWithoutBroadcastAudienceCreatedInput = {
 
 export type UserMasterCreateWithoutBroadcastAudienceUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -124606,6 +125246,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -124811,6 +125452,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastAudienceCreatedInput =
 
 export type UserMasterUpdateWithoutBroadcastAudienceCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -125003,6 +125645,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -125203,6 +125846,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastAudienceUpdatedInput =
 
 export type UserMasterUpdateWithoutBroadcastAudienceUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -125395,6 +126039,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -125584,6 +126229,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
 
 export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -125776,6 +126422,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -125970,6 +126617,7 @@ export type UserMasterCreateOrConnectWithoutBroadcastAttachmentsCreatedInput = {
 
 export type UserMasterCreateWithoutBroadcastAttachmentsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -126162,6 +126810,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -126367,6 +127016,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastAttachmentsCreatedInpu
 
 export type UserMasterUpdateWithoutBroadcastAttachmentsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -126559,6 +127209,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -126759,6 +127410,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastAttachmentsUpdatedInpu
 
 export type UserMasterUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -126951,6 +127603,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -127140,6 +127793,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
 
 export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -127332,6 +127986,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -127526,6 +128181,7 @@ export type UserMasterCreateOrConnectWithoutBroadcastReadsCreatedInput = {
 
 export type UserMasterCreateWithoutBroadcastReadsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -127718,6 +128374,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -127912,6 +128569,7 @@ export type UserMasterCreateOrConnectWithoutBroadcastReadsUpdatedInput = {
 
 export type UserMasterCreateWithoutBroadcastReadsInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -128104,6 +128762,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -128309,6 +128968,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastReadsCreatedInput = {
 
 export type UserMasterUpdateWithoutBroadcastReadsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -128501,6 +129161,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -128701,6 +129362,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastReadsUpdatedInput = {
 
 export type UserMasterUpdateWithoutBroadcastReadsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -128893,6 +129555,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -129093,6 +129756,7 @@ export type UserMasterUpdateToOneWithWhereWithoutBroadcastReadsInput = {
 
 export type UserMasterUpdateWithoutBroadcastReadsInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -129285,6 +129949,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -129474,6 +130139,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
 
 export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -129666,6 +130332,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -129860,6 +130527,7 @@ export type UserMasterCreateOrConnectWithoutNotificationQueuesCreatedInput = {
 
 export type UserMasterCreateWithoutNotificationQueuesUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -130052,6 +130720,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -130257,6 +130926,7 @@ export type UserMasterUpdateToOneWithWhereWithoutNotificationQueuesCreatedInput 
 
 export type UserMasterUpdateWithoutNotificationQueuesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -130449,6 +131119,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -130649,6 +131320,7 @@ export type UserMasterUpdateToOneWithWhereWithoutNotificationQueuesUpdatedInput 
 
 export type UserMasterUpdateWithoutNotificationQueuesUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -130841,6 +131513,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -131030,6 +131703,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadB2BReqMappingsCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -131222,6 +131896,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -131416,6 +132091,7 @@ export type UserMasterCreateOrConnectWithoutLeadB2BReqMappingsCreatedInput = {
 
 export type UserMasterCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -131608,6 +132284,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -131813,6 +132490,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadB2BReqMappingsCreatedInput 
 
 export type UserMasterUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -132005,6 +132683,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -132205,6 +132884,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadB2BReqMappingsUpdatedInput 
 
 export type UserMasterUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -132397,6 +133077,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -132586,6 +133267,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
 
 export type UserMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -132778,6 +133460,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -132983,6 +133666,7 @@ export type UserMasterUpdateToOneWithWhereWithoutLeadOtherAppliancesRemarkMappin
 
 export type UserMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -133175,6 +133859,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -133364,6 +134049,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
 
 export type UserMasterCreateWithoutOnline_lead_call_logInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -133556,6 +134242,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -133761,6 +134448,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_lead_call_logInput = {
 
 export type UserMasterUpdateWithoutOnline_lead_call_logInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -133953,6 +134641,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -134142,6 +134831,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
 
 export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_followup_status_created_byToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -134334,6 +135024,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -134528,6 +135219,7 @@ export type UserMasterCreateOrConnectWithoutOnline_lead_followup_status_online_l
 
 export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_followup_status_updated_byToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -134720,6 +135412,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -134925,6 +135618,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_lead_followup_status_onl
 
 export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_followup_status_created_byToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -135117,6 +135811,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -135317,6 +136012,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_lead_followup_status_onl
 
 export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_followup_status_updated_byToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -135509,6 +136205,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -135698,6 +136395,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
 
 export type UserMasterCreateWithoutOnline_lead_historyInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -135890,6 +136588,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -136095,6 +136794,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_lead_historyInput = {
 
 export type UserMasterUpdateWithoutOnline_lead_historyInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -136287,6 +136987,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -136476,6 +137177,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
 
 export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_assigned_toToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -136668,6 +137370,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -136862,6 +137565,7 @@ export type UserMasterCreateOrConnectWithoutOnline_lead_store_log_online_lead_st
 
 export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_selected_byToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -137054,6 +137758,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -137259,6 +137964,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_lead_store_log_online_le
 
 export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_assigned_toToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -137451,6 +138157,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -137651,6 +138358,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_lead_store_log_online_le
 
 export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_selected_byToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -137843,6 +138551,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -138032,6 +138741,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
 
 export type UserMasterCreateWithoutOnline_leads_online_leads_assign_toToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -138224,6 +138934,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_assign_toT
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -138418,6 +139129,7 @@ export type UserMasterCreateOrConnectWithoutOnline_leads_online_leads_assign_toT
 
 export type UserMasterCreateWithoutOnline_leads_online_leads_created_byToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -138610,6 +139322,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_created_by
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -138804,6 +139517,7 @@ export type UserMasterCreateOrConnectWithoutOnline_leads_online_leads_created_by
 
 export type UserMasterCreateWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -138996,6 +139710,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_final_assi
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -139190,6 +139905,7 @@ export type UserMasterCreateOrConnectWithoutOnline_leads_online_leads_final_assi
 
 export type UserMasterCreateWithoutOnline_leads_online_leads_updated_byToUserMasterInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -139382,6 +140098,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_updated_by
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -139587,6 +140304,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_leads_online_leads_assig
 
 export type UserMasterUpdateWithoutOnline_leads_online_leads_assign_toToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -139779,6 +140497,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_assign_toT
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -139979,6 +140698,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_leads_online_leads_creat
 
 export type UserMasterUpdateWithoutOnline_leads_online_leads_created_byToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -140171,6 +140891,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_created_by
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -140371,6 +141092,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_leads_online_leads_final
 
 export type UserMasterUpdateWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -140563,6 +141285,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_final_assi
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -140763,6 +141486,7 @@ export type UserMasterUpdateToOneWithWhereWithoutOnline_leads_online_leads_updat
 
 export type UserMasterUpdateWithoutOnline_leads_online_leads_updated_byToUserMasterInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -140955,6 +141679,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_by
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -141144,6 +141869,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_by
 
 export type UserMasterCreateWithoutProductsRequiredForProductionInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -141336,6 +142062,7 @@ export type UserMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -141541,6 +142268,7 @@ export type UserMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionIn
 
 export type UserMasterUpdateWithoutProductsRequiredForProductionInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -141733,6 +142461,7 @@ export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -141922,6 +142651,7 @@ export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
 
 export type UserMasterCreateWithoutCutListRulesCreatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -142114,6 +142844,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesCreatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -142308,6 +143039,7 @@ export type UserMasterCreateOrConnectWithoutCutListRulesCreatedInput = {
 
 export type UserMasterCreateWithoutCutListRulesUpdatedInput = {
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -142500,6 +143232,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesUpdatedInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -142705,6 +143438,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCutListRulesCreatedInput = {
 
 export type UserMasterUpdateWithoutCutListRulesCreatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -142897,6 +143631,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesCreatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -143097,6 +143832,7 @@ export type UserMasterUpdateToOneWithWhereWithoutCutListRulesUpdatedInput = {
 
 export type UserMasterUpdateWithoutCutListRulesUpdatedInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -143289,6 +144025,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -143479,6 +144216,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
 export type UserMasterCreateManyVendorInput = {
   id?: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -143492,6 +144230,7 @@ export type UserMasterCreateManyVendorInput = {
 
 export type UserMasterUpdateWithoutVendorInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -143683,6 +144422,7 @@ export type UserMasterUpdateWithoutVendorInput = {
 export type UserMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -143874,6 +144614,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
 export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -143889,6 +144630,7 @@ export type UserMasterCreateManyUser_typeInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -143901,6 +144643,7 @@ export type UserMasterCreateManyUser_typeInput = {
 
 export type UserMasterUpdateWithoutUser_typeInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -144093,6 +144836,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -144284,6 +145028,7 @@ export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -144298,6 +145043,7 @@ export type UserMasterCreateManyFranchiseInput = {
   id?: number
   vendor_id: number
   user_name: string
+  designation?: string | null
   user_contact: string
   user_email: string
   user_timezone: string
@@ -144310,6 +145056,7 @@ export type UserMasterCreateManyFranchiseInput = {
 
 export type UserMasterUpdateWithoutFranchiseInput = {
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -144502,6 +145249,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -144693,6 +145441,7 @@ export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_contact?: Prisma.StringFieldUpdateOperationsInput | string
   user_email?: Prisma.StringFieldUpdateOperationsInput | string
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -146322,6 +147071,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   vendor_id?: boolean
   user_name?: boolean
+  designation?: boolean
   user_contact?: boolean
   user_email?: boolean
   user_timezone?: boolean
@@ -146518,6 +147268,7 @@ export type UserMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   vendor_id?: boolean
   user_name?: boolean
+  designation?: boolean
   user_contact?: boolean
   user_email?: boolean
   user_timezone?: boolean
@@ -146536,6 +147287,7 @@ export type UserMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   vendor_id?: boolean
   user_name?: boolean
+  designation?: boolean
   user_contact?: boolean
   user_email?: boolean
   user_timezone?: boolean
@@ -146554,6 +147306,7 @@ export type UserMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   user_name?: boolean
+  designation?: boolean
   user_contact?: boolean
   user_email?: boolean
   user_timezone?: boolean
@@ -146565,7 +147318,7 @@ export type UserMasterSelectScalar = {
   franchise_id?: boolean
 }
 
-export type UserMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_name" | "user_contact" | "user_email" | "user_timezone" | "password" | "user_type_id" | "status" | "created_at" | "updated_at" | "franchise_id", ExtArgs["result"]["userMaster"]>
+export type UserMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_name" | "designation" | "user_contact" | "user_email" | "user_timezone" | "password" | "user_type_id" | "status" | "created_at" | "updated_at" | "franchise_id", ExtArgs["result"]["userMaster"]>
 export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.UserMaster$productsRequiredForProductionArgs<ExtArgs>
   accountsCreated?: boolean | Prisma.UserMaster$accountsCreatedArgs<ExtArgs>
@@ -146948,6 +147701,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: number
     vendor_id: number
     user_name: string
+    designation: string | null
     user_contact: string
     user_email: string
     user_timezone: string
@@ -147563,6 +148317,7 @@ export interface UserMasterFieldRefs {
   readonly id: Prisma.FieldRef<"UserMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"UserMaster", 'Int'>
   readonly user_name: Prisma.FieldRef<"UserMaster", 'String'>
+  readonly designation: Prisma.FieldRef<"UserMaster", 'String'>
   readonly user_contact: Prisma.FieldRef<"UserMaster", 'String'>
   readonly user_email: Prisma.FieldRef<"UserMaster", 'String'>
   readonly user_timezone: Prisma.FieldRef<"UserMaster", 'String'>
