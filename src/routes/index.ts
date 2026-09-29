@@ -1,3 +1,4 @@
+import cadbidRoutes from "./cadbid/cadbid.routes";
 import { Router } from "express";
 import vendorRoutes from "./vendor.routes";
 import vendorAddressRoutes from "./vendorAddress.routes";
@@ -82,7 +83,10 @@ router.use("/leads/production/ready-to-dispatch", readyToDispatchRoutes);
 router.use("/leads/installation/site-readiness", siteReadinessRoutes);
 router.use("/leads/installation/dispatch-planning", dispatchPlanningRoutes);
 router.use("/leads/installation/dispatch", dispatchStageRoutes);
-router.use("/leads/installation/under-installation", underInstallationStageRoutes);
+router.use(
+  "/leads/installation/under-installation",
+  underInstallationStageRoutes,
+);
 
 router.use("/installer-users", installerUserRoutes);
 router.use("/miscellaneous-master", miscRoutes);
@@ -93,5 +97,7 @@ router.use("/leads/chats", chatRoutes);
 router.use("/notifications", notificationRoutes);
 router.use("/email-notification-master", emailNotificationMasterRoutes);
 router.use("/public", contactUsRoutes);
+
+router.use("/cadbid", cadbidRoutes);
 
 export { router };
