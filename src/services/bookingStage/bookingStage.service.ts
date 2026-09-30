@@ -5330,6 +5330,13 @@ export class BookingStageService {
 
     // ============= Non-Admin Flow =============
 
+    const callerSelectedFranchiseId =
+      Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0
+        ? Number(normalizedFranchises[0])
+        : franchiseId && !Number.isNaN(franchiseId)
+          ? Number(franchiseId)
+          : undefined;
+
     let callerExtraLeadIds: number[] = [];
     if (isCaller && userId) {
       const [directLeads, onlineFollowUpLeads] = await Promise.all([
@@ -5337,6 +5344,7 @@ export class BookingStageService {
           where: {
             vendor_id: vendorId,
             is_deleted: false,
+            ...(callerSelectedFranchiseId ? { franchise_id: callerSelectedFranchiseId } : {}),
             OR: [{ created_by: userId }, { assign_to: userId }],
           },
           select: { id: true },
@@ -5345,13 +5353,35 @@ export class BookingStageService {
           where: {
             vendor_id: vendorId,
             lead_master_id: { not: null },
-            OR: [
-              { assign_to: userId },
-              { final_assigned_leads: userId },
-              { created_by: userId },
-              { online_lead_call_log: { some: { telecaller_id: userId } } },
-              { online_lead_history: { some: { created_by: userId } } },
-            ],
+            ...(callerSelectedFranchiseId
+              ? {
+                  AND: [
+                    {
+                      OR: [
+                        { pending_store_id: callerSelectedFranchiseId },
+                        { store_id: callerSelectedFranchiseId },
+                      ],
+                    },
+                    {
+                      OR: [
+                        { assign_to: userId },
+                        { final_assigned_leads: userId },
+                        { created_by: userId },
+                        { online_lead_call_log: { some: { telecaller_id: userId } } },
+                        { online_lead_history: { some: { created_by: userId } } },
+                      ],
+                    },
+                  ],
+                }
+              : {
+                  OR: [
+                    { assign_to: userId },
+                    { final_assigned_leads: userId },
+                    { created_by: userId },
+                    { online_lead_call_log: { some: { telecaller_id: userId } } },
+                    { online_lead_history: { some: { created_by: userId } } },
+                  ],
+                }),
           },
           select: { lead_master_id: true },
         }),
@@ -5936,7 +5966,7 @@ export class BookingStageService {
       is_draft: true,
     };
 
-    if (shouldIncludeFranchise && franchiseId) {
+    if ((shouldIncludeFranchise || isCaller) && franchiseId) {
       baseWhere.franchise_id = franchiseId;
     }
 
@@ -5948,6 +5978,7 @@ export class BookingStageService {
             where: {
               vendor_id: vendorId,
               is_deleted: false,
+              ...(franchiseId ? { franchise_id: franchiseId } : {}),
               OR: [{ created_by: userId }, { assign_to: userId }],
             },
             select: { id: true },
@@ -5956,13 +5987,35 @@ export class BookingStageService {
             where: {
               vendor_id: vendorId,
               lead_master_id: { not: null },
-              OR: [
-                { assign_to: userId },
-                { final_assigned_leads: userId },
-                { created_by: userId },
-                { online_lead_call_log: { some: { telecaller_id: userId } } },
-                { online_lead_history: { some: { created_by: userId } } },
-              ],
+              ...(franchiseId
+                ? {
+                    AND: [
+                      {
+                        OR: [
+                          { pending_store_id: franchiseId },
+                          { store_id: franchiseId },
+                        ],
+                      },
+                      {
+                        OR: [
+                          { assign_to: userId },
+                          { final_assigned_leads: userId },
+                          { created_by: userId },
+                          { online_lead_call_log: { some: { telecaller_id: userId } } },
+                          { online_lead_history: { some: { created_by: userId } } },
+                        ],
+                      },
+                    ],
+                  }
+                : {
+                    OR: [
+                      { assign_to: userId },
+                      { final_assigned_leads: userId },
+                      { created_by: userId },
+                      { online_lead_call_log: { some: { telecaller_id: userId } } },
+                      { online_lead_history: { some: { created_by: userId } } },
+                    ],
+                  }),
             },
             select: { lead_master_id: true },
           }),
@@ -6050,6 +6103,15 @@ export class BookingStageService {
         approval_status: "PENDING",
       };
 
+      const storeCondition = franchiseId
+        ? {
+            OR: [
+              { pending_store_id: franchiseId },
+              { AND: [{ pending_store_id: null }, { store_id: franchiseId }] },
+            ],
+          }
+        : null;
+
       if (normalizedUserType === "sales-executive") {
         const userCondition: any = {
           OR: [
@@ -6063,14 +6125,9 @@ export class BookingStageService {
           ],
         };
 
-        if (shouldIncludeFranchise && franchiseId) {
+        if (storeCondition) {
           pendingOnlineWhere.AND = [
-            {
-              OR: [
-                { pending_store_id: franchiseId },
-                { store_id: franchiseId },
-              ],
-            },
+            storeCondition,
             userCondition,
           ];
         } else {
@@ -6086,12 +6143,16 @@ export class BookingStageService {
             { online_lead_history: { some: { created_by: userId } } },
           ],
         };
-        Object.assign(pendingOnlineWhere, callerCondition);
-      } else if (shouldIncludeFranchise && franchiseId) {
-        pendingOnlineWhere.OR = [
-          { pending_store_id: franchiseId },
-          { store_id: franchiseId },
-        ];
+        if (storeCondition) {
+          pendingOnlineWhere.AND = [
+            storeCondition,
+            callerCondition,
+          ];
+        } else {
+          Object.assign(pendingOnlineWhere, callerCondition);
+        }
+      } else if (storeCondition) {
+        Object.assign(pendingOnlineWhere, storeCondition);
       }
 
       pendingOnlineLeads = await prisma.online_leads.findMany({
@@ -6196,6 +6257,11 @@ export class BookingStageService {
         continue;
       }
 
+      const assignedStoreId = ol.pending_store_id || ol.store_id;
+      if (franchiseId && assignedStoreId && assignedStoreId !== franchiseId) {
+        continue;
+      }
+
       if (c10) seenPendingContacts.add(c10);
 
       formattedPendingLeads.push({
@@ -6257,6 +6323,9 @@ export class BookingStageService {
 
     // Filter out LeadMaster processed draft leads that ALREADY have a pending online lead
     const filteredProcessed = processed.filter((lead: any) => {
+      if (franchiseId && lead.franchise_id && lead.franchise_id !== franchiseId) {
+        return false;
+      }
       const clean = String(lead.contact_no || "").replace(/\D/g, "");
       const c10 =
         clean.length > 10 && clean.startsWith("91") ? clean.slice(-10) : clean;
