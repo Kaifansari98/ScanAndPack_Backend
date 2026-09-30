@@ -2467,7 +2467,7 @@ line-height: 1.2;
 
 .project-value{
 color: #111827;
-  font-size: 11.5pt;
+  font-size: 8.5pt;
   line-height: 1.35;
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -7272,7 +7272,7 @@ padding-top:25px;
 
 .project-value{
 color: #111827;
-  font-size: 11.5pt;
+  font-size: 8.5pt;
   line-height: 1.35;
   font-weight: 700;
   overflow-wrap: anywhere;
