@@ -1152,3 +1152,8 @@ export type RuleActionMaster = Prisma.RuleActionMasterModel
  * 
  */
 export type SiteSupervisorFranchiseMapping = Prisma.SiteSupervisorFranchiseMappingModel
+/**
+ * Model WixStudioDataCapture
+ * 
+ */
+export type WixStudioDataCapture = Prisma.WixStudioDataCaptureModel

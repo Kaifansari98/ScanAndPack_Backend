@@ -5837,3 +5837,11 @@ model SiteSupervisorFranchiseMapping {
   @@unique([vendor_id, supervisor_id, franchise_id], name: "vendor_supervisor_franchise_unique")
   @@index([vendor_id])
 }
+
+model WixStudioDataCapture {
+  id         Int      @id @default(autoincrement())
+  payload    Json
+  created_at DateTime @default(now())
+
+  @@map("wix_studio_data_capture")
+}

@@ -277,7 +277,8 @@ export const ModelName = {
   CutListRuleAction: 'CutListRuleAction',
   RuleFieldMaster: 'RuleFieldMaster',
   RuleActionMaster: 'RuleActionMaster',
-  SiteSupervisorFranchiseMapping: 'SiteSupervisorFranchiseMapping'
+  SiteSupervisorFranchiseMapping: 'SiteSupervisorFranchiseMapping',
+  WixStudioDataCapture: 'WixStudioDataCapture'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4232,6 +4233,15 @@ export const SiteSupervisorFranchiseMappingScalarFieldEnum = {
 } as const
 
 export type SiteSupervisorFranchiseMappingScalarFieldEnum = (typeof SiteSupervisorFranchiseMappingScalarFieldEnum)[keyof typeof SiteSupervisorFranchiseMappingScalarFieldEnum]
+
+
+export const WixStudioDataCaptureScalarFieldEnum = {
+  id: 'id',
+  payload: 'payload',
+  created_at: 'created_at'
+} as const
+
+export type WixStudioDataCaptureScalarFieldEnum = (typeof WixStudioDataCaptureScalarFieldEnum)[keyof typeof WixStudioDataCaptureScalarFieldEnum]
 
 
 export const SortOrder = {
