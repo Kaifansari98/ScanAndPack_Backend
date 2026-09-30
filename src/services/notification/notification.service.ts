@@ -20,6 +20,8 @@ export type ListNotificationsOptions = {
   is_read?: boolean;
   take?: number;
   skip?: number;
+  search?: string;
+  tab?: string;
 };
 
 export type RegisterPushTokenInput = {
@@ -51,6 +53,7 @@ export type NotificationWithDelivery = Notification & {
 export type ListNotificationsResult = {
   notifications: NotificationWithDelivery[];
   unread_count: number;
+  total_count: number;
 };
 
 export const NotificationService = {
@@ -71,8 +74,30 @@ export const NotificationService = {
   },
 
   async createAndSend(
-    input: CreateNotificationInput
-  ): Promise<{ notification: Notification; delivery: PushDeliverySummary | null }> {
+    input: CreateNotificationInput,
+  ): Promise<{
+    notification: Notification | null;
+    delivery: PushDeliverySummary | null;
+  }> {
+    let notificationsEnabled = process.env.NOTIFICATIONS_ENABLED === "true";
+    if (input.vendor_id) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: input.vendor_id },
+        select: { is_in_app_noti_enabled: true }
+      });
+      if (vendor) {
+        notificationsEnabled = vendor.is_in_app_noti_enabled;
+      }
+    }
+
+    if (!notificationsEnabled) {
+      logger.info("Notification skipped: notifications disabled", {
+        user_id: input.user_id,
+        title: input.title,
+      });
+      return { notification: null, delivery: null };
+    }
+
     const notification = await this.create(input);
     let delivery: PushDeliverySummary | null = null;
 
@@ -91,7 +116,7 @@ export const NotificationService = {
 
   async sendPushToUser(
     notificationId: number,
-    input: CreateNotificationInput
+    input: CreateNotificationInput,
   ): Promise<PushDeliverySummary> {
     const tokens = await prisma.userPushToken.findMany({
       where: {
@@ -105,6 +130,20 @@ export const NotificationService = {
     if (tokens.length === 0) {
       return {
         total_tokens: 0,
+        success_count: 0,
+        failure_count: 0,
+        invalid_token_count: 0,
+      };
+    }
+
+    const firebaseEnabled = process.env.FIREBASE_ENABLED === "true";
+    if (!firebaseEnabled) {
+      logger.info("Firebase push notification skipped: disabled", {
+        user_id: input.user_id,
+        title: input.title,
+      });
+      return {
+        total_tokens: tokens.length,
         success_count: 0,
         failure_count: 0,
         invalid_token_count: 0,
@@ -149,7 +188,9 @@ export const NotificationService = {
         notification_id: notificationId,
         push_token_id: token.id,
         status: result.success ? "SENT" : "FAILED",
-        error: result.success ? null : result.error?.message ?? "Unknown error",
+        error: result.success
+          ? null
+          : (result.error?.message ?? "Unknown error"),
       };
     });
 
@@ -168,9 +209,10 @@ export const NotificationService = {
         tokenId: tokens[index].id,
       }))
       .filter(({ result }) =>
-        ["messaging/registration-token-not-registered", "messaging/invalid-registration-token"].includes(
-          result.error?.code ?? ""
-        )
+        [
+          "messaging/registration-token-not-registered",
+          "messaging/invalid-registration-token",
+        ].includes(result.error?.code ?? ""),
       )
       .map(({ tokenId }) => tokenId);
 
@@ -181,7 +223,9 @@ export const NotificationService = {
       });
     }
 
-    const successCount = response.responses.filter((result) => result.success).length;
+    const successCount = response.responses.filter(
+      (result) => result.success,
+    ).length;
     const failureCount = response.responses.length - successCount;
 
     return {
@@ -195,72 +239,118 @@ export const NotificationService = {
   async listForUser(
     vendorId: number,
     userId: number,
-    options: ListNotificationsOptions = {}
+    options: ListNotificationsOptions = {},
   ): Promise<ListNotificationsResult> {
-    const { is_read, take = 20, skip = 0 } = options;
-    const notifications = await prisma.notification.findMany({
-      where: {
-        vendor_id: vendorId,
-        user_id: userId,
-        ...(typeof is_read === "boolean" ? { is_read } : {}),
-      },
-      orderBy: { created_at: "desc" },
-      take,
-      skip,
-      include: {
-        sender: {
-          select: {
-            user_name: true,
+    const { is_read, take = 20, skip = 0, search, tab } = options;
+
+    // Map tab names to their corresponding notification types (backend filter)
+    const TAB_TYPE_MAP: Record<string, string[]> = {
+      leads:    ["LEAD_ASSIGNED", "LEAD_MILESTONE", "LEAD_ACTION"],
+      task:     ["TASK_ASSIGNED"],
+      mention:  ["CHAT_MENTION"],
+      approval: ["APPROVAL"],
+    };
+
+    const whereClause: any = {
+      vendor_id: vendorId,
+      user_id: userId,
+      ...(typeof is_read === "boolean" ? { is_read } : {}),
+      ...(search ? { OR: [
+        { title:   { contains: search, mode: "insensitive" } },
+        { message: { contains: search, mode: "insensitive" } },
+      ]} : {}),
+      ...(tab && TAB_TYPE_MAP[tab] ? { type: { in: TAB_TYPE_MAP[tab] } } : {}),
+    };
+
+    const [notifications, unread_count, total_count] = await Promise.all([
+      prisma.notification.findMany({
+        where: whereClause,
+        orderBy: { created_at: "desc" },
+        take,
+        skip,
+        include: {
+          sender: {
+            select: { user_name: true },
           },
         },
-      },
-    });
+      }),
+      prisma.notification.count({
+        where: { vendor_id: vendorId, user_id: userId, is_read: false },
+      }),
+      prisma.notification.count({
+        where: whereClause,
+      }),
+    ]);
 
-    const unread_count = await prisma.notification.count({
-      where: {
-        vendor_id: vendorId,
-        user_id: userId,
-        is_read: false,
-      },
-    });
-
-    if (notifications.length === 0) {
-      return { notifications: [], unread_count };
-    }
-
-    const notificationIds = notifications.map((item) => item.id);
-    const grouped = await prisma.notificationDeliveryLogs.groupBy({
-      by: ["notification_id", "status"],
-      where: { notification_id: { in: notificationIds } },
-      _count: { _all: true },
-    });
-
-    const deliveryLookup = new Map<number, { sent: number; failed: number }>();
-    for (const row of grouped) {
-      const current = deliveryLookup.get(row.notification_id) ?? {
-        sent: 0,
-        failed: 0,
-      };
-      if (row.status === "SENT") current.sent += row._count._all;
-      if (row.status === "FAILED") current.failed += row._count._all;
-      deliveryLookup.set(row.notification_id, current);
-    }
-
-    const notificationsWithDelivery: NotificationWithDelivery[] = notifications.map(
-      (notification) => ({
-        ...notification,
-        delivery_summary: deliveryLookup.get(notification.id) ?? {
-          sent: 0,
-          failed: 0,
-        },
-      })
+    // Clean up & filter out any stale LEAD_ASSIGNED notifications for online leads no longer assigned to this user
+    const leadAssignedNotifs = notifications.filter(
+      (n) => n.type === "LEAD_ASSIGNED" && n.entity_type === "online_lead" && n.entity_id,
     );
 
-    return { notifications: notificationsWithDelivery, unread_count };
+    let filteredNotifications = notifications;
+    if (leadAssignedNotifs.length > 0) {
+      const leadIds = [
+        ...new Set(leadAssignedNotifs.map((n) => n.entity_id as number)),
+      ];
+      const onlineLeads = await prisma.online_leads.findMany({
+        where: { id: { in: leadIds } },
+        select: { id: true, final_assigned_leads: true, assign_to: true },
+      });
+      const leadMap = new Map<
+        number,
+        { final_assigned_leads: number | null; assign_to: number | null }
+      >();
+      onlineLeads.forEach((l) => leadMap.set(l.id, l));
+
+      const staleNotificationIds: number[] = [];
+      filteredNotifications = notifications.filter((n) => {
+        if (
+          n.type === "LEAD_ASSIGNED" &&
+          n.entity_type === "online_lead" &&
+          n.entity_id
+        ) {
+          const lead = leadMap.get(n.entity_id);
+          if (lead) {
+            const currentAssignee = lead.final_assigned_leads || lead.assign_to;
+            if (currentAssignee && Number(currentAssignee) !== Number(userId)) {
+              staleNotificationIds.push(n.id);
+              return false;
+            }
+          }
+        }
+        return true;
+      });
+
+      if (staleNotificationIds.length > 0) {
+        prisma.notification
+          .deleteMany({
+            where: { id: { in: staleNotificationIds } },
+          })
+          .catch(() => {});
+      }
+    }
+
+    const notificationsWithDelivery: NotificationWithDelivery[] =
+      filteredNotifications.map((n) => ({
+        ...n,
+        delivery_summary: { sent: 0, failed: 0 },
+      }));
+
+    const removedCount = notifications.length - filteredNotifications.length;
+    return {
+      notifications: notificationsWithDelivery,
+      unread_count: Math.max(0, unread_count - removedCount),
+      total_count: Math.max(0, total_count - removedCount),
+    };
   },
 
   async markRead(notificationId: number, userId: number) {
-    return prisma.notification.updateMany({
+    const notif = await prisma.notification.findUnique({
+      where: { id: notificationId },
+      select: { entity_type: true, entity_id: true, user_id: true },
+    });
+
+    const result = await prisma.notification.updateMany({
       where: {
         id: notificationId,
         user_id: userId,
@@ -270,6 +360,106 @@ export const NotificationService = {
         read_at: new Date(),
       },
     });
+
+    if (notif && notif.entity_type === "broadcast" && notif.entity_id) {
+      try {
+        const userRec = await prisma.userMaster.findUnique({
+          where: { id: userId },
+          select: { created_at: true, user_type: { select: { user_type: true } } },
+        });
+        const roleName = userRec?.user_type?.user_type?.toLowerCase();
+        const isSuperAdmin = roleName === "super-admin" || roleName === "superadmin" || roleName === "super_admin";
+
+        if (!isSuperAdmin) {
+          const broadcastRec = await prisma.broadcastMaster.findUnique({
+            where: { id: notif.entity_id },
+            select: { created_at: true, publish_at: true },
+          });
+          const effectivePublishDate = broadcastRec?.publish_at || broadcastRec?.created_at;
+          const isUserCreatedAfterPublish =
+            userRec?.created_at && effectivePublishDate && userRec.created_at > effectivePublishDate;
+
+          if (!isUserCreatedAfterPublish) {
+            await prisma.broadcastRead.upsert({
+              where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
+              update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
+              create: {
+                broadcast_id: notif.entity_id,
+                user_id: userId,
+                created_by: userId,
+                updated_by: userId,
+              },
+            });
+          }
+        }
+      } catch (err) {
+        // Non-fatal
+      }
+    }
+
+    return result;
+  },
+
+  async markReadBulk(notificationIds: number[], userId: number) {
+    const broadcastNotifs = await prisma.notification.findMany({
+      where: {
+        id: { in: notificationIds },
+        user_id: userId,
+        entity_type: "broadcast",
+      },
+      select: { entity_id: true },
+    });
+
+    const result = await prisma.notification.updateMany({
+      where: {
+        id: { in: notificationIds },
+        user_id: userId,
+      },
+      data: {
+        is_read: true,
+        read_at: new Date(),
+      },
+    });
+
+    try {
+      const userRec = await prisma.userMaster.findUnique({
+        where: { id: userId },
+        select: { created_at: true, user_type: { select: { user_type: true } } },
+      });
+      const roleName = userRec?.user_type?.user_type?.toLowerCase();
+      const isSuperAdmin = roleName === "super-admin" || roleName === "superadmin" || roleName === "super_admin";
+
+      if (!isSuperAdmin) {
+        for (const notif of broadcastNotifs) {
+          if (notif.entity_id) {
+            const broadcastRec = await prisma.broadcastMaster.findUnique({
+              where: { id: notif.entity_id },
+              select: { created_at: true, publish_at: true },
+            });
+            const effectivePublishDate = broadcastRec?.publish_at || broadcastRec?.created_at;
+            const isUserCreatedAfterPublish =
+              userRec?.created_at && effectivePublishDate && userRec.created_at > effectivePublishDate;
+
+            if (!isUserCreatedAfterPublish) {
+              await prisma.broadcastRead.upsert({
+                where: { broadcast_id_user_id: { broadcast_id: notif.entity_id, user_id: userId } },
+                update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
+                create: {
+                  broadcast_id: notif.entity_id,
+                  user_id: userId,
+                  created_by: userId,
+                  updated_by: userId,
+                },
+              });
+            }
+          }
+        }
+      }
+    } catch (err) {
+      // Non-fatal
+    }
+
+    return result;
   },
 
   async registerPushToken(input: RegisterPushTokenInput) {
@@ -296,4 +486,168 @@ export const NotificationService = {
       },
     });
   },
+
+async deactivatePushToken(data: {
+  user_id: number;
+  vendor_id: number;
+  device_id?: string;
+  token?: string;
+}) {
+  const { user_id, vendor_id, device_id, token } = data;
+
+  logger.info("Deactivating push token", {
+    user_id,
+    vendor_id,
+    device_id,
+    token,
+  });
+
+  const result = await prisma.userPushToken.updateMany({
+    where: {
+      user_id,
+      vendor_id,
+      ...(device_id ? { device_id } : {}),
+      ...(token ? { token } : {}),
+    },
+    data: {
+      is_active: false,
+      last_used_at: new Date(),
+    },
+  });
+
+  logger.info("Push token deactivated", { affectedRows: result.count });
+
+  return { success: true, affected: result.count };
+},
+
+  async sendLeadAssignedToSalesExecutive(input: {
+    vendor_id: number;
+    sales_executive_id: number;
+    sender_id?: number | null;
+    leadId: number;
+    leadCode?: string;
+    leadName?: string;
+    redirectUrl?: string;
+  }) {
+    const leadLabel =
+      input.leadCode && input.leadName
+        ? `${input.leadCode} - ${input.leadName}`
+        : input.leadCode || input.leadName || `#${input.leadId}`;
+
+    const title = `New Lead ${leadLabel} assigned to you`;
+    const message = `A new lead ${leadLabel} has been assigned to you for review.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads/details/${input.leadId}`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.sales_executive_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.LEAD_ASSIGNED,
+      title,
+      message,
+      entity_type: "online_lead",
+      entity_id: input.leadId,
+      redirect_url,
+    });
+  },
+
+  async sendLeadApprovedBySalesExecutive(input: {
+    vendor_id: number;
+    telecaller_id: number;
+    sender_id?: number | null;
+    leadId: number;
+    leadCode?: string;
+    leadName?: string;
+    sales_executive_name?: string;
+    redirectUrl?: string;
+  }) {
+    const leadLabel =
+      input.leadCode && input.leadName
+        ? `${input.leadCode} - ${input.leadName}`
+        : input.leadCode || input.leadName || `#${input.leadId}`;
+
+    const salesExecutiveName = input.sales_executive_name || "Sales Executive";
+    const title = `Lead Approved`;
+    const message = `Lead ${leadLabel} has been approved by ${salesExecutiveName}. The lead has now moved to Open Lead.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads?tab=open`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.telecaller_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.APPROVAL,
+      title,
+      message,
+      entity_type: "online_lead",
+      entity_id: input.leadId,
+      redirect_url,
+    });
+  },
+
+  async sendLeadRejectedBySalesExecutive(input: {
+    vendor_id: number;
+    telecaller_id: number;
+    sender_id?: number | null;
+    leadId: number;
+    leadCode?: string;
+    leadName?: string;
+    sales_executive_name?: string;
+    rejection_reason?: string;
+    redirectUrl?: string;
+  }) {
+    const leadLabel =
+      input.leadCode && input.leadName
+        ? `${input.leadCode} - ${input.leadName}`
+        : input.leadCode || input.leadName || `#${input.leadId}`;
+
+    const salesExecutiveName = input.sales_executive_name || "Sales Executive";
+    const title = `Lead Rejected`;
+    const message = `Lead ${leadLabel} has been rejected by ${salesExecutiveName}. The lead moved into the Lost lead.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads/details/${input.leadId}?tab=lost`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.telecaller_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.APPROVAL,
+      title,
+      message,
+      entity_type: "online_lead",
+      entity_id: input.leadId,
+      redirect_url,
+    });
+  },
+
+  async sendNewLeadsAddedLeadPool(input: {
+    vendor_id: number;
+    telecaller_id: number;
+    sender_id?: number | null;
+    leadCount?: number;
+    redirectUrl?: string;
+  }) {
+    const title = `New Leads Added in Lead Pool`;
+    const message = `New leads have been added in the Lead Pool. Please review the lead details and do follow up.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads?tab=pool`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.telecaller_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.LEAD_ASSIGNED,
+      title,
+      message,
+      entity_type: "online_lead_pool",
+      entity_id: null,
+      redirect_url,
+    });
+  },
+
 };
+
+
+
+

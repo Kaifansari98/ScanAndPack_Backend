@@ -1,26 +1,40 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
+import { AuthService } from "../services/auth/auth.service";
 
 dotenv.config();
 
-export const verifyToken = (
+const authService = new AuthService();
+const secret = process.env.JWT_SECRET || "supersecretkey";
+
+export const verifyToken = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader?.split(" ")[1]; // Expecting "Bearer <token>"
+  const token = authHeader?.split(" ")[1];
 
-  if (!token) return res.status(401).json({ message: "Access token missing" });
-
-  const secret = process.env.JWT_SECRET || "supersecretkey";
+  if (!token) {
+    return res.status(401).json({ message: "Access token missing" });
+  }
 
   try {
-    const decoded = jwt.verify(token, secret);
+    const decoded = await authService.verifySessionToken(token);
     (req as any).user = decoded;
-    next();
-  } catch (err) {
-    return res.status(403).json({ message: "Invalid token" });
+    return next();
+  } catch (err: any) {
+    try {
+      const legacyDecoded = jwt.verify(token, secret) as any;
+      if (legacyDecoded && !legacyDecoded.session_id) {
+        (req as any).user = legacyDecoded;
+        return next();
+      }
+    } catch {}
+
+    return res
+      .status(err?.statusCode || 403)
+      .json({ message: err?.message || "Invalid token" });
   }
 };

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { SiteReadinessController } from "../../../controllers/installation/site-readiness/SiteReadiness.controller";
 import { uploadSiteReadinessPhotos } from "../../../middlewares/uploadWasabi";
+import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
 const siteReadinessRoutes = Router();
 const controller = new SiteReadinessController();
@@ -32,7 +33,7 @@ siteReadinessRoutes.put(
 // ✅ POST → Upload Current Site Photos at Site Readiness
 siteReadinessRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-current-site-photos",
-  uploadSiteReadinessPhotos.array("files", 10), // accept up to 10 images
+  handleMulterUpload(uploadSiteReadinessPhotos.array("files")), // accept multiple images
   controller.uploadCurrentSitePhotosAtSiteReadiness
 );
 
@@ -46,6 +47,12 @@ siteReadinessRoutes.get(
 siteReadinessRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/is-site-readiness-completed",
   controller.checkSiteReadinessCompletion
+);
+
+// ✅ GET → Fetch assigned Site Supervisor for a lead
+siteReadinessRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/site-supervisor",
+  controller.getAssignedSiteSupervisor
 );
 
 // ✅ Move Lead to Dispatch Planning Stage

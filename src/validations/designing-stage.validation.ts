@@ -60,6 +60,12 @@ export const createDesignSelectionValidation = [
     .withMessage("vendor_id must be a valid number")
     .toInt(), // Convert string to integer
 
+  body("product_structure_instance_id")
+    .optional({ values: "falsy" })
+    .isNumeric({ no_symbols: true })
+    .withMessage("product_structure_instance_id must be a valid number")
+    .toInt(),
+
   body("type")
     .notEmpty()
     .withMessage("type is required")
@@ -110,4 +116,10 @@ export const updateDesignSelectionValidation = [
     .isNumeric({ no_symbols: true })
     .withMessage("updated_by must be a valid number")
     .toInt(), // Convert string to integer
+
+  body("product_structure_instance_id")
+    .optional({ values: "falsy" })
+    .isNumeric({ no_symbols: true })
+    .withMessage("product_structure_instance_id must be a valid number")
+    .toInt(),
 ];

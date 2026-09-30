@@ -1,25 +1,26 @@
 import { Router } from "express";
 import { PostProductionController } from "../../../controllers/leadModuleControllers/production/post-production/postProduction.controller";
-import { uploadPostProductionFiles } from "../../../middlewares/uploadWasabi";
+import { uploadPostProductionFiles, uploadPreProductionFiles } from "../../../middlewares/uploadWasabi";
+import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
 const postProductionRoutes = Router();
 const controller = new PostProductionController();
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-qc-photos",
-  uploadPostProductionFiles.array("files", 10), // accept up to 10 images
+  handleMulterUpload(uploadPostProductionFiles.array("files")), // accept multiple images
   controller.uploadQcPhotos
 );
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-hardware-packing-details",
-  uploadPostProductionFiles.array("files", 10), // multiple docs
+  handleMulterUpload(uploadPostProductionFiles.array("files")), // multiple docs
   controller.uploadHardwarePackingDetails
 );
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-woodwork-packing-details",
-  uploadPostProductionFiles.array("files", 10),
+  handleMulterUpload(uploadPostProductionFiles.array("files")),
   controller.uploadWoodworkPackingDetails
 );
 
@@ -59,10 +60,37 @@ postProductionRoutes.get(
   controller.checkPostProductionCompleteness
 );
 
+postProductionRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/mark-production-completed",
+  controller.markProductionCompleted
+);
+
 // PUT → Move lead from Production (Type 10) → Ready To Dispatch (Type 11)
 postProductionRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/move-to-ready-to-dispatch",
   controller.moveLeadToReadyToDispatch
+);
+
+// ✅ Pre-Production Files (Type 37)
+postProductionRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/upload-pre-production-files",
+  handleMulterUpload(uploadPreProductionFiles.array("files")),
+  controller.uploadPreProductionFiles
+);
+
+postProductionRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/get-pre-production-files",
+  controller.getPreProductionFiles
+);
+
+postProductionRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/check-pre-production-files-ready",
+  controller.checkPreProductionFilesReady
+);
+
+postProductionRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/mark-pre-prod-done",
+  controller.markPreProdDone
 );
 
 export default postProductionRoutes;

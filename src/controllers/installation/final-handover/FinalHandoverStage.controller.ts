@@ -11,7 +11,13 @@ import { ApiResponse } from "../../../utils/apiResponse";
 import logger from "../../../utils/logger";
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
-import { sendMajorMilestoneEmail } from "../../../services/email/brevoEmail.service";
+import {
+  sendMajorMilestoneEmail,
+  sendFinalHandoverCompletedEmail,
+} from "../../../services/email/brevoEmail.service";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
+import { NotificationType } from "../../../prisma/generated";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -39,8 +45,14 @@ export class FinalHandoverStageController {
    */
   async getAllFinalHandoverStageLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const userIdParam = Array.isArray(req.params.userId)
+        ? req.params.userId[0]
+        : req.params.userId;
+      const vendorId = Number(vendorIdParam);
+      const userId = Number(userIdParam);
 
       if (!vendorId || !userId) {
         return res
@@ -269,6 +281,53 @@ export class FinalHandoverStageController {
     }
   }
 
+  async updateAmcOptedStatus(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const { updated_by, is_amc_opted } = req.body;
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !updated_by ||
+        typeof is_amc_opted !== "boolean"
+      ) {
+        return res.status(400).json(
+          ApiResponse.error(
+            "vendorId, leadId, updated_by, and is_amc_opted are required",
+            400,
+          ),
+        );
+      }
+
+      const result = await service.updateAmcOptedStatus(
+        vendorId,
+        leadId,
+        Number(updated_by),
+        is_amc_opted,
+      );
+
+      return res.status(200).json(
+        ApiResponse.success(
+          result,
+          is_amc_opted
+            ? "AMC opted status updated to yes"
+            : "AMC opted status updated to no",
+        ),
+      );
+    } catch (error: any) {
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message || "Internal server error",
+            error.statusCode || 500,
+          ),
+        );
+    }
+  }
+
   /**
    * ✅ Move Lead to Project Completed Stage (Type 17)
    * @route PUT /leads/installation/final-handover/vendorId/:vendorId/leadId/:leadId/move-to-project-completed
@@ -290,22 +349,98 @@ export class FinalHandoverStageController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await FinalHandoverStageService.moveLeadToProjectCompleted(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl
       );
 
-      try {
-        const [admins, mappings, lead] = await Promise.all([
-          prisma.userMaster.findMany({
-            where: {
+      // Fire-and-forget: notify Head Site Supervisor that Final Handover is completed
+      void (async () => {
+        try {
+          const [hssMapping, lead, updater] = await Promise.all([
+            prisma.leadUserMapping.findFirst({
+              where: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                type: "head-site-supervisor",
+                status: "active",
+              },
+              select: { user_id: true },
+            }),
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                firstname: true,
+                lastname: true,
+                account_id: true,
+                lead_code: true,
+              },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: Number(updated_by) },
+              select: { user_name: true, user_email: true },
+            }),
+          ]);
+
+          if (!hssMapping) return;
+
+          const hss = await prisma.userMaster.findUnique({
+            where: { id: hssMapping.user_id },
+            select: { id: true, user_name: true, user_email: true },
+          });
+          if (!hss) return;
+
+          const leadName =
+            `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const leadCode =
+            lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const projectUrl = lead?.account_id
+            ? `${clientBaseUrl}/dashboard/installation/final-handover/details/${leadId}?accountId=${lead.account_id}`
+            : `${clientBaseUrl}/dashboard/installation/final-handover/details/${leadId}`;
+          const completedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+          const title = "Final Handover Completed";
+          const message = `Final Handover completed for ${leadCode} – ${leadName}`;
+
+          await NotificationService.createAndSend({
+            vendor_id: vendorId,
+            user_id: hss.id,
+            sender_id: Number(updated_by),
+            title,
+            message,
+            type: NotificationType.LEAD_MILESTONE,
+            redirect_url: projectUrl,
+          });
+
+          if (hss.user_email) {
+            await sendFinalHandoverCompletedEmail({
               vendor_id: vendorId,
-              status: "active",
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
-            },
-            select: { id: true },
-          }),
+              toEmail: hss.user_email,
+              toName: hss.user_name ?? undefined,
+              leadCode,
+              leadName: leadName || "Lead",
+              updatedBy: updater?.user_name ?? "Team",
+              updatedOn: completedOn,
+              projectUrl,
+            });
+          }
+        } catch (err: any) {
+          logger.warn(
+            "⚠️ Failed to send Final Handover Completed notification to Head Site Supervisor",
+            { error: err?.message, lead_id: leadId }
+          );
+        }
+      })();
+
+      try {
+        const [mappings, lead] = await Promise.all([
           prisma.leadUserMapping.findMany({
             where: {
               vendor_id: vendorId,
@@ -316,24 +451,18 @@ export class FinalHandoverStageController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, account_id: true, lead_code: true },
+            select: { firstname: true, lastname: true, account_id: true, lead_code: true, franchise_id: true },
           }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-        const recipientIds = new Set<number>();
-        admins.forEach((admin) => recipientIds.add(admin.id));
-        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
-
-        if (recipientIds.size > 0) {
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-            },
-            select: { id: true, user_name: true, user_email: true },
+        const franchiseId = lead?.franchise_id ?? null;
+        if (mappings.length > 0 || franchiseId != null) {
+          const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+            vendorId,
+            franchiseId,
           });
           const clientBaseUrl = resolveClientBaseUrl(req);
           const detailsUrl = lead?.account_id

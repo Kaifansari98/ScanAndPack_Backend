@@ -32,12 +32,46 @@ import fs from "node:fs/promises";
 
 const service = new DispatchStageService();
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
+const getProductionStageFactoryUser = async (
+  vendorId: number,
+  leadId: number,
+) => {
+  const productionStageMapping = await prisma.leadUserMapping.findFirst({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      status: "active",
+      type: "production-stage",
+      user: {
+        status: "active",
+      },
+    },
+    orderBy: { created_at: "asc" },
+    select: {
+      user_id: true,
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+          user_type: { select: { user_type: true } },
+        },
+      },
+    },
+  });
+
+  return productionStageMapping?.user ?? null;
+};
+
 export class DispatchStageController {
   /** ✅ Get all leads under Dispatch Stage (Type 14) */
   async getAllDispatchStageLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res
@@ -77,8 +111,8 @@ export class DispatchStageController {
   /** ✅ Get required_date_for_dispatch by Lead ID & Vendor ID */
   async getRequiredDateForDispatch(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
 
       if (!vendorId || !leadId) {
         return res
@@ -110,8 +144,8 @@ export class DispatchStageController {
   /** ✅ POST → Add Dispatch Details */
   async addDispatchDetails(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const {
         dispatch_date,
         driver_name,
@@ -155,8 +189,8 @@ export class DispatchStageController {
   /** ✅ GET → Fetch Dispatch details */
   async getDispatchDetails(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
 
       if (!vendorId || !leadId) {
         return res
@@ -450,24 +484,16 @@ export class DispatchStageController {
         }
       }
 
-      const factoryUser = await prisma.userMaster.findFirst({
-        where: {
-          vendor_id: Number(vendorId),
-          status: "active",
-          user_type: {
-            user_type: {
-              equals: "factory",
-              mode: "insensitive",
-            },
-          },
-        },
-        select: { id: true, user_name: true, user_email: true },
-      });
+      const factoryUser = await getProductionStageFactoryUser(
+        Number(vendorId),
+        Number(leadId),
+      );
 
       if (!factoryUser) {
         return res.status(400).json({
           success: false,
-          message: "Factory user not found for this vendor",
+          message:
+            "Production-stage factory mapping not found for this lead",
         });
       }
 
@@ -613,24 +639,16 @@ export class DispatchStageController {
         }
       }
 
-      const factoryUser = await prisma.userMaster.findFirst({
-        where: {
-          vendor_id: Number(vendorId),
-          status: "active",
-          user_type: {
-            user_type: {
-              equals: "factory",
-              mode: "insensitive",
-            },
-          },
-        },
-        select: { id: true, user_name: true, user_email: true },
-      });
+      const factoryUser = await getProductionStageFactoryUser(
+        Number(vendorId),
+        Number(leadId),
+      );
 
       if (!factoryUser) {
         return res.status(400).json({
           success: false,
-          message: "Factory user not found for this vendor",
+          message:
+            "Production-stage factory mapping not found for this lead",
         });
       }
 

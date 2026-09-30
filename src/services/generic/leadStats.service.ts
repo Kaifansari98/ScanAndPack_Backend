@@ -3,9 +3,14 @@ import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 
 export class LeadStatsService {
-  static async getVendorLeadStats(vendorId: number, userId?: number) {
+  static async getVendorLeadStats(
+    vendorId: number,
+    franchiseId: number | undefined,
+    userId?: number
+  ) {
     logger.info("[LeadStatsService] getVendorLeadStats called", {
       vendorId,
+      franchiseId,
       userId,
     });
 
@@ -14,8 +19,19 @@ export class LeadStatsService {
       is_deleted: false,
     };
 
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled =
+      vendorData?.is_online_lead_feature_enabled === true;
+
     // ✅ Total My Tasks count (for current user)
     let totalMyTasks: number | null = null;
+    let userType = "";
+    let isCaller = false;
+    let targetFranchiseId: number | undefined = franchiseId;
+    let isHO = false;
 
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
@@ -34,56 +50,201 @@ export class LeadStatsService {
         throw new Error("User does not belong to the specified vendor");
       }
 
-      const userType = user.user_type.user_type.toLowerCase();
+      isHO = user.franchise_id
+        ? (
+            await prisma.franchiseMaster.findUnique({
+              where: { id: user.franchise_id },
+              select: { is_head_office: true },
+            })
+          )?.is_head_office === true
+        : false;
+
+      userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
+      isCaller = [
+        "telecaller",
+        "telecaller-team-lead",
+        "telecaller team lead",
+        "caller",
+        "store-caller",
+        "store caller",
+      ].includes(userType);
+
+      targetFranchiseId =
+        franchiseId ??
+        (!isHO && userType !== "super-admin" && !isCaller ? user.franchise_id ?? undefined : undefined);
+
+      const shouldUseMapping = ![
+        "admin",
+        "super-admin",
+        "auditor",
+      ].includes(userType);
+      // Site supervisors can be mapped to leads across multiple franchises
+      // (see SiteSupervisorFranchiseMapping); leads individually assigned to
+      // them via LeadUserMapping/UserLeadTask (the `leadIds` gate below) must
+      // count regardless of the lead's franchise, so franchise scoping is
+      // skipped for this role here.
+      const isSiteSupervisorLeadOwner = userType === "site-supervisor";
+      console.log("[LeadStatsService] role flags", {
+        userType,
+        targetFranchiseId,
+        shouldUseMapping,
+      });
+
+      if (targetFranchiseId && !isSiteSupervisorLeadOwner && !isCaller) {
+        whereClause = {
+          ...whereClause,
+          franchise_id: targetFranchiseId,
+        };
+      }
+
+      // My Task is a personal queue. Admin-level users can work across
+      // franchises, so its badge must not be limited by the active franchise.
+      // Site supervisors are excluded for the same cross-franchise-mapping
+      // reason as above.
+      const taskFranchiseId =
+        ["admin", "super-admin", "auditor"].includes(userType) ||
+        isSiteSupervisorLeadOwner ||
+        isCaller
+          ? undefined
+          : targetFranchiseId;
 
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
           vendor_id: vendorId,
+          ...(taskFranchiseId
+            ? { franchise_id: taskFranchiseId }
+            : {}),
           user_id: userId,
           status: { in: ["open", "in_progress"] },
         },
       });
 
-      if (userType === "sales-executive" || userType === "site-supervisor") {
-        // ✅ Leads from LeadUserMapping
-        const mappedLeads = await prisma.leadUserMapping.findMany({
-          where: { vendor_id: vendorId, user_id: userId, status: "active" },
-          select: { lead_id: true },
-        });
+      if (shouldUseMapping) {
+        // Pre-prod and factory are mapping-only — taskLeads would pull leads they
+        // don't own (e.g. tasks they created) and inflate the sidebar count.
+        const mappingOnlyRoles = ["pre-prod", "factory"];
+        const isMappingOnly = mappingOnlyRoles.includes(userType);
 
-        // ✅ Use only mapped leads (ignore userLeadTask)
-        const leadIds = [...new Set(mappedLeads.map((m) => m.lead_id))];
+        let callerLeadIds: number[] = [];
+        if (isCaller && userId) {
+          const [directLeads, onlineFollowUpLeads] = await Promise.all([
+            prisma.leadMaster.findMany({
+              where: {
+                vendor_id: vendorId,
+                is_deleted: false,
+                OR: [{ created_by: userId }, { assign_to: userId }],
+              },
+              select: { id: true },
+            }),
+            prisma.online_leads.findMany({
+              where: {
+                vendor_id: vendorId,
+                lead_master_id: { not: null },
+                OR: [
+                  { assign_to: userId },
+                  { final_assigned_leads: userId },
+                  { created_by: userId },
+                  { online_lead_call_log: { some: { telecaller_id: userId } } },
+                  { online_lead_history: { some: { created_by: userId } } },
+                ],
+              },
+              select: { lead_master_id: true },
+            }),
+          ]);
+
+          callerLeadIds = [
+            ...directLeads.map((d) => d.id),
+            ...onlineFollowUpLeads
+              .map((o) => o.lead_master_id)
+              .filter((id): id is number => typeof id === "number"),
+          ];
+        }
+
+        const [mappedLeads, taskLeads] = await Promise.all([
+          prisma.leadUserMapping.findMany({
+            where: { vendor_id: vendorId, user_id: userId, status: "active" },
+            select: { lead_id: true },
+          }),
+          isMappingOnly
+            ? Promise.resolve([])
+            : prisma.userLeadTask.findMany({
+                where: {
+                  vendor_id: vendorId,
+                  OR: [{ created_by: userId }, { user_id: userId }],
+                },
+                select: { lead_id: true },
+              }),
+        ]);
+
+        const leadIds = [
+          ...new Set([
+            ...mappedLeads.map((m) => m.lead_id),
+            ...taskLeads.map((t) => t.lead_id),
+            ...callerLeadIds,
+          ]),
+        ];
+        console.log("[LeadStatsService] lead ids", {
+          mappedCount: mappedLeads.length,
+          taskCount: taskLeads.length,
+          callerCount: callerLeadIds.length,
+          totalUnique: leadIds.length,
+        });
 
         whereClause = {
           ...whereClause,
           id: { in: leadIds.length > 0 ? leadIds : [0] }, // avoid empty "in []"
         };
+        if (userType === "sales-executive" && userId) {
+          whereClause.assign_to = userId;
+        }
       }
       // ✅ Admin/super-admin → see all vendor leads
 
       // userLeadTask counts are no longer included
     }
 
-    // Helper: count leads by status type
-    const countByStatus = async (statusType: string) =>
+    const baseLeadScope = {
+      ...whereClause,
+      activity_status: ActivityStatus.onGoing,
+      is_draft: { not: true },
+    };
+
+    const hiddenSmallOrderRequests = await prisma.smallOrderRequest.findMany({
+      where: {
+        vendor_id: vendorId,
+        so_code: { not: null },
+        request_source: { in: ["post_dispatch", "final_handover"] },
+      },
+      select: {
+        so_code: true,
+        request_source: true,
+      },
+    });
+
+    const postDispatchHiddenLeadCodes = hiddenSmallOrderRequests
+      .filter((request) => request.request_source === "post_dispatch")
+      .map((request) => request.so_code)
+      .filter((code): code is string => Boolean(code));
+
+    const installationHiddenLeadCodes = hiddenSmallOrderRequests
+      .map((request) => request.so_code)
+      .filter((code): code is string => Boolean(code));
+
+    // Helper: count leads by status tag (Type 1..17)
+    const countByTag = async (statusTag: string, extraWhere: any = {}) =>
       prisma.leadMaster.count({
         where: {
-          ...whereClause,
-          statusType: { vendor_id: vendorId, type: statusType },
-          activity_status: {
-            in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
-          },
+          ...baseLeadScope,
+          statusType: { vendor_id: vendorId, tag: statusTag },
+          ...extraWhere,
         },
       });
 
     // Aggregate counts
     const totalLeads = await prisma.leadMaster.count({
       where: {
-        ...whereClause,
+        ...baseLeadScope,
         statusType: { vendor_id: vendorId },
-        activity_status: {
-          in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
-        },
       },
     });
 
@@ -112,46 +273,259 @@ export class LeadStatsService {
         ...whereClause,
         statusType: { vendor_id: vendorId, tag: { in: overallStatusTags } },
         activity_status: ActivityStatus.onGoing,
+        is_draft: { not: true },
       },
     });
 
-    const totalOpenLeads = await countByStatus("open");
-    const totalInitialSiteMeasurementLeads = await countByStatus(
-      "initial-site-measurement"
-    );
-    const totalDesigningStageLeads = await countByStatus("designing-stage");
-    const totalBookingStageLeads = await countByStatus("booking-stage");
-    const totalFinalMeasurementStageLeads = await countByStatus(
-      "final-site-measurement-stage"
-    );
-    const totalClientDocumentationStageLeads = await countByStatus(
-      "client-documentation-stage"
-    );
-    const totalClientApprovalStageLeads = await countByStatus(
-      "client-approval-stage"
-    );
-    const totalTechCheckStageLeads = await countByStatus("tech-check-stage");
-    const totalOrderLoginStageLeads = await countByStatus("order-login-stage");
-    const totalProductionStageLeads = await countByStatus("production-stage");
-    const totalReadyToDispatchStageLeads = await countByStatus(
-      "ready-to-dispatch-stage"
-    );
-    const totalSiteReadinessStageLeads = await countByStatus(
-      "site-readiness-stage"
-    );
-    const totalDispatchPlanningStageLeads = await countByStatus(
-      "dispatch-planning-stage"
-    );
-    const totalDispatchStageLeads = await countByStatus("dispatch-stage");
-    const totalUnderInstallationStageLeads = await countByStatus(
-      "under-installation-stage"
-    );
-    const totalFinalhandoverStageLeads = await countByStatus(
-      "final-handover-stage"
-    );
+    const totalOpenLeads = await countByTag("Type 1", {
+      is_draft: undefined,
+      AND: [{ OR: [{ is_draft: false }, { draft_in_open_leads: true }] }],
+    });
+
+    let totalDraftLeads = 0;
+    if (isOnlineLeadFeatureEnabled) {
+      const shouldIncludeFranchise = userId
+        ? (userType === "admin" ||
+            userType === "auditor" ||
+            userType === "sales-executive") &&
+          !isHO
+        : Boolean(franchiseId);
+
+      const effectiveFranchiseId = userId ? targetFranchiseId : franchiseId;
+
+      const pendingOnlineWhere: any = {
+        vendor_id: vendorId,
+        approval_status: "PENDING",
+      };
+
+      if (userType === "sales-executive" && userId) {
+        const userCondition: any = {
+          OR: [
+            { final_assigned_leads: userId },
+            {
+              AND: [
+                { final_assigned_leads: null },
+                { OR: [{ assign_to: userId }, { pending_assign_to: userId }] },
+              ],
+            },
+          ],
+        };
+
+        if (shouldIncludeFranchise && effectiveFranchiseId) {
+          pendingOnlineWhere.AND = [
+            {
+              OR: [
+                { pending_store_id: effectiveFranchiseId },
+                { store_id: effectiveFranchiseId },
+              ],
+            },
+            userCondition,
+          ];
+        } else {
+          Object.assign(pendingOnlineWhere, userCondition);
+        }
+      } else if (isCaller && userId) {
+        const callerCondition: any = {
+          OR: [
+            { assign_to: userId },
+            { final_assigned_leads: userId },
+            { created_by: userId },
+            { online_lead_call_log: { some: { telecaller_id: userId } } },
+            { online_lead_history: { some: { created_by: userId } } },
+          ],
+        };
+        Object.assign(pendingOnlineWhere, callerCondition);
+      } else if (shouldIncludeFranchise && effectiveFranchiseId) {
+        pendingOnlineWhere.OR = [
+          { pending_store_id: effectiveFranchiseId },
+          { store_id: effectiveFranchiseId },
+        ];
+      }
+
+      const pendingOnlineCount = await prisma.online_leads.count({
+        where: pendingOnlineWhere,
+      });
+
+      const draftLeadMasterCount = await countByTag("Type 1", { is_draft: true });
+      totalDraftLeads = pendingOnlineCount + draftLeadMasterCount;
+    } else {
+      totalDraftLeads = await countByTag("Type 1", { is_draft: true });
+    }
+    const totalInitialSiteMeasurementLeads = await countByTag("Type 2");
+    const totalDesigningStageLeads = await countByTag("Type 3");
+    const totalBookingStageLeads = await countByTag("Type 4");
+    const totalFinalMeasurementStageLeads = await countByTag("Type 5");
+    const debugType5Leads = await prisma.leadMaster.findMany({
+      where: {
+        ...baseLeadScope,
+        statusType: { vendor_id: vendorId, tag: "Type 5" },
+      },
+      select: { id: true, lead_code: true },
+      take: 10,
+    });
+    console.log("[LeadStatsService] debug Type 5 leads", {
+      count: totalFinalMeasurementStageLeads,
+      sample: debugType5Leads,
+    });
+    const totalClientDocumentationStageLeads = await countByTag("Type 6");
+    const totalClientApprovalStageLeads = await countByTag("Type 7");
+    const instanceStageTags = ["Type 8", "Type 9", "Type 10"];
+
+    const totalTechCheckStageLeads =
+      await prisma.leadProductStructureInstance.count({
+        where: {
+          vendor_id: vendorId,
+          OR: [
+            { is_tech_check_completed: false },
+            { is_tech_check_completed: null },
+          ],
+          lead: {
+            ...baseLeadScope,
+            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+          },
+        },
+      });
+
+    const totalOrderLoginStageLeads =
+      await prisma.leadProductStructureInstance.count({
+        where: {
+          vendor_id: vendorId,
+          is_tech_check_completed: true,
+          OR: [
+            { is_order_login_completed: false },
+            { is_order_login_completed: null },
+          ],
+          lead: {
+            ...baseLeadScope,
+            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+          },
+        },
+      });
+
+    const totalProductionStageLeads =
+      await prisma.leadProductStructureInstance.count({
+        where: {
+          vendor_id: vendorId,
+          is_tech_check_completed: true,
+          is_order_login_completed: true,
+          lead: {
+            ...baseLeadScope,
+            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
+          },
+        },
+      });
+    const totalReadyToDispatchStageLeads = await countByTag("Type 11");
+    const totalSiteReadinessStageLeads = await countByTag("Type 12");
+    const totalDispatchPlanningStageLeads = await countByTag("Type 13");
+    const totalDispatchStageLeads = await countByTag("Type 14");
+    const totalUnderInstallationStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        ...(postDispatchHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: postDispatchHiddenLeadCodes } }
+          : {}),
+
+        // Stage Filter (Type 15)
+        statusType: {
+          vendor_id: vendorId,
+          tag: "Type 15",
+        },
+
+        // Hide ONLY when usable completed + misc still pending
+        NOT: {
+          AND: [
+            { usable_handover_completed: true },
+            {
+              miscellaneousMaster: {
+                some: { is_resolved: false },
+              },
+            },
+          ],
+        },
+      },
+    });
+    const totalFinalhandoverStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        ...(installationHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: installationHiddenLeadCodes } }
+          : {}),
+        statusType: { vendor_id: vendorId, tag: "Type 16" },
+      },
+    });
+    const totalProjectCompletedStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        ...(installationHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: installationHiddenLeadCodes } }
+          : {}),
+        statusType: { vendor_id: vendorId, tag: "Type 17" },
+      },
+    });
+    const totalServicingStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        ...(installationHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: installationHiddenLeadCodes } }
+          : {}),
+        statusType: { vendor_id: vendorId, tag: "Type 17" },
+        serviceSchedules: {
+          some: {
+            status: "open",
+          },
+        },
+      },
+    });
+
+    // Resolve online lead pool count
+    const totalLeadPool = await prisma.online_leads.count({
+      where: {
+        vendor_id: vendorId,
+        assign_to: null,
+        OR: [
+          { approval_status: "PENDING" },
+          {
+            NOT: {
+              online_lead_followup_status: {
+                status_name: {
+                  in: ["Store Assigned", "Store Visit Done"],
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+        ],
+      },
+    });
+
+    console.log("[LeadStatsService] counts snapshot", {
+      totalLeads,
+      totalOverallLeads,
+      totalLeadPool,
+      totalOpenLeads,
+      totalDraftLeads,
+      totalInitialSiteMeasurementLeads,
+      totalDesigningStageLeads,
+      totalBookingStageLeads,
+      totalFinalMeasurementStageLeads,
+      totalClientDocumentationStageLeads,
+      totalClientApprovalStageLeads,
+      totalTechCheckStageLeads,
+      totalOrderLoginStageLeads,
+      totalProductionStageLeads,
+      totalReadyToDispatchStageLeads,
+      totalSiteReadinessStageLeads,
+      totalDispatchPlanningStageLeads,
+      totalDispatchStageLeads,
+      totalUnderInstallationStageLeads,
+      totalFinalhandoverStageLeads,
+      totalProjectCompletedStageLeads,
+      totalServicingStageLeads,
+    });
 
     // GROUP TOTALS
     const total_leads_group =
+      totalDraftLeads +
       totalOpenLeads +
       totalInitialSiteMeasurementLeads +
       totalDesigningStageLeads +
@@ -172,7 +546,8 @@ export class LeadStatsService {
       totalDispatchPlanningStageLeads +
       totalDispatchStageLeads +
       totalUnderInstallationStageLeads +
-      totalFinalhandoverStageLeads;
+      totalFinalhandoverStageLeads +
+      totalProjectCompletedStageLeads;
 
     const stats = {
       // =====================
@@ -180,9 +555,11 @@ export class LeadStatsService {
       // =====================
       total_leads: totalLeads,
       total_overall_leads: totalOverallLeads,
+      total_lead_pool: totalLeadPool,
       total_my_tasks: totalMyTasks,
 
       total_open_leads: totalOpenLeads,
+      total_draft_leads: totalDraftLeads,
       total_initial_site_measurement_leads: totalInitialSiteMeasurementLeads,
       total_designing_stage_leads: totalDesigningStageLeads,
       total_booking_stage_leads: totalBookingStageLeads,
@@ -190,17 +567,19 @@ export class LeadStatsService {
       total_final_measurement_leads: totalFinalMeasurementStageLeads,
       total_client_documentation_leads: totalClientDocumentationStageLeads,
       total_client_approval_leads: totalClientApprovalStageLeads,
-      
+
       total_tech_check_leads: totalTechCheckStageLeads,
       total_order_login_leads: totalOrderLoginStageLeads,
       total_production_stage_leads: totalProductionStageLeads,
       total_ready_to_dispatch_leads: totalReadyToDispatchStageLeads,
-      
+
       total_site_readiness_stage_leads: totalSiteReadinessStageLeads,
       total_dispatch_planning_stage_leads: totalDispatchPlanningStageLeads,
       total_dispatch_stage_leads: totalDispatchStageLeads,
       total_under_installation_stage_leads: totalUnderInstallationStageLeads,
       total_final_handover_stage_leads: totalFinalhandoverStageLeads,
+      total_project_completed_stage_leads: totalProjectCompletedStageLeads,
+      total_servicing_stage_leads: totalServicingStageLeads,
 
       // =====================
       // GROUP TOTALS (NEW)

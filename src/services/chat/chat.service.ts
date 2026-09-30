@@ -1,7 +1,6 @@
 import { prisma } from "../../prisma/client";
 import { NotificationType } from "../../prisma/generated";
 import { NotificationService } from "../notification/notification.service";
-import { sendChatMentionEmail } from "../email/brevoEmail.service";
 import logger from "../../utils/logger";
 import {
   generateSignedUrl,
@@ -10,6 +9,81 @@ import {
 import fs from "node:fs/promises";
 
 export class ChatService {
+  private static mapReplyPreview(
+    row:
+      | {
+          id: number;
+          sender_id: number;
+          message_text: string | null;
+          sender: { user_name: string | null };
+          attachments: Array<{
+            document: { doc_og_name: string };
+          }>;
+        }
+      | null
+      | undefined,
+  ) {
+    if (!row) return null;
+
+    return {
+      id: row.id,
+      sender_id: row.sender_id,
+      sender_name: row.sender?.user_name ?? "Unknown",
+      message_text: row.message_text,
+      attachment_name: row.attachments[0]?.document?.doc_og_name ?? null,
+      attachment_count: row.attachments.length,
+    };
+  }
+
+  private static async resolveChatMemberIds(
+    tx: Parameters<Parameters<typeof prisma.$transaction>[0]>[0],
+    params: {
+      leadId: number;
+      vendorId: number;
+      franchiseId: number | null;
+      userId: number;
+    }
+  ) {
+    const { leadId, vendorId, franchiseId, userId } = params;
+
+    const [superAdminUsers, adminUsers, mappedUsers] = await Promise.all([
+      tx.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          user_type: { user_type: "super-admin" },
+        },
+        select: { id: true },
+      }),
+      franchiseId == null
+        ? Promise.resolve([])
+        : tx.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              franchise_id: franchiseId,
+              status: "active",
+              user_type: { user_type: "admin" },
+            },
+            select: { id: true },
+          }),
+      tx.leadUserMapping.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          status: "active",
+        },
+        select: { user_id: true },
+      }),
+    ]);
+
+    return new Set<number>([
+      ...superAdminUsers.map((user) => user.id),
+      ...adminUsers.map((user) => user.id),
+      ...mappedUsers.map((mapping) => mapping.user_id),
+      userId,
+    ]);
+  }
+
   static async checkChatRoomByLeadId(leadId: number) {
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
@@ -39,7 +113,7 @@ export class ChatService {
     const messageResult = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
-        select: { id: true, vendor_id: true },
+        select: { id: true, vendor_id: true, franchise_id: true },
       });
 
       if (!lead) {
@@ -58,29 +132,12 @@ export class ChatService {
         },
       });
 
-      const adminUsers = await tx.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: { user_type: { in: ["admin", "super-admin"] } },
-        },
-        select: { id: true },
-      });
-
-      const mappedUsers = await tx.leadUserMapping.findMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: lead.vendor_id,
-          status: "active",
-        },
-        select: { user_id: true },
-      });
-
-      const desiredMemberIds = new Set<number>([
-        ...adminUsers.map((user) => user.id),
-        ...mappedUsers.map((mapping) => mapping.user_id),
+      const desiredMemberIds = await ChatService.resolveChatMemberIds(tx, {
+        leadId,
+        vendorId: lead.vendor_id,
+        franchiseId: lead.franchise_id ?? null,
         userId,
-      ]);
+      });
 
       if (existingRoom) {
         const existingMembers = await tx.leadChatMember.findMany({
@@ -184,6 +241,7 @@ export class ChatService {
     messageText?: string;
     files?: Express.Multer.File[];
     mentionUserIds?: number[];
+    replyToMessageId?: number;
     clientBaseUrl?: string;
   }) {
     const {
@@ -193,6 +251,7 @@ export class ChatService {
       messageText,
       files,
       mentionUserIds,
+      replyToMessageId,
       clientBaseUrl,
     } = params;
   
@@ -242,7 +301,7 @@ export class ChatService {
     const messageResult = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findFirst({
         where: { id: leadId, vendor_id: vendorId, is_deleted: false },
-        select: { id: true, vendor_id: true, account_id: true },
+        select: { id: true, vendor_id: true, account_id: true, franchise_id: true },
       });
   
       if (!lead) {
@@ -252,6 +311,13 @@ export class ChatService {
         (error as any).statusCode = 404;
         throw error;
       }
+
+      let repliedToMessage:
+        | {
+            id: number;
+            chat_room_id: number;
+          }
+        | null = null;
   
       let chatRoom = await tx.leadChatRoom.findFirst({
         where: { lead_id: leadId, vendor_id: vendorId },
@@ -263,12 +329,50 @@ export class ChatService {
           data: { lead_id: leadId, vendor_id: vendorId },
           select: { id: true },
         });
+
+        const memberIds = await ChatService.resolveChatMemberIds(tx, {
+          leadId,
+          vendorId,
+          franchiseId: lead.franchise_id ?? null,
+          userId,
+        });
+
+        if (memberIds.size > 0) {
+          await tx.leadChatMember.createMany({
+            data: Array.from(memberIds).map((memberId) => ({
+              chat_room_id: chatRoom!.id,
+              user_id: memberId,
+              added_by: userId,
+            })),
+            skipDuplicates: true,
+          });
+        }
+      }
+
+      if (replyToMessageId) {
+        repliedToMessage = await tx.leadChatMessage.findFirst({
+          where: {
+            id: replyToMessageId,
+            chat_room_id: chatRoom.id,
+          },
+          select: {
+            id: true,
+            chat_room_id: true,
+          },
+        });
+
+        if (!repliedToMessage) {
+          const error = new Error("Reply target message not found in this chat");
+          (error as any).statusCode = 400;
+          throw error;
+        }
       }
   
       const message = await tx.leadChatMessage.create({
         data: {
           chat_room_id: chatRoom.id,
           sender_id: userId,
+          reply_to_message_id: repliedToMessage?.id ?? null,
           message_type: uploadedFiles.length ? "attachment" : "text",
           message_text: trimmedText || null,
         },
@@ -276,9 +380,31 @@ export class ChatService {
           id: true,
           chat_room_id: true,
           sender_id: true,
+          reply_to_message_id: true,
           message_type: true,
           message_text: true,
           created_at: true,
+          repliedToMessage: {
+            select: {
+              id: true,
+              sender_id: true,
+              message_text: true,
+              sender: {
+                select: {
+                  user_name: true,
+                },
+              },
+              attachments: {
+                include: {
+                  document: {
+                    select: {
+                      doc_og_name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       });
   
@@ -337,6 +463,7 @@ export class ChatService {
       return {
         ...message,
         attachments,
+        reply_to: ChatService.mapReplyPreview(message.repliedToMessage),
       };
     });
 
@@ -349,7 +476,7 @@ export class ChatService {
         const [lead, sender] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { account_id: true, firstname: true, lastname: true, lead_code: true },
+            select: { account_id: true, firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
           prisma.userMaster.findUnique({
             where: { id: userId },
@@ -364,6 +491,7 @@ export class ChatService {
         const redirectUrl = lead?.account_id
           ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}&tab=chats&messageId=${messageResult.id}`
           : `/dashboard/leads/details/${leadId}?tab=chats&messageId=${messageResult.id}`;
+        const franchiseId = lead?.franchise_id ?? null;
 
         await Promise.all(
           mentionIds.map((mentionedUserId) =>
@@ -460,6 +588,24 @@ export class ChatService {
               document: true,
             },
           },
+          repliedToMessage: {
+            include: {
+              sender: {
+                select: {
+                  user_name: true,
+                },
+              },
+              attachments: {
+                include: {
+                  document: {
+                    select: {
+                      doc_og_name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
           mentions: {
             include: {
               mentionedUser: {
@@ -497,10 +643,12 @@ export class ChatService {
           id: row.id,
           chat_room_id: row.chat_room_id,
           sender_id: row.sender_id,
+          reply_to_message_id: row.reply_to_message_id,
           message_type: row.message_type,
           message_text: row.message_text,
           created_at: row.created_at,
           attachments,
+          reply_to: ChatService.mapReplyPreview(row.repliedToMessage),
           mentions: row.mentions.map((mention) => ({
             id: mention.mentionedUser.id,
             user_name: mention.mentionedUser.user_name,

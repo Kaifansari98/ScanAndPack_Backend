@@ -1,0 +1,4 @@
+ALTER TYPE "PackingType" ADD VALUE IF NOT EXISTS 'CUSTOM_GROUP';
+
+ALTER TABLE "CutList"
+ADD COLUMN IF NOT EXISTS "custom_packing_group" TEXT;

@@ -2,24 +2,35 @@ import { Request, Response } from "express";
 import { addDocumentType, deleteDocumentType, getAllDocumentTypes } from "../../services/leadModuleServices/documentType.service";
 import { DocumentTypeInput } from "../../types/leadModule.types";
 
-export const createDocumentType = async (req: Request, res: Response) => {
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
+ export const createDocumentType = async (req: Request, res: Response) => {
   console.log("[CONTROLLER] createDocumentType called", { body: req.body });
 
   try {
-      const { vendor_id, type, tag } = req.body as DocumentTypeInput;
+    const { vendor_id, type, tag, doc_title, stage } = req.body as DocumentTypeInput;
 
-      if (!vendor_id || !type || !tag) {
-          console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, tag });
-          return res.status(400).json({ error: "vendor_id, type, and tag are required" });
-      }
+    // ✅ Required validation (unchanged)
+    if (!vendor_id || !type || !tag) {
+      console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, tag });
+      return res.status(400).json({ error: "vendor_id, type, and tag are required" });
+    }
 
-      const documentType = await addDocumentType({ vendor_id, type, tag });
+    const documentType = await addDocumentType({
+      vendor_id,
+      type,
+      tag,
+      doc_title, // ✅ pass
+      stage      // ✅ pass
+    });
 
-      console.log("[CONTROLLER] createDocumentType created successfully", documentType);
-      return res.status(201).json({ success: true, data: documentType });
+    console.log("[CONTROLLER] createDocumentType created successfully", documentType);
+    return res.status(201).json({ success: true, data: documentType });
+
   } catch (error: any) {
-      console.error("[CONTROLLER] Error creating document type", { error: error.message });
-      return res.status(500).json({ success: false, error: error.message });
+    console.error("[CONTROLLER] Error creating document type", { error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -27,7 +38,7 @@ export const fetchAllDocumentTypes = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] fetchAllDocumentTypes called", { query: req.query });
 
     try {
-    const vendor_id = parseInt(req.params.vendor_id);
+    const vendor_id = Number(getParam(req.params.vendor_id));
     if (!vendor_id) {
       console.warn("[CONTROLLER] Missing vendor_id");
       return res.status(400).json({ error: "vendor_id is required" });
@@ -46,7 +57,7 @@ export const removeDocumentType = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] removeDocumentType called", { params: req.params });
   
     try {
-      const id = parseInt(req.params.id);
+      const id = Number(getParam(req.params.id));
       if (!id) {
         console.warn("[CONTROLLER] Missing Document type id");
         return res.status(400).json({ error: "id is required" });

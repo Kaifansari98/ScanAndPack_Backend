@@ -1,5 +1,9 @@
 import { prisma } from '../../prisma/client';
-import { SourceType, SourceTypeInput } from '../../types/leadModule.types';
+import {
+    SourceType,
+    SourceTypeInput,
+    UpdateSourceTypeInput,
+} from '../../types/leadModule.types';
 
 export const addSourceType = async (payload: SourceTypeInput): Promise<SourceType> => {
     console.log("[SERVICE] addSourceType called", payload);
@@ -80,5 +84,26 @@ export const updateSourceTypeStatus = async (
     });
 
     console.log("[SERVICE] Source status updated successfully", updated);
+    return updated as SourceType;
+};
+
+export const updateSourceType = async (
+    id: number,
+    payload: UpdateSourceTypeInput,
+): Promise<SourceType> => {
+    console.log("[SERVICE] updateSourceType called", { id, payload });
+
+    const existing = await prisma.sourceMaster.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] Source not found for update", { id });
+        throw new Error("Source not found");
+    }
+
+    const updated = await prisma.sourceMaster.update({
+        where: { id },
+        data: { type: payload.type },
+    });
+
+    console.log("[SERVICE] Source updated successfully", updated);
     return updated as SourceType;
 };

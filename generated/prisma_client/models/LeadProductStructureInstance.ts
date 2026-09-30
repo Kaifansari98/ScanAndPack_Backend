@@ -36,6 +36,11 @@ export type LeadProductStructureInstanceAvgAggregateOutputType = {
   quantity_index: number | null
   created_by: number | null
   updated_by: number | null
+  no_of_boxes: number | null
+  no_of_client_documents_initially_submitted: number | null
+  product_item_code_id: number | null
+  quantity: number | null
+  sub_product_structure_id: number | null
 }
 
 export type LeadProductStructureInstanceSumAggregateOutputType = {
@@ -48,6 +53,11 @@ export type LeadProductStructureInstanceSumAggregateOutputType = {
   quantity_index: number | null
   created_by: number | null
   updated_by: number | null
+  no_of_boxes: number | null
+  no_of_client_documents_initially_submitted: number | null
+  product_item_code_id: number | null
+  quantity: number | null
+  sub_product_structure_id: number | null
 }
 
 export type LeadProductStructureInstanceMinAggregateOutputType = {
@@ -56,6 +66,7 @@ export type LeadProductStructureInstanceMinAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
+  is_archived: boolean | null
   product_structure_id: number | null
   quantity_index: number | null
   title: string | null
@@ -65,6 +76,28 @@ export type LeadProductStructureInstanceMinAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  is_tech_check_completed: boolean | null
+  tech_check_completed_at: Date | null
+  is_order_login_completed: boolean | null
+  order_login_completed_at: Date | null
+  is_production_completed: boolean | null
+  production_completed_at: Date | null
+  woodwork_packing_details_remark: string | null
+  hardware_packing_details_remark: string | null
+  no_of_boxes: number | null
+  no_of_client_documents_initially_submitted: number | null
+  is_order_login_filled: boolean | null
+  is_pre_prod_done: boolean | null
+  is_under_production: boolean | null
+  pre_prod_done_at: Date | null
+  under_production_at: Date | null
+  production_erd_date: Date | null
+  is_post_production: boolean | null
+  pre_prod_remark: string | null
+  isLargeScaleProjectInstance: boolean | null
+  product_item_code_id: number | null
+  quantity: number | null
+  sub_product_structure_id: number | null
 }
 
 export type LeadProductStructureInstanceMaxAggregateOutputType = {
@@ -73,6 +106,7 @@ export type LeadProductStructureInstanceMaxAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
+  is_archived: boolean | null
   product_structure_id: number | null
   quantity_index: number | null
   title: string | null
@@ -82,6 +116,28 @@ export type LeadProductStructureInstanceMaxAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  is_tech_check_completed: boolean | null
+  tech_check_completed_at: Date | null
+  is_order_login_completed: boolean | null
+  order_login_completed_at: Date | null
+  is_production_completed: boolean | null
+  production_completed_at: Date | null
+  woodwork_packing_details_remark: string | null
+  hardware_packing_details_remark: string | null
+  no_of_boxes: number | null
+  no_of_client_documents_initially_submitted: number | null
+  is_order_login_filled: boolean | null
+  is_pre_prod_done: boolean | null
+  is_under_production: boolean | null
+  pre_prod_done_at: Date | null
+  under_production_at: Date | null
+  production_erd_date: Date | null
+  is_post_production: boolean | null
+  pre_prod_remark: string | null
+  isLargeScaleProjectInstance: boolean | null
+  product_item_code_id: number | null
+  quantity: number | null
+  sub_product_structure_id: number | null
 }
 
 export type LeadProductStructureInstanceCountAggregateOutputType = {
@@ -90,6 +146,7 @@ export type LeadProductStructureInstanceCountAggregateOutputType = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived: number
   product_structure_id: number
   quantity_index: number
   title: number
@@ -99,6 +156,28 @@ export type LeadProductStructureInstanceCountAggregateOutputType = {
   created_at: number
   updated_by: number
   updated_at: number
+  is_tech_check_completed: number
+  tech_check_completed_at: number
+  is_order_login_completed: number
+  order_login_completed_at: number
+  is_production_completed: number
+  production_completed_at: number
+  woodwork_packing_details_remark: number
+  hardware_packing_details_remark: number
+  no_of_boxes: number
+  no_of_client_documents_initially_submitted: number
+  is_order_login_filled: number
+  is_pre_prod_done: number
+  is_under_production: number
+  pre_prod_done_at: number
+  under_production_at: number
+  production_erd_date: number
+  is_post_production: number
+  pre_prod_remark: number
+  isLargeScaleProjectInstance: number
+  product_item_code_id: number
+  quantity: number
+  sub_product_structure_id: number
   _all: number
 }
 
@@ -113,6 +192,11 @@ export type LeadProductStructureInstanceAvgAggregateInputType = {
   quantity_index?: true
   created_by?: true
   updated_by?: true
+  no_of_boxes?: true
+  no_of_client_documents_initially_submitted?: true
+  product_item_code_id?: true
+  quantity?: true
+  sub_product_structure_id?: true
 }
 
 export type LeadProductStructureInstanceSumAggregateInputType = {
@@ -125,6 +209,11 @@ export type LeadProductStructureInstanceSumAggregateInputType = {
   quantity_index?: true
   created_by?: true
   updated_by?: true
+  no_of_boxes?: true
+  no_of_client_documents_initially_submitted?: true
+  product_item_code_id?: true
+  quantity?: true
+  sub_product_structure_id?: true
 }
 
 export type LeadProductStructureInstanceMinAggregateInputType = {
@@ -133,6 +222,7 @@ export type LeadProductStructureInstanceMinAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
+  is_archived?: true
   product_structure_id?: true
   quantity_index?: true
   title?: true
@@ -142,6 +232,28 @@ export type LeadProductStructureInstanceMinAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  is_tech_check_completed?: true
+  tech_check_completed_at?: true
+  is_order_login_completed?: true
+  order_login_completed_at?: true
+  is_production_completed?: true
+  production_completed_at?: true
+  woodwork_packing_details_remark?: true
+  hardware_packing_details_remark?: true
+  no_of_boxes?: true
+  no_of_client_documents_initially_submitted?: true
+  is_order_login_filled?: true
+  is_pre_prod_done?: true
+  is_under_production?: true
+  pre_prod_done_at?: true
+  under_production_at?: true
+  production_erd_date?: true
+  is_post_production?: true
+  pre_prod_remark?: true
+  isLargeScaleProjectInstance?: true
+  product_item_code_id?: true
+  quantity?: true
+  sub_product_structure_id?: true
 }
 
 export type LeadProductStructureInstanceMaxAggregateInputType = {
@@ -150,6 +262,7 @@ export type LeadProductStructureInstanceMaxAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
+  is_archived?: true
   product_structure_id?: true
   quantity_index?: true
   title?: true
@@ -159,6 +272,28 @@ export type LeadProductStructureInstanceMaxAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  is_tech_check_completed?: true
+  tech_check_completed_at?: true
+  is_order_login_completed?: true
+  order_login_completed_at?: true
+  is_production_completed?: true
+  production_completed_at?: true
+  woodwork_packing_details_remark?: true
+  hardware_packing_details_remark?: true
+  no_of_boxes?: true
+  no_of_client_documents_initially_submitted?: true
+  is_order_login_filled?: true
+  is_pre_prod_done?: true
+  is_under_production?: true
+  pre_prod_done_at?: true
+  under_production_at?: true
+  production_erd_date?: true
+  is_post_production?: true
+  pre_prod_remark?: true
+  isLargeScaleProjectInstance?: true
+  product_item_code_id?: true
+  quantity?: true
+  sub_product_structure_id?: true
 }
 
 export type LeadProductStructureInstanceCountAggregateInputType = {
@@ -167,6 +302,7 @@ export type LeadProductStructureInstanceCountAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
+  is_archived?: true
   product_structure_id?: true
   quantity_index?: true
   title?: true
@@ -176,6 +312,28 @@ export type LeadProductStructureInstanceCountAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  is_tech_check_completed?: true
+  tech_check_completed_at?: true
+  is_order_login_completed?: true
+  order_login_completed_at?: true
+  is_production_completed?: true
+  production_completed_at?: true
+  woodwork_packing_details_remark?: true
+  hardware_packing_details_remark?: true
+  no_of_boxes?: true
+  no_of_client_documents_initially_submitted?: true
+  is_order_login_filled?: true
+  is_pre_prod_done?: true
+  is_under_production?: true
+  pre_prod_done_at?: true
+  under_production_at?: true
+  production_erd_date?: true
+  is_post_production?: true
+  pre_prod_remark?: true
+  isLargeScaleProjectInstance?: true
+  product_item_code_id?: true
+  quantity?: true
+  sub_product_structure_id?: true
   _all?: true
 }
 
@@ -271,6 +429,7 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -280,6 +439,28 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   created_at: Date
   updated_by: number | null
   updated_at: Date
+  is_tech_check_completed: boolean | null
+  tech_check_completed_at: Date | null
+  is_order_login_completed: boolean | null
+  order_login_completed_at: Date | null
+  is_production_completed: boolean | null
+  production_completed_at: Date | null
+  woodwork_packing_details_remark: string | null
+  hardware_packing_details_remark: string | null
+  no_of_boxes: number | null
+  no_of_client_documents_initially_submitted: number | null
+  is_order_login_filled: boolean | null
+  is_pre_prod_done: boolean | null
+  is_under_production: boolean | null
+  pre_prod_done_at: Date | null
+  under_production_at: Date | null
+  production_erd_date: Date | null
+  is_post_production: boolean | null
+  pre_prod_remark: string | null
+  isLargeScaleProjectInstance: boolean
+  product_item_code_id: number | null
+  quantity: number | null
+  sub_product_structure_id: number | null
   _count: LeadProductStructureInstanceCountAggregateOutputType | null
   _avg: LeadProductStructureInstanceAvgAggregateOutputType | null
   _sum: LeadProductStructureInstanceSumAggregateOutputType | null
@@ -287,7 +468,7 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   _max: LeadProductStructureInstanceMaxAggregateOutputType | null
 }
 
-type GetLeadProductStructureInstanceGroupByPayload<T extends LeadProductStructureInstanceGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadProductStructureInstanceGroupByPayload<T extends LeadProductStructureInstanceGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadProductStructureInstanceGroupByOutputType, T['by']> &
       {
@@ -311,6 +492,7 @@ export type LeadProductStructureInstanceWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
@@ -320,12 +502,42 @@ export type LeadProductStructureInstanceWhereInput = {
   created_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   updated_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  is_tech_check_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_order_login_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  order_login_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_production_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  production_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  hardware_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  no_of_boxes?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  no_of_client_documents_initially_submitted?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  is_order_login_filled?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  is_pre_prod_done?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  is_under_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  under_production_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  production_erd_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_post_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
+  product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
+  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
+  designSelections?: Prisma.LeadDesignSelectionListRelationFilter
+  documents?: Prisma.LeadDocumentsListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  productItemCode?: Prisma.XOR<Prisma.ProductItemCodeNullableScalarRelationFilter, Prisma.ProductItemCodeWhereInput> | null
   productStructure?: Prisma.XOR<Prisma.ProductStructureScalarRelationFilter, Prisma.ProductStructureWhereInput>
+  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
+  subProductStructure?: Prisma.XOR<Prisma.ProductSubStructureNullableScalarRelationFilter, Prisma.ProductSubStructureWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
+  tasks?: Prisma.UserLeadTaskListRelationFilter
 }
 
 export type LeadProductStructureInstanceOrderByWithRelationInput = {
@@ -334,6 +546,7 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -343,12 +556,42 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  is_tech_check_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_order_login_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  order_login_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_production_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  production_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  woodwork_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  hardware_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrderInput | Prisma.SortOrder
+  no_of_client_documents_initially_submitted?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_order_login_filled?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_under_production?: Prisma.SortOrderInput | Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  under_production_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  production_erd_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_post_production?: Prisma.SortOrderInput | Prisma.SortOrder
+  pre_prod_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  isLargeScaleProjectInstance?: Prisma.SortOrder
+  product_item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  quantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  sub_product_structure_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
+  fastProductionRequests?: Prisma.FastProductionRequestOrderByRelationAggregateInput
+  designSelections?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
+  documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
-  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  productItemCode?: Prisma.ProductItemCodeOrderByWithRelationInput
   productStructure?: Prisma.ProductStructureOrderByWithRelationInput
+  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
+  subProductStructure?: Prisma.ProductSubStructureOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogOrderByRelationAggregateInput
+  tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
 }
 
 export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
@@ -361,6 +604,7 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
@@ -370,12 +614,42 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   updated_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  is_tech_check_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_order_login_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  order_login_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_production_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  production_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  hardware_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  no_of_boxes?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  no_of_client_documents_initially_submitted?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  is_order_login_filled?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  is_pre_prod_done?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  is_under_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  under_production_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  production_erd_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_post_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
+  product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
+  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
+  designSelections?: Prisma.LeadDesignSelectionListRelationFilter
+  documents?: Prisma.LeadDocumentsListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  productItemCode?: Prisma.XOR<Prisma.ProductItemCodeNullableScalarRelationFilter, Prisma.ProductItemCodeWhereInput> | null
   productStructure?: Prisma.XOR<Prisma.ProductStructureScalarRelationFilter, Prisma.ProductStructureWhereInput>
+  productType?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
+  subProductStructure?: Prisma.XOR<Prisma.ProductSubStructureNullableScalarRelationFilter, Prisma.ProductSubStructureWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
+  tasks?: Prisma.UserLeadTaskListRelationFilter
 }, "id" | "uniq_structure_instance">
 
 export type LeadProductStructureInstanceOrderByWithAggregationInput = {
@@ -384,6 +658,7 @@ export type LeadProductStructureInstanceOrderByWithAggregationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -393,6 +668,28 @@ export type LeadProductStructureInstanceOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_order_login_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  order_login_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_production_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  production_completed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  woodwork_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  hardware_packing_details_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrderInput | Prisma.SortOrder
+  no_of_client_documents_initially_submitted?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_order_login_filled?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_under_production?: Prisma.SortOrderInput | Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  under_production_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  production_erd_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_post_production?: Prisma.SortOrderInput | Prisma.SortOrder
+  pre_prod_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  isLargeScaleProjectInstance?: Prisma.SortOrder
+  product_item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  quantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  sub_product_structure_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadProductStructureInstanceCountOrderByAggregateInput
   _avg?: Prisma.LeadProductStructureInstanceAvgOrderByAggregateInput
   _max?: Prisma.LeadProductStructureInstanceMaxOrderByAggregateInput
@@ -409,6 +706,7 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolWithAggregatesFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringWithAggregatesFilter<"LeadProductStructureInstance"> | string
@@ -418,9 +716,32 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string
+  is_tech_check_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_order_login_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  order_login_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_production_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  production_completed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  woodwork_packing_details_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  hardware_packing_details_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  no_of_boxes?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
+  no_of_client_documents_initially_submitted?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
+  is_order_login_filled?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  is_pre_prod_done?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  is_under_production?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  under_production_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  production_erd_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_post_production?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolWithAggregatesFilter<"LeadProductStructureInstance"> | boolean
+  product_item_code_id?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
+  quantity?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
+  sub_product_structure_id?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
 }
 
 export type LeadProductStructureInstanceCreateInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -428,12 +749,40 @@ export type LeadProductStructureInstanceCreateInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
   productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateInput = {
@@ -442,6 +791,7 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -451,9 +801,38 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUpdateInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -461,12 +840,40 @@ export type LeadProductStructureInstanceUpdateInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
   productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateInput = {
@@ -475,6 +882,7 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -484,6 +892,34 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateManyInput = {
@@ -492,6 +928,7 @@ export type LeadProductStructureInstanceCreateManyInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -501,9 +938,32 @@ export type LeadProductStructureInstanceCreateManyInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
 }
 
 export type LeadProductStructureInstanceUpdateManyMutationInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -511,6 +971,26 @@ export type LeadProductStructureInstanceUpdateManyMutationInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
@@ -519,6 +999,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -528,6 +1009,28 @@ export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadProductStructureInstanceListRelationFilter = {
@@ -538,6 +1041,11 @@ export type LeadProductStructureInstanceListRelationFilter = {
 
 export type LeadProductStructureInstanceOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type LeadProductStructureInstanceNullableScalarRelationFilter = {
+  is?: Prisma.LeadProductStructureInstanceWhereInput | null
+  isNot?: Prisma.LeadProductStructureInstanceWhereInput | null
 }
 
 export type LeadProductStructureInstanceUniq_structure_instanceCompoundUniqueInput = {
@@ -553,6 +1061,7 @@ export type LeadProductStructureInstanceCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -562,6 +1071,28 @@ export type LeadProductStructureInstanceCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrder
+  is_order_login_completed?: Prisma.SortOrder
+  order_login_completed_at?: Prisma.SortOrder
+  is_production_completed?: Prisma.SortOrder
+  production_completed_at?: Prisma.SortOrder
+  woodwork_packing_details_remark?: Prisma.SortOrder
+  hardware_packing_details_remark?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  no_of_client_documents_initially_submitted?: Prisma.SortOrder
+  is_order_login_filled?: Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrder
+  is_under_production?: Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrder
+  under_production_at?: Prisma.SortOrder
+  production_erd_date?: Prisma.SortOrder
+  is_post_production?: Prisma.SortOrder
+  pre_prod_remark?: Prisma.SortOrder
+  isLargeScaleProjectInstance?: Prisma.SortOrder
+  product_item_code_id?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
+  sub_product_structure_id?: Prisma.SortOrder
 }
 
 export type LeadProductStructureInstanceAvgOrderByAggregateInput = {
@@ -574,6 +1105,11 @@ export type LeadProductStructureInstanceAvgOrderByAggregateInput = {
   quantity_index?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  no_of_client_documents_initially_submitted?: Prisma.SortOrder
+  product_item_code_id?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
+  sub_product_structure_id?: Prisma.SortOrder
 }
 
 export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
@@ -582,6 +1118,7 @@ export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -591,6 +1128,28 @@ export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrder
+  is_order_login_completed?: Prisma.SortOrder
+  order_login_completed_at?: Prisma.SortOrder
+  is_production_completed?: Prisma.SortOrder
+  production_completed_at?: Prisma.SortOrder
+  woodwork_packing_details_remark?: Prisma.SortOrder
+  hardware_packing_details_remark?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  no_of_client_documents_initially_submitted?: Prisma.SortOrder
+  is_order_login_filled?: Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrder
+  is_under_production?: Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrder
+  under_production_at?: Prisma.SortOrder
+  production_erd_date?: Prisma.SortOrder
+  is_post_production?: Prisma.SortOrder
+  pre_prod_remark?: Prisma.SortOrder
+  isLargeScaleProjectInstance?: Prisma.SortOrder
+  product_item_code_id?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
+  sub_product_structure_id?: Prisma.SortOrder
 }
 
 export type LeadProductStructureInstanceMinOrderByAggregateInput = {
@@ -599,6 +1158,7 @@ export type LeadProductStructureInstanceMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -608,6 +1168,28 @@ export type LeadProductStructureInstanceMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_tech_check_completed?: Prisma.SortOrder
+  tech_check_completed_at?: Prisma.SortOrder
+  is_order_login_completed?: Prisma.SortOrder
+  order_login_completed_at?: Prisma.SortOrder
+  is_production_completed?: Prisma.SortOrder
+  production_completed_at?: Prisma.SortOrder
+  woodwork_packing_details_remark?: Prisma.SortOrder
+  hardware_packing_details_remark?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  no_of_client_documents_initially_submitted?: Prisma.SortOrder
+  is_order_login_filled?: Prisma.SortOrder
+  is_pre_prod_done?: Prisma.SortOrder
+  is_under_production?: Prisma.SortOrder
+  pre_prod_done_at?: Prisma.SortOrder
+  under_production_at?: Prisma.SortOrder
+  production_erd_date?: Prisma.SortOrder
+  is_post_production?: Prisma.SortOrder
+  pre_prod_remark?: Prisma.SortOrder
+  isLargeScaleProjectInstance?: Prisma.SortOrder
+  product_item_code_id?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
+  sub_product_structure_id?: Prisma.SortOrder
 }
 
 export type LeadProductStructureInstanceSumOrderByAggregateInput = {
@@ -620,6 +1202,16 @@ export type LeadProductStructureInstanceSumOrderByAggregateInput = {
   quantity_index?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
+  no_of_client_documents_initially_submitted?: Prisma.SortOrder
+  product_item_code_id?: Prisma.SortOrder
+  quantity?: Prisma.SortOrder
+  sub_product_structure_id?: Prisma.SortOrder
+}
+
+export type LeadProductStructureInstanceScalarRelationFilter = {
+  is?: Prisma.LeadProductStructureInstanceWhereInput
+  isNot?: Prisma.LeadProductStructureInstanceWhereInput
 }
 
 export type LeadProductStructureInstanceCreateNestedManyWithoutVendorInput = {
@@ -748,6 +1340,22 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInpu
   deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
 }
 
+export type LeadProductStructureInstanceCreateNestedOneWithoutActivityStatusLogsInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutActivityStatusLogsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutActivityStatusLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutActivityStatusLogsInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutActivityStatusLogsInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput>
+}
+
 export type LeadProductStructureInstanceCreateNestedManyWithoutAccountInput = {
   create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutAccountInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutAccountInput> | Prisma.LeadProductStructureInstanceCreateWithoutAccountInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutAccountInput[]
   connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutAccountInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutAccountInput[]
@@ -832,6 +1440,22 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNes
   deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
 }
 
+export type LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDocumentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDocumentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutDocumentsInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutDocumentsInput, Prisma.LeadProductStructureInstanceUpdateWithoutDocumentsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type LeadProductStructureInstanceCreateNestedManyWithoutProductStructureInput = {
   create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductStructureInput> | Prisma.LeadProductStructureInstanceCreateWithoutProductStructureInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductStructureInput[]
   connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductStructureInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductStructureInput[]
@@ -874,11 +1498,158 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
 }
 
+export type LeadProductStructureInstanceCreateNestedManyWithoutSubProductStructureInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput> | Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManySubProductStructureInputEnvelope
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+}
+
+export type LeadProductStructureInstanceUncheckedCreateNestedManyWithoutSubProductStructureInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput> | Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManySubProductStructureInputEnvelope
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+}
+
+export type LeadProductStructureInstanceUpdateManyWithoutSubProductStructureNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput> | Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput[]
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutSubProductStructureInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManySubProductStructureInputEnvelope
+  set?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  disconnect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  delete?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  update?: Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutSubProductStructureInput[]
+  updateMany?: Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutSubProductStructureInput[]
+  deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput> | Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput[]
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutSubProductStructureInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManySubProductStructureInputEnvelope
+  set?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  disconnect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  delete?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  update?: Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutSubProductStructureInput[]
+  updateMany?: Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutSubProductStructureInput | Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutSubProductStructureInput[]
+  deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
+}
+
+export type LeadProductStructureInstanceCreateNestedManyWithoutProductItemCodeInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput> | Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManyProductItemCodeInputEnvelope
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+}
+
+export type LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductItemCodeInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput> | Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManyProductItemCodeInputEnvelope
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+}
+
+export type LeadProductStructureInstanceUpdateManyWithoutProductItemCodeNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput> | Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput[]
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutProductItemCodeInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManyProductItemCodeInputEnvelope
+  set?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  disconnect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  delete?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  update?: Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutProductItemCodeInput[]
+  updateMany?: Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutProductItemCodeInput[]
+  deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCodeNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput> | Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput[]
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput[]
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceUpsertWithWhereUniqueWithoutProductItemCodeInput[]
+  createMany?: Prisma.LeadProductStructureInstanceCreateManyProductItemCodeInputEnvelope
+  set?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  disconnect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  delete?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput | Prisma.LeadProductStructureInstanceWhereUniqueInput[]
+  update?: Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceUpdateWithWhereUniqueWithoutProductItemCodeInput[]
+  updateMany?: Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutProductItemCodeInput | Prisma.LeadProductStructureInstanceUpdateManyWithWhereWithoutProductItemCodeInput[]
+  deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
+}
+
 export type EnumProductInstanceStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProductInstanceStatus
 }
 
+export type LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDesignSelectionsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutDesignSelectionsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDesignSelectionsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutDesignSelectionsInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutDesignSelectionsInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutDesignSelectionsInput, Prisma.LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsInput>
+}
+
+export type LeadProductStructureInstanceCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutTasksInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutTasksInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutTasksInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutTasksInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutTasksInput, Prisma.LeadProductStructureInstanceUpdateWithoutTasksInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput>
+}
+
+export type LeadProductStructureInstanceCreateNestedOneWithoutFastProductionRequestsInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequestsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutFastProductionRequestsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequestsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutFastProductionRequestsInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutFastProductionRequestsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequestsInput>
+}
+
+export type LeadProductStructureInstanceCreateNestedOneWithoutProductsRequiredForProductionInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredForProductionInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductsRequiredForProductionInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutProductsRequiredForProductionNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredForProductionInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductsRequiredForProductionInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutProductsRequiredForProductionInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUpdateWithoutProductsRequiredForProductionInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutProductsRequiredForProductionInput>
+}
+
 export type LeadProductStructureInstanceCreateWithoutVendorInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -886,11 +1657,39 @@ export type LeadProductStructureInstanceCreateWithoutVendorInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
   productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
@@ -898,6 +1697,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -907,6 +1707,34 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutVendorInput = {
@@ -944,6 +1772,7 @@ export type LeadProductStructureInstanceScalarWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
@@ -953,9 +1782,32 @@ export type LeadProductStructureInstanceScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   updated_at?: Prisma.DateTimeFilter<"LeadProductStructureInstance"> | Date | string
+  is_tech_check_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  tech_check_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_order_login_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  order_login_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_production_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  production_completed_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  woodwork_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  hardware_packing_details_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  no_of_boxes?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  no_of_client_documents_initially_submitted?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  is_order_login_filled?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  is_pre_prod_done?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  is_under_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_done_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  under_production_at?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  production_erd_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_post_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  pre_prod_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
+  product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
+  sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
 }
 
 export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -963,11 +1815,39 @@ export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
   productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
@@ -976,6 +1856,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -984,6 +1865,34 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutUpdatedByInput = {
@@ -1013,6 +1922,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutUpdatedByInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutLeadInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1020,11 +1930,39 @@ export type LeadProductStructureInstanceCreateWithoutLeadInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
   productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
@@ -1032,6 +1970,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   vendor_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1041,6 +1980,34 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutLeadInput = {
@@ -1069,7 +2036,8 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateManyMutationInput, Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput>
 }
 
-export type LeadProductStructureInstanceCreateWithoutAccountInput = {
+export type LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1077,18 +2045,48 @@ export type LeadProductStructureInstanceCreateWithoutAccountInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
-  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
   productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
-export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
+export type LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1098,6 +2096,227 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutActivityStatusLogsInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutActivityStatusLogsInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutActivityStatusLogsInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutAccountInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutAccountInput = {
@@ -1127,6 +2346,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutAccountInput =
 }
 
 export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1134,11 +2354,39 @@ export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
   productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput = {
@@ -1146,6 +2394,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   vendor_id: number
   lead_id: number
   account_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1155,6 +2404,34 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutProductTypeInput = {
@@ -1183,7 +2460,8 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutProductTypeInp
   data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateManyMutationInput, Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInput>
 }
 
-export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
+export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1191,19 +2469,49 @@ export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
-  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
   productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
-export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureInput = {
+export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
   id?: number
   vendor_id: number
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1212,6 +2520,227 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureIn
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDocumentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutDocumentsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDocumentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutDocumentsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutProductStructureInput = {
@@ -1240,11 +2769,57 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutProductStructu
   data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateManyMutationInput, Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureInput>
 }
 
-export type LeadProductStructureInstanceCreateManyVendorInput = {
+export type LeadProductStructureInstanceCreateWithoutSubProductStructureInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput = {
   id?: number
+  vendor_id: number
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1254,9 +2829,283 @@ export type LeadProductStructureInstanceCreateManyVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
-export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
+export type LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput>
+}
+
+export type LeadProductStructureInstanceCreateManySubProductStructureInputEnvelope = {
+  data: Prisma.LeadProductStructureInstanceCreateManySubProductStructureInput | Prisma.LeadProductStructureInstanceCreateManySubProductStructureInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadProductStructureInstanceUpsertWithWhereUniqueWithoutSubProductStructureInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructureInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithWhereUniqueWithoutSubProductStructureInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutSubProductStructureInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructureInput>
+}
+
+export type LeadProductStructureInstanceUpdateManyWithWhereWithoutSubProductStructureInput = {
+  where: Prisma.LeadProductStructureInstanceScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateManyMutationInput, Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureInput>
+}
+
+export type LeadProductStructureInstanceCreateWithoutProductItemCodeInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput>
+}
+
+export type LeadProductStructureInstanceCreateManyProductItemCodeInputEnvelope = {
+  data: Prisma.LeadProductStructureInstanceCreateManyProductItemCodeInput | Prisma.LeadProductStructureInstanceCreateManyProductItemCodeInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadProductStructureInstanceUpsertWithWhereUniqueWithoutProductItemCodeInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithWhereUniqueWithoutProductItemCodeInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutProductItemCodeInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInput>
+}
+
+export type LeadProductStructureInstanceUpdateManyWithWhereWithoutProductItemCodeInput = {
+  where: Prisma.LeadProductStructureInstanceScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateManyMutationInput, Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCodeInput>
+}
+
+export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutDesignSelectionsInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDesignSelectionsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutDesignSelectionsInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutDesignSelectionsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutDesignSelectionsInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1264,11 +3113,749 @@ export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
   productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutTasksInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutTasksInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutTasksInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutTasksInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutTasksInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutTasksInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutTasksInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutTasksInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutTasksInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequestsInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutFastProductionRequestsInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequestsInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutFastProductionRequestsInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequestsInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequestsInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutFastProductionRequestsInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequestsInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutProductsRequiredForProductionInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredForProductionInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutProductsRequiredForProductionInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredForProductionInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutProductsRequiredForProductionInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutProductsRequiredForProductionInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredForProductionInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutProductsRequiredForProductionInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutProductsRequiredForProductionInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutProductsRequiredForProductionInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutProductsRequiredForProductionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateManyVendorInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+}
+
+export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
@@ -1276,6 +3863,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1285,6 +3873,34 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = {
@@ -1292,6 +3908,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = 
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1301,6 +3918,28 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
@@ -1309,6 +3948,7 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1317,9 +3957,32 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
 }
 
 export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1327,11 +3990,39 @@ export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
   productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
@@ -1340,6 +4031,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1348,6 +4040,34 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1356,6 +4076,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1364,6 +4085,28 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadProductStructureInstanceCreateManyLeadInput = {
@@ -1371,6 +4114,7 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
   vendor_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1380,9 +4124,32 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
 }
 
 export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1390,11 +4157,39 @@ export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
   productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
@@ -1402,6 +4197,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1411,6 +4207,34 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
@@ -1418,6 +4242,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1427,6 +4252,28 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadProductStructureInstanceCreateManyAccountInput = {
@@ -1434,6 +4281,7 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
   vendor_id: number
   lead_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1443,9 +4291,32 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
 }
 
 export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1453,11 +4324,39 @@ export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
   productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
@@ -1465,6 +4364,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1474,6 +4374,34 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput = {
@@ -1481,6 +4409,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput =
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1490,6 +4419,28 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadProductStructureInstanceCreateManyProductTypeInput = {
@@ -1497,6 +4448,7 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
   vendor_id: number
   lead_id: number
   account_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1506,9 +4458,32 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
 }
 
 export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1516,11 +4491,39 @@ export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
   productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput = {
@@ -1528,6 +4531,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1537,6 +4541,34 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInput = {
@@ -1544,6 +4576,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInp
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1553,6 +4586,28 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInp
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadProductStructureInstanceCreateManyProductStructureInput = {
@@ -1561,6 +4616,7 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1569,9 +4625,32 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
 }
 
 export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1579,11 +4658,39 @@ export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureInput = {
@@ -1592,6 +4699,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1600,6 +4708,34 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureInput = {
@@ -1608,6 +4744,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -1616,8 +4753,438 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
+export type LeadProductStructureInstanceCreateManySubProductStructureInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+}
+
+export type LeadProductStructureInstanceUpdateWithoutSubProductStructureInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructureInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LeadProductStructureInstanceCreateManyProductItemCodeInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+}
+
+export type LeadProductStructureInstanceUpdateWithoutProductItemCodeInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCodeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+
+/**
+ * Count Type LeadProductStructureInstanceCountOutputType
+ */
+
+export type LeadProductStructureInstanceCountOutputType = {
+  productsRequiredForProduction: number
+  fastProductionRequests: number
+  designSelections: number
+  documents: number
+  activityStatusLogs: number
+  tasks: number
+}
+
+export type LeadProductStructureInstanceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  productsRequiredForProduction?: boolean | LeadProductStructureInstanceCountOutputTypeCountProductsRequiredForProductionArgs
+  fastProductionRequests?: boolean | LeadProductStructureInstanceCountOutputTypeCountFastProductionRequestsArgs
+  designSelections?: boolean | LeadProductStructureInstanceCountOutputTypeCountDesignSelectionsArgs
+  documents?: boolean | LeadProductStructureInstanceCountOutputTypeCountDocumentsArgs
+  activityStatusLogs?: boolean | LeadProductStructureInstanceCountOutputTypeCountActivityStatusLogsArgs
+  tasks?: boolean | LeadProductStructureInstanceCountOutputTypeCountTasksArgs
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadProductStructureInstanceCountOutputType
+   */
+  select?: Prisma.LeadProductStructureInstanceCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountProductsRequiredForProductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductsRequiredForProductionWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountFastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastProductionRequestWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountDesignSelectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDesignSelectionWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDocumentsWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountActivityStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadScopedActivityStatusLogWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserLeadTaskWhereInput
+}
 
 
 export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1626,6 +5193,7 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -1635,12 +5203,43 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
+  is_order_login_completed?: boolean
+  order_login_completed_at?: boolean
+  is_production_completed?: boolean
+  production_completed_at?: boolean
+  woodwork_packing_details_remark?: boolean
+  hardware_packing_details_remark?: boolean
+  no_of_boxes?: boolean
+  no_of_client_documents_initially_submitted?: boolean
+  is_order_login_filled?: boolean
+  is_pre_prod_done?: boolean
+  is_under_production?: boolean
+  pre_prod_done_at?: boolean
+  under_production_at?: boolean
+  production_erd_date?: boolean
+  is_post_production?: boolean
+  pre_prod_remark?: boolean
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: boolean
+  quantity?: boolean
+  sub_product_structure_id?: boolean
+  productsRequiredForProduction?: boolean | Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs>
+  fastProductionRequests?: boolean | Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs>
+  designSelections?: boolean | Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>
+  documents?: boolean | Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productItemCode?: boolean | Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs>
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  activityStatusLogs?: boolean | Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>
+  tasks?: boolean | Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadProductStructureInstanceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductStructureInstance"]>
 
 export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1649,6 +5248,7 @@ export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extend
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -1658,12 +5258,36 @@ export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extend
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
+  is_order_login_completed?: boolean
+  order_login_completed_at?: boolean
+  is_production_completed?: boolean
+  production_completed_at?: boolean
+  woodwork_packing_details_remark?: boolean
+  hardware_packing_details_remark?: boolean
+  no_of_boxes?: boolean
+  no_of_client_documents_initially_submitted?: boolean
+  is_order_login_filled?: boolean
+  is_pre_prod_done?: boolean
+  is_under_production?: boolean
+  pre_prod_done_at?: boolean
+  under_production_at?: boolean
+  production_erd_date?: boolean
+  is_post_production?: boolean
+  pre_prod_remark?: boolean
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: boolean
+  quantity?: boolean
+  sub_product_structure_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productItemCode?: boolean | Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs>
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductStructureInstance"]>
 
 export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1672,6 +5296,7 @@ export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extend
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -1681,12 +5306,36 @@ export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extend
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
+  is_order_login_completed?: boolean
+  order_login_completed_at?: boolean
+  is_production_completed?: boolean
+  production_completed_at?: boolean
+  woodwork_packing_details_remark?: boolean
+  hardware_packing_details_remark?: boolean
+  no_of_boxes?: boolean
+  no_of_client_documents_initially_submitted?: boolean
+  is_order_login_filled?: boolean
+  is_pre_prod_done?: boolean
+  is_under_production?: boolean
+  pre_prod_done_at?: boolean
+  under_production_at?: boolean
+  production_erd_date?: boolean
+  is_post_production?: boolean
+  pre_prod_remark?: boolean
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: boolean
+  quantity?: boolean
+  sub_product_structure_id?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productItemCode?: boolean | Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs>
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductStructureInstance"]>
 
 export type LeadProductStructureInstanceSelectScalar = {
@@ -1695,6 +5344,7 @@ export type LeadProductStructureInstanceSelectScalar = {
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -1704,43 +5354,86 @@ export type LeadProductStructureInstanceSelectScalar = {
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  is_tech_check_completed?: boolean
+  tech_check_completed_at?: boolean
+  is_order_login_completed?: boolean
+  order_login_completed_at?: boolean
+  is_production_completed?: boolean
+  production_completed_at?: boolean
+  woodwork_packing_details_remark?: boolean
+  hardware_packing_details_remark?: boolean
+  no_of_boxes?: boolean
+  no_of_client_documents_initially_submitted?: boolean
+  is_order_login_filled?: boolean
+  is_pre_prod_done?: boolean
+  is_under_production?: boolean
+  pre_prod_done_at?: boolean
+  under_production_at?: boolean
+  production_erd_date?: boolean
+  is_post_production?: boolean
+  pre_prod_remark?: boolean
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: boolean
+  quantity?: boolean
+  sub_product_structure_id?: boolean
 }
 
-export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at", ExtArgs["result"]["leadProductStructureInstance"]>
+export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "is_archived" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_tech_check_completed" | "tech_check_completed_at" | "is_order_login_completed" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "no_of_client_documents_initially_submitted" | "is_order_login_filled" | "is_pre_prod_done" | "is_under_production" | "pre_prod_done_at" | "under_production_at" | "production_erd_date" | "is_post_production" | "pre_prod_remark" | "isLargeScaleProjectInstance" | "product_item_code_id" | "quantity" | "sub_product_structure_id", ExtArgs["result"]["leadProductStructureInstance"]>
 export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productsRequiredForProduction?: boolean | Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs>
+  fastProductionRequests?: boolean | Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs>
+  designSelections?: boolean | Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>
+  documents?: boolean | Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productItemCode?: boolean | Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs>
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  activityStatusLogs?: boolean | Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>
+  tasks?: boolean | Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadProductStructureInstanceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadProductStructureInstanceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productItemCode?: boolean | Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs>
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadProductStructureInstanceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  productItemCode?: boolean | Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs>
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
+  productType?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
+  subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadProductStructureInstance"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    productsRequiredForProduction: Prisma.$ProductsRequiredForProductionPayload<ExtArgs>[]
+    fastProductionRequests: Prisma.$FastProductionRequestPayload<ExtArgs>[]
+    designSelections: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
+    documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs>
-    productType: Prisma.$ProductTypeMasterPayload<ExtArgs>
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    productItemCode: Prisma.$ProductItemCodePayload<ExtArgs> | null
     productStructure: Prisma.$ProductStructurePayload<ExtArgs>
+    productType: Prisma.$ProductTypeMasterPayload<ExtArgs>
+    subProductStructure: Prisma.$ProductSubStructurePayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    activityStatusLogs: Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>[]
+    tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1748,6 +5441,7 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     lead_id: number
     account_id: number
     product_type_id: number
+    is_archived: boolean
     product_structure_id: number
     quantity_index: number
     title: string
@@ -1757,6 +5451,28 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     created_at: Date
     updated_by: number | null
     updated_at: Date
+    is_tech_check_completed: boolean | null
+    tech_check_completed_at: Date | null
+    is_order_login_completed: boolean | null
+    order_login_completed_at: Date | null
+    is_production_completed: boolean | null
+    production_completed_at: Date | null
+    woodwork_packing_details_remark: string | null
+    hardware_packing_details_remark: string | null
+    no_of_boxes: number | null
+    no_of_client_documents_initially_submitted: number | null
+    is_order_login_filled: boolean | null
+    is_pre_prod_done: boolean | null
+    is_under_production: boolean | null
+    pre_prod_done_at: Date | null
+    under_production_at: Date | null
+    production_erd_date: Date | null
+    is_post_production: boolean | null
+    pre_prod_remark: string | null
+    isLargeScaleProjectInstance: boolean
+    product_item_code_id: number | null
+    quantity: number | null
+    sub_product_structure_id: number | null
   }, ExtArgs["result"]["leadProductStructureInstance"]>
   composites: {}
 }
@@ -2151,12 +5867,20 @@ readonly fields: LeadProductStructureInstanceFieldRefs;
  */
 export interface Prisma__LeadProductStructureInstanceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  productsRequiredForProduction<T extends Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsRequiredForProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fastProductionRequests<T extends Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designSelections<T extends Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  productType<T extends Prisma.ProductTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  productItemCode<T extends Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$productItemCodeArgs<ExtArgs>>): Prisma.Prisma__ProductItemCodeClient<runtime.Types.Result.GetResult<Prisma.$ProductItemCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   productStructure<T extends Prisma.ProductStructureDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructureDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductStructureClient<runtime.Types.Result.GetResult<Prisma.$ProductStructurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  productType<T extends Prisma.ProductTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  subProductStructure<T extends Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>>): Prisma.Prisma__ProductSubStructureClient<runtime.Types.Result.GetResult<Prisma.$ProductSubStructurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  activityStatusLogs<T extends Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2191,6 +5915,7 @@ export interface LeadProductStructureInstanceFieldRefs {
   readonly lead_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly account_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly product_type_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
+  readonly is_archived: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
   readonly product_structure_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly quantity_index: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly title: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
@@ -2200,6 +5925,28 @@ export interface LeadProductStructureInstanceFieldRefs {
   readonly created_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly updated_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_tech_check_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly tech_check_completed_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_order_login_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly order_login_completed_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_production_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly production_completed_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly woodwork_packing_details_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly hardware_packing_details_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly no_of_boxes: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
+  readonly no_of_client_documents_initially_submitted: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
+  readonly is_order_login_filled: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly is_pre_prod_done: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly is_under_production: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly pre_prod_done_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly under_production_at: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly production_erd_date: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_post_production: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly pre_prod_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly isLargeScaleProjectInstance: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly product_item_code_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
+  readonly quantity: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
+  readonly sub_product_structure_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
 }
     
 
@@ -2396,6 +6143,11 @@ export type LeadProductStructureInstanceFindManyArgs<ExtArgs extends runtime.Typ
    * Skip the first `n` LeadProductStructureInstances.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadProductStructureInstances.
+   */
   distinct?: Prisma.LeadProductStructureInstanceScalarFieldEnum | Prisma.LeadProductStructureInstanceScalarFieldEnum[]
 }
 
@@ -2596,6 +6348,140 @@ export type LeadProductStructureInstanceDeleteManyArgs<ExtArgs extends runtime.T
 }
 
 /**
+ * LeadProductStructureInstance.productsRequiredForProduction
+ */
+export type LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductsRequiredForProduction
+   */
+  select?: Prisma.ProductsRequiredForProductionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductsRequiredForProduction
+   */
+  omit?: Prisma.ProductsRequiredForProductionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductsRequiredForProductionInclude<ExtArgs> | null
+  where?: Prisma.ProductsRequiredForProductionWhereInput
+  orderBy?: Prisma.ProductsRequiredForProductionOrderByWithRelationInput | Prisma.ProductsRequiredForProductionOrderByWithRelationInput[]
+  cursor?: Prisma.ProductsRequiredForProductionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductsRequiredForProductionScalarFieldEnum | Prisma.ProductsRequiredForProductionScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.fastProductionRequests
+ */
+export type LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastProductionRequest
+   */
+  select?: Prisma.FastProductionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastProductionRequest
+   */
+  omit?: Prisma.FastProductionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastProductionRequestInclude<ExtArgs> | null
+  where?: Prisma.FastProductionRequestWhereInput
+  orderBy?: Prisma.FastProductionRequestOrderByWithRelationInput | Prisma.FastProductionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FastProductionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastProductionRequestScalarFieldEnum | Prisma.FastProductionRequestScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.designSelections
+ */
+export type LeadProductStructureInstance$designSelectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadDesignSelection
+   */
+  select?: Prisma.LeadDesignSelectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadDesignSelection
+   */
+  omit?: Prisma.LeadDesignSelectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadDesignSelectionInclude<ExtArgs> | null
+  where?: Prisma.LeadDesignSelectionWhereInput
+  orderBy?: Prisma.LeadDesignSelectionOrderByWithRelationInput | Prisma.LeadDesignSelectionOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDesignSelectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadDesignSelectionScalarFieldEnum | Prisma.LeadDesignSelectionScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.documents
+ */
+export type LeadProductStructureInstance$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadDocuments
+   */
+  select?: Prisma.LeadDocumentsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadDocuments
+   */
+  omit?: Prisma.LeadDocumentsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadDocumentsInclude<ExtArgs> | null
+  where?: Prisma.LeadDocumentsWhereInput
+  orderBy?: Prisma.LeadDocumentsOrderByWithRelationInput | Prisma.LeadDocumentsOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDocumentsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.productItemCode
+ */
+export type LeadProductStructureInstance$productItemCodeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductItemCode
+   */
+  select?: Prisma.ProductItemCodeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductItemCode
+   */
+  omit?: Prisma.ProductItemCodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductItemCodeInclude<ExtArgs> | null
+  where?: Prisma.ProductItemCodeWhereInput
+}
+
+/**
+ * LeadProductStructureInstance.subProductStructure
+ */
+export type LeadProductStructureInstance$subProductStructureArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductSubStructure
+   */
+  select?: Prisma.ProductSubStructureSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductSubStructure
+   */
+  omit?: Prisma.ProductSubStructureOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductSubStructureInclude<ExtArgs> | null
+  where?: Prisma.ProductSubStructureWhereInput
+}
+
+/**
  * LeadProductStructureInstance.updatedBy
  */
 export type LeadProductStructureInstance$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2612,6 +6498,54 @@ export type LeadProductStructureInstance$updatedByArgs<ExtArgs extends runtime.T
    */
   include?: Prisma.UserMasterInclude<ExtArgs> | null
   where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * LeadProductStructureInstance.activityStatusLogs
+ */
+export type LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadScopedActivityStatusLog
+   */
+  select?: Prisma.LeadScopedActivityStatusLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadScopedActivityStatusLog
+   */
+  omit?: Prisma.LeadScopedActivityStatusLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadScopedActivityStatusLogInclude<ExtArgs> | null
+  where?: Prisma.LeadScopedActivityStatusLogWhereInput
+  orderBy?: Prisma.LeadScopedActivityStatusLogOrderByWithRelationInput | Prisma.LeadScopedActivityStatusLogOrderByWithRelationInput[]
+  cursor?: Prisma.LeadScopedActivityStatusLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadScopedActivityStatusLogScalarFieldEnum | Prisma.LeadScopedActivityStatusLogScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.tasks
+ */
+export type LeadProductStructureInstance$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserLeadTask
+   */
+  select?: Prisma.UserLeadTaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserLeadTask
+   */
+  omit?: Prisma.UserLeadTaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserLeadTaskInclude<ExtArgs> | null
+  where?: Prisma.UserLeadTaskWhereInput
+  orderBy?: Prisma.UserLeadTaskOrderByWithRelationInput | Prisma.UserLeadTaskOrderByWithRelationInput[]
+  cursor?: Prisma.UserLeadTaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserLeadTaskScalarFieldEnum | Prisma.UserLeadTaskScalarFieldEnum[]
 }
 
 /**

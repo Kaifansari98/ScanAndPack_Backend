@@ -118,3 +118,8 @@ dist
 .pnp.*
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node
+
+/assets/track-trace/qr/
+/assets/track-trace/excel/
+
+ecosystem.backend.config.cjs

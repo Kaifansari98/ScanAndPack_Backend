@@ -2,49 +2,61 @@ import { Router } from 'express';
 import { 
     createProject,
     createProjectDetails, 
-    createProjectItem, 
-    getAllProjects,
+    // createProjectItem, 
+    // getAllProjects,
     getAllProjectDetails,
-    getAllProjectItems,
+    // getAllProjectItems,
     getProjectById,
     getProjectDetailsById,
     getProjectItemById, 
     getProjectsByVendorId,
-    getProjectItemByFields,
-    getProjectItemCounts,
-    handleFullProjectCreate,
+    // getProjectItemByFields,
+    // getProjectItemCounts,
+    // handleFullProjectCreate,
     getProjectWeight, 
     getProjectAndBoxWeight,
-    getCompletedProjects,
-    autoPackGroupedBoxes
+    // getCompletedProjects,
+    autoPackGroupedBoxes,
+    handelItems
 } from '../../controllers/projectControllers/project.controller';
 
 const router = Router();
 
 router.post('/', createProject);
 router.post('/details', createProjectDetails);
-router.post('/items', createProjectItem);
+// router.post('/items', createProjectItem);
 
-router.get('/', getAllProjects);
+// router.get('/', getAllProjects);
 router.get('/details', getAllProjectDetails);
-router.get('/items', getAllProjectItems);
+// router.get('/items', getAllProjectItems);
+
+
+
 
 router.get("/vendor/:vendorId", getProjectsByVendorId);
 
-router.post('/items-by-fields', getProjectItemByFields);
+// router.post('/items-by-fields', getProjectItemByFields);
 
-router.get('/item-counts', getProjectItemCounts);
+// router.get('/item-counts', getProjectItemCounts);
 
 router.get('/:id', getProjectById);
 router.get('/details/:id', getProjectDetailsById);
 router.get('/items/:id', getProjectItemById);
 
-router.post("/onboard/project", handleFullProjectCreate);
+// router.post("/onboard/project", handleFullProjectCreate);
+
+router.post("/onboard/project", handelItems);
 
 router.get('/:vendor_id/:project_id/weight', getProjectWeight);
 router.get('/:vendor_id/:project_id/boxes/:box_id/weight', getProjectAndBoxWeight);
 
-router.get('/vendor/:vendorId/completed', getCompletedProjects);
+// router.get('/vendor/:vendorId/completed', getCompletedProjects);
 router.post('/vendor/:vendorId/auto-pack-grouped-boxes', autoPackGroupedBoxes);
+
+
+
+
+
+
 
 export default router;

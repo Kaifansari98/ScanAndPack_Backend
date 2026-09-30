@@ -7,6 +7,7 @@ import {
   uploadToWasabiPaymentProffDispatchPlanningFile,
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const service = new DispatchPlanningService();
 
@@ -14,8 +15,14 @@ export class DispatchPlanningController {
   /** ✅ Get all leads under Dispatch Planning (Type 13) */
   async getAllDispatchPlanningLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const userIdParam = Array.isArray(req.params.userId)
+        ? req.params.userId[0]
+        : req.params.userId;
+      const vendorId = Number(vendorIdParam);
+      const userId = Number(userIdParam);
 
       if (!vendorId || !userId) {
         return res
@@ -67,6 +74,8 @@ export class DispatchPlanningController {
         alt_onsite_contact_person_name,
         alt_onsite_contact_person_number,
         material_lift_availability,
+        material_lift_size,
+        vehicle_approachability,
         dispatch_planning_remark,
         created_by,
       } = req.body;
@@ -91,6 +100,10 @@ export class DispatchPlanningController {
         alt_onsite_contact_person_name,
         alt_onsite_contact_person_number,
         material_lift_availability: material_lift_availability === "true",
+        material_lift_size: material_lift_size !== undefined && material_lift_size !== null && material_lift_size !== ""
+          ? String(material_lift_size)
+          : null,
+        vehicle_approachability: vehicle_approachability === "true",
         dispatch_planning_remark,
         created_by: Number(created_by),
       });
@@ -340,11 +353,12 @@ export class DispatchPlanningController {
             )
           );
       }
-
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await DispatchPlanningService.moveLeadToDispatch(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl,
       );
 
       return res

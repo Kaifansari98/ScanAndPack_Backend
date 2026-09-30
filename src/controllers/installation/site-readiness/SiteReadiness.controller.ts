@@ -4,6 +4,7 @@ import { uploadToWasabiCurrentSitePhotosSiteReadinessFile } from "../../../utils
 import logger from "../../../utils/logger";
 import { ApiResponse } from "../../../utils/apiResponse";
 import fs from "node:fs/promises";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const service = new SiteReadinessService();
 
@@ -11,8 +12,14 @@ export class SiteReadinessController {
   /** ✅ Get all leads under Site Readiness (Type 12) */
   async getAllSiteReadinessLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const userIdParam = Array.isArray(req.params.userId)
+        ? req.params.userId[0]
+        : req.params.userId;
+      const vendorId = Number(vendorIdParam);
+      const userId = Number(userIdParam);
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -362,6 +369,45 @@ export class SiteReadinessController {
   }
 
   /**
+   * ✅ Fetch assigned Site Supervisor for a lead
+   * @route GET /leads/installation/site-readiness/vendorId/:vendorId/leadId/:leadId/site-supervisor
+   */
+  async getAssignedSiteSupervisor(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId and leadId are required", 400));
+      }
+
+      const supervisor = await service.getAssignedSiteSupervisor(
+        vendorId,
+        leadId
+      );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            supervisor,
+            "Assigned site supervisor fetched successfully"
+          )
+        );
+    } catch (error: any) {
+      console.error(
+        "[SiteReadinessController] getAssignedSiteSupervisor Error:",
+        error
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  }
+
+  /**
    * ✅ Move Lead to Dispatch Planning Stage
    * @route PUT /leads/installation/site-readiness/vendorId/:vendorId/leadId/:leadId/move-to-dispatch-planning
    */
@@ -382,10 +428,12 @@ export class SiteReadinessController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result = await SiteReadinessService.moveLeadToDispatchPlanning(
         vendorId,
         leadId,
-        updated_by
+        updated_by,
+        baseUrl,
       );
 
       return res

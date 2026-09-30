@@ -14,6 +14,11 @@ taskRouter.post(
   TaskController.getTasks2,
 );
 
+taskRouter.post(
+  "/vendorId/:vendorId/userId/:userId/tasks/report/filter",
+  TaskController.getReportTasksByUser,
+);
+
 // GET /api/tasks/vendorId/:vendorId/tasks/all
 taskRouter.get(
   "/vendorId/:vendorId/tasks/all",
@@ -23,6 +28,11 @@ taskRouter.get(
 taskRouter.post(
   "/vendorId/:vendorId/tasks/filter/all",
   TaskController.getTasksFilterByVendorAll,
+);
+
+taskRouter.post(
+  "/vendorId/:vendorId/tasks/report/filter/all",
+  TaskController.getReportTasksFilterByVendorAll,
 );
 
 // GET /api/tasks/user/:userId/lead/:leadId/initial-site-measurement
@@ -47,6 +57,36 @@ taskRouter.get(
 taskRouter.get(
   "/vendorId/:vendorId/leadId/:leadId/active-tasks",
   TaskController.getActiveTasksByVendorAndLead,
+);
+
+taskRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/update-self-assign-task",
+  TaskController.updateSelfAssignTask,
+);
+
+taskRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/reschedule-self-assign-task",
+  TaskController.rescheduleSelfAssignTask,
+);
+
+taskRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/small-order-request/action",
+  TaskController.actOnSmallOrderRequestTask,
+);
+
+taskRouter.get(
+  "/leadId/:leadId/taskId/:taskId/fast-production-request",
+  TaskController.getFastProductionRequestDetails,
+);
+
+taskRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/fast-production-request/action",
+  TaskController.actOnFastProductionRequestTask,
+);
+
+taskRouter.get(
+  "/:taskId/details",
+  TaskController.getTaskDetails,
 );
 
 export default taskRouter;

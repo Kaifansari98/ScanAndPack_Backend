@@ -215,7 +215,7 @@ export type MiscellaneousDocumentGroupByOutputType = {
   _max: MiscellaneousDocumentMaxAggregateOutputType | null
 }
 
-type GetMiscellaneousDocumentGroupByPayload<T extends MiscellaneousDocumentGroupByArgs> = Prisma.PrismaPromise<
+export type GetMiscellaneousDocumentGroupByPayload<T extends MiscellaneousDocumentGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<MiscellaneousDocumentGroupByOutputType, T['by']> &
       {
@@ -1592,6 +1592,11 @@ export type MiscellaneousDocumentFindManyArgs<ExtArgs extends runtime.Types.Exte
    * Skip the first `n` MiscellaneousDocuments.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of MiscellaneousDocuments.
+   */
   distinct?: Prisma.MiscellaneousDocumentScalarFieldEnum | Prisma.MiscellaneousDocumentScalarFieldEnum[]
 }
 

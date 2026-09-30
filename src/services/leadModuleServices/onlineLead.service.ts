@@ -1,0 +1,1091 @@
+import { Request } from "express";
+import { prisma } from "../../prisma/client";
+import { LeadEntryType } from "../../../generated/prisma_client/client";
+import logger from "../../utils/logger";
+import { NotificationService } from "../notification/notification.service";
+import { sendNewLeadsAddedLeadPoolEmail } from "../email/brevoEmail2.service";
+
+export interface CreateOnlineLeadDTO {
+  vendor_id: number;
+  leads_name: string;
+  contact: string;
+  source?: string;
+  email?: string | null;
+  city?: string | null;
+  remark?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  alt_contact_no?: string | null;
+  site_address?: string | null;
+  site_type_id?: number | null;
+  source_id?: number | null;
+  refered_by?: string | null;
+  archetech_name?: string | null;
+  archetech_number?: string | null;
+  priority?: string | null;
+  product_types?: string[];
+  product_structures?: string[];
+  store_id?: number | null;
+  created_by?: number | null;
+  assign_to?: number | null;
+  lead_entry_type?: LeadEntryType;
+}
+
+export interface ResolvedVendorResult {
+  vendorId?: number;
+  error?: string;
+  ambiguous?: boolean;
+  eligibleVendors?: Array<{ id: number; vendor_name: string; vendor_code: string }>;
+  statusCode?: number;
+}
+
+/**
+ * Resolves the target vendor strictly using vendor_token:
+ * 1. Reads vendor_token from query or headers.
+ * 2. Never accepts vendor_id from Google Sheet payload.
+ * 3. Validates that the vendor token exists, is not expired, vendor is active,
+ *    and is_online_lead_feature_enabled === true.
+ * 4. Preserves legacy Meta Webhook event handling if applicable.
+ */
+export async function resolveTargetOnlineLeadVendor(
+  req: Request,
+): Promise<ResolvedVendorResult> {
+  const queryVendorToken = req.query.vendor_token || req.query.vendorToken;
+  const headerVendorToken =
+    req.headers["x-vendor-token"] ||
+    req.headers["vendor_token"] ||
+    req.headers["vendor-token"];
+  const bodyVendorToken = req.body?.vendor_token || req.body?.vendorToken;
+
+  const rawToken = Array.isArray(queryVendorToken)
+    ? queryVendorToken[0]
+    : (queryVendorToken || headerVendorToken || bodyVendorToken);
+
+  const vendorToken = typeof rawToken === "string" ? rawToken.trim() : "";
+
+  // 1. Primary: If vendor_token is provided, resolve strictly by token
+  if (vendorToken) {
+    const tokenEntry = await prisma.vendorTokens.findFirst({
+      where: {
+        token: vendorToken,
+      },
+      include: {
+        vendor: {
+          select: {
+            id: true,
+            vendor_name: true,
+            vendor_code: true,
+            status: true,
+            is_online_lead_feature_enabled: true,
+          },
+        },
+      },
+    });
+
+    if (!tokenEntry || !tokenEntry.vendor) {
+      return {
+        statusCode: 401,
+        error: "Invalid vendor_token. No matching vendor found for this token.",
+      };
+    }
+
+    if (tokenEntry.expiry_date && new Date(tokenEntry.expiry_date) <= new Date()) {
+      return {
+        statusCode: 401,
+        error: "vendor_token has expired or been revoked.",
+      };
+    }
+
+    if (tokenEntry.vendor.status !== "active") {
+      return {
+        statusCode: 403,
+        error: `Vendor '${tokenEntry.vendor.vendor_name}' (ID: ${tokenEntry.vendor.id}) is inactive.`,
+      };
+    }
+
+    if (!tokenEntry.vendor.is_online_lead_feature_enabled) {
+      return {
+        statusCode: 403,
+        error: `Online Lead feature is disabled for vendor '${tokenEntry.vendor.vendor_name}' (ID: ${tokenEntry.vendor.id}). 'is_online_lead_feature_enabled' must be true.`,
+      };
+    }
+
+    return { vendorId: tokenEntry.vendor.id };
+  }
+
+  // 2. Preserved Meta Webhook fallback behavior (if body is a Meta Graph event)
+  const isMetaEvent =
+    req.body?.object === "page" ||
+    Array.isArray(req.body?.entry);
+
+  if (isMetaEvent) {
+    const headerVendorCode =
+      req.headers["x-vendor-code"] ||
+      req.headers["vendor_code"] ||
+      req.headers["vendor-code"];
+    const queryVendorCode = req.query.vendor_code || req.query.vendorCode;
+    const rawVendorCode = Array.isArray(queryVendorCode)
+      ? queryVendorCode[0]
+      : (headerVendorCode || queryVendorCode);
+    const explicitVendorCode = String(rawVendorCode || "").trim();
+
+    if (explicitVendorCode) {
+      const vendor = await prisma.vendorMaster.findFirst({
+        where: {
+          vendor_code: { equals: explicitVendorCode, mode: "insensitive" },
+        },
+        select: {
+          id: true,
+          vendor_name: true,
+          vendor_code: true,
+          status: true,
+          is_online_lead_feature_enabled: true,
+        },
+      });
+      if (!vendor) {
+        return {
+          statusCode: 400,
+          error: `Specified vendor_code '${explicitVendorCode}' does not exist.`,
+        };
+      }
+      if (vendor.status !== "active") {
+        return {
+          statusCode: 403,
+          error: `Specified vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}) is inactive.`,
+        };
+      }
+      if (!vendor.is_online_lead_feature_enabled) {
+        return {
+          statusCode: 403,
+          error: `Online Lead feature is disabled for vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}). 'is_online_lead_feature_enabled' must be true.`,
+        };
+      }
+      return { vendorId: vendor.id };
+    }
+
+    // Automatically find active vendors with is_online_lead_feature_enabled === true
+    const eligibleVendors = await prisma.vendorMaster.findMany({
+      where: {
+        status: "active",
+        is_online_lead_feature_enabled: true,
+      },
+      select: {
+        id: true,
+        vendor_name: true,
+        vendor_code: true,
+      },
+      orderBy: { id: "asc" },
+    });
+
+    if (eligibleVendors.length === 0) {
+      return {
+        statusCode: 400,
+        error:
+          "No active vendor has 'is_online_lead_feature_enabled' set to true in VendorMaster.",
+      };
+    }
+
+    if (eligibleVendors.length === 1) {
+      return { vendorId: eligibleVendors[0].id };
+    }
+
+    return {
+      statusCode: 422,
+      ambiguous: true,
+      error:
+        "Multiple active vendors have 'is_online_lead_feature_enabled' set to true. Please specify 'vendor_token' or 'vendor_code'.",
+      eligibleVendors,
+    };
+  }
+
+  // 3. For Google Sheet or external webhooks, vendor_token is strictly required
+  return {
+    statusCode: 401,
+    error:
+      "vendor_token is required. Please specify a valid vendor_token in the webhook URL query parameters (e.g. /webhook?vendor_token=<VENDOR_TOKEN>).",
+  };
+}
+
+/**
+ * Ensures default followup statuses exist and are active for the vendor.
+ */
+export const ensureDefaultStatuses = async (vendorId: number) => {
+  const defaultStatuses = [
+    { name: "Pending", required: true },
+    { name: "Follow Up Done", required: true },
+    { name: "Store Assigned", required: true },
+    { name: "Store Visit Done", required: false },
+    { name: "Lost", required: false },
+  ];
+
+  for (const status of defaultStatuses) {
+    const existing = await prisma.online_lead_followup_status.findFirst({
+      where: {
+        vendor_id: vendorId,
+        status_name: { equals: status.name, mode: "insensitive" },
+      },
+    });
+
+    if (!existing) {
+      await prisma.online_lead_followup_status.create({
+        data: {
+          vendor_id: vendorId,
+          status_name: status.name,
+          followup_required: status.required,
+          is_active: true,
+          updated_at: new Date(),
+        },
+      });
+    } else if (!existing.is_active) {
+      await prisma.online_lead_followup_status.update({
+        where: { id: existing.id },
+        data: { is_active: true },
+      });
+    }
+  }
+};
+
+/**
+ * Generates an incremented online lead code (e.g. VK-101) with row-level locking.
+ */
+export async function generateOnlineLeadCode(
+  tx: any,
+  vendorId: number,
+): Promise<string> {
+  await tx.$queryRawUnsafe(
+    `SELECT id FROM "VendorMaster" WHERE id = $1 FOR UPDATE`,
+    vendorId,
+  );
+
+  const vendor = await tx.vendorMaster.findUnique({
+    where: { id: vendorId },
+    select: { online_leads_lead_code: true, vendor_code: true },
+  });
+
+  const prefix = String(vendor?.online_leads_lead_code || vendor?.vendor_code || "OL")
+    .trim()
+    .toUpperCase();
+
+  const lastOnlineLead = await tx.online_leads.findFirst({
+    where: {
+      vendor_id: vendorId,
+      lead_code: {
+        startsWith: `${prefix}-`,
+      },
+    },
+    orderBy: [{ created_at: "desc" }, { id: "desc" }],
+    select: {
+      lead_code: true,
+    },
+  });
+
+  const lastSequenceMatch = lastOnlineLead?.lead_code?.match(/-(\d+)$/);
+  let nextNumber = lastSequenceMatch
+    ? parseInt(lastSequenceMatch[1], 10) + 1
+    : 1;
+
+  let generatedCode = `${prefix}-${nextNumber}`;
+
+  let exists = true;
+  while (exists) {
+    const existingOnlineLead = await tx.online_leads.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_code: generatedCode,
+      },
+      select: { id: true },
+    });
+
+    if (!existingOnlineLead) {
+      exists = false;
+    } else {
+      nextNumber += 1;
+      generatedCode = `${prefix}-${nextNumber}`;
+    }
+  }
+
+  return generatedCode;
+}
+
+/**
+ * 16 static columns from Google Sheet / Meta Sheet that must NEVER appear in Design Remarks:
+ * (id, created_time, ad_id, ad_name, adset_id, adset_name, campaign_id, campaign_name,
+ *  form_id, form_name, is_organic, platform, full_name, phone_number, email, lead_status)
+ * Plus CRM system / routing keys.
+ */
+export const STATIC_LEAD_COLUMNS = new Set([
+  // 16 user-specified static columns (normalized)
+  "id",
+  "createdtime",
+  "createdat",
+  "createddate",
+  "adid",
+  "adname",
+  "adsetid",
+  "adsetname",
+  "campaignid",
+  "campaignname",
+  "formid",
+  "formname",
+  "isorganic",
+  "platform",
+  "fullname",
+  "phonenumber",
+  "email",
+  "leadstatus",
+  // Common variants / aliases of contact, name, email
+  "status",
+  "name",
+  "leadsname",
+  "customername",
+  "leadname",
+  "clientname",
+  "firstname",
+  "lastname",
+  "phone",
+  "contact",
+  "contactno",
+  "mobile",
+  "mobilenumber",
+  "mobileno",
+  "altcontact",
+  "altcontactno",
+  "alternativecontact",
+  "alternatenumber",
+  "emailid",
+  "emailaddress",
+  "mail",
+  // System / routing / internal properties
+  "vendortoken",
+  "vendorid",
+  "token",
+  "source",
+  "leadsource",
+  "assignto",
+  "priority",
+  "city",
+  "cityname",
+  "producttypes",
+  "productstructures",
+  "remark",
+  "remarks",
+  "notes",
+  "comments",
+  "description",
+  "designremarks",
+  "designremark",
+  "lead",
+  "surveydata",
+  "entry",
+  "metawebhookid",
+  "meta_webhook_id",
+  "hubmode",
+  "hubchallenge",
+  "hubverifytoken",
+  // Standard survey field names (to avoid camelCase duplicates in dynamic survey fields)
+  "modularsolution",
+  "modular_solution",
+  "whenneedready",
+  "when_need_ready",
+  "preferredshowroom",
+  "preferred_showroom",
+  "projectlocation",
+  "project_location",
+  "siteaddress",
+  "site_address",
+  "propertytype",
+  "property_type",
+  "budget",
+  "leadbudget",
+]);
+
+/**
+ * Clean and format question/column header into human-readable label:
+ * e.g. "what_modular_solution_are_you_interested_in?" -> "What modular solution are you interested in?"
+ */
+export function formatQuestionHeader(header: string): string {
+  if (!header) return "";
+  let clean = String(header).trim();
+
+  // If snake_case or has underscores, replace with spaces
+  if (clean.includes("_")) {
+    clean = clean.replace(/_+/g, " ").trim();
+  }
+
+  // Capitalize first character
+  clean = clean.charAt(0).toUpperCase() + clean.slice(1);
+
+  // Capitalize brand or known proper nouns
+  const properNouns: Record<string, string> = {
+    shambhala: "Shambhala",
+    furnix: "Furnix",
+    vloq: "Vloq",
+    pcmc: "PCMC",
+    bhk: "BHK",
+    rk: "RK",
+  };
+
+  for (const [lower, proper] of Object.entries(properNouns)) {
+    const regex = new RegExp(`\\b${lower}\\b`, "gi");
+    clean = clean.replace(regex, proper);
+  }
+
+  return clean;
+}
+
+/**
+ * Clean answer value: replace underscores with spaces and trim
+ * e.g. "modular_kitchen_(₹4_lakhs_onwards)" -> "modular kitchen (₹4 lakhs onwards)"
+ */
+export function formatAnswerValue(val: any): string {
+  if (val === null || val === undefined) return "";
+  let str = String(val).trim();
+  if (str.includes("_")) {
+    str = str.replace(/_+/g, " ").trim();
+  }
+  return str;
+}
+
+export interface DynamicRemarkField {
+  question: string;
+  answer: string;
+}
+
+export interface SurveyDesignRemarkInput {
+  budget?: string | null;
+  propertyType?: string | null;
+  modularSolution?: string | null;
+  whenNeedReady?: string | null;
+  preferredShowroom?: string | null;
+  projectLocation?: string | null;
+  dynamicFields?: DynamicRemarkField[];
+}
+
+/**
+ * Extracts survey details flexibly from any object (Google Sheet row, webhook payload, nested lead object).
+ * Excludes all 16 static columns (id, created_time, ad_id, ad_name, adset_id, adset_name,
+ * campaign_id, campaign_name, form_id, form_name, is_organic, platform, full_name, phone_number, email, lead_status).
+ * Any remaining non-empty column is dynamically extracted as a survey question/answer!
+ */
+export function extractSurveyDetails(
+  data: Record<string, any>,
+): SurveyDesignRemarkInput {
+  if (!data || typeof data !== "object") return {};
+
+  const clean = (val: any) =>
+    val !== null && val !== undefined ? String(val).trim() : "";
+
+  // Flatten nested structures if present
+  const merged: Record<string, any> = {
+    ...(data.survey_data && typeof data.survey_data === "object"
+      ? data.survey_data
+      : {}),
+    ...(data.lead && typeof data.lead === "object" ? data.lead : {}),
+    ...data,
+  };
+
+  const keys = Object.keys(merged);
+  const norm = (k: string) => k.toLowerCase().replace(/[\s_\/|\-?.:]+/g, "");
+
+  const modularSolutionKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("whatmodularsolution") ||
+      nk.includes("modularsolution") ||
+      (nk.includes("modular") && nk.includes("solution"))
+    );
+  });
+
+  const whenNeedReadyKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("whendoyouneed") ||
+      nk.includes("kitchenwardrobe") ||
+      nk.includes("whenneedready") ||
+      (nk.includes("need") && nk.includes("ready"))
+    );
+  });
+
+  const preferredShowroomKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("shambhala") ||
+      nk.includes("showroom") ||
+      nk.includes("prefertovisit") ||
+      nk.includes("preferredshowroom")
+    );
+  });
+
+  const projectLocationKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("whereisyourproject") ||
+      nk.includes("projectlocated") ||
+      nk.includes("projectlocation") ||
+      (nk.includes("project") && nk.includes("located"))
+    );
+  });
+
+  const budgetKey = keys.find((k) => {
+    const nk = norm(k);
+    return nk === "budget" || nk === "leadbudget";
+  });
+
+  const propertyTypeKey = keys.find((k) => {
+    const nk = norm(k);
+    return nk === "propertytype" || nk === "property";
+  });
+
+  // Extract all dynamic columns from Google Sheet / Payload:
+  // ANY column not in STATIC_LEAD_COLUMNS is treated as dynamic and stored in Design Remarks!
+  const dynamicFields: DynamicRemarkField[] = [];
+  const addedQuestions = new Set<string>();
+
+  for (const key of keys) {
+    const nk = norm(key);
+    // Ignore static columns and CRM system properties
+    if (STATIC_LEAD_COLUMNS.has(nk)) {
+      continue;
+    }
+
+    const rawVal = merged[key];
+    if (rawVal === null || rawVal === undefined) continue;
+
+    // Ignore nested wrapper objects or arrays
+    if (typeof rawVal === "object") continue;
+
+    const cleanedVal = formatAnswerValue(rawVal);
+    if (!cleanedVal || cleanedVal === "-" || cleanedVal === "N/A") {
+      continue;
+    }
+
+    const questionHeader = formatQuestionHeader(key);
+    const questionNorm = norm(questionHeader);
+    if (!addedQuestions.has(questionNorm)) {
+      addedQuestions.add(questionNorm);
+      dynamicFields.push({
+        question: questionHeader,
+        answer: cleanedVal,
+      });
+    }
+  }
+
+  return {
+    budget: budgetKey ? clean(merged[budgetKey]) : undefined,
+    propertyType: propertyTypeKey ? clean(merged[propertyTypeKey]) : undefined,
+    modularSolution: modularSolutionKey ? clean(merged[modularSolutionKey]) : undefined,
+    whenNeedReady: whenNeedReadyKey ? clean(merged[whenNeedReadyKey]) : undefined,
+    preferredShowroom: preferredShowroomKey ? clean(merged[preferredShowroomKey]) : undefined,
+    projectLocation: projectLocationKey ? clean(merged[projectLocationKey]) : undefined,
+    dynamicFields,
+  };
+}
+
+/**
+ * Formats survey fields into Design Remarks using exact Super Admin / CRM UI logic:
+ * Heading is bold with bullet marker (**• <Heading>**), value is normal text on the next line.
+ * Preserves existing remark if present.
+ */
+export function formatDesignRemarks(
+  surveyData: SurveyDesignRemarkInput,
+  existingRemark?: string | null,
+): string {
+  const cleanVal = (v: any) => formatAnswerValue(v);
+
+  const extraRemarks: string[] = [];
+
+  // If dynamic fields were extracted, format all of them in order!
+  if (surveyData.dynamicFields && surveyData.dynamicFields.length > 0) {
+    for (const field of surveyData.dynamicFields) {
+      if (field.question && field.answer) {
+        extraRemarks.push(`**• ${field.question}**\n${field.answer}`);
+      }
+    }
+  } else {
+    // Fallback for direct manual inputs without dynamicFields array
+    const budget = surveyData.budget ? cleanVal(surveyData.budget) : "";
+    const propertyType = surveyData.propertyType ? cleanVal(surveyData.propertyType) : "";
+    const modularSolution = surveyData.modularSolution ? cleanVal(surveyData.modularSolution) : "";
+    const whenNeedReady = surveyData.whenNeedReady ? cleanVal(surveyData.whenNeedReady) : "";
+    const preferredShowroom = surveyData.preferredShowroom ? cleanVal(surveyData.preferredShowroom) : "";
+    const projectLocation = surveyData.projectLocation ? cleanVal(surveyData.projectLocation) : "";
+
+    if (budget) extraRemarks.push(`**• Budget:**\n${budget}`);
+    if (propertyType) extraRemarks.push(`**• Property Type:**\n${propertyType}`);
+    if (modularSolution)
+      extraRemarks.push(
+        `**• What modular solution are you interested in?**\n${modularSolution}`,
+      );
+    if (whenNeedReady)
+      extraRemarks.push(
+        `**• When do you need your modular kitchen/wardrobe ready?**\n${whenNeedReady}`,
+      );
+    if (preferredShowroom)
+      extraRemarks.push(
+        `**• Which Shambhala showroom would you prefer to visit?**\n${preferredShowroom}`,
+      );
+    if (projectLocation)
+      extraRemarks.push(
+        `**• Where is your project located?**\n${projectLocation}`,
+      );
+  }
+
+  let remark = existingRemark
+    ? String(existingRemark).replace(/ΓÇó/g, "•").trim()
+    : "";
+  if (extraRemarks.length > 0) {
+    const surveyRemarkString = extraRemarks.join("\n\n");
+    // Columns M-P are the single source of truth for Design Remarks.
+    // If existingRemark already has questionnaire bullets, do NOT append old survey fields!
+    if (existingRemark && existingRemark !== "-" && existingRemark !== "N/A") {
+      const cleanExisting = String(existingRemark).replace(/ΓÇó/g, "•").trim();
+      if (cleanExisting.includes("**•") || cleanExisting.startsWith("•")) {
+        const blocks = cleanExisting.split(/\n\s*\n/);
+        const nonSurveyBlocks = blocks.filter(
+          (b) => !b.trim().startsWith("**•") && !b.trim().startsWith("•"),
+        );
+        if (nonSurveyBlocks.length > 0) {
+          return `${nonSurveyBlocks.join("\n\n")}\n\n${surveyRemarkString}`;
+        }
+        return surveyRemarkString;
+      }
+      return `${cleanExisting}\n\n${surveyRemarkString}`;
+    }
+    return surveyRemarkString;
+  }
+
+  return existingRemark ? String(existingRemark).trim() : "-";
+}
+
+/**
+ * Deduplicate questionnaire remarks by question key/group, ensuring only the latest unique questions remain.
+ */
+export function deduplicateRemark(remarkText: string | null): string | null {
+  if (!remarkText || !remarkText.includes("**")) return remarkText;
+
+  const blocks = remarkText
+    .split(/\n\s*\n/)
+    .map((b) => b.trim())
+    .filter(Boolean);
+  const seenQuestions = new Map<string, string>();
+  const nonQuestionBlocks: string[] = [];
+
+  const getCleanHeader = (h: string) => {
+    return h.replace(/^\*\*|\*\*$/g, "").replace(/^(?:•|ΓÇó)\s*/, "").trim();
+  };
+
+  const getQuestionKey = (header: string) => {
+    const norm = header.toLowerCase().replace(/[\s_\/|\-?.:*•]+/g, "");
+    if (
+      norm.includes("whenneedready") ||
+      norm.includes("whendoyouneed") ||
+      norm.includes("needready") ||
+      norm.includes("readyby")
+    ) return "when_need_ready";
+    if (
+      norm.includes("whereisyourproject") ||
+      norm.includes("projectlocated") ||
+      norm.includes("projectlocation") ||
+      norm.includes("siteaddress")
+    ) return "project_location";
+    if (
+      norm.includes("whatmodular") ||
+      norm.includes("modularsolution") ||
+      (norm.includes("modular") && norm.includes("solution"))
+    ) return "modular_solution";
+    if (
+      norm.includes("showroom") ||
+      norm.includes("shambhala") ||
+      norm.includes("preferredshowroom")
+    ) return "preferred_showroom";
+    if (norm.includes("budget") || norm.includes("leadbudget")) return "budget";
+    if (norm.includes("propertytype") || norm.includes("property")) return "property_type";
+    return norm;
+  };
+
+  for (const block of blocks) {
+    if (block.startsWith("**•") || block.startsWith("•") || block.includes("?")) {
+      const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+      const headerLine = lines[0] || "";
+      const matchedGroup = getQuestionKey(headerLine);
+
+      const existingBlock = seenQuestions.get(matchedGroup);
+      if (existingBlock) {
+        const existingLines = existingBlock.split("\n").map((l) => l.trim()).filter(Boolean);
+        const existingHeader = existingLines[0] || "";
+        const cleanHeader = getCleanHeader(headerLine);
+        const cleanExisting = getCleanHeader(existingHeader);
+        const isCurrentBetterHeader =
+          (cleanHeader.includes(" ") || cleanHeader.endsWith("?")) &&
+          (!cleanExisting.includes(" ") && !cleanExisting.endsWith("?"));
+        const currentAnswer = lines.slice(1).join("\n").trim();
+        const existingAnswer = existingLines.slice(1).join("\n").trim();
+        const chosenAnswer = currentAnswer || existingAnswer;
+        const chosenHeader = isCurrentBetterHeader ? headerLine : existingHeader;
+        seenQuestions.set(matchedGroup, chosenAnswer ? `${chosenHeader}\n${chosenAnswer}` : chosenHeader);
+      } else {
+        seenQuestions.set(matchedGroup, block);
+      }
+    } else {
+      nonQuestionBlocks.push(block);
+    }
+  }
+
+  const uniqueQuestionBlocks = Array.from(seenQuestions.values());
+  if (nonQuestionBlocks.length > 0) {
+    return `${nonQuestionBlocks.join("\n\n")}\n\n${uniqueQuestionBlocks.join("\n\n")}`;
+  }
+  return uniqueQuestionBlocks.join("\n\n");
+}
+
+/**
+ * Core reusable function to create or update an online lead.
+ * Unassigned leads (assign_to = null) directly appear in Lead Pool.
+ */
+export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
+  const {
+    vendor_id,
+    leads_name,
+    email,
+    contact,
+    source = "Google Sheet",
+    remark,
+    firstname,
+    lastname,
+    alt_contact_no,
+    site_address,
+    site_type_id,
+    source_id,
+    refered_by,
+    archetech_name,
+    archetech_number,
+    priority,
+    city,
+    product_types = [],
+    product_structures = [],
+    store_id,
+    created_by = 1,
+    assign_to = null,
+    lead_entry_type = LeadEntryType.ONLINE,
+  } = input;
+
+  if (!vendor_id) {
+    throw new Error("vendor_id is required to create a lead");
+  }
+
+  // Enforce: only process/create lead when is_online_lead_feature_enabled === true
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: Number(vendor_id) },
+    select: {
+      id: true,
+      vendor_name: true,
+      status: true,
+      is_online_lead_feature_enabled: true,
+    },
+  });
+
+  if (!vendor) {
+    throw new Error(`Vendor with ID ${vendor_id} does not exist.`);
+  }
+  if (!vendor.is_online_lead_feature_enabled) {
+    throw new Error(
+      `Online Lead feature is disabled for vendor '${vendor.vendor_name}' (ID: ${vendor.id}). 'is_online_lead_feature_enabled' must be true.`,
+    );
+  }
+  if (!leads_name || !String(leads_name).trim()) {
+    throw new Error("leads_name is required");
+  }
+  if (!contact || !String(contact).trim()) {
+    throw new Error("contact number is required");
+  }
+
+  // Extract numeric digits only and keep only the last 10 digits
+  const cleanDigits = String(contact).replace(/\D/g, "");
+  if (cleanDigits.length < 10) {
+    throw new Error("Contact number must be at least 10 digits");
+  }
+  const normalizedContact = cleanDigits.slice(-10);
+
+  let cleanAltContact: string | null = null;
+  if (alt_contact_no) {
+    const altDigits = String(alt_contact_no).replace(/\D/g, "");
+    cleanAltContact = altDigits.length >= 10 ? altDigits.slice(-10) : altDigits || null;
+  }
+
+  await ensureDefaultStatuses(Number(vendor_id));
+  const defaultStatus = await prisma.online_lead_followup_status.findFirst({
+    where: {
+      vendor_id: Number(vendor_id),
+      is_active: true,
+    },
+    orderBy: { id: "asc" },
+  });
+
+  let isNew = false;
+  const lead = await prisma.$transaction(async (tx) => {
+    const existingOnlineLead = await tx.online_leads.findFirst({
+      where: {
+        vendor_id: Number(vendor_id),
+        OR: [
+          { contact: normalizedContact },
+          { contact: cleanDigits },
+          { contact: String(contact).trim() },
+          { contact: `+91${normalizedContact}` },
+          { contact: `91${normalizedContact}` },
+          { contact: `0${normalizedContact}` },
+          { contact: `p:+91${normalizedContact}` },
+          { contact: `p:${normalizedContact}` },
+        ],
+      },
+    });
+
+    const isGoogleSheetLead =
+      !source ||
+      String(source).trim().toLowerCase() === "google sheet" ||
+      String(source).trim().toLowerCase().includes("sheet");
+
+    const sanitizeProductTypes = (types: any[]): string[] =>
+      (Array.isArray(types) ? types : [])
+        .map(String)
+        .filter(
+          (t) =>
+            t &&
+            !t.includes("₹") &&
+            !t.toLowerCase().includes("lakh") &&
+            !t.toLowerCase().startsWith("modular_kitchen_") &&
+            !t.toLowerCase().startsWith("semi-modular_kitchen_"),
+        );
+
+    if (existingOnlineLead) {
+      const existingTypes = Array.isArray(existingOnlineLead.product_types)
+        ? existingOnlineLead.product_types
+        : [];
+      const existingStructs = Array.isArray(
+        existingOnlineLead.product_structures,
+      )
+        ? existingOnlineLead.product_structures
+        : [];
+      const newTypes = Array.isArray(product_types) ? product_types : [];
+      const newStructs = Array.isArray(product_structures)
+        ? product_structures
+        : [];
+
+      const isSheetLead =
+        isGoogleSheetLead ||
+        String(existingOnlineLead.source || "").trim().toLowerCase().includes("sheet");
+      const isInLeadPool =
+        existingOnlineLead.assign_to === null || assign_to === null;
+
+      let combinedTypes: string[] = [];
+      let combinedStructs: string[] = [];
+
+      if (isSheetLead && isInLeadPool) {
+        // When lead is in Lead Pool from Google Sheet, keep product types and structures empty
+        combinedTypes = [];
+        combinedStructs = [];
+      } else {
+        combinedTypes = Array.from(
+          new Set([...sanitizeProductTypes(existingTypes), ...sanitizeProductTypes(newTypes)]),
+        ).filter(Boolean);
+        combinedStructs = Array.from(
+          new Set([...existingStructs, ...newStructs].map(String)),
+        ).filter(Boolean);
+      }
+
+      let combinedRemark = existingOnlineLead.remark;
+      if (remark && remark !== "-" && remark !== "N/A") {
+        const prev =
+          existingOnlineLead.remark &&
+          existingOnlineLead.remark !== "-" &&
+          existingOnlineLead.remark !== "N/A"
+            ? existingOnlineLead.remark.trim()
+            : "";
+        if (!prev) {
+          combinedRemark = remark.trim();
+        } else if (remark.includes("**•")) {
+          // Columns M-P are the single source of truth for Design Remarks.
+          // Fresh survey questionnaire from sheet REPLACES old survey questionnaire (never append!)
+          const prevBlocks = prev.split(/\n\s*\n/);
+          const nonSurveyBlocks = prevBlocks.filter(
+            (b) => !b.trim().startsWith("**•") && !b.trim().startsWith("•"),
+          );
+          if (nonSurveyBlocks.length > 0) {
+            combinedRemark = `${nonSurveyBlocks.join("\n\n")}\n\n${remark.trim()}`;
+          } else {
+            combinedRemark = remark.trim();
+          }
+        } else if (prev === remark.trim()) {
+          combinedRemark = prev;
+        } else if (remark.trim().includes(prev)) {
+          combinedRemark = remark.trim();
+        } else if (prev.includes(remark.trim())) {
+          combinedRemark = prev;
+        } else {
+          combinedRemark = `${prev}\n\n${remark.trim()}`;
+        }
+      }
+      combinedRemark = deduplicateRemark(combinedRemark);
+
+      return await tx.online_leads.update({
+        where: { id: existingOnlineLead.id },
+        data: {
+          leads_name: leads_name || existingOnlineLead.leads_name,
+          contact: normalizedContact,
+          email: email || existingOnlineLead.email,
+          remark: combinedRemark,
+          city: city || existingOnlineLead.city,
+          product_types: combinedTypes,
+          product_structures: combinedStructs,
+          priority: priority || existingOnlineLead.priority,
+          updated_at: new Date(),
+        },
+      });
+    }
+
+    isNew = true;
+    const generatedCode = await generateOnlineLeadCode(
+      tx,
+      Number(vendor_id),
+    );
+
+    let fName = firstname || null;
+    let lName = lastname || null;
+    if (!fName && !lName && leads_name) {
+      const parts = String(leads_name).trim().split(/\s+/);
+      fName = parts[0] || null;
+      lName = parts.slice(1).join(" ") || null;
+    }
+
+    // Lookup source_id if not explicitly provided
+    let resolvedSourceId = source_id ? Number(source_id) : null;
+    if (!resolvedSourceId && source) {
+      try {
+        const matchedSource = await tx.sourceMaster.findFirst({
+          where: {
+            vendor_id: Number(vendor_id),
+            type: { contains: source, mode: "insensitive" },
+          },
+        });
+        if (matchedSource) resolvedSourceId = matchedSource.id;
+      } catch {}
+    }
+
+    return await tx.online_leads.create({
+      data: {
+        vendor_id: Number(vendor_id),
+        leads_name: String(leads_name).trim(),
+        lead_code: generatedCode,
+        email: email || null,
+        contact: normalizedContact,
+        source: source || "Google Sheet",
+        lead_entry_type: lead_entry_type,
+        remark: remark ? String(remark).trim() : "-",
+        status: defaultStatus?.id || null,
+        store_id: store_id ? Number(store_id) : null,
+        assign_to: assign_to ?? null, // Default null sends directly to Lead Pool
+        created_by: created_by ? Number(created_by) : 1,
+        updated_at: new Date(),
+        firstname: fName,
+        lastname: lName,
+        alt_contact_no: cleanAltContact,
+        site_address: site_address || null,
+        site_type_id: site_type_id ? Number(site_type_id) : null,
+        source_id: resolvedSourceId,
+        refered_by: refered_by || null,
+        archetech_name: archetech_name || null,
+        archetech_number: archetech_number || null,
+        priority: priority || "Medium",
+        city: city || null,
+        product_types:
+          isGoogleSheetLead && (assign_to === null || assign_to === undefined)
+            ? []
+            : Array.isArray(product_types)
+            ? sanitizeProductTypes(product_types)
+            : [],
+        product_structures:
+          isGoogleSheetLead && (assign_to === null || assign_to === undefined)
+            ? []
+            : Array.isArray(product_structures)
+            ? product_structures
+            : [],
+      },
+    });
+  });
+
+  // Create lead history entry
+  if (defaultStatus) {
+    try {
+      await prisma.online_lead_history.create({
+        data: {
+          vendor_id: Number(vendor_id),
+          online_lead_id: lead.id,
+          remark: isNew
+            ? (remark || `Lead registered via ${source}`)
+            : `Lead updated with new data via ${source}`,
+          created_by: created_by ? Number(created_by) : 1,
+          online_lead_status_id: defaultStatus.id,
+        },
+      });
+    } catch (histErr: any) {
+      logger.warn("[ONLINE LEAD SERVICE] Failed to record lead history:", histErr?.message);
+    }
+  }
+
+  // If a brand new lead is added to the Lead Pool, notify telecallers
+  if (isNew && lead.assign_to === null) {
+    try {
+      const telecallers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: Number(vendor_id),
+          status: "active",
+          user_type: {
+            user_type: {
+              in: [
+                "telecaller",
+                "telecaller team lead",
+                "telecaller-team-lead",
+                "store caller",
+                "caller",
+              ],
+              mode: "insensitive",
+            },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+
+      const leadPoolUrl = `/dashboard/online-leads?tab=pool`;
+      for (const caller of telecallers) {
+        try {
+          await NotificationService.sendNewLeadsAddedLeadPool({
+            vendor_id: Number(vendor_id),
+            telecaller_id: caller.id,
+            sender_id: Number(created_by || 1),
+            leadCount: 1,
+            redirectUrl: leadPoolUrl,
+          });
+        } catch {}
+
+        if (caller.user_email) {
+          try {
+            await sendNewLeadsAddedLeadPoolEmail({
+              vendor_id: Number(vendor_id),
+              toEmail: caller.user_email,
+              toName: caller.user_name,
+              telecaller_name: caller.user_name,
+              leadPoolUrl: leadPoolUrl,
+            });
+          } catch {}
+        }
+      }
+    } catch (notifErr: any) {
+      logger.warn("[ONLINE LEAD SERVICE] Warning sending telecaller notification:", notifErr?.message);
+    }
+  }
+
+  return { lead, isNew };
+}

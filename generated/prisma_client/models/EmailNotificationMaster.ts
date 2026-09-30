@@ -39,34 +39,34 @@ export type EmailNotificationMasterSumAggregateOutputType = {
 export type EmailNotificationMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  template_key: string | null
-  subject: string | null
   text: string | null
-  html: string | null
   active: boolean | null
   created_at: Date | null
+  html: string | null
+  subject: string | null
+  template_key: string | null
 }
 
 export type EmailNotificationMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  template_key: string | null
-  subject: string | null
   text: string | null
-  html: string | null
   active: boolean | null
   created_at: Date | null
+  html: string | null
+  subject: string | null
+  template_key: string | null
 }
 
 export type EmailNotificationMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
-  template_key: number
-  subject: number
   text: number
-  html: number
   active: number
   created_at: number
+  html: number
+  subject: number
+  template_key: number
   _all: number
 }
 
@@ -84,34 +84,34 @@ export type EmailNotificationMasterSumAggregateInputType = {
 export type EmailNotificationMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
-  template_key?: true
-  subject?: true
   text?: true
-  html?: true
   active?: true
   created_at?: true
+  html?: true
+  subject?: true
+  template_key?: true
 }
 
 export type EmailNotificationMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
-  template_key?: true
-  subject?: true
   text?: true
-  html?: true
   active?: true
   created_at?: true
+  html?: true
+  subject?: true
+  template_key?: true
 }
 
 export type EmailNotificationMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
-  template_key?: true
-  subject?: true
   text?: true
-  html?: true
   active?: true
   created_at?: true
+  html?: true
+  subject?: true
+  template_key?: true
   _all?: true
 }
 
@@ -204,12 +204,12 @@ export type EmailNotificationMasterGroupByArgs<ExtArgs extends runtime.Types.Ext
 export type EmailNotificationMasterGroupByOutputType = {
   id: number
   vendor_id: number
-  template_key: string
-  subject: string
   text: string
-  html: string
   active: boolean
   created_at: Date
+  html: string
+  subject: string
+  template_key: string
   _count: EmailNotificationMasterCountAggregateOutputType | null
   _avg: EmailNotificationMasterAvgAggregateOutputType | null
   _sum: EmailNotificationMasterSumAggregateOutputType | null
@@ -217,7 +217,7 @@ export type EmailNotificationMasterGroupByOutputType = {
   _max: EmailNotificationMasterMaxAggregateOutputType | null
 }
 
-type GetEmailNotificationMasterGroupByPayload<T extends EmailNotificationMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetEmailNotificationMasterGroupByPayload<T extends EmailNotificationMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EmailNotificationMasterGroupByOutputType, T['by']> &
       {
@@ -238,24 +238,24 @@ export type EmailNotificationMasterWhereInput = {
   NOT?: Prisma.EmailNotificationMasterWhereInput | Prisma.EmailNotificationMasterWhereInput[]
   id?: Prisma.IntFilter<"EmailNotificationMaster"> | number
   vendor_id?: Prisma.IntFilter<"EmailNotificationMaster"> | number
-  template_key?: Prisma.StringFilter<"EmailNotificationMaster"> | string
-  subject?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   text?: Prisma.StringFilter<"EmailNotificationMaster"> | string
-  html?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   active?: Prisma.BoolFilter<"EmailNotificationMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"EmailNotificationMaster"> | Date | string
+  html?: Prisma.StringFilter<"EmailNotificationMaster"> | string
+  subject?: Prisma.StringFilter<"EmailNotificationMaster"> | string
+  template_key?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type EmailNotificationMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  template_key?: Prisma.SortOrder
-  subject?: Prisma.SortOrder
   text?: Prisma.SortOrder
-  html?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  html?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
+  template_key?: Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -266,24 +266,24 @@ export type EmailNotificationMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.EmailNotificationMasterWhereInput[]
   NOT?: Prisma.EmailNotificationMasterWhereInput | Prisma.EmailNotificationMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"EmailNotificationMaster"> | number
-  template_key?: Prisma.StringFilter<"EmailNotificationMaster"> | string
-  subject?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   text?: Prisma.StringFilter<"EmailNotificationMaster"> | string
-  html?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   active?: Prisma.BoolFilter<"EmailNotificationMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"EmailNotificationMaster"> | Date | string
+  html?: Prisma.StringFilter<"EmailNotificationMaster"> | string
+  subject?: Prisma.StringFilter<"EmailNotificationMaster"> | string
+  template_key?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "vendor_id_template_key">
 
 export type EmailNotificationMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  template_key?: Prisma.SortOrder
-  subject?: Prisma.SortOrder
   text?: Prisma.SortOrder
-  html?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  html?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
+  template_key?: Prisma.SortOrder
   _count?: Prisma.EmailNotificationMasterCountOrderByAggregateInput
   _avg?: Prisma.EmailNotificationMasterAvgOrderByAggregateInput
   _max?: Prisma.EmailNotificationMasterMaxOrderByAggregateInput
@@ -297,85 +297,85 @@ export type EmailNotificationMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.EmailNotificationMasterScalarWhereWithAggregatesInput | Prisma.EmailNotificationMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"EmailNotificationMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"EmailNotificationMaster"> | number
-  template_key?: Prisma.StringWithAggregatesFilter<"EmailNotificationMaster"> | string
-  subject?: Prisma.StringWithAggregatesFilter<"EmailNotificationMaster"> | string
   text?: Prisma.StringWithAggregatesFilter<"EmailNotificationMaster"> | string
-  html?: Prisma.StringWithAggregatesFilter<"EmailNotificationMaster"> | string
   active?: Prisma.BoolWithAggregatesFilter<"EmailNotificationMaster"> | boolean
   created_at?: Prisma.DateTimeWithAggregatesFilter<"EmailNotificationMaster"> | Date | string
+  html?: Prisma.StringWithAggregatesFilter<"EmailNotificationMaster"> | string
+  subject?: Prisma.StringWithAggregatesFilter<"EmailNotificationMaster"> | string
+  template_key?: Prisma.StringWithAggregatesFilter<"EmailNotificationMaster"> | string
 }
 
 export type EmailNotificationMasterCreateInput = {
-  template_key: string
-  subject: string
   text: string
-  html: string
   active?: boolean
   created_at?: Date | string
+  html: string
+  subject: string
+  template_key: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutNotificationMastersInput
 }
 
 export type EmailNotificationMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
-  template_key: string
-  subject: string
   text: string
-  html: string
   active?: boolean
   created_at?: Date | string
+  html: string
+  subject: string
+  template_key: string
 }
 
 export type EmailNotificationMasterUpdateInput = {
-  template_key?: Prisma.StringFieldUpdateOperationsInput | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  html?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  html?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  template_key?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutNotificationMastersNestedInput
 }
 
 export type EmailNotificationMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  template_key?: Prisma.StringFieldUpdateOperationsInput | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  html?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  html?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  template_key?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EmailNotificationMasterCreateManyInput = {
   id?: number
   vendor_id: number
-  template_key: string
-  subject: string
   text: string
-  html: string
   active?: boolean
   created_at?: Date | string
+  html: string
+  subject: string
+  template_key: string
 }
 
 export type EmailNotificationMasterUpdateManyMutationInput = {
-  template_key?: Prisma.StringFieldUpdateOperationsInput | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  html?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  html?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  template_key?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EmailNotificationMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  template_key?: Prisma.StringFieldUpdateOperationsInput | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  html?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  html?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  template_key?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EmailNotificationMasterListRelationFilter = {
@@ -396,12 +396,12 @@ export type EmailNotificationMasterVendor_idTemplate_keyCompoundUniqueInput = {
 export type EmailNotificationMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  template_key?: Prisma.SortOrder
-  subject?: Prisma.SortOrder
   text?: Prisma.SortOrder
-  html?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  html?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
+  template_key?: Prisma.SortOrder
 }
 
 export type EmailNotificationMasterAvgOrderByAggregateInput = {
@@ -412,23 +412,23 @@ export type EmailNotificationMasterAvgOrderByAggregateInput = {
 export type EmailNotificationMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  template_key?: Prisma.SortOrder
-  subject?: Prisma.SortOrder
   text?: Prisma.SortOrder
-  html?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  html?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
+  template_key?: Prisma.SortOrder
 }
 
 export type EmailNotificationMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  template_key?: Prisma.SortOrder
-  subject?: Prisma.SortOrder
   text?: Prisma.SortOrder
-  html?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  html?: Prisma.SortOrder
+  subject?: Prisma.SortOrder
+  template_key?: Prisma.SortOrder
 }
 
 export type EmailNotificationMasterSumOrderByAggregateInput = {
@@ -479,22 +479,22 @@ export type EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput =
 }
 
 export type EmailNotificationMasterCreateWithoutVendorInput = {
-  template_key: string
-  subject: string
   text: string
-  html: string
   active?: boolean
   created_at?: Date | string
+  html: string
+  subject: string
+  template_key: string
 }
 
 export type EmailNotificationMasterUncheckedCreateWithoutVendorInput = {
   id?: number
-  template_key: string
-  subject: string
   text: string
-  html: string
   active?: boolean
   created_at?: Date | string
+  html: string
+  subject: string
+  template_key: string
 }
 
 export type EmailNotificationMasterCreateOrConnectWithoutVendorInput = {
@@ -529,51 +529,51 @@ export type EmailNotificationMasterScalarWhereInput = {
   NOT?: Prisma.EmailNotificationMasterScalarWhereInput | Prisma.EmailNotificationMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"EmailNotificationMaster"> | number
   vendor_id?: Prisma.IntFilter<"EmailNotificationMaster"> | number
-  template_key?: Prisma.StringFilter<"EmailNotificationMaster"> | string
-  subject?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   text?: Prisma.StringFilter<"EmailNotificationMaster"> | string
-  html?: Prisma.StringFilter<"EmailNotificationMaster"> | string
   active?: Prisma.BoolFilter<"EmailNotificationMaster"> | boolean
   created_at?: Prisma.DateTimeFilter<"EmailNotificationMaster"> | Date | string
+  html?: Prisma.StringFilter<"EmailNotificationMaster"> | string
+  subject?: Prisma.StringFilter<"EmailNotificationMaster"> | string
+  template_key?: Prisma.StringFilter<"EmailNotificationMaster"> | string
 }
 
 export type EmailNotificationMasterCreateManyVendorInput = {
   id?: number
-  template_key: string
-  subject: string
   text: string
-  html: string
   active?: boolean
   created_at?: Date | string
+  html: string
+  subject: string
+  template_key: string
 }
 
 export type EmailNotificationMasterUpdateWithoutVendorInput = {
-  template_key?: Prisma.StringFieldUpdateOperationsInput | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  html?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  html?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  template_key?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EmailNotificationMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  template_key?: Prisma.StringFieldUpdateOperationsInput | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  html?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  html?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  template_key?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EmailNotificationMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  template_key?: Prisma.StringFieldUpdateOperationsInput | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
-  html?: Prisma.StringFieldUpdateOperationsInput | string
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  html?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  template_key?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -581,51 +581,51 @@ export type EmailNotificationMasterUncheckedUpdateManyWithoutVendorInput = {
 export type EmailNotificationMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  template_key?: boolean
-  subject?: boolean
   text?: boolean
-  html?: boolean
   active?: boolean
   created_at?: boolean
+  html?: boolean
+  subject?: boolean
+  template_key?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["emailNotificationMaster"]>
 
 export type EmailNotificationMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  template_key?: boolean
-  subject?: boolean
   text?: boolean
-  html?: boolean
   active?: boolean
   created_at?: boolean
+  html?: boolean
+  subject?: boolean
+  template_key?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["emailNotificationMaster"]>
 
 export type EmailNotificationMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  template_key?: boolean
-  subject?: boolean
   text?: boolean
-  html?: boolean
   active?: boolean
   created_at?: boolean
+  html?: boolean
+  subject?: boolean
+  template_key?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["emailNotificationMaster"]>
 
 export type EmailNotificationMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
-  template_key?: boolean
-  subject?: boolean
   text?: boolean
-  html?: boolean
   active?: boolean
   created_at?: boolean
+  html?: boolean
+  subject?: boolean
+  template_key?: boolean
 }
 
-export type EmailNotificationMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "template_key" | "subject" | "text" | "html" | "active" | "created_at", ExtArgs["result"]["emailNotificationMaster"]>
+export type EmailNotificationMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "text" | "active" | "created_at" | "html" | "subject" | "template_key", ExtArgs["result"]["emailNotificationMaster"]>
 export type EmailNotificationMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -644,12 +644,12 @@ export type $EmailNotificationMasterPayload<ExtArgs extends runtime.Types.Extens
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
-    template_key: string
-    subject: string
     text: string
-    html: string
     active: boolean
     created_at: Date
+    html: string
+    subject: string
+    template_key: string
   }, ExtArgs["result"]["emailNotificationMaster"]>
   composites: {}
 }
@@ -1076,12 +1076,12 @@ export interface Prisma__EmailNotificationMasterClient<T, Null = never, ExtArgs 
 export interface EmailNotificationMasterFieldRefs {
   readonly id: Prisma.FieldRef<"EmailNotificationMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"EmailNotificationMaster", 'Int'>
-  readonly template_key: Prisma.FieldRef<"EmailNotificationMaster", 'String'>
-  readonly subject: Prisma.FieldRef<"EmailNotificationMaster", 'String'>
   readonly text: Prisma.FieldRef<"EmailNotificationMaster", 'String'>
-  readonly html: Prisma.FieldRef<"EmailNotificationMaster", 'String'>
   readonly active: Prisma.FieldRef<"EmailNotificationMaster", 'Boolean'>
   readonly created_at: Prisma.FieldRef<"EmailNotificationMaster", 'DateTime'>
+  readonly html: Prisma.FieldRef<"EmailNotificationMaster", 'String'>
+  readonly subject: Prisma.FieldRef<"EmailNotificationMaster", 'String'>
+  readonly template_key: Prisma.FieldRef<"EmailNotificationMaster", 'String'>
 }
     
 
@@ -1278,6 +1278,11 @@ export type EmailNotificationMasterFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` EmailNotificationMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EmailNotificationMasters.
+   */
   distinct?: Prisma.EmailNotificationMasterScalarFieldEnum | Prisma.EmailNotificationMasterScalarFieldEnum[]
 }
 

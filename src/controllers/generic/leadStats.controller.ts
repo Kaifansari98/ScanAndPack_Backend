@@ -7,6 +7,11 @@ export class LeadStatsController {
     try {
       const vendorId = Number(req.params.vendorId);
       const userId = req.query.userId ? Number(req.query.userId) : undefined;
+      const franchiseIdRaw = req.query.franchise_id;
+      const franchiseId =
+        franchiseIdRaw !== undefined && franchiseIdRaw !== null && franchiseIdRaw !== ""
+          ? Number(franchiseIdRaw)
+          : undefined;
 
       if (isNaN(vendorId)) {
         logger.warn("Invalid vendorId provided", { vendorId: req.params.vendorId });
@@ -18,9 +23,24 @@ export class LeadStatsController {
         return res.status(400).json({ success: false, message: "Invalid userId" });
       }
 
-      const stats = await LeadStatsService.getVendorLeadStats(vendorId, userId);
+      if (franchiseId !== undefined && isNaN(franchiseId)) {
+        logger.warn("Invalid franchiseId provided", { franchiseId: req.query.franchise_id });
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid franchiseId" });
+      }
 
-      logger.info("Fetched lead stats successfully", { vendorId, userId });
+      const stats = await LeadStatsService.getVendorLeadStats(
+        vendorId,
+        franchiseId,
+        userId
+      );
+
+      logger.info("Fetched lead stats successfully", {
+        vendorId,
+        franchiseId,
+        userId,
+      });
       return res.status(200).json({ success: true, data: stats });
 
     } catch (error: any) {
