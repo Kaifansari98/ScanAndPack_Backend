@@ -1986,6 +1986,49 @@ export class LeadActivityStatusService {
         if (shouldUseMapping) {
           const mappingOnlyRoles = ["pre-prod", "factory"];
           const isMappingOnly = mappingOnlyRoles.includes(userType);
+          const isCaller = [
+            "telecaller",
+            "telecaller-team-lead",
+            "telecaller team lead",
+            "caller",
+            "store caller",
+            "store-caller",
+          ].includes(userType);
+
+          let callerExtraLeadIds: number[] = [];
+          if (isCaller) {
+            const [directLeads, onlineFollowUpLeads] = await Promise.all([
+              prisma.leadMaster.findMany({
+                where: {
+                  vendor_id: vendorId,
+                  is_deleted: false,
+                  OR: [{ created_by: assignTo }, { assign_to: assignTo }],
+                },
+                select: { id: true },
+              }),
+              prisma.online_leads.findMany({
+                where: {
+                  vendor_id: vendorId,
+                  lead_master_id: { not: null },
+                  OR: [
+                    { assign_to: assignTo },
+                    { final_assigned_leads: assignTo },
+                    { created_by: assignTo },
+                    { online_lead_call_log: { some: { telecaller_id: assignTo } } },
+                    { online_lead_history: { some: { created_by: assignTo } } },
+                  ],
+                },
+                select: { lead_master_id: true },
+              }),
+            ]);
+
+            callerExtraLeadIds = [
+              ...directLeads.map((d) => d.id),
+              ...onlineFollowUpLeads
+                .map((o) => o.lead_master_id)
+                .filter((id): id is number => typeof id === "number"),
+            ];
+          }
 
           const [mappedLeads, taskLeads] = await Promise.all([
             prisma.leadUserMapping.findMany({
@@ -2007,6 +2050,7 @@ export class LeadActivityStatusService {
             ...new Set([
               ...mappedLeads.map((m) => m.lead_id),
               ...taskLeads.map((t) => t.lead_id),
+              ...callerExtraLeadIds,
             ]),
           ];
 

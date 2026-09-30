@@ -29,6 +29,7 @@ export class LeadStatsService {
     // ✅ Total My Tasks count (for current user)
     let totalMyTasks: number | null = null;
     let userType = "";
+    let isCaller = false;
     let targetFranchiseId: number | undefined = franchiseId;
     let isHO = false;
 
@@ -59,7 +60,7 @@ export class LeadStatsService {
         : false;
 
       userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
-      const isCaller = [
+      isCaller = [
         "telecaller",
         "telecaller-team-lead",
         "telecaller team lead",
@@ -76,12 +77,6 @@ export class LeadStatsService {
         "admin",
         "super-admin",
         "auditor",
-        "telecaller",
-        "telecaller-team-lead",
-        "telecaller team lead",
-        "caller",
-        "store-caller",
-        "store caller",
       ].includes(userType);
       // Site supervisors can be mapped to leads across multiple franchises
       // (see SiteSupervisorFranchiseMapping); leads individually assigned to
@@ -130,6 +125,41 @@ export class LeadStatsService {
         const mappingOnlyRoles = ["pre-prod", "factory"];
         const isMappingOnly = mappingOnlyRoles.includes(userType);
 
+        let callerLeadIds: number[] = [];
+        if (isCaller && userId) {
+          const [directLeads, onlineFollowUpLeads] = await Promise.all([
+            prisma.leadMaster.findMany({
+              where: {
+                vendor_id: vendorId,
+                is_deleted: false,
+                OR: [{ created_by: userId }, { assign_to: userId }],
+              },
+              select: { id: true },
+            }),
+            prisma.online_leads.findMany({
+              where: {
+                vendor_id: vendorId,
+                lead_master_id: { not: null },
+                OR: [
+                  { assign_to: userId },
+                  { final_assigned_leads: userId },
+                  { created_by: userId },
+                  { online_lead_call_log: { some: { telecaller_id: userId } } },
+                  { online_lead_history: { some: { created_by: userId } } },
+                ],
+              },
+              select: { lead_master_id: true },
+            }),
+          ]);
+
+          callerLeadIds = [
+            ...directLeads.map((d) => d.id),
+            ...onlineFollowUpLeads
+              .map((o) => o.lead_master_id)
+              .filter((id): id is number => typeof id === "number"),
+          ];
+        }
+
         const [mappedLeads, taskLeads] = await Promise.all([
           prisma.leadUserMapping.findMany({
             where: { vendor_id: vendorId, user_id: userId, status: "active" },
@@ -150,11 +180,13 @@ export class LeadStatsService {
           ...new Set([
             ...mappedLeads.map((m) => m.lead_id),
             ...taskLeads.map((t) => t.lead_id),
+            ...callerLeadIds,
           ]),
         ];
         console.log("[LeadStatsService] lead ids", {
           mappedCount: mappedLeads.length,
           taskCount: taskLeads.length,
+          callerCount: callerLeadIds.length,
           totalUnique: leadIds.length,
         });
 
@@ -292,6 +324,17 @@ export class LeadStatsService {
         } else {
           Object.assign(pendingOnlineWhere, userCondition);
         }
+      } else if (isCaller && userId) {
+        const callerCondition: any = {
+          OR: [
+            { assign_to: userId },
+            { final_assigned_leads: userId },
+            { created_by: userId },
+            { online_lead_call_log: { some: { telecaller_id: userId } } },
+            { online_lead_history: { some: { created_by: userId } } },
+          ],
+        };
+        Object.assign(pendingOnlineWhere, callerCondition);
       } else if (shouldIncludeFranchise && effectiveFranchiseId) {
         pendingOnlineWhere.OR = [
           { pending_store_id: effectiveFranchiseId },

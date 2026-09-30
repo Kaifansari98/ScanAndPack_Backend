@@ -911,28 +911,49 @@ export const getLeadsByVendorAndUser = async (
     };
 
     // Role-based filtering
-    if (
-      [
-        "admin",
-        "super-admin",
-        "auditor",
-        "telecaller",
-        "telecaller-team-lead",
-        "telecaller team lead",
-        "caller",
-        "store caller",
-      ].includes(userType)
-    ) {
-      // Admins, super-admins, and telecallers (view-only) can see all leads for their vendor
+    const isCaller = [
+      "telecaller",
+      "telecaller-team-lead",
+      "telecaller team lead",
+      "caller",
+      "store caller",
+      "store-caller",
+    ].includes(userType);
+
+    // Role-based filtering
+    if (["admin", "super-admin", "auditor"].includes(userType)) {
       console.log(
-        `[SERVICE] Admin/Super-admin/Telecaller access - showing all vendor leads`,
+        `[SERVICE] Admin/Super-admin access - showing all vendor leads`,
       );
     } else {
+      let callerLeadIds: number[] = [];
+      if (isCaller) {
+        const callerOnlineLeads = await prisma.online_leads.findMany({
+          where: {
+            vendor_id: vendorId,
+            lead_master_id: { not: null },
+            OR: [
+              { assign_to: userId },
+              { final_assigned_leads: userId },
+              { created_by: userId },
+              { online_lead_call_log: { some: { telecaller_id: userId } } },
+              { online_lead_history: { some: { created_by: userId } } },
+            ],
+          },
+          select: { lead_master_id: true },
+        });
+        callerLeadIds = callerOnlineLeads
+          .map((o) => o.lead_master_id)
+          .filter((id): id is number => typeof id === "number");
+      }
+
       // Non-admin roles (sales executive, telecaller, etc.): see leads created by, assigned to, or mapped to them
       whereCondition.OR = [
         { created_by: userId }, // Leads created by them
         { assign_to: userId }, // Leads assigned to them
         { userMappings: { some: { user_id: userId, status: "active" } } }, // Leads mapped to them
+        { tasks: { some: { OR: [{ user_id: userId }, { created_by: userId }] } } },
+        ...(callerLeadIds.length > 0 ? [{ id: { in: callerLeadIds } }] : []),
       ];
 
       console.log(
