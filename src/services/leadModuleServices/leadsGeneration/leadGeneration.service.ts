@@ -321,6 +321,7 @@ export const createLeadService = async (
         const lead_code = await generateLeadCode(tx, {
           franchiseId: franchise_id,
           vendorId: vendor_id,
+          useOnlineLeadPrefix: !(payload.is_draft && payload.draft_in_open_leads === true),
         });
 
         // 3) Create Lead with the generated code
@@ -5412,4 +5413,3 @@ export const changeLeadStoreService = async (
 
   return result;
 };
-
