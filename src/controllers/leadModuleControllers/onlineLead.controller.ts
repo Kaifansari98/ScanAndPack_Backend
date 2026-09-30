@@ -609,8 +609,9 @@ export class OnlineLeadController {
         });
       }
 
-      const baseConditions: any = {
+      const unassignedPoolFilter: any = {
         vendor_id: vendorId,
+        assign_to: null,
         OR: [
           { approval_status: "PENDING" },
           {
@@ -628,18 +629,15 @@ export class OnlineLeadController {
 
       const [poolCount, overallCount, myCount] = await Promise.all([
         prisma.online_leads.count({
-          where: {
-            ...baseConditions,
-            assign_to: null,
-          },
+          where: unassignedPoolFilter,
         }),
         prisma.online_leads.count({
-          where: baseConditions,
+          where: { vendor_id: vendorId },
         }),
         userId
           ? prisma.online_leads.count({
               where: {
-                ...baseConditions,
+                vendor_id: vendorId,
                 OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
               },
             })
@@ -690,9 +688,12 @@ export class OnlineLeadController {
         });
       }
 
-      const andConditions: any[] = [
-        { vendor_id: vendorId },
-        {
+      const andConditions: any[] = [{ vendor_id: vendorId }];
+
+      // Apply tab filters
+      if (tab === "pool") {
+        andConditions.push({
+          assign_to: null,
           OR: [
             { approval_status: "PENDING" },
             {
@@ -706,12 +707,7 @@ export class OnlineLeadController {
               },
             },
           ],
-        },
-      ];
-
-      // Apply tab filters
-      if (tab === "pool") {
-        andConditions.push({ assign_to: null });
+        });
       } else if (tab === "my") {
         if (!userId) {
           return res.status(400).json({
@@ -829,8 +825,9 @@ export class OnlineLeadController {
         ],
       });
 
-      const baseCountConditions: any = {
+      const unassignedPoolCountFilter: any = {
         vendor_id: vendorId,
+        assign_to: null,
         OR: [
           { approval_status: "PENDING" },
           {
@@ -848,18 +845,15 @@ export class OnlineLeadController {
 
       const [poolCount, overallCount, myCount] = await Promise.all([
         prisma.online_leads.count({
-          where: {
-            ...baseCountConditions,
-            assign_to: null,
-          },
+          where: unassignedPoolCountFilter,
         }),
         prisma.online_leads.count({
-          where: baseCountConditions,
+          where: { vendor_id: vendorId },
         }),
         userId
           ? prisma.online_leads.count({
               where: {
-                ...baseCountConditions,
+                vendor_id: vendorId,
                 OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
               },
             })

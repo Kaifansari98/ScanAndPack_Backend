@@ -4587,6 +4587,13 @@ export class BookingStageService {
     const isAdmin = normalizedUserType === "admin";
     const isSuperAdmin = normalizedUserType === "super-admin";
     const isAuditor = normalizedUserType === "auditor";
+    const isCaller = [
+      "telecaller",
+      "telecaller-team-lead",
+      "telecaller team lead",
+      "caller",
+      "store caller",
+    ].includes(normalizedUserType || "");
     const isFactory =
       normalizedUserType === "factory" ||
       normalizedUserType === "factory-user" ||
@@ -4600,7 +4607,7 @@ export class BookingStageService {
       ignoreFranchiseForStage = true;
     }
     const isAdminLikeForRange =
-      isType4To16 && (isAdmin || isSuperAdmin || isAuditor);
+      isType4To16 && (isAdmin || isSuperAdmin || isAuditor || isCaller);
     const shouldIncludeFranchiseByRole =
       isType4To16 &&
       [
@@ -4610,6 +4617,11 @@ export class BookingStageService {
         "admin",
         "super-admin",
         "auditor",
+        "telecaller",
+        "telecaller-team-lead",
+        "telecaller team lead",
+        "caller",
+        "store caller",
       ].includes(normalizedUserType || "");
     const shouldIncludeFranchise =
       normalizedUserType === "admin" ||
@@ -4617,7 +4629,8 @@ export class BookingStageService {
       normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive" ||
       normalizedUserType === "site-supervisor" ||
-      normalizedUserType === "head-site-supervisor";
+      normalizedUserType === "head-site-supervisor" ||
+      isCaller;
     const effectiveFranchiseId =
       franchiseId && !Number.isNaN(franchiseId)
         ? franchiseId
@@ -5217,7 +5230,8 @@ export class BookingStageService {
     // ============= Admin Flow =============
     if (
       isAdminLikeForRange ||
-      (!isType4To16 && isAdmin) ||
+      (!isType4To16 && (isAdmin || isSuperAdmin || isAuditor)) ||
+      isCaller ||
       normalizedUserType === "miscellaneous" ||
       isFactoryInstallation
     ) {
@@ -5594,17 +5608,25 @@ export class BookingStageService {
       include: { user_type: true, franchise: true },
     });
 
-    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
+    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase().trim();
     const isAdmin = normalizedUserType === "admin";
     const isSuperAdmin = normalizedUserType === "super-admin";
     const isAuditor = normalizedUserType === "auditor";
-    const isAdminFlow = isAdmin || isSuperAdmin || isAuditor;
+    const isCaller = [
+      "telecaller",
+      "telecaller-team-lead",
+      "telecaller team lead",
+      "caller",
+      "store caller",
+    ].includes(normalizedUserType || "");
+    const isAdminFlow = isAdmin || isSuperAdmin || isAuditor || isCaller;
     const isHO = creator?.franchise?.is_head_office === true;
   
     const shouldIncludeFranchise =
       (normalizedUserType === "admin" ||
         normalizedUserType === "auditor" ||
-        normalizedUserType === "sales-executive") &&
+        normalizedUserType === "sales-executive" ||
+        isCaller) &&
       !isSuperAdmin &&
       !isHO;
 

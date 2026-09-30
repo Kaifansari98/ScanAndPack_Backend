@@ -911,10 +911,21 @@ export const getLeadsByVendorAndUser = async (
     };
 
     // Role-based filtering
-    if (["admin", "super-admin", "auditor"].includes(userType)) {
-      // Admins and super-admins can see all leads for their vendor
+    if (
+      [
+        "admin",
+        "super-admin",
+        "auditor",
+        "telecaller",
+        "telecaller-team-lead",
+        "telecaller team lead",
+        "caller",
+        "store caller",
+      ].includes(userType)
+    ) {
+      // Admins, super-admins, and telecallers (view-only) can see all leads for their vendor
       console.log(
-        `[SERVICE] Admin/Super-admin access - showing all vendor leads`,
+        `[SERVICE] Admin/Super-admin/Telecaller access - showing all vendor leads`,
       );
     } else {
       // Non-admin roles (sales executive, telecaller, etc.): see leads created by, assigned to, or mapped to them

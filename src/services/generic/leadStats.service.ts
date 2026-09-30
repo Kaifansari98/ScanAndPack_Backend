@@ -59,14 +59,29 @@ export class LeadStatsService {
         : false;
 
       userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
+      const isCaller = [
+        "telecaller",
+        "telecaller-team-lead",
+        "telecaller team lead",
+        "caller",
+        "store-caller",
+        "store caller",
+      ].includes(userType);
+
       targetFranchiseId =
         franchiseId ??
-        (!isHO && userType !== "super-admin" ? user.franchise_id ?? undefined : undefined);
+        (!isHO && userType !== "super-admin" && !isCaller ? user.franchise_id ?? undefined : undefined);
 
       const shouldUseMapping = ![
         "admin",
         "super-admin",
         "auditor",
+        "telecaller",
+        "telecaller-team-lead",
+        "telecaller team lead",
+        "caller",
+        "store-caller",
+        "store caller",
       ].includes(userType);
       // Site supervisors can be mapped to leads across multiple franchises
       // (see SiteSupervisorFranchiseMapping); leads individually assigned to
@@ -80,7 +95,7 @@ export class LeadStatsService {
         shouldUseMapping,
       });
 
-      if (targetFranchiseId && !isSiteSupervisorLeadOwner) {
+      if (targetFranchiseId && !isSiteSupervisorLeadOwner && !isCaller) {
         whereClause = {
           ...whereClause,
           franchise_id: targetFranchiseId,
@@ -93,7 +108,8 @@ export class LeadStatsService {
       // reason as above.
       const taskFranchiseId =
         ["admin", "super-admin", "auditor"].includes(userType) ||
-        isSiteSupervisorLeadOwner
+        isSiteSupervisorLeadOwner ||
+        isCaller
           ? undefined
           : targetFranchiseId;
 
@@ -423,14 +439,19 @@ export class LeadStatsService {
       where: {
         vendor_id: vendorId,
         assign_to: null,
-        NOT: {
-          online_lead_followup_status: {
-            status_name: {
-              in: ["Store Assigned", "Store Visit Done"],
-              mode: "insensitive",
+        OR: [
+          { approval_status: "PENDING" },
+          {
+            NOT: {
+              online_lead_followup_status: {
+                status_name: {
+                  in: ["Store Assigned", "Store Visit Done"],
+                  mode: "insensitive",
+                },
+              },
             },
           },
-        },
+        ],
       },
     });
 
