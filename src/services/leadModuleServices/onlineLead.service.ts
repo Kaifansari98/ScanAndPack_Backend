@@ -216,13 +216,24 @@ export const ensureDefaultStatuses = async (vendorId: number) => {
     { name: "Store Assigned", required: true },
     { name: "Store Visit Done", required: false },
     { name: "Lost", required: false },
+    { name: "Mark on hold", required: false },
   ];
 
   for (const status of defaultStatuses) {
+    const isHoldStatus = status.name.toLowerCase().includes("hold");
     const existing = await prisma.online_lead_followup_status.findFirst({
       where: {
         vendor_id: vendorId,
-        status_name: { equals: status.name, mode: "insensitive" },
+        ...(isHoldStatus
+          ? {
+              OR: [
+                { status_name: { equals: "Mark on hold", mode: "insensitive" } },
+                { status_name: { equals: "On Hold", mode: "insensitive" } },
+              ],
+            }
+          : {
+              status_name: { equals: status.name, mode: "insensitive" },
+            }),
       },
     });
 
@@ -348,6 +359,8 @@ export const STATIC_LEAD_COLUMNS = new Set([
   "mobile",
   "mobilenumber",
   "mobileno",
+  "contactnumber",
+  "contact_number",
   "altcontact",
   "altcontactno",
   "alternativecontact",
@@ -355,6 +368,26 @@ export const STATIC_LEAD_COLUMNS = new Set([
   "emailid",
   "emailaddress",
   "mail",
+  // Excel references & caller assignments
+  "no",
+  "no.",
+  "srno",
+  "sno",
+  "serialno",
+  "telecallername",
+  "telecaller_name",
+  "telecaller",
+  "callername",
+  "caller_name",
+  "caller",
+  "firstcall",
+  "first_call",
+  "latestfollowup",
+  "latest_follow_up",
+  "lastfollowup",
+  "date",
+  "leaddate",
+  "createddate",
   // System / routing / internal properties
   "vendortoken",
   "vendorid",
@@ -389,6 +422,8 @@ export const STATIC_LEAD_COLUMNS = new Set([
   "when_need_ready",
   "preferredshowroom",
   "preferred_showroom",
+  "showroompreference",
+  "showroom_preference",
   "projectlocation",
   "project_location",
   "siteaddress",
@@ -458,6 +493,9 @@ export interface SurveyDesignRemarkInput {
   whenNeedReady?: string | null;
   preferredShowroom?: string | null;
   projectLocation?: string | null;
+  firstCall?: string | null;
+  latestFollowUp?: string | null;
+  date?: string | null;
   dynamicFields?: DynamicRemarkField[];
 }
 
@@ -512,7 +550,8 @@ export function extractSurveyDetails(
       nk.includes("shambhala") ||
       nk.includes("showroom") ||
       nk.includes("prefertovisit") ||
-      nk.includes("preferredshowroom")
+      nk.includes("preferredshowroom") ||
+      nk.includes("showroompreference")
     );
   });
 
@@ -524,6 +563,26 @@ export function extractSurveyDetails(
       nk.includes("projectlocation") ||
       (nk.includes("project") && nk.includes("located"))
     );
+  });
+
+  const firstCallKey = keys.find((k) => {
+    const nk = norm(k);
+    return nk === "firstcall" || nk === "first_call" || nk.includes("firstcall");
+  });
+
+  const latestFollowUpKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk === "latestfollowup" ||
+      nk === "latest_follow_up" ||
+      nk === "lastfollowup" ||
+      nk.includes("latestfollowup")
+    );
+  });
+
+  const dateKey = keys.find((k) => {
+    const nk = norm(k);
+    return nk === "date" || nk === "leaddate" || nk === "createddate";
   });
 
   const budgetKey = keys.find((k) => {
@@ -577,6 +636,9 @@ export function extractSurveyDetails(
     whenNeedReady: whenNeedReadyKey ? clean(merged[whenNeedReadyKey]) : undefined,
     preferredShowroom: preferredShowroomKey ? clean(merged[preferredShowroomKey]) : undefined,
     projectLocation: projectLocationKey ? clean(merged[projectLocationKey]) : undefined,
+    firstCall: firstCallKey ? clean(merged[firstCallKey]) : undefined,
+    latestFollowUp: latestFollowUpKey ? clean(merged[latestFollowUpKey]) : undefined,
+    date: dateKey ? clean(merged[dateKey]) : undefined,
     dynamicFields,
   };
 }
@@ -628,6 +690,20 @@ export function formatDesignRemarks(
       extraRemarks.push(
         `**• Where is your project located?**\n${projectLocation}`,
       );
+  }
+
+  // Include firstCall & latestFollowUp if present
+  if (surveyData.firstCall) {
+    const v = cleanVal(surveyData.firstCall);
+    if (v && v !== "-") {
+      extraRemarks.push(`**• First call:**\n${v}`);
+    }
+  }
+  if (surveyData.latestFollowUp) {
+    const v = cleanVal(surveyData.latestFollowUp);
+    if (v && v !== "-") {
+      extraRemarks.push(`**• Latest follow up:**\n${v}`);
+    }
   }
 
   let remark = existingRemark
