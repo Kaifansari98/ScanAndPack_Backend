@@ -3,8 +3,9 @@ import puppeteer from "puppeteer";
 import { prisma } from "../../prisma/client";
 
 const PACKAGING_MACHINE_TYPE_ID = 18;
-const BOXES_PER_PAGE = 45;
-const BOX_ROWS_PER_COLUMN = 15;
+const BOX_COLUMNS_PER_PAGE = 2;
+const BOX_ROWS_PER_COLUMN = 25;
+const BOXES_PER_PAGE = BOX_COLUMNS_PER_PAGE * BOX_ROWS_PER_COLUMN;
 const PRODUCTS_PER_PAGE = 45;
 
 type DispatchBox = {
@@ -76,17 +77,8 @@ const getBoxNumber = (box: DispatchBox): number | string => {
   return numericName ? Number(numericName) : box.box_name;
 };
 
-const sortBoxesByStatus = (
-  boxes: DispatchBox[],
-  statusField: "factory_out_at" | "site_in_at",
-): DispatchBox[] =>
+const sortBoxes = (boxes: DispatchBox[]): DispatchBox[] =>
   [...boxes].sort((left, right) => {
-    const statusOrder =
-      Number(Boolean(right[statusField])) -
-      Number(Boolean(left[statusField]));
-
-    if (statusOrder !== 0) return statusOrder;
-
     const leftSequence =
       Number.isInteger(left.sequence_no) && Number(left.sequence_no) > 0
         ? Number(left.sequence_no)
@@ -102,7 +94,15 @@ const sortBoxesByStatus = (
       ? rightSequence
       : Number.MAX_SAFE_INTEGER;
 
-    return normalizedLeftSequence - normalizedRightSequence || left.id - right.id;
+    if (normalizedLeftSequence !== normalizedRightSequence) {
+      return normalizedLeftSequence - normalizedRightSequence;
+    }
+
+    return (
+      String(left.box_name).localeCompare(String(right.box_name), undefined, {
+        numeric: true,
+      }) || left.id - right.id
+    );
   });
 
 const chunk = <T>(rows: T[], size: number): T[][] => {
@@ -130,10 +130,7 @@ const getProductSummary = (
   boxes: DispatchBox[],
   locationName: string | null,
 ): ProductSummary[] => {
-  const products = new Map<
-    string,
-    { qty: number; boxIds: Set<number> }
-  >();
+  const products = new Map<string, { qty: number; boxIds: Set<number> }>();
 
   for (const box of boxes) {
     for (const mapping of getLocationMappings(box, locationName)) {
@@ -200,32 +197,34 @@ const paginateDispatchBoxes = (
   return pages;
 };
 
-const renderBoxColumns = (
-  boxes: DispatchBox[],
-  checkField: "factory_out_at" | "site_in_at",
-) => {
-  const columns = chunk(boxes, BOX_ROWS_PER_COLUMN);
+const renderBoxColumnTable = (boxes: DispatchBox[]) => {
+  const rows = Array.from({ length: BOX_ROWS_PER_COLUMN }, (_, rowIndex) => {
+    const box = boxes[rowIndex];
+    const loaded = Boolean(box?.factory_out_at);
+    const unloaded = Boolean(box?.site_in_at);
 
-  while (columns.length < 3) columns.push([]);
+    return `
+      <tr>
+        <td class="packet-number">${box ? escapeHtml(getBoxNumber(box)) : ""}</td>
+        <td class="check-cell ${loaded ? "checked" : ""}">${loaded ? "&#10003;" : ""}</td>
+        <td class="check-cell ${unloaded ? "checked" : ""}">${unloaded ? "&#10003;" : ""}</td>
+      </tr>
+    `;
+  }).join("");
 
-  return Array.from({ length: BOX_ROWS_PER_COLUMN }, (_, rowIndex) =>
-    columns
-      .slice(0, 3)
-      .map((column) => {
-        const box = column[rowIndex];
-        const checked = Boolean(box?.[checkField]);
-
-        return `
-          <td class="packet-number">${box ? escapeHtml(getBoxNumber(box)) : ""}</td>
-          <td class="check-cell ${checked ? "checked" : ""}">
-            ${checked ? "&#10003;" : ""}
-          </td>
-        `;
-      })
-      .join(""),
-  )
-    .map((cells) => `<tr>${cells}</tr>`)
-    .join("");
+  return `
+    <table class="movement-table">
+      <thead>
+        <tr><th colspan="3" class="movement-title">LOADING / DISPATCH &amp; UNLOADING</th></tr>
+        <tr class="movement-subheader-row">
+          <th class="th-pkt">Pkt No.</th>
+          <th class="th-check">Loading /<br/>Dispatch</th>
+          <th class="th-check">Unloading /<br/>Site Receipt</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
 };
 
 const renderProductSummary = (summary: ProductSummary[]) => {
@@ -293,8 +292,7 @@ const buildDispatchHtml = ({
   };
   locationPages: Array<{
     locationName: string | null;
-    loadingBoxes: DispatchBox[];
-    unloadingBoxes: DispatchBox[];
+    boxes: DispatchBox[];
     pageNumber: number;
     totalPages: number;
     totalLocationBoxes: number;
@@ -302,7 +300,8 @@ const buildDispatchHtml = ({
   locationContactMap?: Map<string, string>;
 }) => {
   const generatedOn = formatDate(new Date());
-  const jobNumber = project.order_no?.trim() || project.lead?.lead_code || project.id;
+  const jobNumber =
+    project.order_no?.trim() || project.lead?.lead_code || project.id;
   const clientName =
     project.client_name?.trim() ||
     [project.lead?.firstname, project.lead?.lastname]
@@ -313,67 +312,76 @@ const buildDispatchHtml = ({
     project.client_address?.trim() || project.lead?.site_address?.trim() || "-";
 
   const pages = locationPages
-    .map(({
-      locationName,
-      loadingBoxes,
-      unloadingBoxes,
-      pageNumber,
-      totalPages,
-      totalLocationBoxes,
-    }) => {
-      const locationContact = locationName
-        ? locationContactMap.get(normalizeLocation(locationName))
-        : null;
-      const projectContact =
-        project.client_contact_no?.trim() ||
-        project.lead?.contact_no?.trim() ||
-        "";
-      const resolvedContacts = Array.from(
-        new Set([projectContact, locationContact].filter(Boolean)),
-      );
-      const contactNo =
-        resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "-";
-      const dispatchedBoxes = loadingBoxes.filter((box) => box.factory_out_at);
-      const siteReceivedBoxes = unloadingBoxes.filter((box) => box.site_in_at);
-      const dispatcherNames = Array.from(
-        new Set(
-          dispatchedBoxes
-            .map(
-              (box) =>
-                box.factoryOutByUser?.user_name.trim() ||
-                (box.factory_out_by ? `User #${box.factory_out_by}` : null),
-            )
-            .filter((name): name is string => Boolean(name)),
-        ),
-      );
-      const siteReceiverNames = Array.from(
-        new Set(
-          siteReceivedBoxes
-            .map(
-              (box) =>
-                box.siteInByUser?.user_name.trim() ||
-                (box.site_in_by ? `User #${box.site_in_by}` : null),
-            )
-            .filter((name): name is string => Boolean(name)),
-        ),
-      );
-      const latestDispatchDate = dispatchedBoxes.reduce<Date | null>(
-        (latest, box) =>
-          !latest || (box.factory_out_at && box.factory_out_at > latest)
-            ? box.factory_out_at
-            : latest,
-        null,
-      );
-      const latestSiteReceiptDate = siteReceivedBoxes.reduce<Date | null>(
-        (latest, box) =>
-          !latest || (box.site_in_at && box.site_in_at > latest)
-            ? box.site_in_at
-            : latest,
-        null,
-      );
-      const summary = getProductSummary(loadingBoxes, locationName);
+    .map(
+      ({
+        locationName,
+        boxes,
+        pageNumber,
+        totalPages,
+        totalLocationBoxes,
+      }) => {
+        const locationContact = locationName
+          ? locationContactMap.get(normalizeLocation(locationName))
+          : null;
+        const projectContact =
+          project.client_contact_no?.trim() ||
+          project.lead?.contact_no?.trim() ||
+          "";
+        const resolvedContacts = Array.from(
+          new Set([projectContact, locationContact].filter(Boolean)),
+        );
+        const contactNo =
+          resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "-";
+        const dispatchedBoxes = boxes.filter(
+          (box) => box.factory_out_at,
+        );
+        const siteReceivedBoxes = boxes.filter(
+          (box) => box.site_in_at,
+        );
+        const loadedCount = dispatchedBoxes.length;
+        const unloadedCount = siteReceivedBoxes.length;
+        const dispatcherNames = Array.from(
+          new Set(
+            dispatchedBoxes
+              .map(
+                (box) =>
+                  box.factoryOutByUser?.user_name.trim() ||
+                  (box.factory_out_by ? `User #${box.factory_out_by}` : null),
+              )
+              .filter((name): name is string => Boolean(name)),
+          ),
+        );
+        const siteReceiverNames = Array.from(
+          new Set(
+            siteReceivedBoxes
+              .map(
+                (box) =>
+                  box.siteInByUser?.user_name.trim() ||
+                  (box.site_in_by ? `User #${box.site_in_by}` : null),
+              )
+              .filter((name): name is string => Boolean(name)),
+          ),
+        );
+        const latestDispatchDate = dispatchedBoxes.reduce<Date | null>(
+          (latest, box) =>
+            !latest || (box.factory_out_at && box.factory_out_at > latest)
+              ? box.factory_out_at
+              : latest,
+          null,
+        );
+        const latestSiteReceiptDate = siteReceivedBoxes.reduce<Date | null>(
+          (latest, box) =>
+            !latest || (box.site_in_at && box.site_in_at > latest)
+              ? box.site_in_at
+              : latest,
+          null,
+        );
+        const summary = getProductSummary(boxes, locationName);
 
-      return `
+        const movementColumns = chunk(boxes, BOX_ROWS_PER_COLUMN);
+        while (movementColumns.length < BOX_COLUMNS_PER_PAGE) movementColumns.push([]);
+
+        return `
         <section class="dispatch-page">
           <table class="header-table">
             <tr>
@@ -419,35 +427,12 @@ const buildDispatchHtml = ({
           </table>
 
           <div class="movement-grid">
-            <table class="movement-table">
-              <thead>
-                <tr><th colspan="6" class="movement-title">LOADING / DISPATCH</th></tr>
-                <tr>
-                  <th>Pkt No.</th><th>Check</th>
-                  <th>Pkt No.</th><th>Check</th>
-                  <th>Pkt No.</th><th>Check</th>
-                </tr>
-              </thead>
-              <tbody>${renderBoxColumns(loadingBoxes, "factory_out_at")}</tbody>
-              <tfoot>
-                <tr><th colspan="2">PAGE TOTAL</th><td colspan="4">${loadingBoxes.length} / ${totalLocationBoxes}</td></tr>
-              </tfoot>
-            </table>
+            ${renderBoxColumnTable(movementColumns[0])}
+            ${renderBoxColumnTable(movementColumns[1])}
+          </div>
 
-            <table class="movement-table">
-              <thead>
-                <tr><th colspan="6" class="movement-title">UNLOADING / SITE RECEIPT</th></tr>
-                <tr>
-                  <th>Pkt No.</th><th>Check</th>
-                  <th>Pkt No.</th><th>Check</th>
-                  <th>Pkt No.</th><th>Check</th>
-                </tr>
-              </thead>
-              <tbody>${renderBoxColumns(unloadingBoxes, "site_in_at")}</tbody>
-              <tfoot>
-                <tr><th colspan="2">PAGE TOTAL</th><td colspan="4">${unloadingBoxes.length} / ${totalLocationBoxes}</td></tr>
-              </tfoot>
-            </table>
+          <div class="page-total-bar">
+            PAGE TOTAL: ${boxes.length} / ${totalLocationBoxes} BOXES
           </div>
 
           <table class="remark-table">
@@ -467,7 +452,7 @@ const buildDispatchHtml = ({
               <tr>
                 <th colspan="7">TOTAL ON THIS PAGE</th>
                 <th>${summary.reduce((total, row) => total + row.qty, 0)}</th>
-                <th>${loadingBoxes.length}</th>
+                <th>${boxes.length}</th>
               </tr>
             </tfoot>
           </table>
@@ -478,7 +463,8 @@ const buildDispatchHtml = ({
           </div>
         </section>
       `;
-    })
+      },
+    )
     .join("");
 
   return `<!doctype html>
@@ -487,40 +473,49 @@ const buildDispatchHtml = ({
         <meta charset="utf-8" />
         <title>Dispatch Document</title>
         <style>
-          @page { size: A4 landscape; margin: 7mm; }
+          @page { size: A4 portrait; margin: 7mm; }
           * { box-sizing: border-box; }
           html, body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; color: #111; background: #fff; }
-          body { font-size: 9px; }
+          body { font-size: 8.5px; }
           table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-          th, td { border: 1px solid #222; padding: 2px 4px; vertical-align: middle; }
+          th, td { border: 1px solid #222; padding: 2px 3px; vertical-align: middle; }
           th { font-weight: 700; }
-          .dispatch-page { break-after: page; page-break-after: always; min-height: 190mm; background: #fff; }
+          .dispatch-page { break-after: page; page-break-after: always; min-height: 275mm; background: #fff; }
           .dispatch-page:last-child { break-after: auto; page-break-after: auto; }
           .header-table { margin-bottom: 3px; }
-          .header-table th { width: 10%; text-align: left; background: #f2f2f2; }
-          .header-table td { height: 5mm; }
-          .company-name { font-size: 14px; font-weight: 800; text-align: center; letter-spacing: .25px; }
-          .page-label { text-align: center; font-size: 9px; font-weight: 700; }
-          .strong { font-weight: 700; font-size: 10px; }
-          .movement-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-          .movement-table th, .movement-table td { text-align: center; height: 5mm; padding: 1px 3px; }
-          .movement-table .movement-title { font-size: 10px; height: 5mm; background: #e9e9e9; letter-spacing: .4px; }
-          .movement-table thead tr:nth-child(2) th { background: #f6f6f6; }
-          .packet-number { font-weight: 700; width: 12%; }
-          .check-cell { width: 21%; font-size: 13px; }
+          .header-table th { width: 12%; text-align: left; background: #f2f2f2; font-size: 8px; }
+          .header-table td { height: 4.8mm; font-size: 8px; }
+          .company-name { font-size: 13px; font-weight: 800; text-align: center; letter-spacing: .25px; }
+          .page-label { text-align: center; font-size: 8px; font-weight: 700; }
+          .strong { font-weight: 700; font-size: 9px; }
+          .movement-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 3px; }
+          .movement-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+          .movement-table th, .movement-table td { text-align: center; height: 5.1mm; padding: 2px 3px; border: 1px solid #222; }
+          .movement-title { font-size: 8.5px; height: 5mm; background: #e9e9e9; letter-spacing: .2px; }
+          .movement-subheader-row th { background: #f6f6f6; font-size: 8px; line-height: 1.15; height: 7mm; vertical-align: middle; }
+          .th-pkt, .packet-number { font-weight: 700; width: 28%; }
+          .th-check, .check-cell { width: 36%; font-size: 11px; }
           .checked { color: #087a30; font-weight: 900; }
-          .movement-table tfoot th, .movement-table tfoot td { height: 4mm; background: #f3f3f3; font-weight: 700; }
-          .remark-table { margin-top: 3px; }
-          .remark-table th { width: 9%; text-align: left; background: #f3f3f3; }
-          .remark-table td { height: 5mm; }
-          .summary-table { margin-top: 3px; font-size: 7.5px; }
+          .page-total-bar {
+            background: #f3f3f3;
+            border: 1px solid #222;
+            font-weight: 700;
+            font-size: 8px;
+            text-align: center;
+            padding: 2.5px 0;
+            margin-bottom: 3px;
+          }
+          .remark-table { margin-top: 2px; }
+          .remark-table th { width: 10%; text-align: left; background: #f3f3f3; font-size: 8px; }
+          .remark-table td { height: 4.5mm; }
+          .summary-table { margin-top: 2px; font-size: 7px; }
           .summary-table th { background: #f3f3f3; text-align: center; }
-          .summary-table td { height: 3.4mm; }
-          .summary-table .product-name { width: 25%; font-weight: 600; }
+          .summary-table td { height: 3.2mm; }
+          .summary-table .product-name { width: 25%; font-weight: 600; text-align: left; }
           .number-cell { width: 4%; text-align: center; }
           .summary-table tfoot th { height: 4mm; }
-          .empty-summary { text-align: center; color: #555; height: 6mm !important; }
-          .legend { display: flex; justify-content: space-between; gap: 12px; padding: 2px 1px 0; font-size: 7px; color: #444; }
+          .empty-summary { text-align: center; color: #555; height: 5mm !important; }
+          .legend { display: flex; justify-content: space-between; gap: 12px; padding: 2px 1px 0; font-size: 6.5px; color: #444; }
         </style>
       </head>
       <body>${pages}</body>
@@ -685,29 +680,16 @@ export const generateDispatchDocumentService = async (
           ),
         )
       : boxes;
-    const loadingPages = paginateDispatchBoxes(
-      sortBoxesByStatus(locationBoxes, "factory_out_at"),
+    const sortedBoxes = sortBoxes(locationBoxes);
+    const pages = paginateDispatchBoxes(sortedBoxes, locationName);
+
+    return pages.map((pageBoxes, index) => ({
       locationName,
-    );
-    const unloadingBoxes = sortBoxesByStatus(locationBoxes, "site_in_at");
-    let unloadingOffset = 0;
-
-    return loadingPages.map((loadingBoxes, index) => {
-      const unloadingPageBoxes = unloadingBoxes.slice(
-        unloadingOffset,
-        unloadingOffset + loadingBoxes.length,
-      );
-      unloadingOffset += loadingBoxes.length;
-
-      return {
-        locationName,
-        loadingBoxes,
-        unloadingBoxes: unloadingPageBoxes,
-        pageNumber: index + 1,
-        totalPages: loadingPages.length,
-        totalLocationBoxes: locationBoxes.length,
-      };
-    });
+      boxes: pageBoxes,
+      pageNumber: index + 1,
+      totalPages: pages.length,
+      totalLocationBoxes: locationBoxes.length,
+    }));
   });
 
   const html = buildDispatchHtml({
@@ -723,7 +705,7 @@ export const generateDispatchDocumentService = async (
 
     const pdf = await page.pdf({
       format: "A4",
-      landscape: true,
+      landscape: false,
       printBackground: true,
       preferCSSPageSize: true,
       margin: {

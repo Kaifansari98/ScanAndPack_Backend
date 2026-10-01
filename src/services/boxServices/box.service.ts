@@ -381,7 +381,11 @@ export const getBoxesByVendorAndProject = async (
               select: {
                 weight: true,
                 qty: true,
+                group_name: true,
               },
+            },
+            projectLocationProductQuantity: {
+              select: { location_name: true },
             },
           },
         })
@@ -400,10 +404,16 @@ export const getBoxesByVendorAndProject = async (
       }
     >
   >();
+  const boxGroupMap = new Map<number, string>();
 
   for (const mapping of mappingRows) {
     if (mapping.box_id === null || !mapping.cut_list) {
       continue;
+    }
+
+    const groupName = mapping.cut_list.group_name?.trim();
+    if (groupName && !boxGroupMap.has(mapping.box_id)) {
+      boxGroupMap.set(mapping.box_id, groupName);
     }
 
     const mappingQuantityValue = Number(mapping.qty || 0);
@@ -482,14 +492,29 @@ export const getBoxesByVendorAndProject = async (
         field_value: item.field_value || "",
       }));
 
+    const mappedLocations = Array.from(
+      new Set(
+        mappingRows
+          .filter((mapping) => mapping.box_id === box.id)
+          .map((mapping) => mapping.projectLocationProductQuantity?.location_name?.trim())
+          .filter((location): location is string => Boolean(location)),
+      ),
+    );
+
     return {
       ...box,
+      location_name: mappedLocations.join(", ") || null,
 
       // Sum of CutListMachineMapping.qty, clubbed by cut_list_id
       items_count: itemsCount,
 
       // Total calculated weight of items packed in the box
       weight: Number(totalWeight.toFixed(2)),
+
+      // Manual groupwise boxes may not have this column populated yet. Use the
+      // first packed item's group so the workstation can lock the box in the UI.
+      packing_group_name:
+        box.packing_group_name?.trim() || boxGroupMap.get(box.id) || null,
 
       box_info_values: boxInfoValues,
     };
@@ -2442,7 +2467,7 @@ line-height: 1.2;
 
 .project-value{
 color: #111827;
-  font-size: 11.5pt;
+  font-size: 8.5pt;
   line-height: 1.35;
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -7247,7 +7272,7 @@ padding-top:25px;
 
 .project-value{
 color: #111827;
-  font-size: 11.5pt;
+  font-size: 8.5pt;
   line-height: 1.35;
   font-weight: 700;
   overflow-wrap: anywhere;
