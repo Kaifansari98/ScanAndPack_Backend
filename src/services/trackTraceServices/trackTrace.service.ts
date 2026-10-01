@@ -10179,7 +10179,7 @@ export const getBoxItemsService = async (
 
         actual_in_at: mapping.actual_in_at,
 
-        site_in_at: mapping.site_in_at,
+        site_in_at: mapping.site_in_at || box.site_in_at,
 
         qty,
 
@@ -10193,6 +10193,8 @@ export const getBoxItemsService = async (
 
         site_in_by: mapping.site_in_by
           ? (opMap.get(mapping.site_in_by) ?? null)
+          : box.site_in_by && box.siteInByUser
+          ? box.siteInByUser.user_name
           : null,
 
         inOperator: mapping.in_operator
@@ -10208,6 +10210,11 @@ export const getBoxItemsService = async (
               id: mapping.site_in_by,
 
               name: opMap.get(mapping.site_in_by) ?? "",
+            }
+          : box.site_in_by && box.siteInByUser
+          ? {
+              id: box.site_in_by,
+              name: box.siteInByUser.user_name,
             }
           : null,
 
