@@ -2720,6 +2720,7 @@ model CompanyVendorsMaster {
 }
 
 model OrderLoginDetails {
+  outsourcedMaterials                          ProductsRequiredForProduction[]
   id                                           Int                                            @id @default(autoincrement())
   lead_id                                      Int
   account_id                                   Int
@@ -5630,6 +5631,10 @@ model BoxItemDeleteLog {
 }
 
 model ProductsRequiredForProduction {
+  order_login_id  Int?
+  orderLogin      OrderLoginDetails? @relation(fields: [order_login_id], references: [id], onDelete: SetNull)
+
+  @@index([order_login_id])
   id              Int      @id @default(autoincrement())
   vendor_id       Int
   franchise_id    Int

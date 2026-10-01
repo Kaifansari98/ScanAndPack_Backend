@@ -736,6 +736,7 @@ export class OrderLoginService {
         created_at: "asc",
       },
       include: {
+        outsourcedMaterials: { select: { id: true } },
         companyVendor: {
           select: {
             id: true,
@@ -1109,6 +1110,7 @@ export class OrderLoginService {
     files: { originalName: string; sysName: string }[],
     instanceId?: number | null,
     materials?: { rows: any[]; replace: boolean },
+    documentsOnly = false,
   ) {
     if (!vendorId || !leadId || !userId) {
       const error = new Error("vendorId, leadId, and userId are required");
@@ -1148,10 +1150,19 @@ export class OrderLoginService {
       }
       const uploadedDocs = [];
 
-      // ✅ Step 1: Upload Client Approval Screenshots
-      const ProductionDocType = await tx.documentTypeMaster.findFirst({
-        where: { vendor_id: vendorId, tag: "Type 14" },
+      // Keep supporting documents separate from the material spreadsheets.
+      if (documentsOnly) {
+        await tx.$queryRaw`SELECT id FROM "VendorMaster" WHERE id = ${vendorId} FOR UPDATE`;
+      }
+      const documentTag = documentsOnly ? "order_login_production_documents" : "Type 14";
+      let ProductionDocType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: documentTag },
       });
+      if (!ProductionDocType && documentsOnly) {
+        ProductionDocType = await tx.documentTypeMaster.create({
+          data: { vendor_id: vendorId, tag: documentTag, type: "Production Files", stage: "order-login" },
+        });
+      }
       if (!ProductionDocType) throw new Error("Doc Type (Type 14) not found");
 
       for (const file of files) {
