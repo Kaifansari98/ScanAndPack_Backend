@@ -970,11 +970,11 @@ export const updateScannedItem = async (
       : project_id
         ? { project_id }
         : {};
-    //const normalizedUniqueCode = unique_code.trim();
-    const normalizedUniqueCode = unique_code.trim().toUpperCase();
+    const normalizedUniqueCode = unique_code.trim();
     const barcodeRelationFilter = {
       unique_code: {
         equals: normalizedUniqueCode,
+        mode: "insensitive" as Prisma.QueryMode,
       },
     };
 
