@@ -279,6 +279,7 @@ export const markBoxAsPacked = async (req: Request, res: Response) => {
   try {
     const {
       user_id,
+      location_name,
     } =
       req.body;
 
@@ -287,7 +288,13 @@ export const markBoxAsPacked = async (req: Request, res: Response) => {
     const boxId = Number(req.params.boxId);
     if (isNaN(boxId)) return res.status(400).json({ error: 'Invalid boxId' });
 
-    const updatedBox = await updateBoxStatus(boxId, BoxStatus.packed,user_id);
+    const updatedBox = await updateBoxStatus(
+      boxId,
+      BoxStatus.packed,
+      Number(user_id),
+      undefined,
+      typeof location_name === "string" ? location_name : undefined,
+    );
     res.status(200).json(updatedBox);
   } catch (err: any) {
     res.status(400).json({ error: err.message });

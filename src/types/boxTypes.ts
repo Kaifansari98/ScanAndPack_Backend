@@ -9,6 +9,7 @@ export type CreateBoxInput = {
   box_name: string;
   box_status: BoxStatus;
   created_by: number;
+  is_auto_created?: boolean;
   box_info_values?: BoxInfoValueInput[];
 };
 

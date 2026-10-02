@@ -6559,7 +6559,13 @@ export const markBoxFactoryOutService = async (
             select: {
               id: true,
               qty: true,
-              cut_list: { select: { group_name: true } },
+              cut_list: {
+                select: {
+                  group_name: true,
+                  include_in_packing: true,
+                  scan_pack_validate: true,
+                },
+              },
               projectLocationProductQuantity: {
                 select: { id: true, location_name: true, group_name: true },
               },
@@ -6691,6 +6697,23 @@ export const markBoxFactoryOutService = async (
           );
         }
 
+        const hasOnlyScanPackDisabledItems =
+          box.cutListMachineMapping.length > 0 &&
+          box.cutListMachineMapping.every(
+            (mapping) =>
+              mapping.cut_list.include_in_packing === true &&
+              mapping.cut_list.scan_pack_validate === false,
+          );
+        const isAutomaticHardwareBox = hasOnlyScanPackDisabledItems;
+
+        let totalQuota = 0;
+        let totalDispatched = 0;
+        let boxAddsProductSetTotal = 0;
+
+        // Automatically created hardware boxes are not product-quantity boxes.
+        // Keep location validation above, but do not consume or validate the
+        // product-group quantity quota for these boxes.
+        if (!isAutomaticHardwareBox) {
         const cutListRows = await tx.cutList.findMany({
           where: { project_id, vendor_id },
           select: { group_name: true, qty: true },
@@ -6752,9 +6775,6 @@ export const markBoxFactoryOutService = async (
           dispatchedProductSetsByGroup.set(groupName, productSets);
         }
 
-        let totalQuota = 0;
-        let totalDispatched = 0;
-        let boxAddsProductSetTotal = 0;
         for (const [groupName, quota] of targetQuotaByGroup) {
           const dispatchedProductSets = dispatchedProductSetsByGroup.get(groupName) ?? new Set<string>();
           const boxProductSetKey = `${groupName}::${box.product_set_no ?? `box:${box.id}`}`;
@@ -6774,6 +6794,7 @@ export const markBoxFactoryOutService = async (
               `${selectedLocation} is full (${dispatched} of ${quota} products dispatched). This box cannot be assigned there.`,
             );
           }
+        }
         }
 
         const mappingsToBind = (scopedProductSetMappings.length
@@ -6801,9 +6822,13 @@ export const markBoxFactoryOutService = async (
             });
           }
 
-          dispatchMessage = `Box assigned to ${selectedLocation}. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+          dispatchMessage = isAutomaticHardwareBox
+            ? `Hardware box assigned to ${selectedLocation} and dispatched successfully.`
+            : `Box assigned to ${selectedLocation}. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
         } else {
-          dispatchMessage = `Box dispatched. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+          dispatchMessage = isAutomaticHardwareBox
+            ? `Hardware box dispatched to ${selectedLocation} successfully.`
+            : `Box dispatched. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
         }
       }
 
@@ -7219,6 +7244,7 @@ export const getProjectDetailService_old = async (
         project_status: true,
         track_trace_status: true,
         packing_type: true,
+        is_multi_location: true,
         lead_id: true,
 
         details: {
@@ -7977,6 +8003,7 @@ export const getProjectDetailService = async (
         project_status: true,
         track_trace_status: true,
         packing_type: true,
+        is_multi_location: true,
         lead_id: true,
 
         details: {
@@ -9831,6 +9858,7 @@ export const getProjectDetailService = async (
         project_status: project.project_status,
         track_trace_status: project.track_trace_status,
         packing_type: project.packing_type,
+        is_multi_location: project.is_multi_location,
         lead_id: project.lead_id,
         lead: lead
           ? {
