@@ -1373,11 +1373,52 @@ export const updateScannedItem = async (
         );
       }
 
-      if (locationAllocation.qty <= 0) {
-        return validationResponse(
+      let allocatedProductQty = locationAllocation.qty;
+
+      // Keep packing consistent with dispatch: a zero quantity means that
+      // this location may use the remaining group quota. The quota is only
+      // used for validation here; packing must not write it into the location
+      // row because the operator may assign the product to another location.
+      if (allocatedProductQty <= 0) {
+        const [groupQuantity, otherLocationRows] = await Promise.all([
+          prisma.cutList.aggregate({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              status: { equals: "active", mode: "insensitive" },
+              group_name: {
+                equals: productGroupName,
+                mode: "insensitive",
+              },
+            },
+            _min: { qty: true },
+          }),
+          prisma.projectLocationProductQuantity.findMany({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              group_name: {
+                equals: productGroupName,
+                mode: "insensitive",
+              },
+              id: { not: locationAllocation.id },
+            },
+            select: { qty: true },
+          }),
+        ]);
+        const totalProductQty = Math.max(0, Number(groupQuantity._min.qty || 0));
+        const otherLocationsQty = otherLocationRows.reduce(
+          (total, row) => total + Math.max(0, Number(row.qty || 0)),
           0,
-          `No quantity is allocated to Product Group "${productGroupName}" at location "${locationAllocation.location_name}"`,
         );
+        allocatedProductQty = Math.max(0, totalProductQty - otherLocationsQty);
+
+        if (allocatedProductQty <= 0) {
+          return validationResponse(
+            0,
+            `No unassigned quantity remains for Product Group "${productGroupName}"`,
+          );
+        }
       }
 
       const scannedAtLocation = await prisma.cutListMachineMapping.count({
@@ -1395,19 +1436,19 @@ export const updateScannedItem = async (
         1,
         Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
       );
-      const maximumItemQty = locationAllocation.qty * qtyPerBox;
+      const maximumItemQty = allocatedProductQty * qtyPerBox;
 
       if (scannedAtLocation >= maximumItemQty) {
         return validationResponse(
           0,
-          `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${locationAllocation.qty} at location "${locationAllocation.location_name}"`,
+          `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${allocatedProductQty} at location "${locationAllocation.location_name}"`,
         );
       }
 
       selectedLocationAllocation = {
         id: locationAllocation.id,
         locationName: locationAllocation.location_name,
-        allocatedProductQty: locationAllocation.qty,
+        allocatedProductQty,
         maximumItemQty,
       };
     }
@@ -1730,7 +1771,6 @@ export const updateScannedItem = async (
           where: {
             project_id: eligibleMapping.project_id,
             vendor_id,
-            machine_id,
             expected_in: true,
             actual_in_at: {
               not: null,
@@ -1741,40 +1781,45 @@ export const updateScannedItem = async (
             cut_list_id: {
               in: groupCutListIds,
             },
-            ...(selectedLocationAllocation
-              ? {
-                  project_location_product_quantity_id:
-                    selectedLocationAllocation.id,
-                }
-              : {
-                  project_location_product_quantity_id: null,
-                }),
           },
           select: {
             cut_list_id: true,
             in_operator: true,
+            project_location_product_quantity_id: true,
             qty: true,
           },
         });
 
-        const quantitiesByOperator = new Map<number, Map<number, number>>();
+        // A product group can be split across locations. Reserve boxes per
+        // operator and location, then enforce each CutList item's quantity
+        // globally so one location cannot consume another location's group
+        // item quota.
+        const quantitiesByOperatorAndLocation = new Map<
+          string,
+          Map<number, number>
+        >();
 
         for (const mapping of scannedGroupMappings) {
           if (!mapping.in_operator) continue;
 
+          const operatorLocationKey = `${mapping.in_operator}:${mapping.project_location_product_quantity_id ?? 0}`;
           const operatorQuantities =
-            quantitiesByOperator.get(mapping.in_operator) ?? new Map();
+            quantitiesByOperatorAndLocation.get(operatorLocationKey) ??
+            new Map();
           operatorQuantities.set(
             mapping.cut_list_id,
             (operatorQuantities.get(mapping.cut_list_id) ?? 0) +
               Math.max(1, Number(mapping.qty || 1)),
           );
-          quantitiesByOperator.set(mapping.in_operator, operatorQuantities);
+          quantitiesByOperatorAndLocation.set(
+            operatorLocationKey,
+            operatorQuantities,
+          );
         }
 
         const reservedQuantities = new Map<number, number>();
 
-        for (const operatorQuantities of quantitiesByOperator.values()) {
+        for (const operatorQuantities of quantitiesByOperatorAndLocation.values()) {
           const requiredBoxCount = Math.max(
             ...automaticPackingDefinition.packingGroupItems.map((item) =>
               Math.ceil(
@@ -1795,9 +1840,9 @@ export const updateScannedItem = async (
         }
 
         for (const item of automaticPackingDefinition.packingGroupItems) {
-          const availableQty = selectedLocationAllocation
-            ? selectedLocationAllocation.allocatedProductQty * item.qtyPerBox
-            : item.availableQty;
+          // CutList quantity is the total available quantity across all
+          // locations. Location allocations are quotas, not additional stock.
+          const availableQty = item.availableQty;
           const reservedQty = reservedQuantities.get(item.cutListId) ?? 0;
 
           if (reservedQty > availableQty) {
@@ -6610,6 +6655,13 @@ export const markBoxFactoryOutService = async (
               .filter((location): location is string => Boolean(location)),
           ),
         );
+        const boxLocationIds = Array.from(
+          new Set(
+            box.cutListMachineMapping
+              .map((mapping) => mapping.projectLocationProductQuantity?.id)
+              .filter((id): id is number => id != null),
+          ),
+        );
 
         const boxGroupNames = Array.from(
           new Set(
@@ -6657,6 +6709,13 @@ export const markBoxFactoryOutService = async (
                         },
                       }
                     : {}),
+                  ...(boxLocationIds.length > 0
+                    ? {
+                        project_location_product_quantity_id: {
+                          in: boxLocationIds,
+                        },
+                      }
+                    : {}),
                 },
                 select: {
                   id: true,
@@ -6676,9 +6735,12 @@ export const markBoxFactoryOutService = async (
           const g = mapping.cut_list.group_name?.trim().toLowerCase();
           return g ? normalizedBoxGroupSet.has(g) : true;
         });
-        const locationScope = scopedProductSetMappings.length
-          ? scopedProductSetMappings
-          : box.cutListMachineMapping;
+        // Dispatch must validate the location assigned to this box itself.
+        // Product-set numbers repeat independently for Pune, Goa, etc., so
+        // using every box in the product set can incorrectly mix locations.
+        const locationScope = box.cutListMachineMapping.length
+          ? box.cutListMachineMapping
+          : scopedProductSetMappings;
         const allExistingLocations = Array.from(
           new Set(
             locationScope
@@ -6797,10 +6859,12 @@ export const markBoxFactoryOutService = async (
         }
         }
 
-        const mappingsToBind = (scopedProductSetMappings.length
-          ? scopedProductSetMappings
-          : box.cutListMachineMapping
-        ).filter((mapping) => !mapping.projectLocationProductQuantity);
+        // If packing did not select a location, dispatch assigns the scanned
+        // box now. Bind only this box's mappings; product-set numbers repeat
+        // across locations and must not pull mappings from other boxes.
+        const mappingsToBind = box.cutListMachineMapping.filter(
+          (mapping) => !mapping.projectLocationProductQuantity,
+        );
 
         if (mappingsToBind.length > 0) {
           for (const mapping of mappingsToBind) {
@@ -6824,11 +6888,11 @@ export const markBoxFactoryOutService = async (
 
           dispatchMessage = isAutomaticHardwareBox
             ? `Hardware box assigned to ${selectedLocation} and dispatched successfully.`
-            : `Box assigned to ${selectedLocation}. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+            : `Box is dispatched to ${selectedLocation}.`;
         } else {
           dispatchMessage = isAutomaticHardwareBox
             ? `Hardware box dispatched to ${selectedLocation} successfully.`
-            : `Box dispatched. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+            : `Box is dispatched to ${selectedLocation}.`;
         }
       }
 
@@ -6849,7 +6913,10 @@ export const markBoxFactoryOutService = async (
     return result;
   } catch (error) {
     console.error("Error in markBoxFactoryOutService:", error);
-    return validationResponse(0, "Failed to mark factory out");
+    return validationResponse(
+      0,
+      error instanceof Error ? error.message : "Failed to mark factory out",
+    );
   }
 };
 
