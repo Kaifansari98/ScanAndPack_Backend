@@ -326,6 +326,7 @@ export const VendorMasterScalarFieldEnum = {
   subdomain_url: 'subdomain_url',
   is_crm_enabled: 'is_crm_enabled',
   is_custom_doc_nomenclature_enabled: 'is_custom_doc_nomenclature_enabled',
+  is_miscellaneous_enabled: 'is_miscellaneous_enabled',
   handlesLargeScaleProjects: 'handlesLargeScaleProjects',
   is_email_noti_enabled: 'is_email_noti_enabled',
   is_in_app_noti_enabled: 'is_in_app_noti_enabled',
