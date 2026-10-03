@@ -27,6 +27,7 @@ export type AggregateProductsRequiredForProduction = {
 }
 
 export type ProductsRequiredForProductionAvgAggregateOutputType = {
+  order_login_id: number | null
   id: number | null
   vendor_id: number | null
   franchise_id: number | null
@@ -41,6 +42,7 @@ export type ProductsRequiredForProductionAvgAggregateOutputType = {
 }
 
 export type ProductsRequiredForProductionSumAggregateOutputType = {
+  order_login_id: number | null
   id: number | null
   vendor_id: number | null
   franchise_id: number | null
@@ -55,6 +57,7 @@ export type ProductsRequiredForProductionSumAggregateOutputType = {
 }
 
 export type ProductsRequiredForProductionMinAggregateOutputType = {
+  order_login_id: number | null
   id: number | null
   vendor_id: number | null
   franchise_id: number | null
@@ -75,6 +78,7 @@ export type ProductsRequiredForProductionMinAggregateOutputType = {
 }
 
 export type ProductsRequiredForProductionMaxAggregateOutputType = {
+  order_login_id: number | null
   id: number | null
   vendor_id: number | null
   franchise_id: number | null
@@ -95,6 +99,7 @@ export type ProductsRequiredForProductionMaxAggregateOutputType = {
 }
 
 export type ProductsRequiredForProductionCountAggregateOutputType = {
+  order_login_id: number
   id: number
   vendor_id: number
   franchise_id: number
@@ -117,6 +122,7 @@ export type ProductsRequiredForProductionCountAggregateOutputType = {
 
 
 export type ProductsRequiredForProductionAvgAggregateInputType = {
+  order_login_id?: true
   id?: true
   vendor_id?: true
   franchise_id?: true
@@ -131,6 +137,7 @@ export type ProductsRequiredForProductionAvgAggregateInputType = {
 }
 
 export type ProductsRequiredForProductionSumAggregateInputType = {
+  order_login_id?: true
   id?: true
   vendor_id?: true
   franchise_id?: true
@@ -145,6 +152,7 @@ export type ProductsRequiredForProductionSumAggregateInputType = {
 }
 
 export type ProductsRequiredForProductionMinAggregateInputType = {
+  order_login_id?: true
   id?: true
   vendor_id?: true
   franchise_id?: true
@@ -165,6 +173,7 @@ export type ProductsRequiredForProductionMinAggregateInputType = {
 }
 
 export type ProductsRequiredForProductionMaxAggregateInputType = {
+  order_login_id?: true
   id?: true
   vendor_id?: true
   franchise_id?: true
@@ -185,6 +194,7 @@ export type ProductsRequiredForProductionMaxAggregateInputType = {
 }
 
 export type ProductsRequiredForProductionCountAggregateInputType = {
+  order_login_id?: true
   id?: true
   vendor_id?: true
   franchise_id?: true
@@ -292,6 +302,7 @@ export type ProductsRequiredForProductionGroupByArgs<ExtArgs extends runtime.Typ
 }
 
 export type ProductsRequiredForProductionGroupByOutputType = {
+  order_login_id: number | null
   id: number
   vendor_id: number
   franchise_id: number
@@ -335,6 +346,7 @@ export type ProductsRequiredForProductionWhereInput = {
   AND?: Prisma.ProductsRequiredForProductionWhereInput | Prisma.ProductsRequiredForProductionWhereInput[]
   OR?: Prisma.ProductsRequiredForProductionWhereInput[]
   NOT?: Prisma.ProductsRequiredForProductionWhereInput | Prisma.ProductsRequiredForProductionWhereInput[]
+  order_login_id?: Prisma.IntNullableFilter<"ProductsRequiredForProduction"> | number | null
   id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   vendor_id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   franchise_id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
@@ -352,6 +364,7 @@ export type ProductsRequiredForProductionWhereInput = {
   issued_item_qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"ProductsRequiredForProduction"> | Date | string
   created_by?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
+  orderLogin?: Prisma.XOR<Prisma.OrderLoginDetailsNullableScalarRelationFilter, Prisma.OrderLoginDetailsWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   franchise?: Prisma.XOR<Prisma.FranchiseMasterScalarRelationFilter, Prisma.FranchiseMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -362,6 +375,7 @@ export type ProductsRequiredForProductionWhereInput = {
 }
 
 export type ProductsRequiredForProductionOrderByWithRelationInput = {
+  order_login_id?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -379,6 +393,7 @@ export type ProductsRequiredForProductionOrderByWithRelationInput = {
   issued_item_qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  orderLogin?: Prisma.OrderLoginDetailsOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
@@ -393,6 +408,7 @@ export type ProductsRequiredForProductionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ProductsRequiredForProductionWhereInput | Prisma.ProductsRequiredForProductionWhereInput[]
   OR?: Prisma.ProductsRequiredForProductionWhereInput[]
   NOT?: Prisma.ProductsRequiredForProductionWhereInput | Prisma.ProductsRequiredForProductionWhereInput[]
+  order_login_id?: Prisma.IntNullableFilter<"ProductsRequiredForProduction"> | number | null
   vendor_id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   franchise_id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   lead_id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
@@ -409,6 +425,7 @@ export type ProductsRequiredForProductionWhereUniqueInput = Prisma.AtLeast<{
   issued_item_qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"ProductsRequiredForProduction"> | Date | string
   created_by?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
+  orderLogin?: Prisma.XOR<Prisma.OrderLoginDetailsNullableScalarRelationFilter, Prisma.OrderLoginDetailsWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   franchise?: Prisma.XOR<Prisma.FranchiseMasterScalarRelationFilter, Prisma.FranchiseMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -419,6 +436,7 @@ export type ProductsRequiredForProductionWhereUniqueInput = Prisma.AtLeast<{
 }, "id">
 
 export type ProductsRequiredForProductionOrderByWithAggregationInput = {
+  order_login_id?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -447,6 +465,7 @@ export type ProductsRequiredForProductionScalarWhereWithAggregatesInput = {
   AND?: Prisma.ProductsRequiredForProductionScalarWhereWithAggregatesInput | Prisma.ProductsRequiredForProductionScalarWhereWithAggregatesInput[]
   OR?: Prisma.ProductsRequiredForProductionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProductsRequiredForProductionScalarWhereWithAggregatesInput | Prisma.ProductsRequiredForProductionScalarWhereWithAggregatesInput[]
+  order_login_id?: Prisma.IntNullableWithAggregatesFilter<"ProductsRequiredForProduction"> | number | null
   id?: Prisma.IntWithAggregatesFilter<"ProductsRequiredForProduction"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProductsRequiredForProduction"> | number
   franchise_id?: Prisma.IntWithAggregatesFilter<"ProductsRequiredForProduction"> | number
@@ -476,6 +495,7 @@ export type ProductsRequiredForProductionCreateInput = {
   frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -486,6 +506,7 @@ export type ProductsRequiredForProductionCreateInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -515,6 +536,7 @@ export type ProductsRequiredForProductionUpdateInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -525,6 +547,7 @@ export type ProductsRequiredForProductionUpdateInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -545,6 +568,7 @@ export type ProductsRequiredForProductionUncheckedUpdateInput = {
 }
 
 export type ProductsRequiredForProductionCreateManyInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -577,6 +601,7 @@ export type ProductsRequiredForProductionUpdateManyMutationInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -607,6 +632,7 @@ export type ProductsRequiredForProductionOrderByRelationAggregateInput = {
 }
 
 export type ProductsRequiredForProductionCountOrderByAggregateInput = {
+  order_login_id?: Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -627,6 +653,7 @@ export type ProductsRequiredForProductionCountOrderByAggregateInput = {
 }
 
 export type ProductsRequiredForProductionAvgOrderByAggregateInput = {
+  order_login_id?: Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -641,6 +668,7 @@ export type ProductsRequiredForProductionAvgOrderByAggregateInput = {
 }
 
 export type ProductsRequiredForProductionMaxOrderByAggregateInput = {
+  order_login_id?: Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -661,6 +689,7 @@ export type ProductsRequiredForProductionMaxOrderByAggregateInput = {
 }
 
 export type ProductsRequiredForProductionMinOrderByAggregateInput = {
+  order_login_id?: Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -681,6 +710,7 @@ export type ProductsRequiredForProductionMinOrderByAggregateInput = {
 }
 
 export type ProductsRequiredForProductionSumOrderByAggregateInput = {
+  order_login_id?: Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -904,6 +934,48 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNeste
   deleteMany?: Prisma.ProductsRequiredForProductionScalarWhereInput | Prisma.ProductsRequiredForProductionScalarWhereInput[]
 }
 
+export type ProductsRequiredForProductionCreateNestedManyWithoutOrderLoginInput = {
+  create?: Prisma.XOR<Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput> | Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput[] | Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput[]
+  connectOrCreate?: Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput[]
+  createMany?: Prisma.ProductsRequiredForProductionCreateManyOrderLoginInputEnvelope
+  connect?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+}
+
+export type ProductsRequiredForProductionUncheckedCreateNestedManyWithoutOrderLoginInput = {
+  create?: Prisma.XOR<Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput> | Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput[] | Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput[]
+  connectOrCreate?: Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput[]
+  createMany?: Prisma.ProductsRequiredForProductionCreateManyOrderLoginInputEnvelope
+  connect?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+}
+
+export type ProductsRequiredForProductionUpdateManyWithoutOrderLoginNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput> | Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput[] | Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput[]
+  connectOrCreate?: Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput[]
+  upsert?: Prisma.ProductsRequiredForProductionUpsertWithWhereUniqueWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionUpsertWithWhereUniqueWithoutOrderLoginInput[]
+  createMany?: Prisma.ProductsRequiredForProductionCreateManyOrderLoginInputEnvelope
+  set?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  disconnect?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  delete?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  connect?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  update?: Prisma.ProductsRequiredForProductionUpdateWithWhereUniqueWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionUpdateWithWhereUniqueWithoutOrderLoginInput[]
+  updateMany?: Prisma.ProductsRequiredForProductionUpdateManyWithWhereWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionUpdateManyWithWhereWithoutOrderLoginInput[]
+  deleteMany?: Prisma.ProductsRequiredForProductionScalarWhereInput | Prisma.ProductsRequiredForProductionScalarWhereInput[]
+}
+
+export type ProductsRequiredForProductionUncheckedUpdateManyWithoutOrderLoginNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput> | Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput[] | Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput[]
+  connectOrCreate?: Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput[]
+  upsert?: Prisma.ProductsRequiredForProductionUpsertWithWhereUniqueWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionUpsertWithWhereUniqueWithoutOrderLoginInput[]
+  createMany?: Prisma.ProductsRequiredForProductionCreateManyOrderLoginInputEnvelope
+  set?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  disconnect?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  delete?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  connect?: Prisma.ProductsRequiredForProductionWhereUniqueInput | Prisma.ProductsRequiredForProductionWhereUniqueInput[]
+  update?: Prisma.ProductsRequiredForProductionUpdateWithWhereUniqueWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionUpdateWithWhereUniqueWithoutOrderLoginInput[]
+  updateMany?: Prisma.ProductsRequiredForProductionUpdateManyWithWhereWithoutOrderLoginInput | Prisma.ProductsRequiredForProductionUpdateManyWithWhereWithoutOrderLoginInput[]
+  deleteMany?: Prisma.ProductsRequiredForProductionScalarWhereInput | Prisma.ProductsRequiredForProductionScalarWhereInput[]
+}
+
 export type ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput = {
   create?: Prisma.XOR<Prisma.ProductsRequiredForProductionCreateWithoutFranchiseInput, Prisma.ProductsRequiredForProductionUncheckedCreateWithoutFranchiseInput> | Prisma.ProductsRequiredForProductionCreateWithoutFranchiseInput[] | Prisma.ProductsRequiredForProductionUncheckedCreateWithoutFranchiseInput[]
   connectOrCreate?: Prisma.ProductsRequiredForProductionCreateOrConnectWithoutFranchiseInput | Prisma.ProductsRequiredForProductionCreateOrConnectWithoutFranchiseInput[]
@@ -998,6 +1070,7 @@ export type ProductsRequiredForProductionCreateWithoutVendorInput = {
   frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1007,6 +1080,7 @@ export type ProductsRequiredForProductionCreateWithoutVendorInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateWithoutVendorInput = {
+  order_login_id?: number | null
   id?: number
   franchise_id: number
   lead_id: number
@@ -1055,6 +1129,7 @@ export type ProductsRequiredForProductionScalarWhereInput = {
   AND?: Prisma.ProductsRequiredForProductionScalarWhereInput | Prisma.ProductsRequiredForProductionScalarWhereInput[]
   OR?: Prisma.ProductsRequiredForProductionScalarWhereInput[]
   NOT?: Prisma.ProductsRequiredForProductionScalarWhereInput | Prisma.ProductsRequiredForProductionScalarWhereInput[]
+  order_login_id?: Prisma.IntNullableFilter<"ProductsRequiredForProduction"> | number | null
   id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   vendor_id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   franchise_id?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
@@ -1084,6 +1159,7 @@ export type ProductsRequiredForProductionCreateWithoutCreatedByInput = {
   frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1093,6 +1169,7 @@ export type ProductsRequiredForProductionCreateWithoutCreatedByInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateWithoutCreatedByInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1147,6 +1224,7 @@ export type ProductsRequiredForProductionCreateWithoutLeadInput = {
   frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1156,6 +1234,7 @@ export type ProductsRequiredForProductionCreateWithoutLeadInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateWithoutLeadInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1210,6 +1289,7 @@ export type ProductsRequiredForProductionCreateWithoutProductTypeInput = {
   frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1219,6 +1299,7 @@ export type ProductsRequiredForProductionCreateWithoutProductTypeInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateWithoutProductTypeInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1273,6 +1354,7 @@ export type ProductsRequiredForProductionCreateWithoutInstanceInput = {
   frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1282,6 +1364,7 @@ export type ProductsRequiredForProductionCreateWithoutInstanceInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateWithoutInstanceInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1326,7 +1409,7 @@ export type ProductsRequiredForProductionUpdateManyWithWhereWithoutInstanceInput
   data: Prisma.XOR<Prisma.ProductsRequiredForProductionUpdateManyMutationInput, Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceInput>
 }
 
-export type ProductsRequiredForProductionCreateWithoutFranchiseInput = {
+export type ProductsRequiredForProductionCreateWithoutOrderLoginInput = {
   article_code: string
   type: string
   category: string
@@ -1337,6 +1420,72 @@ export type ProductsRequiredForProductionCreateWithoutFranchiseInput = {
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
+  franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
+  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductsRequiredForProductionInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutProductsRequiredForProductionInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutProductsRequiredForProductionInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutProductsRequiredForProductionInput
+}
+
+export type ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput = {
+  id?: number
+  vendor_id: number
+  franchise_id: number
+  lead_id: number
+  product_type_id?: number | null
+  instance_id?: number | null
+  product_id: number
+  article_code: string
+  type: string
+  category: string
+  qty: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit: string
+  name: string
+  frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string
+  created_by: number
+}
+
+export type ProductsRequiredForProductionCreateOrConnectWithoutOrderLoginInput = {
+  where: Prisma.ProductsRequiredForProductionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput>
+}
+
+export type ProductsRequiredForProductionCreateManyOrderLoginInputEnvelope = {
+  data: Prisma.ProductsRequiredForProductionCreateManyOrderLoginInput | Prisma.ProductsRequiredForProductionCreateManyOrderLoginInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProductsRequiredForProductionUpsertWithWhereUniqueWithoutOrderLoginInput = {
+  where: Prisma.ProductsRequiredForProductionWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProductsRequiredForProductionUpdateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedUpdateWithoutOrderLoginInput>
+  create: Prisma.XOR<Prisma.ProductsRequiredForProductionCreateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedCreateWithoutOrderLoginInput>
+}
+
+export type ProductsRequiredForProductionUpdateWithWhereUniqueWithoutOrderLoginInput = {
+  where: Prisma.ProductsRequiredForProductionWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProductsRequiredForProductionUpdateWithoutOrderLoginInput, Prisma.ProductsRequiredForProductionUncheckedUpdateWithoutOrderLoginInput>
+}
+
+export type ProductsRequiredForProductionUpdateManyWithWhereWithoutOrderLoginInput = {
+  where: Prisma.ProductsRequiredForProductionScalarWhereInput
+  data: Prisma.XOR<Prisma.ProductsRequiredForProductionUpdateManyMutationInput, Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutOrderLoginInput>
+}
+
+export type ProductsRequiredForProductionCreateWithoutFranchiseInput = {
+  article_code: string
+  type: string
+  category: string
+  qty: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit: string
+  name: string
+  frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1345,6 +1494,7 @@ export type ProductsRequiredForProductionCreateWithoutFranchiseInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateWithoutFranchiseInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   lead_id: number
@@ -1399,6 +1549,7 @@ export type ProductsRequiredForProductionCreateWithoutProductInput = {
   frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  orderLogin?: Prisma.OrderLoginDetailsCreateNestedOneWithoutOutsourcedMaterialsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1408,6 +1559,7 @@ export type ProductsRequiredForProductionCreateWithoutProductInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedCreateWithoutProductInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1453,6 +1605,7 @@ export type ProductsRequiredForProductionUpdateManyWithWhereWithoutProductInput 
 }
 
 export type ProductsRequiredForProductionCreateManyVendorInput = {
+  order_login_id?: number | null
   id?: number
   franchise_id: number
   lead_id: number
@@ -1481,6 +1634,7 @@ export type ProductsRequiredForProductionUpdateWithoutVendorInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductsRequiredForProductionNestedInput
@@ -1490,6 +1644,7 @@ export type ProductsRequiredForProductionUpdateWithoutVendorInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateWithoutVendorInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1509,6 +1664,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutVendorInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1528,6 +1684,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorInput =
 }
 
 export type ProductsRequiredForProductionCreateManyCreatedByInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1556,6 +1713,7 @@ export type ProductsRequiredForProductionUpdateWithoutCreatedByInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1565,6 +1723,7 @@ export type ProductsRequiredForProductionUpdateWithoutCreatedByInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateWithoutCreatedByInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1584,6 +1743,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutCreatedByInput = 
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1603,6 +1763,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByInpu
 }
 
 export type ProductsRequiredForProductionCreateManyLeadInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1631,6 +1792,7 @@ export type ProductsRequiredForProductionUpdateWithoutLeadInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductsRequiredForProductionNestedInput
@@ -1640,6 +1802,7 @@ export type ProductsRequiredForProductionUpdateWithoutLeadInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateWithoutLeadInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1659,6 +1822,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutLeadInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1678,6 +1842,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadInput = {
 }
 
 export type ProductsRequiredForProductionCreateManyProductTypeInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1706,6 +1871,7 @@ export type ProductsRequiredForProductionUpdateWithoutProductTypeInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1715,6 +1881,7 @@ export type ProductsRequiredForProductionUpdateWithoutProductTypeInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateWithoutProductTypeInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1734,6 +1901,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutProductTypeInput 
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1753,6 +1921,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeIn
 }
 
 export type ProductsRequiredForProductionCreateManyInstanceInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1781,6 +1950,7 @@ export type ProductsRequiredForProductionUpdateWithoutInstanceInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1790,6 +1960,7 @@ export type ProductsRequiredForProductionUpdateWithoutInstanceInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateWithoutInstanceInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1809,6 +1980,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutInstanceInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1827,7 +1999,87 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceInput
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
+export type ProductsRequiredForProductionCreateManyOrderLoginInput = {
+  id?: number
+  vendor_id: number
+  franchise_id: number
+  lead_id: number
+  product_type_id?: number | null
+  instance_id?: number | null
+  product_id: number
+  article_code: string
+  type: string
+  category: string
+  qty: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit: string
+  name: string
+  frozen_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string
+  created_by: number
+}
+
+export type ProductsRequiredForProductionUpdateWithoutOrderLoginInput = {
+  article_code?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductsRequiredForProductionNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutProductsRequiredForProductionNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
+}
+
+export type ProductsRequiredForProductionUncheckedUpdateWithoutOrderLoginInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type ProductsRequiredForProductionUncheckedUpdateManyWithoutOrderLoginInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 export type ProductsRequiredForProductionCreateManyFranchiseInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   lead_id: number
@@ -1856,6 +2108,7 @@ export type ProductsRequiredForProductionUpdateWithoutFranchiseInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductsRequiredForProductionNestedInput
@@ -1865,6 +2118,7 @@ export type ProductsRequiredForProductionUpdateWithoutFranchiseInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateWithoutFranchiseInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1884,6 +2138,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutFranchiseInput = 
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1903,6 +2158,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseInpu
 }
 
 export type ProductsRequiredForProductionCreateManyProductInput = {
+  order_login_id?: number | null
   id?: number
   vendor_id: number
   franchise_id: number
@@ -1931,6 +2187,7 @@ export type ProductsRequiredForProductionUpdateWithoutProductInput = {
   frozen_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orderLogin?: Prisma.OrderLoginDetailsUpdateOneWithoutOutsourcedMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1940,6 +2197,7 @@ export type ProductsRequiredForProductionUpdateWithoutProductInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateWithoutProductInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1959,6 +2217,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutProductInput = {
 }
 
 export type ProductsRequiredForProductionUncheckedUpdateManyWithoutProductInput = {
+  order_login_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1980,6 +2239,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutProductInput 
 
 
 export type ProductsRequiredForProductionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  order_login_id?: boolean
   id?: boolean
   vendor_id?: boolean
   franchise_id?: boolean
@@ -1997,6 +2257,7 @@ export type ProductsRequiredForProductionSelect<ExtArgs extends runtime.Types.Ex
   issued_item_qty?: boolean
   created_at?: boolean
   created_by?: boolean
+  orderLogin?: boolean | Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2007,6 +2268,7 @@ export type ProductsRequiredForProductionSelect<ExtArgs extends runtime.Types.Ex
 }, ExtArgs["result"]["productsRequiredForProduction"]>
 
 export type ProductsRequiredForProductionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  order_login_id?: boolean
   id?: boolean
   vendor_id?: boolean
   franchise_id?: boolean
@@ -2024,6 +2286,7 @@ export type ProductsRequiredForProductionSelectCreateManyAndReturn<ExtArgs exten
   issued_item_qty?: boolean
   created_at?: boolean
   created_by?: boolean
+  orderLogin?: boolean | Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2034,6 +2297,7 @@ export type ProductsRequiredForProductionSelectCreateManyAndReturn<ExtArgs exten
 }, ExtArgs["result"]["productsRequiredForProduction"]>
 
 export type ProductsRequiredForProductionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  order_login_id?: boolean
   id?: boolean
   vendor_id?: boolean
   franchise_id?: boolean
@@ -2051,6 +2315,7 @@ export type ProductsRequiredForProductionSelectUpdateManyAndReturn<ExtArgs exten
   issued_item_qty?: boolean
   created_at?: boolean
   created_by?: boolean
+  orderLogin?: boolean | Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2061,6 +2326,7 @@ export type ProductsRequiredForProductionSelectUpdateManyAndReturn<ExtArgs exten
 }, ExtArgs["result"]["productsRequiredForProduction"]>
 
 export type ProductsRequiredForProductionSelectScalar = {
+  order_login_id?: boolean
   id?: boolean
   vendor_id?: boolean
   franchise_id?: boolean
@@ -2080,8 +2346,9 @@ export type ProductsRequiredForProductionSelectScalar = {
   created_by?: boolean
 }
 
-export type ProductsRequiredForProductionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_id" | "lead_id" | "product_type_id" | "instance_id" | "product_id" | "article_code" | "type" | "category" | "qty" | "unit" | "name" | "frozen_item_qty" | "issued_item_qty" | "created_at" | "created_by", ExtArgs["result"]["productsRequiredForProduction"]>
+export type ProductsRequiredForProductionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"order_login_id" | "id" | "vendor_id" | "franchise_id" | "lead_id" | "product_type_id" | "instance_id" | "product_id" | "article_code" | "type" | "category" | "qty" | "unit" | "name" | "frozen_item_qty" | "issued_item_qty" | "created_at" | "created_by", ExtArgs["result"]["productsRequiredForProduction"]>
 export type ProductsRequiredForProductionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orderLogin?: boolean | Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2091,6 +2358,7 @@ export type ProductsRequiredForProductionInclude<ExtArgs extends runtime.Types.E
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 export type ProductsRequiredForProductionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orderLogin?: boolean | Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2100,6 +2368,7 @@ export type ProductsRequiredForProductionIncludeCreateManyAndReturn<ExtArgs exte
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 export type ProductsRequiredForProductionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orderLogin?: boolean | Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2112,6 +2381,7 @@ export type ProductsRequiredForProductionIncludeUpdateManyAndReturn<ExtArgs exte
 export type $ProductsRequiredForProductionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductsRequiredForProduction"
   objects: {
+    orderLogin: Prisma.$OrderLoginDetailsPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     franchise: Prisma.$FranchiseMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
@@ -2121,6 +2391,7 @@ export type $ProductsRequiredForProductionPayload<ExtArgs extends runtime.Types.
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    order_login_id: number | null
     id: number
     vendor_id: number
     franchise_id: number
@@ -2221,8 +2492,8 @@ export interface ProductsRequiredForProductionDelegate<ExtArgs extends runtime.T
    * // Get first 10 ProductsRequiredForProductions
    * const productsRequiredForProductions = await prisma.productsRequiredForProduction.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const productsRequiredForProductionWithIdOnly = await prisma.productsRequiredForProduction.findMany({ select: { id: true } })
+   * // Only select the `order_login_id`
+   * const productsRequiredForProductionWithOrder_login_idOnly = await prisma.productsRequiredForProduction.findMany({ select: { order_login_id: true } })
    * 
    */
   findMany<T extends ProductsRequiredForProductionFindManyArgs>(args?: Prisma.SelectSubset<T, ProductsRequiredForProductionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsRequiredForProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2266,9 +2537,9 @@ export interface ProductsRequiredForProductionDelegate<ExtArgs extends runtime.T
    *   ]
    * })
    * 
-   * // Create many ProductsRequiredForProductions and only return the `id`
-   * const productsRequiredForProductionWithIdOnly = await prisma.productsRequiredForProduction.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many ProductsRequiredForProductions and only return the `order_login_id`
+   * const productsRequiredForProductionWithOrder_login_idOnly = await prisma.productsRequiredForProduction.createManyAndReturn({
+   *   select: { order_login_id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -2357,9 +2628,9 @@ export interface ProductsRequiredForProductionDelegate<ExtArgs extends runtime.T
    *   ]
    * })
    * 
-   * // Update zero or more ProductsRequiredForProductions and only return the `id`
-   * const productsRequiredForProductionWithIdOnly = await prisma.productsRequiredForProduction.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more ProductsRequiredForProductions and only return the `order_login_id`
+   * const productsRequiredForProductionWithOrder_login_idOnly = await prisma.productsRequiredForProduction.updateManyAndReturn({
+   *   select: { order_login_id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -2532,6 +2803,7 @@ readonly fields: ProductsRequiredForProductionFieldRefs;
  */
 export interface Prisma__ProductsRequiredForProductionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  orderLogin<T extends Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductsRequiredForProduction$orderLoginArgs<ExtArgs>>): Prisma.Prisma__OrderLoginDetailsClient<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   franchise<T extends Prisma.FranchiseMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -2568,6 +2840,7 @@ export interface Prisma__ProductsRequiredForProductionClient<T, Null = never, Ex
  * Fields of the ProductsRequiredForProduction model
  */
 export interface ProductsRequiredForProductionFieldRefs {
+  readonly order_login_id: Prisma.FieldRef<"ProductsRequiredForProduction", 'Int'>
   readonly id: Prisma.FieldRef<"ProductsRequiredForProduction", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"ProductsRequiredForProduction", 'Int'>
   readonly franchise_id: Prisma.FieldRef<"ProductsRequiredForProduction", 'Int'>
@@ -2983,6 +3256,25 @@ export type ProductsRequiredForProductionDeleteManyArgs<ExtArgs extends runtime.
    * Limit how many ProductsRequiredForProductions to delete.
    */
   limit?: number
+}
+
+/**
+ * ProductsRequiredForProduction.orderLogin
+ */
+export type ProductsRequiredForProduction$orderLoginArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderLoginDetails
+   */
+  select?: Prisma.OrderLoginDetailsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderLoginDetails
+   */
+  omit?: Prisma.OrderLoginDetailsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderLoginDetailsInclude<ExtArgs> | null
+  where?: Prisma.OrderLoginDetailsWhereInput
 }
 
 /**

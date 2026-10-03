@@ -5964,6 +5964,7 @@ export class BookingStageService {
       is_deleted: false,
       status_id: { in: statusIds },
       is_draft: true,
+      draft_in_open_leads: false,
     };
 
     if ((shouldIncludeFranchise || isCaller) && franchiseId) {

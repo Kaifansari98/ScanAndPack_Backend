@@ -16,6 +16,7 @@ export async function generateLeadCode(
   input: {
     franchiseId?: number;
     vendorId: number;
+    useOnlineLeadPrefix?: boolean;
   },
 ): Promise<string> {
   const vendor = await tx.vendorMaster.findUnique({
@@ -54,7 +55,9 @@ export async function generateLeadCode(
       })
     : null;
 
-  const isOnlineLeadFeatureEnabled = vendor.is_online_lead_feature_enabled === true;
+  const isOnlineLeadFeatureEnabled =
+    vendor.is_online_lead_feature_enabled === true &&
+    input.useOnlineLeadPrefix !== false;
   const basePrefix = vendor.vendor_code || "SH";
   const normalizedVendorCode = basePrefix.trim().toUpperCase();
   const normalizedFranchiseCode = franchise?.franchise_code?.trim().toUpperCase() || null;

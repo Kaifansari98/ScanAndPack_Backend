@@ -21363,6 +21363,7 @@ export type BoxItemDeleteLogScalarFieldEnum = (typeof BoxItemDeleteLogScalarFiel
 
 
 export const ProductsRequiredForProductionScalarFieldEnum = {
+  order_login_id: 'order_login_id',
   id: 'id',
   vendor_id: 'vendor_id',
   franchise_id: 'franchise_id',

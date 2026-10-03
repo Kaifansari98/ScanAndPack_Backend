@@ -150,3 +150,51 @@ export const getAllProductItemCodes = async (
 
     return itemCodes as ProductItemCodeType[];
 };
+
+export const updateProductItemCode = async (
+    id: number,
+    payload: ProductItemCodeInput
+) => {
+    const existing = await prisma.productItemCode.findFirst({
+        where: { id, vendor_id: payload.vendor_id },
+    });
+    if (!existing) return null;
+
+    const subProductStructure = await prisma.productSubStructure.findFirst({
+        where: {
+            id: payload.sub_product_structure_id,
+            vendor_id: payload.vendor_id,
+            status: "active",
+        },
+    });
+    if (!subProductStructure) {
+        throw new Error("Invalid sub_product_structure_id");
+    }
+    if (subProductStructure.product_structure_id !== payload.product_structure_id) {
+        throw new Error("product_structure_id does not match the selected sub_product_structure_id");
+    }
+
+    const duplicate = await prisma.productItemCode.findFirst({
+        where: {
+            id: { not: id },
+            vendor_id: payload.vendor_id,
+            item_code: payload.item_code,
+            description: payload.description,
+            specification: payload.specification,
+        },
+    });
+    if (duplicate) {
+        throw new Error("An item code with the same description and specification already exists for this vendor");
+    }
+
+    return prisma.productItemCode.update({
+        where: { id, vendor_id: payload.vendor_id },
+        data: {
+            item_code: payload.item_code,
+            product_structure_id: payload.product_structure_id,
+            sub_product_structure_id: payload.sub_product_structure_id,
+            description: payload.description,
+            specification: payload.specification,
+        },
+    });
+};
