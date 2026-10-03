@@ -5840,8 +5840,10 @@ model SiteSupervisorFranchiseMapping {
 
 model WixStudioDataCapture {
   id         Int      @id @default(autoincrement())
+  vendor_id  Int?
   payload    Json
   created_at DateTime @default(now())
 
+  @@index([vendor_id])
   @@map("wix_studio_data_capture")
 }

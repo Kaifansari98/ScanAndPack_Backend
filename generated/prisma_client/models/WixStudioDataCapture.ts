@@ -28,24 +28,29 @@ export type AggregateWixStudioDataCapture = {
 
 export type WixStudioDataCaptureAvgAggregateOutputType = {
   id: number | null
+  vendor_id: number | null
 }
 
 export type WixStudioDataCaptureSumAggregateOutputType = {
   id: number | null
+  vendor_id: number | null
 }
 
 export type WixStudioDataCaptureMinAggregateOutputType = {
   id: number | null
+  vendor_id: number | null
   created_at: Date | null
 }
 
 export type WixStudioDataCaptureMaxAggregateOutputType = {
   id: number | null
+  vendor_id: number | null
   created_at: Date | null
 }
 
 export type WixStudioDataCaptureCountAggregateOutputType = {
   id: number
+  vendor_id: number
   payload: number
   created_at: number
   _all: number
@@ -54,24 +59,29 @@ export type WixStudioDataCaptureCountAggregateOutputType = {
 
 export type WixStudioDataCaptureAvgAggregateInputType = {
   id?: true
+  vendor_id?: true
 }
 
 export type WixStudioDataCaptureSumAggregateInputType = {
   id?: true
+  vendor_id?: true
 }
 
 export type WixStudioDataCaptureMinAggregateInputType = {
   id?: true
+  vendor_id?: true
   created_at?: true
 }
 
 export type WixStudioDataCaptureMaxAggregateInputType = {
   id?: true
+  vendor_id?: true
   created_at?: true
 }
 
 export type WixStudioDataCaptureCountAggregateInputType = {
   id?: true
+  vendor_id?: true
   payload?: true
   created_at?: true
   _all?: true
@@ -165,6 +175,7 @@ export type WixStudioDataCaptureGroupByArgs<ExtArgs extends runtime.Types.Extens
 
 export type WixStudioDataCaptureGroupByOutputType = {
   id: number
+  vendor_id: number | null
   payload: runtime.JsonValue
   created_at: Date
   _count: WixStudioDataCaptureCountAggregateOutputType | null
@@ -194,12 +205,14 @@ export type WixStudioDataCaptureWhereInput = {
   OR?: Prisma.WixStudioDataCaptureWhereInput[]
   NOT?: Prisma.WixStudioDataCaptureWhereInput | Prisma.WixStudioDataCaptureWhereInput[]
   id?: Prisma.IntFilter<"WixStudioDataCapture"> | number
+  vendor_id?: Prisma.IntNullableFilter<"WixStudioDataCapture"> | number | null
   payload?: Prisma.JsonFilter<"WixStudioDataCapture">
   created_at?: Prisma.DateTimeFilter<"WixStudioDataCapture"> | Date | string
 }
 
 export type WixStudioDataCaptureOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   payload?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
@@ -209,12 +222,14 @@ export type WixStudioDataCaptureWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.WixStudioDataCaptureWhereInput | Prisma.WixStudioDataCaptureWhereInput[]
   OR?: Prisma.WixStudioDataCaptureWhereInput[]
   NOT?: Prisma.WixStudioDataCaptureWhereInput | Prisma.WixStudioDataCaptureWhereInput[]
+  vendor_id?: Prisma.IntNullableFilter<"WixStudioDataCapture"> | number | null
   payload?: Prisma.JsonFilter<"WixStudioDataCapture">
   created_at?: Prisma.DateTimeFilter<"WixStudioDataCapture"> | Date | string
 }, "id">
 
 export type WixStudioDataCaptureOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrderInput | Prisma.SortOrder
   payload?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.WixStudioDataCaptureCountOrderByAggregateInput
@@ -229,106 +244,124 @@ export type WixStudioDataCaptureScalarWhereWithAggregatesInput = {
   OR?: Prisma.WixStudioDataCaptureScalarWhereWithAggregatesInput[]
   NOT?: Prisma.WixStudioDataCaptureScalarWhereWithAggregatesInput | Prisma.WixStudioDataCaptureScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"WixStudioDataCapture"> | number
+  vendor_id?: Prisma.IntNullableWithAggregatesFilter<"WixStudioDataCapture"> | number | null
   payload?: Prisma.JsonWithAggregatesFilter<"WixStudioDataCapture">
   created_at?: Prisma.DateTimeWithAggregatesFilter<"WixStudioDataCapture"> | Date | string
 }
 
 export type WixStudioDataCaptureCreateInput = {
+  vendor_id?: number | null
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
 }
 
 export type WixStudioDataCaptureUncheckedCreateInput = {
   id?: number
+  vendor_id?: number | null
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
 }
 
 export type WixStudioDataCaptureUpdateInput = {
+  vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WixStudioDataCaptureUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WixStudioDataCaptureCreateManyInput = {
   id?: number
+  vendor_id?: number | null
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   created_at?: Date | string
 }
 
 export type WixStudioDataCaptureUpdateManyMutationInput = {
+  vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WixStudioDataCaptureUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WixStudioDataCaptureCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
   payload?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type WixStudioDataCaptureAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
 }
 
 export type WixStudioDataCaptureMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type WixStudioDataCaptureMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type WixStudioDataCaptureSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
 }
 
 
 
 export type WixStudioDataCaptureSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  vendor_id?: boolean
   payload?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["wixStudioDataCapture"]>
 
 export type WixStudioDataCaptureSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  vendor_id?: boolean
   payload?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["wixStudioDataCapture"]>
 
 export type WixStudioDataCaptureSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  vendor_id?: boolean
   payload?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["wixStudioDataCapture"]>
 
 export type WixStudioDataCaptureSelectScalar = {
   id?: boolean
+  vendor_id?: boolean
   payload?: boolean
   created_at?: boolean
 }
 
-export type WixStudioDataCaptureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "payload" | "created_at", ExtArgs["result"]["wixStudioDataCapture"]>
+export type WixStudioDataCaptureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "payload" | "created_at", ExtArgs["result"]["wixStudioDataCapture"]>
 
 export type $WixStudioDataCapturePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "WixStudioDataCapture"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    vendor_id: number | null
     payload: runtime.JsonValue
     created_at: Date
   }, ExtArgs["result"]["wixStudioDataCapture"]>
@@ -755,6 +788,7 @@ export interface Prisma__WixStudioDataCaptureClient<T, Null = never, ExtArgs ext
  */
 export interface WixStudioDataCaptureFieldRefs {
   readonly id: Prisma.FieldRef<"WixStudioDataCapture", 'Int'>
+  readonly vendor_id: Prisma.FieldRef<"WixStudioDataCapture", 'Int'>
   readonly payload: Prisma.FieldRef<"WixStudioDataCapture", 'Json'>
   readonly created_at: Prisma.FieldRef<"WixStudioDataCapture", 'DateTime'>
 }

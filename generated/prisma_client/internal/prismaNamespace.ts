@@ -21495,6 +21495,7 @@ export type SiteSupervisorFranchiseMappingScalarFieldEnum = (typeof SiteSupervis
 
 export const WixStudioDataCaptureScalarFieldEnum = {
   id: 'id',
+  vendor_id: 'vendor_id',
   payload: 'payload',
   created_at: 'created_at'
 } as const

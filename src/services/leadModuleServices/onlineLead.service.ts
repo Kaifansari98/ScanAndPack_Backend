@@ -198,7 +198,100 @@ export async function resolveTargetOnlineLeadVendor(
     };
   }
 
-  // 3. For Google Sheet or external webhooks, vendor_token is strictly required
+  // 3. Vendor Code or Vendor ID check (from headers, query, or body) for integrations like Wix Studio
+  const headerVendorCode =
+    req.headers["x-vendor-code"] ||
+    req.headers["vendor_code"] ||
+    req.headers["vendor-code"];
+  const queryVendorCode = req.query.vendor_code || req.query.vendorCode;
+  const bodyVendorCode = req.body?.vendor_code || req.body?.vendorCode;
+  const rawVendorCode = Array.isArray(queryVendorCode)
+    ? queryVendorCode[0]
+    : (headerVendorCode || queryVendorCode || bodyVendorCode);
+  const explicitVendorCode = String(rawVendorCode || "").trim();
+
+  const headerVendorId =
+    req.headers["x-vendor-id"] ||
+    req.headers["vendor_id"] ||
+    req.headers["vendor-id"];
+  const queryVendorId = req.query.vendor_id || req.query.vendorId;
+  const bodyVendorId = req.body?.vendor_id || req.body?.vendorId;
+  const rawVendorId = Array.isArray(queryVendorId)
+    ? queryVendorId[0]
+    : (headerVendorId || queryVendorId || bodyVendorId);
+  const explicitVendorId = rawVendorId && !isNaN(Number(rawVendorId)) ? Number(rawVendorId) : null;
+
+  if (explicitVendorCode || explicitVendorId) {
+    const vendor = await prisma.vendorMaster.findFirst({
+      where: explicitVendorId
+        ? { id: explicitVendorId }
+        : { vendor_code: { equals: explicitVendorCode, mode: "insensitive" } },
+      select: {
+        id: true,
+        vendor_name: true,
+        vendor_code: true,
+        status: true,
+        is_online_lead_feature_enabled: true,
+      },
+    });
+    if (!vendor) {
+      return {
+        statusCode: 400,
+        error: `Specified vendor '${explicitVendorCode || explicitVendorId}' does not exist.`,
+      };
+    }
+    if (vendor.status !== "active") {
+      return {
+        statusCode: 403,
+        error: `Specified vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}, ID: ${vendor.id}) is inactive.`,
+      };
+    }
+    if (!vendor.is_online_lead_feature_enabled) {
+      return {
+        statusCode: 403,
+        error: `Online Lead feature is disabled for vendor '${vendor.vendor_name}' (Code: ${vendor.vendor_code}, ID: ${vendor.id}). 'is_online_lead_feature_enabled' must be true.`,
+      };
+    }
+    return { vendorId: vendor.id };
+  }
+
+  // 4. Automatically find active vendors with is_online_lead_feature_enabled === true
+  const eligibleVendors = await prisma.vendorMaster.findMany({
+    where: {
+      status: "active",
+      is_online_lead_feature_enabled: true,
+    },
+    select: {
+      id: true,
+      vendor_name: true,
+      vendor_code: true,
+    },
+    orderBy: { id: "asc" },
+  });
+
+  if (eligibleVendors.length === 1) {
+    return { vendorId: eligibleVendors[0].id };
+  }
+
+  if (eligibleVendors.length > 1) {
+    return {
+      statusCode: 422,
+      ambiguous: true,
+      error:
+        "Multiple active vendors have 'is_online_lead_feature_enabled' set to true. Please specify 'vendor_token', 'vendor_code', or 'vendor_id'.",
+      eligibleVendors,
+    };
+  }
+
+  if (eligibleVendors.length === 0) {
+    return {
+      statusCode: 400,
+      error:
+        "No active vendor has 'is_online_lead_feature_enabled' set to true in VendorMaster.",
+    };
+  }
+
+  // 5. For Google Sheet or external webhooks, vendor_token is strictly required
   return {
     statusCode: 401,
     error:
