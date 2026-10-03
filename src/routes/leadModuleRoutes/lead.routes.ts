@@ -64,6 +64,7 @@ import {
 } from "../../controllers/leadModuleControllers/productSubStructure.controller";
 import {
   createProductItemCode,
+  editProductItemCode,
   fetchAllProductItemCodes,
 } from "../../controllers/leadModuleControllers/productItemCode.controller";
 import { uploadLeadSitePhotos } from "../../utils/wasabiClient";
@@ -157,6 +158,7 @@ leadsRouter.post("/create-source-type", createSourceType);
 leadsRouter.post("/create-product-structure", createProductStructureType);
 leadsRouter.post("/create-product-sub-structure", createProductSubStructure);
 leadsRouter.post("/create-product-item-code", createProductItemCode);
+leadsRouter.patch("/update-product-item-code/:id", editProductItemCode);
 leadsRouter.get("/get-all-status-types/:vendor_id", fetchAllStatusTypes);
 leadsRouter.get("/get-all-payment-types/:vendor_id", fetchAllPaymentTypes);
 leadsRouter.get("/get-all-document-types/:vendor_id", fetchAllDocumentTypes);
