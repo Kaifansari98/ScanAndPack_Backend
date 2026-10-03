@@ -1088,13 +1088,9 @@ export const updateBoxStatus = async (
   if (
     newStatus === BoxStatus.packed &&
     box.project.packing_type === PackingType.CUSTOM_GROUP &&
-    box.project.is_multi_location
+    box.project.is_multi_location &&
+    normalizedLocationName
   ) {
-    if (!normalizedLocationName) {
-      throw new Error(
-        "Select a location before packing a custom group box when Multi Location is enabled",
-      );
-    }
 
     const mappings = await prisma.cutListMachineMapping.findMany({
       where: {
