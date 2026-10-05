@@ -1,6 +1,7 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import path from "path";
+import { randomUUID } from "node:crypto";
 import { sanitizeFilename } from "../utils/fileUtils";
 import wasabi from "../utils/wasabiClient";
 import fs from 'fs'
@@ -755,7 +756,7 @@ export const uploadVendorAssets = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, `${randomUUID()}${path.extname(file.originalname)}`);
     },
   }),
   limits: {
