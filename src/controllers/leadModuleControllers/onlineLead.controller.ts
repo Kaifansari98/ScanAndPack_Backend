@@ -633,35 +633,36 @@ export class OnlineLeadController {
         });
       }
 
-      const unassignedPoolFilter: any = {
+      const baseLeadPoolFilter: any = {
         vendor_id: vendorId,
-        assign_to: null,
-        OR: [
-          { approval_status: "PENDING" },
-          {
-            NOT: {
-              online_lead_followup_status: {
-                status_name: {
-                  in: ["Store Assigned", "Store Visit Done"],
-                  mode: "insensitive",
-                },
-              },
+        approval_status: null,
+        lead_master_id: null,
+        store_id: null,
+        pending_store_id: null,
+        NOT: {
+          online_lead_followup_status: {
+            status_name: {
+              in: ["Store Assigned", "Store Visit Done"],
+              mode: "insensitive",
             },
           },
-        ],
+        },
       };
 
       const [poolCount, overallCount, myCount] = await Promise.all([
         prisma.online_leads.count({
-          where: unassignedPoolFilter,
+          where: {
+            ...baseLeadPoolFilter,
+            assign_to: null,
+          },
         }),
         prisma.online_leads.count({
-          where: { vendor_id: vendorId },
+          where: baseLeadPoolFilter,
         }),
         userId
           ? prisma.online_leads.count({
               where: {
-                vendor_id: vendorId,
+                ...baseLeadPoolFilter,
                 OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
               },
             })
@@ -712,25 +713,28 @@ export class OnlineLeadController {
         });
       }
 
-      const andConditions: any[] = [{ vendor_id: vendorId }];
+      const baseLeadPoolFilter: any = {
+        vendor_id: vendorId,
+        approval_status: null,
+        lead_master_id: null,
+        store_id: null,
+        pending_store_id: null,
+        NOT: {
+          online_lead_followup_status: {
+            status_name: {
+              in: ["Store Assigned", "Store Visit Done"],
+              mode: "insensitive",
+            },
+          },
+        },
+      };
+
+      const andConditions: any[] = [baseLeadPoolFilter];
 
       // Apply tab filters
       if (tab === "pool") {
         andConditions.push({
           assign_to: null,
-          OR: [
-            { approval_status: "PENDING" },
-            {
-              NOT: {
-                online_lead_followup_status: {
-                  status_name: {
-                    in: ["Store Assigned", "Store Visit Done"],
-                    mode: "insensitive",
-                  },
-                },
-              },
-            },
-          ],
         });
       } else if (tab === "my") {
         if (!userId) {
@@ -743,7 +747,7 @@ export class OnlineLeadController {
           OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
         });
       } else if (tab === "overall") {
-        // Overall leads has no assignment filter (shows all unassigned + assigned leads for that vendor)
+        // Overall leads under lead pool page shows all active leads in Lead Pool stage for that vendor
       }
 
       // Apply search filters
@@ -850,21 +854,8 @@ export class OnlineLeadController {
       });
 
       const unassignedPoolCountFilter: any = {
-        vendor_id: vendorId,
+        ...baseLeadPoolFilter,
         assign_to: null,
-        OR: [
-          { approval_status: "PENDING" },
-          {
-            NOT: {
-              online_lead_followup_status: {
-                status_name: {
-                  in: ["Store Assigned", "Store Visit Done"],
-                  mode: "insensitive",
-                },
-              },
-            },
-          },
-        ],
       };
 
       const [poolCount, overallCount, myCount] = await Promise.all([
@@ -872,12 +863,12 @@ export class OnlineLeadController {
           where: unassignedPoolCountFilter,
         }),
         prisma.online_leads.count({
-          where: { vendor_id: vendorId },
+          where: baseLeadPoolFilter,
         }),
         userId
           ? prisma.online_leads.count({
               where: {
-                vendor_id: vendorId,
+                ...baseLeadPoolFilter,
                 OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
               },
             })

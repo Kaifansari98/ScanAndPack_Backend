@@ -1095,12 +1095,27 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
       }
       combinedRemark = deduplicateRemark(combinedRemark);
 
+      let resolvedSourceId = existingOnlineLead.source_id;
+      if (source && source !== existingOnlineLead.source) {
+        try {
+          const matchedSource = await tx.sourceMaster.findFirst({
+            where: {
+              vendor_id: Number(vendor_id),
+              type: { contains: source, mode: "insensitive" },
+            },
+          });
+          resolvedSourceId = matchedSource ? matchedSource.id : null;
+        } catch {}
+      }
+
       return await tx.online_leads.update({
         where: { id: existingOnlineLead.id },
         data: {
           leads_name: leads_name || existingOnlineLead.leads_name,
           contact: normalizedContact,
           email: email || existingOnlineLead.email,
+          source: source || existingOnlineLead.source,
+          source_id: resolvedSourceId,
           remark: combinedRemark,
           city: city || existingOnlineLead.city,
           product_types: combinedTypes,

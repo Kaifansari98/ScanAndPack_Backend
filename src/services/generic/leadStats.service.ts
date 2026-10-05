@@ -482,19 +482,18 @@ export class LeadStatsService {
       where: {
         vendor_id: vendorId,
         assign_to: null,
-        OR: [
-          { approval_status: "PENDING" },
-          {
-            NOT: {
-              online_lead_followup_status: {
-                status_name: {
-                  in: ["Store Assigned", "Store Visit Done"],
-                  mode: "insensitive",
-                },
-              },
+        approval_status: null,
+        lead_master_id: null,
+        store_id: null,
+        pending_store_id: null,
+        NOT: {
+          online_lead_followup_status: {
+            status_name: {
+              in: ["Store Assigned", "Store Visit Done"],
+              mode: "insensitive",
             },
           },
-        ],
+        },
       },
     });
 
