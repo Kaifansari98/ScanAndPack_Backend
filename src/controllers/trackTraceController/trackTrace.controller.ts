@@ -2189,9 +2189,11 @@ export const getManualPackingItemsController = async (
       });
     }
 
+    const machineId = req.query.machine_id ? Number(req.query.machine_id) : undefined;
     const result = await trackTraceService.getManualPackingItemsService(
       projectId,
       vendorId,
+      machineId
     );
 
     return res
@@ -2341,5 +2343,33 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
           ? error.message
           : "Unable to load project item tracking",
     });
+  }
+};
+export const addManualQualityItemController = async (req: Request, res: Response) => {
+  try {
+    const serviceResponse = await trackTraceService.addManualQualityItemService(
+      req.body,
+    );
+
+    if (serviceResponse?.status === 0) {
+      return res
+        .status(200)
+        .json(ApiResponse.error(serviceResponse?.message, 500));
+    } else {
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            serviceResponse?.data || serviceResponse?.status,
+            serviceResponse?.message,
+            200
+          )
+        );
+    }
+  } catch (error) {
+    console.error("addManualQualityItemController error:", error);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Internal Server Error", 500));
   }
 };

@@ -12570,6 +12570,7 @@ type ApiResponseManualItems = ReturnType<typeof validationResponse>;
 export const getManualPackingItemsService = async (
   projectId: number,
   vendorId: number,
+  machineId?: number
 ): Promise<ApiResponseManualItems> => {
   if (!projectId || projectId <= 0) {
     return validationResponse(0, "project_id is required");
@@ -12681,17 +12682,22 @@ export const getManualPackingItemsService = async (
   |--------------------------------------------------------------------------
   */
 
-  const packagingMachines = await prisma.machineMaster.findMany({
-    where: {
-      vendor_id: vendorId,
-      machine_type_id: 18,
-    },
-    select: {
-      id: true,
-    },
-  });
+  let packagingMachineIds: number[] = [];
+  if (machineId) {
+    packagingMachineIds = [machineId];
+  } else {
+    const packagingMachines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        machine_type_id: 18,
+      },
+      select: {
+        id: true,
+      },
+    });
 
-  const packagingMachineIds = packagingMachines.map((machine) => machine.id);
+    packagingMachineIds = packagingMachines.map((machine) => machine.id);
+  }
 
   /*
   |--------------------------------------------------------------------------
@@ -12732,9 +12738,34 @@ export const getManualPackingItemsService = async (
   */
 
   const packedQtyMap = new Map<number, number>();
-
   for (const row of packedQtyRows) {
     packedQtyMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
+  }
+
+  // Find QC Machines if we are in Packing mode (!machineId)
+  const qcMachines = await prisma.machineMaster.findMany({
+    where: { vendor_id: vendorId, machine_type_id: 17, status: "ACTIVE" },
+    select: { id: true },
+  });
+  const qcMachineIds = qcMachines.map(m => m.id);
+  const hasQcMachines = qcMachineIds.length > 0;
+
+  const qcQtyRows = (!machineId && hasQcMachines)
+    ? await prisma.cutListMachineMapping.groupBy({
+        by: ["cut_list_id"],
+        where: {
+          project_id: projectId,
+          vendor_id: vendorId,
+          cut_list_id: { in: cutListIds },
+          machine_id: { in: qcMachineIds },
+        },
+        _sum: { qty: true },
+      })
+    : [];
+    
+  const qcQtyMap = new Map<number, number>();
+  for (const row of qcQtyRows) {
+    qcQtyMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
   }
 
   /*
@@ -12744,19 +12775,23 @@ export const getManualPackingItemsService = async (
   */
 
   const items = cutListItems.map((item) => {
-    const totalQty = Number(item.qty ?? 0);
+    const projectTotalQty = Number(item.qty ?? 0);
+
+    const effectiveMaxQty = (!machineId && hasQcMachines)
+       ? Number(qcQtyMap.get(item.id) ?? 0)
+       : projectTotalQty;
 
     const packedQty = Math.min(
       Number(packedQtyMap.get(item.id) ?? 0),
-      totalQty,
+      effectiveMaxQty,
     );
 
-    const pendingQty = Math.max(totalQty - packedQty, 0);
+    const pendingQty = Math.max(effectiveMaxQty - packedQty, 0);
 
     return {
       ...item,
 
-      total_qty: totalQty,
+      total_qty: projectTotalQty,
       packed_qty: packedQty,
       pending_qty: pendingQty,
 
@@ -13807,4 +13842,54 @@ export const getProjectItemTrackingService = async (
       })),
     },
   };
+};
+export const addManualQualityItemService = async (payload: any): Promise<any> => {
+  try {
+    const { project_id, vendor_id, machine_id, cut_list_id, qty, user_id } = payload;
+    
+    if (!project_id || !vendor_id || !machine_id || !cut_list_id || !qty || !user_id) {
+      return validationResponse(0, "Missing required fields");
+    }
+
+    const cutList = await prisma.cutList.findFirst({
+      where: { id: cut_list_id, project_id, vendor_id, status: "Active" }
+    });
+    
+    if (!cutList) return validationResponse(0, "Item not found");
+
+    const machine = await prisma.machineMaster.findFirst({
+      where: { id: machine_id, vendor_id, status: "ACTIVE" }
+    });
+
+    if (!machine) return validationResponse(0, "Machine not found");
+
+    const result = await prisma.$transaction(async (tx) => {
+      // Find existing mapping or create new
+      let mapping = await tx.cutListMachineMapping.findFirst({
+        where: { cut_list_id, machine_id, vendor_id, project_id, row_created_source: "Manual_QC" }
+      });
+      
+      if (mapping) {
+        mapping = await tx.cutListMachineMapping.update({
+          where: { id: mapping.id },
+          data: { qty: mapping.qty + qty, actual_in_at: new Date() }
+        });
+      } else {
+        mapping = await tx.cutListMachineMapping.create({
+          data: {
+            cut_list_id, machine_id, project_id, vendor_id,
+            sequence_no: machine.sequence_no ?? 0,
+            expected_in: true, expected_out: false,
+            status: "Pending", actual_in_at: new Date(),
+            in_operator: user_id, created_by: user_id,
+            qty, row_created_source: "Manual_QC"
+          }
+        });
+      }
+      return validationResponse(1, "Quality check passed for manual item", { mapping });
+    });
+    return result;
+  } catch (error: any) {
+    return validationResponse(0, error.message);
+  }
 };

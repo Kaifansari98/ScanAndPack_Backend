@@ -82,6 +82,7 @@ import {
   createUnitMaster,
   getManualPackingItemsController,
   addManualPackingItem,
+  addManualQualityItemController,
   getProjectCutList,
   getProjectItemTracking
 } from "../../controllers/trackTraceController/trackTrace.controller";
@@ -269,6 +270,11 @@ router.get(
 router.post(
   "/boxes/packing/manual-items",
   addManualPackingItem
+);
+
+router.post(
+  "/quality/manual-items",
+  addManualQualityItemController
 );
 
 router.get(
