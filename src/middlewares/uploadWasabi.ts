@@ -760,7 +760,7 @@ export const uploadVendorAssets = multer({
   }),
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB
-    files: 2,
+    files: 3, // One logo, icon, and login image
   },
   fileFilter: (_req, file, cb) => {
     const allowed = [
@@ -772,6 +772,6 @@ export const uploadVendorAssets = multer({
       "image/x-icon",
     ];
     if (allowed.includes(file.mimetype)) cb(null, true);
-    else cb(new Error("Only image files are allowed for logo and icon"));
+    else cb(new Error("Only image files are allowed for logo, icon, and login image"));
   },
 });
