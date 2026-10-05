@@ -484,7 +484,6 @@ export class LeadStatsService {
         assign_to: null,
         approval_status: null,
         lead_master_id: null,
-        store_id: null,
         pending_store_id: null,
         NOT: {
           online_lead_followup_status: {
