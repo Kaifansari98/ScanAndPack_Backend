@@ -61,6 +61,7 @@ export type VendorMasterMinAggregateOutputType = {
   state_id: number | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  cutlist_configuration: string | null
   is_approval_task_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
@@ -111,6 +112,7 @@ export type VendorMasterMaxAggregateOutputType = {
   state_id: number | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  cutlist_configuration: string | null
   is_approval_task_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
@@ -161,6 +163,7 @@ export type VendorMasterCountAggregateOutputType = {
   state_id: number
   is_inventory_enabled: number
   is_tracktrace_enabled: number
+  cutlist_configuration: number
   is_approval_task_enabled: number
   eligible_booking_days: number
   is_self_assign_task_type_master_enabed: number
@@ -227,6 +230,7 @@ export type VendorMasterMinAggregateInputType = {
   state_id?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  cutlist_configuration?: true
   is_approval_task_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
@@ -277,6 +281,7 @@ export type VendorMasterMaxAggregateInputType = {
   state_id?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  cutlist_configuration?: true
   is_approval_task_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
@@ -327,6 +332,7 @@ export type VendorMasterCountAggregateInputType = {
   state_id?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  cutlist_configuration?: true
   is_approval_task_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
@@ -464,6 +470,7 @@ export type VendorMasterGroupByOutputType = {
   state_id: number | null
   is_inventory_enabled: boolean
   is_tracktrace_enabled: boolean
+  cutlist_configuration: string | null
   is_approval_task_enabled: boolean
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean
@@ -537,6 +544,7 @@ export type VendorMasterWhereInput = {
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -750,6 +758,7 @@ export type VendorMasterOrderByWithRelationInput = {
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrderInput | Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -966,6 +975,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -1179,6 +1189,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrderInput | Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -1237,6 +1248,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   state_id?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
@@ -1285,6 +1297,7 @@ export type VendorMasterCreateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -1498,6 +1511,7 @@ export type VendorMasterUncheckedCreateInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -1708,6 +1722,7 @@ export type VendorMasterUpdateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1921,6 +1936,7 @@ export type VendorMasterUncheckedUpdateInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2133,6 +2149,7 @@ export type VendorMasterCreateManyInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -2181,6 +2198,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2231,6 +2249,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2281,6 +2300,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   state_id?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -2338,6 +2358,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   state_id?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -2388,6 +2409,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   state_id?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -4813,6 +4835,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -5025,6 +5048,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -5250,6 +5274,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5462,6 +5487,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5671,6 +5697,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -5883,6 +5910,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -6108,6 +6136,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6320,6 +6349,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6529,6 +6559,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -6741,6 +6772,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -6966,6 +6998,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7178,6 +7211,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7387,6 +7421,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -7599,6 +7634,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -7824,6 +7860,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8036,6 +8073,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8245,6 +8283,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -8457,6 +8496,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -8682,6 +8722,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8894,6 +8935,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9103,6 +9145,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -9315,6 +9358,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -9540,6 +9584,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9752,6 +9797,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9961,6 +10007,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -10173,6 +10220,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -10398,6 +10446,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10610,6 +10659,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10819,6 +10869,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -11031,6 +11082,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -11256,6 +11308,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11468,6 +11521,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11677,6 +11731,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -11889,6 +11944,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -12114,6 +12170,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12326,6 +12383,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12535,6 +12593,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -12747,6 +12806,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -12972,6 +13032,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13184,6 +13245,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13393,6 +13455,7 @@ export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -13605,6 +13668,7 @@ export type VendorMasterUncheckedCreateWithoutFactoryOutRevertLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -13830,6 +13894,7 @@ export type VendorMasterUpdateWithoutFactoryOutRevertLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14042,6 +14107,7 @@ export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14251,6 +14317,7 @@ export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -14463,6 +14530,7 @@ export type VendorMasterUncheckedCreateWithoutBoxUnpackLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -14688,6 +14756,7 @@ export type VendorMasterUpdateWithoutBoxUnpackLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14900,6 +14969,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15109,6 +15179,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -15321,6 +15392,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -15546,6 +15618,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15758,6 +15831,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15967,6 +16041,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -16179,6 +16254,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -16404,6 +16480,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16616,6 +16693,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16825,6 +16903,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -17037,6 +17116,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -17262,6 +17342,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17474,6 +17555,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17683,6 +17765,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -17895,6 +17978,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -18120,6 +18204,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18332,6 +18417,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18541,6 +18627,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -18753,6 +18840,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -18978,6 +19066,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19190,6 +19279,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19399,6 +19489,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -19611,6 +19702,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -19836,6 +19928,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20048,6 +20141,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20257,6 +20351,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -20469,6 +20564,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -20694,6 +20790,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20906,6 +21003,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21115,6 +21213,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -21327,6 +21426,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -21552,6 +21652,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21764,6 +21865,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21973,6 +22075,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -22185,6 +22288,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -22410,6 +22514,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22622,6 +22727,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22831,6 +22937,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -23043,6 +23150,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -23268,6 +23376,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23480,6 +23589,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23689,6 +23799,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -23901,6 +24012,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -24126,6 +24238,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24338,6 +24451,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24547,6 +24661,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -24759,6 +24874,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -24984,6 +25100,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25196,6 +25313,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25405,6 +25523,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -25617,6 +25736,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -25842,6 +25962,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26054,6 +26175,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26263,6 +26385,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -26475,6 +26598,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -26700,6 +26824,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26912,6 +27037,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27121,6 +27247,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -27333,6 +27460,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -27558,6 +27686,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27770,6 +27899,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27979,6 +28109,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -28191,6 +28322,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -28416,6 +28548,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28628,6 +28761,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28837,6 +28971,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -29049,6 +29184,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -29274,6 +29410,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29486,6 +29623,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29695,6 +29833,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -29907,6 +30046,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -30132,6 +30272,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30344,6 +30485,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30553,6 +30695,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -30765,6 +30908,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -30990,6 +31134,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31202,6 +31347,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31411,6 +31557,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -31623,6 +31770,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -31848,6 +31996,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32060,6 +32209,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32269,6 +32419,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -32481,6 +32632,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -32706,6 +32858,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32918,6 +33071,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33127,6 +33281,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -33339,6 +33494,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -33564,6 +33720,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33776,6 +33933,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33985,6 +34143,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -34197,6 +34356,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -34422,6 +34582,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34634,6 +34795,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34843,6 +35005,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -35055,6 +35218,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -35280,6 +35444,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35492,6 +35657,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35701,6 +35867,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -35913,6 +36080,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -36138,6 +36306,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36350,6 +36519,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36559,6 +36729,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -36771,6 +36942,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -36996,6 +37168,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37208,6 +37381,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37417,6 +37591,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -37629,6 +37804,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -37854,6 +38030,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38066,6 +38243,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38275,6 +38453,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -38487,6 +38666,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -38712,6 +38892,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38924,6 +39105,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39133,6 +39315,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -39345,6 +39528,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -39570,6 +39754,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39782,6 +39967,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39991,6 +40177,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -40203,6 +40390,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -40428,6 +40616,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40640,6 +40829,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40849,6 +41039,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -41061,6 +41252,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -41286,6 +41478,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41498,6 +41691,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41707,6 +41901,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -41919,6 +42114,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -42144,6 +42340,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42356,6 +42553,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42565,6 +42763,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -42777,6 +42976,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -43002,6 +43202,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43214,6 +43415,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43423,6 +43625,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -43635,6 +43838,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -43860,6 +44064,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44072,6 +44277,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44281,6 +44487,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -44493,6 +44700,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -44718,6 +44926,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44930,6 +45139,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45139,6 +45349,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -45351,6 +45562,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -45576,6 +45788,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45788,6 +46001,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45997,6 +46211,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -46209,6 +46424,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -46434,6 +46650,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46646,6 +46863,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46855,6 +47073,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -47067,6 +47286,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -47292,6 +47512,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47504,6 +47725,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47713,6 +47935,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -47925,6 +48148,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -48150,6 +48374,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48362,6 +48587,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48571,6 +48797,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -48783,6 +49010,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -49008,6 +49236,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49220,6 +49449,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49429,6 +49659,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -49641,6 +49872,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -49866,6 +50098,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50078,6 +50311,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50287,6 +50521,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -50499,6 +50734,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -50724,6 +50960,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50936,6 +51173,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51145,6 +51383,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -51357,6 +51596,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -51582,6 +51822,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51794,6 +52035,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52003,6 +52245,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -52215,6 +52458,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -52440,6 +52684,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52652,6 +52897,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52861,6 +53107,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -53073,6 +53320,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -53298,6 +53546,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53510,6 +53759,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53719,6 +53969,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -53931,6 +54182,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -54156,6 +54408,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54368,6 +54621,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54577,6 +54831,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -54789,6 +55044,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -55014,6 +55270,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55226,6 +55483,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55435,6 +55693,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -55647,6 +55906,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -55872,6 +56132,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56084,6 +56345,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56293,6 +56555,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -56505,6 +56768,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -56730,6 +56994,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56942,6 +57207,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57151,6 +57417,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -57363,6 +57630,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -57588,6 +57856,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57800,6 +58069,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58009,6 +58279,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -58221,6 +58492,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -58446,6 +58718,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58658,6 +58931,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58867,6 +59141,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -59079,6 +59354,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -59304,6 +59580,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59516,6 +59793,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59725,6 +60003,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -59937,6 +60216,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -60162,6 +60442,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60374,6 +60655,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60583,6 +60865,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -60795,6 +61078,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -61020,6 +61304,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61232,6 +61517,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61441,6 +61727,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -61653,6 +61940,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -61878,6 +62166,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62090,6 +62379,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62299,6 +62589,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -62511,6 +62802,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -62736,6 +63028,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62948,6 +63241,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63157,6 +63451,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -63369,6 +63664,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -63594,6 +63890,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63806,6 +64103,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64015,6 +64313,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -64227,6 +64526,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -64452,6 +64752,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64664,6 +64965,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64873,6 +65175,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -65085,6 +65388,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -65310,6 +65614,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65522,6 +65827,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65731,6 +66037,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -65943,6 +66250,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -66168,6 +66476,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66380,6 +66689,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66589,6 +66899,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -66801,6 +67112,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -67026,6 +67338,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67238,6 +67551,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67447,6 +67761,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -67659,6 +67974,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -67884,6 +68200,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68096,6 +68413,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68305,6 +68623,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -68517,6 +68836,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -68742,6 +69062,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68954,6 +69275,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69163,6 +69485,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -69375,6 +69698,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -69600,6 +69924,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69812,6 +70137,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70021,6 +70347,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -70233,6 +70560,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -70458,6 +70786,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70670,6 +70999,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70879,6 +71209,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -71091,6 +71422,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -71316,6 +71648,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71528,6 +71861,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71737,6 +72071,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -71949,6 +72284,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -72174,6 +72510,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72386,6 +72723,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72595,6 +72933,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -72807,6 +73146,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -73032,6 +73372,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73244,6 +73585,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73453,6 +73795,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -73665,6 +74008,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -73890,6 +74234,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74102,6 +74447,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74311,6 +74657,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -74523,6 +74870,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -74748,6 +75096,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74960,6 +75309,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75169,6 +75519,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -75381,6 +75732,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -75606,6 +75958,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75818,6 +76171,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76027,6 +76381,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -76239,6 +76594,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -76464,6 +76820,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76676,6 +77033,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76885,6 +77243,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -77097,6 +77456,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -77322,6 +77682,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77534,6 +77895,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77743,6 +78105,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -77955,6 +78318,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -78180,6 +78544,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78392,6 +78757,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78601,6 +78967,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -78813,6 +79180,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -79038,6 +79406,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79250,6 +79619,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79459,6 +79829,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -79671,6 +80042,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -79896,6 +80268,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80108,6 +80481,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80317,6 +80691,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -80529,6 +80904,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -80754,6 +81130,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80966,6 +81343,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81175,6 +81553,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -81387,6 +81766,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -81612,6 +81992,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81824,6 +82205,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82033,6 +82415,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -82245,6 +82628,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -82470,6 +82854,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82682,6 +83067,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82891,6 +83277,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -83103,6 +83490,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -83328,6 +83716,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83540,6 +83929,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83749,6 +84139,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -83961,6 +84352,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -84186,6 +84578,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84398,6 +84791,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84607,6 +85001,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -84819,6 +85214,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -85044,6 +85440,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85256,6 +85653,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85465,6 +85863,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -85677,6 +86076,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -85902,6 +86302,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86114,6 +86515,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86323,6 +86725,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -86535,6 +86938,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -86760,6 +87164,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86972,6 +87377,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87181,6 +87587,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -87393,6 +87800,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -87618,6 +88026,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87830,6 +88239,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88039,6 +88449,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -88251,6 +88662,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -88476,6 +88888,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88688,6 +89101,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88897,6 +89311,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -89109,6 +89524,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -89334,6 +89750,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89546,6 +89963,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89755,6 +90173,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -89967,6 +90386,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -90192,6 +90612,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90404,6 +90825,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90613,6 +91035,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -90825,6 +91248,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -91050,6 +91474,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91262,6 +91687,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91471,6 +91897,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -91683,6 +92110,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -91908,6 +92336,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92120,6 +92549,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92329,6 +92759,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -92541,6 +92972,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -92766,6 +93198,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92978,6 +93411,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93187,6 +93621,7 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -93399,6 +93834,7 @@ export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -93624,6 +94060,7 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93836,6 +94273,7 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94045,6 +94483,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -94257,6 +94696,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -94482,6 +94922,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94694,6 +95135,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94903,6 +95345,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -95115,6 +95558,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -95340,6 +95784,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95552,6 +95997,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95761,6 +96207,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -95973,6 +96420,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -96198,6 +96646,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96410,6 +96859,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96619,6 +97069,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -96831,6 +97282,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -97056,6 +97508,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97268,6 +97721,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97477,6 +97931,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -97689,6 +98144,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -97914,6 +98370,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98126,6 +98583,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98335,6 +98793,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -98547,6 +99006,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -98772,6 +99232,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98984,6 +99445,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99193,6 +99655,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -99405,6 +99868,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -99630,6 +100094,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99842,6 +100307,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100051,6 +100517,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -100263,6 +100730,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -100488,6 +100956,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100700,6 +101169,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100909,6 +101379,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -101120,6 +101591,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -101361,6 +101833,7 @@ export type VendorMasterScalarWhereInput = {
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -101409,6 +101882,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -101621,6 +102095,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -101846,6 +102321,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102058,6 +102534,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102267,6 +102744,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -102479,6 +102957,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -102704,6 +103183,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102916,6 +103396,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103125,6 +103606,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -103337,6 +103819,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -103562,6 +104045,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103774,6 +104258,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103983,6 +104468,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -104195,6 +104681,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -104420,6 +104907,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104632,6 +105120,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104841,6 +105330,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -105053,6 +105543,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -105278,6 +105769,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105490,6 +105982,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105699,6 +106192,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -105911,6 +106405,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -106136,6 +106631,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106348,6 +106844,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106557,6 +107054,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -106769,6 +107267,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -106994,6 +107493,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107206,6 +107706,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107415,6 +107916,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -107627,6 +108129,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -107852,6 +108355,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108064,6 +108568,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108273,6 +108778,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -108485,6 +108991,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -108710,6 +109217,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108922,6 +109430,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109131,6 +109640,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -109343,6 +109853,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -109568,6 +110079,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109780,6 +110292,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109989,6 +110502,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -110201,6 +110715,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -110426,6 +110941,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110638,6 +111154,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110847,6 +111364,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -111059,6 +111577,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -111284,6 +111803,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111496,6 +112016,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111705,6 +112226,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -111917,6 +112439,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -112142,6 +112665,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112354,6 +112878,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112563,6 +113088,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -112775,6 +113301,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -113000,6 +113527,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113212,6 +113740,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113421,6 +113950,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -113633,6 +114163,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -113858,6 +114389,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114070,6 +114602,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114279,6 +114812,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -114491,6 +115025,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -114716,6 +115251,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114928,6 +115464,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115137,6 +115674,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -115349,6 +115887,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -115574,6 +116113,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115786,6 +116326,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115995,6 +116536,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -116207,6 +116749,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -116432,6 +116975,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116644,6 +117188,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116853,6 +117398,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -117065,6 +117611,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -117290,6 +117837,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117502,6 +118050,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117711,6 +118260,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -117923,6 +118473,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -118148,6 +118699,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118360,6 +118912,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118569,6 +119122,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -118781,6 +119335,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -119006,6 +119561,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119218,6 +119774,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119427,6 +119984,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -119639,6 +120197,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -119864,6 +120423,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120076,6 +120636,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120285,6 +120846,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -120497,6 +121059,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -120722,6 +121285,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120934,6 +121498,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121143,6 +121708,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -121355,6 +121921,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -121580,6 +122147,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121792,6 +122360,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122001,6 +122570,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -122213,6 +122783,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -122438,6 +123009,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122650,6 +123222,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122859,6 +123432,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -123071,6 +123645,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -123296,6 +123871,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123508,6 +124084,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123717,6 +124294,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -123929,6 +124507,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -124154,6 +124733,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124366,6 +124946,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124575,6 +125156,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -124787,6 +125369,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -125012,6 +125595,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125224,6 +125808,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125433,6 +126018,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -125645,6 +126231,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -125870,6 +126457,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126082,6 +126670,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126291,6 +126880,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -126503,6 +127093,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -126728,6 +127319,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126940,6 +127532,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127149,6 +127742,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -127361,6 +127955,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -127586,6 +128181,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127798,6 +128394,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128007,6 +128604,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -128219,6 +128817,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -128444,6 +129043,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128656,6 +129256,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128865,6 +129466,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -129077,6 +129679,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -129302,6 +129905,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129514,6 +130118,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129723,6 +130328,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -129935,6 +130541,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -130160,6 +130767,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130372,6 +130980,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130581,6 +131190,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -130793,6 +131403,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -131018,6 +131629,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131230,6 +131842,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131439,6 +132052,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -131651,6 +132265,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -131876,6 +132491,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132088,6 +132704,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132297,6 +132914,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -132509,6 +133127,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -132734,6 +133353,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132946,6 +133566,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133155,6 +133776,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -133367,6 +133989,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -133592,6 +134215,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133804,6 +134428,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134013,6 +134638,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -134225,6 +134851,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -134450,6 +135077,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134662,6 +135290,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134871,6 +135500,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -135083,6 +135713,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -135308,6 +135939,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135520,6 +136152,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135729,6 +136362,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -135941,6 +136575,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -136166,6 +136801,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136378,6 +137014,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136587,6 +137224,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -136799,6 +137437,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -137024,6 +137663,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137236,6 +137876,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137445,6 +138086,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -137657,6 +138299,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -137882,6 +138525,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -138094,6 +138738,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -138303,6 +138948,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -138515,6 +139161,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -138740,6 +139387,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -138952,6 +139600,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -139161,6 +139810,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -139373,6 +140023,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -139598,6 +140249,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -139810,6 +140462,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -140019,6 +140672,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -140231,6 +140885,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -140456,6 +141111,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -140668,6 +141324,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -140877,6 +141534,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -141089,6 +141747,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -141314,6 +141973,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -141526,6 +142186,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -141735,6 +142396,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -141947,6 +142609,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -142172,6 +142835,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -142384,6 +143048,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -142593,6 +143258,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -142805,6 +143471,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -143030,6 +143697,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -143242,6 +143910,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -143451,6 +144120,7 @@ export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -143663,6 +144333,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInp
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -143888,6 +144559,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -144100,6 +144772,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInp
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -144310,6 +144983,7 @@ export type VendorMasterCreateManyStateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -144358,6 +145032,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -144569,6 +145244,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -144780,6 +145456,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -146310,6 +146987,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -146524,6 +147202,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -146575,6 +147254,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -146626,6 +147306,7 @@ export type VendorMasterSelectScalar = {
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -146655,7 +147336,7 @@ export type VendorMasterSelectScalar = {
   is_available_unique_code?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
@@ -147017,6 +147698,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     state_id: number | null
     is_inventory_enabled: boolean
     is_tracktrace_enabled: boolean
+    cutlist_configuration: string | null
     is_approval_task_enabled: boolean
     eligible_booking_days: number | null
     is_self_assign_task_type_master_enabed: boolean
@@ -147650,6 +148332,7 @@ export interface VendorMasterFieldRefs {
   readonly state_id: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly is_inventory_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly cutlist_configuration: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly eligible_booking_days: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly is_self_assign_task_type_master_enabed: Prisma.FieldRef<"VendorMaster", 'Boolean'>

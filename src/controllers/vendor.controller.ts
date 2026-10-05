@@ -360,9 +360,11 @@ export const onboardVendorController = async (req: Request, res: Response) => {
     const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
     const logoFile = files?.logo?.[0];
     const iconFile = files?.icon?.[0];
+    const loginImageFile = files?.login_image?.[0];
 
     let logoUrl = req.body.logo || "";
     let iconUrl = req.body.icon || "";
+    let loginImageUrl = req.body.login_image || "";
 
     if (logoFile) {
       logoUrl = await uploadToWasabiVendorAsset(
@@ -384,10 +386,21 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       await fs.unlink(iconFile.path);
     }
 
+    if (loginImageFile) {
+      loginImageUrl = await uploadToWasabiVendorAsset(
+        loginImageFile.path,
+        "login_image",
+        loginImageFile.originalname,
+        loginImageFile.mimetype
+      );
+      await fs.unlink(loginImageFile.path);
+    }
+
     const vendorData = {
       ...req.body,
       logo: logoUrl,
       icon: iconUrl,
+      login_image: loginImageUrl,
       gst_no: cleanString(req.body.gst_no),
       toll_free_no: cleanString(req.body.toll_free_no),
       website_link: cleanString(req.body.website_link),
@@ -847,4 +860,3 @@ export const getLeadServicingReportController = async (
     });
   }
 };
-
