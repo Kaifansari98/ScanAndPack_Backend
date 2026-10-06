@@ -1082,6 +1082,23 @@ export const updateBoxStatus = async (
 
   const now = new Date();
 
+  if (newStatus === BoxStatus.packed) {
+    const itemsCount = await prisma.cutListMachineMapping.count({
+      where: {
+        box_id: box.id,
+        project_id: box.project_id,
+        vendor_id: box.vendor_id,
+        actual_in_at: { not: null },
+      },
+    });
+
+    if (itemsCount === 0) {
+      throw new Error(
+        `Empty box ${box.box_name} cannot be packed, it should have at least 1 item inside it`
+      );
+    }
+  }
+
   let locationAllocationId: number | null = null;
   const normalizedLocationName = String(locationName ?? "").trim();
 
@@ -1105,10 +1122,6 @@ export const updateBoxStatus = async (
         cut_list: { select: { group_name: true } },
       },
     });
-
-    if (mappings.length === 0) {
-      throw new Error("Box is empty. Add items before packing it");
-    }
 
     const groupNames = Array.from(
       new Set(
