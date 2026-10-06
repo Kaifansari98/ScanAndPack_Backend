@@ -1373,11 +1373,52 @@ export const updateScannedItem = async (
         );
       }
 
-      if (locationAllocation.qty <= 0) {
-        return validationResponse(
+      let allocatedProductQty = locationAllocation.qty;
+
+      // Keep packing consistent with dispatch: a zero quantity means that
+      // this location may use the remaining group quota. The quota is only
+      // used for validation here; packing must not write it into the location
+      // row because the operator may assign the product to another location.
+      if (allocatedProductQty <= 0) {
+        const [groupQuantity, otherLocationRows] = await Promise.all([
+          prisma.cutList.aggregate({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              status: { equals: "active", mode: "insensitive" },
+              group_name: {
+                equals: productGroupName,
+                mode: "insensitive",
+              },
+            },
+            _min: { qty: true },
+          }),
+          prisma.projectLocationProductQuantity.findMany({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              group_name: {
+                equals: productGroupName,
+                mode: "insensitive",
+              },
+              id: { not: locationAllocation.id },
+            },
+            select: { qty: true },
+          }),
+        ]);
+        const totalProductQty = Math.max(0, Number(groupQuantity._min.qty || 0));
+        const otherLocationsQty = otherLocationRows.reduce(
+          (total, row) => total + Math.max(0, Number(row.qty || 0)),
           0,
-          `No quantity is allocated to Product Group "${productGroupName}" at location "${locationAllocation.location_name}"`,
         );
+        allocatedProductQty = Math.max(0, totalProductQty - otherLocationsQty);
+
+        if (allocatedProductQty <= 0) {
+          return validationResponse(
+            0,
+            `No unassigned quantity remains for Product Group "${productGroupName}"`,
+          );
+        }
       }
 
       const scannedAtLocation = await prisma.cutListMachineMapping.count({
@@ -1395,19 +1436,19 @@ export const updateScannedItem = async (
         1,
         Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
       );
-      const maximumItemQty = locationAllocation.qty * qtyPerBox;
+      const maximumItemQty = allocatedProductQty * qtyPerBox;
 
       if (scannedAtLocation >= maximumItemQty) {
         return validationResponse(
           0,
-          `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${locationAllocation.qty} at location "${locationAllocation.location_name}"`,
+          `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${allocatedProductQty} at location "${locationAllocation.location_name}"`,
         );
       }
 
       selectedLocationAllocation = {
         id: locationAllocation.id,
         locationName: locationAllocation.location_name,
-        allocatedProductQty: locationAllocation.qty,
+        allocatedProductQty,
         maximumItemQty,
       };
     }
@@ -1730,7 +1771,6 @@ export const updateScannedItem = async (
           where: {
             project_id: eligibleMapping.project_id,
             vendor_id,
-            machine_id,
             expected_in: true,
             actual_in_at: {
               not: null,
@@ -1741,40 +1781,45 @@ export const updateScannedItem = async (
             cut_list_id: {
               in: groupCutListIds,
             },
-            ...(selectedLocationAllocation
-              ? {
-                  project_location_product_quantity_id:
-                    selectedLocationAllocation.id,
-                }
-              : {
-                  project_location_product_quantity_id: null,
-                }),
           },
           select: {
             cut_list_id: true,
             in_operator: true,
+            project_location_product_quantity_id: true,
             qty: true,
           },
         });
 
-        const quantitiesByOperator = new Map<number, Map<number, number>>();
+        // A product group can be split across locations. Reserve boxes per
+        // operator and location, then enforce each CutList item's quantity
+        // globally so one location cannot consume another location's group
+        // item quota.
+        const quantitiesByOperatorAndLocation = new Map<
+          string,
+          Map<number, number>
+        >();
 
         for (const mapping of scannedGroupMappings) {
           if (!mapping.in_operator) continue;
 
+          const operatorLocationKey = `${mapping.in_operator}:${mapping.project_location_product_quantity_id ?? 0}`;
           const operatorQuantities =
-            quantitiesByOperator.get(mapping.in_operator) ?? new Map();
+            quantitiesByOperatorAndLocation.get(operatorLocationKey) ??
+            new Map();
           operatorQuantities.set(
             mapping.cut_list_id,
             (operatorQuantities.get(mapping.cut_list_id) ?? 0) +
               Math.max(1, Number(mapping.qty || 1)),
           );
-          quantitiesByOperator.set(mapping.in_operator, operatorQuantities);
+          quantitiesByOperatorAndLocation.set(
+            operatorLocationKey,
+            operatorQuantities,
+          );
         }
 
         const reservedQuantities = new Map<number, number>();
 
-        for (const operatorQuantities of quantitiesByOperator.values()) {
+        for (const operatorQuantities of quantitiesByOperatorAndLocation.values()) {
           const requiredBoxCount = Math.max(
             ...automaticPackingDefinition.packingGroupItems.map((item) =>
               Math.ceil(
@@ -1795,9 +1840,9 @@ export const updateScannedItem = async (
         }
 
         for (const item of automaticPackingDefinition.packingGroupItems) {
-          const availableQty = selectedLocationAllocation
-            ? selectedLocationAllocation.allocatedProductQty * item.qtyPerBox
-            : item.availableQty;
+          // CutList quantity is the total available quantity across all
+          // locations. Location allocations are quotas, not additional stock.
+          const availableQty = item.availableQty;
           const reservedQty = reservedQuantities.get(item.cutListId) ?? 0;
 
           if (reservedQty > availableQty) {
@@ -6566,7 +6611,13 @@ export const markBoxFactoryOutService = async (
             select: {
               id: true,
               qty: true,
-              cut_list: { select: { group_name: true } },
+              cut_list: {
+                select: {
+                  group_name: true,
+                  include_in_packing: true,
+                  scan_pack_validate: true,
+                },
+              },
               projectLocationProductQuantity: {
                 select: { id: true, location_name: true, group_name: true },
               },
@@ -6609,6 +6660,13 @@ export const markBoxFactoryOutService = async (
             box.cutListMachineMapping
               .map((mapping) => mapping.projectLocationProductQuantity?.location_name?.trim())
               .filter((location): location is string => Boolean(location)),
+          ),
+        );
+        const boxLocationIds = Array.from(
+          new Set(
+            box.cutListMachineMapping
+              .map((mapping) => mapping.projectLocationProductQuantity?.id)
+              .filter((id): id is number => id != null),
           ),
         );
 
@@ -6658,6 +6716,13 @@ export const markBoxFactoryOutService = async (
                         },
                       }
                     : {}),
+                  ...(boxLocationIds.length > 0
+                    ? {
+                        project_location_product_quantity_id: {
+                          in: boxLocationIds,
+                        },
+                      }
+                    : {}),
                 },
                 select: {
                   id: true,
@@ -6677,9 +6742,12 @@ export const markBoxFactoryOutService = async (
           const g = mapping.cut_list.group_name?.trim().toLowerCase();
           return g ? normalizedBoxGroupSet.has(g) : true;
         });
-        const locationScope = scopedProductSetMappings.length
-          ? scopedProductSetMappings
-          : box.cutListMachineMapping;
+        // Dispatch must validate the location assigned to this box itself.
+        // Product-set numbers repeat independently for Pune, Goa, etc., so
+        // using every box in the product set can incorrectly mix locations.
+        const locationScope = box.cutListMachineMapping.length
+          ? box.cutListMachineMapping
+          : scopedProductSetMappings;
         const allExistingLocations = Array.from(
           new Set(
             locationScope
@@ -6698,6 +6766,23 @@ export const markBoxFactoryOutService = async (
           );
         }
 
+        const hasOnlyScanPackDisabledItems =
+          box.cutListMachineMapping.length > 0 &&
+          box.cutListMachineMapping.every(
+            (mapping) =>
+              mapping.cut_list.include_in_packing === true &&
+              mapping.cut_list.scan_pack_validate === false,
+          );
+        const isAutomaticHardwareBox = hasOnlyScanPackDisabledItems;
+
+        let totalQuota = 0;
+        let totalDispatched = 0;
+        let boxAddsProductSetTotal = 0;
+
+        // Automatically created hardware boxes are not product-quantity boxes.
+        // Keep location validation above, but do not consume or validate the
+        // product-group quantity quota for these boxes.
+        if (!isAutomaticHardwareBox) {
         const cutListRows = await tx.cutList.findMany({
           where: { project_id, vendor_id },
           select: { group_name: true, qty: true },
@@ -6759,9 +6844,6 @@ export const markBoxFactoryOutService = async (
           dispatchedProductSetsByGroup.set(groupName, productSets);
         }
 
-        let totalQuota = 0;
-        let totalDispatched = 0;
-        let boxAddsProductSetTotal = 0;
         for (const [groupName, quota] of targetQuotaByGroup) {
           const dispatchedProductSets = dispatchedProductSetsByGroup.get(groupName) ?? new Set<string>();
           const boxProductSetKey = `${groupName}::${box.product_set_no ?? `box:${box.id}`}`;
@@ -6782,11 +6864,14 @@ export const markBoxFactoryOutService = async (
             );
           }
         }
+        }
 
-        const mappingsToBind = (scopedProductSetMappings.length
-          ? scopedProductSetMappings
-          : box.cutListMachineMapping
-        ).filter((mapping) => !mapping.projectLocationProductQuantity);
+        // If packing did not select a location, dispatch assigns the scanned
+        // box now. Bind only this box's mappings; product-set numbers repeat
+        // across locations and must not pull mappings from other boxes.
+        const mappingsToBind = box.cutListMachineMapping.filter(
+          (mapping) => !mapping.projectLocationProductQuantity,
+        );
 
         if (mappingsToBind.length > 0) {
           for (const mapping of mappingsToBind) {
@@ -6808,9 +6893,13 @@ export const markBoxFactoryOutService = async (
             });
           }
 
-          dispatchMessage = `Box assigned to ${selectedLocation}. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+          dispatchMessage = isAutomaticHardwareBox
+            ? `Hardware box assigned to ${selectedLocation} and dispatched successfully.`
+            : `Box is dispatched to ${selectedLocation}.`;
         } else {
-          dispatchMessage = `Box dispatched. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+          dispatchMessage = isAutomaticHardwareBox
+            ? `Hardware box dispatched to ${selectedLocation} successfully.`
+            : `Box is dispatched to ${selectedLocation}.`;
         }
       }
 
@@ -6831,7 +6920,10 @@ export const markBoxFactoryOutService = async (
     return result;
   } catch (error) {
     console.error("Error in markBoxFactoryOutService:", error);
-    return validationResponse(0, "Failed to mark factory out");
+    return validationResponse(
+      0,
+      error instanceof Error ? error.message : "Failed to mark factory out",
+    );
   }
 };
 
@@ -7226,6 +7318,7 @@ export const getProjectDetailService_old = async (
         project_status: true,
         track_trace_status: true,
         packing_type: true,
+        is_multi_location: true,
         lead_id: true,
 
         details: {
@@ -7984,6 +8077,7 @@ export const getProjectDetailService = async (
         project_status: true,
         track_trace_status: true,
         packing_type: true,
+        is_multi_location: true,
         lead_id: true,
 
         details: {
@@ -9838,6 +9932,7 @@ export const getProjectDetailService = async (
         project_status: project.project_status,
         track_trace_status: project.track_trace_status,
         packing_type: project.packing_type,
+        is_multi_location: project.is_multi_location,
         lead_id: project.lead_id,
         lead: lead
           ? {
@@ -12488,6 +12583,7 @@ type ApiResponseManualItems = ReturnType<typeof validationResponse>;
 export const getManualPackingItemsService = async (
   projectId: number,
   vendorId: number,
+  machineId?: number
 ): Promise<ApiResponseManualItems> => {
   if (!projectId || projectId <= 0) {
     return validationResponse(0, "project_id is required");
@@ -12599,17 +12695,22 @@ export const getManualPackingItemsService = async (
   |--------------------------------------------------------------------------
   */
 
-  const packagingMachines = await prisma.machineMaster.findMany({
-    where: {
-      vendor_id: vendorId,
-      machine_type_id: 18,
-    },
-    select: {
-      id: true,
-    },
-  });
+  let packagingMachineIds: number[] = [];
+  if (machineId) {
+    packagingMachineIds = [machineId];
+  } else {
+    const packagingMachines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        machine_type_id: 18,
+      },
+      select: {
+        id: true,
+      },
+    });
 
-  const packagingMachineIds = packagingMachines.map((machine) => machine.id);
+    packagingMachineIds = packagingMachines.map((machine) => machine.id);
+  }
 
   /*
   |--------------------------------------------------------------------------
@@ -12650,9 +12751,34 @@ export const getManualPackingItemsService = async (
   */
 
   const packedQtyMap = new Map<number, number>();
-
   for (const row of packedQtyRows) {
     packedQtyMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
+  }
+
+  // Find QC Machines if we are in Packing mode (!machineId)
+  const qcMachines = await prisma.machineMaster.findMany({
+    where: { vendor_id: vendorId, machine_type_id: 17, status: "ACTIVE" },
+    select: { id: true },
+  });
+  const qcMachineIds = qcMachines.map(m => m.id);
+  const hasQcMachines = qcMachineIds.length > 0;
+
+  const qcQtyRows = (!machineId && hasQcMachines)
+    ? await prisma.cutListMachineMapping.groupBy({
+        by: ["cut_list_id"],
+        where: {
+          project_id: projectId,
+          vendor_id: vendorId,
+          cut_list_id: { in: cutListIds },
+          machine_id: { in: qcMachineIds },
+        },
+        _sum: { qty: true },
+      })
+    : [];
+    
+  const qcQtyMap = new Map<number, number>();
+  for (const row of qcQtyRows) {
+    qcQtyMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
   }
 
   /*
@@ -12662,19 +12788,23 @@ export const getManualPackingItemsService = async (
   */
 
   const items = cutListItems.map((item) => {
-    const totalQty = Number(item.qty ?? 0);
+    const projectTotalQty = Number(item.qty ?? 0);
+
+    const effectiveMaxQty = (!machineId && hasQcMachines)
+       ? Number(qcQtyMap.get(item.id) ?? 0)
+       : projectTotalQty;
 
     const packedQty = Math.min(
       Number(packedQtyMap.get(item.id) ?? 0),
-      totalQty,
+      effectiveMaxQty,
     );
 
-    const pendingQty = Math.max(totalQty - packedQty, 0);
+    const pendingQty = Math.max(effectiveMaxQty - packedQty, 0);
 
     return {
       ...item,
 
-      total_qty: totalQty,
+      total_qty: projectTotalQty,
       packed_qty: packedQty,
       pending_qty: pendingQty,
 
@@ -13725,4 +13855,54 @@ export const getProjectItemTrackingService = async (
       })),
     },
   };
+};
+export const addManualQualityItemService = async (payload: any): Promise<any> => {
+  try {
+    const { project_id, vendor_id, machine_id, cut_list_id, qty, user_id } = payload;
+    
+    if (!project_id || !vendor_id || !machine_id || !cut_list_id || !qty || !user_id) {
+      return validationResponse(0, "Missing required fields");
+    }
+
+    const cutList = await prisma.cutList.findFirst({
+      where: { id: cut_list_id, project_id, vendor_id, status: "Active" }
+    });
+    
+    if (!cutList) return validationResponse(0, "Item not found");
+
+    const machine = await prisma.machineMaster.findFirst({
+      where: { id: machine_id, vendor_id, status: "ACTIVE" }
+    });
+
+    if (!machine) return validationResponse(0, "Machine not found");
+
+    const result = await prisma.$transaction(async (tx) => {
+      // Find existing mapping or create new
+      let mapping = await tx.cutListMachineMapping.findFirst({
+        where: { cut_list_id, machine_id, vendor_id, project_id, row_created_source: "Manual_QC" }
+      });
+      
+      if (mapping) {
+        mapping = await tx.cutListMachineMapping.update({
+          where: { id: mapping.id },
+          data: { qty: mapping.qty + qty, actual_in_at: new Date() }
+        });
+      } else {
+        mapping = await tx.cutListMachineMapping.create({
+          data: {
+            cut_list_id, machine_id, project_id, vendor_id,
+            sequence_no: machine.sequence_no ?? 0,
+            expected_in: true, expected_out: false,
+            status: "Pending", actual_in_at: new Date(),
+            in_operator: user_id, created_by: user_id,
+            qty, row_created_source: "Manual_QC"
+          }
+        });
+      }
+      return validationResponse(1, "Quality check passed for manual item", { mapping });
+    });
+    return result;
+  } catch (error: any) {
+    return validationResponse(0, error.message);
+  }
 };
