@@ -3,6 +3,7 @@ import { prisma } from "../../prisma/client";
 import { NotificationService } from "../notification/notification.service";
 import { NotificationType } from "../../prisma/generated";
 import logger from "../../utils/logger";
+import { wixStudioService } from "../wixStudio.service";
 
 export async function processPendingNotificationQueue() {
   try {
@@ -252,9 +253,24 @@ for (let i = 0; i < users.length; i += BATCH_SIZE) {
     }
 }
 
+let isWixStudioSweeping = false;
+
 export function startCronJobs() {
   // Run every 10 seconds for real-time notification processing
   cron.schedule("*/10 * * * * *", async () => {
     await processPendingNotificationQueue();
+  });
+
+  // Automatically sweep unprocessed Wix Studio data captures (e.g. manual DB inserts) every 20 seconds
+  cron.schedule("*/20 * * * * *", async () => {
+    if (isWixStudioSweeping) return;
+    isWixStudioSweeping = true;
+    try {
+      await wixStudioService.processAllUnprocessedRecords();
+    } catch (err: any) {
+      logger.error("[WIX STUDIO CRON] Error sweeping unprocessed captures:", err);
+    } finally {
+      isWixStudioSweeping = false;
+    }
   });
 }

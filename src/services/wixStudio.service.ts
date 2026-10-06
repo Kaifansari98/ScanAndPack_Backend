@@ -60,41 +60,74 @@ export class WixStudioService {
       root.submission,
       root.form,
       root.contact,
+      root.contact?.name,
+      root.contact?.address,
       root.customer,
+      root.customer?.name,
+      root.customer?.address,
       root.data?.contact,
+      root.data?.contact?.name,
+      root.data?.contact?.address,
       root.data?.submissionData,
       root.data?.customer,
+      root.submission?.contact,
+      root.submission?.contact?.name,
+      root.submission?.contact?.address,
       root.metadata,
     ].filter((o): o is Record<string, any> => o && typeof o === "object" && !Array.isArray(o));
 
-    // Handle Wix fields array: [{ label/key/name/id: '...', value: '...' }]
+    // Handle Wix submissions and fields array: [{ label/key/name/id: '...', value: '...' }]
     const fieldsMap: Record<string, any> = {};
-    const possibleFieldArrays = [
+    const possibleFieldArrays: any[] = [
+      root.submissions,
       root.fields,
       root.fieldValues,
+      root.form?.submissions,
       root.form?.fields,
+      root.data?.submissions,
       root.data?.fields,
+      root.data?.fieldValues,
+      root.submissionData?.submissions,
       root.submissionData?.fields,
+      root.submission?.submissions,
+      root.submission?.fields,
     ];
+
+    // Scan any other array property in containers for submissions/fields arrays
+    for (const container of [root, root.data, root.submissionData, root.submission, root.form]) {
+      if (!container || typeof container !== "object") continue;
+      for (const k of Object.keys(container)) {
+        const val = container[k];
+        if (Array.isArray(val) && !possibleFieldArrays.includes(val)) {
+          possibleFieldArrays.push(val);
+        }
+      }
+    }
 
     for (const arr of possibleFieldArrays) {
       if (Array.isArray(arr)) {
         for (const item of arr) {
           if (!item || typeof item !== "object") continue;
-          const key = item.label || item.name || item.key || item.id || item.title;
-          const val = item.value ?? item.val ?? item.text;
+          const key = item.label || item.name || item.key || item.id || item.title || item.tag;
+          const val = item.value ?? item.val ?? item.text ?? item.values;
           if (key && val !== undefined && val !== null) {
-            fieldsMap[String(key).trim()] = val;
+            const rawKeyStr = String(key).trim();
+            fieldsMap[rawKeyStr] = val;
+            fieldsMap[rawKeyStr.toLowerCase()] = val;
           }
         }
       }
     }
 
     if (Object.keys(fieldsMap).length > 0) {
-      objectsToSearch.push(fieldsMap);
+      objectsToSearch.unshift(fieldsMap);
     }
 
     const norm = (s: any) => String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    const stripFieldPrefix = (raw: string) => {
+      return String(raw || "").toLowerCase().trim().replace(/^field[:_]/, "");
+    };
 
     // Value finder across candidate objects
     const findValue = (matchFn: (normKey: string, rawKey: string, val: any) => boolean) => {
@@ -130,7 +163,8 @@ export class WixStudioService {
 
     // --- 1. NAME EXTRACTION ---
     let name: string | null = null;
-    const isNameKey = (k: string) => {
+    const isNameKey = (k: string, raw: string) => {
+      const lowerRaw = raw.toLowerCase().trim();
       if (
         [
           "campaignname",
@@ -145,6 +179,34 @@ export class WixStudioService {
       ) {
         return false;
       }
+
+      // 1. Explicit matching for submissions[] label "Full name"
+      if (
+        lowerRaw === "full name" ||
+        lowerRaw === "fullname" ||
+        lowerRaw === "name" ||
+        lowerRaw === "your name" ||
+        lowerRaw === "customer name" ||
+        lowerRaw === "client name"
+      ) {
+        return true;
+      }
+
+      // 2. field:* dynamic keys: field:first_name_*, field:name_*, field:full_name_*
+      if (lowerRaw.startsWith("field:") || lowerRaw.startsWith("field_")) {
+        const stripped = stripFieldPrefix(raw);
+        if (
+          stripped.startsWith("first_name") ||
+          stripped.startsWith("firstname") ||
+          stripped.startsWith("full_name") ||
+          stripped.startsWith("fullname") ||
+          stripped.startsWith("name")
+        ) {
+          return true;
+        }
+      }
+
+      // 3. Normalized key matches
       return (
         k === "name" ||
         k === "fullname" ||
@@ -153,10 +215,10 @@ export class WixStudioService {
         k === "clientname" ||
         k === "leadsname" ||
         k === "leadname" ||
+        k === "contactname" ||
         k.endsWith("fullname") ||
         k.endsWith("customername") ||
-        k.endsWith("clientname") ||
-        k === "contactname"
+        k.endsWith("clientname")
       );
     };
 
@@ -169,25 +231,111 @@ export class WixStudioService {
       } else if (typeof rawName === "object") {
         if (rawName.formatted) name = String(rawName.formatted).trim();
         else if (rawName.first || rawName.last) {
-          name = `${rawName.first || ""} ${rawName.last || ""}`.trim();
+          const f = String(rawName.first || "").trim();
+          const l = String(rawName.last || "").trim();
+          if (f && l) {
+            if (f.toLowerCase().includes(l.toLowerCase()) || l.toLowerCase().includes(f.toLowerCase())) {
+              name = f.length >= l.length ? f : l;
+            } else {
+              name = `${f} ${l}`.trim();
+            }
+          } else {
+            name = (f || l).trim();
+          }
         } else if (rawName.name) {
           name = String(rawName.name).trim();
         }
       }
     }
 
-    // First + Last name fallback
+    // First + Last name fallback (including contact.name.first or field:first_name_* / field:last_name_*)
     if (!name) {
-      const firstName = findValue((k) => ["firstname", "first", "fname"].includes(k));
-      const lastName = findValue((k) => ["lastname", "last", "lname"].includes(k));
+      const firstName = findValue((k, raw) => {
+        const lowerRaw = raw.toLowerCase().trim();
+        const stripped = stripFieldPrefix(raw);
+        return (
+          lowerRaw === "first name" ||
+          lowerRaw === "firstname" ||
+          stripped.startsWith("first_name") ||
+          stripped.startsWith("firstname") ||
+          ["firstname", "first", "fname"].includes(k)
+        );
+      });
+      const lastName = findValue((k, raw) => {
+        const lowerRaw = raw.toLowerCase().trim();
+        const stripped = stripFieldPrefix(raw);
+        return (
+          lowerRaw === "last name" ||
+          lowerRaw === "lastname" ||
+          stripped.startsWith("last_name") ||
+          stripped.startsWith("lastname") ||
+          ["lastname", "last", "lname"].includes(k)
+        );
+      });
       if (firstName || lastName) {
         name = `${firstName ? String(firstName).trim() : ""} ${lastName ? String(lastName).trim() : ""}`.trim();
       }
     }
 
+    // Direct check for contact.name.first / contact.name.last if still not found
+    if (!name) {
+      const cName =
+        root.contact?.name ||
+        root.data?.contact?.name ||
+        root.submission?.contact?.name;
+      if (cName && typeof cName === "object") {
+        if (cName.first || cName.last) {
+          const f = String(cName.first || "").trim();
+          const l = String(cName.last || "").trim();
+          if (f && l) {
+            if (f.toLowerCase().includes(l.toLowerCase()) || l.toLowerCase().includes(f.toLowerCase())) {
+              name = f.length >= l.length ? f : l;
+            } else {
+              name = `${f} ${l}`.trim();
+            }
+          } else {
+            name = (f || l).trim();
+          }
+        } else if (cName.formatted || cName.name) {
+          name = String(cName.formatted || cName.name).trim();
+        }
+      } else if (typeof cName === "string" && cName.trim()) {
+        name = cName.trim();
+      }
+    }
+
     // --- 2. PHONE EXTRACTION ---
     let phone: string | null = null;
-    const isPhoneKey = (k: string) => {
+    const isPhoneKey = (k: string, raw: string) => {
+      const lowerRaw = raw.toLowerCase().trim();
+
+      // 1. Explicit matching for submissions[] label "Phone"
+      if (
+        lowerRaw === "phone" ||
+        lowerRaw === "phone number" ||
+        lowerRaw === "your phone" ||
+        lowerRaw === "mobile" ||
+        lowerRaw === "mobile number" ||
+        lowerRaw === "contact" ||
+        lowerRaw === "contact number"
+      ) {
+        return true;
+      }
+
+      // 2. field:* dynamic keys: field:phone_4c77, field:phone_*, field:phone
+      if (lowerRaw.startsWith("field:") || lowerRaw.startsWith("field_")) {
+        const stripped = stripFieldPrefix(raw);
+        if (
+          stripped.startsWith("phone") ||
+          stripped.startsWith("contact") ||
+          stripped.startsWith("mobile") ||
+          stripped.startsWith("cell")
+        ) {
+          return true;
+        }
+      }
+
+      // 3. Normalized key matches
       return (
         k === "phone" ||
         k === "phones" ||
@@ -202,7 +350,9 @@ export class WixStudioService {
         k === "mobileno" ||
         k === "mobilenumber" ||
         k === "primaryphone" ||
-        k === "cellphone"
+        k === "cellphone" ||
+        k.endsWith("phonenumber") ||
+        k.endsWith("phone")
       );
     };
 
@@ -233,16 +383,58 @@ export class WixStudioService {
     const rawPhone = findValue(isPhoneKey);
     phone = cleanPhone(rawPhone);
 
+    // Direct check for contact.phone if still not found
+    if (!phone) {
+      const cPhone =
+        root.contact?.phone ||
+        root.data?.contact?.phone ||
+        root.submission?.contact?.phone ||
+        root.contact?.phones ||
+        root.data?.contact?.phones;
+      if (cPhone) {
+        phone = cleanPhone(cPhone);
+      }
+    }
+
     // --- 3. CITY EXTRACTION ---
     let city: string | null = null;
-    const isCityKey = (k: string) => {
+    const isCityKey = (k: string, raw: string) => {
+      const lowerRaw = raw.toLowerCase().trim();
+
+      // 1. Explicit matching for submissions[] label "City"
+      if (
+        lowerRaw === "city" ||
+        lowerRaw === "your city" ||
+        lowerRaw === "location" ||
+        lowerRaw === "project location"
+      ) {
+        return true;
+      }
+
+      // 2. field:* dynamic keys: field:city, field:city_*
+      if (lowerRaw.startsWith("field:") || lowerRaw.startsWith("field_")) {
+        const stripped = stripFieldPrefix(raw);
+        if (
+          stripped === "city" ||
+          stripped.startsWith("city") ||
+          stripped.startsWith("location") ||
+          stripped.startsWith("address")
+        ) {
+          return true;
+        }
+      }
+
+      // 3. Normalized key matches
       return (
         k === "city" ||
         k === "cityname" ||
         k === "yourcity" ||
         k === "location" ||
         k === "projectlocation" ||
-        k === "sitelocation"
+        k === "sitelocation" ||
+        k === "addressline" ||
+        k === "addressline1" ||
+        k === "address"
       );
     };
 
@@ -250,14 +442,59 @@ export class WixStudioService {
     if (typeof rawCity === "string" && rawCity.trim()) {
       city = rawCity.trim();
     } else if (typeof rawCity === "object" && rawCity !== null) {
-      if (typeof rawCity.city === "string") city = rawCity.city.trim();
-      else if (typeof rawCity.name === "string") city = rawCity.name.trim();
+      if (typeof rawCity.addressLine === "string" && rawCity.addressLine.trim()) city = rawCity.addressLine.trim();
+      else if (typeof rawCity.city === "string" && rawCity.city.trim()) city = rawCity.city.trim();
+      else if (typeof rawCity.name === "string" && rawCity.name.trim()) city = rawCity.name.trim();
       else if (typeof rawCity.value === "string") city = rawCity.value.trim();
+    }
+
+    // Direct check for contact.address.addressLine / contact.address.city
+    if (!city) {
+      const cAddr =
+        root.contact?.address ||
+        root.data?.contact?.address ||
+        root.submission?.contact?.address;
+      if (cAddr && typeof cAddr === "object") {
+        city =
+          cAddr.addressLine?.trim() ||
+          cAddr.addressLine1?.trim() ||
+          cAddr.city?.trim() ||
+          cAddr.line1?.trim() ||
+          null;
+      }
     }
 
     // --- 4. REQUIREMENT EXTRACTION (handles string or array) ---
     let requirement: string | string[] | null = null;
-    const isReqKey = (k: string) => {
+    const isReqKey = (k: string, raw: string) => {
+      const lowerRaw = raw.toLowerCase().trim();
+
+      // 1. Explicit matching for submissions[] label "Requirement"
+      if (
+        lowerRaw === "requirement" ||
+        lowerRaw === "requirements" ||
+        lowerRaw === "your requirement" ||
+        lowerRaw === "product" ||
+        lowerRaw === "products"
+      ) {
+        return true;
+      }
+
+      // 2. field:* dynamic keys: field:requirement, field:requirement_*
+      if (lowerRaw.startsWith("field:") || lowerRaw.startsWith("field_")) {
+        const stripped = stripFieldPrefix(raw);
+        if (
+          stripped === "requirement" ||
+          stripped.startsWith("requirement") ||
+          stripped.startsWith("product") ||
+          stripped.startsWith("modular") ||
+          stripped.startsWith("service")
+        ) {
+          return true;
+        }
+      }
+
+      // 3. Normalized key matches
       return (
         k === "requirement" ||
         k === "requirements" ||
@@ -286,7 +523,11 @@ export class WixStudioService {
             return String(item || "").trim();
           })
           .filter(Boolean);
-        if (cleaned.length > 0) requirement = cleaned;
+        if (cleaned.length === 1) {
+          requirement = cleaned[0];
+        } else if (cleaned.length > 1) {
+          requirement = cleaned;
+        }
       } else if (typeof rawReq === "string" && rawReq.trim()) {
         requirement = rawReq.trim();
       }
@@ -294,15 +535,33 @@ export class WixStudioService {
 
     // --- 5. EMAIL (optional) ---
     let email: string | null = null;
-    const rawEmail = findValue((k) =>
-      ["email", "emailid", "emailaddress", "mail", "youremail"].includes(k)
-    );
+    const isEmailKey = (k: string, raw: string) => {
+      const lowerRaw = raw.toLowerCase().trim();
+      if (lowerRaw === "email" || lowerRaw === "email address") return true;
+      if (lowerRaw.startsWith("field:") || lowerRaw.startsWith("field_")) {
+        const stripped = stripFieldPrefix(raw);
+        if (stripped.startsWith("email") || stripped.startsWith("mail")) return true;
+      }
+      return ["email", "emailid", "emailaddress", "mail", "youremail"].includes(k);
+    };
+
+    const rawEmail = findValue(isEmailKey);
     if (typeof rawEmail === "string" && rawEmail.includes("@")) {
       email = rawEmail.trim();
     } else if (Array.isArray(rawEmail) && rawEmail[0] && String(rawEmail[0]).includes("@")) {
       email = String(rawEmail[0]).trim();
     } else if (typeof rawEmail === "object" && rawEmail?.email) {
       email = String(rawEmail.email).trim();
+    }
+
+    if (!email) {
+      const cEmail =
+        root.contact?.email ||
+        root.data?.contact?.email ||
+        root.submission?.contact?.email;
+      if (typeof cEmail === "string" && cEmail.includes("@")) {
+        email = cEmail.trim();
+      }
     }
 
     return { name, phone, city, requirement, email };
@@ -321,7 +580,7 @@ export class WixStudioService {
       return {
         valid: false,
         statusCode: 400,
-        error: "vendor_id query parameter is required and must be a valid positive integer (e.g. ?vendor_id=1)",
+        error: "Valid vendor ID is required.",
       };
     }
 
@@ -361,6 +620,77 @@ export class WixStudioService {
     }
 
     return { valid: true, vendor };
+  };
+
+  /**
+   * Validates a vendor using their vendor_token:
+   * - Must exist in vendorTokens table
+   * - Must not be expired
+   * - Associated VendorMaster must exist
+   * - Vendor status must be 'active'
+   * - is_online_lead_feature_enabled must be true
+   */
+  validateVendorToken = async (
+    token: string
+  ): Promise<{ valid: boolean; statusCode?: number; error?: string; vendor?: any; tokenRecord?: any }> => {
+    if (!token || typeof token !== "string" || !token.trim()) {
+      return {
+        valid: false,
+        statusCode: 400,
+        error: "vendor_token query parameter is required (e.g. ?vendor_token=<VENDOR_TOKEN>)",
+      };
+    }
+
+    const tokenEntry = await prisma.vendorTokens.findFirst({
+      where: {
+        token: token.trim(),
+      },
+      include: {
+        vendor: {
+          select: {
+            id: true,
+            vendor_name: true,
+            vendor_code: true,
+            status: true,
+            is_online_lead_feature_enabled: true,
+          },
+        },
+      },
+    });
+
+    if (!tokenEntry || !tokenEntry.vendor) {
+      return {
+        valid: false,
+        statusCode: 401,
+        error: "Invalid vendor_token. No matching vendor found for this token.",
+      };
+    }
+
+    if (tokenEntry.expiry_date && new Date(tokenEntry.expiry_date) <= new Date()) {
+      return {
+        valid: false,
+        statusCode: 401,
+        error: "vendor_token has expired or been revoked.",
+      };
+    }
+
+    if (tokenEntry.vendor.status !== "active") {
+      return {
+        valid: false,
+        statusCode: 403,
+        error: `Vendor '${tokenEntry.vendor.vendor_name}' (ID: ${tokenEntry.vendor.id}) is inactive.`,
+      };
+    }
+
+    if (!tokenEntry.vendor.is_online_lead_feature_enabled) {
+      return {
+        valid: false,
+        statusCode: 403,
+        error: `Online lead feature is disabled for vendor '${tokenEntry.vendor.vendor_name}' (ID: ${tokenEntry.vendor.id}). 'is_online_lead_feature_enabled' must be true.`,
+      };
+    }
+
+    return { valid: true, vendor: tokenEntry.vendor, tokenRecord: tokenEntry };
   };
 
   /**
@@ -434,18 +764,11 @@ export class WixStudioService {
       const extracted = this.extractWixStudioLeadData(record.payload);
       const { name, phone, city, requirement } = extracted;
 
-      // 3. Check if all 4 required fields are present
+      // 3. Check if required fields are present (name, phone, city)
       const missingFields: string[] = [];
       if (!name || !name.trim()) missingFields.push("name");
       if (!phone || phone.length < 10) missingFields.push("phone");
       if (!city || !city.trim()) missingFields.push("city");
-      if (
-        !requirement ||
-        (Array.isArray(requirement) && requirement.length === 0) ||
-        (typeof requirement === "string" && !requirement.trim())
-      ) {
-        missingFields.push("requirement");
-      }
 
       if (missingFields.length > 0 || !phone) {
         // Skip invalid records
@@ -515,7 +838,9 @@ export class WixStudioService {
   }) => {
     const filterVendorId = options?.filterVendorId;
     const records = await prisma.wixStudioDataCapture.findMany({
-      where: filterVendorId ? { vendor_id: filterVendorId } : undefined,
+      where: filterVendorId
+        ? { vendor_id: filterVendorId }
+        : { vendor_id: { not: null } },
       orderBy: { id: "asc" },
     });
 
@@ -563,20 +888,13 @@ export class WixStudioService {
         continue;
       }
 
-      // 3. Extract required fields
+      // 3. Extract fields (name, phone, city are required; requirement is optional)
       const extracted = this.extractWixStudioLeadData(record.payload);
       const { name, phone, city, requirement } = extracted;
       const missingFields: string[] = [];
       if (!name || !name.trim()) missingFields.push("name");
       if (!phone || phone.length < 10) missingFields.push("phone");
       if (!city || !city.trim()) missingFields.push("city");
-      if (
-        !requirement ||
-        (Array.isArray(requirement) && requirement.length === 0) ||
-        (typeof requirement === "string" && !requirement.trim())
-      ) {
-        missingFields.push("requirement");
-      }
 
       if (missingFields.length > 0 || !phone) {
         skippedCount++;
@@ -672,13 +990,21 @@ export class WixStudioService {
   ): Promise<ProcessWixLeadResult> => {
     const captureRecordId = options?.captureRecordId;
 
-    // 1. Resolve vendor_id (Priority: explicitVendorId -> query.vendor_id -> dynamic fallback)
+    // 1. Resolve vendor_id (Priority: explicitVendorId -> query/header vendor_token -> dynamic fallback)
     let vendorId: number | null = options?.explicitVendorId || null;
 
     if (!vendorId && options?.req) {
-      const qVendorId = options.req.query?.vendor_id || options.req.query?.vendorId;
-      if (qVendorId && !isNaN(Number(qVendorId))) {
-        vendorId = Number(qVendorId);
+      const qVendorToken =
+        options.req.query?.vendor_token ||
+        options.req.query?.vendorToken ||
+        options.req.headers?.["x-vendor-token"] ||
+        options.req.headers?.["vendor_token"] ||
+        options.req.headers?.["vendor-token"];
+      if (qVendorToken && typeof qVendorToken === "string" && qVendorToken.trim()) {
+        const tokenCheck = await this.validateVendorToken(qVendorToken.trim());
+        if (tokenCheck.valid && tokenCheck.vendor?.id) {
+          vendorId = tokenCheck.vendor.id;
+        }
       }
     }
 
@@ -709,24 +1035,17 @@ export class WixStudioService {
       };
     }
 
-    // 3. Extract the 4 required fields
+    // 3. Extract fields (name, phone, city are required; requirement is optional)
     const extracted = this.extractWixStudioLeadData(rawPayload);
 
-    // 4. Validate all 4 required fields (city, name, phone, requirement)
+    // 4. Validate required fields (city, name, phone)
     const { name, phone, city, requirement, email } = extracted;
     const missingFields: string[] = [];
     if (!name || !name.trim()) missingFields.push("name");
     if (!phone || phone.length < 10) missingFields.push("phone");
     if (!city || !city.trim()) missingFields.push("city");
-    if (
-      !requirement ||
-      (Array.isArray(requirement) && requirement.length === 0) ||
-      (typeof requirement === "string" && !requirement.trim())
-    ) {
-      missingFields.push("requirement");
-    }
 
-    if (missingFields.length > 0 || !name || !phone || !city || !requirement) {
+    if (missingFields.length > 0 || !name || !phone || !city) {
       logger.warn(
         `[WIX STUDIO] Missing required field(s) for Lead Pool lead creation: [${missingFields.join(", ")}]${captureRecordId ? ` (Capture Record ID: ${captureRecordId})` : ""}`
       );
@@ -737,19 +1056,28 @@ export class WixStudioService {
       };
     }
 
-    // Format requirement and product types
-    const reqVal: string | string[] = requirement;
-    const requirementStr = Array.isArray(reqVal)
-      ? reqVal.join(", ")
-      : String(reqVal).trim();
+    // Format optional requirement and product types
+    let productTypes: string[] = [];
+    let formattedRemark = "-";
 
-    const productTypes = Array.isArray(reqVal)
-      ? reqVal
-      : reqVal.includes(",")
-      ? reqVal.split(",").map((s) => s.trim()).filter(Boolean)
-      : [reqVal.trim()];
+    if (
+      requirement &&
+      !(Array.isArray(requirement) && requirement.length === 0) &&
+      !(typeof requirement === "string" && !requirement.trim())
+    ) {
+      const reqVal: string | string[] = requirement;
+      const requirementStr = Array.isArray(reqVal)
+        ? reqVal.join(", ")
+        : String(reqVal).trim();
 
-    const formattedRemark = `Requirement: ${requirementStr}`;
+      productTypes = Array.isArray(reqVal)
+        ? reqVal
+        : reqVal.includes(",")
+        ? reqVal.split(",").map((s) => s.trim()).filter(Boolean)
+        : [reqVal.trim()];
+
+      formattedRemark = `Requirement: ${requirementStr}`;
+    }
 
     // 5. Reuse existing Lead Pool lead creation flow (createOrUpdateOnlineLead)
     // assign_to: null sends the lead directly into the unassigned Lead Pool
@@ -788,8 +1116,6 @@ export class WixStudioService {
       root?.vendor_token || root?.vendorToken || root?.metadata?.vendor_token;
     const payloadVendorCode =
       root?.vendor_code || root?.vendorCode || root?.metadata?.vendor_code;
-    const payloadVendorId =
-      root?.vendor_id || root?.vendorId || root?.metadata?.vendor_id;
 
     if (req) {
       // If request exists, enrich req.body with payload vendor fields if not already present
@@ -802,9 +1128,6 @@ export class WixStudioService {
       if (payloadVendorCode && !req.query?.vendor_code && !enrichedBody.vendor_code) {
         enrichedBody.vendor_code = payloadVendorCode;
       }
-      if (payloadVendorId && !req.query?.vendor_id && !enrichedBody.vendor_id) {
-        enrichedBody.vendor_id = payloadVendorId;
-      }
       req.body = enrichedBody;
       return req;
     }
@@ -816,7 +1139,6 @@ export class WixStudioService {
       body: {
         vendor_token: payloadVendorToken,
         vendor_code: payloadVendorCode,
-        vendor_id: payloadVendorId,
       },
     } as unknown as Request;
   };
