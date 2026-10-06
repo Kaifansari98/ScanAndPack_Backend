@@ -438,11 +438,18 @@ export class OrderLoginController {
       const actor = (req as any).user;
       const vendor_id = Number(req.params.vendorId);
       const lead_id = Number(req.params.leadId);
+      const instanceId = req.query.instance_id === undefined
+        ? undefined
+        : Number(req.query.instance_id);
+      if (instanceId !== undefined && (!Number.isSafeInteger(instanceId) || instanceId <= 0)) {
+        return res.status(400).json({ message: "instance_id must be a positive integer" });
+      }
       if (actor?.vendor_id !== vendor_id) return res.status(403).json({ message: "Vendor access denied" });
       const lead = await prisma.leadMaster.findFirst({ where: { id: lead_id, vendor_id, ...(actor.franchise_id ? { franchise_id: actor.franchise_id } : {}) } });
       if (!lead) return res.status(404).json({ message: "Lead not found" });
       const data = await prisma.productsRequiredForProduction.findMany({
-        where: { vendor_id, lead_id, instance_id: req.query.instance_id ? Number(req.query.instance_id) : null },
+        // Without an instance filter, material issue shows all saved rows for the lead.
+        where: { vendor_id, lead_id, ...(instanceId !== undefined ? { instance_id: instanceId } : {}) },
         include: { product: { select: {
           id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, min_stock_qty: true, active: true,
           unit_of_measure: true, stockUnit: { select: { unit_name: true } },
