@@ -349,6 +349,29 @@ export const ensureDefaultStatuses = async (vendorId: number) => {
   }
 };
 
+export const getOrCreateInactiveStatus = async (vendorId: number) => {
+  let inactiveStatus = await prisma.online_lead_followup_status.findFirst({
+    where: {
+      vendor_id: vendorId,
+      status_name: { equals: "Inactive", mode: "insensitive" },
+    },
+  });
+
+  if (!inactiveStatus) {
+    inactiveStatus = await prisma.online_lead_followup_status.create({
+      data: {
+        vendor_id: vendorId,
+        status_name: "Inactive",
+        followup_required: false,
+        is_active: false,
+        updated_at: new Date(),
+      },
+    });
+  }
+
+  return inactiveStatus;
+};
+
 /**
  * Generates an incremented online lead code (e.g. VK-101) with row-level locking.
  */
@@ -1026,6 +1049,9 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
         );
 
     if (existingOnlineLead) {
+      if (existingOnlineLead.approval_status === "INACTIVE") {
+        return existingOnlineLead;
+      }
       const existingTypes = Array.isArray(existingOnlineLead.product_types)
         ? existingOnlineLead.product_types
         : [];
@@ -1195,6 +1221,10 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
       },
     });
   });
+
+  if (lead.approval_status === "INACTIVE") {
+    return { lead, isNew: false };
+  }
 
   // Create lead history entry
   if (defaultStatus) {

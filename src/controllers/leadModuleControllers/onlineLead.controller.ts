@@ -23,6 +23,7 @@ import {
   createOrUpdateOnlineLead,
   generateOnlineLeadCode as generateCodeHelper,
   ensureDefaultStatuses,
+  getOrCreateInactiveStatus,
   formatDesignRemarks,
   extractSurveyDetails,
 } from "../../services/leadModuleServices/onlineLead.service";
@@ -641,7 +642,7 @@ export class OnlineLeadController {
         NOT: {
           online_lead_followup_status: {
             status_name: {
-              in: ["Store Assigned", "Store Visit Done"],
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
               mode: "insensitive",
             },
           },
@@ -720,7 +721,7 @@ export class OnlineLeadController {
         NOT: {
           online_lead_followup_status: {
             status_name: {
-              in: ["Store Assigned", "Store Visit Done"],
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
               mode: "insensitive",
             },
           },
@@ -4604,35 +4605,79 @@ export class OnlineLeadController {
         }
       }
 
+      const requestingUser = await getRequestingUser(req);
+      const inactiveStatus = await getOrCreateInactiveStatus(lead.vendor_id);
+
       await prisma.$transaction(async (tx) => {
         if (lead.lead_master_id) {
           await tx.leadMaster.updateMany({
             where: { id: lead.lead_master_id },
-            data: { is_deleted: true },
+            data: { is_deleted: true, deleted_at: new Date() },
           });
         }
 
-        await tx.online_lead_history.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.online_lead_call_log.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.online_lead_store_log.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.telecaller_campaign_leads.deleteMany({
-          where: { online_lead_id: id },
+        // Mark lead as inactive in online_leads
+        await tx.online_leads.update({
+          where: { id },
+          data: {
+            approval_status: "INACTIVE",
+            status: inactiveStatus.id,
+            updated_at: new Date(),
+          },
         });
 
-        await tx.online_leads.delete({
-          where: { id },
+        // Add history record for audit/tracking
+        await tx.online_lead_history.create({
+          data: {
+            vendor_id: lead.vendor_id,
+            online_lead_id: id,
+            remark: "Lead deleted from Lead Pool (marked inactive)",
+            created_by: requestingUser?.id || lead.created_by || 1,
+            online_lead_status_id: inactiveStatus.id,
+          },
         });
+
+        // Treat corresponding Wix Studio capture record(s) as inactive/consumed
+        const cleanContactDigits = String(lead.contact || "").replace(/\D/g, "");
+        const last10Digits = cleanContactDigits.slice(-10);
+
+        const wixCaptures = await tx.wixStudioDataCapture.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+          },
+        });
+
+        for (const capture of wixCaptures) {
+          const payloadStr = JSON.stringify(capture.payload || {});
+          const matchesPhone =
+            (last10Digits && payloadStr.includes(last10Digits)) ||
+            (cleanContactDigits && payloadStr.includes(cleanContactDigits)) ||
+            (lead.email && payloadStr.toLowerCase().includes(lead.email.toLowerCase()));
+
+          if (matchesPhone) {
+            const currentPayload =
+              typeof capture.payload === "object" && capture.payload !== null
+                ? (capture.payload as Record<string, any>)
+                : {};
+            await tx.wixStudioDataCapture.update({
+              where: { id: capture.id },
+              data: {
+                payload: {
+                  ...currentPayload,
+                  is_inactive: true,
+                  status: "inactive",
+                  consumed: true,
+                  inactive_at: new Date().toISOString(),
+                },
+              },
+            });
+          }
+        }
       });
 
       return res
         .status(200)
-        .json({ success: true, message: "Lead deleted successfully" });
+        .json({ success: true, message: "Lead marked inactive successfully" });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] deleteLead error:", error);
       return res.status(500).json({

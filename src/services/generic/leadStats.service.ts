@@ -488,7 +488,7 @@ export class LeadStatsService {
         NOT: {
           online_lead_followup_status: {
             status_name: {
-              in: ["Store Assigned", "Store Visit Done"],
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
               mode: "insensitive",
             },
           },

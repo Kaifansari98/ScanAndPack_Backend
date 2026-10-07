@@ -760,6 +760,15 @@ export class WixStudioService {
     });
 
     for (const record of records) {
+      const payloadObj = record.payload as any;
+      if (
+        payloadObj?.is_inactive === true ||
+        payloadObj?.status === "inactive" ||
+        payloadObj?.consumed === true
+      ) {
+        continue;
+      }
+
       // 2. Extract lead fields directly from the original Wix payload
       const extracted = this.extractWixStudioLeadData(record.payload);
       const { name, phone, city, requirement } = extracted;
@@ -859,6 +868,22 @@ export class WixStudioService {
     let skippedCount = 0;
 
     for (const record of records) {
+      const payloadObj = record.payload as any;
+      if (
+        payloadObj?.is_inactive === true ||
+        payloadObj?.status === "inactive" ||
+        payloadObj?.consumed === true
+      ) {
+        alreadyProcessedCount++;
+        results.push({
+          capture_id: record.id,
+          vendor_id: record.vendor_id ?? undefined,
+          status: "already_processed",
+          reason: "Wix Studio capture record is marked inactive/consumed",
+        });
+        continue;
+      }
+
       const vendorId = record.vendor_id;
 
       if (!vendorId) {
@@ -923,18 +948,29 @@ export class WixStudioService {
             { contact: `91${normalizedPhone}` },
           ],
         },
-        select: { id: true, lead_code: true },
+        select: {
+          id: true,
+          lead_code: true,
+          approval_status: true,
+          online_lead_followup_status: { select: { status_name: true } },
+        },
       });
 
       if (existingLead) {
         alreadyProcessedCount++;
+        const isInactive =
+          existingLead.approval_status === "INACTIVE" ||
+          existingLead.online_lead_followup_status?.status_name?.toLowerCase() === "inactive";
+
         results.push({
           capture_id: record.id,
           vendor_id: vendorId,
           status: "already_processed",
           lead_id: existingLead.id,
           lead_code: existingLead.lead_code || undefined,
-          reason: `Lead already exists in Lead Pool (ID: ${existingLead.id}, Code: ${existingLead.lead_code})`,
+          reason: isInactive
+            ? `Lead is marked inactive in database (ID: ${existingLead.id}, Code: ${existingLead.lead_code})`
+            : `Lead already exists in Lead Pool (ID: ${existingLead.id}, Code: ${existingLead.lead_code})`,
         });
         continue;
       }
@@ -1079,7 +1115,43 @@ export class WixStudioService {
       formattedRemark = `Requirement: ${requirementStr}`;
     }
 
-    // 5. Reuse existing Lead Pool lead creation flow (createOrUpdateOnlineLead)
+    // 5. Duplicate & Inactive check
+    const cleanDigits = String(phone).replace(/\D/g, "");
+    const normalizedPhone = cleanDigits.slice(-10);
+
+    const existingLead = await prisma.online_leads.findFirst({
+      where: {
+        vendor_id: vendorId,
+        OR: [
+          { contact: normalizedPhone },
+          { contact: cleanDigits },
+          { contact: String(phone).trim() },
+          { contact: `+91${normalizedPhone}` },
+          { contact: `91${normalizedPhone}` },
+        ],
+      },
+      include: {
+        online_lead_followup_status: true,
+      },
+    });
+
+    if (
+      existingLead &&
+      (existingLead.approval_status === "INACTIVE" ||
+        existingLead.online_lead_followup_status?.status_name?.toLowerCase() === "inactive")
+    ) {
+      logger.info(
+        `[WIX STUDIO] Lead ${existingLead.lead_code} (${existingLead.id}) is marked inactive. Skipping recreation.`
+      );
+      return {
+        leadCreated: false,
+        lead: existingLead,
+        isNew: false,
+        reason: `Lead is marked inactive in database (ID: ${existingLead.id}, Code: ${existingLead.lead_code})`,
+      };
+    }
+
+    // 6. Reuse existing Lead Pool lead creation flow (createOrUpdateOnlineLead)
     // assign_to: null sends the lead directly into the unassigned Lead Pool
     // Idempotent: If contact exists for this vendor, it updates the existing lead without duplicating
     const leadResult = await createOrUpdateOnlineLead({
