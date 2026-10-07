@@ -1381,7 +1381,7 @@ export const toggleProjectCategoryStatus = async (
   }
   return res
     .status(200)
-    .json(ApiResponse.success(serviceResponse.data, "", 200));
+    .json(ApiResponse.success(serviceResponse.data, serviceResponse.message, 200));
 };
 
 export const unsetBoxFromMapping = async (req: Request, res: Response) => {
