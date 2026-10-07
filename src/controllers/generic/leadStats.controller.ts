@@ -30,10 +30,20 @@ export class LeadStatsController {
           .json({ success: false, message: "Invalid franchiseId" });
       }
 
+      const onlineLeadFranchiseRaw = req.query.online_lead_franchise_id;
+      const onlineLeadFranchiseId = onlineLeadFranchiseRaw === undefined
+        ? undefined
+        : Number(onlineLeadFranchiseRaw);
+      if (onlineLeadFranchiseId !== undefined &&
+          (!Number.isSafeInteger(onlineLeadFranchiseId) || onlineLeadFranchiseId <= 0)) {
+        return res.status(400).json({ success: false, message: "Invalid online lead franchiseId" });
+      }
+
       const stats = await LeadStatsService.getVendorLeadStats(
         vendorId,
         franchiseId,
-        userId
+        userId,
+        onlineLeadFranchiseId
       );
 
       logger.info("Fetched lead stats successfully", {
