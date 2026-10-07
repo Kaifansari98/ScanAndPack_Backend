@@ -6,7 +6,8 @@ export class LeadStatsService {
   static async getVendorLeadStats(
     vendorId: number,
     franchiseId: number | undefined,
-    userId?: number
+    userId?: number,
+    onlineLeadFranchiseId?: number
   ) {
     logger.info("[LeadStatsService] getVendorLeadStats called", {
       vendorId,
@@ -32,6 +33,7 @@ export class LeadStatsService {
     let isCaller = false;
     let targetFranchiseId: number | undefined = franchiseId;
     let isHO = false;
+    let userFranchiseId: number | undefined;
 
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
@@ -50,6 +52,7 @@ export class LeadStatsService {
         throw new Error("User does not belong to the specified vendor");
       }
 
+      userFranchiseId = user.franchise_id ?? undefined;
       isHO = user.franchise_id
         ? (
             await prisma.franchiseMaster.findUnique({
@@ -284,14 +287,7 @@ export class LeadStatsService {
 
     let totalDraftLeads = 0;
     if (isOnlineLeadFeatureEnabled) {
-      const shouldIncludeFranchise = userId
-        ? (userType === "admin" ||
-            userType === "auditor" ||
-            userType === "sales-executive") &&
-          !isHO
-        : Boolean(franchiseId);
-
-      const effectiveFranchiseId = userId ? targetFranchiseId : franchiseId;
+      const effectiveFranchiseId = onlineLeadFranchiseId ?? franchiseId ?? userFranchiseId;
 
       const pendingOnlineWhere: any = {
         vendor_id: vendorId,
@@ -311,19 +307,7 @@ export class LeadStatsService {
           ],
         };
 
-        if (shouldIncludeFranchise && effectiveFranchiseId) {
-          pendingOnlineWhere.AND = [
-            {
-              OR: [
-                { pending_store_id: effectiveFranchiseId },
-                { store_id: effectiveFranchiseId },
-              ],
-            },
-            userCondition,
-          ];
-        } else {
-          Object.assign(pendingOnlineWhere, userCondition);
-        }
+        Object.assign(pendingOnlineWhere, userCondition);
       } else if (isCaller && userId) {
         const callerCondition: any = {
           OR: [
@@ -335,18 +319,25 @@ export class LeadStatsService {
           ],
         };
         Object.assign(pendingOnlineWhere, callerCondition);
-      } else if (shouldIncludeFranchise && effectiveFranchiseId) {
-        pendingOnlineWhere.OR = [
-          { pending_store_id: effectiveFranchiseId },
-          { store_id: effectiveFranchiseId },
-        ];
+      }
+
+      if (effectiveFranchiseId) {
+        pendingOnlineWhere.AND = [{
+          OR: [
+            { pending_store_id: effectiveFranchiseId },
+            { store_id: effectiveFranchiseId },
+          ],
+        }];
       }
 
       const pendingOnlineCount = await prisma.online_leads.count({
         where: pendingOnlineWhere,
       });
 
-      const draftLeadMasterCount = await countByTag("Type 1", { is_draft: true });
+      const draftLeadMasterCount = await countByTag("Type 1", {
+        is_draft: true,
+        ...(effectiveFranchiseId ? { franchise_id: effectiveFranchiseId } : {}),
+      });
       totalDraftLeads = pendingOnlineCount + draftLeadMasterCount;
     } else {
       totalDraftLeads = await countByTag("Type 1", { is_draft: true });
