@@ -8834,7 +8834,6 @@ export const getProjectDetailService = async (
               .filter(
                 (row) =>
                   row.cut_list_id === manualItem.id &&
-                  row.row_created_source?.trim().toLowerCase() === "manual" &&
                   row.box_id !== null &&
                   row.actual_in_at !== null,
               )
@@ -9286,8 +9285,7 @@ export const getProjectDetailService = async (
         .filter(
           (row) =>
             packagingMachine &&
-            Number(row.machine_id) === Number(packagingMachine.id) &&
-            row.row_created_source?.trim().toLowerCase() === "manual",
+            Number(row.machine_id) === Number(packagingMachine.id),
         )
         .sort((a, b) => a.id - b.id);
 
@@ -11271,7 +11269,7 @@ export const getProjectCutListPaginatedService = async (
         const manualPackagingRows = packagingMachine
           ? (byMachine.get(packagingMachine.id) ?? [])
               .filter(
-                (row) => normalizeText(row.row_created_source) === "manual",
+                (row) => true,
               )
               .sort((a, b) => a.id - b.id)
           : [];
