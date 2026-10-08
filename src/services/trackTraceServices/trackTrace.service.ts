@@ -1,4 +1,4 @@
-﻿import { validationResponse } from "../../../src/utils/validationResponse";
+import { validationResponse } from "../../../src/utils/validationResponse";
 import axios from "axios";
 import { prisma, Prisma } from "../../prisma/client";
 
@@ -2559,7 +2559,7 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
 
   const sqftTrend = totalSqft >= yesterdaySqft ? "up" : "down";
 
-  const sqftSubtitle = `${sqftTrend === "up" ? "â†‘" : "â†“"} ${Math.abs(
+  const sqftSubtitle = `${sqftTrend === "up" ? "↑" : "↓"} ${Math.abs(
     totalSqft - yesterdaySqft,
   ).toFixed(2)} sqft`;
 
@@ -2613,7 +2613,7 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
     totalItemsProcessed: {
       value: itemsToday,
       change: `${itemsChange >= 0 ? "+" : ""}${itemsChange}% vs yesterday`,
-      subtitle: `${itemsChange >= 0 ? "â†‘" : "â†“"} ${Math.abs(itemsToday - itemsYesterday)}`,
+      subtitle: `${itemsChange >= 0 ? "↑" : "↓"} ${Math.abs(itemsToday - itemsYesterday)}`,
       trend: itemsChange >= 0 ? "up" : "down",
       sqft: {
         value: totalSqft,
@@ -3889,7 +3889,7 @@ export const getAllUsersByVendorId = (vendor_id: number) => {
 //             resultMap.set(cut.id, baseRow);
 //         }
 
-//         // If mapping exists â†’ override NA
+//         // If mapping exists → override NA
 //         if (MACHINE_COLUMNS.includes(machineName)) {
 //             resultMap.get(cut.id)[machineName] =
 //                 row.actual_in_at ?? null; // null means exists but not started
@@ -4095,7 +4095,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
         return validationResponse(1, "Machine unmapped");
       }
 
-      // âœ… Fetch cutList rows to get qty and lead_id per cut_list_id
+      // ✅ Fetch cutList rows to get qty and lead_id per cut_list_id
       const cutListRows = await tx.cutList.findMany({
         where: {
           id: { in: cutListIdArray },
@@ -4109,7 +4109,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
       console.log(cutListRows);
 
-      // âœ… Find which cut_list_ids already have mapping for this machine
+      // ✅ Find which cut_list_ids already have mapping for this machine
       const existing = await tx.cutListMachineMapping.findMany({
         where: {
           cut_list_id: { in: cutListIdArray },
@@ -4121,7 +4121,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
       const existingIds = new Set(existing.map((e) => e.cut_list_id));
 
-      // âœ… Only process cut_list_ids that don't already have a mapping
+      // ✅ Only process cut_list_ids that don't already have a mapping
       const newCutListRows = cutListRows.filter(
         (row) => !existingIds.has(row.id),
       );
@@ -4141,7 +4141,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
         return validationResponse(0, "Machine sequence not set");
       }
 
-      // âœ… Build mapping rows â€” one entry per qty unit per cut_list_id
+      // ✅ Build mapping rows — one entry per qty unit per cut_list_id
       const mappingData: {
         cut_list_id: number;
         machine_id: number;
@@ -4312,8 +4312,8 @@ export const downloadCutListExcel = async (
   const excelData = data.map((row) => {
     const excelRow: any = {
       Description: row.description,
-      Length: row.length ? Number(row.length) : 0, // âœ… Convert to number
-      Width: row.width ? Number(row.width) : 0, // âœ… Convert to number
+      Length: row.length ? Number(row.length) : 0, // ✅ Convert to number
+      Width: row.width ? Number(row.width) : 0, // ✅ Convert to number
       Thickness: row.thickness ? Number(row.thickness) : 0,
       Qty: row.qty,
       "Material Details": row.material_details,
@@ -4355,26 +4355,26 @@ export const downloadCutListExcel = async (
   // Add rows
   excelData.forEach((row) => worksheet.addRow(row));
 
-  // âœ… Define the directory path
+  // ✅ Define the directory path
   // const publicDir = process.cwd();
   const publicDir = path.join(process.cwd(), "public");
 
   const excelDir = path.join(publicDir, "assets", "track-trace", "excel");
 
-  // âœ… Create directory if it doesn't exist
+  // ✅ Create directory if it doesn't exist
   if (!fs.existsSync(excelDir)) {
     fs.mkdirSync(excelDir, { recursive: true });
   }
 
-  // âœ… Generate unique filename
+  // ✅ Generate unique filename
   const timestamp = Date.now();
   const filename = `cutlist-${unique_project_id}-${timestamp}.xlsx`;
   const filePath = path.join(excelDir, filename);
 
-  // âœ… Write the Excel file to disk
+  // ✅ Write the Excel file to disk
   await workbook.xlsx.writeFile(filePath);
 
-  // âœ… Return filename; API will build a served URL
+  // ✅ Return filename; API will build a served URL
   return filename;
 };
 
@@ -5194,7 +5194,7 @@ export const getQualityCheckProjects = async (
   }
 };
 
-// â”€â”€â”€ Helper: sum qty of cut_lists by their ids â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helper: sum qty of cut_lists by their ids ────────────────────────────────
 async function sumQty(cutListIds: number[]): Promise<number> {
   if (cutListIds.length === 0) return 0;
   const result = await prisma.cutList.aggregate({
@@ -5204,15 +5204,15 @@ async function sumQty(cutListIds: number[]): Promise<number> {
   return result._sum.qty ?? 0;
 }
 
-// â”€â”€â”€ Helper: sum qty of cut_list rows from CutListMachineMapping â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helper: sum qty of cut_list rows from CutListMachineMapping ──────────────
 // Each mapping row corresponds to one panel instance.
-// We use the cut_list.qty indirectly â€” one mapping row per panel is already
-// how the data is structured (qty=4 on CutList â†’ 4 mapping rows per machine).
+// We use the cut_list.qty indirectly — one mapping row per panel is already
+// how the data is structured (qty=4 on CutList → 4 mapping rows per machine).
 // So COUNT of mapping rows = total panels correctly.
 
 export const getTraceTraceDashboard_old = async (vendor_id: number) => {
   try {
-    // â”€â”€ 1. Fetch all projects for this vendor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 1. Fetch all projects for this vendor ──────────────────────────────
     const projects = await prisma.projectMaster.findMany({
       where: { vendor_id },
       select: {
@@ -5225,7 +5225,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
       orderBy: { created_at: "desc" },
     });
 
-    // â”€â”€ 2. Fetch all non-PASS machines ordered by sequence â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 2. Fetch all non-PASS machines ordered by sequence ─────────────────
     const machines = await prisma.machineMaster.findMany({
       where: {
         vendor_id,
@@ -5241,7 +5241,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
       orderBy: { sequence_no: "asc" },
     });
 
-    // â”€â”€ 3. For each project, compute per-machine counts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 3. For each project, compute per-machine counts ────────────────────
     const buildProjectStatus = async (project: (typeof projects)[0]) => {
       // Pre-compute scanned count per machine for this project (used for waterfall)
       const scannedPerMachine: Map<number, number> = new Map();
@@ -5274,7 +5274,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
 
           const scanned = scannedPerMachine.get(machine.id) ?? 0;
 
-          // â”€â”€ Waterfall total â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+          // ── Waterfall total ──────────────────────────────────────────────
           // total = rows at this machine where this cut_list's LAST assigned
           // machine before this one has been scanned (actual_in_at != null).
           // This correctly handles cut_lists that skip intermediate machines.
@@ -5288,9 +5288,9 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
             total = assigned;
           } else if (isQCStation) {
             // QC Station:
-            // Part A â€” cut_lists that DO have a prior machine assignment:
+            // Part A — cut_lists that DO have a prior machine assignment:
             //   eligible if their last assigned machine before QC is scanned
-            // Part B â€” cut_lists with NO prior machine assignment (QC-only):
+            // Part B — cut_lists with NO prior machine assignment (QC-only):
             //   always eligible (count all their QC rows)
 
             // Find cut_list_ids that have at least one row at seq < QC seq
@@ -5348,7 +5348,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
               }
             }
 
-            // Part B: QC-only rows (no prior machine at all) â€” always eligible
+            // Part B: QC-only rows (no prior machine at all) — always eligible
             const partBCount = await prisma.cutListMachineMapping.count({
               where: {
                 project_id: project.id,
@@ -5357,7 +5357,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
                 expected_in: true,
                 ...(cutListIdsWithPrior.length > 0
                   ? { cut_list_id: { notIn: cutListIdsWithPrior } }
-                  : { cut_list_id: { notIn: [-1] } }), // empty set â€” nothing qualifies as prior-less if no prior exists at all
+                  : { cut_list_id: { notIn: [-1] } }), // empty set — nothing qualifies as prior-less if no prior exists at all
               },
             });
 
@@ -5395,7 +5395,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
               );
 
               if (!lastPriorRow) {
-                // No prior machine for this cut_list â€” not eligible yet
+                // No prior machine for this cut_list — not eligible yet
                 // (shouldn't happen for non-first machines in normal flow)
                 continue;
               }
@@ -5422,7 +5422,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
         }),
       );
 
-      // â”€â”€ Panels: total and fully scanned â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      // ── Panels: total and fully scanned ───────────────────────────────────
       const firstMachine = machines[0];
       const lastMachine = machines[machines.length - 1];
 
@@ -5455,7 +5455,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
 
     const allStatuses = await Promise.all(projects.map(buildProjectStatus));
 
-    // â”€â”€ 4. Split into active vs archived â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 4. Split into active vs archived ───────────────────────────────────
     const activeStatuses = ["Initiated", "Started"];
     const active = allStatuses.filter((p) =>
       activeStatuses.includes(p.project_status),
@@ -5481,7 +5481,7 @@ export const getTraceTraceDashboard = async (
   statusFilter: string = "all",
 ) => {
   try {
-    // â”€â”€ 1. Fetch projects and machines in parallel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 1. Fetch projects and machines in parallel ─────────────────────────
     const [projects, machines] = await Promise.all([
       prisma.projectMaster.findMany({
         where: {
@@ -5531,7 +5531,7 @@ export const getTraceTraceDashboard = async (
       });
     }
 
-    // â”€â”€ 2. Fetch all mappings ONCE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 2. Fetch all mappings ONCE ─────────────────────────────────────────
     const mappings = machines.length
       ? await prisma.cutListMachineMapping.findMany({
           where: {
@@ -5579,7 +5579,7 @@ export const getTraceTraceDashboard = async (
       }
     };
 
-    // â”€â”€ 3. Group mappings in memory â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 3. Group mappings in memory ────────────────────────────────────────
     const rowsByProjectMachine = new Map<string, Mapping[]>();
     const rowsByProjectCutList = new Map<string, Mapping[]>();
     const assignedCountByProjectMachine = new Map<string, number>();
@@ -5633,7 +5633,7 @@ export const getTraceTraceDashboard = async (
       return null;
     };
 
-    // â”€â”€ 4. Build dashboard without DB calls inside loops â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 4. Build dashboard without DB calls inside loops ───────────────────
     const buildProjectStatus = (project: (typeof projects)[number]) => {
       const machineStatuses: MachineStatus[] = machines
         .map((machine, index): MachineStatus | null => {
@@ -5727,7 +5727,7 @@ export const getTraceTraceDashboard = async (
 
     const allStatuses = projects.map(buildProjectStatus);
 
-    // â”€â”€ 5. Apply Status Filter from backend (all, not_started, pending, completed) â”€â”€â”€
+    // ── 5. Apply Status Filter from backend (all, not_started, pending, completed) ───
     const normalizedFilter = (statusFilter || "all")
       .toLowerCase()
       .trim()
@@ -5761,7 +5761,7 @@ export const getTraceTraceDashboard = async (
       return true;
     });
 
-    // â”€â”€ 6. Split active and archived â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 6. Split active and archived ───────────────────────────────────────
     const activeStatuses = new Set(["Initiated", "Started"]);
 
     const active = filteredStatuses.filter((p) =>
@@ -5896,7 +5896,7 @@ export const getProjectCategories = async (
   }
 };
 
-// â”€â”€â”€ Get all type masters â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Get all type masters ─────────────────────────────────────────────────────
 export const getProjectCategoryTypes = async () => {
   try {
     const types = await prisma.projectCategoriesTypeMaster.findMany({
@@ -5911,7 +5911,7 @@ export const getProjectCategoryTypes = async () => {
   }
 };
 
-// â”€â”€â”€ Create category + assign type mappings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Create category + assign type mappings ───────────────────────────────────
 export const createProjectCategory = async (
   vendor_id: number,
   category_name: string,
@@ -5986,7 +5986,7 @@ export const createProjectCategory = async (
   }
 };
 
-// â”€â”€â”€ Update category name, status, and type mappings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Update category name, status, and type mappings ─────────────────────────
 export const updateProjectCategory = async (
   id: number,
   vendor_id: number,
@@ -6073,7 +6073,7 @@ export const updateProjectCategory = async (
   }
 };
 
-// â”€â”€â”€ Toggle status â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Toggle status ────────────────────────────────────────────────────────────
 export const toggleProjectCategoryStatus = async (
   id: number,
   status: "Yes" | "No",
@@ -6094,7 +6094,7 @@ export const toggleProjectCategoryStatus = async (
   }
 };
 
-// â”€â”€â”€ Brand Master Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Brand Master Services ───────────────────────────────────────────────────
 export const getBrandMasters = async (vendor_id: number) => {
   try {
     const brands = await prisma.brandMaster.findMany({
@@ -6197,7 +6197,7 @@ export const deleteBrandMaster = async (id: number, vendor_id: number) => {
   }
 };
 
-// â”€â”€â”€ Grade Master Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Grade Master Services ────────────────────────────────────────────────────
 export const getGradeMasters = async (vendor_id: number) => {
   try {
     const grades = await prisma.gradeMaster.findMany({
@@ -6280,7 +6280,7 @@ export const deleteGradeMaster = async (id: number) => {
   }
 };
 
-// â”€â”€â”€ Finish Master Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Finish Master Services ───────────────────────────────────────────────────
 export const getFinishMasters = async (vendor_id: number) => {
   try {
     const finishes = await prisma.finishMaster.findMany({
@@ -6363,7 +6363,7 @@ export const deleteFinishMaster = async (id: number) => {
   }
 };
 
-// â”€â”€â”€ Type Master Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Type Master Services ─────────────────────────────────────────────────────
 export const getTypeMasters = async (vendor_id: number) => {
   try {
     const types = await prisma.typeMaster.findMany({
@@ -6446,7 +6446,7 @@ export const deleteTypeMaster = async (id: number) => {
   }
 };
 
-// â”€â”€â”€ Core Product Master Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Core Product Master Services ──────────────────────────────────────────────
 export const getCoreProductMasters = async (vendor_id: number) => {
   try {
     const coreProducts = await prisma.coreProductMaster.findMany({
@@ -6546,7 +6546,7 @@ export const unsetBoxFromMappingService = async (
   vendor_id: number,
 ) => {
   try {
-    // â”€â”€ 1. Find the mapping row scoped to project + vendor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 1. Find the mapping row scoped to project + vendor ───────────────────
     const mapping = await prisma.cutListMachineMapping.findFirst({
       where: {
         id: mapping_id,
@@ -6563,7 +6563,7 @@ export const unsetBoxFromMappingService = async (
     if (!mapping.box_id)
       return validationResponse(0, "Item is not assigned to any box");
 
-    // â”€â”€ 2. Get project_details_id from the box â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 2. Get project_details_id from the box ───────────────────────────────
     const box = await prisma.boxMaster.findFirst({
       where: {
         id: mapping.box_id,
@@ -6576,7 +6576,7 @@ export const unsetBoxFromMappingService = async (
 
     if (!box) return validationResponse(0, "Box not found");
 
-    // â”€â”€ 3 & 4. Atomic transaction: unset box + update ProjectDetails â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 3 & 4. Atomic transaction: unset box + update ProjectDetails ─────────
     await prisma.$transaction([
       prisma.cutListMachineMapping.update({
         where: { id: mapping_id },
@@ -6625,7 +6625,11 @@ export const markBoxFactoryOutService = async (
           box_status: true,
           factory_out_at: true,
           product_set_no: true,
+          sequence_no: true,
+          box_position: true,
+          boxes_per_product: true,
           product_group_name: true,
+          is_auto_created: true,
           cutListMachineMapping: {
             where: { actual_in_at: { not: null } },
             select: {
@@ -6793,16 +6797,17 @@ export const markBoxFactoryOutService = async (
               mapping.cut_list.include_in_packing === true &&
               mapping.cut_list.scan_pack_validate === false,
           );
-        const isAutomaticHardwareBox = hasOnlyScanPackDisabledItems;
+        const isAutomaticHardwareBox =
+          hasOnlyScanPackDisabledItems;
 
         let totalQuota = 0;
         let totalDispatched = 0;
         let boxAddsProductSetTotal = 0;
 
-        // Automatically created hardware boxes are not product-quantity boxes.
-        // Keep location validation above, but do not consume or validate the
-        // product-group quantity quota for these boxes.
-        if (!isAutomaticHardwareBox) {
+        // Location quotas apply to scanned/custom-group products. Standalone
+        // manual hardware (Scan & Pack = No) may be dispatched to any selected
+        // location and must not consume a product allocation quota.
+        if (!hasOnlyScanPackDisabledItems) {
         const cutListRows = await tx.cutList.findMany({
           where: { project_id, vendor_id },
           select: { group_name: true, qty: true },
@@ -6838,6 +6843,67 @@ export const markBoxFactoryOutService = async (
         }
 
         const targetLocationIds = targetRows.map((row) => row.id);
+        const hasUnassignedMappings = box.cutListMachineMapping.some(
+          (mapping) => !mapping.projectLocationProductQuantity,
+        );
+        const sameProductSetSiblings =
+          box.sequence_no != null &&
+          box.box_position != null &&
+          box.boxes_per_product != null &&
+          box.product_group_name
+            ? (
+                await tx.boxMaster.findMany({
+                  where: {
+                    project_id,
+                    vendor_id,
+                    is_deleted: false,
+                    id: { not: box.id },
+                    boxes_per_product: box.boxes_per_product,
+                    product_group_name: {
+                      equals: box.product_group_name,
+                      mode: "insensitive" as const,
+                    },
+                    sequence_no: { not: null },
+                    box_position: { not: null },
+                    cutListMachineMapping: {
+                      some: { actual_in_at: { not: null } },
+                    },
+                  },
+                  select: {
+                    id: true,
+                    sequence_no: true,
+                    box_position: true,
+                    cutListMachineMapping: {
+                      where: { actual_in_at: { not: null } },
+                      select: {
+                        project_location_product_quantity_id: true,
+                      },
+                    },
+                  },
+                })
+              ).filter(
+                (sibling) =>
+                  sibling.sequence_no! - (sibling.box_position! - 1) ===
+                  box.sequence_no! - (box.box_position! - 1),
+              )
+            : [];
+        const hasUnassignedProductSetSibling = sameProductSetSiblings.some(
+          (sibling) =>
+            sibling.cutListMachineMapping.some(
+              (mapping) =>
+                mapping.project_location_product_quantity_id == null,
+            ),
+        );
+        const hasTargetLocationProductSetSibling = sameProductSetSiblings.some(
+          (sibling) =>
+            sibling.cutListMachineMapping.some(
+              (mapping) =>
+                mapping.project_location_product_quantity_id != null &&
+                targetLocationIds.includes(
+                  mapping.project_location_product_quantity_id,
+                ),
+            ),
+        );
         const dispatchedMappings = await tx.cutListMachineMapping.findMany({
           where: {
             project_id,
@@ -6845,7 +6911,9 @@ export const markBoxFactoryOutService = async (
             project_location_product_quantity_id: { in: targetLocationIds },
             boxMaster: {
               is_deleted: false,
-              factory_out_at: { not: null },
+              // A location quota is consumed when the box is packed and
+              // assigned to that location, not only after Factory Out.
+              box_status: "packed",
             },
           },
           select: {
@@ -6871,8 +6939,31 @@ export const markBoxFactoryOutService = async (
             (mapping) =>
               mapping.cut_list.group_name?.trim().toLocaleLowerCase() === groupName,
           );
-          const boxProductSetCount = boxAddsProductSet && !dispatchedProductSets.has(boxProductSetKey) ? 1 : 0;
           const dispatched = dispatchedProductSets.size;
+          if (
+            boxAddsProductSet &&
+            hasUnassignedMappings &&
+            dispatched >= quota &&
+            !hasTargetLocationProductSetSibling
+          ) {
+            return validationResponse(
+              0,
+              `${selectedLocation} is full (${dispatched} of ${quota} products dispatched). This unassigned product cannot be assigned there.`,
+            );
+          }
+          // Locationless boxes created for another custom-group position can
+          // reuse a product_set_no that was already used by a location-bound
+          // product. Treat the first box from that unassigned sibling set as
+          // a new product; once one sibling is dispatched, the remaining
+          // sibling boxes can follow its location without consuming quantity
+          // again.
+          const boxProductSetCount =
+            boxAddsProductSet &&
+            !hasTargetLocationProductSetSibling &&
+            (hasUnassignedProductSetSibling ||
+              !dispatchedProductSets.has(boxProductSetKey))
+              ? 1
+              : 0;
           totalQuota += quota;
           totalDispatched += dispatched;
           boxAddsProductSetTotal += boxProductSetCount;
@@ -6947,7 +7038,7 @@ export const markBoxFactoryOutService = async (
   }
 };
 
-// â”€â”€ Mark site_in_at on a box â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Mark site_in_at on a box ──────────────────────────────────────────────────
 export const markBoxSiteInService = async (
   box_id: number,
   project_id: number,
@@ -6995,7 +7086,7 @@ export const markBoxSiteInService = async (
   }
 };
 
-// â”€â”€ Revert factory_out_at on a box â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Revert factory_out_at on a box ─────────────────────────────────────────────
 export const revertBoxFactoryOutService = async (
   box_id: number,
   project_id: number,
@@ -7114,7 +7205,7 @@ export const revertBoxFactoryOutService = async (
   }
 };
 
-// â”€â”€ Get Factory Out Revert Logs for a box â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Get Factory Out Revert Logs for a box ─────────────────────────────────────
 export const getBoxFactoryOutRevertLogsService = async (
   box_id: number,
   project_id: number,
@@ -7162,7 +7253,7 @@ const CADBID_PLATFORM_ID = 1;
 
 export const syncCategoriesFromExternalService = async (vendor_id: number) => {
   try {
-    // â”€â”€ 1. Check ExternalPlatformToken for this vendor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 1. Check ExternalPlatformToken for this vendor ───────────────────────
     const tokenRecord = await prisma.externalPlatformToken.findFirst({
       where: {
         vendor_id,
@@ -7180,7 +7271,7 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
       );
     }
 
-    // â”€â”€ 2. Call CadBid API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 2. Call CadBid API ───────────────────────────────────────────────────
     let externalCategories: { nItemCategoryId: number; sName: string }[] = [];
 
     try {
@@ -7212,7 +7303,7 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
       return validationResponse(0, "No categories returned from CadBid");
     }
 
-    // â”€â”€ 3. Upsert into ProjectCategoriesMaster â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 3. Upsert into ProjectCategoriesMaster ───────────────────────────────
     // Upsert key: external_category_id + vendor_id
     // ProjectCategoriesMaster has no unique constraint on those two fields,
     // so we do a manual find-then-create-or-update.
@@ -7270,7 +7361,7 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
   }
 };
 
-// â”€â”€ Check if vendor has an active token â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Check if vendor has an active token ──────────────────────────────────────
 export const checkExternalTokenService = async (vendor_id: number) => {
   try {
     const token = await prisma.externalPlatformToken.findFirst({
@@ -7299,7 +7390,7 @@ export const getProjectDetailService_old = async (
   try {
     /*
     |--------------------------------------------------------------------------
-    | Resolve unique_project_id â†’ project_id
+    | Resolve unique_project_id → project_id
     |--------------------------------------------------------------------------
     */
 
@@ -7637,7 +7728,7 @@ export const getProjectDetailService_old = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 4. Cut list â€” one row per panel unit
+    | 4. Cut list — one row per panel unit
     |--------------------------------------------------------------------------
     */
 
@@ -8060,7 +8151,7 @@ export const getProjectDetailService = async (
     const { search, group, category, machine_id, box_id, box_status } = options;
     /*
     |--------------------------------------------------------------------------
-    | Resolve unique_project_id â†’ project_id
+    | Resolve unique_project_id → project_id
     |--------------------------------------------------------------------------
     */
 
@@ -8935,7 +9026,7 @@ export const getProjectDetailService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | Helper â€” expand a mapping row by mapping.qty
+    | Helper — expand a mapping row by mapping.qty
     |--------------------------------------------------------------------------
     |
     | Normal:
@@ -10027,7 +10118,7 @@ export const getProjectDetailService = async (
   }
 };
 
-// â”€â”€â”€ GET box items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── GET box items ────────────────────────────────────────────────────────────
 
 export const getBoxItemsService_old = async (
   vendor_id: number,
@@ -12101,7 +12192,7 @@ export const getProjectCutListPaginatedService = async (
 
 export const getDefectDashboardService = async (vendor_id: number) => {
   try {
-    // â”€â”€ 1. Summary counts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 1. Summary counts ─────────────────────────────────────────────────────
     const [total, pending, completed, rework, replace] = await Promise.all([
       prisma.defectedItem.count({ where: { vendor_id } }),
       prisma.defectedItem.count({
@@ -12114,7 +12205,7 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       prisma.defectedItem.count({ where: { vendor_id, action: "replace" } }),
     ]);
 
-    // â”€â”€ 2. Defect breakdown by defect type â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 2. Defect breakdown by defect type ────────────────────────────────────
     const byDefectType = await prisma.defectedItem.groupBy({
       by: ["defect_id"],
       where: { vendor_id },
@@ -12140,7 +12231,7 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       count: d._count.id,
     }));
 
-    // â”€â”€ 3. Defect breakdown by project â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 3. Defect breakdown by project ────────────────────────────────────────
     const byProject = await prisma.defectedItem.groupBy({
       by: ["project_id"],
       where: { vendor_id },
@@ -12161,7 +12252,7 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       count: p._count.id,
     }));
 
-    // â”€â”€ 4. Defect breakdown by machine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 4. Defect breakdown by machine ────────────────────────────────────────
     const byMachine = await prisma.defectedItem.groupBy({
       by: ["machine_id"],
       where: { vendor_id },
@@ -12181,14 +12272,14 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       count: m._count.id,
     }));
 
-    // â”€â”€ 5. Status breakdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 5. Status breakdown ───────────────────────────────────────────────────
     const byStatus = await prisma.defectedItem.groupBy({
       by: ["defect_status"],
       where: { vendor_id },
       _count: { id: true },
     });
 
-    // â”€â”€ 6. Recent defects list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 6. Recent defects list ────────────────────────────────────────────────
     const recentDefects = await prisma.defectedItem.findMany({
       where: { vendor_id },
       orderBy: { created_at: "desc" },
@@ -12211,7 +12302,7 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       },
     });
 
-    // â”€â”€ 7. Avg resolution time (completed defects) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── 7. Avg resolution time (completed defects) ────────────────────────────
     const completedWithTime = await prisma.defectedItem.findMany({
       where: {
         vendor_id,
@@ -12260,7 +12351,7 @@ export const getDefectDashboardService = async (vendor_id: number) => {
   }
 };
 
-// â”€â”€ Per-project defect list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Per-project defect list ───────────────────────────────────────────────────
 
 export const getProjectDefectsService = async (
   vendor_id: number,
@@ -12304,7 +12395,7 @@ export const getProjectDefectsService = async (
 
 const PAGE_SIZE = 15;
 
-// â”€â”€â”€ Helper: attach signed URLs to images â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Helper: attach signed URLs to images ─────────────────────────────────────
 
 async function signImages(
   images: { id: number; doc_sys_name: string; doc_og_name: string }[],
@@ -12317,7 +12408,7 @@ async function signImages(
   );
 }
 
-// â”€â”€â”€ Summary (stat cards + bar charts) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Summary (stat cards + bar charts) ───────────────────────────────────────
 
 export const getDefectSummaryService = async (vendor_id: number) => {
   try {
@@ -12432,7 +12523,7 @@ export const getDefectSummaryService = async (vendor_id: number) => {
   }
 };
 
-// â”€â”€â”€ Pending Defects (paginated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Pending Defects (paginated) ─────────────────────────────────────────────
 
 export const getPendingDefectsService = async (
   vendor_id: number,
@@ -12491,7 +12582,7 @@ export const getPendingDefectsService = async (
   }
 };
 
-// â”€â”€â”€ Resolved Defects (paginated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Resolved Defects (paginated) ────────────────────────────────────────────
 
 export const getResolvedDefectsService = async (
   vendor_id: number,
@@ -12741,6 +12832,13 @@ export const getManualPackingItemsService = async (
             machine_id: {
               in: packagingMachineIds,
             },
+
+            // A machine assignment is not a packed item. Manual hardware is
+            // packed only after it has been placed in a box and scanned into
+            // that box. QC mappings do not have a box_id, so keep their
+            // actual-in rows eligible when this endpoint is used for QC.
+            actual_in_at: { not: null },
+            ...(!machineId ? { box_id: { not: null } } : {}),
           },
 
           _sum: {
@@ -12795,9 +12893,17 @@ export const getManualPackingItemsService = async (
   const items = cutListItems.map((item) => {
     const projectTotalQty = Number(item.qty ?? 0);
 
-    const effectiveMaxQty = (!machineId && hasQcMachines)
-       ? Number(qcQtyMap.get(item.id) ?? 0)
-       : projectTotalQty;
+    const qcPassedQty = !machineId && hasQcMachines
+      ? Number(qcQtyMap.get(item.id) ?? 0)
+      : 0;
+
+    // QC is an optional gate for manual hardware packing. Once QC quantities
+    // exist, packing is limited to the quantity that passed QC. Before the
+    // first QC mark, keep the normal project quantity available so operators
+    // can still pack hardware; the UI separately hides QC/Ready counters.
+    const effectiveMaxQty = !machineId && hasQcMachines && qcPassedQty > 0
+      ? qcPassedQty
+      : projectTotalQty;
 
     const packedQty = Math.min(
       Number(packedQtyMap.get(item.id) ?? 0),
@@ -12810,6 +12916,10 @@ export const getManualPackingItemsService = async (
       ...item,
 
       total_qty: projectTotalQty,
+      // In packing mode, QC-passed quantity exists only after a QC mapping
+      // has actually been created. Keep this separate from pending_qty so a
+      // project with no QC marks does not appear "Ready" with a zero count.
+      qc_passed_qty: qcPassedQty,
       packed_qty: packedQty,
       pending_qty: pendingQty,
 
@@ -12873,7 +12983,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 1 â€” Basic validation
+    | STEP 1 — Basic validation
     |--------------------------------------------------------------------------
     */
 
@@ -12903,7 +13013,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 2 â€” Check project
+    | STEP 2 — Check project
     |--------------------------------------------------------------------------
     */
 
@@ -12934,7 +13044,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 3 â€” Check box
+    | STEP 3 — Check box
     |--------------------------------------------------------------------------
     */
 
@@ -12964,7 +13074,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 4 â€” Check user
+    | STEP 4 — Check user
     |--------------------------------------------------------------------------
     */
 
@@ -12985,7 +13095,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 5 â€” Check CutList item
+    | STEP 5 — Check CutList item
     |--------------------------------------------------------------------------
     |
     | Manual packing is ONLY applicable when:
@@ -13030,7 +13140,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 6 â€” Find ACTIVE packaging machine
+    | STEP 6 — Find ACTIVE packaging machine
     |--------------------------------------------------------------------------
     |
     | Machine Type 18 = Packaging
@@ -13061,7 +13171,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 7 â€” GROUPWISE packing validation
+    | STEP 7 — GROUPWISE packing validation
     |--------------------------------------------------------------------------
     |
     | Keep same behavior as scan packing.
@@ -13142,7 +13252,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 8 â€” Calculate per-item weight
+    | STEP 8 — Calculate per-item weight
     |--------------------------------------------------------------------------
     |
     | CutList.weight = total row weight.
@@ -13161,7 +13271,7 @@ export const addManualPackingItemService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 9 â€” Add quantity to box
+    | STEP 9 — Add quantity to box
     |--------------------------------------------------------------------------
     */
 
@@ -13287,7 +13397,7 @@ export const addManualPackingItemService = async (
 
         /*
           |--------------------------------------------------------------------------
-          | Same box â†’ UPDATE qty
+          | Same box → UPDATE qty
           |--------------------------------------------------------------------------
           */
 
@@ -13332,7 +13442,7 @@ export const addManualPackingItemService = async (
 
         /*
           |--------------------------------------------------------------------------
-          | New box â†’ CREATE row
+          | New box → CREATE row
           |--------------------------------------------------------------------------
           */
           mapping = await tx.cutListMachineMapping.create({
