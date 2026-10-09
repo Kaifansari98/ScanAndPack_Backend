@@ -5428,6 +5428,7 @@ export const getTraceTraceDashboard = async (
         select: {
           id: true,
           project_name: true,
+          unique_project_id: true,
           lead_id: true,
           project_status: true,
           track_trace_status: true,
@@ -5649,6 +5650,7 @@ export const getTraceTraceDashboard = async (
 
       return {
         project_id: project.id,
+        unique_project_id: project.unique_project_id,
         lead_id: project.lead_id,
         project_name: project.project_name,
         project_status: project.project_status,
@@ -13315,6 +13317,9 @@ export interface ProjectItemTrackingQuery {
   search: string;
   scanStatus: ProjectItemScanFilter;
   machineId?: number;
+  isDispatch?: boolean;
+  category?: string;
+  group?: string;
 }
 
 type MappingRow = {
@@ -13322,6 +13327,43 @@ type MappingRow = {
   qty: number;
   is_optional: boolean;
   actual_in_at: Date | null;
+  box_id?: number | null;
+  machine_id?: number;
+  site_in_at?: Date | null;
+  site_in_by?: number | null;
+  siteInByUser?: {
+    id: number;
+    user_name: string;
+  } | null;
+  in_operator?: number | null;
+  operator?: {
+    id: number;
+    user_name: string;
+  } | null;
+  boxMaster?: {
+    id: number;
+    box_name: string;
+    box_status: string;
+    sequence_no: number | null;
+    factory_out_at: Date | null;
+    factory_out_by: number | null;
+    site_in_at: Date | null;
+    site_in_by: number | null;
+    packed_by?: number | null;
+    packed_at?: Date | null;
+    packedByUser?: {
+      id: number;
+      user_name: string;
+    } | null;
+    factoryOutByUser?: {
+      id: number;
+      user_name: string;
+    } | null;
+    siteInByUser?: {
+      id: number;
+      user_name: string;
+    } | null;
+  } | null;
   machine: {
     id: number;
     machine_name: string;
@@ -13362,6 +13404,21 @@ const getSearchWhere = (
         cutListMachineMapping: {
           some: {
             ...mappingScope,
+            boxMaster: {
+              is: {
+                box_name: {
+                  contains: value,
+                  mode: "insensitive",
+                },
+              },
+            },
+          },
+        },
+      },
+      {
+        cutListMachineMapping: {
+          some: {
+            ...mappingScope,
             machine: {
               is: {
                 OR: [
@@ -13391,9 +13448,44 @@ const addScanStatus = (
   where: Prisma.CutListWhereInput,
   scanStatus: ProjectItemScanFilter,
   mappingScope: Prisma.CutListMachineMappingWhereInput,
+  machineId?: number,
 ): Prisma.CutListWhereInput => {
   if (scanStatus === "all") {
     return where;
+  }
+
+  if (machineId) {
+    if (scanStatus === "scanned") {
+      return {
+        AND: [
+          where,
+          {
+            cutListMachineMapping: {
+              some: {
+                ...mappingScope,
+                machine_id: machineId,
+                actual_in_at: { not: null },
+              },
+            },
+          },
+        ],
+      };
+    }
+
+    return {
+      AND: [
+        where,
+        {
+          cutListMachineMapping: {
+            some: {
+              ...mappingScope,
+              machine_id: machineId,
+              actual_in_at: null,
+            },
+          },
+        },
+      ],
+    };
   }
 
   if (scanStatus === "scanned") {
@@ -13471,6 +13563,9 @@ const buildMachineSummaries = (rows: MappingRow[]) => {
     status: "scanned" | "pending";
     scanned_at: Date | null;
     last_scanned_at: Date | null;
+    box_id?: number | null;
+    box_name?: string | null;
+    box_status?: string | null;
   };
 
   const grouped = new Map<
@@ -13484,6 +13579,15 @@ const buildMachineSummaries = (rows: MappingRow[]) => {
     const quantity = normaliseQuantity(row.qty);
     const existing = grouped.get(key);
 
+    const rowBoxId = row.boxMaster?.id ?? row.box_id ?? null;
+    const rawBoxName = row.boxMaster?.box_name ?? (rowBoxId ? `Box ${rowBoxId}` : null);
+    const rowBoxName = rawBoxName
+      ? /^box/i.test(rawBoxName.trim())
+        ? rawBoxName.trim()
+        : `Box ${rawBoxName.trim()}`
+      : null;
+    const rowBoxStatus = row.boxMaster?.box_status ?? null;
+
     if (!existing) {
       grouped.set(key, {
         machine_id: row.machine.id,
@@ -13495,6 +13599,9 @@ const buildMachineSummaries = (rows: MappingRow[]) => {
         total_quantity: quantity,
         scanned_quantity: row.actual_in_at ? quantity : 0,
         last_scanned_at: row.actual_in_at,
+        box_id: rowBoxId,
+        box_name: rowBoxName,
+        box_status: rowBoxStatus,
       });
       continue;
     }
@@ -13502,6 +13609,14 @@ const buildMachineSummaries = (rows: MappingRow[]) => {
     existing.total_quantity += quantity;
     existing.scanned_quantity += row.actual_in_at ? quantity : 0;
     existing.is_optional = existing.is_optional && row.is_optional;
+
+    if (rowBoxId && !existing.box_id) {
+      existing.box_id = rowBoxId;
+      existing.box_name = rowBoxName;
+      existing.box_status = rowBoxStatus;
+    } else if (rowBoxName && existing.box_name && !existing.box_name.includes(rowBoxName)) {
+      existing.box_name = `${existing.box_name}, ${rowBoxName}`;
+    }
 
     if (
       row.actual_in_at &&
@@ -13564,6 +13679,18 @@ export const getProjectItemTrackingService = async (
     baseAnd.push(searchWhere);
   }
 
+  if (query.category) {
+    baseAnd.push({
+      category_name: { equals: query.category, mode: "insensitive" },
+    });
+  }
+
+  if (query.group) {
+    baseAnd.push({
+      group_name: { equals: query.group, mode: "insensitive" },
+    });
+  }
+
   if (query.machineId) {
     baseAnd.push({
       cutListMachineMapping: {
@@ -13581,129 +13708,389 @@ export const getProjectItemTrackingService = async (
     ...(baseAnd.length > 0 ? { AND: baseAnd } : {}),
   };
 
-  const pageWhere = addScanStatus(baseWhere, query.scanStatus, mappingScope);
-  const scannedWhere = addScanStatus(baseWhere, "scanned", mappingScope);
-  const pendingWhere = addScanStatus(baseWhere, "pending", mappingScope);
-
-  const [items, allCount, scannedCount, pendingCount, machines] =
-    await Promise.all([
-      prisma.cutList.findMany({
-        where: pageWhere,
-        skip,
-        take: limit,
-        orderBy: [{ item_name: "asc" }, { id: "asc" }],
-        select: {
-          id: true,
-          item_name: true,
-          description: true,
-          unique_code: true,
-          unique_code_2: true,
-          qty: true,
-          length: true,
-          width: true,
-          thickness: true,
-          material_details: true,
-          category_name: true,
-          group_name: true,
-          procurement: true,
-          weight: true,
-          status: true,
-          cutListMachineMapping: {
-            where: mappingScope,
-            orderBy: [
-              { sequence_no: "asc" },
-              { machine_id: "asc" },
-              { id: "asc" },
-            ],
-            select: {
-              sequence_no: true,
-              qty: true,
-              is_optional: true,
-              actual_in_at: true,
-              machine: {
-                select: {
-                  id: true,
-                  machine_name: true,
-                  machine_code: true,
-                  scan_type: true,
+  const [candidateCutLists, machines, distinctMetadata] = await Promise.all([
+    prisma.cutList.findMany({
+      where: baseWhere,
+      orderBy: [{ item_name: "asc" }, { id: "asc" }],
+      select: {
+        id: true,
+        item_name: true,
+        description: true,
+        unique_code: true,
+        unique_code_2: true,
+        qty: true,
+        length: true,
+        width: true,
+        thickness: true,
+        material_details: true,
+        category_name: true,
+        group_name: true,
+        procurement: true,
+        weight: true,
+        status: true,
+        cutListMachineMapping: {
+          where: mappingScope,
+          orderBy: [
+            { sequence_no: "asc" },
+            { machine_id: "asc" },
+            { id: "asc" },
+          ],
+          select: {
+            id: true,
+            sequence_no: true,
+            qty: true,
+            is_optional: true,
+            actual_in_at: true,
+            box_id: true,
+            machine_id: true,
+            site_in_at: true,
+            site_in_by: true,
+            in_operator: true,
+            operator: {
+              select: {
+                id: true,
+                user_name: true,
+              },
+            },
+            siteInByUser: {
+              select: {
+                id: true,
+                user_name: true,
+              },
+            },
+            boxMaster: {
+              select: {
+                id: true,
+                box_name: true,
+                box_status: true,
+                sequence_no: true,
+                factory_out_at: true,
+                factory_out_by: true,
+                site_in_at: true,
+                site_in_by: true,
+                packed_by: true,
+                packed_at: true,
+                packedByUser: {
+                  select: {
+                    id: true,
+                    user_name: true,
+                  },
                 },
+                factoryOutByUser: {
+                  select: {
+                    id: true,
+                    user_name: true,
+                  },
+                },
+                siteInByUser: {
+                  select: {
+                    id: true,
+                    user_name: true,
+                  },
+                },
+              },
+            },
+            machine: {
+              select: {
+                id: true,
+                machine_name: true,
+                machine_code: true,
+                scan_type: true,
               },
             },
           },
         },
-      }),
-      prisma.cutList.count({ where: baseWhere }),
-      prisma.cutList.count({ where: scannedWhere }),
-      prisma.cutList.count({ where: pendingWhere }),
-      prisma.machineMaster.findMany({
-        where: {
-          vendor_id: vendorId,
-          cutListMachineMapping: {
-            some: mappingScope,
-          },
+      },
+    }),
+    prisma.machineMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        cutListMachineMapping: {
+          some: mappingScope,
         },
-        select: {
-          id: true,
-          machine_name: true,
-          machine_code: true,
-          scan_type: true,
-          sequence_no: true,
-        },
-        orderBy: [{ sequence_no: "asc" }, { machine_name: "asc" }],
-      }),
-    ]);
+      },
+      select: {
+        id: true,
+        machine_name: true,
+        machine_code: true,
+        scan_type: true,
+        sequence_no: true,
+      },
+      orderBy: [{ sequence_no: "asc" }, { machine_name: "asc" }],
+    }),
+    prisma.cutList.findMany({
+      where: {
+        vendor_id: vendorId,
+        project_id: projectId,
+        ...(query.machineId
+          ? {
+              cutListMachineMapping: {
+                some: {
+                  ...mappingScope,
+                  machine_id: query.machineId,
+                },
+              },
+            }
+          : {}),
+      },
+      select: {
+        category_name: true,
+        group_name: true,
+      },
+    }),
+  ]);
 
-  const data = items.map((item) => {
-    const machineSummaries = buildMachineSummaries(
-      item.cutListMachineMapping as MappingRow[],
+  const categories = Array.from(
+    new Set(
+      distinctMetadata
+        .map((c) => c.category_name?.trim())
+        .filter(Boolean) as string[],
+    ),
+  ).sort((a, b) => a.localeCompare(b));
+
+  const groups = Array.from(
+    new Set(
+      distinctMetadata
+        .map((c) => c.group_name?.trim())
+        .filter(Boolean) as string[],
+    ),
+  ).sort((a, b) => a.localeCompare(b));
+
+  const allUnitRows: any[] = [];
+
+  for (const item of candidateCutLists) {
+    const rawMappings = item.cutListMachineMapping as MappingRow[];
+    const targetMappings = query.machineId
+      ? rawMappings.filter((m) => (m.machine_id ?? m.machine?.id) === query.machineId)
+      : rawMappings;
+
+    // A cutlist item with qty > 1 is expanded so each unit (panel) is on its own row.
+    // If item.qty is 2, it produces 2 separate rows (Piece 1 of 2, Piece 2 of 2).
+    const itemQty = Math.max(1, Math.min(50, Number(item.qty || 1)));
+    const unitCount = Math.max(itemQty, targetMappings.length);
+
+    // Group mappings by machine to assign to units
+    const byMachine = new Map<number, MappingRow[]>();
+    for (const m of rawMappings) {
+      const mId = m.machine_id ?? m.machine?.id;
+      if (mId) {
+        if (!byMachine.has(mId)) {
+          byMachine.set(mId, []);
+        }
+        byMachine.get(mId)!.push(m);
+      }
+    }
+
+    // Identify packaging mappings across all machines for this cutlist item
+    const packagingMappings = rawMappings.filter(
+      (m) => Boolean(m.box_id || m.boxMaster || (m.machine?.machine_name && /pack/i.test(m.machine.machine_name))),
     );
-    const isScanned =
-      machineSummaries.length > 0 &&
-      machineSummaries.every((machine) => machine.status === "scanned");
 
-    return {
-      id: item.id,
-      item_name: item.item_name,
-      description: item.description,
-      unique_code: item.unique_code,
-      unique_code_2: item.unique_code_2,
-      qty: item.qty,
-      length: toNullableNumber(item.length),
-      width: toNullableNumber(item.width),
-      thickness: toNullableNumber(item.thickness),
-      material_details: item.material_details,
-      category_name: item.category_name,
-      group_name: item.group_name,
-      procurement: item.procurement,
-      weight: toNullableNumber(item.weight) ?? 0,
-      item_status: item.status,
-      scan_status: isScanned ? ("scanned" as const) : ("pending" as const),
-      assigned_machines_count: machineSummaries.length,
-      scanned_machines_count: machineSummaries.filter(
-        (machine) => machine.status === "scanned",
-      ).length,
-      machines: machineSummaries,
-    };
-  });
+    for (let u = 0; u < unitCount; u++) {
+      const targetMapping = targetMappings[u] ?? targetMappings[0] ?? null;
+      const packMapping = packagingMappings[u] ?? packagingMappings[0] ?? null;
 
-  const total =
+      const bId = targetMapping?.boxMaster?.id ?? targetMapping?.box_id ?? packMapping?.boxMaster?.id ?? packMapping?.box_id ?? null;
+      const bMaster = targetMapping?.boxMaster ?? packMapping?.boxMaster ?? null;
+      const rawName = bMaster?.box_name ?? (bId ? `Box ${bId}` : null);
+      const boxName = rawName
+        ? /^box/i.test(rawName.trim())
+          ? rawName.trim()
+          : `Box ${rawName.trim()}`
+        : null;
+      const boxStatus = bMaster?.box_status ?? null;
+      const boxSeq = bMaster?.sequence_no ?? null;
+
+      const isUnitScannedAtTarget = Boolean(targetMapping?.actual_in_at);
+
+      // Build machine summaries for this unit
+      const unitMachines: any[] = [];
+      for (const [mId, mMappings] of byMachine) {
+        const mappingForUnit = mMappings[u] ?? mMappings[0];
+        const mObj = mappingForUnit.machine;
+        const mScanned = Boolean(mappingForUnit.actual_in_at);
+        const mIsPackaging = /pack/i.test(mObj.machine_name);
+
+        unitMachines.push({
+          machine_id: mId,
+          machine_name: mObj.machine_name,
+          machine_code: mObj.machine_code,
+          scan_type: String(mObj.scan_type),
+          sequence_no: mappingForUnit.sequence_no,
+          is_optional: mappingForUnit.is_optional,
+          total_quantity: 1,
+          scanned_quantity: mScanned ? 1 : 0,
+          status: mScanned ? ("scanned" as const) : ("pending" as const),
+          scanned_at: mappingForUnit.actual_in_at,
+          box_id: mIsPackaging ? (mappingForUnit.box_id || bId) : mappingForUnit.box_id,
+          box_name: mIsPackaging ? (boxName || (mappingForUnit.box_id ? `Box ${mappingForUnit.box_id}` : null)) : null,
+          box_status: mIsPackaging ? boxStatus : null,
+        });
+      }
+
+      unitMachines.sort(
+        (a, b) =>
+          a.sequence_no - b.sequence_no ||
+          a.machine_name.localeCompare(b.machine_name),
+      );
+
+      const isScannedOverall = query.machineId
+        ? isUnitScannedAtTarget
+        : unitMachines.length > 0 &&
+          unitMachines.every((m) => m.status === "scanned");
+
+      const isPackScanned = Boolean(packMapping?.actual_in_at ?? (query.machineId ? isUnitScannedAtTarget : false));
+
+      const factoryOutAt = bMaster?.factory_out_at ?? null;
+      const factoryOutBy =
+        bMaster?.factoryOutByUser?.user_name ??
+        (bMaster?.factory_out_by ? `User #${bMaster.factory_out_by}` : null);
+
+      const packedBy =
+        bMaster?.packedByUser?.user_name ??
+        packMapping?.operator?.user_name ??
+        targetMapping?.operator?.user_name ??
+        (bMaster?.packed_by ? `User #${bMaster.packed_by}` : null);
+      const packedAt = bMaster?.packed_at ?? packMapping?.actual_in_at ?? null;
+
+      // Item-level site verify: check packMapping, targetMapping, or unit mapping
+      const itemSiteVerifyAt =
+        packMapping?.site_in_at ??
+        targetMapping?.site_in_at ??
+        rawMappings[u]?.site_in_at ??
+        null;
+
+      const itemSiteVerifyUser =
+        packMapping?.siteInByUser ??
+        targetMapping?.siteInByUser ??
+        rawMappings[u]?.siteInByUser ??
+        null;
+
+      const itemSiteVerifyBy =
+        itemSiteVerifyUser?.user_name ??
+        (packMapping?.site_in_by
+          ? `User #${packMapping.site_in_by}`
+          : targetMapping?.site_in_by
+          ? `User #${targetMapping.site_in_by}`
+          : rawMappings[u]?.site_in_by
+          ? `User #${rawMappings[u].site_in_by}`
+          : null);
+
+      const boxSiteInAt = bMaster?.site_in_at ?? null;
+      const boxSiteInBy =
+        bMaster?.siteInByUser?.user_name ??
+        (bMaster?.site_in_by ? `User #${bMaster.site_in_by}` : null);
+
+      const isDispatched = Boolean(factoryOutAt);
+      const effectiveScanStatus = query.isDispatch
+        ? (isDispatched ? ("scanned" as const) : ("pending" as const))
+        : (isScannedOverall ? ("scanned" as const) : ("pending" as const));
+
+      const unitBoxes = bId
+        ? [
+            {
+              box_id: bId,
+              box_name: boxName || `Box ${bId}`,
+              box_status: boxStatus,
+              box_sequence_no: boxSeq,
+              quantity: 1,
+              scanned_at: packMapping?.actual_in_at ?? targetMapping?.actual_in_at ?? null,
+              is_scanned: isPackScanned,
+              factory_out_at: factoryOutAt,
+              factory_out_by: factoryOutBy,
+              site_in_at: itemSiteVerifyAt,
+              site_in_by: itemSiteVerifyBy,
+              site_verify_at: itemSiteVerifyAt,
+              site_verify_by: itemSiteVerifyBy,
+              box_site_in_at: boxSiteInAt,
+              box_site_in_by: boxSiteInBy,
+              packed_by: packedBy,
+              packed_at: packedAt,
+            },
+          ]
+        : [];
+
+      allUnitRows.push({
+        id: `${item.id}-${u + 1}`,
+        cut_list_id: item.id,
+        item_name: item.item_name,
+        description: item.description,
+        unique_code: item.unique_code,
+        unique_code_2: item.unique_code_2,
+        qty: 1,
+        total_qty: Number(item.qty || 1),
+        unit_index: u + 1,
+        length: toNullableNumber(item.length),
+        width: toNullableNumber(item.width),
+        thickness: toNullableNumber(item.thickness),
+        material_details: item.material_details,
+        category_name: item.category_name,
+        group_name: item.group_name,
+        procurement: item.procurement,
+        weight: item.weight
+          ? Number((Number(item.weight) / Number(item.qty || 1)).toFixed(4))
+          : 0,
+        item_status: item.status,
+        scan_status: effectiveScanStatus,
+        assigned_machines_count: unitMachines.length,
+        scanned_machines_count: unitMachines.filter((m) => m.status === "scanned").length,
+        machines: unitMachines,
+        box_id: bId,
+        box_name: boxName,
+        box_status: boxStatus,
+        box_sequence_no: boxSeq,
+        is_packed: Boolean(bId),
+        package_box_id: bId,
+        package_box_name: boxName,
+        package_box_status: boxStatus,
+        boxes: unitBoxes,
+        packed_quantity: bId ? 1 : 0,
+        remaining_quantity: bId ? 0 : 1,
+        packed_by: packedBy,
+        packed_at: packedAt,
+        packed_by_id: bMaster?.packed_by ?? packMapping?.in_operator ?? null,
+        factory_out_at: factoryOutAt,
+        factory_out_by: factoryOutBy,
+        factory_out_by_id: bMaster?.factory_out_by ?? null,
+        site_in_at: itemSiteVerifyAt,
+        site_in_by: itemSiteVerifyBy,
+        site_in_by_id: packMapping?.site_in_by ?? targetMapping?.site_in_by ?? null,
+        site_verify_at: itemSiteVerifyAt,
+        site_verify_by: itemSiteVerifyBy,
+        box_site_in_at: boxSiteInAt,
+        box_site_in_by: boxSiteInBy,
+      });
+    }
+  }
+
+  const allCount = allUnitRows.length;
+  const scannedCount = allUnitRows.filter((r) => r.scan_status === "scanned").length;
+  const pendingCount = allUnitRows.filter((r) => r.scan_status === "pending").length;
+
+  const filteredRows =
     query.scanStatus === "scanned"
-      ? scannedCount
+      ? allUnitRows.filter((r) => r.scan_status === "scanned")
       : query.scanStatus === "pending"
-        ? pendingCount
-        : allCount;
+        ? allUnitRows.filter((r) => r.scan_status === "pending")
+        : allUnitRows;
+
+  const total = filteredRows.length;
   const totalPages = total === 0 ? 0 : Math.ceil(total / limit);
+  const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+  const safeSkip = (safePage - 1) * limit;
+
+  const data = filteredRows.slice(safeSkip, safeSkip + limit);
 
   return {
     project,
     data,
     pagination: {
-      page,
+      page: safePage,
       limit,
       total,
       totalPages,
-      hasNextPage: page < totalPages,
-      hasPreviousPage: page > 1,
+      hasNextPage: safePage < totalPages,
+      hasPreviousPage: safePage > 1,
     },
     counts: {
       all: allCount,
@@ -13714,8 +14101,12 @@ export const getProjectItemTrackingService = async (
       search: query.search,
       scanStatus: query.scanStatus,
       machineId: query.machineId ?? null,
+      category: query.category ?? null,
+      group: query.group ?? null,
     },
     filterOptions: {
+      categories,
+      groups,
       machines: machines.map((machine) => ({
         id: machine.id,
         machine_name: machine.machine_name,

@@ -2309,19 +2309,38 @@ const toPositiveInteger = (
 export const getProjectItemTracking = async (req: Request, res: Response) => {
   try {
     const vendorId = toPositiveInteger(req.params.vendorId);
-    const projectId = toPositiveInteger(req.params.projectId);
+    let projectId = toPositiveInteger(req.params.projectId);
     const page = toPositiveInteger(req.query.page, 1);
     const limit = toPositiveInteger(req.query.limit, 10);
     const search = String(req.query.search ?? "")
       .trim()
       .slice(0, 100);
     const rawStatus = String(req.query.scanStatus ?? "all").toLowerCase();
-    const machineId = toPositiveInteger(req.query.machineId);
+    const isDispatch =
+      String(req.query.stage ?? "").toLowerCase() === "dispatch" ||
+      String(req.query.machineId ?? "").toLowerCase() === "dispatch";
+    const machineId = isDispatch ? undefined : toPositiveInteger(req.query.machineId);
 
-    if (!vendorId || !projectId) {
+    if (!vendorId) {
       return res.status(400).json({
-        error: "vendorId and projectId must be positive integers",
+        error: "vendorId must be a positive integer",
       });
+    }
+
+    if (!projectId) {
+      const projectLookup = await prisma.projectMaster.findFirst({
+        where: {
+          vendor_id: vendorId,
+          unique_project_id: String(req.params.projectId),
+        },
+        select: { id: true },
+      });
+
+      if (projectLookup) {
+        projectId = projectLookup.id;
+      } else {
+        return res.status(404).json({ error: "Project not found" });
+      }
     }
 
     if (!page || !limit || limit > 50) {
@@ -2341,6 +2360,7 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
     }
 
     if (
+      !isDispatch &&
       req.query.machineId !== undefined &&
       req.query.machineId !== "" &&
       !machineId
@@ -2349,6 +2369,9 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
         .status(400)
         .json({ error: "machineId must be a positive integer" });
     }
+
+    const category = req.query.category ? String(req.query.category).trim() : undefined;
+    const group = req.query.group ? String(req.query.group).trim() : undefined;
 
     const result = await trackTraceService.getProjectItemTrackingService(
       vendorId,
@@ -2359,6 +2382,9 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
         search,
         scanStatus: rawStatus as trackTraceService.ProjectItemScanFilter,
         machineId,
+        isDispatch,
+        category,
+        group,
       },
     );
 
