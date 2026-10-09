@@ -268,11 +268,13 @@ export class MetaWebhookController {
           "Medium";
 
         // Check if lead originates from Google Sheet
+        const userAgent = String(req.headers["user-agent"] || "");
         const isGoogleSheet =
           Boolean(body.source && String(body.source).toLowerCase().includes("sheet")) ||
           Boolean(body["Source"] && String(body["Source"]).toLowerCase().includes("sheet")) ||
           Boolean(body["source"] && String(body["source"]).toLowerCase().includes("sheet")) ||
-          String(source || "").toLowerCase().includes("sheet");
+          String(source || "").toLowerCase().includes("sheet") ||
+          userAgent.toLowerCase().includes("google-apps-script");
 
         // Parse product_types (array or comma-separated string)
         // If coming from Google Sheet into Lead Pool, product_types and product_structures MUST remain empty []

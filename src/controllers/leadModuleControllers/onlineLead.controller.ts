@@ -110,6 +110,24 @@ const mapOnlineLeadToFrontend = (lead: any) => {
             let remark = h.remark || "";
 
             if (isOnlineLeadFeatureEnabled) {
+              const cleanRem = remark.trim().toLowerCase();
+              const leadRem = (lead.remark || "").trim().toLowerCase();
+              const isInitialCreationRemark =
+                (leadRem && cleanRem === leadRem) ||
+                cleanRem.startsWith("lead registered via") ||
+                cleanRem.startsWith("lead updated with new data via") ||
+                cleanRem.includes("lead automatically created") ||
+                cleanRem.startsWith("design remarks updated") ||
+                cleanRem.startsWith("bulk imported") ||
+                cleanRem.startsWith("lead bulk imported") ||
+                cleanRem.startsWith("**•") ||
+                cleanRem.startsWith("•") ||
+                cleanRem.includes("**•");
+
+              if (isInitialCreationRemark) {
+                continue;
+              }
+
               remark = remark
                 .replace(
                   /Lead conversion approved and moved to Draft Lead stage/gi,
@@ -220,16 +238,15 @@ const mapOnlineLeadToFrontend = (lead: any) => {
                 })
                 .filter(Boolean);
 
-              if (itemsToInject.length > 0) {
-                const conversionEntry = historyList.find((h: any) =>
-                  (h.remark || "").toLowerCase().includes("conversion")
-                );
-                const baseTime = conversionEntry
-                  ? new Date(conversionEntry.created_at).getTime() - 1000
-                  : lead.created_at
-                  ? new Date(lead.created_at).getTime()
-                  : Date.now();
-                const baseUser = conversionEntry?.createdBy ||
+              const conversionEntry = historyList.find((h: any) =>
+                (h.remark || "").toLowerCase().includes("conversion")
+              );
+
+              // Only inject synthetic structure entries for converted leads that have a conversion timeline event.
+              // Brand-new or unconverted leads in Lead Pool must NOT have synthetic product structure history entries.
+              if (conversionEntry && itemsToInject.length > 0) {
+                const baseTime = new Date(conversionEntry.created_at).getTime() - 1000;
+                const baseUser = conversionEntry.createdBy ||
                   lead.UserMaster_online_leads_created_byToUserMaster ||
                   { user_name: "Super Admin" };
 
@@ -239,8 +256,8 @@ const mapOnlineLeadToFrontend = (lead: any) => {
                     remark: `Product structure instance added : ${item}`,
                     created_at: new Date(baseTime - idx * 500).toISOString(),
                     createdBy: baseUser,
-                    status: conversionEntry?.status || { status_name: "Status Change" },
-                    franchise: conversionEntry?.franchise || lead.FranchiseMaster || null,
+                    status: conversionEntry.status || { status_name: "Status Change" },
+                    franchise: conversionEntry.franchise || lead.FranchiseMaster || null,
                   });
                 });
               }
@@ -3531,15 +3548,21 @@ export class OnlineLeadController {
         currentLead &&
         currentLead.remark !== remark
       ) {
-        await prisma.online_lead_history.create({
-          data: {
-            vendor_id: currentLead.vendor_id,
-            online_lead_id: id,
-            remark: `Design remarks updated: ${remark || "N/A"}`,
-            created_by: updated_by ? Number(updated_by) : 1,
-            online_lead_status_id: currentLead.status || 1,
-          },
+        const vendorRec = await prisma.vendorMaster.findUnique({
+          where: { id: currentLead.vendor_id },
+          select: { is_online_lead_feature_enabled: true },
         });
+        if (!vendorRec?.is_online_lead_feature_enabled) {
+          await prisma.online_lead_history.create({
+            data: {
+              vendor_id: currentLead.vendor_id,
+              online_lead_id: id,
+              remark: `Design remarks updated: ${remark || "N/A"}`,
+              created_by: updated_by ? Number(updated_by) : 1,
+              online_lead_status_id: currentLead.status || 1,
+            },
+          });
+        }
       }
 
       const updated = await prisma.online_leads.update({
@@ -4396,16 +4419,18 @@ export class OnlineLeadController {
                   ? `Bulk imported:\n\n${remark}`
                   : "Lead registered via bulk upload");
 
-            await tx.online_lead_history.create({
-              data: {
-                vendor_id: Number(vendor_id),
-                online_lead_id: createdLead.id,
-                remark: historyRemark,
-                created_by: Number(created_by),
-                store_id: storeId || null,
-                online_lead_status_id: walkInStatus.id,
-              },
-            });
+            if (!isOnlineLeadFeatureEnabled) {
+              await tx.online_lead_history.create({
+                data: {
+                  vendor_id: Number(vendor_id),
+                  online_lead_id: createdLead.id,
+                  remark: historyRemark,
+                  created_by: Number(created_by),
+                  store_id: storeId || null,
+                  online_lead_status_id: walkInStatus.id,
+                },
+              });
+            }
 
             // Record store preference log if showroom identified
             if (storeId) {
