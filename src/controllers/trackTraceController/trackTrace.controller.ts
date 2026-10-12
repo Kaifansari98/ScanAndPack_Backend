@@ -2343,9 +2343,9 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
       }
     }
 
-    if (!page || !limit || limit > 50) {
+    if (!page || !limit || limit > 100) {
       return res.status(400).json({
-        error: "page must be positive and limit must be between 1 and 50",
+        error: "page must be positive and limit must be between 1 and 100",
       });
     }
 

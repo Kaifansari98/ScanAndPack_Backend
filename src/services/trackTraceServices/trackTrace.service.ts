@@ -13652,7 +13652,7 @@ export const getProjectItemTrackingService = async (
   query: ProjectItemTrackingQuery,
 ) => {
   const page = Math.max(1, query.page);
-  const limit = Math.min(50, Math.max(1, query.limit));
+  const limit = Math.min(100, Math.max(1, query.limit));
   const skip = (page - 1) * limit;
   const mappingScope = getMappingScope(vendorId, projectId);
 
@@ -13866,7 +13866,7 @@ export const getProjectItemTrackingService = async (
 
     // A cutlist item with qty > 1 is expanded so each unit (panel) is on its own row.
     // If item.qty is 2, it produces 2 separate rows (Piece 1 of 2, Piece 2 of 2).
-    const itemQty = Math.max(1, Math.min(50, Number(item.qty || 1)));
+    const itemQty = Math.max(1, Number(item.qty || 1));
     const unitCount = Math.max(itemQty, targetMappings.length);
 
     // Group mappings by machine to assign to units
