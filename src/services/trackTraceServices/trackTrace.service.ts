@@ -5146,6 +5146,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
       select: {
         id: true,
         project_name: true,
+        order_no: true,
         project_status: true,
         track_trace_status: true,
         created_at: true,
@@ -5372,6 +5373,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
       return {
         project_id: project.id,
         project_name: project.project_name,
+        order_no: project.order_no,
         project_status: project.project_status,
         track_trace_status: project.track_trace_status,
         created_at: project.created_at.toISOString(),
@@ -5430,6 +5432,7 @@ export const getTraceTraceDashboard = async (
           project_name: true,
           unique_project_id: true,
           lead_id: true,
+          order_no: true,
           project_status: true,
           track_trace_status: true,
           created_at: true,
@@ -5653,6 +5656,7 @@ export const getTraceTraceDashboard = async (
         unique_project_id: project.unique_project_id,
         lead_id: project.lead_id,
         project_name: project.project_name,
+        order_no: project.order_no,
         project_status: project.project_status,
         track_trace_status: project.track_trace_status,
         created_at: project.created_at.toISOString(),
