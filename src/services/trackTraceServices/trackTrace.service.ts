@@ -6580,8 +6580,15 @@ export const markBoxFactoryOutService = async (
       if (!box) return validationResponse(0, "Box not found");
       if (box.box_status !== "packed")
         return validationResponse(0, "Box is still open/unpacked. Seal box before dispatch.");
+
+      const boxDisplayName = box.box_name?.trim()
+        ? /^box/i.test(box.box_name.trim())
+          ? box.box_name.trim()
+          : `Box ${box.box_name.trim()}`
+        : "Box";
+
       if (box.factory_out_at)
-        return validationResponse(0, `Duplicate: Box #${box.id} was already dispatched.`);
+        return validationResponse(0, `Duplicate: ${boxDisplayName} was already dispatched.`);
 
       const locationRows = await tx.projectLocationProductQuantity.findMany({
         where: { project_id, vendor_id },
@@ -6595,7 +6602,7 @@ export const markBoxFactoryOutService = async (
         );
       }
 
-      let dispatchMessage = "Box marked as factory out successfully";
+      let dispatchMessage = `${boxDisplayName} marked as factory out successfully`;
 
       if (normalizedSelectedLocation) {
         const targetRows = locationRows.filter(
@@ -6810,9 +6817,9 @@ export const markBoxFactoryOutService = async (
             });
           }
 
-          dispatchMessage = `Box assigned to ${selectedLocation}. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+          dispatchMessage = `${boxDisplayName} assigned to ${selectedLocation}. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
         } else {
-          dispatchMessage = `Box dispatched. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
+          dispatchMessage = `${boxDisplayName} dispatched. ${selectedLocation}: ${totalDispatched + boxAddsProductSetTotal} of ${totalQuota} products dispatched.`;
         }
       }
 
