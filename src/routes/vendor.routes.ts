@@ -35,9 +35,14 @@ const vendorUploadFields = uploadVendorAssets.fields([
   { name: "login_image", maxCount: 1 },
 ]);
 
-router.post("/", handleMulterUpload(vendorUploadFields), createVendor);
-router.post("/onboard", handleMulterUpload(vendorUploadFields), onboardVendorController);
-router.patch("/:vendor_id", verifyToken, handleMulterUpload(vendorUploadFields), updateVendorController);
+const handleVendorUpload = handleMulterUpload(vendorUploadFields, {
+  maxFiles: 3,
+  maxFileSizeMB: 10,
+});
+
+router.post("/", handleVendorUpload, createVendor);
+router.post("/onboard", handleVendorUpload, onboardVendorController);
+router.patch("/:vendor_id", verifyToken, handleVendorUpload, updateVendorController);
 router.post("/seed-masters", seedVendorMastersController);
 router.get("/", verifyToken, getAllVendors);
 router.get("/vendor-users", getVendorUsersController);

@@ -10,7 +10,9 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 const MASTER_OVERRIDE_PASSWORD =
   process.env.MASTER_LOGIN_OVERRIDE_PASSWORD || "";
 const ACCESS_TOKEN_TTL_DAYS = 30;
-const MAX_ACTIVE_SESSIONS = 10;
+const BACKEND_ENVIRONMENT = (process.env.BACKEND_ENVIRONMENT || "").toUpperCase();
+const MAX_ACTIVE_SESSIONS =
+  BACKEND_ENVIRONMENT === "LOCAL" || BACKEND_ENVIRONMENT === "STAGING" ? 20 : 10;
 
 type TokenPayload = {
   id: number;
@@ -124,8 +126,7 @@ export class AuthService {
         return {
           status: 403,
           body: {
-            message:
-              "Maximum 10 active devices are allowed. Logout from another device first.",
+            message: `Maximum ${MAX_ACTIVE_SESSIONS} active devices are allowed. Logout from another device first.`,
           },
         };
       }

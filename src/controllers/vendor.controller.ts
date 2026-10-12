@@ -212,6 +212,9 @@ export const updateVendorController = async (req: Request, res: Response) => {
       is_scanpack_enabled: req.body.is_scanpack_enabled !== undefined
         ? (req.body.is_scanpack_enabled === "true" || req.body.is_scanpack_enabled === true)
         : undefined,
+      is_hrms_master_enabled: req.body.is_hrms_master_enabled !== undefined
+        ? (req.body.is_hrms_master_enabled === "true" || req.body.is_hrms_master_enabled === true)
+        : undefined,
       push_lead_to_cadbid: req.body.push_lead_to_cadbid !== undefined
         ? req.body.push_lead_to_cadbid === "true" ||
         req.body.push_lead_to_cadbid === true : undefined,
@@ -357,9 +360,11 @@ export const onboardVendorController = async (req: Request, res: Response) => {
     const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
     const logoFile = files?.logo?.[0];
     const iconFile = files?.icon?.[0];
+    const loginImageFile = files?.login_image?.[0];
 
     let logoUrl = req.body.logo || "";
     let iconUrl = req.body.icon || "";
+    let loginImageUrl = req.body.login_image || "";
 
     if (logoFile) {
       logoUrl = await uploadToWasabiVendorAsset(
@@ -381,10 +386,21 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       await fs.unlink(iconFile.path);
     }
 
+    if (loginImageFile) {
+      loginImageUrl = await uploadToWasabiVendorAsset(
+        loginImageFile.path,
+        "login_image",
+        loginImageFile.originalname,
+        loginImageFile.mimetype
+      );
+      await fs.unlink(loginImageFile.path);
+    }
+
     const vendorData = {
       ...req.body,
       logo: logoUrl,
       icon: iconUrl,
+      login_image: loginImageUrl,
       gst_no: cleanString(req.body.gst_no),
       toll_free_no: cleanString(req.body.toll_free_no),
       website_link: cleanString(req.body.website_link),
@@ -403,6 +419,7 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
       head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
       is_scanpack_enabled: req.body.is_scanpack_enabled === "true" || req.body.is_scanpack_enabled === true,
+      is_hrms_master_enabled: req.body.is_hrms_master_enabled === "true" || req.body.is_hrms_master_enabled === true,
       push_lead_to_cadbid: req.body.push_lead_to_cadbid === "true" || req.body.push_lead_to_cadbid === true,
 
     };
@@ -843,4 +860,3 @@ export const getLeadServicingReportController = async (
     });
   }
 };
-

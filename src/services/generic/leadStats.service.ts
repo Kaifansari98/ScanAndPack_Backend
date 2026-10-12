@@ -6,7 +6,8 @@ export class LeadStatsService {
   static async getVendorLeadStats(
     vendorId: number,
     franchiseId: number | undefined,
-    userId?: number
+    userId?: number,
+    onlineLeadFranchiseId?: number
   ) {
     logger.info("[LeadStatsService] getVendorLeadStats called", {
       vendorId,
@@ -29,7 +30,10 @@ export class LeadStatsService {
     // ✅ Total My Tasks count (for current user)
     let totalMyTasks: number | null = null;
     let userType = "";
+    let isCaller = false;
     let targetFranchiseId: number | undefined = franchiseId;
+    let isHO = false;
+    let userFranchiseId: number | undefined;
 
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
@@ -48,7 +52,8 @@ export class LeadStatsService {
         throw new Error("User does not belong to the specified vendor");
       }
 
-      const isHO = user.franchise_id
+      userFranchiseId = user.franchise_id ?? undefined;
+      isHO = user.franchise_id
         ? (
             await prisma.franchiseMaster.findUnique({
               where: { id: user.franchise_id },
@@ -58,22 +63,37 @@ export class LeadStatsService {
         : false;
 
       userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
+      isCaller = [
+        "telecaller",
+        "telecaller-team-lead",
+        "telecaller team lead",
+        "caller",
+        "store-caller",
+        "store caller",
+      ].includes(userType);
+
       targetFranchiseId =
         franchiseId ??
-        (!isHO && userType !== "super-admin" ? user.franchise_id ?? undefined : undefined);
+        (!isHO && userType !== "super-admin" && !isCaller ? user.franchise_id ?? undefined : undefined);
 
       const shouldUseMapping = ![
         "admin",
         "super-admin",
         "auditor",
       ].includes(userType);
+      // Site supervisors can be mapped to leads across multiple franchises
+      // (see SiteSupervisorFranchiseMapping); leads individually assigned to
+      // them via LeadUserMapping/UserLeadTask (the `leadIds` gate below) must
+      // count regardless of the lead's franchise, so franchise scoping is
+      // skipped for this role here.
+      const isSiteSupervisorLeadOwner = userType === "site-supervisor";
       console.log("[LeadStatsService] role flags", {
         userType,
         targetFranchiseId,
         shouldUseMapping,
       });
 
-      if (targetFranchiseId) {
+      if (targetFranchiseId && !isSiteSupervisorLeadOwner && !isCaller) {
         whereClause = {
           ...whereClause,
           franchise_id: targetFranchiseId,
@@ -82,11 +102,14 @@ export class LeadStatsService {
 
       // My Task is a personal queue. Admin-level users can work across
       // franchises, so its badge must not be limited by the active franchise.
-      const taskFranchiseId = ["admin", "super-admin", "auditor"].includes(
-        userType,
-      )
-        ? undefined
-        : targetFranchiseId;
+      // Site supervisors are excluded for the same cross-franchise-mapping
+      // reason as above.
+      const taskFranchiseId =
+        ["admin", "super-admin", "auditor"].includes(userType) ||
+        isSiteSupervisorLeadOwner ||
+        isCaller
+          ? undefined
+          : targetFranchiseId;
 
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
@@ -104,6 +127,41 @@ export class LeadStatsService {
         // don't own (e.g. tasks they created) and inflate the sidebar count.
         const mappingOnlyRoles = ["pre-prod", "factory"];
         const isMappingOnly = mappingOnlyRoles.includes(userType);
+
+        let callerLeadIds: number[] = [];
+        if (isCaller && userId) {
+          const [directLeads, onlineFollowUpLeads] = await Promise.all([
+            prisma.leadMaster.findMany({
+              where: {
+                vendor_id: vendorId,
+                is_deleted: false,
+                OR: [{ created_by: userId }, { assign_to: userId }],
+              },
+              select: { id: true },
+            }),
+            prisma.online_leads.findMany({
+              where: {
+                vendor_id: vendorId,
+                lead_master_id: { not: null },
+                OR: [
+                  { assign_to: userId },
+                  { final_assigned_leads: userId },
+                  { created_by: userId },
+                  { online_lead_call_log: { some: { telecaller_id: userId } } },
+                  { online_lead_history: { some: { created_by: userId } } },
+                ],
+              },
+              select: { lead_master_id: true },
+            }),
+          ]);
+
+          callerLeadIds = [
+            ...directLeads.map((d) => d.id),
+            ...onlineFollowUpLeads
+              .map((o) => o.lead_master_id)
+              .filter((id): id is number => typeof id === "number"),
+          ];
+        }
 
         const [mappedLeads, taskLeads] = await Promise.all([
           prisma.leadUserMapping.findMany({
@@ -125,11 +183,13 @@ export class LeadStatsService {
           ...new Set([
             ...mappedLeads.map((m) => m.lead_id),
             ...taskLeads.map((t) => t.lead_id),
+            ...callerLeadIds,
           ]),
         ];
         console.log("[LeadStatsService] lead ids", {
           mappedCount: mappedLeads.length,
           taskCount: taskLeads.length,
+          callerCount: callerLeadIds.length,
           totalUnique: leadIds.length,
         });
 
@@ -220,10 +280,15 @@ export class LeadStatsService {
       },
     });
 
-    const totalOpenLeads = await countByTag("Type 1", { is_draft: { not: true } });
+    const totalOpenLeads = await countByTag("Type 1", {
+      is_draft: undefined,
+      AND: [{ OR: [{ is_draft: false }, { draft_in_open_leads: true }] }],
+    });
 
     let totalDraftLeads = 0;
     if (isOnlineLeadFeatureEnabled) {
+      const effectiveFranchiseId = onlineLeadFranchiseId ?? franchiseId ?? userFranchiseId;
+
       const pendingOnlineWhere: any = {
         vendor_id: vendorId,
         approval_status: "PENDING",
@@ -242,31 +307,37 @@ export class LeadStatsService {
           ],
         };
 
-        if (targetFranchiseId) {
-          pendingOnlineWhere.AND = [
-            {
-              OR: [
-                { pending_store_id: targetFranchiseId },
-                { store_id: targetFranchiseId },
-              ],
-            },
-            userCondition,
-          ];
-        } else {
-          Object.assign(pendingOnlineWhere, userCondition);
-        }
-      } else if (targetFranchiseId) {
-        pendingOnlineWhere.OR = [
-          { pending_store_id: targetFranchiseId },
-          { store_id: targetFranchiseId },
-        ];
+        Object.assign(pendingOnlineWhere, userCondition);
+      } else if (isCaller && userId) {
+        const callerCondition: any = {
+          OR: [
+            { assign_to: userId },
+            { final_assigned_leads: userId },
+            { created_by: userId },
+            { online_lead_call_log: { some: { telecaller_id: userId } } },
+            { online_lead_history: { some: { created_by: userId } } },
+          ],
+        };
+        Object.assign(pendingOnlineWhere, callerCondition);
+      }
+
+      if (effectiveFranchiseId) {
+        pendingOnlineWhere.AND = [{
+          OR: [
+            { pending_store_id: effectiveFranchiseId },
+            { store_id: effectiveFranchiseId },
+          ],
+        }];
       }
 
       const pendingOnlineCount = await prisma.online_leads.count({
         where: pendingOnlineWhere,
       });
 
-      const draftLeadMasterCount = await countByTag("Type 1", { is_draft: true });
+      const draftLeadMasterCount = await countByTag("Type 1", {
+        is_draft: true,
+        ...(effectiveFranchiseId ? { franchise_id: effectiveFranchiseId } : {}),
+      });
       totalDraftLeads = pendingOnlineCount + draftLeadMasterCount;
     } else {
       totalDraftLeads = await countByTag("Type 1", { is_draft: true });
@@ -402,10 +473,13 @@ export class LeadStatsService {
       where: {
         vendor_id: vendorId,
         assign_to: null,
+        approval_status: null,
+        lead_master_id: null,
+        pending_store_id: null,
         NOT: {
           online_lead_followup_status: {
             status_name: {
-              in: ["Store Assigned", "Store Visit Done"],
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
               mode: "insensitive",
             },
           },

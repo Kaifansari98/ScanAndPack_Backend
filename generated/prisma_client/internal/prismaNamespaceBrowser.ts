@@ -276,7 +276,9 @@ export const ModelName = {
   CutListRuleCondition: 'CutListRuleCondition',
   CutListRuleAction: 'CutListRuleAction',
   RuleFieldMaster: 'RuleFieldMaster',
-  RuleActionMaster: 'RuleActionMaster'
+  RuleActionMaster: 'RuleActionMaster',
+  SiteSupervisorFranchiseMapping: 'SiteSupervisorFranchiseMapping',
+  WixStudioDataCapture: 'WixStudioDataCapture'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -325,6 +327,7 @@ export const VendorMasterScalarFieldEnum = {
   subdomain_url: 'subdomain_url',
   is_crm_enabled: 'is_crm_enabled',
   is_custom_doc_nomenclature_enabled: 'is_custom_doc_nomenclature_enabled',
+  is_miscellaneous_enabled: 'is_miscellaneous_enabled',
   handlesLargeScaleProjects: 'handlesLargeScaleProjects',
   is_email_noti_enabled: 'is_email_noti_enabled',
   is_in_app_noti_enabled: 'is_in_app_noti_enabled',
@@ -339,6 +342,7 @@ export const VendorMasterScalarFieldEnum = {
   website_link: 'website_link',
   is_broadcast_enabled: 'is_broadcast_enabled',
   is_scanpack_enabled: 'is_scanpack_enabled',
+  is_hrms_master_enabled: 'is_hrms_master_enabled',
   is_online_lead_feature_enabled: 'is_online_lead_feature_enabled',
   push_lead_to_cadbid: 'push_lead_to_cadbid',
   is_available_unique_code: 'is_available_unique_code'
@@ -403,6 +407,7 @@ export const UserMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   user_name: 'user_name',
+  designation: 'designation',
   user_contact: 'user_contact',
   user_email: 'user_email',
   user_timezone: 'user_timezone',
@@ -740,6 +745,7 @@ export const LeadMasterScalarFieldEnum = {
   pending_amount: 'pending_amount',
   total_project_amount: 'total_project_amount',
   is_draft: 'is_draft',
+  draft_in_open_leads: 'draft_in_open_leads',
   lead_code: 'lead_code',
   is_client_approval_submitted: 'is_client_approval_submitted',
   client_required_order_login_complition_date: 'client_required_order_login_complition_date',
@@ -4101,6 +4107,7 @@ export type BoxItemDeleteLogScalarFieldEnum = (typeof BoxItemDeleteLogScalarFiel
 
 
 export const ProductsRequiredForProductionScalarFieldEnum = {
+  order_login_id: 'order_login_id',
   id: 'id',
   vendor_id: 'vendor_id',
   franchise_id: 'franchise_id',
@@ -4215,6 +4222,30 @@ export const RuleActionMasterScalarFieldEnum = {
 } as const
 
 export type RuleActionMasterScalarFieldEnum = (typeof RuleActionMasterScalarFieldEnum)[keyof typeof RuleActionMasterScalarFieldEnum]
+
+
+export const SiteSupervisorFranchiseMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  supervisor_id: 'supervisor_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by'
+} as const
+
+export type SiteSupervisorFranchiseMappingScalarFieldEnum = (typeof SiteSupervisorFranchiseMappingScalarFieldEnum)[keyof typeof SiteSupervisorFranchiseMappingScalarFieldEnum]
+
+
+export const WixStudioDataCaptureScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  payload: 'payload',
+  created_at: 'created_at'
+} as const
+
+export type WixStudioDataCaptureScalarFieldEnum = (typeof WixStudioDataCaptureScalarFieldEnum)[keyof typeof WixStudioDataCaptureScalarFieldEnum]
 
 
 export const SortOrder = {

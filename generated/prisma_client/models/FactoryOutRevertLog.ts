@@ -363,7 +363,7 @@ export type FactoryOutRevertLogCreateInput = {
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutFactory_out_revert_logsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutFactory_out_revert_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactory_out_revert_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactoryOutRevertLogsInput
   revertedByUser: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsMadeInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsOriginalInput
 }
@@ -388,7 +388,7 @@ export type FactoryOutRevertLogUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactoryOutRevertLogsNestedInput
   revertedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutFactoryOutRevertsMadeNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutFactoryOutRevertsOriginalNestedInput
 }
@@ -788,7 +788,7 @@ export type FactoryOutRevertLogCreateWithoutRevertedByUserInput = {
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutFactory_out_revert_logsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutFactory_out_revert_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactory_out_revert_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactoryOutRevertLogsInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsOriginalInput
 }
 
@@ -821,7 +821,7 @@ export type FactoryOutRevertLogCreateWithoutFactoryOutByUserInput = {
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutFactory_out_revert_logsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutFactory_out_revert_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactory_out_revert_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactoryOutRevertLogsInput
   revertedByUser: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsMadeInput
 }
 
@@ -885,7 +885,7 @@ export type FactoryOutRevertLogCreateWithoutProjectInput = {
   description: string
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutFactory_out_revert_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactory_out_revert_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactoryOutRevertLogsInput
   revertedByUser: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsMadeInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsOriginalInput
 }
@@ -934,7 +934,7 @@ export type FactoryOutRevertLogCreateWithoutBoxInput = {
   description: string
   created_at?: Date | string
   project: Prisma.ProjectMasterCreateNestedOneWithoutFactory_out_revert_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactory_out_revert_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFactoryOutRevertLogsInput
   revertedByUser: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsMadeInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutFactoryOutRevertsOriginalInput
 }
@@ -1055,7 +1055,7 @@ export type FactoryOutRevertLogUpdateWithoutRevertedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactoryOutRevertLogsNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutFactoryOutRevertsOriginalNestedInput
 }
 
@@ -1090,7 +1090,7 @@ export type FactoryOutRevertLogUpdateWithoutFactoryOutByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactoryOutRevertLogsNestedInput
   revertedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutFactoryOutRevertsMadeNestedInput
 }
 
@@ -1136,7 +1136,7 @@ export type FactoryOutRevertLogUpdateWithoutProjectInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactoryOutRevertLogsNestedInput
   revertedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutFactoryOutRevertsMadeNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutFactoryOutRevertsOriginalNestedInput
 }
@@ -1183,7 +1183,7 @@ export type FactoryOutRevertLogUpdateWithoutBoxInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFactoryOutRevertLogsNestedInput
   revertedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutFactoryOutRevertsMadeNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutFactoryOutRevertsOriginalNestedInput
 }

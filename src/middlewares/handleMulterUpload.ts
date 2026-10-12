@@ -31,7 +31,12 @@ const getFlatFiles = (reqFiles: any, skipFields: string[] = []): Express.Multer.
   return flatList;
 };
 
-export const handleMulterUpload = (uploadMiddleware: any, options: { skipFields?: string[] } = {}) => {
+export const handleMulterUpload = (
+  uploadMiddleware: any,
+  options: { skipFields?: string[]; maxFiles?: number; maxFileSizeMB?: number } = {},
+) => {
+  const maxFiles = options.maxFiles ?? MAX_FILES;
+  const maxFileSizeMB = options.maxFileSizeMB ?? MAX_FILE_SIZE_MB;
   return (req: Request, res: Response, next: NextFunction) => {
     uploadMiddleware(req, res, (err: any) => {
       const skipFields = options.skipFields || [];
@@ -46,13 +51,13 @@ export const handleMulterUpload = (uploadMiddleware: any, options: { skipFields?
             case "LIMIT_FILE_SIZE":
               return res.status(400).json({
                 success: false,
-                error: `Single file size exceeded. Max ${MAX_FILE_SIZE_MB}MB allowed`,
+                error: `Single file size exceeded. Max ${maxFileSizeMB}MB allowed`,
               });
 
             case "LIMIT_FILE_COUNT":
               return res.status(400).json({
                 success: false,
-                error: `Maximum ${MAX_FILES} files allowed`,
+                error: `Maximum ${maxFiles} files allowed`,
               });
 
             case "LIMIT_UNEXPECTED_FILE":
@@ -79,11 +84,11 @@ export const handleMulterUpload = (uploadMiddleware: any, options: { skipFields?
         }
 
         // Manual file count validation
-        if (files.length > MAX_FILES) {
+        if (files.length > maxFiles) {
           cleanupFiles(files);
           return res.status(400).json({
             success: false,
-            error: `Maximum ${MAX_FILES} files allowed`,
+            error: `Maximum ${maxFiles} files allowed`,
           });
         }
 

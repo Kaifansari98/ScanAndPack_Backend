@@ -1,3 +1,4 @@
+import { outsourceProductionMaterials } from "../../../../services/production/order-login/outsourceProductionMaterials.service";
 import { uploadProductionFiles } from "./../../../../middlewares/uploadWasabi";
 import { Request, Response } from "express";
 import {
@@ -356,6 +357,9 @@ export class OrderLoginController {
         try { materials = { rows: JSON.parse(req.body.material_rows), replace: req.body.replace_materials === "true" }; }
         catch { return res.status(400).json({ message: "Invalid material rows" }); }
       }
+      if (req.body.documents_only === "true" && materials) {
+        return res.status(400).json({ message: "Document uploads cannot contain material rows." });
+      }
       if (materials && (!Array.isArray(materials.rows) || !materials.rows.length || materials.rows.length > 10000)) {
         return res.status(400).json({ message: "Provide between 1 and 10,000 material rows." });
       }
@@ -409,6 +413,7 @@ export class OrderLoginController {
         uploadedFiles,
         instanceIdValue,
         materials,
+        req.body.documents_only === "true",
       );
 
       return res.status(200).json({
@@ -433,11 +438,18 @@ export class OrderLoginController {
       const actor = (req as any).user;
       const vendor_id = Number(req.params.vendorId);
       const lead_id = Number(req.params.leadId);
+      const instanceId = req.query.instance_id === undefined
+        ? undefined
+        : Number(req.query.instance_id);
+      if (instanceId !== undefined && (!Number.isSafeInteger(instanceId) || instanceId <= 0)) {
+        return res.status(400).json({ message: "instance_id must be a positive integer" });
+      }
       if (actor?.vendor_id !== vendor_id) return res.status(403).json({ message: "Vendor access denied" });
       const lead = await prisma.leadMaster.findFirst({ where: { id: lead_id, vendor_id, ...(actor.franchise_id ? { franchise_id: actor.franchise_id } : {}) } });
       if (!lead) return res.status(404).json({ message: "Lead not found" });
       const data = await prisma.productsRequiredForProduction.findMany({
-        where: { vendor_id, lead_id, instance_id: req.query.instance_id ? Number(req.query.instance_id) : null },
+        // Without an instance filter, material issue shows all saved rows for the lead.
+        where: { vendor_id, lead_id, ...(instanceId !== undefined ? { instance_id: instanceId } : {}) },
         include: { product: { select: {
           id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, min_stock_qty: true, active: true,
           unit_of_measure: true, stockUnit: { select: { unit_name: true } },
@@ -449,6 +461,24 @@ export class OrderLoginController {
     } catch (error) {
       console.error("Failed to load required materials", error);
       return res.status(500).json({ message: "Failed to load required materials" });
+    }
+  }
+
+  async outsourceRequiredMaterials(req: Request, res: Response) {
+    try {
+      const actor = (req as any).user;
+      const vendorId = Number(req.params.vendorId);
+      if (actor?.vendor_id !== vendorId) return res.status(403).json({ message: "Vendor access denied" });
+      const data = await outsourceProductionMaterials({
+        vendorId,
+        leadId: Number(req.params.leadId),
+        userId: Number(actor.id),
+        instanceId: req.body.instance_id ?? null,
+        materialIds: req.body.material_ids,
+      });
+      return res.json({ success: true, data });
+    } catch (error: any) {
+      return res.status(error.statusCode || 500).json({ message: error.message || "Failed to outsource materials" });
     }
   }
 
@@ -502,13 +532,13 @@ export class OrderLoginController {
 
       // 🧾 Get DocType for Production Files
       const ProductionDocType = await prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: Number(vendorId), tag: "Type 14" },
+        where: { vendor_id: Number(vendorId), tag: req.query.documents_only === "true" ? "order_login_production_documents" : "Type 14" },
       });
 
       if (!ProductionDocType) {
         return res.status(404).json({
           success: false,
-          message: "Document type (Type 14) not found for this vendor.",
+          message: "Production document type not found for this vendor.",
         });
       }
 

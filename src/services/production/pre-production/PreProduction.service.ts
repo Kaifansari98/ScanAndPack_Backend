@@ -307,6 +307,7 @@ export class PreProductionService {
     const normalizedRole =
       actor?.user_type?.user_type?.trim().toLowerCase() ?? "";
     const isSuperAdmin = normalizedRole === "super-admin";
+    const isFactory = normalizedRole === "factory";
     const currentLeadErd = lead.expected_order_login_ready_date;
     const currentInstance = instanceId
       ? await prisma.leadProductStructureInstance.findFirst({
@@ -340,14 +341,13 @@ export class PreProductionService {
       currentInstanceErdTime !== nextDateTime;
 
     if (
-      isExistingDisplayedErdChanged &&
-      !isSuperAdmin &&
+      (isFactory || (isExistingDisplayedErdChanged && !isSuperAdmin)) &&
       !String(changeRemark ?? "").trim()
     ) {
       throw new Error("Reason is required when changing this ERD");
     }
 
-    if ((isMasterErdChange || isInstanceErdChange) && !isSuperAdmin) {
+    if ((isMasterErdChange || isInstanceErdChange) && !isSuperAdmin && !isFactory) {
       const previousChange = await prisma.leadDetailedLogs.findFirst({
         where: {
           vendor_id: vendorId,
@@ -415,12 +415,12 @@ export class PreProductionService {
         account_id: lead.account_id,
         action: instanceId
           ? currentInstanceErdTime === null
-            ? `Instance ERD set to ${formattedDate} and lead ERD recalculated`
+            ? `Instance ERD set to ${formattedDate} and lead ERD recalculated${String(changeRemark ?? "").trim() ? `. Reason: ${String(changeRemark).trim()}` : ""}`
             : String(changeRemark ?? "").trim()
               ? `Instance ERD changed to ${formattedDate}. Reason: ${String(changeRemark).trim()}`
               : `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
           : currentLeadErdTime === null
-            ? `Expected Order Login ready date set to ${formattedDate}`
+            ? `Expected Order Login ready date set to ${formattedDate}${String(changeRemark ?? "").trim() ? `. Reason: ${String(changeRemark).trim()}` : ""}`
             : String(changeRemark ?? "").trim()
               ? `Expected Order Login ready date changed to ${formattedDate}. Reason: ${String(changeRemark).trim()}`
               : `Expected Order Login ready date updated to ${formattedDate}`,

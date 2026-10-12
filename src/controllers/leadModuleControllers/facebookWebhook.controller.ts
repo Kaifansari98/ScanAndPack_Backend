@@ -277,8 +277,12 @@ export class FacebookWebhookController {
         });
       }
 
-      // 8. Log lead history status
-      if (defaultStatus) {
+      // 8. Log lead history status (skip if vendor has is_online_lead_feature_enabled enabled)
+      const vendorRecord = await tx.vendorMaster.findUnique({
+        where: { id: vendor_id },
+        select: { is_online_lead_feature_enabled: true },
+      });
+      if (defaultStatus && !vendorRecord?.is_online_lead_feature_enabled) {
         await tx.online_lead_history.create({
           data: {
             vendor_id: vendor_id,

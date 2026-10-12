@@ -33,7 +33,8 @@ async function main() {
     { name: "Follow Up Done", required: true },
     { name: "Store Assigned", required: true },
     { name: "Store Visit Done", required: false },
-    { name: "Lost", required: false }
+    { name: "Lost", required: false },
+    { name: "Mark on hold", required: false },
   ];
   
   for (const vendor of vendors) {

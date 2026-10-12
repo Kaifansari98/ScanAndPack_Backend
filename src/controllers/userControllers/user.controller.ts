@@ -3,9 +3,15 @@ import * as userService from '../../services/userServices/user.service';
 
 export const createUserController = async (req: Request, res: Response) => {
   try {
-    const newUser = await userService.createUserService(req.body);
+    const newUser = await userService.createUserService(req.body, (req as any).user?.id);
     res.status(201).json({ message: "User created", data: newUser });
   } catch (error: any) {
+    if (error.code === "SUPERVISOR_CONFIRMATION_REQUIRED") {
+      return res.status(409).json({
+        code: error.code, message: error.message, franchises: error.franchises,
+      });
+    }
+
     res
       .status(error.statusCode || 500)
       .json({ message: "Failed to create user", error: error.message || error });
@@ -50,9 +56,15 @@ export const updateUserController = async (req: Request, res: Response) => {
       return res.status(400).json({ success: false, message: "userId is required" });
     }
 
-    const result = await userService.updateUserService(userId, req.body);
+    const result = await userService.updateUserService(userId, req.body, (req as any).user?.id);
     return res.status(200).json({ success: true, data: result });
   } catch (error: any) {
+    if (error.code === "SUPERVISOR_CONFIRMATION_REQUIRED") {
+      return res.status(409).json({
+        code: error.code, message: error.message, franchises: error.franchises,
+      });
+    }
+
     return res.status(error.statusCode || 500).json({
       success: false,
       message: error.message || "Failed to update user",
@@ -100,6 +112,10 @@ export const getUsersByVendorController = async (req: Request, res: Response) =>
     const limit = Number(req.query.limit ?? 20);
     const search = String(req.query.search ?? "");
     const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+    const user_type = req.query.user_type ? String(req.query.user_type).trim() : undefined;
+    const exclude_user_type = req.query.exclude_user_type
+      ? String(req.query.exclude_user_type).trim()
+      : undefined;
 
     if (!vendorId) {
       return res.status(400).json({
@@ -114,6 +130,8 @@ export const getUsersByVendorController = async (req: Request, res: Response) =>
       limit,
       search,
       franchise_id,
+      user_type,
+      exclude_user_type,
     });
 
     return res.status(200).json({

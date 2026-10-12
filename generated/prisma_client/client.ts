@@ -1169,3 +1169,13 @@ export type RuleFieldMaster = Prisma.RuleFieldMasterModel
  * 
  */
 export type RuleActionMaster = Prisma.RuleActionMasterModel
+/**
+ * Model SiteSupervisorFranchiseMapping
+ * 
+ */
+export type SiteSupervisorFranchiseMapping = Prisma.SiteSupervisorFranchiseMappingModel
+/**
+ * Model WixStudioDataCapture
+ * 
+ */
+export type WixStudioDataCapture = Prisma.WixStudioDataCaptureModel

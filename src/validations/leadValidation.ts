@@ -100,6 +100,7 @@ export const createLeadSchema = Joi.object({
   }),
 
   is_draft: Joi.boolean().optional(),
+  draft_in_open_leads: Joi.boolean().optional(),
 });
 
 export const createLeadDraftSchema = Joi.object({
@@ -156,6 +157,7 @@ export const createLeadDraftSchema = Joi.object({
   initial_site_measurement_date: Joi.date().optional().allow(null),
 
   is_draft: Joi.boolean().optional(),
+  draft_in_open_leads: Joi.boolean().optional(),
 });
 
 /**
@@ -181,6 +183,11 @@ export const isLeadComplete = (lead: any): boolean => {
 
   if (!allFieldsFilled) return false;
 
+  // B2B and large-scale projects do not use furniture selections.
+  if (lead.vendor?.handlesLargeScaleProjects || lead.franchise?.moduled_for_b2b) {
+    return true;
+  }
+
   // Check product structures (at least one required)
   const hasProductStructures =
     lead.leadProductStructureMapping &&
@@ -195,6 +202,7 @@ interface UpdateLeadValidationResult {
 }
 
 interface UpdateLeadInput {
+  convert_to_lead?: boolean;
   firstname?: string;
   lastname?: string;
   country_code?: string;
@@ -218,6 +226,9 @@ export const validateUpdateLeadInput = (
   input: UpdateLeadInput
 ): UpdateLeadValidationResult => {
   const errors: string[] = [];
+  if (input.convert_to_lead !== undefined && typeof input.convert_to_lead !== "boolean") {
+    errors.push("convert_to_lead must be a boolean");
+  }
   const isB2B = input.client_id != null;
 
   // Only validate fields that are provided (partial update support)

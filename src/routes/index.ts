@@ -60,6 +60,7 @@ import cadbidIntegrationWithFurnixcrmRoutes from "./cadbid-integration-with-furn
 import metaLeadsRoutes from "./webhookRoutes/metaLeads.routes";
 import metaWebhookRoutes from "./webhookRoutes/metaWebhook.routes";
 import metaLeadsDashboardRoutes from "./metaLeadsDashboard.routes";
+import wixStudioRoutes from "./webhookRoutes/wixStudio.routes";
 
 import inventoryRoutes from "./inventoryRoutes/inventory.routes";
 import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
@@ -90,6 +91,7 @@ import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
   router.use("/online-leads", onlineLeadRoutes);
 router.use("/", metaLeadsRoutes);
 router.use("/", metaWebhookRoutes);
+router.use("/wix-studio", wixStudioRoutes);
 router.use("/meta-leads", metaLeadsDashboardRoutes);
 router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 router.use("/leads/designing-stage", DesigningStageRouter);

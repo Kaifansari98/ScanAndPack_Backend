@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { prisma } from "../prisma/client";
-import { CUTLIST_HEADER_FIELDS, CUTLIST_HEADER_FIELD_KEYS, normalizeCutlistHeader, validateHeaderMappings } from "../utils/cutlist-headers";
+import { CUTLIST_HEADER_FIELDS, normalizeCutlistHeader, validateHeaderMappings } from "../utils/cutlist-headers";
 
 const CUTLIST_FIELD_META = new Map<string, (typeof CUTLIST_HEADER_FIELDS)[number]>(CUTLIST_HEADER_FIELDS.map((field) => [field.field, field]));
 
 async function getActiveCutlistFields() {
   const ruleFields = await prisma.ruleFieldMaster.findMany({
-    where: { field_key: { in: CUTLIST_HEADER_FIELD_KEYS as unknown as string[] }, status: "ACTIVE" },
+    where: { status: "ACTIVE" },
     orderBy: { id: "asc" },
   });
   return ruleFields.map((ruleField) => ({
@@ -49,7 +49,7 @@ export async function saveCutlistHeaders(req: Request, res: Response) {
   try {
     const vendorId = await checkAccess(req, true);
     const allowedFields = await prisma.ruleFieldMaster.findMany({
-      where: { field_key: { in: CUTLIST_HEADER_FIELD_KEYS as unknown as string[] }, status: "ACTIVE" },
+      where: { status: "ACTIVE" },
       select: { id: true, field_key: true },
     });
     const mappings = validateHeaderMappings(req.body.mappings, allowedFields);

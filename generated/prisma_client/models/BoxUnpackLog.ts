@@ -395,7 +395,7 @@ export type BoxUnpackLogCreateInput = {
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutBox_unpack_logsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBox_unpack_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_unpack_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxUnpackLogsInput
   unpackedByUser: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksMadeInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksPackedByInput
   boxCreatedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksCreatedByInput
@@ -424,7 +424,7 @@ export type BoxUnpackLogUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxUnpackLogsNestedInput
   unpackedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutBoxUnpacksMadeNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksPackedByNestedInput
   boxCreatedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksCreatedByNestedInput
@@ -889,7 +889,7 @@ export type BoxUnpackLogCreateWithoutUnpackedByUserInput = {
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutBox_unpack_logsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBox_unpack_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_unpack_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxUnpackLogsInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksPackedByInput
   boxCreatedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksCreatedByInput
 }
@@ -926,7 +926,7 @@ export type BoxUnpackLogCreateWithoutPackedByUserInput = {
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutBox_unpack_logsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBox_unpack_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_unpack_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxUnpackLogsInput
   unpackedByUser: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksMadeInput
   boxCreatedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksCreatedByInput
 }
@@ -963,7 +963,7 @@ export type BoxUnpackLogCreateWithoutBoxCreatedByUserInput = {
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutBox_unpack_logsInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBox_unpack_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_unpack_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxUnpackLogsInput
   unpackedByUser: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksMadeInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksPackedByInput
 }
@@ -1047,7 +1047,7 @@ export type BoxUnpackLogCreateWithoutProjectInput = {
   reason: string
   created_at?: Date | string
   box: Prisma.BoxMasterCreateNestedOneWithoutBox_unpack_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_unpack_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxUnpackLogsInput
   unpackedByUser: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksMadeInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksPackedByInput
   boxCreatedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksCreatedByInput
@@ -1100,7 +1100,7 @@ export type BoxUnpackLogCreateWithoutBoxInput = {
   reason: string
   created_at?: Date | string
   project: Prisma.ProjectMasterCreateNestedOneWithoutBox_unpack_logsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutBox_unpack_logsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxUnpackLogsInput
   unpackedByUser: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksMadeInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksPackedByInput
   boxCreatedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxUnpacksCreatedByInput
@@ -1251,7 +1251,7 @@ export type BoxUnpackLogUpdateWithoutUnpackedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxUnpackLogsNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksPackedByNestedInput
   boxCreatedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksCreatedByNestedInput
 }
@@ -1292,7 +1292,7 @@ export type BoxUnpackLogUpdateWithoutPackedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxUnpackLogsNestedInput
   unpackedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutBoxUnpacksMadeNestedInput
   boxCreatedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksCreatedByNestedInput
 }
@@ -1333,7 +1333,7 @@ export type BoxUnpackLogUpdateWithoutBoxCreatedByUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxUnpackLogsNestedInput
   unpackedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutBoxUnpacksMadeNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksPackedByNestedInput
 }
@@ -1387,7 +1387,7 @@ export type BoxUnpackLogUpdateWithoutProjectInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   box?: Prisma.BoxMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxUnpackLogsNestedInput
   unpackedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutBoxUnpacksMadeNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksPackedByNestedInput
   boxCreatedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksCreatedByNestedInput
@@ -1442,7 +1442,7 @@ export type BoxUnpackLogUpdateWithoutBoxInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxUnpackLogsNestedInput
   unpackedByUser?: Prisma.UserMasterUpdateOneRequiredWithoutBoxUnpacksMadeNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksPackedByNestedInput
   boxCreatedByUser?: Prisma.UserMasterUpdateOneWithoutBoxUnpacksCreatedByNestedInput

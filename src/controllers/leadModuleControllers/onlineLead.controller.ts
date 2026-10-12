@@ -23,7 +23,9 @@ import {
   createOrUpdateOnlineLead,
   generateOnlineLeadCode as generateCodeHelper,
   ensureDefaultStatuses,
+  getOrCreateInactiveStatus,
   formatDesignRemarks,
+  extractSurveyDetails,
 } from "../../services/leadModuleServices/onlineLead.service";
 
 export { ensureDefaultStatuses };
@@ -108,6 +110,24 @@ const mapOnlineLeadToFrontend = (lead: any) => {
             let remark = h.remark || "";
 
             if (isOnlineLeadFeatureEnabled) {
+              const cleanRem = remark.trim().toLowerCase();
+              const leadRem = (lead.remark || "").trim().toLowerCase();
+              const isInitialCreationRemark =
+                (leadRem && cleanRem === leadRem) ||
+                cleanRem.startsWith("lead registered via") ||
+                cleanRem.startsWith("lead updated with new data via") ||
+                cleanRem.includes("lead automatically created") ||
+                cleanRem.startsWith("design remarks updated") ||
+                cleanRem.startsWith("bulk imported") ||
+                cleanRem.startsWith("lead bulk imported") ||
+                cleanRem.startsWith("**•") ||
+                cleanRem.startsWith("•") ||
+                cleanRem.includes("**•");
+
+              if (isInitialCreationRemark) {
+                continue;
+              }
+
               remark = remark
                 .replace(
                   /Lead conversion approved and moved to Draft Lead stage/gi,
@@ -218,16 +238,15 @@ const mapOnlineLeadToFrontend = (lead: any) => {
                 })
                 .filter(Boolean);
 
-              if (itemsToInject.length > 0) {
-                const conversionEntry = historyList.find((h: any) =>
-                  (h.remark || "").toLowerCase().includes("conversion")
-                );
-                const baseTime = conversionEntry
-                  ? new Date(conversionEntry.created_at).getTime() - 1000
-                  : lead.created_at
-                  ? new Date(lead.created_at).getTime()
-                  : Date.now();
-                const baseUser = conversionEntry?.createdBy ||
+              const conversionEntry = historyList.find((h: any) =>
+                (h.remark || "").toLowerCase().includes("conversion")
+              );
+
+              // Only inject synthetic structure entries for converted leads that have a conversion timeline event.
+              // Brand-new or unconverted leads in Lead Pool must NOT have synthetic product structure history entries.
+              if (conversionEntry && itemsToInject.length > 0) {
+                const baseTime = new Date(conversionEntry.created_at).getTime() - 1000;
+                const baseUser = conversionEntry.createdBy ||
                   lead.UserMaster_online_leads_created_byToUserMaster ||
                   { user_name: "Super Admin" };
 
@@ -237,8 +256,8 @@ const mapOnlineLeadToFrontend = (lead: any) => {
                     remark: `Product structure instance added : ${item}`,
                     created_at: new Date(baseTime - idx * 500).toISOString(),
                     createdBy: baseUser,
-                    status: conversionEntry?.status || { status_name: "Status Change" },
-                    franchise: conversionEntry?.franchise || lead.FranchiseMaster || null,
+                    status: conversionEntry.status || { status_name: "Status Change" },
+                    franchise: conversionEntry.franchise || lead.FranchiseMaster || null,
                   });
                 });
               }
@@ -378,8 +397,32 @@ export class OnlineLeadController {
         creatorRole === "telecaller" ||
         creatorRole === "telecaller-team-lead" ||
         creatorRole === "telecaller team lead" ||
+        creatorRole === "caller" ||
+        creatorRole === "store caller" ||
+        creatorRole === "store-caller" ||
         creatorRole === "sales-executive" ||
         creatorRole === "sales executive";
+
+      const isTelecaller =
+        creatorRole === "telecaller" ||
+        creatorRole === "telecaller-team-lead" ||
+        creatorRole === "telecaller team lead" ||
+        creatorRole === "caller" ||
+        creatorRole === "store caller" ||
+        creatorRole === "store-caller";
+
+      if (isTelecaller) {
+        const vendor = await prisma.vendorMaster.findUnique({
+          where: { id: Number(vendor_id) },
+          select: { is_online_lead_feature_enabled: true },
+        });
+        if (!vendor?.is_online_lead_feature_enabled) {
+          return res.status(403).json({
+            success: false,
+            error: "Online lead feature is disabled for this vendor.",
+          });
+        }
+      }
 
       if (isCaller) {
         assignToId = Number(created_by);
@@ -587,6 +630,79 @@ export class OnlineLeadController {
     }
   };
 
+  // 2.5 Fetch tab counts (pool, overall, my)
+  fetchTabCounts = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const vendorId = Number(req.query.vendor_id);
+      const userId = req.query.userId ? Number(req.query.userId) : null;
+
+      if (isNaN(vendorId)) {
+        return res.status(400).json({
+          success: false,
+          error: "Invalid or missing vendor_id parameter",
+        });
+      }
+
+      const requestingUser = await getRequestingUser(req);
+      if (!isUserAuthorizedForVendor(requestingUser, vendorId)) {
+        return res.status(403).json({
+          success: false,
+          error: "Access denied: Cannot access another vendor's leads.",
+        });
+      }
+
+      const baseLeadPoolFilter: any = {
+        vendor_id: vendorId,
+        approval_status: null,
+        lead_master_id: null,
+        pending_store_id: null,
+        NOT: {
+          online_lead_followup_status: {
+            status_name: {
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
+              mode: "insensitive",
+            },
+          },
+        },
+      };
+
+      const [poolCount, overallCount, myCount] = await Promise.all([
+        prisma.online_leads.count({
+          where: {
+            ...baseLeadPoolFilter,
+            assign_to: null,
+          },
+        }),
+        prisma.online_leads.count({
+          where: baseLeadPoolFilter,
+        }),
+        userId
+          ? prisma.online_leads.count({
+              where: {
+                ...baseLeadPoolFilter,
+                OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
+              },
+            })
+          : Promise.resolve(0),
+      ]);
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          pool: poolCount,
+          overall: overallCount,
+          my: myCount,
+        },
+      });
+    } catch (error: any) {
+      console.error("[ONLINE LEAD CONTROLLER] fetchTabCounts error:", error);
+      return res.status(500).json({
+        success: false,
+        error: error.message || "Failed to fetch tab counts",
+      });
+    }
+  };
+
   // 3. Fetch online leads with filters
   fetchLeads = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -614,28 +730,28 @@ export class OnlineLeadController {
         });
       }
 
-      const andConditions: any[] = [
-        { vendor_id: vendorId },
-        {
-          OR: [
-            { approval_status: "PENDING" },
-            {
-              NOT: {
-                online_lead_followup_status: {
-                  status_name: {
-                    in: ["Store Assigned", "Store Visit Done"],
-                    mode: "insensitive",
-                  },
-                },
-              },
+      const baseLeadPoolFilter: any = {
+        vendor_id: vendorId,
+        approval_status: null,
+        lead_master_id: null,
+        pending_store_id: null,
+        NOT: {
+          online_lead_followup_status: {
+            status_name: {
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
+              mode: "insensitive",
             },
-          ],
+          },
         },
-      ];
+      };
+
+      const andConditions: any[] = [baseLeadPoolFilter];
 
       // Apply tab filters
       if (tab === "pool") {
-        andConditions.push({ assign_to: null });
+        andConditions.push({
+          assign_to: null,
+        });
       } else if (tab === "my") {
         if (!userId) {
           return res.status(400).json({
@@ -647,7 +763,7 @@ export class OnlineLeadController {
           OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
         });
       } else if (tab === "overall") {
-        // Overall leads has no assignment filter (shows all unassigned + assigned leads for that vendor)
+        // Overall leads under lead pool page shows all active leads in Lead Pool stage for that vendor
       }
 
       // Apply search filters
@@ -753,9 +869,36 @@ export class OnlineLeadController {
         ],
       });
 
+      const unassignedPoolCountFilter: any = {
+        ...baseLeadPoolFilter,
+        assign_to: null,
+      };
+
+      const [poolCount, overallCount, myCount] = await Promise.all([
+        prisma.online_leads.count({
+          where: unassignedPoolCountFilter,
+        }),
+        prisma.online_leads.count({
+          where: baseLeadPoolFilter,
+        }),
+        userId
+          ? prisma.online_leads.count({
+              where: {
+                ...baseLeadPoolFilter,
+                OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
+              },
+            })
+          : Promise.resolve(0),
+      ]);
+
       return res.status(200).json({
         success: true,
         data: leads.map(mapOnlineLeadToFrontend),
+        counts: {
+          pool: poolCount,
+          overall: overallCount,
+          my: myCount,
+        },
       });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] fetchLeads error:", error);
@@ -1620,6 +1763,24 @@ export class OnlineLeadController {
       }
 
       const statusNameLower = status.status_name.toLowerCase();
+      const isHoldStatus =
+        statusNameLower === "mark on hold" ||
+        statusNameLower === "on hold" ||
+        statusNameLower.includes("hold");
+
+      if (isHoldStatus) {
+        const vendor = await prisma.vendorMaster.findUnique({
+          where: { id: lead.vendor_id },
+          select: { is_online_lead_feature_enabled: true },
+        });
+        if (!vendor?.is_online_lead_feature_enabled) {
+          return res.status(403).json({
+            success: false,
+            error: "Online lead feature is disabled for this vendor.",
+          });
+        }
+      }
+
       const shouldCreateDraft =
         statusNameLower === "store assigned" ||
         statusNameLower === "store visit done";
@@ -3387,15 +3548,21 @@ export class OnlineLeadController {
         currentLead &&
         currentLead.remark !== remark
       ) {
-        await prisma.online_lead_history.create({
-          data: {
-            vendor_id: currentLead.vendor_id,
-            online_lead_id: id,
-            remark: `Design remarks updated: ${remark || "N/A"}`,
-            created_by: updated_by ? Number(updated_by) : 1,
-            online_lead_status_id: currentLead.status || 1,
-          },
+        const vendorRec = await prisma.vendorMaster.findUnique({
+          where: { id: currentLead.vendor_id },
+          select: { is_online_lead_feature_enabled: true },
         });
+        if (!vendorRec?.is_online_lead_feature_enabled) {
+          await prisma.online_lead_history.create({
+            data: {
+              vendor_id: currentLead.vendor_id,
+              online_lead_id: id,
+              remark: `Design remarks updated: ${remark || "N/A"}`,
+              created_by: updated_by ? Number(updated_by) : 1,
+              online_lead_status_id: currentLead.status || 1,
+            },
+          });
+        }
       }
 
       const updated = await prisma.online_leads.update({
@@ -3474,7 +3641,7 @@ export class OnlineLeadController {
           .json({ success: false, error: "Excel file is required" });
       }
 
-      const { vendor_id, created_by } = req.body;
+      const { vendor_id, created_by, default_assign_to } = req.body;
       if (!vendor_id || !created_by) {
         return res.status(400).json({
           success: false,
@@ -3500,7 +3667,8 @@ export class OnlineLeadController {
       }
 
       const headers: string[] = [];
-      const rows: Record<string, string>[] = [];
+      const rawHeaders: string[] = [];
+      const rows: { normalized: Record<string, string>; raw: Record<string, string> }[] = [];
 
       worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
         if (rowNumber === 1) {
@@ -3520,23 +3688,28 @@ export class OnlineLeadController {
                 strVal = String(val);
               }
             }
-            // Strip spaces, underscores, and lowercase
+            rawHeaders.push(strVal.trim());
+            // Strip non-alphanumeric and lowercase for reliable matching
             headers.push(
               strVal
                 .trim()
                 .toLowerCase()
-                .replace(/[\s_]+/g, ""),
+                .replace(/[^a-z0-9]/g, ""),
             );
           });
         } else {
           const rowData: Record<string, string> = {};
+          const rawRowData: Record<string, string> = {};
           row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
             const headerName = headers[colNumber - 1];
-            if (headerName) {
+            const rawHeaderName = rawHeaders[colNumber - 1];
+            if (headerName || rawHeaderName) {
               const val = cell.value;
               let strVal = "";
               if (val !== null && val !== undefined) {
-                if (
+                if (val instanceof Date) {
+                  strVal = val.toLocaleDateString("en-IN");
+                } else if (
                   typeof val === "object" &&
                   "richText" in val &&
                   Array.isArray(val.richText)
@@ -3548,10 +3721,11 @@ export class OnlineLeadController {
                   strVal = String(val);
                 }
               }
-              rowData[headerName] = strVal.trim();
+              if (headerName) rowData[headerName] = strVal.trim();
+              if (rawHeaderName) rawRowData[rawHeaderName] = strVal.trim();
             }
           });
-          rows.push(rowData);
+          rows.push({ normalized: rowData, raw: rawRowData });
         }
       });
 
@@ -3581,37 +3755,145 @@ export class OnlineLeadController {
       // Fallback franchise lookup removed; general vendor code prefix used by default
       const vendor = await prisma.vendorMaster.findUnique({
         where: { id: Number(vendor_id) },
-        select: { vendor_code: true },
+        select: { vendor_code: true, is_online_lead_feature_enabled: true },
       });
       const vendorCode = vendor?.vendor_code || "FURNIX";
+      const isOnlineLeadFeatureEnabled = Boolean(vendor?.is_online_lead_feature_enabled);
 
       const franchises = await prisma.franchiseMaster.findMany({
         where: { vendor_id: Number(vendor_id) },
         select: { id: true, franchise_name: true, franchise_code: true },
       });
 
-      const keywordMappings = franchises.map((f) => {
-        const kws: string[] = [];
-        const cleanName = f.franchise_name
-          .toLowerCase()
-          .replace("vloq", "")
-          .replace("furnix", "")
-          .replace("ho", "")
-          .replace("b2b", "")
-          .trim();
-        if (cleanName.length > 2) kws.push(cleanName);
-
-        const cleanCode = (f.franchise_code || "")
-          .toLowerCase()
-          .replace("vloq", "")
-          .replace("furnix", "")
-          .replace("ho", "")
-          .replace("b2b", "")
-          .trim();
-        if (cleanCode.length > 2) kws.push(cleanCode);
-
-        return { id: f.id, keywords: kws };
+      // Fetch all active users for this vendor to resolve telecallers dynamically
+      const activeUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: Number(vendor_id),
+          status: "active",
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+          user_type: {
+            select: {
+              id: true,
+              user_type: true,
+            },
+          },
+        },
       });
+
+      const isCallerRole = (userTypeStr?: string | null) => {
+        const r = (userTypeStr || "").toLowerCase();
+        return (
+          r.includes("telecaller") ||
+          r.includes("caller") ||
+          r.includes("sales executive") ||
+          r.includes("sales-executive")
+        );
+      };
+
+      const resolveTelecallerByName = (
+        rawCallerName: string | undefined | null,
+      ): { matchedUser: (typeof activeUsers)[0] | null; error: string | null } => {
+        if (!rawCallerName || typeof rawCallerName !== "string") {
+          return { matchedUser: null, error: null };
+        }
+
+        const cleaned = rawCallerName.trim();
+        if (
+          !cleaned ||
+          cleaned === "-" ||
+          cleaned.toLowerCase() === "unassigned" ||
+          cleaned.toLowerCase() === "na" ||
+          cleaned.toLowerCase() === "n/a"
+        ) {
+          return { matchedUser: null, error: null };
+        }
+
+        const searchTarget = cleaned.toLowerCase();
+
+        // 1. Exact match on user_name (case-insensitive & trimmed)
+        const exactMatches = activeUsers.filter(
+          (u) => (u.user_name || "").trim().toLowerCase() === searchTarget,
+        );
+
+        if (exactMatches.length === 1) {
+          return { matchedUser: exactMatches[0], error: null };
+        }
+
+        if (exactMatches.length > 1) {
+          const callerMatches = exactMatches.filter((u) =>
+            isCallerRole(u.user_type?.user_type),
+          );
+          if (callerMatches.length === 1) {
+            return { matchedUser: callerMatches[0], error: null };
+          }
+          return {
+            matchedUser: null,
+            error: `Multiple users found with name "${cleaned}". Cannot resolve caller unambiguously.`,
+          };
+        }
+
+        // 2. Token / word / first name match (e.g., "Asawari" matching "Asawari Joshi")
+        const wordMatches = activeUsers.filter((u) => {
+          const uName = (u.user_name || "").trim().toLowerCase();
+          if (!uName) return false;
+          const tokens = uName.split(/[\s._-]+/);
+          return (
+            tokens.includes(searchTarget) ||
+            uName.startsWith(searchTarget + " ") ||
+            tokens[0] === searchTarget
+          );
+        });
+
+        if (wordMatches.length === 1) {
+          return { matchedUser: wordMatches[0], error: null };
+        }
+
+        if (wordMatches.length > 1) {
+          const callerMatches = wordMatches.filter((u) =>
+            isCallerRole(u.user_type?.user_type),
+          );
+          if (callerMatches.length === 1) {
+            return { matchedUser: callerMatches[0], error: null };
+          }
+          return {
+            matchedUser: null,
+            error: `Multiple callers found matching "${cleaned}". Please specify full telecaller name.`,
+          };
+        }
+
+        // 3. Substring match fallback (only if unique)
+        const subMatches = activeUsers.filter((u) => {
+          const uName = (u.user_name || "").trim().toLowerCase();
+          return uName.includes(searchTarget);
+        });
+
+        if (subMatches.length === 1) {
+          return { matchedUser: subMatches[0], error: null };
+        }
+
+        if (subMatches.length > 1) {
+          const callerMatches = subMatches.filter((u) =>
+            isCallerRole(u.user_type?.user_type),
+          );
+          if (callerMatches.length === 1) {
+            return { matchedUser: callerMatches[0], error: null };
+          }
+          return {
+            matchedUser: null,
+            error: `Multiple callers found matching "${cleaned}". Please specify full telecaller name.`,
+          };
+        }
+
+        // 4. Not found
+        return {
+          matchedUser: null,
+          error: `Telecaller "${cleaned}" not found among active users for this vendor.`,
+        };
+      };
 
       let successCount = 0;
       let duplicateCount = 0;
@@ -3632,7 +3914,7 @@ export class OnlineLeadController {
       const processedContactsInBatch = new Set<string>();
 
       const normalizeContactNumber = (num: string): string => {
-        let cleaned = String(num).replace(/\D/g, "");
+        let cleaned = String(num || "").replace(/\D/g, "");
         if (cleaned.length === 12 && cleaned.startsWith("91")) {
           cleaned = cleaned.slice(2);
         } else if (cleaned.length === 11 && cleaned.startsWith("0")) {
@@ -3654,102 +3936,165 @@ export class OnlineLeadController {
       });
 
       for (let i = 0; i < rows.length; i++) {
-        const rowData = rows[i];
+        const { normalized: rowData, raw: rawRowData } = rows[i];
         const rowNum = i + 2; // Row numbers are 1-based, index 0 is row 2 (row 1 was headers)
 
-        // Find keys in parsed headers mapping to fields (keys are already lowercased and stripped of spaces/underscores)
-        const fullnameKey = Object.keys(rowData).find((k) =>
-          ["fullname", "leadsname", "name"].includes(k),
+        const normKey = (k: string) => k.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+        // Find keys in parsed headers mapping to fields
+        const fullnameKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return (
+            nk === "name" ||
+            nk === "fullname" ||
+            nk === "leadsname" ||
+            nk === "leadname" ||
+            nk === "customername" ||
+            nk === "clientname"
+          );
+        });
+        const platformKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["platform", "source", "leadsource"].includes(nk);
+        });
+        const adSetNameKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["adsetname", "adset"].includes(nk);
+        });
+        const firstnameKey = Object.keys(rowData).find(
+          (k) => normKey(k) === "firstname",
         );
-        const platformKey = Object.keys(rowData).find((k) =>
-          ["platform", "source", "leadsource"].includes(k),
+        const lastnameKey = Object.keys(rowData).find(
+          (k) => normKey(k) === "lastname",
         );
-        const adSetNameKey = Object.keys(rowData).find((k) =>
-          ["adsetname", "adset_name", "adset"].includes(k),
-        );
-        const firstnameKey = Object.keys(rowData).find((k) =>
-          ["firstname"].includes(k),
-        );
-        const lastnameKey = Object.keys(rowData).find((k) =>
-          ["lastname"].includes(k),
-        );
-        const emailKey = Object.keys(rowData).find((k) =>
-          ["email", "emailid", "emailaddress"].includes(k),
-        );
-        const contactKey = Object.keys(rowData).find((k) =>
-          [
+        const emailKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["email", "emailid", "emailaddress", "mail", "mailid"].includes(nk);
+        });
+        const contactKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return [
             "contact",
             "phone",
             "contactno",
+            "contactnumber",
             "phonenumber",
             "mobile",
             "mobileno",
             "mobilenumber",
-          ].includes(k),
-        );
-        const altContactKey = Object.keys(rowData).find((k) =>
-          [
+          ].includes(nk);
+        });
+        const altContactKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return [
             "altcontactno",
             "altcontact",
             "alternativecontact",
             "alternatenumber",
-          ].includes(k),
+          ].includes(nk);
+        });
+        const addressKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["siteaddress", "address"].includes(nk);
+        });
+        const priorityKey = Object.keys(rowData).find(
+          (k) => normKey(k) === "priority",
         );
-        const addressKey = Object.keys(rowData).find((k) =>
-          ["siteaddress", "address"].includes(k),
-        );
-        const priorityKey = Object.keys(rowData).find((k) =>
-          ["priority"].includes(k),
-        );
-        const remarkKey = Object.keys(rowData).find((k) =>
-          ["remark", "remarks", "description", "notes"].includes(k),
-        );
+        const remarkKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["remark", "remarks", "description", "notes"].includes(nk);
+        });
 
-        // Optional City, Campaign, Form, Budget, Property Type & Survey Columns
-        const cityKey = Object.keys(rowData).find((k) =>
-          ["city", "cityname"].includes(k),
-        );
-        const campaignNameKey = Object.keys(rowData).find(
-          (k) => k === "campaignname" || k === "campaign" || (k.includes("campaign") && !k.includes("id")),
-        );
-        const formNameKey = Object.keys(rowData).find(
-          (k) => k === "formname" || k === "form" || (k.includes("form") && !k.includes("id")),
-        );
-        const budgetKey = Object.keys(rowData).find((k) =>
-          ["budget", "leadbudget"].includes(k),
-        );
-        const propertyTypeKey = Object.keys(rowData).find((k) =>
-          ["propertytype", "property"].includes(k),
-        );
-        const modularSolutionKey = Object.keys(rowData).find(
-          (k) =>
-            k.includes("whatmodularsolution") ||
-            k.includes("modularsolution") ||
-            (k.includes("modular") && k.includes("solution")),
-        );
-        const whenNeedReadyKey = Object.keys(rowData).find(
-          (k) =>
-            k.includes("whendoyouneed") ||
-            k.includes("kitchen/wardrobe") ||
-            k.includes("kitchenwardrobe") ||
-            (k.includes("need") && k.includes("ready")),
-        );
-        const preferredShowroomKey = Object.keys(rowData).find(
-          (k) =>
-            k.includes("shambhala") ||
-            k.includes("showroom") ||
-            k.includes("prefertovisit"),
-        );
-        const projectLocationKey = Object.keys(rowData).find(
-          (k) =>
-            k.includes("whereisyourproject") ||
-            k.includes("projectlocated") ||
-            (k.includes("project") && k.includes("located")),
-        );
+        // City, Campaign, Form, Budget, Property Type & Survey Columns
+        const cityKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["city", "cityname"].includes(nk);
+        });
+        const campaignNameKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return nk === "campaignname" || nk === "campaign" || (nk.includes("campaign") && !nk.includes("id"));
+        });
+        const formNameKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return nk === "formname" || nk === "form" || (nk.includes("form") && !nk.includes("id"));
+        });
+        const budgetKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["budget", "leadbudget"].includes(nk);
+        });
+        const propertyTypeKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return ["propertytype", "property"].includes(nk);
+        });
+        const modularSolutionKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return (
+            nk.includes("whatmodularsolution") ||
+            nk.includes("modularsolution") ||
+            (nk.includes("modular") && nk.includes("solution")) ||
+            nk.includes("requirement")
+          );
+        });
+        const whenNeedReadyKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return (
+            nk.includes("whendoyouneed") ||
+            nk.includes("kitchenwardrobe") ||
+            (nk.includes("need") && nk.includes("ready")) ||
+            nk.includes("timeline")
+          );
+        });
+        const preferredShowroomKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return (
+            nk.includes("showroompreference") ||
+            nk.includes("shambhala") ||
+            nk.includes("showroom") ||
+            nk.includes("store") ||
+            nk.includes("prefertovisit")
+          );
+        });
+        const projectLocationKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return (
+            nk.includes("whereisyourproject") ||
+            nk.includes("projectlocated") ||
+            nk.includes("projectlocation") ||
+            (nk.includes("project") && nk.includes("located"))
+          );
+        });
+        const firstCallKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return nk === "firstcall" || nk.includes("firstcall") || nk === "call1";
+        });
+        const latestFollowUpKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return (
+            nk === "latestfollowup" ||
+            nk.includes("latestfollowup") ||
+            nk === "followup" ||
+            nk === "lastfollowup"
+          );
+        });
+        const dateKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return nk === "date" || nk === "leaddate" || nk === "createddate";
+        });
+        const telecallerKey = Object.keys(rowData).find((k) => {
+          const nk = normKey(k);
+          return (
+            nk === "telecallername" ||
+            nk === "telecaller" ||
+            nk === "callername" ||
+            nk === "caller" ||
+            nk === "assignedto" ||
+            nk === "assignee"
+          );
+        });
 
         let firstname = firstnameKey ? rowData[firstnameKey] : "";
         let lastname = lastnameKey ? rowData[lastnameKey] : "";
-        const email = emailKey ? rowData[emailKey] : "";
+        let rawEmail = emailKey ? rowData[emailKey] : "";
         const rawContact = contactKey ? rowData[contactKey] : "";
         const altContact = altContactKey ? rowData[altContactKey] : "";
         let siteAddress = addressKey ? rowData[addressKey] : "";
@@ -3793,13 +4138,6 @@ export class OnlineLeadController {
           return "";
         };
 
-        let rawCityVal = cityKey ? cleanVal(rowData[cityKey]) : "";
-        let city = extractCityToken(rawCityVal);
-        if (!city) {
-          const rawCampaign = campaignNameKey ? rowData[campaignNameKey] : "";
-          const rawForm = formNameKey ? rowData[formNameKey] : "";
-          city = extractCityToken(rawCampaign) || extractCityToken(rawForm);
-        }
         const budget = budgetKey ? cleanVal(rowData[budgetKey]) : "";
         const propertyType = propertyTypeKey
           ? cleanVal(rowData[propertyTypeKey])
@@ -3816,18 +4154,130 @@ export class OnlineLeadController {
         const projectLocation = projectLocationKey
           ? cleanVal(rowData[projectLocationKey])
           : "";
+        const firstCall = firstCallKey ? cleanVal(rowData[firstCallKey]) : "";
+        const latestFollowUp = latestFollowUpKey
+          ? cleanVal(rowData[latestFollowUpKey])
+          : "";
+        const dateVal = dateKey ? cleanVal(rowData[dateKey]) : "";
         const rawPlatform = platformKey ? rowData[platformKey] : "";
         const rawAdSetName = adSetNameKey ? rowData[adSetNameKey] : "";
 
-        // Standardize platform/source mapping
+        // Standardize Name
+        let leads_name = "";
+        const fullname = fullnameKey ? rowData[fullnameKey] : "";
+        if (fullname) {
+          leads_name = fullname.trim();
+          if (!firstname) {
+            const parts = leads_name.split(/\s+/);
+            firstname = parts[0] || "";
+            lastname = parts.slice(1).join(" ") || "";
+          }
+        } else {
+          leads_name = `${firstname} ${lastname}`.trim() || "Walk-In Customer";
+        }
+
+        // Telecaller Resolution from Excel "Telecaller Name"
+        const rawTelecaller = telecallerKey ? rowData[telecallerKey] : "";
+        const callerResolution = resolveTelecallerByName(rawTelecaller);
+
+        if (callerResolution.error) {
+          invalidCount++;
+          invalidRows.push({
+            rowNumber: rowNum,
+            name: leads_name,
+            error: callerResolution.error,
+          });
+          continue;
+        }
+
+        const assignedCaller = callerResolution.matchedUser;
+        let assignedCallerId: number | null = assignedCaller ? assignedCaller.id : null;
+
+        // If Excel "Telecaller Name" is blank, fall back to default_assign_to if selected
+        if (!assignedCallerId && default_assign_to) {
+          const defId = Number(default_assign_to);
+          if (!isNaN(defId) && defId > 0) {
+            const defUser = activeUsers.find((u) => u.id === defId);
+            if (defUser) {
+              assignedCallerId = defUser.id;
+            }
+          }
+        }
+
+        // Showroom / Franchise Resolution from "Showroom preference"
+        let storeId: number | null = null;
+        if (preferredShowroom) {
+          const prefLower = preferredShowroom.toLowerCase().trim();
+          if (
+            prefLower !== "not decided yet" &&
+            prefLower !== "not_decided_yet" &&
+            prefLower !== "end to end service" &&
+            prefLower !== "-"
+          ) {
+            const matched = franchises.find((f) => {
+              const fName = (f.franchise_name || "").toLowerCase();
+              const fCode = (f.franchise_code || "").toLowerCase();
+              return (
+                fName === prefLower ||
+                fCode === prefLower ||
+                fName.includes(prefLower) ||
+                prefLower.includes(fName)
+              );
+            });
+            if (matched) {
+              storeId = matched.id;
+            }
+          }
+        }
+
+        // City & Site Address resolution
+        let rawCityVal = cityKey ? cleanVal(rowData[cityKey]) : "";
+        let city = projectLocation || extractCityToken(rawCityVal);
+        if (!city) {
+          const rawCampaign = campaignNameKey ? rowData[campaignNameKey] : "";
+          const rawForm = formNameKey ? rowData[formNameKey] : "";
+          city = extractCityToken(rawCampaign) || extractCityToken(rawForm);
+        }
+
+        if (projectLocation) {
+          if (siteAddress && !siteAddress.toLowerCase().includes(projectLocation.toLowerCase())) {
+            siteAddress = `${siteAddress}, ${projectLocation}`;
+          } else if (!siteAddress) {
+            siteAddress = projectLocation;
+          }
+        } else if (city) {
+          if (siteAddress && !siteAddress.toLowerCase().includes(city.toLowerCase())) {
+            siteAddress = `${siteAddress}, ${city}`;
+          } else if (!siteAddress) {
+            siteAddress = city;
+          }
+        }
+
+        // Modular solutions to product types
+        // When is_online_lead_feature_enabled is true, Product Types & Product Structures must remain empty!
+        const resolvedProductTypes: string[] = [];
+        if (!isOnlineLeadFeatureEnabled && modularSolution) {
+          const modLower = modularSolution.toLowerCase();
+          if (modLower.includes("kitchen")) resolvedProductTypes.push("Modular Kitchen");
+          if (modLower.includes("wardrobe")) resolvedProductTypes.push("Modular Wardrobe");
+          if (resolvedProductTypes.length === 0) resolvedProductTypes.push(modularSolution);
+        }
+
+        // Email & Platform / Source mapping
+        let email = "";
+        let sourceNote = "";
+        if (rawEmail) {
+          if (rawEmail.includes("@") && rawEmail.includes(".")) {
+            email = rawEmail.trim();
+          } else {
+            // Note placed in Email column (e.g., "Insta lead ( Shubh sir gave )", "message", "Direct call commercial")
+            sourceNote = rawEmail.trim();
+          }
+        }
+
         const cleanPlatform = rawPlatform ? String(rawPlatform).trim() : "";
         let source = "WALK_IN";
         let lead_entry_type: LeadEntryType = LeadEntryType.WALK_IN;
-
-        // Map location from store/franchise column or ad_set_name to franchise
-        // (Disabled: new leads should always remain unassigned by default)
-        const storeId: number | null = null;
-        const leadFranchiseId: number | undefined = undefined;
 
         if (cleanPlatform) {
           const platClean = cleanPlatform.toLowerCase();
@@ -3844,43 +4294,38 @@ export class OnlineLeadController {
             source = cleanPlatform;
             lead_entry_type = LeadEntryType.ONLINE;
           }
-        }
-
-        // Standardize Name (Full Name mapping check)
-        let leads_name = "";
-        const fullname = fullnameKey ? rowData[fullnameKey] : "";
-        if (fullname) {
-          leads_name = fullname;
-          if (!firstname) {
-            const parts = fullname.trim().split(/\s+/);
-            firstname = parts[0] || "";
-            lastname = parts.slice(1).join(" ") || "";
-          }
-        } else {
-          leads_name = `${firstname} ${lastname}`.trim() || "Walk-In Customer";
-        }
-
-        // Normalize address and city
-        if (city) {
-          if (siteAddress) {
-            siteAddress = `${siteAddress}, ${city}`;
+        } else if (sourceNote) {
+          const snLower = sourceNote.toLowerCase();
+          if (snLower.includes("insta")) {
+            source = "Instagram";
+            lead_entry_type = LeadEntryType.ONLINE;
+          } else if (snLower.includes("fb") || snLower.includes("facebook")) {
+            source = "Facebook";
+            lead_entry_type = LeadEntryType.ONLINE;
+          } else if (snLower.includes("call")) {
+            source = "Direct Call";
           } else {
-            siteAddress = city;
+            source = sourceNote;
           }
         }
 
-        // Append Budget, Property Type, and Survey Details to remark via shared helper
-        remark = formatDesignRemarks(
-          {
-            budget,
-            propertyType,
-            modularSolution,
-            whenNeedReady,
-            preferredShowroom,
-            projectLocation,
-          },
-          remark,
-        );
+        // Append survey details to design remarks
+        const surveyDetails = extractSurveyDetails({
+          budget,
+          propertyType,
+          modularSolution,
+          whenNeedReady,
+          preferredShowroom,
+          projectLocation,
+          firstCall,
+          latestFollowUp,
+          date: dateVal,
+          ...rawRowData,
+        });
+        remark = formatDesignRemarks(surveyDetails, remark);
+        if (sourceNote && !remark.includes(sourceNote)) {
+          remark = `**• Source Note:**\n${sourceNote}\n\n` + remark;
+        }
 
         // Default remark to "-" if not specified
         remark = remark ? remark.trim() : "-";
@@ -3941,7 +4386,7 @@ export class OnlineLeadController {
             );
 
             // Create OnlineLead
-            return await tx.online_leads.create({
+            const createdLead = await tx.online_leads.create({
               data: {
                 vendor_id: Number(vendor_id),
                 leads_name,
@@ -3951,7 +4396,7 @@ export class OnlineLeadController {
                 source: source,
                 lead_entry_type: lead_entry_type,
                 store_id: storeId || null,
-                assign_to: null,
+                assign_to: assignedCallerId || null,
                 status: walkInStatus.id,
                 remark: remark,
                 created_by: Number(created_by),
@@ -3962,24 +4407,72 @@ export class OnlineLeadController {
                 site_address: siteAddress || null,
                 city: city || null,
                 priority,
-                product_types: [],
+                product_types: isOnlineLeadFeatureEnabled ? [] : resolvedProductTypes,
                 product_structures: [],
               },
             });
-          });
 
-          await prisma.online_lead_history.create({
-            data: {
-              vendor_id: Number(vendor_id),
-              online_lead_id: lead.id,
-              remark:
-                remark && remark !== "-"
+            // Create Lead History
+            const historyRemark = assignedCaller
+              ? `Lead bulk imported and allocated to telecaller ${assignedCaller.user_name}:\n\n${remark}`
+              : (remark && remark !== "-"
                   ? `Bulk imported:\n\n${remark}`
-                  : "Lead registered via bulk upload",
-              created_by: Number(created_by),
-              store_id: storeId || null,
-              online_lead_status_id: walkInStatus.id,
-            },
+                  : "Lead registered via bulk upload");
+
+            if (!isOnlineLeadFeatureEnabled) {
+              await tx.online_lead_history.create({
+                data: {
+                  vendor_id: Number(vendor_id),
+                  online_lead_id: createdLead.id,
+                  remark: historyRemark,
+                  created_by: Number(created_by),
+                  store_id: storeId || null,
+                  online_lead_status_id: walkInStatus.id,
+                },
+              });
+            }
+
+            // Record store preference log if showroom identified
+            if (storeId) {
+              await tx.online_lead_store_log.create({
+                data: {
+                  vendor_id: Number(vendor_id),
+                  online_lead_id: createdLead.id,
+                  to_store_id: storeId,
+                  action_type: LeadStoreActionType.PREFERENCE,
+                  selected_by: Number(created_by),
+                  assigned_to: assignedCallerId || null,
+                  remark: preferredShowroom ? `Showroom preference: ${preferredShowroom}` : "Bulk upload store preference",
+                },
+              });
+            }
+
+            // Create initial Call Log if telecaller assigned and call notes exist
+            if (assignedCallerId && (firstCall || latestFollowUp)) {
+              const callNotes = [
+                firstCall ? `First call: ${firstCall}` : "",
+                latestFollowUp ? `Latest follow up: ${latestFollowUp}` : "",
+              ]
+                .filter(Boolean)
+                .join("\n\n");
+
+              if (callNotes) {
+                await tx.online_lead_call_log.create({
+                  data: {
+                    vendor_id: Number(vendor_id),
+                    online_lead_id: createdLead.id,
+                    telecaller_id: assignedCallerId,
+                    call_type: LeadCallType.OUTGOING,
+                    online_lead_status_id: walkInStatus.id,
+                    started_at: new Date(),
+                    ended_at: new Date(),
+                    remark: callNotes,
+                  },
+                });
+              }
+            }
+
+            return createdLead;
           });
 
           processedContactsInBatch.add(contact);
@@ -4137,35 +4630,79 @@ export class OnlineLeadController {
         }
       }
 
+      const requestingUser = await getRequestingUser(req);
+      const inactiveStatus = await getOrCreateInactiveStatus(lead.vendor_id);
+
       await prisma.$transaction(async (tx) => {
         if (lead.lead_master_id) {
           await tx.leadMaster.updateMany({
             where: { id: lead.lead_master_id },
-            data: { is_deleted: true },
+            data: { is_deleted: true, deleted_at: new Date() },
           });
         }
 
-        await tx.online_lead_history.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.online_lead_call_log.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.online_lead_store_log.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.telecaller_campaign_leads.deleteMany({
-          where: { online_lead_id: id },
+        // Mark lead as inactive in online_leads
+        await tx.online_leads.update({
+          where: { id },
+          data: {
+            approval_status: "INACTIVE",
+            status: inactiveStatus.id,
+            updated_at: new Date(),
+          },
         });
 
-        await tx.online_leads.delete({
-          where: { id },
+        // Add history record for audit/tracking
+        await tx.online_lead_history.create({
+          data: {
+            vendor_id: lead.vendor_id,
+            online_lead_id: id,
+            remark: "Lead deleted from Lead Pool (marked inactive)",
+            created_by: requestingUser?.id || lead.created_by || 1,
+            online_lead_status_id: inactiveStatus.id,
+          },
         });
+
+        // Treat corresponding Wix Studio capture record(s) as inactive/consumed
+        const cleanContactDigits = String(lead.contact || "").replace(/\D/g, "");
+        const last10Digits = cleanContactDigits.slice(-10);
+
+        const wixCaptures = await tx.wixStudioDataCapture.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+          },
+        });
+
+        for (const capture of wixCaptures) {
+          const payloadStr = JSON.stringify(capture.payload || {});
+          const matchesPhone =
+            (last10Digits && payloadStr.includes(last10Digits)) ||
+            (cleanContactDigits && payloadStr.includes(cleanContactDigits)) ||
+            (lead.email && payloadStr.toLowerCase().includes(lead.email.toLowerCase()));
+
+          if (matchesPhone) {
+            const currentPayload =
+              typeof capture.payload === "object" && capture.payload !== null
+                ? (capture.payload as Record<string, any>)
+                : {};
+            await tx.wixStudioDataCapture.update({
+              where: { id: capture.id },
+              data: {
+                payload: {
+                  ...currentPayload,
+                  is_inactive: true,
+                  status: "inactive",
+                  consumed: true,
+                  inactive_at: new Date().toISOString(),
+                },
+              },
+            });
+          }
+        }
       });
 
       return res
         .status(200)
-        .json({ success: true, message: "Lead deleted successfully" });
+        .json({ success: true, message: "Lead marked inactive successfully" });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] deleteLead error:", error);
       return res.status(500).json({

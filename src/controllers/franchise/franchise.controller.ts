@@ -5,6 +5,7 @@ import {
   createHeadSiteSupervisorFranchiseMapping,
   updateHeadSiteSupervisorFranchiseMappingStatus,
   getHeadSiteSupervisorFranchiseMapping,
+  getSiteSupervisorFranchiseMapping,
 } from "../../services/franchise/franchise.service";
 
 export const createFranchiseController = async (
@@ -142,6 +143,35 @@ export const getHeadSiteSupervisorFranchiseMappingController = async (
       message:
         error.message ||
         "Internal server error while fetching head site supervisor franchise mapping",
+    });
+  }
+};
+
+export const getSiteSupervisorFranchiseMappingController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendorId = Number(req.query.vendor_id);
+    const franchiseId = Number(req.query.franchise_id);
+
+    const mapping = await getSiteSupervisorFranchiseMapping(
+      vendorId,
+      franchiseId
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Site supervisor franchise mapping fetched successfully",
+      data: mapping,
+    });
+  } catch (error: any) {
+    console.error("Error fetching site supervisor franchise mapping:", error);
+    return res.status(error.statusCode || 500).json({
+      success: false,
+      message:
+        error.message ||
+        "Internal server error while fetching site supervisor franchise mapping",
     });
   }
 };
