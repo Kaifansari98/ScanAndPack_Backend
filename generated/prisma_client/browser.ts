@@ -1172,3 +1172,18 @@ export type WalkinLeadResponse = Prisma.WalkinLeadResponseModel
  * 
  */
 export type WalkinLeadUpload = Prisma.WalkinLeadUploadModel
+/**
+ * Model time_zone_master
+ * 
+ */
+export type time_zone_master = Prisma.time_zone_masterModel
+/**
+ * Model attendance
+ * 
+ */
+export type attendance = Prisma.attendanceModel
+/**
+ * Model attendance_logs
+ * 
+ */
+export type attendance_logs = Prisma.attendance_logsModel

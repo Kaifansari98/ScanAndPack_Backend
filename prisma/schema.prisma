@@ -21,6 +21,10 @@ model VendorMaster {
   status                                       String                                         @default("inactive")
   logo                                         String
   time_zone                                    String
+  time_zone_id                                 Int?
+  time_zone_master                             time_zone_master?                              @relation(fields: [time_zone_id], references: [id], onDelete: Restrict)
+  attendances                                  attendance[]
+  attendance_logs                              attendance_logs[]
   createdAt                                    DateTime                                       @default(now())
   updatedAt                                    DateTime                                       @updatedAt
   vendor_report_code                           String?                                        @map("vendor-report-code")
@@ -225,6 +229,7 @@ model VendorMaster {
   walkinUploads WalkinLeadUpload[]
 
   @@index([state_id])
+  @@index([time_zone_id])
 }
 
 model VendorAddress {
@@ -480,6 +485,8 @@ model UserMaster {
   siteSupervisorFranchiseMappings                                                SiteSupervisorFranchiseMapping[]
   siteSupervisorFranchiseMappingsCreated                                         SiteSupervisorFranchiseMapping[]               @relation("SiteSupervisorFranchiseMappingCreatedBy")
   siteSupervisorFranchiseMappingsUpdated                                         SiteSupervisorFranchiseMapping[]               @relation("SiteSupervisorFranchiseMappingUpdatedBy")
+  attendances                                                                    attendance[]
+  attendance_logs                                                                attendance_logs[]
 }
 
 model UserDocument {
@@ -3421,6 +3428,8 @@ model FranchiseMaster {
   online_lead_store_log_online_lead_store_log_to_store_idToFranchiseMaster   online_lead_store_log[]              @relation("online_lead_store_log_to_store_idToFranchiseMaster")
   online_leads                                                               online_leads[]
   siteSupervisorFranchiseMappings                                            SiteSupervisorFranchiseMapping[]
+  attendances                                                                attendance[]
+  attendance_logs                                                            attendance_logs[]
 
   @@unique([vendor_id, franchise_code])
 }
@@ -5917,4 +5926,72 @@ model WalkinLeadUpload {
   vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id, created_by])
+}
+
+enum AttendanceAction {
+  IN
+  OUT
+}
+
+enum AttendanceSource {
+  MANUAL
+  PHONE
+  CARD
+}
+
+model time_zone_master {
+  id             Int            @id @default(autoincrement())
+  name           String
+  time_zone_code String         @unique
+  is_active      Boolean        @default(true)
+  created_at     DateTime       @default(now())
+  updated_at     DateTime       @updatedAt
+  vendors        VendorMaster[]
+}
+
+model attendance {
+  id              Int               @id @default(autoincrement())
+  vendor_id       Int
+  franchise_id    Int?
+  user_id         Int
+  attendance_date DateTime          @db.Date
+  check_in        DateTime
+  check_out       DateTime?
+  source          AttendanceSource
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+
+  vendor          VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise       FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  user            UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  logs            attendance_logs[]
+
+  @@unique([vendor_id, user_id, attendance_date])
+  @@index([vendor_id])
+  @@index([franchise_id])
+  @@index([user_id])
+  @@index([attendance_date])
+}
+
+model attendance_logs {
+  id             Int               @id @default(autoincrement())
+  vendor_id      Int
+  franchise_id   Int?
+  user_id        Int
+  attendance_id  Int
+  action         AttendanceAction
+  action_time    DateTime
+  source         AttendanceSource
+  created_at     DateTime          @default(now())
+
+  attendance     attendance        @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
+  vendor         VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise      FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  user           UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
+
+  @@index([attendance_id])
+  @@index([vendor_id])
+  @@index([franchise_id])
+  @@index([user_id])
+  @@index([action_time])
 }

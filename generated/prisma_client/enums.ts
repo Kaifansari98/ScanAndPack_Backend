@@ -756,3 +756,20 @@ export const RuleFieldDataType = {
 } as const
 
 export type RuleFieldDataType = (typeof RuleFieldDataType)[keyof typeof RuleFieldDataType]
+
+
+export const AttendanceAction = {
+  IN: 'IN',
+  OUT: 'OUT'
+} as const
+
+export type AttendanceAction = (typeof AttendanceAction)[keyof typeof AttendanceAction]
+
+
+export const AttendanceSource = {
+  MANUAL: 'MANUAL',
+  PHONE: 'PHONE',
+  CARD: 'CARD'
+} as const
+
+export type AttendanceSource = (typeof AttendanceSource)[keyof typeof AttendanceSource]
