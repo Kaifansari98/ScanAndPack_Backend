@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { verifyToken } from "../../middlewares/auth.middleware";
 import multer from "multer";
 
 import {
@@ -377,6 +378,10 @@ leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
 leadsRouter.post(
   "/create",
   handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  (req, res, next) => {
+    if (req.body.walkin_answers !== undefined) return verifyToken(req, res, next);
+    next();
+  },
   leadController.createLead
 );
 

@@ -735,6 +735,9 @@ export type VendorMasterWhereInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogListRelationFilter
   boxUnpackLogs?: Prisma.BoxUnpackLogListRelationFilter
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingListRelationFilter
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireListRelationFilter
+  walkinResponses?: Prisma.WalkinLeadResponseListRelationFilter
+  walkinUploads?: Prisma.WalkinLeadUploadListRelationFilter
 }
 
 export type VendorMasterOrderByWithRelationInput = {
@@ -949,6 +952,9 @@ export type VendorMasterOrderByWithRelationInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogOrderByRelationAggregateInput
   boxUnpackLogs?: Prisma.BoxUnpackLogOrderByRelationAggregateInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingOrderByRelationAggregateInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireOrderByRelationAggregateInput
+  walkinResponses?: Prisma.WalkinLeadResponseOrderByRelationAggregateInput
+  walkinUploads?: Prisma.WalkinLeadUploadOrderByRelationAggregateInput
 }
 
 export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -1166,6 +1172,9 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogListRelationFilter
   boxUnpackLogs?: Prisma.BoxUnpackLogListRelationFilter
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingListRelationFilter
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireListRelationFilter
+  walkinResponses?: Prisma.WalkinLeadResponseListRelationFilter
+  walkinUploads?: Prisma.WalkinLeadUploadListRelationFilter
 }, "id">
 
 export type VendorMasterOrderByWithAggregationInput = {
@@ -1488,6 +1497,9 @@ export type VendorMasterCreateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateInput = {
@@ -1701,6 +1713,9 @@ export type VendorMasterUncheckedCreateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUpdateInput = {
@@ -1913,6 +1928,9 @@ export type VendorMasterUpdateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateInput = {
@@ -2126,6 +2144,9 @@ export type VendorMasterUncheckedUpdateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateManyInput = {
@@ -4816,6 +4837,48 @@ export type VendorMasterUpdateOneRequiredWithoutSiteSupervisorFranchiseMappingsN
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappingsInput, Prisma.VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput>, Prisma.VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutWalkinQuestionnairesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinQuestionnairesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutWalkinQuestionnairesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutWalkinQuestionnairesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinQuestionnairesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutWalkinQuestionnairesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutWalkinQuestionnairesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutWalkinQuestionnairesInput, Prisma.VendorMasterUpdateWithoutWalkinQuestionnairesInput>, Prisma.VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutWalkinResponsesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinResponsesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinResponsesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutWalkinResponsesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutWalkinResponsesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinResponsesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinResponsesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutWalkinResponsesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutWalkinResponsesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutWalkinResponsesInput, Prisma.VendorMasterUpdateWithoutWalkinResponsesInput>, Prisma.VendorMasterUncheckedUpdateWithoutWalkinResponsesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutWalkinUploadsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinUploadsInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinUploadsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutWalkinUploadsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutWalkinUploadsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinUploadsInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinUploadsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutWalkinUploadsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutWalkinUploadsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutWalkinUploadsInput, Prisma.VendorMasterUpdateWithoutWalkinUploadsInput>, Prisma.VendorMasterUncheckedUpdateWithoutWalkinUploadsInput>
+}
+
 export type VendorMasterCreateWithoutAddressesInput = {
   vendor_name: string
   vendor_code: string
@@ -5025,6 +5088,9 @@ export type VendorMasterCreateWithoutAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAddressesInput = {
@@ -5237,6 +5303,9 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAddressesInput = {
@@ -5464,6 +5533,9 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
@@ -5676,6 +5748,9 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTaxInfoInput = {
@@ -5887,6 +5962,9 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
@@ -6099,6 +6177,9 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTaxInfoInput = {
@@ -6326,6 +6407,9 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
@@ -6538,6 +6622,9 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPrivilegeMastersInput = {
@@ -6749,6 +6836,9 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
@@ -6961,6 +7051,9 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPrivilegeMastersInput = {
@@ -7188,6 +7281,9 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
@@ -7400,6 +7496,9 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUsersInput = {
@@ -7611,6 +7710,9 @@ export type VendorMasterCreateWithoutUsersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUsersInput = {
@@ -7823,6 +7925,9 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUsersInput = {
@@ -8050,6 +8155,9 @@ export type VendorMasterUpdateWithoutUsersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUsersInput = {
@@ -8262,6 +8370,9 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserSessionsInput = {
@@ -8473,6 +8584,9 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
@@ -8685,6 +8799,9 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserSessionsInput = {
@@ -8912,6 +9029,9 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
@@ -9124,6 +9244,9 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
@@ -9335,6 +9458,9 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
@@ -9547,6 +9673,9 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
@@ -9774,6 +9903,9 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
@@ -9986,6 +10118,9 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectsInput = {
@@ -10197,6 +10332,9 @@ export type VendorMasterCreateWithoutProjectsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectsInput = {
@@ -10409,6 +10547,9 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectsInput = {
@@ -10636,6 +10777,9 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
@@ -10848,6 +10992,9 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectDetailsInput = {
@@ -11059,6 +11206,9 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
@@ -11271,6 +11421,9 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectDetailsInput = {
@@ -11498,6 +11651,9 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
@@ -11710,6 +11866,9 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectItemsInput = {
@@ -11921,6 +12080,9 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
@@ -12133,6 +12295,9 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectItemsInput = {
@@ -12360,6 +12525,9 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
@@ -12572,6 +12740,9 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBoxesInput = {
@@ -12783,6 +12954,9 @@ export type VendorMasterCreateWithoutBoxesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBoxesInput = {
@@ -12995,6 +13169,9 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBoxesInput = {
@@ -13222,6 +13399,9 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
@@ -13434,6 +13614,9 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
@@ -13645,6 +13828,9 @@ export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFactoryOutRevertLogsInput = {
@@ -13857,6 +14043,9 @@ export type VendorMasterUncheckedCreateWithoutFactoryOutRevertLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFactoryOutRevertLogsInput = {
@@ -14084,6 +14273,9 @@ export type VendorMasterUpdateWithoutFactoryOutRevertLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
@@ -14296,6 +14488,9 @@ export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
@@ -14507,6 +14702,9 @@ export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBoxUnpackLogsInput = {
@@ -14719,6 +14917,9 @@ export type VendorMasterUncheckedCreateWithoutBoxUnpackLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBoxUnpackLogsInput = {
@@ -14946,6 +15147,9 @@ export type VendorMasterUpdateWithoutBoxUnpackLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
@@ -15158,6 +15362,9 @@ export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutScanItemsInput = {
@@ -15369,6 +15576,9 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
@@ -15581,6 +15791,9 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutScanItemsInput = {
@@ -15808,6 +16021,9 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
@@ -16020,6 +16236,9 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTokensInput = {
@@ -16231,6 +16450,9 @@ export type VendorMasterCreateWithoutTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTokensInput = {
@@ -16443,6 +16665,9 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTokensInput = {
@@ -16670,6 +16895,9 @@ export type VendorMasterUpdateWithoutTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTokensInput = {
@@ -16882,6 +17110,9 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientsInput = {
@@ -17093,6 +17324,9 @@ export type VendorMasterCreateWithoutClientsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientsInput = {
@@ -17305,6 +17539,9 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientsInput = {
@@ -17532,6 +17769,9 @@ export type VendorMasterUpdateWithoutClientsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientsInput = {
@@ -17744,6 +17984,9 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientBankAccountsInput = {
@@ -17955,6 +18198,9 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
@@ -18167,6 +18413,9 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientBankAccountsInput = {
@@ -18394,6 +18643,9 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
@@ -18606,6 +18858,9 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientTypesInput = {
@@ -18817,6 +19072,9 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
@@ -19029,6 +19287,9 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientTypesInput = {
@@ -19256,6 +19517,9 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
@@ -19468,6 +19732,9 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadsInput = {
@@ -19679,6 +19946,9 @@ export type VendorMasterCreateWithoutLeadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadsInput = {
@@ -19891,6 +20161,9 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadsInput = {
@@ -20118,6 +20391,9 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
@@ -20330,6 +20606,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadSpecificationsInput = {
@@ -20541,6 +20820,9 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
@@ -20753,6 +21035,9 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadSpecificationsInput = {
@@ -20980,6 +21265,9 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
@@ -21192,6 +21480,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
@@ -21403,6 +21694,9 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput = {
@@ -21615,6 +21909,9 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadCarcassMaterialMappingsInput = {
@@ -21842,6 +22139,9 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput = {
@@ -22054,6 +22354,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
@@ -22265,6 +22568,9 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput = {
@@ -22477,6 +22783,9 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadShutterMaterialMappingsInput = {
@@ -22704,6 +23013,9 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput = {
@@ -22916,6 +23228,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -23127,6 +23442,9 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -23339,6 +23657,9 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -23566,6 +23887,9 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -23778,6 +24102,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadUserMappingsInput = {
@@ -23989,6 +24316,9 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
@@ -24201,6 +24531,9 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadUserMappingsInput = {
@@ -24428,6 +24761,9 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
@@ -24640,6 +24976,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -24851,6 +25190,9 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -25063,6 +25405,9 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -25290,6 +25635,9 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -25502,6 +25850,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
@@ -25713,6 +26064,9 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = {
@@ -25925,6 +26279,9 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsInput = {
@@ -26152,6 +26509,9 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = {
@@ -26364,6 +26724,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteTypesInput = {
@@ -26575,6 +26938,9 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
@@ -26787,6 +27153,9 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteTypesInput = {
@@ -27014,6 +27383,9 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
@@ -27226,6 +27598,9 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSourcesInput = {
@@ -27437,6 +27812,9 @@ export type VendorMasterCreateWithoutSourcesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSourcesInput = {
@@ -27649,6 +28027,9 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSourcesInput = {
@@ -27876,6 +28257,9 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
@@ -28088,6 +28472,9 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutAccountsInput = {
@@ -28299,6 +28686,9 @@ export type VendorMasterCreateWithoutAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAccountsInput = {
@@ -28511,6 +28901,9 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAccountsInput = {
@@ -28738,6 +29131,9 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
@@ -28950,6 +29346,9 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductMapsInput = {
@@ -29161,6 +29560,9 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
@@ -29373,6 +29775,9 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductMapsInput = {
@@ -29600,6 +30005,9 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
@@ -29812,6 +30220,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductTypesInput = {
@@ -30023,6 +30434,9 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
@@ -30235,6 +30649,9 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductTypesInput = {
@@ -30462,6 +30879,9 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
@@ -30674,6 +31094,9 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProcessBriefsInput = {
@@ -30885,6 +31308,9 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
@@ -31097,6 +31523,9 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProcessBriefsInput = {
@@ -31324,6 +31753,9 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
@@ -31536,6 +31968,9 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
@@ -31747,6 +32182,9 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
@@ -31959,6 +32397,9 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProcessBriefsInput = {
@@ -32186,6 +32627,9 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
@@ -32398,6 +32842,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
@@ -32609,6 +33056,9 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput = {
@@ -32821,6 +33271,9 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProcessBriefMachineMappingsInput = {
@@ -33048,6 +33501,9 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput = {
@@ -33260,6 +33716,9 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
@@ -33471,6 +33930,9 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
@@ -33683,6 +34145,9 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadRequirementMaterialsInput = {
@@ -33910,6 +34375,9 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
@@ -34122,6 +34590,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcassTypesInput = {
@@ -34333,6 +34804,9 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
@@ -34545,6 +35019,9 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcassTypesInput = {
@@ -34772,6 +35249,9 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
@@ -34984,6 +35464,9 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcasMaterialsInput = {
@@ -35195,6 +35678,9 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
@@ -35407,6 +35893,9 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcasMaterialsInput = {
@@ -35634,6 +36123,9 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
@@ -35846,6 +36338,9 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutShutterTypesInput = {
@@ -36057,6 +36552,9 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
@@ -36269,6 +36767,9 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutShutterTypesInput = {
@@ -36496,6 +36997,9 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
@@ -36708,6 +37212,9 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutShutterMaterialsInput = {
@@ -36919,6 +37426,9 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
@@ -37131,6 +37641,9 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutShutterMaterialsInput = {
@@ -37358,6 +37871,9 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
@@ -37570,6 +38086,9 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcassLegsInput = {
@@ -37781,6 +38300,9 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
@@ -37993,6 +38515,9 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcassLegsInput = {
@@ -38220,6 +38745,9 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
@@ -38432,6 +38960,9 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
@@ -38643,6 +39174,9 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
@@ -38855,6 +39389,9 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadHardwareMappingsInput = {
@@ -39082,6 +39619,9 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
@@ -39294,6 +39834,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLightCarcasTypesInput = {
@@ -39505,6 +40048,9 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
@@ -39717,6 +40263,9 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLightCarcasTypesInput = {
@@ -39944,6 +40493,9 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
@@ -40156,6 +40708,9 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
@@ -40367,6 +40922,9 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
@@ -40579,6 +41137,9 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLightCarcasUnitsInput = {
@@ -40806,6 +41367,9 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
@@ -41018,6 +41582,9 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -41229,6 +41796,9 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -41441,6 +42011,9 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadLightCarcasUnitMappingsInput = {
@@ -41668,6 +42241,9 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput = {
@@ -41880,6 +42456,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOtherAppliancesInput = {
@@ -42091,6 +42670,9 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
@@ -42303,6 +42885,9 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOtherAppliancesInput = {
@@ -42530,6 +43115,9 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
@@ -42742,6 +43330,9 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
@@ -42953,6 +43544,9 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput = {
@@ -43165,6 +43759,9 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadOtherAppliancesMappingsInput = {
@@ -43392,6 +43989,9 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput = {
@@ -43604,6 +44204,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHandleTypesInput = {
@@ -43815,6 +44418,9 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
@@ -44027,6 +44633,9 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHandleTypesInput = {
@@ -44254,6 +44863,9 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
@@ -44466,6 +45078,9 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTimelineRulesInput = {
@@ -44677,6 +45292,9 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
@@ -44889,6 +45507,9 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTimelineRulesInput = {
@@ -45116,6 +45737,9 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
@@ -45328,6 +45952,9 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
@@ -45539,6 +46166,9 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput = {
@@ -45751,6 +46381,9 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSpecificationDocumentMappingsInput = {
@@ -45978,6 +46611,9 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput = {
@@ -46190,6 +46826,9 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentsInput = {
@@ -46401,6 +47040,9 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
@@ -46613,6 +47255,9 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentsInput = {
@@ -46840,6 +47485,9 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -47052,6 +47700,9 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutB2bDocumentsInput = {
@@ -47263,6 +47914,9 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
@@ -47475,6 +48129,9 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutB2bDocumentsInput = {
@@ -47702,6 +48359,9 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
@@ -47914,6 +48574,9 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatRoomsInput = {
@@ -48125,6 +48788,9 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
@@ -48337,6 +49003,9 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatRoomsInput = {
@@ -48564,6 +49233,9 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
@@ -48776,6 +49448,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
@@ -48987,6 +49662,9 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
@@ -49199,6 +49877,9 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatDocumentsInput = {
@@ -49426,6 +50107,9 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
@@ -49638,6 +50322,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInput = {
@@ -49849,6 +50536,9 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
@@ -50061,6 +50751,9 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInput = {
@@ -50288,6 +50981,9 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
@@ -50500,6 +51196,9 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductSubStructuresInput = {
@@ -50711,6 +51410,9 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
@@ -50923,6 +51625,9 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductSubStructuresInput = {
@@ -51150,6 +51855,9 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
@@ -51362,6 +52070,9 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductItemCodesInput = {
@@ -51573,6 +52284,9 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
@@ -51785,6 +52499,9 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductItemCodesInput = {
@@ -52012,6 +52729,9 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
@@ -52224,6 +52944,9 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -52435,6 +53158,9 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -52647,6 +53373,9 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -52874,6 +53603,9 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -53086,6 +53818,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInstancesInput = {
@@ -53297,6 +54032,9 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -53509,6 +54247,9 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -53736,6 +54477,9 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -53948,6 +54692,9 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -54159,6 +54906,9 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -54371,6 +55121,9 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput = {
@@ -54598,6 +55351,9 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
@@ -54810,6 +55566,9 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentsInput = {
@@ -55021,6 +55780,9 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
@@ -55233,6 +55995,9 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentsInput = {
@@ -55460,6 +56225,9 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -55672,6 +56440,9 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLedgersInput = {
@@ -55883,6 +56654,9 @@ export type VendorMasterCreateWithoutLedgersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLedgersInput = {
@@ -56095,6 +56869,9 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLedgersInput = {
@@ -56322,6 +57099,9 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
@@ -56534,6 +57314,9 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentTypesInput = {
@@ -56745,6 +57528,9 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
@@ -56957,6 +57743,9 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentTypesInput = {
@@ -57184,6 +57973,9 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
@@ -57396,6 +58188,9 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -57607,6 +58402,9 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -57819,6 +58617,9 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestTypeMastersInput = {
@@ -58046,6 +58847,9 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput = {
@@ -58258,6 +59062,9 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
@@ -58469,6 +59276,9 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
@@ -58681,6 +59491,9 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestsInput = {
@@ -58908,6 +59721,9 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
@@ -59120,6 +59936,9 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -59331,6 +60150,9 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -59543,6 +60365,9 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestDocumentsInput = {
@@ -59770,6 +60595,9 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = {
@@ -59982,6 +60810,9 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadAmcContractsInput = {
@@ -60193,6 +61024,9 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
@@ -60405,6 +61239,9 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadAmcContractsInput = {
@@ -60632,6 +61469,9 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
@@ -60844,6 +61684,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
@@ -61055,6 +61898,9 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
@@ -61267,6 +62113,9 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadServiceSchedulesInput = {
@@ -61494,6 +62343,9 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
@@ -61706,6 +62558,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStatusTypesInput = {
@@ -61917,6 +62772,9 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
@@ -62129,6 +62987,9 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStatusTypesInput = {
@@ -62356,6 +63217,9 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
@@ -62568,6 +63432,9 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadStatusLogsInput = {
@@ -62779,6 +63646,9 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -62991,6 +63861,9 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -63218,6 +64091,9 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -63430,6 +64306,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingInput = {
@@ -63641,6 +64520,9 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -63853,6 +64735,9 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -64080,6 +64965,9 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -64292,6 +65180,9 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitsInput = {
@@ -64503,6 +65394,9 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
@@ -64715,6 +65609,9 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitsInput = {
@@ -64942,6 +65839,9 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
@@ -65154,6 +66054,9 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMeetingTypesInput = {
@@ -65365,6 +66268,9 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
@@ -65577,6 +66483,9 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMeetingTypesInput = {
@@ -65804,6 +66713,9 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
@@ -66016,6 +66928,9 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -66227,6 +67142,9 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -66439,6 +67357,9 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -66666,6 +67587,9 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -66878,6 +67802,9 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
@@ -67089,6 +68016,9 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
@@ -67301,6 +68231,9 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
@@ -67528,6 +68461,9 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
@@ -67740,6 +68676,9 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignSelectionInput = {
@@ -67951,6 +68890,9 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -68163,6 +69105,9 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -68390,6 +69335,9 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -68602,6 +69550,9 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
@@ -68813,6 +69764,9 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
@@ -69025,6 +69979,9 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -69252,6 +70209,9 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
@@ -69464,6 +70424,9 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
@@ -69675,6 +70638,9 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
@@ -69887,6 +70853,9 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTypeMasterInput = {
@@ -70114,6 +71083,9 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
@@ -70326,6 +71298,9 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteSupervisorsInput = {
@@ -70537,6 +71512,9 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -70749,6 +71727,9 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -70976,6 +71957,9 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -71188,6 +72172,9 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserLeadTasksInput = {
@@ -71399,6 +72386,9 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
@@ -71611,6 +72601,9 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserLeadTasksInput = {
@@ -71838,6 +72831,9 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
@@ -72050,6 +73046,9 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
@@ -72261,6 +73260,9 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = {
@@ -72473,6 +73475,9 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFastProductionRequestBatchesInput = {
@@ -72700,6 +73705,9 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = {
@@ -72912,6 +73920,9 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestsInput = {
@@ -73123,6 +74134,9 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
@@ -73335,6 +74349,9 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFastProductionRequestsInput = {
@@ -73562,6 +74579,9 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
@@ -73774,6 +74794,9 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
@@ -73985,6 +75008,9 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -74197,6 +75223,9 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -74424,6 +75453,9 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -74636,6 +75668,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
@@ -74847,6 +75882,9 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -75059,6 +76097,9 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -75286,6 +76327,9 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -75498,6 +76542,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -75709,6 +76756,9 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -75921,6 +76971,9 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -76148,6 +77201,9 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -76360,6 +77416,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
@@ -76571,6 +77630,9 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
@@ -76783,6 +77845,9 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompanyVendorsMasterInput = {
@@ -77010,6 +78075,9 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
@@ -77222,6 +78290,9 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
@@ -77433,6 +78504,9 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -77645,6 +78719,9 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -77872,6 +78949,9 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -78084,6 +79164,9 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteReadinessInput = {
@@ -78295,6 +79378,9 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -78507,6 +79593,9 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -78734,6 +79823,9 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -78946,6 +80038,9 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallersInput = {
@@ -79157,6 +80252,9 @@ export type VendorMasterCreateWithoutInstallersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallersInput = {
@@ -79369,6 +80467,9 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallersInput = {
@@ -79596,6 +80697,9 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
@@ -79808,6 +80912,9 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallerMappingsInput = {
@@ -80019,6 +81126,9 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -80231,6 +81341,9 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -80458,6 +81571,9 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -80670,6 +81786,9 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdatesInput = {
@@ -80881,6 +82000,9 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -81093,6 +82215,9 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -81320,6 +82445,9 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -81532,6 +82660,9 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
@@ -81743,6 +82874,9 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
@@ -81955,6 +83089,9 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdateDocsInput = {
@@ -82182,6 +83319,9 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
@@ -82394,6 +83534,9 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
@@ -82605,6 +83748,9 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -82817,6 +83963,9 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -83044,6 +84193,9 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -83256,6 +84408,9 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
@@ -83467,6 +84622,9 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
@@ -83679,6 +84837,9 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTypeMasterInput = {
@@ -83906,6 +85067,9 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
@@ -84118,6 +85282,9 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
@@ -84329,6 +85496,9 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
@@ -84541,6 +85711,9 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTeamMasterInput = {
@@ -84768,6 +85941,9 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
@@ -84980,6 +86156,9 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
@@ -85191,6 +86370,9 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
@@ -85403,6 +86585,9 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousDocumentInput = {
@@ -85630,6 +86815,9 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
@@ -85842,6 +87030,9 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
@@ -86053,6 +87244,9 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
@@ -86265,6 +87459,9 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousFollowupsInput = {
@@ -86492,6 +87689,9 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
@@ -86704,6 +87904,9 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -86915,6 +88118,9 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -87127,6 +88333,9 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -87354,6 +88563,9 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -87566,6 +88778,9 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -87777,6 +88992,9 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -87989,6 +89207,9 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -88216,6 +89437,9 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -88428,6 +89652,9 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
@@ -88639,6 +89866,9 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
@@ -88851,6 +90081,9 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutIssueLogTypeMasterInput = {
@@ -89078,6 +90311,9 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
@@ -89290,6 +90526,9 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationMastersInput = {
@@ -89501,6 +90740,9 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
@@ -89713,6 +90955,9 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationMastersInput = {
@@ -89940,6 +91185,9 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
@@ -90152,6 +91400,9 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationsInput = {
@@ -90363,6 +91614,9 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
@@ -90575,6 +91829,9 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationsInput = {
@@ -90802,6 +92059,9 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
@@ -91014,6 +92274,9 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPushTokensInput = {
@@ -91225,6 +92488,9 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
@@ -91437,6 +92703,9 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPushTokensInput = {
@@ -91664,6 +92933,9 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
@@ -91876,6 +93148,9 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
@@ -92087,6 +93362,9 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
@@ -92299,6 +93577,9 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorModulesMappingsInput = {
@@ -92526,6 +93807,9 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
@@ -92738,6 +94022,9 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMachineMasterInput = {
@@ -92949,6 +94236,9 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
@@ -93161,6 +94451,9 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMachineMasterInput = {
@@ -93388,6 +94681,9 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
@@ -93600,6 +94896,9 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
@@ -93811,6 +95110,9 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
@@ -94023,6 +95325,9 @@ export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutlistHeadersMappingsInput = {
@@ -94250,6 +95555,9 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
@@ -94462,6 +95770,9 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
   siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListInput = {
@@ -94673,6 +95984,9 @@ export type VendorMasterCreateWithoutCutListInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListInput = {
@@ -94885,6 +96199,9 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListInput = {
@@ -95112,6 +96429,9 @@ export type VendorMasterUpdateWithoutCutListInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListInput = {
@@ -95324,6 +96644,9 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListMachineMappingInput = {
@@ -95535,6 +96858,9 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -95747,6 +97073,9 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -95974,6 +97303,9 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -96186,6 +97518,9 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserMachineMappingInput = {
@@ -96397,6 +97732,9 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
@@ -96609,6 +97947,9 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserMachineMappingInput = {
@@ -96836,6 +98177,9 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
@@ -97048,6 +98392,9 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorSettingInput = {
@@ -97259,6 +98606,9 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
@@ -97471,6 +98821,9 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorSettingInput = {
@@ -97698,6 +99051,9 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
@@ -97910,6 +99266,9 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectMasterInput = {
@@ -98121,6 +99480,9 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
@@ -98333,6 +99695,9 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectMasterInput = {
@@ -98560,6 +99925,9 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
@@ -98772,6 +100140,9 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectedItemsInput = {
@@ -98983,6 +100354,9 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
@@ -99195,6 +100569,9 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectedItemsInput = {
@@ -99422,6 +100799,9 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
@@ -99634,6 +101014,9 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFranchisesInput = {
@@ -99845,6 +101228,9 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
@@ -100057,6 +101443,9 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFranchisesInput = {
@@ -100284,6 +101673,9 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
@@ -100496,6 +101888,9 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -100707,6 +102102,9 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -100919,6 +102317,9 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -101146,6 +102547,9 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -101358,6 +102762,9 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStateInput = {
@@ -101569,6 +102976,9 @@ export type VendorMasterCreateWithoutStateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStateInput = {
@@ -101781,6 +103191,9 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStateInput = {
@@ -102072,6 +103485,9 @@ export type VendorMasterCreateWithoutThemesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutThemesInput = {
@@ -102284,6 +103700,9 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutThemesInput = {
@@ -102511,6 +103930,9 @@ export type VendorMasterUpdateWithoutThemesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutThemesInput = {
@@ -102723,6 +104145,9 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
@@ -102934,6 +104359,9 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
@@ -103146,6 +104574,9 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutExternalPlatformTokensInput = {
@@ -103373,6 +104804,9 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
@@ -103585,6 +105019,9 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -103796,6 +105233,9 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -104008,6 +105448,9 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -104235,6 +105678,9 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -104447,6 +105893,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompletionPhotosInput = {
@@ -104658,6 +106107,9 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
@@ -104870,6 +106322,9 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompletionPhotosInput = {
@@ -105097,6 +106552,9 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -105309,6 +106767,9 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
@@ -105520,6 +106981,9 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
@@ -105732,6 +107196,9 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesMasterInput = {
@@ -105959,6 +107426,9 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
@@ -106171,6 +107641,9 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
@@ -106382,6 +107855,9 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
@@ -106594,6 +108070,9 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCategoryNamingStructuresInput = {
@@ -106821,6 +108300,9 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
@@ -107033,6 +108515,9 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -107244,6 +108729,9 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -107456,6 +108944,9 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsInput = {
@@ -107683,6 +109174,9 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInput = {
@@ -107895,6 +109389,9 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBrandsInput = {
@@ -108106,6 +109603,9 @@ export type VendorMasterCreateWithoutBrandsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBrandsInput = {
@@ -108318,6 +109818,9 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBrandsInput = {
@@ -108545,6 +110048,9 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
@@ -108757,6 +110263,9 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductsInput = {
@@ -108968,6 +110477,9 @@ export type VendorMasterCreateWithoutProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsInput = {
@@ -109180,6 +110692,9 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductsInput = {
@@ -109407,6 +110922,9 @@ export type VendorMasterUpdateWithoutProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsInput = {
@@ -109619,6 +111137,9 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCoreProductsInput = {
@@ -109830,6 +111351,9 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
@@ -110042,6 +111566,9 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCoreProductsInput = {
@@ -110269,6 +111796,9 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
@@ -110481,6 +112011,9 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutGradesInput = {
@@ -110692,6 +112225,9 @@ export type VendorMasterCreateWithoutGradesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutGradesInput = {
@@ -110904,6 +112440,9 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutGradesInput = {
@@ -111131,6 +112670,9 @@ export type VendorMasterUpdateWithoutGradesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutGradesInput = {
@@ -111343,6 +112885,9 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFinishesInput = {
@@ -111554,6 +113099,9 @@ export type VendorMasterCreateWithoutFinishesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFinishesInput = {
@@ -111766,6 +113314,9 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFinishesInput = {
@@ -111993,6 +113544,9 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
@@ -112205,6 +113759,9 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTypesInput = {
@@ -112416,6 +113973,9 @@ export type VendorMasterCreateWithoutTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTypesInput = {
@@ -112628,6 +114188,9 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTypesInput = {
@@ -112855,6 +114418,9 @@ export type VendorMasterUpdateWithoutTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTypesInput = {
@@ -113067,6 +114633,9 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutItemTypesInput = {
@@ -113278,6 +114847,9 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
@@ -113490,6 +115062,9 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutItemTypesInput = {
@@ -113717,6 +115292,9 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
@@ -113929,6 +115507,9 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseIntentsInput = {
@@ -114140,6 +115721,9 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
@@ -114352,6 +115936,9 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseIntentsInput = {
@@ -114579,6 +116166,9 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
@@ -114791,6 +116381,9 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseOrdersInput = {
@@ -115002,6 +116595,9 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -115214,6 +116810,9 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -115441,6 +117040,9 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -115653,6 +117255,9 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutGrnsInput = {
@@ -115864,6 +117469,9 @@ export type VendorMasterCreateWithoutGrnsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutGrnsInput = {
@@ -116076,6 +117684,9 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutGrnsInput = {
@@ -116303,6 +117914,9 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
@@ -116515,6 +118129,9 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDebitCreditNotesInput = {
@@ -116726,6 +118343,9 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
@@ -116938,6 +118558,9 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDebitCreditNotesInput = {
@@ -117165,6 +118788,9 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
@@ -117377,6 +119003,9 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
@@ -117588,6 +119217,9 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
@@ -117800,6 +119432,9 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutRedeliveryRequestsInput = {
@@ -118027,6 +119662,9 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
@@ -118239,6 +119877,9 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHsnMappingsInput = {
@@ -118450,6 +120091,9 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
@@ -118662,6 +120306,9 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHsnMappingsInput = {
@@ -118889,6 +120536,9 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
@@ -119101,6 +120751,9 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStockHistoriesInput = {
@@ -119312,6 +120965,9 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
@@ -119524,6 +121180,9 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -119751,6 +121410,9 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
@@ -119963,6 +121625,9 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTermsInput = {
@@ -120174,6 +121839,9 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
@@ -120386,6 +122054,9 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTermsInput = {
@@ -120613,6 +122284,9 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
@@ -120825,6 +122499,9 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
@@ -121036,6 +122713,9 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
@@ -121248,6 +122928,9 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentSchedulesInput = {
@@ -121475,6 +123158,9 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
@@ -121687,6 +123373,9 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentsInput = {
@@ -121898,6 +123587,9 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
@@ -122110,6 +123802,9 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentsInput = {
@@ -122337,6 +124032,9 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
@@ -122549,6 +124247,9 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUnitsInput = {
@@ -122760,6 +124461,9 @@ export type VendorMasterCreateWithoutUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUnitsInput = {
@@ -122972,6 +124676,9 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUnitsInput = {
@@ -123199,6 +124906,9 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
@@ -123411,6 +125121,9 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutItemGroupsInput = {
@@ -123622,6 +125335,9 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
@@ -123834,6 +125550,9 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutItemGroupsInput = {
@@ -124061,6 +125780,9 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
@@ -124273,6 +125995,9 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
@@ -124484,6 +126209,9 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
@@ -124696,6 +126424,9 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductSupplierMappingsInput = {
@@ -124923,6 +126654,9 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
@@ -125135,6 +126869,9 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
@@ -125346,6 +127083,9 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = {
@@ -125558,6 +127298,9 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPopaymentScheduleHistoriesInput = {
@@ -125785,6 +127528,9 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = {
@@ -125997,6 +127743,9 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutArchitechuremastersInput = {
@@ -126208,6 +127957,9 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
@@ -126420,6 +128172,9 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutArchitechuremastersInput = {
@@ -126647,6 +128402,9 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
@@ -126859,6 +128617,9 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
@@ -127070,6 +128831,9 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
@@ -127282,6 +129046,9 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAdditionalCostMastersInput = {
@@ -127509,6 +129276,9 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
@@ -127721,6 +129491,9 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
@@ -127932,6 +129705,9 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
@@ -128144,6 +129920,9 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPiSupplierAdditionalCostsInput = {
@@ -128371,6 +130150,9 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
@@ -128583,6 +130365,9 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
@@ -128794,6 +130579,9 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
@@ -129006,6 +130794,9 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoSupplierAdditionalCostsInput = {
@@ -129233,6 +131024,9 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
@@ -129445,6 +131239,9 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBox_info_fieldsInput = {
@@ -129656,6 +131453,9 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
@@ -129868,6 +131668,9 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBox_info_fieldsInput = {
@@ -130095,6 +131898,9 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
@@ -130307,6 +132113,9 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBox_info_valuesInput = {
@@ -130518,6 +132327,9 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
@@ -130730,6 +132542,9 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBox_info_valuesInput = {
@@ -130957,6 +132772,9 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
@@ -131169,6 +132987,9 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBroadcastsInput = {
@@ -131380,6 +133201,9 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
@@ -131592,6 +133416,9 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBroadcastsInput = {
@@ -131819,6 +133646,9 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
@@ -132031,6 +133861,9 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
@@ -132242,6 +134075,9 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
@@ -132454,6 +134290,9 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBroadcastCategoriesInput = {
@@ -132681,6 +134520,9 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
@@ -132893,6 +134735,9 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
@@ -133104,6 +134949,9 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
@@ -133316,6 +135164,9 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutB2bRequirementTypesInput = {
@@ -133543,6 +135394,9 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
@@ -133755,6 +135609,9 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
@@ -133966,6 +135823,9 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
@@ -134178,6 +136038,9 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadB2BReqMappingsInput = {
@@ -134405,6 +136268,9 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
@@ -134617,6 +136483,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -134828,6 +136697,9 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -135040,6 +136912,9 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -135267,6 +137142,9 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -135479,6 +137357,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
@@ -135690,6 +137571,9 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
@@ -135902,6 +137786,9 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserTypePrivilegeMappingInput = {
@@ -136129,6 +138016,9 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
@@ -136341,6 +138231,9 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
@@ -136552,6 +138445,9 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
@@ -136764,6 +138660,9 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_call_logInput = {
@@ -136991,6 +138890,9 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
@@ -137203,6 +139105,9 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
@@ -137414,6 +139319,9 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput = {
@@ -137626,6 +139534,9 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_followup_statusInput = {
@@ -137853,6 +139764,9 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput = {
@@ -138065,6 +139979,9 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_historyInput = {
@@ -138276,6 +140193,9 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
@@ -138488,6 +140408,9 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_historyInput = {
@@ -138715,6 +140638,9 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
@@ -138927,6 +140853,9 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
@@ -139138,6 +141067,9 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
@@ -139350,6 +141282,9 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_lead_store_logInput = {
@@ -139577,6 +141512,9 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
@@ -139789,6 +141727,9 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOnline_leadsInput = {
@@ -140000,6 +141941,9 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
@@ -140212,6 +142156,9 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOnline_leadsInput = {
@@ -140439,6 +142386,9 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
@@ -140651,6 +142601,9 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
@@ -140862,6 +142815,9 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
@@ -141074,6 +143030,9 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadBillingAddressesInput = {
@@ -141301,6 +143260,9 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
@@ -141513,6 +143475,9 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
@@ -141724,6 +143689,9 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
@@ -141936,6 +143904,9 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductsRequiredForProductionInput = {
@@ -142163,6 +144134,9 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
@@ -142375,6 +144349,9 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListRulesInput = {
@@ -142586,6 +144563,9 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
@@ -142798,6 +144778,9 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListRulesInput = {
@@ -143025,6 +145008,9 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
@@ -143237,6 +145223,9 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutRuleActionsInput = {
@@ -143448,6 +145437,9 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
@@ -143660,6 +145652,9 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutRuleActionsInput = {
@@ -143887,6 +145882,9 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
@@ -144099,6 +146097,9 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
@@ -144310,6 +146311,9 @@ export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput = {
@@ -144522,6 +146526,9 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInp
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteSupervisorFranchiseMappingsInput = {
@@ -144749,6 +146756,9 @@ export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
@@ -144961,6 +146971,2631 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInp
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutWalkinQuestionnairesInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutWalkinQuestionnairesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinQuestionnairesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+}
+
+export type VendorMasterUpsertWithoutWalkinQuestionnairesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutWalkinQuestionnairesInput, Prisma.VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinQuestionnairesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutWalkinQuestionnairesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutWalkinQuestionnairesInput, Prisma.VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput>
+}
+
+export type VendorMasterUpdateWithoutWalkinQuestionnairesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutWalkinResponsesInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutWalkinResponsesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutWalkinResponsesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinResponsesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinResponsesInput>
+}
+
+export type VendorMasterUpsertWithoutWalkinResponsesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutWalkinResponsesInput, Prisma.VendorMasterUncheckedUpdateWithoutWalkinResponsesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinResponsesInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinResponsesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutWalkinResponsesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutWalkinResponsesInput, Prisma.VendorMasterUncheckedUpdateWithoutWalkinResponsesInput>
+}
+
+export type VendorMasterUpdateWithoutWalkinResponsesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutWalkinResponsesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutWalkinUploadsInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutWalkinUploadsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutWalkinUploadsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinUploadsInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinUploadsInput>
+}
+
+export type VendorMasterUpsertWithoutWalkinUploadsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutWalkinUploadsInput, Prisma.VendorMasterUncheckedUpdateWithoutWalkinUploadsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutWalkinUploadsInput, Prisma.VendorMasterUncheckedCreateWithoutWalkinUploadsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutWalkinUploadsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutWalkinUploadsInput, Prisma.VendorMasterUncheckedUpdateWithoutWalkinUploadsInput>
+}
+
+export type VendorMasterUpdateWithoutWalkinUploadsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutWalkinUploadsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateManyStateInput = {
@@ -145222,6 +149857,9 @@ export type VendorMasterUpdateWithoutStateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStateInput = {
@@ -145434,6 +150072,9 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
@@ -145654,6 +150295,9 @@ export type VendorMasterCountOutputType = {
   factoryOutRevertLogs: number
   boxUnpackLogs: number
   cutlistHeadersMappings: number
+  walkinQuestionnaires: number
+  walkinResponses: number
+  walkinUploads: number
 }
 
 export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -145819,6 +150463,9 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   factoryOutRevertLogs?: boolean | VendorMasterCountOutputTypeCountFactoryOutRevertLogsArgs
   boxUnpackLogs?: boolean | VendorMasterCountOutputTypeCountBoxUnpackLogsArgs
   cutlistHeadersMappings?: boolean | VendorMasterCountOutputTypeCountCutlistHeadersMappingsArgs
+  walkinQuestionnaires?: boolean | VendorMasterCountOutputTypeCountWalkinQuestionnairesArgs
+  walkinResponses?: boolean | VendorMasterCountOutputTypeCountWalkinResponsesArgs
+  walkinUploads?: boolean | VendorMasterCountOutputTypeCountWalkinUploadsArgs
 }
 
 /**
@@ -146965,6 +151612,27 @@ export type VendorMasterCountOutputTypeCountCutlistHeadersMappingsArgs<ExtArgs e
   where?: Prisma.CutlistHeadersMappingWhereInput
 }
 
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountWalkinQuestionnairesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalkinLeadQuestionnaireWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountWalkinResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalkinLeadResponseWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountWalkinUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalkinLeadUploadWhereInput
+}
+
 
 export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -147178,6 +151846,9 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   factoryOutRevertLogs?: boolean | Prisma.VendorMaster$factoryOutRevertLogsArgs<ExtArgs>
   boxUnpackLogs?: boolean | Prisma.VendorMaster$boxUnpackLogsArgs<ExtArgs>
   cutlistHeadersMappings?: boolean | Prisma.VendorMaster$cutlistHeadersMappingsArgs<ExtArgs>
+  walkinQuestionnaires?: boolean | Prisma.VendorMaster$walkinQuestionnairesArgs<ExtArgs>
+  walkinResponses?: boolean | Prisma.VendorMaster$walkinResponsesArgs<ExtArgs>
+  walkinUploads?: boolean | Prisma.VendorMaster$walkinUploadsArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -147501,6 +152172,9 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   factoryOutRevertLogs?: boolean | Prisma.VendorMaster$factoryOutRevertLogsArgs<ExtArgs>
   boxUnpackLogs?: boolean | Prisma.VendorMaster$boxUnpackLogsArgs<ExtArgs>
   cutlistHeadersMappings?: boolean | Prisma.VendorMaster$cutlistHeadersMappingsArgs<ExtArgs>
+  walkinQuestionnaires?: boolean | Prisma.VendorMaster$walkinQuestionnairesArgs<ExtArgs>
+  walkinResponses?: boolean | Prisma.VendorMaster$walkinResponsesArgs<ExtArgs>
+  walkinUploads?: boolean | Prisma.VendorMaster$walkinUploadsArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VendorMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -147676,6 +152350,9 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     factoryOutRevertLogs: Prisma.$FactoryOutRevertLogPayload<ExtArgs>[]
     boxUnpackLogs: Prisma.$BoxUnpackLogPayload<ExtArgs>[]
     cutlistHeadersMappings: Prisma.$CutlistHeadersMappingPayload<ExtArgs>[]
+    walkinQuestionnaires: Prisma.$WalkinLeadQuestionnairePayload<ExtArgs>[]
+    walkinResponses: Prisma.$WalkinLeadResponsePayload<ExtArgs>[]
+    walkinUploads: Prisma.$WalkinLeadUploadPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -148283,6 +152960,9 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   factoryOutRevertLogs<T extends Prisma.VendorMaster$factoryOutRevertLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$factoryOutRevertLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FactoryOutRevertLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boxUnpackLogs<T extends Prisma.VendorMaster$boxUnpackLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$boxUnpackLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxUnpackLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutlistHeadersMappings<T extends Prisma.VendorMaster$cutlistHeadersMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$cutlistHeadersMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutlistHeadersMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walkinQuestionnaires<T extends Prisma.VendorMaster$walkinQuestionnairesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$walkinQuestionnairesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalkinLeadQuestionnairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walkinResponses<T extends Prisma.VendorMaster$walkinResponsesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$walkinResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalkinLeadResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walkinUploads<T extends Prisma.VendorMaster$walkinUploadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$walkinUploadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalkinLeadUploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -152665,6 +157345,78 @@ export type VendorMaster$cutlistHeadersMappingsArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.CutlistHeadersMappingScalarFieldEnum | Prisma.CutlistHeadersMappingScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.walkinQuestionnaires
+ */
+export type VendorMaster$walkinQuestionnairesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalkinLeadQuestionnaire
+   */
+  select?: Prisma.WalkinLeadQuestionnaireSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalkinLeadQuestionnaire
+   */
+  omit?: Prisma.WalkinLeadQuestionnaireOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalkinLeadQuestionnaireInclude<ExtArgs> | null
+  where?: Prisma.WalkinLeadQuestionnaireWhereInput
+  orderBy?: Prisma.WalkinLeadQuestionnaireOrderByWithRelationInput | Prisma.WalkinLeadQuestionnaireOrderByWithRelationInput[]
+  cursor?: Prisma.WalkinLeadQuestionnaireWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalkinLeadQuestionnaireScalarFieldEnum | Prisma.WalkinLeadQuestionnaireScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.walkinResponses
+ */
+export type VendorMaster$walkinResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalkinLeadResponse
+   */
+  select?: Prisma.WalkinLeadResponseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalkinLeadResponse
+   */
+  omit?: Prisma.WalkinLeadResponseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalkinLeadResponseInclude<ExtArgs> | null
+  where?: Prisma.WalkinLeadResponseWhereInput
+  orderBy?: Prisma.WalkinLeadResponseOrderByWithRelationInput | Prisma.WalkinLeadResponseOrderByWithRelationInput[]
+  cursor?: Prisma.WalkinLeadResponseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalkinLeadResponseScalarFieldEnum | Prisma.WalkinLeadResponseScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.walkinUploads
+ */
+export type VendorMaster$walkinUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalkinLeadUpload
+   */
+  select?: Prisma.WalkinLeadUploadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalkinLeadUpload
+   */
+  omit?: Prisma.WalkinLeadUploadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalkinLeadUploadInclude<ExtArgs> | null
+  where?: Prisma.WalkinLeadUploadWhereInput
+  orderBy?: Prisma.WalkinLeadUploadOrderByWithRelationInput | Prisma.WalkinLeadUploadOrderByWithRelationInput[]
+  cursor?: Prisma.WalkinLeadUploadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalkinLeadUploadScalarFieldEnum | Prisma.WalkinLeadUploadScalarFieldEnum[]
 }
 
 /**

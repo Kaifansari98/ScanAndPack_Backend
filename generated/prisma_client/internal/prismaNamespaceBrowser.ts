@@ -278,7 +278,10 @@ export const ModelName = {
   RuleFieldMaster: 'RuleFieldMaster',
   RuleActionMaster: 'RuleActionMaster',
   SiteSupervisorFranchiseMapping: 'SiteSupervisorFranchiseMapping',
-  WixStudioDataCapture: 'WixStudioDataCapture'
+  WixStudioDataCapture: 'WixStudioDataCapture',
+  WalkinLeadQuestionnaire: 'WalkinLeadQuestionnaire',
+  WalkinLeadResponse: 'WalkinLeadResponse',
+  WalkinLeadUpload: 'WalkinLeadUpload'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4246,6 +4249,54 @@ export const WixStudioDataCaptureScalarFieldEnum = {
 } as const
 
 export type WixStudioDataCaptureScalarFieldEnum = (typeof WixStudioDataCaptureScalarFieldEnum)[keyof typeof WixStudioDataCaptureScalarFieldEnum]
+
+
+export const WalkinLeadQuestionnaireScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
+  questions: 'questions',
+  version: 'version',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type WalkinLeadQuestionnaireScalarFieldEnum = (typeof WalkinLeadQuestionnaireScalarFieldEnum)[keyof typeof WalkinLeadQuestionnaireScalarFieldEnum]
+
+
+export const WalkinLeadResponseScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  product_type_id: 'product_type_id',
+  questionnaire_key: 'questionnaire_key',
+  questionnaire_version: 'questionnaire_version',
+  question_snapshot: 'question_snapshot',
+  answers: 'answers',
+  is_complete: 'is_complete',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type WalkinLeadResponseScalarFieldEnum = (typeof WalkinLeadResponseScalarFieldEnum)[keyof typeof WalkinLeadResponseScalarFieldEnum]
+
+
+export const WalkinLeadUploadScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  created_by: 'created_by',
+  original_name: 'original_name',
+  storage_key: 'storage_key',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  created_at: 'created_at'
+} as const
+
+export type WalkinLeadUploadScalarFieldEnum = (typeof WalkinLeadUploadScalarFieldEnum)[keyof typeof WalkinLeadUploadScalarFieldEnum]
 
 
 export const SortOrder = {

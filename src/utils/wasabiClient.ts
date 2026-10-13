@@ -64,6 +64,17 @@ export const generateSignedUrl = async (
   return await getSignedUrl(wasabi, command, { expiresIn });
 };
 
+export const uploadWalkinReferenceFile = async (buffer: Buffer, vendorId: number, mimeType: string) => {
+  const extensions: Record<string, string> = {
+    "application/pdf": "pdf", "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif",
+  };
+  const key = `walkin_lead_questions/${vendorId}/${uuidv4()}.${extensions[mimeType]}`;
+  await wasabi.send(new PutObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!, Key: key, Body: buffer, ContentType: mimeType,
+  }));
+  return key;
+};
+
 export const uploadToWasabi = async (
   buffer: Buffer,
   vendorId: number,
