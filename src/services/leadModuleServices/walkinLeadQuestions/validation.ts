@@ -8,6 +8,8 @@ export type Question = {
   required: boolean;
   options: string[];
   sort_order: number;
+  // Single choice only: adds an "Others" option answered with free text.
+  allow_other?: boolean;
   min?: number;
   integer?: boolean;
   accepted_mime_types?: string[];
@@ -23,6 +25,7 @@ export type AnswerGroup = {
 };
 export const allowedMimeTypes = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"];
 export const maxFileSize = 10 * 1024 * 1024;
+export const maxOtherAnswerLength = 500;
 export class WalkinValidationError extends Error {
   constructor(message: string, public statusCode = 400) { super(message); }
 }
@@ -34,6 +37,7 @@ const questionSchema = Joi.object({
   required: Joi.boolean().required(),
   options: Joi.array().items(Joi.string().trim().max(300)).unique().max(100).default([]),
   sort_order: Joi.number().integer().min(0).required(),
+  allow_other: Joi.boolean().optional(),
   min: Joi.number().optional(),
   integer: Joi.boolean().optional(),
   accepted_mime_types: Joi.array().items(Joi.string().valid(...allowedMimeTypes)).unique().min(1),
@@ -42,6 +46,8 @@ const questionSchema = Joi.object({
 }).custom((q: Question, helpers) => {
   const select = q.type === "single_select" || q.type === "multi_select";
   if (select !== (q.options.length > 0)) return helpers.message({ custom: "Only select questions must have options" });
+  if (q.allow_other && q.type !== "single_select") return helpers.message({ custom: "Only single choice questions can allow a custom Others answer" });
+  if (q.allow_other && q.options.some(option => /^others?$/i.test(option))) return helpers.message({ custom: "Remove the Others option; it is added automatically" });
   if (q.type !== "number" && (q.min !== undefined || q.integer !== undefined)) return helpers.message({ custom: "Numeric constraints require a number question" });
   if (q.type !== "file" && (q.accepted_mime_types || q.max_files || q.max_file_size_bytes)) return helpers.message({ custom: "File constraints require a file question" });
   return q;
@@ -106,7 +112,7 @@ export function validateAnswers(questions: Question[], input: Record<string, Ans
     switch (q.type) {
       case "text": valid = typeof value === "string" && value.length <= 5000; break;
       case "number": valid = typeof value === "number" && Number.isFinite(value) && (!q.integer || Number.isInteger(value)) && (q.min === undefined || value >= q.min); break;
-      case "single_select": valid = typeof value === "string" && q.options.includes(value); break;
+      case "single_select": valid = typeof value === "string" && (q.options.includes(value) || (!!q.allow_other && value.length <= maxOtherAnswerLength)); break;
       case "multi_select": valid = Array.isArray(value) && new Set(value).size === value.length && value.every(v => q.options.includes(v)); break;
       case "file": valid = Array.isArray(value) && value.length <= (q.max_files ?? 5) && new Set(value).size === value.length && value.every(v => typeof v === "string" && /^[0-9a-f-]{36}$/i.test(v)); break;
     }

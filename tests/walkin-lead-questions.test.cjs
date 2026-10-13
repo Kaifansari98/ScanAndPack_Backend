@@ -28,6 +28,7 @@ function setup() {
     },
     walkinLeadUpload: { findMany: async ({where}) => uploads.filter(u=>matches(u,where)) },
     walkinLeadResponse: { findFirst: async ({where}) => responses.find(r=>matches(r,where)) ?? null, update: async ({where,data}) => { const row=responses.find(r=>r.id===where.id); Object.assign(row,data); return row; }, upsert: async ({where,create,update}) => { const row=responses.find(r=>matches(r,where.lead_id_product_type_id)); if(row){Object.assign(row,update);return row;} const created={id:responses.length+1,...create};responses.push(created);return created; } },
+    vendorMaster: {findUnique: async ({where}) => ({10:{is_walkin_questions_feature_enabled:true},11:{is_walkin_questions_feature_enabled:false}})[where.id] ?? null},
     leadMaster: {findFirst: async ({where}) => matches(lead,where) ? lead : null},
     leadUserMapping: {findFirst: async ()=>null},
     leadProductMapping: {findMany: async ()=>[{product_type_id:1},{product_type_id:2}]},
@@ -185,4 +186,21 @@ test('a single saved answer is edited against the stored snapshot',async()=>{
   assert.equal(s.responses()[0].answers.kitchen_1,'Rarely');
   s.lead.is_draft=true;const cleared=await s.updateLeadAnswer(10,50,9,'sales-executive',1,'kitchen_1','');
   assert.equal(cleared.answers.kitchen_1,undefined);assert.equal(cleared.is_complete,false);
+});
+test('walk-in endpoints are blocked for vendors with the feature switched off',async()=>{
+  const s=setup();const run=async vendorId=>{let passed=false;const res={code:200,status(code){this.code=code;return this;},json(){return this;}};await s.controllers.requireWalkinFeature({params:{vendorId:String(vendorId)}},res,()=>{passed=true;});return {passed,code:res.code};};
+  assert.deepEqual(await run(10),{passed:true,code:200});
+  assert.deepEqual(await run(11),{passed:false,code:403});
+  assert.deepEqual(await run(99),{passed:false,code:403});
+});
+test('single choice questions can allow a custom Others answer',()=>{
+  const s=setup();const q={key:'q',label:'Priority?',type:'single_select',required:true,options:['Design','Budget'],sort_order:1,allow_other:true};
+  const [question]=s.validateQuestions([q]);assert.equal(question.allow_other,true);
+  assert.equal(s.validateAnswers([question],{q:'Budget'},false).answers.q,'Budget');
+  assert.equal(s.validateAnswers([question],{q:'  Resale value '},false).answers.q,'Resale value');
+  assert.throws(()=>s.validateAnswers([question],{q:'   '},false),/Required/);
+  assert.throws(()=>s.validateAnswers([question],{q:'x'.repeat(501)},false),/Invalid answer/);
+  assert.throws(()=>s.validateAnswers([{...question,allow_other:false}],{q:'Resale value'},false),/Invalid answer/);
+  assert.throws(()=>s.validateQuestions([{...q,type:'multi_select'}]),/single choice/);
+  assert.throws(()=>s.validateQuestions([{...q,options:['Design','Others']}]),/added automatically/);
 });

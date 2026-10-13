@@ -1,12 +1,12 @@
 import { Router } from "express";
 import multer from "multer";
 import { verifyToken } from "../../middlewares/auth.middleware";
-import { checkWalkinVendorAccess, deleteQuestions, getAnswers, getQuestions, patchAnswer, putAnswers, putQuestions, uploadReference } from "../../controllers/leadModuleControllers/walkinLeadQuestions.controller";
+import { checkWalkinVendorAccess, deleteQuestions, getAnswers, getQuestions, patchAnswer, putAnswers, putQuestions, requireWalkinFeature, uploadReference } from "../../controllers/leadModuleControllers/walkinLeadQuestions.controller";
 import { allowedMimeTypes, maxFileSize } from "../../services/leadModuleServices/walkinLeadQuestions/validation";
 
 const router = Router();
 router.use(verifyToken);
-router.use("/vendor/:vendorId", checkWalkinVendorAccess);
+router.use("/vendor/:vendorId", checkWalkinVendorAccess, requireWalkinFeature);
 router.get("/vendor/:vendorId/questions", getQuestions);
 router.put("/vendor/:vendorId/product-type/:productTypeId/questions", putQuestions);
 router.delete("/vendor/:vendorId/product-type/:productTypeId/questions", deleteQuestions);

@@ -351,6 +351,7 @@ export const VendorMasterScalarFieldEnum = {
   is_scanpack_enabled: 'is_scanpack_enabled',
   is_hrms_master_enabled: 'is_hrms_master_enabled',
   is_online_lead_feature_enabled: 'is_online_lead_feature_enabled',
+  is_walkin_questions_feature_enabled: 'is_walkin_questions_feature_enabled',
   push_lead_to_cadbid: 'push_lead_to_cadbid',
   is_available_unique_code: 'is_available_unique_code'
 } as const

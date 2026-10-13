@@ -90,6 +90,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_scanpack_enabled: boolean | null
   is_hrms_master_enabled: boolean | null
   is_online_lead_feature_enabled: boolean | null
+  is_walkin_questions_feature_enabled: boolean | null
   push_lead_to_cadbid: boolean | null
   is_available_unique_code: boolean | null
 }
@@ -142,6 +143,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_scanpack_enabled: boolean | null
   is_hrms_master_enabled: boolean | null
   is_online_lead_feature_enabled: boolean | null
+  is_walkin_questions_feature_enabled: boolean | null
   push_lead_to_cadbid: boolean | null
   is_available_unique_code: boolean | null
 }
@@ -194,6 +196,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_scanpack_enabled: number
   is_hrms_master_enabled: number
   is_online_lead_feature_enabled: number
+  is_walkin_questions_feature_enabled: number
   push_lead_to_cadbid: number
   is_available_unique_code: number
   _all: number
@@ -264,6 +267,7 @@ export type VendorMasterMinAggregateInputType = {
   is_scanpack_enabled?: true
   is_hrms_master_enabled?: true
   is_online_lead_feature_enabled?: true
+  is_walkin_questions_feature_enabled?: true
   push_lead_to_cadbid?: true
   is_available_unique_code?: true
 }
@@ -316,6 +320,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_scanpack_enabled?: true
   is_hrms_master_enabled?: true
   is_online_lead_feature_enabled?: true
+  is_walkin_questions_feature_enabled?: true
   push_lead_to_cadbid?: true
   is_available_unique_code?: true
 }
@@ -368,6 +373,7 @@ export type VendorMasterCountAggregateInputType = {
   is_scanpack_enabled?: true
   is_hrms_master_enabled?: true
   is_online_lead_feature_enabled?: true
+  is_walkin_questions_feature_enabled?: true
   push_lead_to_cadbid?: true
   is_available_unique_code?: true
   _all?: true
@@ -507,6 +513,7 @@ export type VendorMasterGroupByOutputType = {
   is_scanpack_enabled: boolean
   is_hrms_master_enabled: boolean
   is_online_lead_feature_enabled: boolean
+  is_walkin_questions_feature_enabled: boolean
   push_lead_to_cadbid: boolean
   is_available_unique_code: boolean
   _count: VendorMasterCountAggregateOutputType | null
@@ -582,6 +589,7 @@ export type VendorMasterWhereInput = {
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_hrms_master_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
@@ -803,6 +811,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_scanpack_enabled?: Prisma.SortOrder
   is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  is_walkin_questions_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
@@ -1027,6 +1036,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_hrms_master_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
@@ -1248,6 +1258,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_scanpack_enabled?: Prisma.SortOrder
   is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  is_walkin_questions_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
   _count?: Prisma.VendorMasterCountOrderByAggregateInput
@@ -1308,6 +1319,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_scanpack_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_hrms_master_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
 }
@@ -1357,6 +1369,7 @@ export type VendorMasterCreateInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -1578,6 +1591,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -1794,6 +1808,7 @@ export type VendorMasterUpdateInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -2015,6 +2030,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -2234,6 +2250,7 @@ export type VendorMasterCreateManyInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
 }
@@ -2283,6 +2300,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -2335,6 +2353,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -2387,6 +2406,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_scanpack_enabled?: Prisma.SortOrder
   is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  is_walkin_questions_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
 }
@@ -2447,6 +2467,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_scanpack_enabled?: Prisma.SortOrder
   is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  is_walkin_questions_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
 }
@@ -2499,6 +2520,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_scanpack_enabled?: Prisma.SortOrder
   is_hrms_master_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  is_walkin_questions_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
 }
@@ -5038,6 +5060,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -5258,6 +5281,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -5489,6 +5513,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -5709,6 +5734,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -5924,6 +5950,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -6144,6 +6171,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -6375,6 +6403,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -6595,6 +6624,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -6810,6 +6840,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -7030,6 +7061,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -7261,6 +7293,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -7481,6 +7514,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -7696,6 +7730,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -7916,6 +7951,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -8147,6 +8183,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -8367,6 +8404,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -8582,6 +8620,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -8802,6 +8841,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -9033,6 +9073,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -9253,6 +9294,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -9468,6 +9510,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -9688,6 +9731,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -9919,6 +9963,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -10139,6 +10184,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -10354,6 +10400,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -10574,6 +10621,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -10805,6 +10853,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -11025,6 +11074,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -11240,6 +11290,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -11460,6 +11511,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -11691,6 +11743,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -11911,6 +11964,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -12126,6 +12180,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -12346,6 +12401,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -12577,6 +12633,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -12797,6 +12854,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -13012,6 +13070,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -13232,6 +13291,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -13463,6 +13523,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -13683,6 +13744,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -13898,6 +13960,7 @@ export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -14118,6 +14181,7 @@ export type VendorMasterUncheckedCreateWithoutFactoryOutRevertLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -14349,6 +14413,7 @@ export type VendorMasterUpdateWithoutFactoryOutRevertLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -14569,6 +14634,7 @@ export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -14784,6 +14850,7 @@ export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -15004,6 +15071,7 @@ export type VendorMasterUncheckedCreateWithoutBoxUnpackLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -15235,6 +15303,7 @@ export type VendorMasterUpdateWithoutBoxUnpackLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -15455,6 +15524,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -15670,6 +15740,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -15890,6 +15961,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -16121,6 +16193,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -16341,6 +16414,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -16556,6 +16630,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -16776,6 +16851,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -17007,6 +17083,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -17227,6 +17304,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -17442,6 +17520,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -17662,6 +17741,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -17893,6 +17973,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -18113,6 +18194,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -18328,6 +18410,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -18548,6 +18631,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -18779,6 +18863,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -18999,6 +19084,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -19214,6 +19300,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -19434,6 +19521,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -19665,6 +19753,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -19885,6 +19974,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -20100,6 +20190,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -20320,6 +20411,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -20551,6 +20643,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -20771,6 +20864,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -20986,6 +21080,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -21206,6 +21301,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -21437,6 +21533,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -21657,6 +21754,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -21872,6 +21970,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -22092,6 +22191,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -22323,6 +22423,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -22543,6 +22644,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -22758,6 +22860,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -22978,6 +23081,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -23209,6 +23313,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -23429,6 +23534,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -23644,6 +23750,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -23864,6 +23971,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -24095,6 +24203,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -24315,6 +24424,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -24530,6 +24640,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -24750,6 +24861,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -24981,6 +25093,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -25201,6 +25314,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -25416,6 +25530,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -25636,6 +25751,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -25867,6 +25983,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -26087,6 +26204,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -26302,6 +26420,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -26522,6 +26641,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -26753,6 +26873,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -26973,6 +27094,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -27188,6 +27310,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -27408,6 +27531,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -27639,6 +27763,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -27859,6 +27984,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -28074,6 +28200,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -28294,6 +28421,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -28525,6 +28653,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -28745,6 +28874,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -28960,6 +29090,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -29180,6 +29311,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -29411,6 +29543,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -29631,6 +29764,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -29846,6 +29980,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -30066,6 +30201,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -30297,6 +30433,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -30517,6 +30654,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -30732,6 +30870,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -30952,6 +31091,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -31183,6 +31323,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -31403,6 +31544,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -31618,6 +31760,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -31838,6 +31981,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -32069,6 +32213,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -32289,6 +32434,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -32504,6 +32650,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -32724,6 +32871,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -32955,6 +33103,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -33175,6 +33324,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -33390,6 +33540,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -33610,6 +33761,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -33841,6 +33993,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -34061,6 +34214,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -34276,6 +34430,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -34496,6 +34651,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -34727,6 +34883,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -34947,6 +35104,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -35162,6 +35320,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -35382,6 +35541,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -35613,6 +35773,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -35833,6 +35994,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -36048,6 +36210,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -36268,6 +36431,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -36499,6 +36663,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -36719,6 +36884,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -36934,6 +37100,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -37154,6 +37321,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -37385,6 +37553,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -37605,6 +37774,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -37820,6 +37990,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -38040,6 +38211,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -38271,6 +38443,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -38491,6 +38664,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -38706,6 +38880,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -38926,6 +39101,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -39157,6 +39333,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -39377,6 +39554,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -39592,6 +39770,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -39812,6 +39991,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -40043,6 +40223,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -40263,6 +40444,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -40478,6 +40660,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -40698,6 +40881,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -40929,6 +41113,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -41149,6 +41334,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -41364,6 +41550,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -41584,6 +41771,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -41815,6 +42003,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -42035,6 +42224,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -42250,6 +42440,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -42470,6 +42661,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -42701,6 +42893,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -42921,6 +43114,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -43136,6 +43330,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -43356,6 +43551,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -43587,6 +43783,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -43807,6 +44004,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -44022,6 +44220,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -44242,6 +44441,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -44473,6 +44673,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -44693,6 +44894,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -44908,6 +45110,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -45128,6 +45331,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -45359,6 +45563,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -45579,6 +45784,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -45794,6 +46000,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -46014,6 +46221,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -46245,6 +46453,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -46465,6 +46674,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -46680,6 +46890,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -46900,6 +47111,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -47131,6 +47343,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -47351,6 +47564,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -47566,6 +47780,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -47786,6 +48001,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -48017,6 +48233,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -48237,6 +48454,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -48452,6 +48670,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -48672,6 +48891,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -48903,6 +49123,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -49123,6 +49344,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -49338,6 +49560,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -49558,6 +49781,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -49789,6 +50013,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -50009,6 +50234,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -50224,6 +50450,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -50444,6 +50671,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -50675,6 +50903,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -50895,6 +51124,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -51110,6 +51340,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -51330,6 +51561,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -51561,6 +51793,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -51781,6 +52014,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -51996,6 +52230,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -52216,6 +52451,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -52447,6 +52683,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -52667,6 +52904,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -52882,6 +53120,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -53102,6 +53341,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -53333,6 +53573,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -53553,6 +53794,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -53768,6 +54010,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -53988,6 +54231,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -54219,6 +54463,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -54439,6 +54684,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -54654,6 +54900,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -54874,6 +55121,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -55105,6 +55353,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -55325,6 +55574,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -55540,6 +55790,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -55760,6 +56011,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -55991,6 +56243,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -56211,6 +56464,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -56426,6 +56680,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -56646,6 +56901,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -56877,6 +57133,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -57097,6 +57354,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -57312,6 +57570,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -57532,6 +57791,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -57763,6 +58023,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -57983,6 +58244,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -58198,6 +58460,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -58418,6 +58681,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -58649,6 +58913,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -58869,6 +59134,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -59084,6 +59350,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -59304,6 +59571,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -59535,6 +59803,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -59755,6 +60024,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -59970,6 +60240,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -60190,6 +60461,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -60421,6 +60693,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -60641,6 +60914,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -60856,6 +61130,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -61076,6 +61351,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -61307,6 +61583,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -61527,6 +61804,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -61742,6 +62020,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -61962,6 +62241,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -62193,6 +62473,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -62413,6 +62694,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -62628,6 +62910,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -62848,6 +63131,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -63079,6 +63363,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -63299,6 +63584,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -63514,6 +63800,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -63734,6 +64021,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -63965,6 +64253,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -64185,6 +64474,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -64400,6 +64690,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -64620,6 +64911,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -64851,6 +65143,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -65071,6 +65364,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -65286,6 +65580,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -65506,6 +65801,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -65737,6 +66033,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -65957,6 +66254,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -66172,6 +66470,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -66392,6 +66691,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -66623,6 +66923,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -66843,6 +67144,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -67058,6 +67360,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -67278,6 +67581,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -67509,6 +67813,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -67729,6 +68034,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -67944,6 +68250,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -68164,6 +68471,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -68395,6 +68703,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -68615,6 +68924,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -68830,6 +69140,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -69050,6 +69361,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -69281,6 +69593,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -69501,6 +69814,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -69716,6 +70030,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -69936,6 +70251,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -70167,6 +70483,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -70387,6 +70704,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -70602,6 +70920,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -70822,6 +71141,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -71053,6 +71373,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -71273,6 +71594,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -71488,6 +71810,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -71708,6 +72031,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -71939,6 +72263,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -72159,6 +72484,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -72374,6 +72700,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -72594,6 +72921,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -72825,6 +73153,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -73045,6 +73374,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -73260,6 +73590,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -73480,6 +73811,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -73711,6 +74043,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -73931,6 +74264,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -74146,6 +74480,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -74366,6 +74701,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -74597,6 +74933,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -74817,6 +75154,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -75032,6 +75370,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -75252,6 +75591,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -75483,6 +75823,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -75703,6 +76044,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -75918,6 +76260,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -76138,6 +76481,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -76369,6 +76713,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -76589,6 +76934,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -76804,6 +77150,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -77024,6 +77371,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -77255,6 +77603,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -77475,6 +77824,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -77690,6 +78040,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -77910,6 +78261,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -78141,6 +78493,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -78361,6 +78714,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -78576,6 +78930,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -78796,6 +79151,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -79027,6 +79383,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -79247,6 +79604,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -79462,6 +79820,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -79682,6 +80041,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -79913,6 +80273,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -80133,6 +80494,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -80348,6 +80710,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -80568,6 +80931,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -80799,6 +81163,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -81019,6 +81384,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -81234,6 +81600,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -81454,6 +81821,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -81685,6 +82053,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -81905,6 +82274,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -82120,6 +82490,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -82340,6 +82711,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -82571,6 +82943,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -82791,6 +83164,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -83006,6 +83380,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -83226,6 +83601,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -83457,6 +83833,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -83677,6 +84054,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -83892,6 +84270,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -84112,6 +84491,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -84343,6 +84723,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -84563,6 +84944,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -84778,6 +85160,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -84998,6 +85381,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -85229,6 +85613,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -85449,6 +85834,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -85664,6 +86050,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -85884,6 +86271,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -86115,6 +86503,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -86335,6 +86724,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -86550,6 +86940,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -86770,6 +87161,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -87001,6 +87393,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -87221,6 +87614,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -87436,6 +87830,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -87656,6 +88051,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -87887,6 +88283,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -88107,6 +88504,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -88322,6 +88720,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -88542,6 +88941,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -88773,6 +89173,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -88993,6 +89394,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -89208,6 +89610,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -89428,6 +89831,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -89659,6 +90063,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -89879,6 +90284,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -90094,6 +90500,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -90314,6 +90721,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -90545,6 +90953,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -90765,6 +91174,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -90980,6 +91390,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -91200,6 +91611,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -91431,6 +91843,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -91651,6 +92064,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -91866,6 +92280,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -92086,6 +92501,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -92317,6 +92733,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -92537,6 +92954,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -92752,6 +93170,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -92972,6 +93391,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -93203,6 +93623,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -93423,6 +93844,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -93638,6 +94060,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -93858,6 +94281,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -94089,6 +94513,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -94309,6 +94734,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -94524,6 +94950,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -94744,6 +95171,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -94975,6 +95403,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -95195,6 +95624,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -95410,6 +95840,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -95630,6 +96061,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -95861,6 +96293,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -96081,6 +96514,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -96296,6 +96730,7 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -96516,6 +96951,7 @@ export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -96747,6 +97183,7 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -96967,6 +97404,7 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -97182,6 +97620,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -97402,6 +97841,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -97633,6 +98073,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -97853,6 +98294,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -98068,6 +98510,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -98288,6 +98731,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -98519,6 +98963,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -98739,6 +99184,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -98954,6 +99400,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -99174,6 +99621,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -99405,6 +99853,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -99625,6 +100074,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -99840,6 +100290,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -100060,6 +100511,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -100291,6 +100743,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -100511,6 +100964,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -100726,6 +101180,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -100946,6 +101401,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -101177,6 +101633,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -101397,6 +101854,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -101612,6 +102070,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -101832,6 +102291,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -102063,6 +102523,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -102283,6 +102744,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -102498,6 +102960,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -102718,6 +103181,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -102949,6 +103413,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -103169,6 +103634,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -103384,6 +103850,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -103604,6 +104071,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -103835,6 +104303,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -104055,6 +104524,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -104270,6 +104740,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -104489,6 +104960,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -104737,6 +105209,7 @@ export type VendorMasterScalarWhereInput = {
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_hrms_master_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
 }
@@ -104786,6 +105259,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -105006,6 +105480,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -105237,6 +105712,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -105457,6 +105933,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -105672,6 +106149,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -105892,6 +106370,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -106123,6 +106602,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -106343,6 +106823,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -106558,6 +107039,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -106778,6 +107260,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -107009,6 +107492,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -107229,6 +107713,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -107444,6 +107929,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -107664,6 +108150,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -107895,6 +108382,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -108115,6 +108603,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -108330,6 +108819,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -108550,6 +109040,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -108781,6 +109272,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -109001,6 +109493,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -109216,6 +109709,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -109436,6 +109930,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -109667,6 +110162,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -109887,6 +110383,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -110102,6 +110599,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -110322,6 +110820,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -110553,6 +111052,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -110773,6 +111273,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -110988,6 +111489,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -111208,6 +111710,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -111439,6 +111942,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -111659,6 +112163,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -111874,6 +112379,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -112094,6 +112600,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -112325,6 +112832,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -112545,6 +113053,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -112760,6 +113269,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -112980,6 +113490,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -113211,6 +113722,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -113431,6 +113943,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -113646,6 +114159,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -113866,6 +114380,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -114097,6 +114612,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -114317,6 +114833,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -114532,6 +115049,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -114752,6 +115270,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -114983,6 +115502,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -115203,6 +115723,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -115418,6 +115939,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -115638,6 +116160,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -115869,6 +116392,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -116089,6 +116613,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -116304,6 +116829,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -116524,6 +117050,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -116755,6 +117282,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -116975,6 +117503,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -117190,6 +117719,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -117410,6 +117940,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -117641,6 +118172,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -117861,6 +118393,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -118076,6 +118609,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -118296,6 +118830,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -118527,6 +119062,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -118747,6 +119283,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -118962,6 +119499,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -119182,6 +119720,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -119413,6 +119952,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -119633,6 +120173,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -119848,6 +120389,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -120068,6 +120610,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -120299,6 +120842,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -120519,6 +121063,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -120734,6 +121279,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -120954,6 +121500,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -121185,6 +121732,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -121405,6 +121953,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -121620,6 +122169,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -121840,6 +122390,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -122071,6 +122622,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -122291,6 +122843,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -122506,6 +123059,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -122726,6 +123280,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -122957,6 +123512,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -123177,6 +123733,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -123392,6 +123949,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -123612,6 +124170,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -123843,6 +124402,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -124063,6 +124623,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -124278,6 +124839,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -124498,6 +125060,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -124729,6 +125292,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -124949,6 +125513,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -125164,6 +125729,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -125384,6 +125950,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -125615,6 +126182,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -125835,6 +126403,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -126050,6 +126619,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -126270,6 +126840,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -126501,6 +127072,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -126721,6 +127293,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -126936,6 +127509,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -127156,6 +127730,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -127387,6 +127962,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -127607,6 +128183,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -127822,6 +128399,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -128042,6 +128620,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -128273,6 +128852,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -128493,6 +129073,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -128708,6 +129289,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -128928,6 +129510,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -129159,6 +129742,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -129379,6 +129963,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -129594,6 +130179,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -129814,6 +130400,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -130045,6 +130632,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -130265,6 +130853,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -130480,6 +131069,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -130700,6 +131290,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -130931,6 +131522,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -131151,6 +131743,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -131366,6 +131959,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -131586,6 +132180,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -131817,6 +132412,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -132037,6 +132633,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -132252,6 +132849,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -132472,6 +133070,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -132703,6 +133302,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -132923,6 +133523,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -133138,6 +133739,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -133358,6 +133960,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -133589,6 +134192,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -133809,6 +134413,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -134024,6 +134629,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -134244,6 +134850,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -134475,6 +135082,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -134695,6 +135303,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -134910,6 +135519,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -135130,6 +135740,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -135361,6 +135972,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -135581,6 +136193,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -135796,6 +136409,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -136016,6 +136630,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -136247,6 +136862,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -136467,6 +137083,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -136682,6 +137299,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -136902,6 +137520,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -137133,6 +137752,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -137353,6 +137973,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -137568,6 +138189,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -137788,6 +138410,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -138019,6 +138642,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -138239,6 +138863,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -138454,6 +139079,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -138674,6 +139300,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -138905,6 +139532,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -139125,6 +139753,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -139340,6 +139969,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -139560,6 +140190,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -139791,6 +140422,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -140011,6 +140643,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -140226,6 +140859,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -140446,6 +141080,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -140677,6 +141312,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -140897,6 +141533,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -141112,6 +141749,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -141332,6 +141970,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -141563,6 +142202,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -141783,6 +142423,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -141998,6 +142639,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -142218,6 +142860,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -142449,6 +143092,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -142669,6 +143313,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -142884,6 +143529,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -143104,6 +143750,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -143335,6 +143982,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -143555,6 +144203,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -143770,6 +144419,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -143990,6 +144640,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -144221,6 +144872,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -144441,6 +145093,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -144656,6 +145309,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -144876,6 +145530,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -145107,6 +145762,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -145327,6 +145983,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -145542,6 +146199,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -145762,6 +146420,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -145993,6 +146652,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -146213,6 +146873,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -146428,6 +147089,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -146648,6 +147310,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -146879,6 +147542,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -147099,6 +147763,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -147314,6 +147979,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -147534,6 +148200,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -147765,6 +148432,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -147985,6 +148653,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -148200,6 +148869,7 @@ export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -148420,6 +149090,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInp
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -148651,6 +149322,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -148871,6 +149543,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInp
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -149086,6 +149759,7 @@ export type VendorMasterCreateWithoutWalkinQuestionnairesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -149306,6 +149980,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -149537,6 +150212,7 @@ export type VendorMasterUpdateWithoutWalkinQuestionnairesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -149757,6 +150433,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -149972,6 +150649,7 @@ export type VendorMasterCreateWithoutWalkinResponsesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -150192,6 +150870,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinResponsesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -150423,6 +151102,7 @@ export type VendorMasterUpdateWithoutWalkinResponsesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -150643,6 +151323,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinResponsesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -150858,6 +151539,7 @@ export type VendorMasterCreateWithoutWalkinUploadsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -151078,6 +151760,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinUploadsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -151309,6 +151992,7 @@ export type VendorMasterUpdateWithoutWalkinUploadsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -151529,6 +152213,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinUploadsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -151744,6 +152429,7 @@ export type VendorMasterCreateWithoutTime_zone_masterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -151963,6 +152649,7 @@ export type VendorMasterUncheckedCreateWithoutTime_zone_masterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -152205,6 +152892,7 @@ export type VendorMasterCreateWithoutAttendancesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -152425,6 +153113,7 @@ export type VendorMasterUncheckedCreateWithoutAttendancesInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -152656,6 +153345,7 @@ export type VendorMasterUpdateWithoutAttendancesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -152876,6 +153566,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendancesInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -153091,6 +153782,7 @@ export type VendorMasterCreateWithoutAttendance_logsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
@@ -153311,6 +154003,7 @@ export type VendorMasterUncheckedCreateWithoutAttendance_logsInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
@@ -153542,6 +154235,7 @@ export type VendorMasterUpdateWithoutAttendance_logsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -153762,6 +154456,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendance_logsInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -153979,6 +154674,7 @@ export type VendorMasterCreateManyStateInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
 }
@@ -154028,6 +154724,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -154247,6 +154944,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -154465,6 +155163,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -154516,6 +155215,7 @@ export type VendorMasterCreateManyTime_zone_masterInput = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
 }
@@ -154565,6 +155265,7 @@ export type VendorMasterUpdateWithoutTime_zone_masterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
@@ -154784,6 +155485,7 @@ export type VendorMasterUncheckedUpdateWithoutTime_zone_masterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
@@ -155002,6 +155704,7 @@ export type VendorMasterUncheckedUpdateManyWithoutTime_zone_masterInput = {
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -156579,6 +157282,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
@@ -156801,6 +157505,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   time_zone_master?: boolean | Prisma.VendorMaster$time_zone_masterArgs<ExtArgs>
@@ -156855,6 +157560,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
   time_zone_master?: boolean | Prisma.VendorMaster$time_zone_masterArgs<ExtArgs>
@@ -156909,11 +157615,12 @@ export type VendorMasterSelectScalar = {
   is_scanpack_enabled?: boolean
   is_hrms_master_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "time_zone_id" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "time_zone_id" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "is_walkin_questions_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
   time_zone_master?: boolean | Prisma.VendorMaster$time_zone_masterArgs<ExtArgs>
@@ -157316,6 +158023,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_scanpack_enabled: boolean
     is_hrms_master_enabled: boolean
     is_online_lead_feature_enabled: boolean
+    is_walkin_questions_feature_enabled: boolean
     push_lead_to_cadbid: boolean
     is_available_unique_code: boolean
   }, ExtArgs["result"]["vendorMaster"]>
@@ -157957,6 +158665,7 @@ export interface VendorMasterFieldRefs {
   readonly is_scanpack_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_hrms_master_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_online_lead_feature_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_walkin_questions_feature_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly push_lead_to_cadbid: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_available_unique_code: Prisma.FieldRef<"VendorMaster", 'Boolean'>
 }

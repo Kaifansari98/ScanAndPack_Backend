@@ -34,6 +34,22 @@ export const checkWalkinVendorAccess = (req: Request, res: Response, next: NextF
   try { actor(req); next(); }
   catch (error) { res.status(error instanceof WalkinValidationError ? error.statusCode : 403).json({ success: false, message: (error as Error).message }); }
 };
+// Vendors with the feature switched off get no walk-in question data at all.
+export const requireWalkinFeature = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: Number(req.params.vendorId) },
+      select: { is_walkin_questions_feature_enabled: true },
+    });
+    if (!vendor?.is_walkin_questions_feature_enabled) {
+      return res.status(403).json({ success: false, message: "Walk-in questions are not enabled for this vendor" });
+    }
+    next();
+  } catch (error) {
+    logger.error("Walk-in questions feature check failed", { error });
+    res.status(500).json({ success: false, message: "Unable to process walk-in questionnaire" });
+  }
+};
 export const getQuestions = handle(async req => {
   const { vendorId } = actor(req);
   if (req.query.source_id !== undefined) await requireWalkinSource(prisma, vendorId, positiveId(req.query.source_id));

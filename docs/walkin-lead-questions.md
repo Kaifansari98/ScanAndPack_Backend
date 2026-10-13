@@ -30,6 +30,10 @@ Matching is case-insensitive and ignores punctuation. Matching order is the tabl
 
 All workbook fields, including file uploads, are required on complete submissions. `N/A` is accepted as text. The office headcount must be a positive integer. Uploads support JPEG, PNG, WebP, GIF and PDF, up to five files per question and 10 MB per file. These upload limits and numeric constraints are implementation defaults; the spreadsheet only specifies Image/PDF and Number.
 
+## Vendor feature flag
+
+`VendorMaster.is_walkin_questions_feature_enabled` (default `true`, migration `20261013170000_add_vendor_walkin_questions_feature_flag`) switches the feature per vendor. When `false`, every `/api/leads/walkin-questions` endpoint returns 403 and the frontend hides the Field Masters tab, the questions in the Create Lead form, and the saved answers on lead screens. The flag reaches the frontend in the login response's `vendor` object.
+
 ## Authentication
 
 All new endpoints require `Authorization: Bearer <session token>`. The path vendor must match the signed-in user's vendor. Only `admin` and `super-admin` can configure/reset questionnaires. Lead answers require the lead creator, assignee, active mapped user, or a vendor admin.
@@ -93,7 +97,7 @@ PUT body:
 }
 ```
 
-Supported types: `text`, `number`, `single_select`, `multi_select`, `file`. Keys must be unique and stable within the questionnaire. Select types require options; other types use an empty options array. `required` and `sort_order` are mandatory. Number constraints: `min`, `integer`. File constraints: `accepted_mime_types`, `max_files`, `max_file_size_bytes`; these cannot exceed the global upload limits. Empty overrides are rejected; use DELETE to restore defaults.
+Supported types: `text`, `number`, `single_select`, `multi_select`, `file`. Keys must be unique and stable within the questionnaire. Select types require options; other types use an empty options array. `required` and `sort_order` are mandatory. Single choice questions may set `allow_other: true`: the form then shows an extra "Others" option with a text box, and the typed text (up to 500 characters) is stored as the answer in place of an option. Number constraints: `min`, `integer`. File constraints: `accepted_mime_types`, `max_files`, `max_file_size_bytes`; these cannot exceed the global upload limits. Empty overrides are rejected; use DELETE to restore defaults.
 
 ### Save answers with a new lead
 
