@@ -1021,6 +1021,7 @@ export class BookingStageController {
         email: req.body.email,
         designer_remark: req.body.designer_remark,
         date_range: dateRange,
+        view_type: req.body.view_type as "my" | "overall" | undefined,
       };
 
       if (!vendorId || !userId) {

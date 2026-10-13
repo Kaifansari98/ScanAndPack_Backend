@@ -278,7 +278,10 @@ export const ModelName = {
   RuleFieldMaster: 'RuleFieldMaster',
   RuleActionMaster: 'RuleActionMaster',
   SiteSupervisorFranchiseMapping: 'SiteSupervisorFranchiseMapping',
-  WixStudioDataCapture: 'WixStudioDataCapture'
+  WixStudioDataCapture: 'WixStudioDataCapture',
+  time_zone_master: 'time_zone_master',
+  attendance: 'attendance',
+  attendance_logs: 'attendance_logs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -310,6 +313,7 @@ export const VendorMasterScalarFieldEnum = {
   status: 'status',
   logo: 'logo',
   time_zone: 'time_zone',
+  time_zone_id: 'time_zone_id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   vendor_report_code: 'vendor_report_code',
@@ -4246,6 +4250,49 @@ export const WixStudioDataCaptureScalarFieldEnum = {
 } as const
 
 export type WixStudioDataCaptureScalarFieldEnum = (typeof WixStudioDataCaptureScalarFieldEnum)[keyof typeof WixStudioDataCaptureScalarFieldEnum]
+
+
+export const Time_zone_masterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  time_zone_code: 'time_zone_code',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Time_zone_masterScalarFieldEnum = (typeof Time_zone_masterScalarFieldEnum)[keyof typeof Time_zone_masterScalarFieldEnum]
+
+
+export const AttendanceScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  user_id: 'user_id',
+  attendance_date: 'attendance_date',
+  check_in: 'check_in',
+  check_out: 'check_out',
+  source: 'source',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
+
+
+export const Attendance_logsScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  user_id: 'user_id',
+  attendance_id: 'attendance_id',
+  action: 'action',
+  action_time: 'action_time',
+  source: 'source',
+  created_at: 'created_at'
+} as const
+
+export type Attendance_logsScalarFieldEnum = (typeof Attendance_logsScalarFieldEnum)[keyof typeof Attendance_logsScalarFieldEnum]
 
 
 export const SortOrder = {

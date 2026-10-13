@@ -68,6 +68,8 @@ import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
   import architectureMasterRoutes from "./architectureMasterRoutes/architectureMaster.route";
   import paymentRequisitionRoutes from "./inventoryRoutes/payment-requisitions.routes";
   import broadcastRouter from "./broadcast/broadcast.routes";
+import timeZoneRoutes from "./timeZone/timeZone.routes";
+import attendanceRoutes from "./attendance/attendance.routes";
   const router = Router();
 
   router.use("/dashboard", DashboardRouter);
@@ -155,5 +157,7 @@ router.use(
 router.use("/inventory/payment-requisitions", paymentRequisitionRoutes);
 
 router.use("/broadcasts", broadcastRouter);
+router.use("/time-zones", timeZoneRoutes);
+router.use("/attendance", attendanceRoutes);
 
 export { router };

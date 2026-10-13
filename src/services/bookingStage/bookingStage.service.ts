@@ -5681,6 +5681,7 @@ export class BookingStageService {
       email?: string;
       designer_remark?: string;
       date_range?: { from: string; to: string };
+      view_type?: "my" | "overall";
     } = {},
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getDraftLeadTableData called", {
@@ -6004,7 +6005,8 @@ export class BookingStageService {
       baseWhere.franchise_id = franchiseId;
     }
 
-    if (!isAdminFlow) {
+    const isOverall = filters.view_type === "overall";
+    if (!isAdminFlow && !isOverall) {
       let callerDraftLeadIds: number[] = [];
       if (isCaller && userId) {
         const [directLeads, onlineFollowUpLeads] = await Promise.all([
@@ -6146,7 +6148,7 @@ export class BookingStageService {
           }
         : null;
 
-      if (normalizedUserType === "sales-executive") {
+      if (!isOverall && normalizedUserType === "sales-executive") {
         const userCondition: any = {
           OR: [
             { final_assigned_leads: userId },
@@ -6167,7 +6169,7 @@ export class BookingStageService {
         } else {
           Object.assign(pendingOnlineWhere, userCondition);
         }
-      } else if (isCaller && userId) {
+      } else if (!isOverall && isCaller && userId) {
         const callerCondition: any = {
           OR: [
             { assign_to: userId },

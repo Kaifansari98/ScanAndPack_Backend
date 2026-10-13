@@ -126,6 +126,7 @@ export const createVendor = async (data: any) => {
     icon,
     login_image,
     time_zone,
+    time_zone_id,
     is_inventory_enabled,
     is_tracktrace_enabled,
     cutlist_configuration,
@@ -134,6 +135,20 @@ export const createVendor = async (data: any) => {
     is_hrms_master_enabled,
     push_lead_to_cadbid,
   } = data;
+
+  let resolvedTimeZoneStr = time_zone || "UTC";
+  const resolvedTimeZoneId = time_zone_id ? Number(time_zone_id) : undefined;
+  if (resolvedTimeZoneId) {
+    const tzRecord = await prisma.time_zone_master.findUnique({
+      where: { id: resolvedTimeZoneId },
+    });
+    if (!tzRecord || !tzRecord.is_active) {
+      const err: any = new Error("Selected time zone must be an active time zone");
+      err.statusCode = 400;
+      throw err;
+    }
+    resolvedTimeZoneStr = tzRecord.time_zone_code;
+  }
 
   const vendor = await prisma.vendorMaster.create({
     data: {
@@ -148,7 +163,8 @@ export const createVendor = async (data: any) => {
       logo,
       icon,
       login_image,
-      time_zone,
+      time_zone: resolvedTimeZoneStr,
+      ...(resolvedTimeZoneId && { time_zone_id: resolvedTimeZoneId }),
       is_inventory_enabled,
       is_tracktrace_enabled,
       cutlist_configuration,
@@ -260,6 +276,9 @@ export const getAllVendorsPaginated = async ({
             name: true,
           },
         },
+        time_zone: true,
+        time_zone_id: true,
+        time_zone_master: true,
       },
     }),
     prisma.vendorMaster.count({ where }),
@@ -1370,6 +1389,10 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
 export const getVendorById = async (vendorId: number) => {
   const vendor = await prisma.vendorMaster.findUnique({
     where: { id: vendorId },
+    include: {
+      time_zone_master: true,
+      state: true,
+    },
   });
   if (!vendor) return null;
 
@@ -1933,6 +1956,7 @@ export const onboardVendor = async (data: any) => {
     icon,
     login_image,
     time_zone,
+    time_zone_id,
     is_crm_enabled,
     is_inventory_enabled,
     is_tracktrace_enabled,
@@ -1943,6 +1967,20 @@ export const onboardVendor = async (data: any) => {
     is_hrms_master_enabled,
     push_lead_to_cadbid,
   } = data;
+
+  let resolvedTimeZoneStr = time_zone || "UTC";
+  const resolvedTimeZoneId = time_zone_id ? Number(time_zone_id) : undefined;
+  if (resolvedTimeZoneId) {
+    const tzRecord = await prisma.time_zone_master.findUnique({
+      where: { id: resolvedTimeZoneId },
+    });
+    if (!tzRecord || !tzRecord.is_active) {
+      const err: any = new Error("Selected time zone must be an active time zone");
+      err.statusCode = 400;
+      throw err;
+    }
+    resolvedTimeZoneStr = tzRecord.time_zone_code;
+  }
 
   const vendor = await prisma.vendorMaster.create({
     data: {
@@ -1966,7 +2004,8 @@ export const onboardVendor = async (data: any) => {
       logo,
       icon,
       login_image,
-      time_zone,
+      time_zone: resolvedTimeZoneStr,
+      ...(resolvedTimeZoneId && { time_zone_id: resolvedTimeZoneId }),
       is_crm_enabled,
       is_inventory_enabled,
       is_tracktrace_enabled,
@@ -2049,6 +2088,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
     icon,
     login_image,
     time_zone,
+    time_zone_id,
     is_crm_enabled,
     is_inventory_enabled,
     is_tracktrace_enabled,
@@ -2060,6 +2100,44 @@ export const updateVendor = async (vendorId: number, data: any) => {
     is_hrms_master_enabled,
     push_lead_to_cadbid,
   } = data;
+
+  const currentVendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendorId },
+    select: { id: true, time_zone_id: true, time_zone: true },
+  });
+  if (!currentVendor) {
+    const err: any = new Error("Vendor not found");
+    err.statusCode = 404;
+    throw err;
+  }
+
+  let updatedTimeZoneStr = time_zone;
+  let updatedTimeZoneId =
+    time_zone_id !== undefined
+      ? time_zone_id
+        ? Number(time_zone_id)
+        : null
+      : undefined;
+
+  if (updatedTimeZoneId !== undefined && updatedTimeZoneId !== null) {
+    const tzRecord = await prisma.time_zone_master.findUnique({
+      where: { id: updatedTimeZoneId },
+    });
+    if (!tzRecord) {
+      const err: any = new Error("Selected time zone not found");
+      err.statusCode = 400;
+      throw err;
+    }
+    // Require active choice when changing time zone
+    if (currentVendor.time_zone_id !== updatedTimeZoneId && !tzRecord.is_active) {
+      const err: any = new Error(
+        "Selected time zone must be an active time zone when changing selection"
+      );
+      err.statusCode = 400;
+      throw err;
+    }
+    updatedTimeZoneStr = tzRecord.time_zone_code;
+  }
 
   const vendor = await prisma.vendorMaster.update({
     where: { id: vendorId },
@@ -2082,7 +2160,8 @@ export const updateVendor = async (vendorId: number, data: any) => {
       logo,
       icon,
       login_image,
-      time_zone,
+      ...(updatedTimeZoneStr !== undefined && { time_zone: updatedTimeZoneStr }),
+      ...(updatedTimeZoneId !== undefined && { time_zone_id: updatedTimeZoneId }),
       is_crm_enabled,
       is_inventory_enabled,
       is_tracktrace_enabled,
