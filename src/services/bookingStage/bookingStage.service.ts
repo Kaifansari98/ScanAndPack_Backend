@@ -1845,6 +1845,7 @@ export class BookingStageService {
     // ============================
 
     let excludedLeadIds: number[] = [];
+    let callerLeadIds: number[] | null = null;
 
     if (userId) {
       const creator = await prisma.userMaster.findUnique({
@@ -1860,7 +1861,106 @@ export class BookingStageService {
         /factory/i.test(normalizedUserType);
       const isFactoryInstallation = isFactory && normalizedTag === "type 15";
 
-      if (!isFactoryInstallation) {
+      const isCaller = [
+        "telecaller",
+        "telecaller-team-lead",
+        "telecaller team lead",
+        "caller",
+        "store caller",
+        "store-caller",
+      ].includes(normalizedUserType);
+
+      if (isCaller) {
+        // If is_online_lead_feature_enabled is true, caller in Overall Leads should ONLY see
+        // leads of all callers ("jitne bhi callers ki leads hai wahi show krna hai caller ko overall leads mei")
+        const vendorData = await prisma.vendorMaster.findUnique({
+          where: { id: vendorId },
+          select: { is_online_lead_feature_enabled: true },
+        });
+
+        if (vendorData?.is_online_lead_feature_enabled === true) {
+          const callerUsers = await prisma.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              user_type: {
+                user_type: {
+                  in: [
+                    "telecaller",
+                    "telecaller-team-lead",
+                    "telecaller team lead",
+                    "caller",
+                    "store caller",
+                    "store-caller",
+                  ],
+                  mode: "insensitive",
+                },
+              },
+            },
+            select: { id: true },
+          });
+          const allCallerUserIds = callerUsers.map((u) => u.id);
+
+          const [directCallerLeads, onlineCallerLeads, mappedCallerLeads, taskCallerLeads] = await Promise.all([
+            prisma.leadMaster.findMany({
+              where: {
+                vendor_id: vendorId,
+                is_deleted: false,
+                ...(franchiseId ? { franchise_id: franchiseId } : {}),
+                OR: [
+                  { created_by: { in: allCallerUserIds } },
+                  { assign_to: { in: allCallerUserIds } },
+                ],
+              },
+              select: { id: true },
+            }),
+            prisma.online_leads.findMany({
+              where: {
+                vendor_id: vendorId,
+                lead_master_id: { not: null },
+                ...(franchiseId
+                  ? {
+                      OR: [
+                        { pending_store_id: franchiseId },
+                        { store_id: franchiseId },
+                      ],
+                    }
+                  : {}),
+              },
+              select: { lead_master_id: true },
+            }),
+            prisma.leadUserMapping.findMany({
+              where: {
+                vendor_id: vendorId,
+                user_id: { in: allCallerUserIds },
+                status: "active",
+              },
+              select: { lead_id: true },
+            }),
+            prisma.userLeadTask.findMany({
+              where: {
+                vendor_id: vendorId,
+                ...(franchiseId ? { franchise_id: franchiseId } : {}),
+                OR: [
+                  { created_by: { in: allCallerUserIds } },
+                  { user_id: { in: allCallerUserIds } },
+                ],
+              },
+              select: { lead_id: true },
+            }),
+          ]);
+
+          callerLeadIds = [
+            ...new Set([
+              ...directCallerLeads.map((d) => d.id),
+              ...onlineCallerLeads
+                .map((o) => o.lead_master_id)
+                .filter((id): id is number => typeof id === "number"),
+              ...mappedCallerLeads.map((m) => m.lead_id),
+              ...taskCallerLeads.map((t) => t.lead_id),
+            ]),
+          ];
+        }
+      } else if (!isFactoryInstallation) {
         const mappedLeads = await prisma.leadUserMapping.findMany({
           where: {
             vendor_id: vendorId,
@@ -2295,8 +2395,16 @@ export class BookingStageService {
       materialIssueCompletedLeadIds = completedRows.map((row) => row.lead_id);
     }
     const idFilter: { in?: number[]; notIn?: number[] } = {};
+    if (callerLeadIds !== null) {
+      idFilter.in = callerLeadIds;
+    }
     if (materialIssueCompletedOnly && materialIssueCompletedLeadIds !== null) {
-      idFilter.in = materialIssueCompletedLeadIds;
+      if (idFilter.in) {
+        const completedSet = new Set(materialIssueCompletedLeadIds);
+        idFilter.in = idFilter.in.filter((id) => completedSet.has(id));
+      } else {
+        idFilter.in = materialIssueCompletedLeadIds;
+      }
     }
     const notInIds = [
       ...(materialIssueReadyOnly && !materialIssueCompletedOnly ? materialIssueCompletedLeadIds ?? [] : []),
@@ -6006,96 +6114,214 @@ export class BookingStageService {
     }
 
     const isOverall = filters.view_type === "overall";
-    if (!isAdminFlow && !isOverall) {
+    if (!isAdminFlow) {
       let callerDraftLeadIds: number[] = [];
-      if (isCaller && userId) {
-        const [directLeads, onlineFollowUpLeads] = await Promise.all([
-          prisma.leadMaster.findMany({
+      if (isCaller) {
+        if (!isOverall && userId) {
+          // "My Leads" for logged-in caller
+          const [directLeads, onlineFollowUpLeads] = await Promise.all([
+            prisma.leadMaster.findMany({
+              where: {
+                vendor_id: vendorId,
+                is_deleted: false,
+                ...(franchiseId ? { franchise_id: franchiseId } : {}),
+                OR: [{ created_by: userId }, { assign_to: userId }],
+              },
+              select: { id: true },
+            }),
+            prisma.online_leads.findMany({
+              where: {
+                vendor_id: vendorId,
+                lead_master_id: { not: null },
+                ...(franchiseId
+                  ? {
+                      AND: [
+                        {
+                          OR: [
+                            { pending_store_id: franchiseId },
+                            { store_id: franchiseId },
+                          ],
+                        },
+                        {
+                          OR: [
+                            { assign_to: userId },
+                            { final_assigned_leads: userId },
+                            { created_by: userId },
+                            { online_lead_call_log: { some: { telecaller_id: userId } } },
+                            { online_lead_history: { some: { created_by: userId } } },
+                          ],
+                        },
+                      ],
+                    }
+                  : {
+                      OR: [
+                        { assign_to: userId },
+                        { final_assigned_leads: userId },
+                        { created_by: userId },
+                        { online_lead_call_log: { some: { telecaller_id: userId } } },
+                        { online_lead_history: { some: { created_by: userId } } },
+                      ],
+                    }),
+              },
+              select: { lead_master_id: true },
+            }),
+          ]);
+
+          callerDraftLeadIds = [
+            ...directLeads.map((d) => d.id),
+            ...onlineFollowUpLeads
+              .map((o) => o.lead_master_id)
+              .filter((id): id is number => typeof id === "number"),
+          ];
+
+          const mappedLeads = await prisma.leadUserMapping.findMany({
+            where: { vendor_id: vendorId, user_id: userId, status: "active" },
+            select: { lead_id: true },
+          });
+
+          const taskLeads = await prisma.userLeadTask.findMany({
             where: {
               vendor_id: vendorId,
-              is_deleted: false,
-              ...(franchiseId ? { franchise_id: franchiseId } : {}),
-              OR: [{ created_by: userId }, { assign_to: userId }],
+              OR: [{ created_by: userId }, { user_id: userId }],
+            },
+            select: { lead_id: true },
+          });
+
+          const leadIds = [
+            ...new Set([
+              ...mappedLeads.map((m) => m.lead_id),
+              ...taskLeads.map((t) => t.lead_id),
+              ...callerDraftLeadIds,
+            ]),
+          ];
+
+          if (!leadIds.length) {
+            if (!isOnlineLeadFeatureEnabled) {
+              return { leads: [], count: 0 };
+            }
+            baseWhere.id = { in: [] };
+          } else {
+            baseWhere.id = { in: leadIds };
+          }
+        } else if (isOverall && isOnlineLeadFeatureEnabled) {
+          // "Overall Leads" for callers: ONLY leads of all callers ("jitne bhi callers ki leads hai")
+          const callerUsers = await prisma.userMaster.findMany({
+            where: {
+              vendor_id: vendorId,
+              user_type: {
+                user_type: {
+                  in: [
+                    "telecaller",
+                    "telecaller-team-lead",
+                    "telecaller team lead",
+                    "caller",
+                    "store caller",
+                    "store-caller",
+                  ],
+                  mode: "insensitive",
+                },
+              },
             },
             select: { id: true },
-          }),
-          prisma.online_leads.findMany({
+          });
+          const allCallerUserIds = callerUsers.map((u) => u.id);
+
+          const [directLeads, onlineFollowUpLeads] = await Promise.all([
+            prisma.leadMaster.findMany({
+              where: {
+                vendor_id: vendorId,
+                is_deleted: false,
+                ...(franchiseId ? { franchise_id: franchiseId } : {}),
+                OR: [
+                  { created_by: { in: allCallerUserIds } },
+                  { assign_to: { in: allCallerUserIds } },
+                ],
+              },
+              select: { id: true },
+            }),
+            prisma.online_leads.findMany({
+              where: {
+                vendor_id: vendorId,
+                lead_master_id: { not: null },
+                ...(franchiseId
+                  ? {
+                      OR: [
+                        { pending_store_id: franchiseId },
+                        { store_id: franchiseId },
+                      ],
+                    }
+                  : {}),
+              },
+              select: { lead_master_id: true },
+            }),
+          ]);
+
+          const mappedLeads = await prisma.leadUserMapping.findMany({
             where: {
               vendor_id: vendorId,
-              lead_master_id: { not: null },
-              ...(franchiseId
-                ? {
-                    AND: [
-                      {
-                        OR: [
-                          { pending_store_id: franchiseId },
-                          { store_id: franchiseId },
-                        ],
-                      },
-                      {
-                        OR: [
-                          { assign_to: userId },
-                          { final_assigned_leads: userId },
-                          { created_by: userId },
-                          { online_lead_call_log: { some: { telecaller_id: userId } } },
-                          { online_lead_history: { some: { created_by: userId } } },
-                        ],
-                      },
-                    ],
-                  }
-                : {
-                    OR: [
-                      { assign_to: userId },
-                      { final_assigned_leads: userId },
-                      { created_by: userId },
-                      { online_lead_call_log: { some: { telecaller_id: userId } } },
-                      { online_lead_history: { some: { created_by: userId } } },
-                    ],
-                  }),
+              user_id: { in: allCallerUserIds },
+              status: "active",
             },
-            select: { lead_master_id: true },
-          }),
-        ]);
+            select: { lead_id: true },
+          });
 
-        callerDraftLeadIds = [
-          ...directLeads.map((d) => d.id),
-          ...onlineFollowUpLeads
-            .map((o) => o.lead_master_id)
-            .filter((id): id is number => typeof id === "number"),
-        ];
-      }
+          const taskLeads = await prisma.userLeadTask.findMany({
+            where: {
+              vendor_id: vendorId,
+              ...(franchiseId ? { franchise_id: franchiseId } : {}),
+              OR: [
+                { created_by: { in: allCallerUserIds } },
+                { user_id: { in: allCallerUserIds } },
+              ],
+            },
+            select: { lead_id: true },
+          });
 
-      const mappedLeads = await prisma.leadUserMapping.findMany({
-        where: { vendor_id: vendorId, user_id: userId, status: "active" },
-        select: { lead_id: true },
-      });
+          const callerLeadIds = [
+            ...new Set([
+              ...directLeads.map((d) => d.id),
+              ...onlineFollowUpLeads
+                .map((o) => o.lead_master_id)
+                .filter((id): id is number => typeof id === "number"),
+              ...mappedLeads.map((m) => m.lead_id),
+              ...taskLeads.map((t) => t.lead_id),
+            ]),
+          ];
 
-      const taskLeads = await prisma.userLeadTask.findMany({
-        where: {
-          vendor_id: vendorId,
-          OR: [{ created_by: userId }, { user_id: userId }],
-        },
-        select: { lead_id: true },
-      });
-
-      const leadIds = [
-        ...new Set([
-          ...mappedLeads.map((m) => m.lead_id),
-          ...taskLeads.map((t) => t.lead_id),
-          ...callerDraftLeadIds,
-        ]),
-      ];
-
-      if (!leadIds.length) {
-        if (!isOnlineLeadFeatureEnabled) {
-          return { leads: [], count: 0 };
+          baseWhere.id = { in: callerLeadIds };
         }
-        baseWhere.id = { in: [] };
-      } else {
-        baseWhere.id = { in: leadIds };
-      }
-      if (normalizedUserType === "sales-executive") {
-        baseWhere.assign_to = userId;
+      } else if (!isOverall) {
+        const mappedLeads = await prisma.leadUserMapping.findMany({
+          where: { vendor_id: vendorId, user_id: userId, status: "active" },
+          select: { lead_id: true },
+        });
+
+        const taskLeads = await prisma.userLeadTask.findMany({
+          where: {
+            vendor_id: vendorId,
+            OR: [{ created_by: userId }, { user_id: userId }],
+          },
+          select: { lead_id: true },
+        });
+
+        const leadIds = [
+          ...new Set([
+            ...mappedLeads.map((m) => m.lead_id),
+            ...taskLeads.map((t) => t.lead_id),
+          ]),
+        ];
+
+        if (!leadIds.length) {
+          if (!isOnlineLeadFeatureEnabled) {
+            return { leads: [], count: 0 };
+          }
+          baseWhere.id = { in: [] };
+        } else {
+          baseWhere.id = { in: leadIds };
+        }
+        if (normalizedUserType === "sales-executive") {
+          baseWhere.assign_to = userId;
+        }
       }
     }
 
