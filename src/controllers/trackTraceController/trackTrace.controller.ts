@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import * as trackTraceService from "../../services/trackTraceServices/trackTrace.service";
 import * as machineService from "../../services/machineService/machineService.service";
+import { getVendorSettingValue } from "../../services/vendor.service";
 import {
   generateSignedUrl,
   uploadToWasabiCompanyVendorDocument,
@@ -342,11 +343,34 @@ export const check_item = async (req: Request, res: Response) => {
       .status(200)
       .json(ApiResponse.error(serviceResponse?.message, 500));
   } else {
-    let mappedItem = serviceResponse?.data;
+    const mappedItem = serviceResponse?.data;
+    const responseData =
+      typeof mappedItem === "object" && mappedItem !== null
+        ? { ...mappedItem, mappedItem }
+        : { mappedItem };
 
     return res
       .status(200)
-      .json(ApiResponse.success({ mappedItem }, serviceResponse?.message, 200));
+      .json(ApiResponse.success(responseData, serviceResponse?.message, 200));
+  }
+};
+
+export const getScanSettings = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const showStatus = await getVendorSettingValue(vendor_id, "SHOW_STATUS_ON_SCAN");
+    return res.status(200).json(
+      ApiResponse.success(
+        {
+          show_status_on_scan: showStatus ?? "1",
+          continuous_scan_default: showStatus === "0",
+        },
+        "",
+        200,
+      ),
+    );
+  } catch (err: any) {
+    return res.status(500).json(ApiResponse.error(err?.message || "Failed to fetch scan settings", 500));
   }
 };
 

@@ -90,6 +90,7 @@ import {
   scan_item,
   scan_machine_item,
   check_item,
+  getScanSettings,
   get_defect,
   mark_Defect,
   check_defect,
@@ -115,6 +116,7 @@ router.post("/scan/check-item", check_item);
 // Step 2: persist completion only after the user confirms Mark Completed.
 router.post("/scan/item", uploadDisk.array("photos[]", 10), scan_item);
 router.post("/scan/machine-item", scan_machine_item);
+router.get("/scan-settings/:vendor_id", getScanSettings);
 // router.post('/scan/item', scan_item);
 
 router.get("/machines/:vendor_id/:user_id", getAllMachines);

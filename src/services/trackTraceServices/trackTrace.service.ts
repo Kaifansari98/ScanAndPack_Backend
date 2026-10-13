@@ -27,6 +27,7 @@ interface TrackTracePayload {
   created_by: number;
   box_id?: number;
   location_name?: string;
+  scan_flow?: "normal" | "continuous";
 }
 
 //qty wise logic
@@ -1262,8 +1263,8 @@ export const updateScannedItem = async (
       );
     }
 
-    // /scan/check-item is validation-only. Never fall through to the update
-    // logic below; /scan/item is the endpoint that completes the item.
+    // /scan/check-item validates the scan and either returns item details for the
+    // confirmation modal (normal mode) OR auto-completes the item (continuous mode).
     if (is_check) {
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
@@ -1312,10 +1313,25 @@ export const updateScannedItem = async (
         };
       }
 
-      return validationResponse(1, "", {
-        mappedItem: eligibleMapping,
-        activeDefect,
-      });
+      // Check vendor setting SHOW_STATUS_ON_SCAN:
+      // "1" = Show modal (normal mode)
+      // "0" = Continuous mode (auto-complete without modal)
+      const showStatus = await getVendorSettingValue(
+        vendor_id,
+        "SHOW_STATUS_ON_SCAN",
+      );
+
+      const isContinuous =
+        payload.scan_flow === "continuous" ||
+        (payload.scan_flow !== "normal" && showStatus === "0");
+
+      // In continuous mode without active defects, fall through to complete the item directly!
+      if (!isContinuous || activeDefect) {
+        return validationResponse(1, "", {
+          mappedItem: eligibleMapping,
+          activeDefect,
+        });
+      }
     }
 
     const isGroupwisePacking =
@@ -2208,6 +2224,7 @@ export const updateScannedItem = async (
         mapping_id: eligibleMapping.id,
         cut_list_id: eligibleMapping.cut_list_id,
         project_id: eligibleMapping.project_id,
+        vendor_id,
         project_name: eligibleMapping.project.project_name,
         machine_id: eligibleMapping.machine.id,
         machine_name: eligibleMapping.machine.machine_name,
@@ -2218,6 +2235,7 @@ export const updateScannedItem = async (
         box_id: resolvedBoxId,
         box_name: scanUpdate.boxName,
         box_completed: scanUpdate.boxCompleted,
+        auto_completed: is_check,
         packing_group_name:
           automaticPackingDefinition?.packingGroupName ?? null,
         product_set_no: scanUpdate.productSetNo,
