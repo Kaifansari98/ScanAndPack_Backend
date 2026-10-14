@@ -3544,9 +3544,9 @@ export const handelItems_13_aug_2026 = async (
       categoryName: z.string().optional().nullable(),
       procurement: z.string().optional().nullable(),
 
-      l1: requiredNumber("l1"),
-      l2: requiredNumber("l2"),
-      l3: requiredNumber("l3"),
+      l1: z.coerce.number().nullable().optional(),
+      l2: z.coerce.number().nullable().optional(),
+      l3: z.coerce.number().nullable().optional(),
 
       name: requiredString("name"),
 
@@ -3950,9 +3950,9 @@ export const handelItems_13_aug_2026 = async (
               project_id: project.id,
               vendor_id: vendor.id,
               description: item.name,
-              length: Number(item.l1),
-              width: Number(item.l2),
-              thickness: Number(item.l3),
+              length: item.l1 == null ? null : Number(item.l1),
+              width: item.l2 == null ? null : Number(item.l2),
+              thickness: item.l3 == null ? null : Number(item.l3),
               qty: quantity,
               material_details: item.articleCode,
               item_name: item.name,
@@ -4239,9 +4239,9 @@ export const handelItems = async (
       categoryName: z.string().optional().nullable(),
       procurement: z.string().optional().nullable(),
 
-      l1: requiredNumber("l1"),
-      l2: requiredNumber("l2"),
-      l3: requiredNumber("l3"),
+      l1: z.coerce.number().nullable().optional(),
+      l2: z.coerce.number().nullable().optional(),
+      l3: z.coerce.number().nullable().optional(),
 
       name: requiredString("name"),
 
@@ -4768,9 +4768,9 @@ export const handelItems = async (
               project_id: project.id,
               vendor_id: vendor.id,
               description: item.name,
-              length: Number(item.l1),
-              width: Number(item.l2),
-              thickness: Number(item.l3),
+              length: item.l1 == null ? null : Number(item.l1),
+              width: item.l2 == null ? null : Number(item.l2),
+              thickness: item.l3 == null ? null : Number(item.l3),
               qty: quantity,
               material_details: item.articleCode,
               item_name: item.name,
