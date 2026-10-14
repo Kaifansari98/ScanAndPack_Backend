@@ -42,6 +42,32 @@ const assignTaskBookingSchema = Joi.object({
   created_by: Joi.number().integer().positive().required(),
 });
 
+// "Required Documents" uploaded with the Final Measurement assign task. Created per vendor on first use.
+const FM_REQUIRED_DOCUMENTS_TAG = "FM_REQUIRED_DOCUMENTS";
+
+const getOrCreateFmRequiredDocType = async (
+  tx: Prisma.TransactionClient,
+  vendorId: number,
+) => {
+  const existing = await tx.documentTypeMaster.findFirst({
+    where: { vendor_id: vendorId, tag: FM_REQUIRED_DOCUMENTS_TAG },
+    select: { id: true },
+  });
+  if (existing) return existing.id;
+
+  const created = await tx.documentTypeMaster.create({
+    data: {
+      vendor_id: vendorId,
+      tag: FM_REQUIRED_DOCUMENTS_TAG,
+      type: "FM Required Documents",
+      doc_title: "Required Documents",
+      stage: "Booking",
+    },
+    select: { id: true },
+  });
+  return created.id;
+};
+
 export class BookingStageService {
   private leadSuperAdminApprovalLockInService =
     new LeadSuperAdminApprovalLockInService();
@@ -3275,7 +3301,9 @@ export class BookingStageService {
     vendor_id: number;
     created_by: number;
     sitePhotos: { originalName: string; sysName: string }[];
+    requiredDocuments?: { originalName: string; sysName: string }[];
   }) {
+    const requiredDocuments = data.requiredDocuments ?? [];
     return prisma.$transaction(async (tx) => {
       // 1️⃣ Validate document type
       const docType = await tx.documentTypeMaster.findFirst({
@@ -3291,48 +3319,55 @@ export class BookingStageService {
         );
       }
 
-      const uploadedDocs: {
-        id: number;
-        originalName: string;
-        s3Key: string;
-      }[] = [];
+      const requiredDocTypeId = requiredDocuments.length
+        ? await getOrCreateFmRequiredDocType(tx, data.vendor_id)
+        : null;
+
+      const createDocs = async (
+        files: { originalName: string; sysName: string }[],
+        docTypeId: number,
+      ) => {
+        const created: { id: number; originalName: string; s3Key: string }[] = [];
+        for (const file of files) {
+          const doc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
+              doc_type_id: docTypeId,
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              account_id: data.account_id,
+              created_by: data.created_by,
+            },
+          });
+          created.push({ id: doc.id, originalName: file.originalName, s3Key: file.sysName });
+        }
+        return created;
+      };
 
       // 2️⃣ Create LeadDocuments
-      for (const photo of data.sitePhotos) {
-        const doc = await tx.leadDocuments.create({
-          data: {
-            doc_og_name: photo.originalName,
-            doc_sys_name: photo.sysName,
-            doc_type_id: docType.id,
-            vendor_id: data.vendor_id,
-            lead_id: data.lead_id,
-            account_id: data.account_id,
-            created_by: data.created_by,
-          },
-        });
-
-        uploadedDocs.push({
-          id: doc.id,
-          originalName: photo.originalName,
-          s3Key: photo.sysName,
-        });
-      }
+      const uploadedDocs = await createDocs(data.sitePhotos, docType.id);
+      const uploadedRequiredDocs = requiredDocTypeId
+        ? await createDocs(requiredDocuments, requiredDocTypeId)
+        : [];
 
       // 3️⃣ Create LeadDetailedLogs (parent log)
       const detailedLog = await createLeadLog(tx, {
         vendor_id: data.vendor_id,
         lead_id: data.lead_id,
         account_id: data.account_id,
-        action:
-          "Current site photos uploaded at Booking stage for Final Measurement.",
+        action: uploadedRequiredDocs.length
+          ? "Current site photos and required documents uploaded at Booking stage for Final Measurement."
+          : "Current site photos uploaded at Booking stage for Final Measurement.",
         action_type: "CREATE",
         created_by: data.created_by,
         created_at: new Date(),
       });
 
       // 4️⃣ Create LeadDocumentLogs (child logs for each document)
-      if (uploadedDocs.length > 0) {
-        const docLogsData = uploadedDocs.map((doc) => ({
+      const allDocs = [...uploadedDocs, ...uploadedRequiredDocs];
+      if (allDocs.length > 0) {
+        const docLogsData = allDocs.map((doc) => ({
           vendor_id: data.vendor_id,
           lead_id: data.lead_id,
           account_id: data.account_id,
@@ -3350,6 +3385,8 @@ export class BookingStageService {
       return {
         uploadedPhotosCount: uploadedDocs.length,
         documents: uploadedDocs,
+        uploadedRequiredDocumentsCount: uploadedRequiredDocs.length,
+        requiredDocuments: uploadedRequiredDocs,
       };
     });
   }
@@ -3372,41 +3409,54 @@ export class BookingStageService {
       );
     }
 
-    // 2️⃣ Fetch documents
-    const documents = await prisma.leadDocuments.findMany({
-      where: {
-        vendor_id: data.vendor_id,
-        lead_id: data.lead_id,
-        doc_type_id: docType.id,
-        is_deleted: false,
-      },
-      orderBy: {
-        created_at: "desc",
-      },
+    const requiredDocType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: data.vendor_id, tag: FM_REQUIRED_DOCUMENTS_TAG },
+      select: { id: true },
     });
 
-    // 3️⃣ Generate signed URLs
-    const docsWithSignedUrls = await Promise.all(
-      documents.map(async (doc) => {
-        const signedUrl = await generateSignedUrl(
-          doc.doc_sys_name,
-          3600,
-          "inline",
-        );
+    // 2️⃣ Fetch documents
+    const fetchDocs = async (docTypeId: number) => {
+      const documents = await prisma.leadDocuments.findMany({
+        where: {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          doc_type_id: docTypeId,
+          is_deleted: false,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
 
-        return {
-          id: doc.id,
-          originalName: doc.doc_og_name,
-          s3Key: doc.doc_sys_name,
-          signedUrl,
-          createdAt: doc.created_at,
-        };
-      }),
-    );
+      // 3️⃣ Generate signed URLs
+      return Promise.all(
+        documents.map(async (doc) => {
+          const signedUrl = await generateSignedUrl(
+            doc.doc_sys_name,
+            3600,
+            "inline",
+          );
+
+          return {
+            id: doc.id,
+            originalName: doc.doc_og_name,
+            s3Key: doc.doc_sys_name,
+            signedUrl,
+            createdAt: doc.created_at,
+          };
+        }),
+      );
+    };
+
+    const [docsWithSignedUrls, requiredDocuments] = await Promise.all([
+      fetchDocs(docType.id),
+      requiredDocType ? fetchDocs(requiredDocType.id) : Promise.resolve([]),
+    ]);
 
     return {
       count: docsWithSignedUrls.length,
       documents: docsWithSignedUrls,
+      requiredDocuments,
     };
   }
 

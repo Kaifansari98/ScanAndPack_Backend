@@ -1752,9 +1752,10 @@ export const uploadToWasabiCSPBookingPhotoFile = async (
   leadId: number,
   originalName: string,
   contentType: string,
+  folder = "current-site-photos-at-booking-stage",
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
-  const sysName = `current-site-photos-at-booking-stage/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
+  const sysName = `${folder}/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
 
   const upload = new Upload({
     client: wasabi,
