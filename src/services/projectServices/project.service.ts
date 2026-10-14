@@ -3660,6 +3660,21 @@ export const handelItems_13_aug_2026 = async (
       .map((item) => normalizeBarcode(item.barcode1))
       .filter((code): code is string => Boolean(code));
 
+    const hasExcelUniqueCode = validPayload.items.some((item) =>
+      Boolean(normalizeBarcode(item.barcode1))
+    );
+    const hasBlankExcelUniqueCode = validPayload.items.some(
+      (item) => !normalizeBarcode(item.barcode1)
+    );
+
+    if (hasExcelUniqueCode && hasBlankExcelUniqueCode) {
+      return {
+        success: false,
+        message:
+          "Unique Code must be provided for every Excel row or left blank for all rows.",
+      };
+    }
+
     const barcodeCountMap = new Map<string, number>();
 
     for (const code of uniqueCodesToInsert) {
@@ -3680,13 +3695,13 @@ export const handelItems_13_aug_2026 = async (
 
     /*
     |--------------------------------------------------------------------------
-    | If Track & Trace is enabled, barcode must be unique in database.
-    | If only ScanPack is enabled, same barcode can exist in old projects.
+    | If unique-code mode is enabled, a customer-supplied barcode must be
+    | unique in the database too. Blank Excel barcodes use the new CutList ID.
     |--------------------------------------------------------------------------
     */
-
     const shouldCheckDatabaseBarcodeDuplicate =
-      vendor.is_tracktrace_enabled === true;
+      vendor.is_available_unique_code === true &&
+      uniqueCodesToInsert.length > 0;
 
     if (shouldCheckDatabaseBarcodeDuplicate && uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
@@ -3957,7 +3972,25 @@ export const handelItems_13_aug_2026 = async (
           });
 
           const uniqueCode =
-            normalizeBarcode(item.barcode1) || `${row.id}-${project.id}`;
+            normalizeBarcode(item.barcode1) || String(row.id);
+
+          // Scenario 2: Validate CutList ID in DB if unique code is required
+          if (vendor.is_available_unique_code && !normalizeBarcode(item.barcode1)) {
+            const existingCodeInDb = await tx.cutList.findFirst({
+              where: {
+                vendor_id: vendor.id,
+                unique_code: uniqueCode,
+                id: { not: row.id },
+              },
+              select: { id: true, unique_code: true },
+            });
+
+            if (existingCodeInDb) {
+              throw new Error(
+                `Duplicate barcode found in database for generated code: ${uniqueCode}`
+              );
+            }
+          }
 
           await tx.cutList.update({
             where: {
@@ -4355,14 +4388,29 @@ export const handelItems = async (
     |--------------------------------------------------------------------------
     | Same rule as createProjectService:
     | 1. Duplicate barcode inside current payload is never allowed.
-    | 2. Track & Trace enabled -> barcode must be unique in DB.
-    | 3. Only Scan & Pack enabled -> DB duplicate is allowed.
+    | 2. Unique-code mode enabled -> customer-supplied barcode must be unique in DB.
+    | 3. Blank Excel barcodes use the new CutList ID and skip this lookup.
     |--------------------------------------------------------------------------
     */
 
     const uniqueCodesToInsert = validPayload.items
       .map((item) => normalizeBarcode(item.barcode1))
       .filter((code): code is string => Boolean(code));
+
+    const hasExcelUniqueCode = validPayload.items.some((item) =>
+      Boolean(normalizeBarcode(item.barcode1))
+    );
+    const hasBlankExcelUniqueCode = validPayload.items.some(
+      (item) => !normalizeBarcode(item.barcode1)
+    );
+
+    if (hasExcelUniqueCode && hasBlankExcelUniqueCode) {
+      return {
+        success: false,
+        message:
+          "Unique Code must be provided for every Excel row or left blank for all rows.",
+      };
+    }
 
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
@@ -4378,13 +4426,18 @@ export const handelItems = async (
       };
     }
 
-    const shouldAllowDatabaseDuplicateBarcode =
-      vendor.is_tracktrace_enabled === false &&
-      vendor.is_scanpack_enabled === true;
-
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 4 — Check duplicate barcode1 in DB based on vendor configuration
+    |--------------------------------------------------------------------------
+    | Rules:
+    | 1. Duplicate barcode inside current payload is never allowed.
+    | 2. Track & Trace enabled -> barcode must be unique in DB.
+    | 3. Only Scan & Pack enabled -> DB duplicate is allowed.
+    |--------------------------------------------------------------------------
+    */
     const shouldCheckDatabaseBarcodeDuplicate =
-      vendor.is_tracktrace_enabled === true ||
-      !shouldAllowDatabaseDuplicateBarcode;
+      vendor.is_available_unique_code === true;
 
     if (shouldCheckDatabaseBarcodeDuplicate && uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
@@ -4745,7 +4798,25 @@ export const handelItems = async (
           });
 
           const uniqueCode =
-            cleanText(item.barcode1) || `${row.id}-${project.id}`;
+            cleanText(item.barcode1) || String(row.id);
+
+          // Scenario 2: Validate CutList ID in DB if unique code is required
+          if (vendor.is_available_unique_code && !cleanText(item.barcode1)) {
+            const existingCodeInDb = await tx.cutList.findFirst({
+              where: {
+                vendor_id: vendor.id,
+                unique_code: uniqueCode,
+                id: { not: row.id },
+              },
+              select: { id: true, unique_code: true },
+            });
+
+            if (existingCodeInDb) {
+              throw new Error(
+                `Duplicate barcode found in database for generated code: ${uniqueCode}`
+              );
+            }
+          }
 
           await tx.cutList.update({
             where: {

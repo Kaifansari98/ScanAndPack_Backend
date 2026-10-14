@@ -1201,28 +1201,21 @@ export const createProjectService_old = async (
     | STEP 3 — Check duplicate barcode1 within Excel
     |--------------------------------------------------------------------------
     */
-    const uniqueCodesToInsert = validPayload.items
-      .map((item) => cleanText(item.barcode1))
-      .filter(Boolean);
+    const uniqueCodesFromExcel = validPayload.items.map((item) =>
+      cleanText(item.barcode1)
+    );
+    const hasExcelUniqueCode = uniqueCodesFromExcel.some(Boolean);
+    const hasBlankExcelUniqueCode = uniqueCodesFromExcel.some((code) => !code);
 
-    if (vendor.is_available_unique_code) {
-      const rowsWithoutUniqueCode = validPayload.items
-        .map((item, index) => ({
-          rowNumber: index + 2,
-          uniqueCode: cleanText(item.barcode1),
-        }))
-        .filter((item) => !item.uniqueCode)
-        .map((item) => item.rowNumber);
-
-      if (rowsWithoutUniqueCode.length > 0) {
-        throw new Error(
-          `Unique Code is required in Excel row${
-            rowsWithoutUniqueCode.length > 1 ? "s" : ""
-          }: ${rowsWithoutUniqueCode.join(", ")}`
-        );
-      }
+    if (hasExcelUniqueCode && hasBlankExcelUniqueCode) {
+      throw new Error(
+        "Unique Code must be provided for every Excel row or left blank for all rows."
+      );
     }
 
+    const uniqueCodesToInsert = uniqueCodesFromExcel.filter(Boolean);
+
+    // Scenario 1 & 3: Check for duplicates within Excel
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
     );
@@ -1239,21 +1232,15 @@ export const createProjectService_old = async (
     |--------------------------------------------------------------------------
     | STEP 4 — Check duplicate barcode1 in DB based on vendor configuration
     |--------------------------------------------------------------------------
-    |
     | Rules:
     | 1. Duplicate barcode inside the same Excel is already blocked above.
-    | 2. If Track & Trace is enabled, barcode must be unique in database.
-    | 3. If Track & Trace is disabled and Scan & Pack is enabled,
-    |    barcode can already exist in database.
-    |
+    | 2. If unique-code mode is enabled, a customer-supplied barcode must be
+    |    unique in the database too.
+    | 3. Blank Excel barcodes are generated from the new CutList row ID below.
+    |--------------------------------------------------------------------------
     */
-    const shouldAllowDatabaseDuplicateBarcode =
-      vendor.is_tracktrace_enabled === false &&
-      vendor.is_scanpack_enabled === true;
-
     const shouldCheckDatabaseBarcodeDuplicate =
-      vendor.is_tracktrace_enabled === true ||
-      !shouldAllowDatabaseDuplicateBarcode;
+      vendor.is_available_unique_code === true;
 
     if (shouldCheckDatabaseBarcodeDuplicate && uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
@@ -1576,6 +1563,24 @@ export const createProjectService_old = async (
 
           const uniqueCode =
             cleanText(item.barcode1) || String(row.id);
+
+          // Scenario 2: Validate automatically assigned CutList ID code in DB if unique code is required
+          if (vendor.is_available_unique_code && !cleanText(item.barcode1)) {
+            const existingCodeInDb = await tx.cutList.findFirst({
+              where: {
+                vendor_id: vendor.id,
+                unique_code: uniqueCode,
+                id: { not: row.id },
+              },
+              select: { id: true, unique_code: true },
+            });
+
+            if (existingCodeInDb) {
+              throw new Error(
+                `Duplicate barcode found in database for generated code: ${uniqueCode}`
+              );
+            }
+          }
 
           await tx.cutList.update({
             where: {
@@ -2102,28 +2107,21 @@ export const createProjectService = async (
     | STEP 3 — Check duplicate barcode1 within Excel
     |--------------------------------------------------------------------------
     */
-    const uniqueCodesToInsert = validPayload.items
-      .map((item) => cleanText(item.barcode1))
-      .filter(Boolean);
+    const uniqueCodesFromExcel = validPayload.items.map((item) =>
+      cleanText(item.barcode1)
+    );
+    const hasExcelUniqueCode = uniqueCodesFromExcel.some(Boolean);
+    const hasBlankExcelUniqueCode = uniqueCodesFromExcel.some((code) => !code);
 
-    if (vendor.is_available_unique_code) {
-      const rowsWithoutUniqueCode = validPayload.items
-        .map((item, index) => ({
-          rowNumber: index + 2,
-          uniqueCode: cleanText(item.barcode1),
-        }))
-        .filter((item) => !item.uniqueCode)
-        .map((item) => item.rowNumber);
-
-      if (rowsWithoutUniqueCode.length > 0) {
-        throw new Error(
-          `Unique Code is required in Excel row${
-            rowsWithoutUniqueCode.length > 1 ? "s" : ""
-          }: ${rowsWithoutUniqueCode.join(", ")}`
-        );
-      }
+    if (hasExcelUniqueCode && hasBlankExcelUniqueCode) {
+      throw new Error(
+        "Unique Code must be provided for every Excel row or left blank for all rows."
+      );
     }
 
+    const uniqueCodesToInsert = uniqueCodesFromExcel.filter(Boolean);
+
+    // Scenario 1 & 3: Check for duplicates within Excel
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
     );
@@ -2140,21 +2138,15 @@ export const createProjectService = async (
     |--------------------------------------------------------------------------
     | STEP 4 — Check duplicate barcode1 in DB based on vendor configuration
     |--------------------------------------------------------------------------
-    |
     | Rules:
     | 1. Duplicate barcode inside the same Excel is already blocked above.
-    | 2. If Track & Trace is enabled, barcode must be unique in database.
-    | 3. If Track & Trace is disabled and Scan & Pack is enabled,
-    |    barcode can already exist in database.
-    |
+    | 2. If unique-code mode is enabled, a customer-supplied barcode must be
+    |    unique in the database too.
+    | 3. Blank Excel barcodes are generated from the new CutList row ID below.
+    |--------------------------------------------------------------------------
     */
-    const shouldAllowDatabaseDuplicateBarcode =
-      vendor.is_tracktrace_enabled === false &&
-      vendor.is_scanpack_enabled === true;
-
     const shouldCheckDatabaseBarcodeDuplicate =
-      vendor.is_tracktrace_enabled === true ||
-      !shouldAllowDatabaseDuplicateBarcode;
+      vendor.is_available_unique_code === true;
 
     if (shouldCheckDatabaseBarcodeDuplicate && uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
@@ -2590,6 +2582,24 @@ export const createProjectService = async (
 
           const uniqueCode =
             cleanText(item.barcode1) || String(row.id);
+
+          // Scenario 2: Validate automatically assigned CutList ID code in DB if unique code is required
+          if (vendor.is_available_unique_code && !cleanText(item.barcode1)) {
+            const existingCodeInDb = await tx.cutList.findFirst({
+              where: {
+                vendor_id: vendor.id,
+                unique_code: uniqueCode,
+                id: { not: row.id },
+              },
+              select: { id: true, unique_code: true },
+            });
+
+            if (existingCodeInDb) {
+              throw new Error(
+                `Duplicate barcode found in database for generated code: ${uniqueCode}`
+              );
+            }
+          }
 
           await tx.cutList.update({
             where: {
