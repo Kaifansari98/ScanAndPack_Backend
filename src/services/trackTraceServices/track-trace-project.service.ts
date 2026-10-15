@@ -123,16 +123,26 @@ const normalizeBooleanFlag = (value: unknown, fallback = false): boolean => {
 };
 
 const calculateQtyPerCustomPackingBox = (
-  items: Array<Pick<CadbidItem, "groupName" | "name" | "qty">>,
-  packingType: PackingType
+  items: Array<Pick<CadbidItem, "groupName" | "name" | "qty" | "categoryName">>,
+  packingType: PackingType,
+  scanPackByCategory?: ReadonlyMap<string, boolean>,
 ): number[] => {
   if (packingType !== PackingType.CUSTOM_GROUP) {
     return items.map(() => 1);
   }
 
+  const isScanAndPackItem = (item: (typeof items)[number]) => {
+    const categoryName = cleanText(item.categoryName).toLowerCase();
+    // Unknown categories retain the existing behavior. Known false categories
+    // are manual-only and must not participate in custom-group quota math.
+    return scanPackByCategory?.get(categoryName) !== false;
+  };
+
   const minimumQtyByGroup = new Map<string, number>();
 
   for (const item of items) {
+    if (!isScanAndPackItem(item)) continue;
+
     const groupKey = cleanText(item.groupName).toLocaleLowerCase();
     const quantity = Number(item.qty);
     const currentMinimum = minimumQtyByGroup.get(groupKey);
@@ -143,6 +153,8 @@ const calculateQtyPerCustomPackingBox = (
   }
 
   return items.map((item, index) => {
+    if (!isScanAndPackItem(item)) return 1;
+
     const groupName = cleanText(item.groupName);
     const minimumQty = minimumQtyByGroup.get(groupName.toLocaleLowerCase());
     const quantity = Number(item.qty);
@@ -155,6 +167,20 @@ const calculateQtyPerCustomPackingBox = (
 
     return Math.max(1, quantity / minimumQty);
   });
+};
+
+const getScanPackValidationByCategory = async (vendorId: number) => {
+  const categories = await prisma.projectCategoriesMaster.findMany({
+    where: { vendor_id: vendorId, status: "Yes" },
+    select: { category_name: true, scan_pack_validate: true },
+  });
+
+  return new Map(
+    categories.map((category) => [
+      category.category_name.trim().toLowerCase(),
+      category.scan_pack_validate === true,
+    ]),
+  );
 };
 
 export const recalculateStoredQtyPerCustomPackingBox = async (
@@ -1228,9 +1254,14 @@ export const createProjectService_old = async (
     }
 
     const validPayload = validation.data;
+    const scanPackByCategory =
+      resolvedPackingType === PackingType.CUSTOM_GROUP
+        ? await getScanPackValidationByCategory(resolvedVendorId)
+        : undefined;
     const qtyPerCustomPackingBox = calculateQtyPerCustomPackingBox(
       validPayload.items,
-      resolvedPackingType
+      resolvedPackingType,
+      scanPackByCategory,
     );
 
     logger.info("Validation passed", {
@@ -2133,10 +2164,15 @@ export const createProjectService = async (
     }
 
     const validPayload = validation.data;
+    const scanPackByCategory =
+      resolvedPackingType === PackingType.CUSTOM_GROUP
+        ? await getScanPackValidationByCategory(resolvedVendorId)
+        : undefined;
 
     const qtyPerCustomPackingBox = calculateQtyPerCustomPackingBox(
       validPayload.items,
-      resolvedPackingType
+      resolvedPackingType,
+      scanPackByCategory,
     );
 
     logger.info("Validation passed", {
