@@ -157,7 +157,7 @@ const calculateQtyPerCustomPackingBox = (
   });
 };
 
-const recalculateStoredQtyPerCustomPackingBox = async (
+export const recalculateStoredQtyPerCustomPackingBox = async (
   client: any,
   projectId: number
 ) => {
@@ -169,30 +169,71 @@ const recalculateStoredQtyPerCustomPackingBox = async (
       id: true,
       item_name: true,
       group_name: true,
+      custom_packing_group: true,
       qty: true,
       no_of_qty_in_boxes: true,
+      scan_pack_validate: true,
+      category_name: true,
+      category: {
+        select: {
+          scan_pack_validate: true,
+        },
+      },
     },
     orderBy: {
       id: "asc",
     },
   });
-  const calculatedQuantities = calculateQtyPerCustomPackingBox(
-    storedItems.map(
-      (item: {
-        item_name: string;
-        group_name: string | null;
-        qty: number;
-      }) => ({
-        name: item.item_name,
-        groupName: item.group_name || "",
-        qty: item.qty,
-      })
-    ),
-    PackingType.CUSTOM_GROUP
-  );
 
-  for (const [index, item] of storedItems.entries()) {
-    const calculatedQuantity = calculatedQuantities[index] ?? 1;
+  const isScanAndPack = (item: (typeof storedItems)[0]) => {
+    const categoryName = item.category_name?.trim().toLowerCase();
+    if (!categoryName || categoryName === "no category") {
+      return false;
+    }
+    if (item.scan_pack_validate === false) {
+      return false;
+    }
+    if (item.scan_pack_validate === true) {
+      return true;
+    }
+    if (
+      item.category?.scan_pack_validate !== undefined &&
+      item.category?.scan_pack_validate !== null
+    ) {
+      return Boolean(item.category.scan_pack_validate);
+    }
+    return false;
+  };
+
+  const minimumQtyByGroup = new Map<string, number>();
+
+  for (const item of storedItems) {
+    if (!isScanAndPack(item)) continue;
+    const groupName = cleanText(item.custom_packing_group || item.group_name);
+    if (!groupName) continue;
+
+    const groupKey = groupName.toLocaleLowerCase();
+    const quantity = Number(item.qty);
+    if (quantity <= 0) continue;
+
+    const currentMinimum = minimumQtyByGroup.get(groupKey);
+    if (currentMinimum === undefined || quantity < currentMinimum) {
+      minimumQtyByGroup.set(groupKey, quantity);
+    }
+  }
+
+  for (const item of storedItems) {
+    let calculatedQuantity = 1;
+    if (isScanAndPack(item)) {
+      const groupName = cleanText(item.custom_packing_group || item.group_name);
+      if (groupName) {
+        const minimumQty = minimumQtyByGroup.get(groupName.toLocaleLowerCase());
+        const quantity = Number(item.qty);
+        if (minimumQty && minimumQty > 0) {
+          calculatedQuantity = Math.max(1, Math.floor(quantity / minimumQty));
+        }
+      }
+    }
 
     if (item.no_of_qty_in_boxes === calculatedQuantity) {
       continue;
@@ -845,7 +886,8 @@ const itemSchema = z.object({
   qty: z.coerce
     .number()
     .int()
-    .positive("qty must be greater than 0"),
+    .positive("qty must be greater than 0")
+    .max(999, "qty cannot be greater than 999"),
 
   weight: optionalWeight,
 

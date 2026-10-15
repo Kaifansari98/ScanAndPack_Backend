@@ -3553,7 +3553,8 @@ export const handelItems_13_aug_2026 = async (
       qty: z.coerce
         .number()
         .int()
-        .positive("qty must be greater than 0"),
+        .positive("qty must be greater than 0")
+        .max(10000, "qty cannot be greater than 10000"),
 
       barcode1: z.string().optional().nullable(),
       barcode2: z.string().optional().nullable(),

@@ -24,6 +24,7 @@ import {
   get_filter_track_trace,
   getCutListMachine,
   assignMachine,
+  updateCutListQty,
   createQR,
   downloadCutListExcel,
   downloadCutListExcelFile,
@@ -134,6 +135,7 @@ router.get("/bottle-neck/:vendor_id", getBottleNeck);
 router.get("/cut-list-machine/:vendor_id/:project_id", getCutListMachine);
 
 router.post("/assign-machine", assignMachine);
+router.post("/update-cutlist-qty", updateCutListQty);
 
 router.post("/create-qr-code", createQR);
 router.get("/qr-labels/:filename", downloadQrLabelsFile);

@@ -14,6 +14,7 @@ import {
   CutListSavePayload,
   MarkDefectPayload,
   QRParam,
+  UpdateCutListQtyPayload,
 } from "../../../src/types/track-trace";
 import { generateCutListLabelsPDF } from "../../utils/cutlist-label-generator";
 import { prisma } from "../../prisma/client";
@@ -707,6 +708,80 @@ export const assignMachine = async (_req: Request, res: Response) => {
     return res
       .status(500)
       .json(ApiResponse.error("Failed to assign machine", 500));
+  }
+};
+
+export const updateCutListQty = async (_req: Request, res: Response) => {
+  try {
+    const { project_id, vendor_id, cut_list_id, new_qty, user_role } = _req.body;
+
+    if (!project_id || project_id === "undefined") {
+      return res
+        .status(400)
+        .json(ApiResponse.error("project_id is required", 400));
+    }
+
+    if (!vendor_id || isNaN(Number(vendor_id))) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Valid vendor_id is required", 400));
+    }
+
+    if (!cut_list_id || isNaN(Number(cut_list_id))) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Valid cut_list_id is required", 400));
+    }
+
+    if (
+      new_qty === undefined ||
+      new_qty === null ||
+      isNaN(Number(new_qty)) ||
+      Number(new_qty) < 0 ||
+      Number(new_qty) > 999
+    ) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Valid new_qty (between 0 and 999) is required", 400));
+    }
+
+    const payload: UpdateCutListQtyPayload = {
+      project_id: String(project_id),
+      vendor_id: Number(vendor_id),
+      cut_list_id: Number(cut_list_id),
+      new_qty: Number(new_qty),
+      user_role: user_role ? String(user_role) : undefined,
+    };
+
+    const serviceResponse = await trackTraceService.updateCutListQty(payload);
+
+    if (serviceResponse.status === 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.error(serviceResponse.message, 400));
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          serviceResponse.status,
+          serviceResponse.message,
+          200,
+        ),
+      );
+  } catch (err: any) {
+    console.error("updateCutListQty controller error:", err);
+
+    if (err.statusCode) {
+      return res
+        .status(err.statusCode)
+        .json(ApiResponse.error(err.message, err.statusCode));
+    }
+
+    return res
+      .status(500)
+      .json(ApiResponse.error("Failed to update cutlist quantity", 500));
   }
 };
 
