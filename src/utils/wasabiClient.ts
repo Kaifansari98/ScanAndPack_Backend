@@ -548,6 +548,26 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocsFile = async (
   return sysName;
 };
 
+export const uploadToWasabiMetalCutlistImage = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  projectId: number,
+) => {
+  const sysName = `metal_cutlist/${vendorId}/${leadId}/${projectId}/${uuidv4()}.png`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "image/png",
+    }),
+  );
+
+  return sysName;
+};
+
 export const uploadToWasabiPreProductionFilesFile = async (
   filePath: string,
   vendorId: number,

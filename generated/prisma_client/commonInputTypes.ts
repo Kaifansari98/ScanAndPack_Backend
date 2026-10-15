@@ -1037,6 +1037,23 @@ export type EnumScanTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumScanTypeFilter<$PrismaModel>
 }
 
+export type EnumFabricationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.FabricationType | Prisma.EnumFabricationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFabricationTypeFilter<$PrismaModel> | $Enums.FabricationType
+}
+
+export type EnumFabricationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FabricationType | Prisma.EnumFabricationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFabricationTypeWithAggregatesFilter<$PrismaModel> | $Enums.FabricationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFabricationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFabricationTypeFilter<$PrismaModel>
+}
+
 export type EnumUserMachineStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.UserMachineStatus | Prisma.EnumUserMachineStatusFieldRefInput<$PrismaModel>
   in?: $Enums.UserMachineStatus[] | Prisma.ListEnumUserMachineStatusFieldRefInput<$PrismaModel>
@@ -2926,6 +2943,23 @@ export type NestedEnumScanTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumScanTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumScanTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumFabricationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.FabricationType | Prisma.EnumFabricationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFabricationTypeFilter<$PrismaModel> | $Enums.FabricationType
+}
+
+export type NestedEnumFabricationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FabricationType | Prisma.EnumFabricationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFabricationTypeWithAggregatesFilter<$PrismaModel> | $Enums.FabricationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFabricationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFabricationTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumUserMachineStatusFilter<$PrismaModel = never> = {

@@ -20204,7 +20204,9 @@ export const CutListScalarFieldEnum = {
   include_in_packing: 'include_in_packing',
   scan_pack_validate: 'scan_pack_validate',
   custom_packing_group: 'custom_packing_group',
-  no_of_qty_in_boxes: 'no_of_qty_in_boxes'
+  no_of_qty_in_boxes: 'no_of_qty_in_boxes',
+  fabrication: 'fabrication',
+  image_key: 'image_key'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
@@ -22738,6 +22740,20 @@ export type EnumScanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'ScanType[]'
  */
 export type ListEnumScanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScanType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FabricationType'
+ */
+export type EnumFabricationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FabricationType'>
+    
+
+
+/**
+ * Reference to a field of type 'FabricationType[]'
+ */
+export type ListEnumFabricationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FabricationType[]'>
     
 
 

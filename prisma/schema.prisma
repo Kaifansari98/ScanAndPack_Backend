@@ -3206,6 +3206,8 @@ model CutList {
   scan_pack_validate       Boolean?
   custom_packing_group     String?
   no_of_qty_in_boxes       Int                      @default(1)
+  fabrication              FabricationType          @default(WOODWORK)
+  image_key                String?
   lead                     LeadMaster?              @relation(fields: [lead_id], references: [id])
   project                  ProjectMaster            @relation(fields: [project_id], references: [id])
   vendor                   VendorMaster             @relation(fields: [vendor_id], references: [id])
@@ -3217,6 +3219,7 @@ model CutList {
   @@index([unique_code])
   @@index([category_id])
   @@index([vendor_id, unique_code, project_id], map: "idx_cutlist_vendor_code_project")
+  @@index([project_id, fabrication])
 }
 
 model CutListMachineMapping {
@@ -5149,6 +5152,11 @@ enum PackingType {
   DEFAULT
   GROUPWISE
   CUSTOM_GROUP
+}
+
+enum FabricationType {
+  METALWORK
+  WOODWORK
 }
 
 enum AdditionalCostCalculationType {
