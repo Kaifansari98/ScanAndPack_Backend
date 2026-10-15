@@ -285,6 +285,7 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  onlineLeadAssignedFranchises FranchiseMaster[] @relation("OnlineLeadSalesExecutive")
   productsRequiredForProduction                                                  ProductsRequiredForProduction[]
   id                                                                             Int                                            @id @default(autoincrement())
   vendor_id                                                                      Int
@@ -3395,6 +3396,10 @@ model DefectedItem {
 }
 
 model FranchiseMaster {
+  online_lead_sales_executive_id Int?
+  onlineLeadSalesExecutive UserMaster? @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
+
+  @@index([online_lead_sales_executive_id])
   productsRequiredForProduction                                              ProductsRequiredForProduction[]
   id                                                                         Int                                  @id @default(autoincrement())
   vendor_id                                                                  Int

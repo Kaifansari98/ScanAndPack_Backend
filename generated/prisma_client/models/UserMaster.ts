@@ -292,6 +292,7 @@ export type UserMasterWhereInput = {
   created_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterListRelationFilter
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   accountsCreated?: Prisma.AccountMasterListRelationFilter
   accountsUpdated?: Prisma.AccountMasterListRelationFilter
@@ -498,6 +499,7 @@ export type UserMasterOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterOrderByRelationAggregateInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
   accountsCreated?: Prisma.AccountMasterOrderByRelationAggregateInput
   accountsUpdated?: Prisma.AccountMasterOrderByRelationAggregateInput
@@ -707,6 +709,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterListRelationFilter
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   accountsCreated?: Prisma.AccountMasterListRelationFilter
   accountsUpdated?: Prisma.AccountMasterListRelationFilter
@@ -949,6 +952,7 @@ export type UserMasterCreateInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -1155,6 +1159,7 @@ export type UserMasterUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1354,6 +1359,7 @@ export type UserMasterUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -1560,6 +1566,7 @@ export type UserMasterUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3805,6 +3812,12 @@ export type UserMasterUpdateOneRequiredWithoutCreatedDefectsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutCreatedDefectsInput, Prisma.UserMasterUpdateWithoutCreatedDefectsInput>, Prisma.UserMasterUncheckedUpdateWithoutCreatedDefectsInput>
 }
 
+export type UserMasterCreateNestedOneWithoutOnlineLeadAssignedFranchisesInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutOnlineLeadAssignedFranchisesInput, Prisma.UserMasterUncheckedCreateWithoutOnlineLeadAssignedFranchisesInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutOnlineLeadAssignedFranchisesInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
 export type UserMasterCreateNestedManyWithoutFranchiseInput = {
   create?: Prisma.XOR<Prisma.UserMasterCreateWithoutFranchiseInput, Prisma.UserMasterUncheckedCreateWithoutFranchiseInput> | Prisma.UserMasterCreateWithoutFranchiseInput[] | Prisma.UserMasterUncheckedCreateWithoutFranchiseInput[]
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutFranchiseInput | Prisma.UserMasterCreateOrConnectWithoutFranchiseInput[]
@@ -3817,6 +3830,16 @@ export type UserMasterUncheckedCreateNestedManyWithoutFranchiseInput = {
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutFranchiseInput | Prisma.UserMasterCreateOrConnectWithoutFranchiseInput[]
   createMany?: Prisma.UserMasterCreateManyFranchiseInputEnvelope
   connect?: Prisma.UserMasterWhereUniqueInput | Prisma.UserMasterWhereUniqueInput[]
+}
+
+export type UserMasterUpdateOneWithoutOnlineLeadAssignedFranchisesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutOnlineLeadAssignedFranchisesInput, Prisma.UserMasterUncheckedCreateWithoutOnlineLeadAssignedFranchisesInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutOnlineLeadAssignedFranchisesInput
+  upsert?: Prisma.UserMasterUpsertWithoutOnlineLeadAssignedFranchisesInput
+  disconnect?: Prisma.UserMasterWhereInput | boolean
+  delete?: Prisma.UserMasterWhereInput | boolean
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutOnlineLeadAssignedFranchisesInput, Prisma.UserMasterUpdateWithoutOnlineLeadAssignedFranchisesInput>, Prisma.UserMasterUncheckedUpdateWithoutOnlineLeadAssignedFranchisesInput>
 }
 
 export type UserMasterUpdateManyWithoutFranchiseNestedInput = {
@@ -4783,6 +4806,7 @@ export type UserMasterCreateWithoutVendorInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -4987,6 +5011,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5231,6 +5256,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -5435,6 +5461,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5660,6 +5687,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -5865,6 +5893,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6079,6 +6108,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -6284,6 +6314,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6482,6 +6513,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -6687,6 +6719,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6890,6 +6923,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -7095,6 +7129,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7309,6 +7344,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -7514,6 +7550,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7723,6 +7760,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -7928,6 +7966,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8126,6 +8165,7 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -8331,6 +8371,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8545,6 +8586,7 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -8750,6 +8792,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8948,6 +8991,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -9153,6 +9197,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9356,6 +9401,7 @@ export type UserMasterCreateWithoutDeletedProjectsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -9561,6 +9607,7 @@ export type UserMasterUncheckedCreateWithoutDeletedProjectsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9764,6 +9811,7 @@ export type UserMasterCreateWithoutProjectMastersInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -9969,6 +10017,7 @@ export type UserMasterUncheckedCreateWithoutProjectMastersInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -10183,6 +10232,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -10388,6 +10438,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -10597,6 +10648,7 @@ export type UserMasterUpdateWithoutDeletedProjectsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -10802,6 +10854,7 @@ export type UserMasterUncheckedUpdateWithoutDeletedProjectsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -11011,6 +11064,7 @@ export type UserMasterUpdateWithoutProjectMastersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -11216,6 +11270,7 @@ export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -11414,6 +11469,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -11619,6 +11675,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -11822,6 +11879,7 @@ export type UserMasterCreateWithoutBoxesPackedByInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -12027,6 +12085,7 @@ export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -12230,6 +12289,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -12435,6 +12495,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -12649,6 +12710,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -12854,6 +12916,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -13063,6 +13126,7 @@ export type UserMasterUpdateWithoutBoxesPackedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -13268,6 +13332,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -13477,6 +13542,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -13682,6 +13748,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -13880,6 +13947,7 @@ export type UserMasterCreateWithoutFactoryOutRevertsMadeInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -14085,6 +14153,7 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsMadeInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -14288,6 +14357,7 @@ export type UserMasterCreateWithoutFactoryOutRevertsOriginalInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -14493,6 +14563,7 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsOriginalInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -14707,6 +14778,7 @@ export type UserMasterUpdateWithoutFactoryOutRevertsMadeInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -14912,6 +14984,7 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsMadeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -15121,6 +15194,7 @@ export type UserMasterUpdateWithoutFactoryOutRevertsOriginalInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -15326,6 +15400,7 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsOriginalInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -15524,6 +15599,7 @@ export type UserMasterCreateWithoutBoxUnpacksMadeInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -15729,6 +15805,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksMadeInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -15932,6 +16009,7 @@ export type UserMasterCreateWithoutBoxUnpacksPackedByInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -16137,6 +16215,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksPackedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -16340,6 +16419,7 @@ export type UserMasterCreateWithoutBoxUnpacksCreatedByInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -16545,6 +16625,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -16759,6 +16840,7 @@ export type UserMasterUpdateWithoutBoxUnpacksMadeInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -16964,6 +17046,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksMadeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -17173,6 +17256,7 @@ export type UserMasterUpdateWithoutBoxUnpacksPackedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -17378,6 +17462,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksPackedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -17587,6 +17672,7 @@ export type UserMasterUpdateWithoutBoxUnpacksCreatedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -17792,6 +17878,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -17990,6 +18077,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -18195,6 +18283,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -18409,6 +18498,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -18614,6 +18704,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -18812,6 +18903,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -19017,6 +19109,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -19220,6 +19313,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -19425,6 +19519,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -19628,6 +19723,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -19833,6 +19929,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -20036,6 +20133,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -20241,6 +20339,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -20455,6 +20554,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -20660,6 +20760,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -20869,6 +20970,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -21074,6 +21176,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -21283,6 +21386,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -21488,6 +21592,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -21697,6 +21802,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -21902,6 +22008,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -22100,6 +22207,7 @@ export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -22305,6 +22413,7 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -22519,6 +22628,7 @@ export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -22724,6 +22834,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -22922,6 +23033,7 @@ export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -23127,6 +23239,7 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -23341,6 +23454,7 @@ export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -23546,6 +23660,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -23744,6 +23859,7 @@ export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -23949,6 +24065,7 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -24163,6 +24280,7 @@ export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -24368,6 +24486,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -24566,6 +24685,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -24771,6 +24891,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -24974,6 +25095,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -25179,6 +25301,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -25393,6 +25516,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -25598,6 +25722,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -25807,6 +25932,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -26012,6 +26138,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -26210,6 +26337,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -26415,6 +26543,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -26618,6 +26747,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -26823,6 +26953,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -27026,6 +27157,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -27231,6 +27363,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -27445,6 +27578,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -27650,6 +27784,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -27859,6 +27994,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -28064,6 +28200,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -28273,6 +28410,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -28478,6 +28616,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -28676,6 +28815,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -28881,6 +29021,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -29095,6 +29236,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -29300,6 +29442,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -29498,6 +29641,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -29703,6 +29847,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsCreatedI
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -29906,6 +30051,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -30111,6 +30257,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsReleased
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -30325,6 +30472,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -30530,6 +30678,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsCreatedI
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -30739,6 +30888,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -30944,6 +31094,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleased
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -31142,6 +31293,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
@@ -31347,6 +31499,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
@@ -31550,6 +31703,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
@@ -31755,6 +31909,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
@@ -31969,6 +32124,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
@@ -32174,6 +32330,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
@@ -32383,6 +32540,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
@@ -32588,6 +32746,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
@@ -32786,6 +32945,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -32991,6 +33151,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -33205,6 +33366,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -33410,6 +33572,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -33608,6 +33771,7 @@ export type UserMasterCreateWithoutProcessBriefsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -33813,6 +33977,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -34016,6 +34181,7 @@ export type UserMasterCreateWithoutProcessBriefsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -34221,6 +34387,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -34435,6 +34602,7 @@ export type UserMasterUpdateWithoutProcessBriefsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -34640,6 +34808,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -34849,6 +35018,7 @@ export type UserMasterUpdateWithoutProcessBriefsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -35054,6 +35224,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -35252,6 +35423,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -35457,6 +35629,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -35660,6 +35833,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -35865,6 +36039,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -36079,6 +36254,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -36284,6 +36460,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -36493,6 +36670,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -36698,6 +36876,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -36896,6 +37075,7 @@ export type UserMasterCreateWithoutPbmCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -37101,6 +37281,7 @@ export type UserMasterUncheckedCreateWithoutPbmCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -37304,6 +37485,7 @@ export type UserMasterCreateWithoutPbmUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -37509,6 +37691,7 @@ export type UserMasterUncheckedCreateWithoutPbmUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -37723,6 +37906,7 @@ export type UserMasterUpdateWithoutPbmCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -37928,6 +38112,7 @@ export type UserMasterUncheckedUpdateWithoutPbmCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -38137,6 +38322,7 @@ export type UserMasterUpdateWithoutPbmUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -38342,6 +38528,7 @@ export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -38540,6 +38727,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -38745,6 +38933,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -38948,6 +39137,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -39153,6 +39343,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -39367,6 +39558,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -39572,6 +39764,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -39781,6 +39974,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -39986,6 +40180,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -40184,6 +40379,7 @@ export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -40389,6 +40585,7 @@ export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -40603,6 +40800,7 @@ export type UserMasterUpdateWithoutLeadHardwareMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -40808,6 +41006,7 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -41006,6 +41205,7 @@ export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -41211,6 +41411,7 @@ export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedIn
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -41425,6 +41626,7 @@ export type UserMasterUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -41630,6 +41832,7 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -41828,6 +42031,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -42033,6 +42237,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedIn
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -42247,6 +42452,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -42452,6 +42658,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -42650,6 +42857,7 @@ export type UserMasterCreateWithoutSpecificationDocumentMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -42855,6 +43063,7 @@ export type UserMasterUncheckedCreateWithoutSpecificationDocumentMappingsCreated
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -43069,6 +43278,7 @@ export type UserMasterUpdateWithoutSpecificationDocumentMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -43274,6 +43484,7 @@ export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreated
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -43472,6 +43683,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -43677,6 +43889,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -43880,6 +44093,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -44085,6 +44299,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -44299,6 +44514,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -44504,6 +44720,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -44713,6 +44930,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -44918,6 +45136,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -45116,6 +45335,7 @@ export type UserMasterCreateWithoutB2bDocumentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -45321,6 +45541,7 @@ export type UserMasterUncheckedCreateWithoutB2bDocumentsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -45535,6 +45756,7 @@ export type UserMasterUpdateWithoutB2bDocumentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -45740,6 +45962,7 @@ export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -45938,6 +46161,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -46143,6 +46367,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -46346,6 +46571,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -46551,6 +46777,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -46765,6 +46992,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -46970,6 +47198,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -47179,6 +47408,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -47384,6 +47614,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -47582,6 +47813,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -47787,6 +48019,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -48001,6 +48234,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -48206,6 +48440,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -48404,6 +48639,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -48609,6 +48845,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -48823,6 +49060,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -49028,6 +49266,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -49226,6 +49465,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -49431,6 +49671,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -49634,6 +49875,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -49839,6 +50081,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -50053,6 +50296,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -50258,6 +50502,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -50467,6 +50712,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -50672,6 +50918,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -50870,6 +51117,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -51075,6 +51323,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -51289,6 +51538,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -51494,6 +51744,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -51692,6 +51943,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -51897,6 +52149,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -52111,6 +52364,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -52316,6 +52570,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -52514,6 +52769,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -52719,6 +52975,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -52933,6 +53190,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -53138,6 +53396,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -53336,6 +53595,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -53541,6 +53801,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -53744,6 +54005,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -53949,6 +54211,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -54163,6 +54426,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -54368,6 +54632,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -54577,6 +54842,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -54782,6 +55048,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -54980,6 +55247,7 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -55185,6 +55453,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -55399,6 +55668,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -55604,6 +55874,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -55802,6 +56073,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -56007,6 +56279,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -56210,6 +56483,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -56415,6 +56689,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -56629,6 +56904,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -56834,6 +57110,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -57043,6 +57320,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -57248,6 +57526,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -57446,6 +57725,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -57651,6 +57931,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -57854,6 +58135,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -58059,6 +58341,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -58262,6 +58545,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -58467,6 +58751,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -58670,6 +58955,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -58875,6 +59161,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -59089,6 +59376,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -59294,6 +59582,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -59503,6 +59792,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -59708,6 +59998,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -59917,6 +60208,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -60122,6 +60414,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -60331,6 +60624,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -60536,6 +60830,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -60734,6 +61029,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -60939,6 +61235,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -61153,6 +61450,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -61358,6 +61656,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -61556,6 +61855,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -61761,6 +62061,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -61964,6 +62265,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -62169,6 +62471,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -62383,6 +62686,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -62588,6 +62892,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -62797,6 +63102,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -63002,6 +63308,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -63200,6 +63507,7 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -63405,6 +63713,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -63608,6 +63917,7 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -63813,6 +64123,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -64027,6 +64338,7 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -64232,6 +64544,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -64441,6 +64754,7 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -64646,6 +64960,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -64844,6 +65159,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -65049,6 +65365,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -65263,6 +65580,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -65468,6 +65786,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -65666,6 +65985,7 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -65871,6 +66191,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -66085,6 +66406,7 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -66290,6 +66612,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -66488,6 +66811,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -66693,6 +67017,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -66896,6 +67221,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -67101,6 +67427,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -67315,6 +67642,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -67520,6 +67848,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -67729,6 +68058,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -67934,6 +68264,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -68132,6 +68463,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -68337,6 +68669,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -68540,6 +68873,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -68745,6 +69079,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -68959,6 +69294,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -69164,6 +69500,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -69373,6 +69710,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -69578,6 +69916,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -69776,6 +70115,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -69981,6 +70321,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -70184,6 +70525,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -70389,6 +70731,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -70603,6 +70946,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -70808,6 +71152,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -71017,6 +71362,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -71222,6 +71568,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -71420,6 +71767,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -71625,6 +71973,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -71828,6 +72177,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -72033,6 +72383,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -72236,6 +72587,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -72441,6 +72793,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -72655,6 +73008,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -72860,6 +73214,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -73069,6 +73424,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -73274,6 +73630,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -73483,6 +73840,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -73688,6 +74046,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -73886,6 +74245,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -74091,6 +74451,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -74294,6 +74655,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput 
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -74499,6 +74861,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -74702,6 +75065,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -74907,6 +75271,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -75110,6 +75475,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -75315,6 +75681,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -75529,6 +75896,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -75734,6 +76102,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -75943,6 +76312,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput 
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -76148,6 +76518,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -76357,6 +76728,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -76562,6 +76934,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -76771,6 +77144,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -76976,6 +77350,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -77174,6 +77549,7 @@ export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -77379,6 +77755,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -77582,6 +77959,7 @@ export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -77787,6 +78165,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -77990,6 +78369,7 @@ export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -78195,6 +78575,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -78398,6 +78779,7 @@ export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -78603,6 +78985,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -78817,6 +79200,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -79022,6 +79406,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -79231,6 +79616,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -79436,6 +79822,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -79645,6 +80032,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -79850,6 +80238,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -80059,6 +80448,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -80264,6 +80654,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -80462,6 +80853,7 @@ export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -80667,6 +81059,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -80881,6 +81274,7 @@ export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -81086,6 +81480,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -81284,6 +81679,7 @@ export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = 
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -81489,6 +81885,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -81703,6 +82100,7 @@ export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = 
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -81908,6 +82306,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -82106,6 +82505,7 @@ export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -82311,6 +82711,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -82525,6 +82926,7 @@ export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -82730,6 +83132,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -82928,6 +83331,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -83133,6 +83537,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -83347,6 +83752,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -83552,6 +83958,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -83750,6 +84157,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -83955,6 +84363,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -84169,6 +84578,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -84374,6 +84784,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -84572,6 +84983,7 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -84777,6 +85189,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -84991,6 +85404,7 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -85196,6 +85610,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -85394,6 +85809,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -85599,6 +86015,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -85802,6 +86219,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -86007,6 +86425,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -86210,6 +86629,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -86415,6 +86835,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -86629,6 +87050,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -86834,6 +87256,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -87043,6 +87466,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -87248,6 +87672,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -87457,6 +87882,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -87662,6 +88088,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -87860,6 +88287,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -88065,6 +88493,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -88268,6 +88697,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -88473,6 +88903,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -88687,6 +89118,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -88892,6 +89324,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -89101,6 +89534,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -89306,6 +89740,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -89504,6 +89939,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -89709,6 +90145,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -89912,6 +90349,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -90117,6 +90555,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -90331,6 +90770,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -90536,6 +90976,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -90745,6 +91186,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -90950,6 +91392,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -91148,6 +91591,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -91353,6 +91797,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -91567,6 +92012,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -91772,6 +92218,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -91970,6 +92417,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -92175,6 +92623,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -92389,6 +92838,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -92594,6 +93044,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -92792,6 +93243,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -92997,6 +93449,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -93211,6 +93664,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -93416,6 +93870,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -93614,6 +94069,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -93819,6 +94275,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -94022,6 +94479,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -94227,6 +94685,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -94430,6 +94889,7 @@ export type UserMasterCreateWithoutMiscReturnedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -94635,6 +95095,7 @@ export type UserMasterUncheckedCreateWithoutMiscReturnedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -94849,6 +95310,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -95054,6 +95516,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -95263,6 +95726,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -95468,6 +95932,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -95677,6 +96142,7 @@ export type UserMasterUpdateWithoutMiscReturnedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -95882,6 +96348,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -96080,6 +96547,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -96285,6 +96753,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -96499,6 +96968,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -96704,6 +97174,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -96902,6 +97373,7 @@ export type UserMasterCreateWithoutMiscFollowupsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -97107,6 +97579,7 @@ export type UserMasterUncheckedCreateWithoutMiscFollowupsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -97321,6 +97794,7 @@ export type UserMasterUpdateWithoutMiscFollowupsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -97526,6 +98000,7 @@ export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -97724,6 +98199,7 @@ export type UserMasterCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -97929,6 +98405,7 @@ export type UserMasterUncheckedCreateWithoutMiscReorderInstanceMaterialMappingsC
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -98143,6 +98620,7 @@ export type UserMasterUpdateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -98348,6 +98826,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsC
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -98546,6 +99025,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -98751,6 +99231,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -98965,6 +99446,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -99170,6 +99652,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -99368,6 +99851,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -99573,6 +100057,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -99776,6 +100261,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -99981,6 +100467,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -100195,6 +100682,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -100400,6 +100888,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -100609,6 +101098,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -100814,6 +101304,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -101012,6 +101503,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -101217,6 +101709,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -101431,6 +101924,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -101636,6 +102130,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -101834,6 +102329,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -102039,6 +102535,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -102242,6 +102739,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -102447,6 +102945,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -102661,6 +103160,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -102866,6 +103366,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -103075,6 +103576,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -103280,6 +103782,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -103478,6 +103981,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -103683,6 +104187,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -103886,6 +104391,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -104091,6 +104597,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -104294,6 +104801,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -104499,6 +105007,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -104713,6 +105222,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -104918,6 +105428,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -105127,6 +105638,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -105332,6 +105844,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -105541,6 +106054,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -105746,6 +106260,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -105944,6 +106459,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -106149,6 +106665,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -106352,6 +106869,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -106557,6 +107075,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -106771,6 +107290,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -106976,6 +107496,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -107185,6 +107706,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -107390,6 +107912,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -107588,6 +108111,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -107793,6 +108317,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -108007,6 +108532,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -108212,6 +108738,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -108400,6 +108927,416 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutUserNestedInput
 }
 
+export type UserMasterCreateWithoutOnlineLeadAssignedFranchisesInput = {
+  user_name: string
+  designation?: string | null
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
+  attendances?: Prisma.attendanceCreateNestedManyWithoutUserInput
+  attendance_logs?: Prisma.attendance_logsCreateNestedManyWithoutUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutOnlineLeadAssignedFranchisesInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  designation?: string | null
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutUserInput
+  attendance_logs?: Prisma.attendance_logsUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutOnlineLeadAssignedFranchisesInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutOnlineLeadAssignedFranchisesInput, Prisma.UserMasterUncheckedCreateWithoutOnlineLeadAssignedFranchisesInput>
+}
+
 export type UserMasterCreateWithoutFranchiseInput = {
   user_name: string
   designation?: string | null
@@ -108410,6 +109347,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -108614,6 +109552,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -108813,6 +109752,422 @@ export type UserMasterCreateManyFranchiseInputEnvelope = {
   skipDuplicates?: boolean
 }
 
+export type UserMasterUpsertWithoutOnlineLeadAssignedFranchisesInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutOnlineLeadAssignedFranchisesInput, Prisma.UserMasterUncheckedUpdateWithoutOnlineLeadAssignedFranchisesInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutOnlineLeadAssignedFranchisesInput, Prisma.UserMasterUncheckedCreateWithoutOnlineLeadAssignedFranchisesInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutOnlineLeadAssignedFranchisesInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutOnlineLeadAssignedFranchisesInput, Prisma.UserMasterUncheckedUpdateWithoutOnlineLeadAssignedFranchisesInput>
+}
+
+export type UserMasterUpdateWithoutOnlineLeadAssignedFranchisesInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
+  attendances?: Prisma.attendanceUpdateManyWithoutUserNestedInput
+  attendance_logs?: Prisma.attendance_logsUpdateManyWithoutUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutOnlineLeadAssignedFranchisesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  attendances?: Prisma.attendanceUncheckedUpdateManyWithoutUserNestedInput
+  attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserMasterUpsertWithWhereUniqueWithoutFranchiseInput = {
   where: Prisma.UserMasterWhereUniqueInput
   update: Prisma.XOR<Prisma.UserMasterUpdateWithoutFranchiseInput, Prisma.UserMasterUncheckedUpdateWithoutFranchiseInput>
@@ -108839,6 +110194,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -109044,6 +110400,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -109247,6 +110604,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -109452,6 +110810,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -109666,6 +111025,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -109871,6 +111231,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -110080,6 +111441,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -110285,6 +111647,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -110483,6 +111846,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -110688,6 +112052,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -110902,6 +112267,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -111107,6 +112473,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -111305,6 +112672,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -111510,6 +112878,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -111724,6 +113093,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -111929,6 +113299,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -112127,6 +113498,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -112332,6 +113704,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -112535,6 +113908,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -112740,6 +114114,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -112954,6 +114329,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -113159,6 +114535,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -113368,6 +114745,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -113573,6 +114951,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -113771,6 +115150,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -113976,6 +115356,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -114190,6 +115571,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -114395,6 +115777,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -114593,6 +115976,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -114798,6 +116182,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -115001,6 +116386,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -115206,6 +116592,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -115420,6 +116807,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -115625,6 +117013,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -115834,6 +117223,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -116039,6 +117429,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -116237,6 +117628,7 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -116442,6 +117834,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -116645,6 +118038,7 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -116850,6 +118244,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -117053,6 +118448,7 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -117258,6 +118654,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -117461,6 +118858,7 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -117666,6 +119064,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -117869,6 +119268,7 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -118074,6 +119474,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -118288,6 +119689,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -118493,6 +119895,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -118702,6 +120105,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -118907,6 +120311,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -119116,6 +120521,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -119321,6 +120727,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -119530,6 +120937,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -119735,6 +121143,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -119944,6 +121353,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -120149,6 +121559,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -120347,6 +121758,7 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -120552,6 +121964,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -120766,6 +122179,7 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -120971,6 +122385,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -121169,6 +122584,7 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -121374,6 +122790,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -121577,6 +122994,7 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -121782,6 +123200,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -121996,6 +123415,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -122201,6 +123621,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -122410,6 +123831,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -122615,6 +124037,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -122813,6 +124236,7 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -123018,6 +124442,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -123221,6 +124646,7 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -123426,6 +124852,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -123629,6 +125056,7 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -123834,6 +125262,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -124048,6 +125477,7 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -124253,6 +125683,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -124462,6 +125893,7 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -124667,6 +126099,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -124876,6 +126309,7 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -125081,6 +126515,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -125279,6 +126714,7 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -125484,6 +126920,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -125687,6 +127124,7 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -125892,6 +127330,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -126095,6 +127534,7 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -126300,6 +127740,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -126514,6 +127955,7 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -126719,6 +128161,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -126928,6 +128371,7 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -127133,6 +128577,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -127342,6 +128787,7 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -127547,6 +128993,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -127745,6 +129192,7 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -127950,6 +129398,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -128153,6 +129602,7 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -128358,6 +129808,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -128572,6 +130023,7 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -128777,6 +130229,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -128986,6 +130439,7 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -129191,6 +130645,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -129389,6 +130844,7 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -129594,6 +131050,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -129808,6 +131265,7 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -130013,6 +131471,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -130211,6 +131670,7 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -130416,6 +131876,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -130630,6 +132091,7 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -130835,6 +132297,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -131033,6 +132496,7 @@ export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -131238,6 +132702,7 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -131452,6 +132917,7 @@ export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -131657,6 +133123,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -131855,6 +133322,7 @@ export type UserMasterCreateWithoutArchitechuremastersInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -132060,6 +133528,7 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -132274,6 +133743,7 @@ export type UserMasterUpdateWithoutArchitechuremastersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -132479,6 +133949,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -132677,6 +134148,7 @@ export type UserMasterCreateWithoutBroadcastsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -132882,6 +134354,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -133085,6 +134558,7 @@ export type UserMasterCreateWithoutBroadcastsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -133290,6 +134764,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -133504,6 +134979,7 @@ export type UserMasterUpdateWithoutBroadcastsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -133709,6 +135185,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -133918,6 +135395,7 @@ export type UserMasterUpdateWithoutBroadcastsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -134123,6 +135601,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -134321,6 +135800,7 @@ export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -134526,6 +136006,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -134740,6 +136221,7 @@ export type UserMasterUpdateWithoutBroadcastCategoriesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -134945,6 +136427,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -135143,6 +136626,7 @@ export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -135348,6 +136832,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -135551,6 +137036,7 @@ export type UserMasterCreateWithoutBroadcastAudienceUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -135756,6 +137242,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -135970,6 +137457,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -136175,6 +137663,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -136384,6 +137873,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -136589,6 +138079,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -136787,6 +138278,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -136992,6 +138484,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -137195,6 +138688,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -137400,6 +138894,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -137614,6 +139109,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -137819,6 +139315,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -138028,6 +139525,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -138233,6 +139731,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -138431,6 +139930,7 @@ export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -138636,6 +140136,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -138839,6 +140340,7 @@ export type UserMasterCreateWithoutBroadcastReadsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -139044,6 +140546,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -139247,6 +140750,7 @@ export type UserMasterCreateWithoutBroadcastReadsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -139452,6 +140956,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -139666,6 +141171,7 @@ export type UserMasterUpdateWithoutBroadcastReadsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -139871,6 +141377,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -140080,6 +141587,7 @@ export type UserMasterUpdateWithoutBroadcastReadsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -140285,6 +141793,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -140494,6 +142003,7 @@ export type UserMasterUpdateWithoutBroadcastReadsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -140699,6 +142209,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -140897,6 +142408,7 @@ export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -141102,6 +142614,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -141305,6 +142818,7 @@ export type UserMasterCreateWithoutNotificationQueuesUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -141510,6 +143024,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -141724,6 +143239,7 @@ export type UserMasterUpdateWithoutNotificationQueuesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -141929,6 +143445,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -142138,6 +143655,7 @@ export type UserMasterUpdateWithoutNotificationQueuesUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -142343,6 +143861,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -142541,6 +144060,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -142746,6 +144266,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -142949,6 +144470,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -143154,6 +144676,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -143368,6 +144891,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -143573,6 +145097,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -143782,6 +145307,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -143987,6 +145513,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -144185,6 +145712,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -144390,6 +145918,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -144604,6 +146133,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -144809,6 +146339,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -145007,6 +146538,7 @@ export type UserMasterCreateWithoutOnline_lead_call_logInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -145212,6 +146744,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -145426,6 +146959,7 @@ export type UserMasterUpdateWithoutOnline_lead_call_logInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -145631,6 +147165,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -145829,6 +147364,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -146034,6 +147570,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -146237,6 +147774,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -146442,6 +147980,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -146656,6 +148195,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -146861,6 +148401,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -147070,6 +148611,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -147275,6 +148817,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -147473,6 +149016,7 @@ export type UserMasterCreateWithoutOnline_lead_historyInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -147678,6 +149222,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -147892,6 +149437,7 @@ export type UserMasterUpdateWithoutOnline_lead_historyInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -148097,6 +149643,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -148295,6 +149842,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_a
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -148500,6 +150048,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -148703,6 +150252,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_s
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -148908,6 +150458,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -149122,6 +150673,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_a
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -149327,6 +150879,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -149536,6 +151089,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_s
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -149741,6 +151295,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -149939,6 +151494,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_assign_toToUserMast
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -150144,6 +151700,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_assign_toT
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -150347,6 +151904,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_created_byToUserMas
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -150552,6 +152110,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_created_by
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -150755,6 +152314,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_final_assigned_lead
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -150960,6 +152520,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_final_assi
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -151163,6 +152724,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_updated_byToUserMas
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -151368,6 +152930,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_updated_by
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -151582,6 +153145,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_assign_toToUserMast
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -151787,6 +153351,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_assign_toT
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -151996,6 +153561,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_created_byToUserMas
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -152201,6 +153767,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_created_by
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -152410,6 +153977,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_final_assigned_lead
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -152615,6 +154183,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_final_assi
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -152824,6 +154393,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_updated_byToUserMas
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -153029,6 +154599,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_by
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -153227,6 +154798,7 @@ export type UserMasterCreateWithoutProductsRequiredForProductionInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
@@ -153432,6 +155004,7 @@ export type UserMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
@@ -153646,6 +155219,7 @@ export type UserMasterUpdateWithoutProductsRequiredForProductionInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
@@ -153851,6 +155425,7 @@ export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
@@ -154049,6 +155624,7 @@ export type UserMasterCreateWithoutCutListRulesCreatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -154254,6 +155830,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesCreatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -154457,6 +156034,7 @@ export type UserMasterCreateWithoutCutListRulesUpdatedInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -154662,6 +156240,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesUpdatedInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -154876,6 +156455,7 @@ export type UserMasterUpdateWithoutCutListRulesCreatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -155081,6 +156661,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesCreatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -155290,6 +156871,7 @@ export type UserMasterUpdateWithoutCutListRulesUpdatedInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -155495,6 +157077,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -155693,6 +157276,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput =
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -155898,6 +157482,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreat
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -156101,6 +157686,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput =
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -156306,6 +157892,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdat
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -156509,6 +158096,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -156714,6 +158302,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -156928,6 +158517,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput =
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -157133,6 +158723,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsCreat
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -157342,6 +158933,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput =
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -157547,6 +159139,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsUpdat
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -157756,6 +159349,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -157961,6 +159555,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -158159,6 +159754,7 @@ export type UserMasterCreateWithoutAttendancesInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -158364,6 +159960,7 @@ export type UserMasterUncheckedCreateWithoutAttendancesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -158578,6 +160175,7 @@ export type UserMasterUpdateWithoutAttendancesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -158783,6 +160381,7 @@ export type UserMasterUncheckedUpdateWithoutAttendancesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -158981,6 +160580,7 @@ export type UserMasterCreateWithoutAttendance_logsInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
@@ -159186,6 +160786,7 @@ export type UserMasterUncheckedCreateWithoutAttendance_logsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
   accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
   accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -159400,6 +161001,7 @@ export type UserMasterUpdateWithoutAttendance_logsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -159605,6 +161207,7 @@ export type UserMasterUncheckedUpdateWithoutAttendance_logsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -159818,6 +161421,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -160022,6 +161626,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -160251,6 +161856,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -160455,6 +162061,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -160684,6 +162291,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
@@ -160888,6 +162496,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -161098,6 +162707,7 @@ export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
  */
 
 export type UserMasterCountOutputType = {
+  onlineLeadAssignedFranchises: number
   productsRequiredForProduction: number
   accountsCreated: number
   accountsUpdated: number
@@ -161288,6 +162898,7 @@ export type UserMasterCountOutputType = {
 }
 
 export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  onlineLeadAssignedFranchises?: boolean | UserMasterCountOutputTypeCountOnlineLeadAssignedFranchisesArgs
   productsRequiredForProduction?: boolean | UserMasterCountOutputTypeCountProductsRequiredForProductionArgs
   accountsCreated?: boolean | UserMasterCountOutputTypeCountAccountsCreatedArgs
   accountsUpdated?: boolean | UserMasterCountOutputTypeCountAccountsUpdatedArgs
@@ -161485,6 +163096,13 @@ export type UserMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the UserMasterCountOutputType
    */
   select?: Prisma.UserMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountOnlineLeadAssignedFranchisesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FranchiseMasterWhereInput
 }
 
 /**
@@ -162811,6 +164429,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   created_at?: boolean
   updated_at?: boolean
   franchise_id?: boolean
+  onlineLeadAssignedFranchises?: boolean | Prisma.UserMaster$onlineLeadAssignedFranchisesArgs<ExtArgs>
   productsRequiredForProduction?: boolean | Prisma.UserMaster$productsRequiredForProductionArgs<ExtArgs>
   accountsCreated?: boolean | Prisma.UserMaster$accountsCreatedArgs<ExtArgs>
   accountsUpdated?: boolean | Prisma.UserMaster$accountsUpdatedArgs<ExtArgs>
@@ -163060,6 +164679,7 @@ export type UserMasterSelectScalar = {
 
 export type UserMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_name" | "designation" | "user_contact" | "user_email" | "user_timezone" | "password" | "user_type_id" | "status" | "created_at" | "updated_at" | "franchise_id", ExtArgs["result"]["userMaster"]>
 export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  onlineLeadAssignedFranchises?: boolean | Prisma.UserMaster$onlineLeadAssignedFranchisesArgs<ExtArgs>
   productsRequiredForProduction?: boolean | Prisma.UserMaster$productsRequiredForProductionArgs<ExtArgs>
   accountsCreated?: boolean | Prisma.UserMaster$accountsCreatedArgs<ExtArgs>
   accountsUpdated?: boolean | Prisma.UserMaster$accountsUpdatedArgs<ExtArgs>
@@ -163266,6 +164886,7 @@ export type UserMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserMaster"
   objects: {
+    onlineLeadAssignedFranchises: Prisma.$FranchiseMasterPayload<ExtArgs>[]
     productsRequiredForProduction: Prisma.$ProductsRequiredForProductionPayload<ExtArgs>[]
     accountsCreated: Prisma.$AccountMasterPayload<ExtArgs>[]
     accountsUpdated: Prisma.$AccountMasterPayload<ExtArgs>[]
@@ -163865,6 +165486,7 @@ readonly fields: UserMasterFieldRefs;
  */
 export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  onlineLeadAssignedFranchises<T extends Prisma.UserMaster$onlineLeadAssignedFranchisesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$onlineLeadAssignedFranchisesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productsRequiredForProduction<T extends Prisma.UserMaster$productsRequiredForProductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$productsRequiredForProductionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsRequiredForProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accountsCreated<T extends Prisma.UserMaster$accountsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$accountsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accountsUpdated<T extends Prisma.UserMaster$accountsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$accountsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -164495,6 +166117,30 @@ export type UserMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many UserMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * UserMaster.onlineLeadAssignedFranchises
+ */
+export type UserMaster$onlineLeadAssignedFranchisesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FranchiseMaster
+   */
+  select?: Prisma.FranchiseMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FranchiseMaster
+   */
+  omit?: Prisma.FranchiseMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FranchiseMasterInclude<ExtArgs> | null
+  where?: Prisma.FranchiseMasterWhereInput
+  orderBy?: Prisma.FranchiseMasterOrderByWithRelationInput | Prisma.FranchiseMasterOrderByWithRelationInput[]
+  cursor?: Prisma.FranchiseMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FranchiseMasterScalarFieldEnum | Prisma.FranchiseMasterScalarFieldEnum[]
 }
 
 /**
