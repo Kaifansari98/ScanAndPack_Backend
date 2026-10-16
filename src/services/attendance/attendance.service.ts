@@ -239,8 +239,8 @@ export const markAttendance = async (
   }
 
   let ianaTimeZone: string | null = null;
-  if (vendor.time_zone_master?.time_zone_code && isValidIANATimeZone(vendor.time_zone_master.time_zone_code)) {
-    ianaTimeZone = vendor.time_zone_master.time_zone_code;
+  if (vendor.time_zone_master?.time_zone_name && isValidIANATimeZone(vendor.time_zone_master.time_zone_name)) {
+    ianaTimeZone = vendor.time_zone_master.time_zone_name;
   } else if (vendor.time_zone && isValidIANATimeZone(vendor.time_zone)) {
     ianaTimeZone = vendor.time_zone;
   }
@@ -427,7 +427,7 @@ export const getAttendanceById = async (id: number) => {
   if (!record) return null;
 
   const tz =
-    record.vendor.time_zone_master?.time_zone_code ||
+    record.vendor.time_zone_master?.time_zone_name ||
     record.vendor.time_zone ||
     "UTC";
 
@@ -517,7 +517,7 @@ export const listAttendance = async (params: ListAttendanceFilters) => {
 
   const decorated = items.map((item) => {
     const tz =
-      item.vendor.time_zone_master?.time_zone_code ||
+      item.vendor.time_zone_master?.time_zone_name ||
       item.vendor.time_zone ||
       "UTC";
     return decorateAttendance(item, tz);
@@ -554,7 +554,7 @@ export const getAttendanceLogs = async (attendanceId: number) => {
   }
 
   const tz =
-    attendance.vendor.time_zone_master?.time_zone_code ||
+    attendance.vendor.time_zone_master?.time_zone_name ||
     attendance.vendor.time_zone ||
     "UTC";
 
@@ -594,7 +594,7 @@ export const getEmployeeTodayAttendance = async (userId: number) => {
   }
 
   const tz =
-    employee.vendor.time_zone_master?.time_zone_code ||
+    employee.vendor.time_zone_master?.time_zone_name ||
     employee.vendor.time_zone ||
     "UTC";
 

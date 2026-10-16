@@ -1,0 +1,420 @@
+id,country,time_zone_name,time_zone,active,mins
+3,Afghanistan,Asia/Kabul,+04:30,Yes,NULL
+4,Albania,Europe/Tirane,+01:00,Yes,NULL
+5,Algeria,Africa/Algiers,+01:00,Yes,NULL
+6,"American Samoa",Pacific/Pago_Pago,-11:00,Yes,NULL
+7,Andorra,Europe/Andorra,+01:00,Yes,NULL
+8,Angola,Africa/Luanda,+01:00,Yes,NULL
+9,Anguilla,America/Anguilla,-04:00,Yes,NULL
+10,Antarctica,Antarctica/Casey,+11:00,Yes,NULL
+11,Antarctica,Antarctica/Davis,+07:00,Yes,NULL
+12,Antarctica,Antarctica/DumontDUrville,+10:00,Yes,NULL
+13,Antarctica,Antarctica/Mawson,+05:00,Yes,NULL
+14,Antarctica,Antarctica/McMurdo,+13:00,Yes,NULL
+15,Antarctica,Antarctica/Palmer,-03:00,Yes,NULL
+16,Antarctica,Antarctica/Rothera,-03:00,Yes,NULL
+17,Antarctica,Antarctica/Syowa,+03:00,Yes,NULL
+18,Antarctica,Antarctica/Troll,,Yes,NULL
+19,Antarctica,Antarctica/Vostok,+06:00,Yes,NULL
+20,"Antigua and Barbuda",America/Antigua,-04:00,Yes,NULL
+21,Argentina,America/Argentina/Buenos_Aires,-03:00,Yes,NULL
+22,Argentina,America/Argentina/Catamarca,-03:00,Yes,NULL
+23,Argentina,America/Argentina/Cordoba,-03:00,Yes,NULL
+24,Argentina,America/Argentina/Jujuy,-03:00,Yes,NULL
+25,Argentina,America/Argentina/La_Rioja,-03:00,Yes,NULL
+26,Argentina,America/Argentina/Mendoza,-03:00,Yes,NULL
+27,Argentina,America/Argentina/Rio_Gallegos,-03:00,Yes,NULL
+28,Argentina,America/Argentina/Salta,-03:00,Yes,NULL
+29,Argentina,America/Argentina/San_Juan,-03:00,Yes,NULL
+30,Argentina,America/Argentina/San_Luis,-03:00,Yes,NULL
+31,Argentina,America/Argentina/Tucuman,-03:00,Yes,NULL
+32,Argentina,America/Argentina/Ushuaia,-03:00,Yes,NULL
+33,Armenia,Asia/Yerevan,+04:00,Yes,NULL
+34,Aruba,America/Aruba,-04:00,Yes,NULL
+35,Australia,Antarctica/Macquarie,+11:00,Yes,NULL
+36,Australia,Australia/Adelaide,+10:30,Yes,NULL
+37,Australia,Australia/Brisbane,+10:00,Yes,NULL
+38,Australia,Australia/Broken_Hill,+10:30,Yes,NULL
+39,Australia,Australia/Darwin,+09:30,Yes,NULL
+40,Australia,Australia/Eucla,+08:45,Yes,NULL
+41,Australia,Australia/Hobart,+11:00,Yes,NULL
+42,Australia,Australia/Lindeman,+10:00,Yes,NULL
+43,Australia,Australia/Lord_Howe,+11:00,Yes,NULL
+44,Australia,Australia/Melbourne,+11:00,Yes,NULL
+45,Australia,Australia/Perth,+08:00,Yes,NULL
+46,Australia,Australia/Sydney,+11:00,Yes,NULL
+47,Austria,Europe/Vienna,+01:00,Yes,NULL
+48,Azerbaijan,Asia/Baku,+04:00,Yes,NULL
+49,Bahamas,America/Nassau,-05:00,Yes,NULL
+50,Bahrain,Asia/Bahrain,+03:00,Yes,NULL
+51,Bangladesh,Asia/Dhaka,+06:00,Yes,NULL
+52,Barbados,America/Barbados,-04:00,Yes,NULL
+53,Belarus,Europe/Minsk,+03:00,Yes,NULL
+54,Belgium,Europe/Brussels,+01:00,Yes,NULL
+55,Belize,America/Belize,-06:00,Yes,NULL
+56,Benin,Africa/Porto-Novo,+01:00,Yes,NULL
+57,Bermuda,Atlantic/Bermuda,-04:00,Yes,NULL
+58,Bhutan,Asia/Thimphu,+06:00,Yes,NULL
+59,"Bolivia, Plurinational State of",America/La_Paz,-04:00,Yes,NULL
+60,"Bonaire, Sint Eustatius and Saba",America/Kralendijk,-04:00,Yes,NULL
+61,"Bosnia and Herzegovina",Europe/Sarajevo,+01:00,Yes,NULL
+62,Botswana,Africa/Gaborone,+02:00,Yes,NULL
+63,Brazil,America/Araguaina,-03:00,Yes,NULL
+64,Brazil,America/Bahia,-03:00,Yes,NULL
+65,Brazil,America/Belem,-03:00,Yes,NULL
+66,Brazil,America/Boa_Vista,-04:00,Yes,NULL
+67,Brazil,America/Campo_Grande,-04:00,Yes,NULL
+68,Brazil,America/Cuiaba,-04:00,Yes,NULL
+69,Brazil,America/Eirunepe,-05:00,Yes,NULL
+70,Brazil,America/Fortaleza,-03:00,Yes,NULL
+71,Brazil,America/Maceio,-03:00,Yes,NULL
+72,Brazil,America/Manaus,-04:00,Yes,NULL
+73,Brazil,America/Noronha,-02:00,Yes,NULL
+74,Brazil,America/Porto_Velho,-04:00,Yes,NULL
+75,Brazil,America/Recife,-03:00,Yes,NULL
+76,Brazil,America/Rio_Branco,-05:00,Yes,NULL
+77,Brazil,America/Santarem,-03:00,Yes,NULL
+78,Brazil,America/Sao_Paulo,-03:00,Yes,NULL
+79,"British Indian Ocean Territory",Indian/Chagos,+06:00,Yes,NULL
+80,"Brunei Darussalam",Asia/Brunei,+08:00,Yes,NULL
+81,Bulgaria,Europe/Sofia,+02:00,Yes,NULL
+82,"Burkina Faso",Africa/Ouagadougou,,Yes,NULL
+83,Burundi,Africa/Bujumbura,+02:00,Yes,NULL
+84,Cambodia,Asia/Phnom_Penh,+07:00,Yes,NULL
+85,Cameroon,Africa/Douala,+01:00,Yes,NULL
+86,Canada,America/Atikokan,-05:00,Yes,NULL
+87,Canada,America/Blanc-Sablon,-04:00,Yes,NULL
+88,Canada,America/Cambridge_Bay,-07:00,Yes,NULL
+89,Canada,America/Creston,-07:00,Yes,NULL
+90,Canada,America/Dawson,-07:00,Yes,NULL
+91,Canada,America/Dawson_Creek,-07:00,Yes,NULL
+92,Canada,America/Edmonton,-07:00,Yes,NULL
+93,Canada,America/Fort_Nelson,-07:00,Yes,NULL
+94,Canada,America/Glace_Bay,-04:00,Yes,NULL
+95,Canada,America/Goose_Bay,-04:00,Yes,NULL
+96,Canada,America/Halifax,-04:00,Yes,NULL
+97,Canada,America/Inuvik,-07:00,Yes,NULL
+98,Canada,America/Iqaluit,-05:00,Yes,NULL
+99,Canada,America/Moncton,-04:00,Yes,NULL
+100,Canada,America/Rankin_Inlet,-06:00,Yes,NULL
+101,Canada,America/Regina,-06:00,Yes,NULL
+102,Canada,America/Resolute,-06:00,Yes,NULL
+103,Canada,America/St_Johns,-03:30,Yes,NULL
+104,Canada,America/Swift_Current,-06:00,Yes,NULL
+105,Canada,America/Toronto,-05:00,Yes,NULL
+106,Canada,America/Vancouver,-08:00,Yes,NULL
+107,Canada,America/Whitehorse,-07:00,Yes,NULL
+108,Canada,America/Winnipeg,-06:00,Yes,NULL
+109,Canada,America/Yellowknife,-07:00,Yes,NULL
+110,"Cape Verde",Atlantic/Cape_Verde,-01:00,Yes,NULL
+111,"Cayman Islands",America/Cayman,-05:00,Yes,NULL
+112,"Central African Republic",Africa/Bangui,+01:00,Yes,NULL
+113,Chad,Africa/Ndjamena,+01:00,Yes,NULL
+114,Chile,America/Punta_Arenas,-03:00,Yes,NULL
+115,Chile,America/Santiago,-03:00,Yes,NULL
+116,Chile,Pacific/Easter,-05:00,Yes,NULL
+117,China,Asia/Shanghai,+08:00,Yes,NULL
+118,China,Asia/Urumqi,+06:00,Yes,NULL
+119,"Christmas Island",Indian/Christmas,+07:00,Yes,NULL
+120,"Cocos (Keeling) Islands",Indian/Cocos,+06:30,Yes,NULL
+121,Colombia,America/Bogota,-05:00,Yes,NULL
+122,Comoros,Indian/Comoro,+03:00,Yes,NULL
+123,Congo,Africa/Brazzaville,+01:00,Yes,NULL
+124,"Congo, the Democratic Republic of the",Africa/Kinshasa,+01:00,Yes,NULL
+125,"Congo, the Democratic Republic of the",Africa/Lubumbashi,+02:00,Yes,NULL
+126,"Cook Islands",Pacific/Rarotonga,-10:00,Yes,NULL
+127,"Costa Rica",America/Costa_Rica,-06:00,Yes,NULL
+128,Croatia,Europe/Zagreb,+01:00,Yes,NULL
+129,Cuba,America/Havana,-05:00,Yes,NULL
+130,Curaçao,America/Curacao,-04:00,Yes,NULL
+131,Cyprus,Asia/Famagusta,+02:00,Yes,NULL
+132,Cyprus,Asia/Nicosia,+02:00,Yes,NULL
+133,"Czech Republic",Europe/Prague,+01:00,Yes,NULL
+134,"Côte dIvoire",Africa/Abidjan,,Yes,NULL
+135,Denmark,Europe/Copenhagen,+01:00,Yes,NULL
+136,Djibouti,Africa/Djibouti,+03:00,Yes,NULL
+137,Dominica,America/Dominica,-04:00,Yes,NULL
+138,"Dominican Republic",America/Santo_Domingo,-04:00,Yes,NULL
+139,Ecuador,America/Guayaquil,-05:00,Yes,NULL
+140,Ecuador,Pacific/Galapagos,-06:00,Yes,NULL
+141,Egypt,Africa/Cairo,+02:00,Yes,NULL
+142,"El Salvador",America/El_Salvador,-06:00,Yes,NULL
+143,"Equatorial Guinea",Africa/Malabo,+01:00,Yes,NULL
+144,Eritrea,Africa/Asmara,+03:00,Yes,NULL
+145,Estonia,Europe/Tallinn,+02:00,Yes,NULL
+146,Ethiopia,Africa/Addis_Ababa,+03:00,Yes,NULL
+147,"Falkland Islands (Malvinas)",Atlantic/Stanley,-03:00,Yes,NULL
+148,"Faroe Islands",Atlantic/Faroe,,Yes,NULL
+149,Fiji,Pacific/Fiji,+12:00,Yes,NULL
+150,Finland,Europe/Helsinki,+02:00,Yes,NULL
+151,France,Europe/Paris,+01:00,Yes,NULL
+152,"French Guiana",America/Cayenne,-03:00,Yes,NULL
+153,"French Polynesia",Pacific/Gambier,-09:00,Yes,NULL
+154,"French Polynesia",Pacific/Marquesas,-09:30,Yes,NULL
+155,"French Polynesia",Pacific/Tahiti,-10:00,Yes,NULL
+156,"French Southern Territories",Indian/Kerguelen,+05:00,Yes,NULL
+157,Gabon,Africa/Libreville,+01:00,Yes,NULL
+158,Gambia,Africa/Banjul,,Yes,NULL
+159,Georgia,Asia/Tbilisi,+04:00,Yes,NULL
+160,Germany,Europe/Berlin,+01:00,Yes,NULL
+161,Germany,Europe/Busingen,+01:00,Yes,NULL
+162,Ghana,Africa/Accra,,Yes,NULL
+163,Gibraltar,Europe/Gibraltar,+01:00,Yes,NULL
+164,Greece,Europe/Athens,+02:00,Yes,NULL
+165,Greenland,America/Danmarkshavn,,Yes,NULL
+166,Greenland,America/Nuuk,-03:00,Yes,NULL
+167,Greenland,America/Scoresbysund,-01:00,Yes,NULL
+168,Greenland,America/Thule,-04:00,Yes,NULL
+169,Grenada,America/Grenada,-04:00,Yes,NULL
+170,Guadeloupe,America/Guadeloupe,-04:00,Yes,NULL
+171,Guam,Pacific/Guam,+10:00,Yes,NULL
+172,Guatemala,America/Guatemala,-06:00,Yes,NULL
+173,Guernsey,Europe/Guernsey,,Yes,NULL
+174,Guinea,Africa/Conakry,,Yes,NULL
+175,Guinea-Bissau,Africa/Bissau,,Yes,NULL
+176,Guyana,America/Guyana,-04:00,Yes,NULL
+177,Haiti,America/Port-au-Prince,-05:00,Yes,NULL
+178,"Holy See (Vatican City State)",Europe/Vatican,+01:00,Yes,NULL
+179,Honduras,America/Tegucigalpa,-06:00,Yes,NULL
+180,"Hong Kong",Asia/Hong_Kong,+08:00,Yes,NULL
+181,Hungary,Europe/Budapest,+01:00,Yes,NULL
+182,Iceland,Atlantic/Reykjavik,,Yes,NULL
+183,India,Asia/Kolkata,+05:30,Yes,NULL
+184,Indonesia,Asia/Jakarta,+07:00,Yes,NULL
+185,Indonesia,Asia/Jayapura,+09:00,Yes,NULL
+186,Indonesia,Asia/Makassar,+08:00,Yes,NULL
+187,Indonesia,Asia/Pontianak,+07:00,Yes,NULL
+188,"Iran, Islamic Republic of",Asia/Tehran,+03:30,Yes,NULL
+189,Iraq,Asia/Baghdad,+03:00,Yes,NULL
+190,Ireland,Europe/Dublin,,Yes,NULL
+191,"Isle of Man",Europe/Isle_of_Man,,Yes,NULL
+192,Israel,Asia/Jerusalem,+02:00,Yes,NULL
+193,Italy,Europe/Rome,+01:00,Yes,NULL
+194,Jamaica,America/Jamaica,-05:00,Yes,NULL
+195,Japan,Asia/Tokyo,+09:00,Yes,NULL
+196,Jersey,Europe/Jersey,,Yes,NULL
+197,Jordan,Asia/Amman,+03:00,Yes,NULL
+198,Kazakhstan,Asia/Almaty,+06:00,Yes,NULL
+199,Kazakhstan,Asia/Aqtau,+05:00,Yes,NULL
+200,Kazakhstan,Asia/Aqtobe,+05:00,Yes,NULL
+201,Kazakhstan,Asia/Atyrau,+05:00,Yes,NULL
+202,Kazakhstan,Asia/Oral,+05:00,Yes,NULL
+203,Kazakhstan,Asia/Qostanay,+06:00,Yes,NULL
+204,Kazakhstan,Asia/Qyzylorda,+05:00,Yes,NULL
+205,Kenya,Africa/Nairobi,+03:00,Yes,NULL
+206,Kiribati,Pacific/Kanton,+13:00,Yes,NULL
+207,Kiribati,Pacific/Kiritimati,+14:00,Yes,NULL
+208,Kiribati,Pacific/Tarawa,+12:00,Yes,NULL
+209,"Korea, Democratic Peoples Republic of",Asia/Pyongyang,+09:00,Yes,NULL
+210,"Korea, Republic of",Asia/Seoul,+09:00,Yes,NULL
+211,Kuwait,Asia/Kuwait,+03:00,Yes,NULL
+212,Kyrgyzstan,Asia/Bishkek,+06:00,Yes,NULL
+213,"Lao Peoples Democratic Republic",Asia/Vientiane,+07:00,Yes,NULL
+214,Latvia,Europe/Riga,+02:00,Yes,NULL
+215,Lebanon,Asia/Beirut,+02:00,Yes,NULL
+216,Lesotho,Africa/Maseru,+02:00,Yes,NULL
+217,Liberia,Africa/Monrovia,,Yes,NULL
+218,Libya,Africa/Tripoli,+02:00,Yes,NULL
+219,Liechtenstein,Europe/Vaduz,+01:00,Yes,NULL
+220,Lithuania,Europe/Vilnius,+02:00,Yes,NULL
+221,Luxembourg,Europe/Luxembourg,+01:00,Yes,NULL
+222,Macao,Asia/Macau,+08:00,Yes,NULL
+223,"Macedonia, the Former Yugoslav Republic of",Europe/Skopje,+01:00,Yes,NULL
+224,Madagascar,Indian/Antananarivo,+03:00,Yes,NULL
+225,Malawi,Africa/Blantyre,+02:00,Yes,NULL
+226,Malaysia,Asia/Kuala_Lumpur,+08:00,Yes,NULL
+227,Malaysia,Asia/Kuching,+08:00,Yes,NULL
+228,Maldives,Indian/Maldives,+05:00,Yes,NULL
+229,Mali,Africa/Bamako,,Yes,NULL
+230,Malta,Europe/Malta,+01:00,Yes,NULL
+231,"Marshall Islands",Pacific/Kwajalein,+12:00,Yes,NULL
+232,"Marshall Islands",Pacific/Majuro,+12:00,Yes,NULL
+233,Martinique,America/Martinique,-04:00,Yes,NULL
+234,Mauritania,Africa/Nouakchott,,Yes,NULL
+235,Mauritius,Indian/Mauritius,+04:00,Yes,NULL
+236,Mayotte,Indian/Mayotte,+03:00,Yes,NULL
+237,Mexico,America/Bahia_Banderas,-06:00,Yes,NULL
+238,Mexico,America/Cancun,-05:00,Yes,NULL
+239,Mexico,America/Chihuahua,-06:00,Yes,NULL
+240,Mexico,America/Ciudad_Juarez,-07:00,Yes,NULL
+241,Mexico,America/Hermosillo,-07:00,Yes,NULL
+242,Mexico,America/Matamoros,-06:00,Yes,NULL
+243,Mexico,America/Mazatlan,-07:00,Yes,NULL
+244,Mexico,America/Merida,-06:00,Yes,NULL
+245,Mexico,America/Mexico_City,-06:00,Yes,NULL
+246,Mexico,America/Monterrey,-06:00,Yes,NULL
+247,Mexico,America/Ojinaga,-06:00,Yes,NULL
+248,Mexico,America/Tijuana,-08:00,Yes,NULL
+249,"Micronesia, Federated States of",Pacific/Chuuk,+10:00,Yes,NULL
+250,"Micronesia, Federated States of",Pacific/Kosrae,+11:00,Yes,NULL
+251,"Micronesia, Federated States of",Pacific/Pohnpei,+11:00,Yes,NULL
+252,"Moldova, Republic of",Europe/Chisinau,+02:00,Yes,NULL
+253,Monaco,Europe/Monaco,+01:00,Yes,NULL
+254,Mongolia,Asia/Choibalsan,+08:00,Yes,NULL
+255,Mongolia,Asia/Hovd,+07:00,Yes,NULL
+256,Mongolia,Asia/Ulaanbaatar,+08:00,Yes,NULL
+257,Montenegro,Europe/Podgorica,+01:00,Yes,NULL
+258,Montserrat,America/Montserrat,-04:00,Yes,NULL
+259,Morocco,Africa/Casablanca,+01:00,Yes,NULL
+260,Morocco,Africa/El_Aaiun,+01:00,Yes,NULL
+261,Mozambique,Africa/Maputo,+02:00,Yes,NULL
+262,Myanmar,Asia/Yangon,+06:30,Yes,NULL
+263,Namibia,Africa/Windhoek,+02:00,Yes,NULL
+264,Nauru,Pacific/Nauru,+12:00,Yes,NULL
+265,Nepal,Asia/Kathmandu,+05:45,Yes,NULL
+266,Netherlands,Europe/Amsterdam,+01:00,Yes,NULL
+267,"New Caledonia",Pacific/Noumea,+11:00,Yes,NULL
+268,"New Zealand",Pacific/Auckland,+13:00,Yes,NULL
+269,"New Zealand",Pacific/Chatham,+13:45,Yes,NULL
+270,Nicaragua,America/Managua,-06:00,Yes,NULL
+271,Niger,Africa/Niamey,+01:00,Yes,NULL
+272,Nigeria,Africa/Lagos,+01:00,Yes,NULL
+273,Niue,Pacific/Niue,-11:00,Yes,NULL
+274,"Norfolk Island",Pacific/Norfolk,+12:00,Yes,NULL
+275,"Northern Mariana Islands",Pacific/Saipan,+10:00,Yes,NULL
+276,Norway,Europe/Oslo,+01:00,Yes,NULL
+277,Oman,Asia/Muscat,+04:00,Yes,NULL
+278,Pakistan,Asia/Karachi,+05:00,Yes,NULL
+279,Palau,Pacific/Palau,+09:00,Yes,NULL
+280,"Palestine, State of",Asia/Gaza,+02:00,Yes,NULL
+281,"Palestine, State of",Asia/Hebron,+02:00,Yes,NULL
+282,Panama,America/Panama,-05:00,Yes,NULL
+283,"Papua New Guinea",Pacific/Bougainville,+11:00,Yes,NULL
+284,"Papua New Guinea",Pacific/Port_Moresby,+10:00,Yes,NULL
+285,Paraguay,America/Asuncion,-03:00,Yes,NULL
+286,Peru,America/Lima,-05:00,Yes,NULL
+287,Philippines,Asia/Manila,+08:00,Yes,NULL
+288,Pitcairn,Pacific/Pitcairn,-08:00,Yes,NULL
+289,Poland,Europe/Warsaw,+01:00,Yes,NULL
+290,Portugal,Atlantic/Azores,-01:00,Yes,NULL
+291,Portugal,Atlantic/Madeira,,Yes,NULL
+292,Portugal,Europe/Lisbon,,Yes,NULL
+293,"Puerto Rico",America/Puerto_Rico,-04:00,Yes,NULL
+294,Qatar,Asia/Qatar,+03:00,Yes,NULL
+295,Romania,Europe/Bucharest,+02:00,Yes,NULL
+296,"Russian Federation",Asia/Anadyr,+12:00,Yes,NULL
+297,"Russian Federation",Asia/Barnaul,+07:00,Yes,NULL
+298,"Russian Federation",Asia/Chita,+09:00,Yes,NULL
+299,"Russian Federation",Asia/Irkutsk,+08:00,Yes,NULL
+300,"Russian Federation",Asia/Kamchatka,+12:00,Yes,NULL
+301,"Russian Federation",Asia/Khandyga,+09:00,Yes,NULL
+302,"Russian Federation",Asia/Krasnoyarsk,+07:00,Yes,NULL
+303,"Russian Federation",Asia/Magadan,+11:00,Yes,NULL
+304,"Russian Federation",Asia/Novokuznetsk,+07:00,Yes,NULL
+305,"Russian Federation",Asia/Novosibirsk,+07:00,Yes,NULL
+306,"Russian Federation",Asia/Omsk,+06:00,Yes,NULL
+307,"Russian Federation",Asia/Sakhalin,+11:00,Yes,NULL
+308,"Russian Federation",Asia/Srednekolymsk,+11:00,Yes,NULL
+309,"Russian Federation",Asia/Tomsk,+07:00,Yes,NULL
+310,"Russian Federation",Asia/Ust-Nera,+10:00,Yes,NULL
+311,"Russian Federation",Asia/Vladivostok,+10:00,Yes,NULL
+312,"Russian Federation",Asia/Yakutsk,+09:00,Yes,NULL
+313,"Russian Federation",Asia/Yekaterinburg,+05:00,Yes,NULL
+314,"Russian Federation",Europe/Astrakhan,+04:00,Yes,NULL
+315,"Russian Federation",Europe/Kaliningrad,+02:00,Yes,NULL
+316,"Russian Federation",Europe/Kirov,+03:00,Yes,NULL
+317,"Russian Federation",Europe/Moscow,+03:00,Yes,NULL
+318,"Russian Federation",Europe/Samara,+04:00,Yes,NULL
+319,"Russian Federation",Europe/Saratov,+04:00,Yes,NULL
+320,"Russian Federation",Europe/Ulyanovsk,+04:00,Yes,NULL
+321,"Russian Federation",Europe/Volgograd,+03:00,Yes,NULL
+322,Rwanda,Africa/Kigali,+02:00,Yes,NULL
+323,Réunion,Indian/Reunion,+04:00,Yes,NULL
+324,"Saint Barthélemy",America/St_Barthelemy,-04:00,Yes,NULL
+325,"Saint Helena, Ascension and Tristan da Cunha",Atlantic/St_Helena,,Yes,NULL
+326,"Saint Kitts and Nevis",America/St_Kitts,-04:00,Yes,NULL
+327,"Saint Lucia",America/St_Lucia,-04:00,Yes,NULL
+328,"Saint Martin (French part)",America/Marigot,-04:00,Yes,NULL
+329,"Saint Pierre and Miquelon",America/Miquelon,-03:00,Yes,NULL
+330,"Saint Vincent and the Grenadines",America/St_Vincent,-04:00,Yes,NULL
+331,Samoa,Pacific/Apia,+13:00,Yes,NULL
+332,"San Marino",Europe/San_Marino,+01:00,Yes,NULL
+333,"Sao Tome and Principe",Africa/Sao_Tome,,Yes,NULL
+334,"Saudi Arabia",Asia/Riyadh,+03:00,Yes,NULL
+335,Senegal,Africa/Dakar,,Yes,NULL
+336,Serbia,Europe/Belgrade,+01:00,Yes,NULL
+337,Seychelles,Indian/Mahe,+04:00,Yes,NULL
+338,"Sierra Leone",Africa/Freetown,,Yes,NULL
+339,Singapore,Asia/Singapore,+08:00,Yes,NULL
+340,"Sint Maarten (Dutch part)",America/Lower_Princes,-04:00,Yes,NULL
+341,Slovakia,Europe/Bratislava,+01:00,Yes,NULL
+342,Slovenia,Europe/Ljubljana,+01:00,Yes,NULL
+343,"Solomon Islands",Pacific/Guadalcanal,+11:00,Yes,NULL
+344,Somalia,Africa/Mogadishu,+03:00,Yes,NULL
+345,"South Africa",Africa/Johannesburg,+02:00,Yes,NULL
+346,"South Georgia and the South Sandwich Islands",Atlantic/South_Georgia,-02:00,Yes,NULL
+347,"South Sudan",Africa/Juba,+02:00,Yes,NULL
+348,Spain,Africa/Ceuta,+01:00,Yes,NULL
+349,Spain,Atlantic/Canary,,Yes,NULL
+350,Spain,Europe/Madrid,+01:00,Yes,NULL
+351,"Sri Lanka",Asia/Colombo,+05:30,Yes,NULL
+352,Sudan,Africa/Khartoum,+02:00,Yes,NULL
+353,Suriname,America/Paramaribo,-03:00,Yes,NULL
+354,"Svalbard and Jan Mayen",Arctic/Longyearbyen,+01:00,Yes,NULL
+355,Swaziland,Africa/Mbabane,+02:00,Yes,NULL
+356,Sweden,Europe/Stockholm,+01:00,Yes,NULL
+357,Switzerland,Europe/Zurich,+01:00,Yes,NULL
+358,"Syrian Arab Republic",Asia/Damascus,+03:00,Yes,NULL
+359,"Taiwan, Province of China",Asia/Taipei,+08:00,Yes,NULL
+360,Tajikistan,Asia/Dushanbe,+05:00,Yes,NULL
+361,"Tanzania, United Republic of",Africa/Dar_es_Salaam,+03:00,Yes,NULL
+362,Thailand,Asia/Bangkok,+07:00,Yes,NULL
+363,Timor-Leste,Asia/Dili,+09:00,Yes,NULL
+364,Togo,Africa/Lome,,Yes,NULL
+365,Tokelau,Pacific/Fakaofo,+13:00,Yes,NULL
+366,Tonga,Pacific/Tongatapu,+13:00,Yes,NULL
+367,"Trinidad and Tobago",America/Port_of_Spain,-04:00,Yes,NULL
+368,Tunisia,Africa/Tunis,+01:00,Yes,NULL
+369,Turkey,Europe/Istanbul,+03:00,Yes,NULL
+370,Turkmenistan,Asia/Ashgabat,+05:00,Yes,NULL
+371,"Turks and Caicos Islands",America/Grand_Turk,-05:00,Yes,NULL
+372,Tuvalu,Pacific/Funafuti,+12:00,Yes,NULL
+373,Uganda,Africa/Kampala,+03:00,Yes,NULL
+374,Ukraine,Europe/Kyiv,+02:00,Yes,NULL
+375,Ukraine,Europe/Simferopol,+03:00,Yes,NULL
+376,"United Arab Emirates",Asia/Dubai,+04:00,Yes,NULL
+377,"United Kingdom",Europe/London,,Yes,NULL
+378,"United States",America/Adak,-10:00,Yes,NULL
+379,"United States",America/Anchorage,-09:00,Yes,NULL
+380,"United States",America/Boise,-07:00,Yes,NULL
+381,"United States",America/Chicago,-06:00,Yes,NULL
+382,"United States",America/Denver,-07:00,Yes,NULL
+383,"United States",America/Detroit,-05:00,Yes,NULL
+384,"United States",America/Indiana/Indianapolis,-05:00,Yes,NULL
+385,"United States",America/Indiana/Knox,-06:00,Yes,NULL
+386,"United States",America/Indiana/Marengo,-05:00,Yes,NULL
+387,"United States",America/Indiana/Petersburg,-05:00,Yes,NULL
+388,"United States",America/Indiana/Tell_City,-06:00,Yes,NULL
+389,"United States",America/Indiana/Vevay,-05:00,Yes,NULL
+390,"United States",America/Indiana/Vincennes,-05:00,Yes,NULL
+391,"United States",America/Indiana/Winamac,-05:00,Yes,NULL
+392,"United States",America/Juneau,-09:00,Yes,NULL
+393,"United States",America/Kentucky/Louisville,-05:00,Yes,NULL
+394,"United States",America/Kentucky/Monticello,-05:00,Yes,NULL
+395,"United States",America/Los_Angeles,-08:00,Yes,NULL
+396,"United States",America/Menominee,-06:00,Yes,NULL
+397,"United States",America/Metlakatla,-09:00,Yes,NULL
+398,"United States",America/New_York,-05:00,Yes,NULL
+399,"United States",America/Nome,-09:00,Yes,NULL
+400,"United States",America/North_Dakota/Beulah,-06:00,Yes,NULL
+401,"United States",America/North_Dakota/Center,-06:00,Yes,NULL
+402,"United States",America/North_Dakota/New_Salem,-06:00,Yes,NULL
+403,"United States",America/Phoenix,-07:00,Yes,NULL
+404,"United States",America/Sitka,-09:00,Yes,NULL
+405,"United States",America/Yakutat,-09:00,Yes,NULL
+406,"United States",Pacific/Honolulu,-10:00,Yes,NULL
+407,"United States Minor Outlying Islands",Pacific/Midway,-11:00,Yes,NULL
+408,"United States Minor Outlying Islands",Pacific/Wake,+12:00,Yes,NULL
+409,Uruguay,America/Montevideo,-03:00,Yes,NULL
+410,Uzbekistan,Asia/Samarkand,+05:00,Yes,NULL
+411,Uzbekistan,Asia/Tashkent,+05:00,Yes,NULL
+412,Vanuatu,Pacific/Efate,+11:00,Yes,NULL
+413,"Venezuela, Bolivarian Republic of",America/Caracas,-04:00,Yes,NULL
+414,"Viet Nam",Asia/Ho_Chi_Minh,+07:00,Yes,NULL
+415,"Virgin Islands, British",America/Tortola,-04:00,Yes,NULL
+416,"Virgin Islands, U.S.",America/St_Thomas,-04:00,Yes,NULL
+417,"Wallis and Futuna",Pacific/Wallis,+12:00,Yes,NULL
+418,Yemen,Asia/Aden,+03:00,Yes,NULL
+419,Zambia,Africa/Lusaka,+02:00,Yes,NULL
+420,Zimbabwe,Africa/Harare,+02:00,Yes,NULL
+421,"Åland Islands",Europe/Mariehamn,+02:00,Yes,NULL
