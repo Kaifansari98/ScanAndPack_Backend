@@ -1498,7 +1498,7 @@ export const updateScannedItem = async (
       selectedLocationAllocation = {
         id: locationAllocation.id,
         locationName: locationAllocation.location_name,
-        allocatedProductQty: locationAllocation.qty,
+        allocatedProductQty,
         maximumItemQty:
           eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP
             ? Number.MAX_SAFE_INTEGER
