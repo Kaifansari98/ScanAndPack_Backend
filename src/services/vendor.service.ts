@@ -1399,7 +1399,18 @@ export const getVendorById = async (vendorId: number) => {
     }
   }
 
-  return { ...vendor, logoUrl, iconUrl, loginImageUrl };
+  const showStatusOnScan = await getVendorSettingValue(
+    vendorId,
+    "SHOW_STATUS_ON_SCAN",
+  );
+
+  return {
+    ...vendor,
+    logoUrl,
+    iconUrl,
+    loginImageUrl,
+    show_status_on_scan: showStatusOnScan ?? "1",
+  };
 };
 
 export const seedVendorMasters = async (vendorId: number) => {
@@ -2016,6 +2027,38 @@ export const onboardVendor = async (data: any) => {
     });
   }
 
+  if (data.show_status_on_scan !== undefined) {
+    let settingKey = await prisma.vendorSettingKey.findFirst({
+      where: { key: "SHOW_STATUS_ON_SCAN" },
+    });
+    if (!settingKey) {
+      settingKey = await prisma.vendorSettingKey.create({
+        data: {
+          key: "SHOW_STATUS_ON_SCAN",
+          display_name: "Display Status On Scan",
+          default_value: "1",
+        },
+      });
+    }
+
+    await prisma.vendorSetting.upsert({
+      where: {
+        setting_id_vendor_id: {
+          setting_id: settingKey.id,
+          vendor_id: vendorId,
+        },
+      },
+      create: {
+        setting_id: settingKey.id,
+        vendor_id: vendorId,
+        value: String(data.show_status_on_scan),
+      },
+      update: {
+        value: String(data.show_status_on_scan),
+      },
+    });
+  }
+
   return vendor;
 };
 
@@ -2109,6 +2152,38 @@ export const updateVendor = async (vendorId: number, data: any) => {
       data: {
         vendor_id: vendorId,
         expiry_date: expiryDate,
+      },
+    });
+  }
+
+  if (data.show_status_on_scan !== undefined) {
+    let settingKey = await prisma.vendorSettingKey.findFirst({
+      where: { key: "SHOW_STATUS_ON_SCAN" },
+    });
+    if (!settingKey) {
+      settingKey = await prisma.vendorSettingKey.create({
+        data: {
+          key: "SHOW_STATUS_ON_SCAN",
+          display_name: "Display Status On Scan",
+          default_value: "1",
+        },
+      });
+    }
+
+    await prisma.vendorSetting.upsert({
+      where: {
+        setting_id_vendor_id: {
+          setting_id: settingKey.id,
+          vendor_id: vendorId,
+        },
+      },
+      create: {
+        setting_id: settingKey.id,
+        vendor_id: vendorId,
+        value: String(data.show_status_on_scan),
+      },
+      update: {
+        value: String(data.show_status_on_scan),
       },
     });
   }

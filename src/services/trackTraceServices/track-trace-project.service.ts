@@ -123,16 +123,26 @@ const normalizeBooleanFlag = (value: unknown, fallback = false): boolean => {
 };
 
 const calculateQtyPerCustomPackingBox = (
-  items: Array<Pick<CadbidItem, "groupName" | "name" | "qty">>,
-  packingType: PackingType
+  items: Array<Pick<CadbidItem, "groupName" | "name" | "qty" | "categoryName">>,
+  packingType: PackingType,
+  scanPackByCategory?: ReadonlyMap<string, boolean>,
 ): number[] => {
   if (packingType !== PackingType.CUSTOM_GROUP) {
     return items.map(() => 1);
   }
 
+  const isScanAndPackItem = (item: (typeof items)[number]) => {
+    const categoryName = cleanText(item.categoryName).toLowerCase();
+    // Unknown categories retain the existing behavior. Known false categories
+    // are manual-only and must not participate in custom-group quota math.
+    return scanPackByCategory?.get(categoryName) !== false;
+  };
+
   const minimumQtyByGroup = new Map<string, number>();
 
   for (const item of items) {
+    if (!isScanAndPackItem(item)) continue;
+
     const groupKey = cleanText(item.groupName).toLocaleLowerCase();
     const quantity = Number(item.qty);
     const currentMinimum = minimumQtyByGroup.get(groupKey);
@@ -143,6 +153,8 @@ const calculateQtyPerCustomPackingBox = (
   }
 
   return items.map((item, index) => {
+    if (!isScanAndPackItem(item)) return 1;
+
     const groupName = cleanText(item.groupName);
     const minimumQty = minimumQtyByGroup.get(groupName.toLocaleLowerCase());
     const quantity = Number(item.qty);
@@ -157,7 +169,21 @@ const calculateQtyPerCustomPackingBox = (
   });
 };
 
-const recalculateStoredQtyPerCustomPackingBox = async (
+const getScanPackValidationByCategory = async (vendorId: number) => {
+  const categories = await prisma.projectCategoriesMaster.findMany({
+    where: { vendor_id: vendorId, status: "Yes" },
+    select: { category_name: true, scan_pack_validate: true },
+  });
+
+  return new Map(
+    categories.map((category) => [
+      category.category_name.trim().toLowerCase(),
+      category.scan_pack_validate === true,
+    ]),
+  );
+};
+
+export const recalculateStoredQtyPerCustomPackingBox = async (
   client: any,
   projectId: number
 ) => {
@@ -169,30 +195,71 @@ const recalculateStoredQtyPerCustomPackingBox = async (
       id: true,
       item_name: true,
       group_name: true,
+      custom_packing_group: true,
       qty: true,
       no_of_qty_in_boxes: true,
+      scan_pack_validate: true,
+      category_name: true,
+      category: {
+        select: {
+          scan_pack_validate: true,
+        },
+      },
     },
     orderBy: {
       id: "asc",
     },
   });
-  const calculatedQuantities = calculateQtyPerCustomPackingBox(
-    storedItems.map(
-      (item: {
-        item_name: string;
-        group_name: string | null;
-        qty: number;
-      }) => ({
-        name: item.item_name,
-        groupName: item.group_name || "",
-        qty: item.qty,
-      })
-    ),
-    PackingType.CUSTOM_GROUP
-  );
 
-  for (const [index, item] of storedItems.entries()) {
-    const calculatedQuantity = calculatedQuantities[index] ?? 1;
+  const isScanAndPack = (item: (typeof storedItems)[0]) => {
+    const categoryName = item.category_name?.trim().toLowerCase();
+    if (!categoryName || categoryName === "no category") {
+      return false;
+    }
+    if (item.scan_pack_validate === false) {
+      return false;
+    }
+    if (item.scan_pack_validate === true) {
+      return true;
+    }
+    if (
+      item.category?.scan_pack_validate !== undefined &&
+      item.category?.scan_pack_validate !== null
+    ) {
+      return Boolean(item.category.scan_pack_validate);
+    }
+    return false;
+  };
+
+  const minimumQtyByGroup = new Map<string, number>();
+
+  for (const item of storedItems) {
+    if (!isScanAndPack(item)) continue;
+    const groupName = cleanText(item.custom_packing_group || item.group_name);
+    if (!groupName) continue;
+
+    const groupKey = groupName.toLocaleLowerCase();
+    const quantity = Number(item.qty);
+    if (quantity <= 0) continue;
+
+    const currentMinimum = minimumQtyByGroup.get(groupKey);
+    if (currentMinimum === undefined || quantity < currentMinimum) {
+      minimumQtyByGroup.set(groupKey, quantity);
+    }
+  }
+
+  for (const item of storedItems) {
+    let calculatedQuantity = 1;
+    if (isScanAndPack(item)) {
+      const groupName = cleanText(item.custom_packing_group || item.group_name);
+      if (groupName) {
+        const minimumQty = minimumQtyByGroup.get(groupName.toLocaleLowerCase());
+        const quantity = Number(item.qty);
+        if (minimumQty && minimumQty > 0) {
+          calculatedQuantity = Math.max(1, Math.floor(quantity / minimumQty));
+        }
+      }
+    }
 
     if (item.no_of_qty_in_boxes === calculatedQuantity) {
       continue;
@@ -836,16 +903,17 @@ const itemSchema = z.object({
   categoryName: z.string().optional().nullable(),
   procurement: z.string().optional().nullable(),
 
-  l1: requiredNumber("l1"),
-  l2: requiredNumber("l2"),
-  l3: requiredNumber("l3"),
+  l1: z.coerce.number().nullable().optional(),
+  l2: z.coerce.number().nullable().optional(),
+  l3: z.coerce.number().nullable().optional(),
 
   name: requiredString("name"),
 
   qty: z.coerce
     .number()
     .int()
-    .positive("qty must be greater than 0"),
+    .positive("qty must be greater than 0")
+    .max(999, "qty cannot be greater than 999"),
 
   weight: optionalWeight,
 
@@ -1186,9 +1254,14 @@ export const createProjectService_old = async (
     }
 
     const validPayload = validation.data;
+    const scanPackByCategory =
+      resolvedPackingType === PackingType.CUSTOM_GROUP
+        ? await getScanPackValidationByCategory(resolvedVendorId)
+        : undefined;
     const qtyPerCustomPackingBox = calculateQtyPerCustomPackingBox(
       validPayload.items,
-      resolvedPackingType
+      resolvedPackingType,
+      scanPackByCategory,
     );
 
     logger.info("Validation passed", {
@@ -1201,28 +1274,21 @@ export const createProjectService_old = async (
     | STEP 3 — Check duplicate barcode1 within Excel
     |--------------------------------------------------------------------------
     */
-    const uniqueCodesToInsert = validPayload.items
-      .map((item) => cleanText(item.barcode1))
-      .filter(Boolean);
+    const uniqueCodesFromExcel = validPayload.items.map((item) =>
+      cleanText(item.barcode1)
+    );
+    const hasExcelUniqueCode = uniqueCodesFromExcel.some(Boolean);
+    const hasBlankExcelUniqueCode = uniqueCodesFromExcel.some((code) => !code);
 
-    if (vendor.is_available_unique_code) {
-      const rowsWithoutUniqueCode = validPayload.items
-        .map((item, index) => ({
-          rowNumber: index + 2,
-          uniqueCode: cleanText(item.barcode1),
-        }))
-        .filter((item) => !item.uniqueCode)
-        .map((item) => item.rowNumber);
-
-      if (rowsWithoutUniqueCode.length > 0) {
-        throw new Error(
-          `Unique Code is required in Excel row${
-            rowsWithoutUniqueCode.length > 1 ? "s" : ""
-          }: ${rowsWithoutUniqueCode.join(", ")}`
-        );
-      }
+    if (hasExcelUniqueCode && hasBlankExcelUniqueCode) {
+      throw new Error(
+        "Unique Code must be provided for every Excel row or left blank for all rows."
+      );
     }
 
+    const uniqueCodesToInsert = uniqueCodesFromExcel.filter(Boolean);
+
+    // Scenario 1 & 3: Check for duplicates within Excel
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
     );
@@ -1239,21 +1305,15 @@ export const createProjectService_old = async (
     |--------------------------------------------------------------------------
     | STEP 4 — Check duplicate barcode1 in DB based on vendor configuration
     |--------------------------------------------------------------------------
-    |
     | Rules:
     | 1. Duplicate barcode inside the same Excel is already blocked above.
-    | 2. If Track & Trace is enabled, barcode must be unique in database.
-    | 3. If Track & Trace is disabled and Scan & Pack is enabled,
-    |    barcode can already exist in database.
-    |
+    | 2. If unique-code mode is enabled, a customer-supplied barcode must be
+    |    unique in the database too.
+    | 3. Blank Excel barcodes are generated from the new CutList row ID below.
+    |--------------------------------------------------------------------------
     */
-    const shouldAllowDatabaseDuplicateBarcode =
-      vendor.is_tracktrace_enabled === false &&
-      vendor.is_scanpack_enabled === true;
-
     const shouldCheckDatabaseBarcodeDuplicate =
-      vendor.is_tracktrace_enabled === true ||
-      !shouldAllowDatabaseDuplicateBarcode;
+      vendor.is_available_unique_code === true;
 
     if (shouldCheckDatabaseBarcodeDuplicate && uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
@@ -1550,9 +1610,9 @@ export const createProjectService_old = async (
               project_id: project.id,
               vendor_id: vendor.id,
               description: item.name,
-              length: Number(item.l1),
-              width: Number(item.l2),
-              thickness: Number(item.l3),
+              length: item.l1 == null ? null : Number(item.l1),
+              width: item.l2 == null ? null : Number(item.l2),
+              thickness: item.l3 == null ? null : Number(item.l3),
               qty: quantity,
               material_details: item.articleCode,
               item_name: item.name,
@@ -1576,6 +1636,24 @@ export const createProjectService_old = async (
 
           const uniqueCode =
             cleanText(item.barcode1) || String(row.id);
+
+          // Scenario 2: Validate automatically assigned CutList ID code in DB if unique code is required
+          if (vendor.is_available_unique_code && !cleanText(item.barcode1)) {
+            const existingCodeInDb = await tx.cutList.findFirst({
+              where: {
+                vendor_id: vendor.id,
+                unique_code: uniqueCode,
+                id: { not: row.id },
+              },
+              select: { id: true, unique_code: true },
+            });
+
+            if (existingCodeInDb) {
+              throw new Error(
+                `Duplicate barcode found in database for generated code: ${uniqueCode}`
+              );
+            }
+          }
 
           await tx.cutList.update({
             where: {
@@ -2086,10 +2164,15 @@ export const createProjectService = async (
     }
 
     const validPayload = validation.data;
+    const scanPackByCategory =
+      resolvedPackingType === PackingType.CUSTOM_GROUP
+        ? await getScanPackValidationByCategory(resolvedVendorId)
+        : undefined;
 
     const qtyPerCustomPackingBox = calculateQtyPerCustomPackingBox(
       validPayload.items,
-      resolvedPackingType
+      resolvedPackingType,
+      scanPackByCategory,
     );
 
     logger.info("Validation passed", {
@@ -2102,28 +2185,21 @@ export const createProjectService = async (
     | STEP 3 — Check duplicate barcode1 within Excel
     |--------------------------------------------------------------------------
     */
-    const uniqueCodesToInsert = validPayload.items
-      .map((item) => cleanText(item.barcode1))
-      .filter(Boolean);
+    const uniqueCodesFromExcel = validPayload.items.map((item) =>
+      cleanText(item.barcode1)
+    );
+    const hasExcelUniqueCode = uniqueCodesFromExcel.some(Boolean);
+    const hasBlankExcelUniqueCode = uniqueCodesFromExcel.some((code) => !code);
 
-    if (vendor.is_available_unique_code) {
-      const rowsWithoutUniqueCode = validPayload.items
-        .map((item, index) => ({
-          rowNumber: index + 2,
-          uniqueCode: cleanText(item.barcode1),
-        }))
-        .filter((item) => !item.uniqueCode)
-        .map((item) => item.rowNumber);
-
-      if (rowsWithoutUniqueCode.length > 0) {
-        throw new Error(
-          `Unique Code is required in Excel row${
-            rowsWithoutUniqueCode.length > 1 ? "s" : ""
-          }: ${rowsWithoutUniqueCode.join(", ")}`
-        );
-      }
+    if (hasExcelUniqueCode && hasBlankExcelUniqueCode) {
+      throw new Error(
+        "Unique Code must be provided for every Excel row or left blank for all rows."
+      );
     }
 
+    const uniqueCodesToInsert = uniqueCodesFromExcel.filter(Boolean);
+
+    // Scenario 1 & 3: Check for duplicates within Excel
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
     );
@@ -2140,21 +2216,15 @@ export const createProjectService = async (
     |--------------------------------------------------------------------------
     | STEP 4 — Check duplicate barcode1 in DB based on vendor configuration
     |--------------------------------------------------------------------------
-    |
     | Rules:
     | 1. Duplicate barcode inside the same Excel is already blocked above.
-    | 2. If Track & Trace is enabled, barcode must be unique in database.
-    | 3. If Track & Trace is disabled and Scan & Pack is enabled,
-    |    barcode can already exist in database.
-    |
+    | 2. If unique-code mode is enabled, a customer-supplied barcode must be
+    |    unique in the database too.
+    | 3. Blank Excel barcodes are generated from the new CutList row ID below.
+    |--------------------------------------------------------------------------
     */
-    const shouldAllowDatabaseDuplicateBarcode =
-      vendor.is_tracktrace_enabled === false &&
-      vendor.is_scanpack_enabled === true;
-
     const shouldCheckDatabaseBarcodeDuplicate =
-      vendor.is_tracktrace_enabled === true ||
-      !shouldAllowDatabaseDuplicateBarcode;
+      vendor.is_available_unique_code === true;
 
     if (shouldCheckDatabaseBarcodeDuplicate && uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
@@ -2545,9 +2615,9 @@ export const createProjectService = async (
               project_id: project.id,
               vendor_id: vendor.id,
               description: item.name,
-              length: Number(item.l1),
-              width: Number(item.l2),
-              thickness: Number(item.l3),
+              length: item.l1 == null ? null : Number(item.l1),
+              width: item.l2 == null ? null : Number(item.l2),
+              thickness: item.l3 == null ? null : Number(item.l3),
               qty: quantity,
               material_details: item.articleCode,
               item_name: item.name,
@@ -2590,6 +2660,24 @@ export const createProjectService = async (
 
           const uniqueCode =
             cleanText(item.barcode1) || String(row.id);
+
+          // Scenario 2: Validate automatically assigned CutList ID code in DB if unique code is required
+          if (vendor.is_available_unique_code && !cleanText(item.barcode1)) {
+            const existingCodeInDb = await tx.cutList.findFirst({
+              where: {
+                vendor_id: vendor.id,
+                unique_code: uniqueCode,
+                id: { not: row.id },
+              },
+              select: { id: true, unique_code: true },
+            });
+
+            if (existingCodeInDb) {
+              throw new Error(
+                `Duplicate barcode found in database for generated code: ${uniqueCode}`
+              );
+            }
+          }
 
           await tx.cutList.update({
             where: {

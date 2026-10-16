@@ -38,3 +38,11 @@ export interface MarkDefectPayload {
   action:string,
   rework_machine_id:number
 }
+
+export interface UpdateCutListQtyPayload {
+  project_id: string;
+  vendor_id: number;
+  cut_list_id: number;
+  new_qty: number;
+  user_role?: string;
+}
