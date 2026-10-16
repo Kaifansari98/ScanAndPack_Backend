@@ -122,6 +122,49 @@ export class LeadStatsService {
         },
       });
 
+      if (isCaller && userId) {
+        const todayStart = new Date();
+        todayStart.setHours(0, 0, 0, 0);
+
+        const todayEnd = new Date();
+        todayEnd.setHours(23, 59, 59, 999);
+
+        const notLostFilter = {
+          online_lead_followup_status: {
+            status_name: { not: "lost", mode: "insensitive" as const },
+          },
+        };
+
+        const [todayCount, upcomingCount, overdueCount] = await Promise.all([
+          prisma.online_leads.count({
+            where: {
+              vendor_id: vendorId,
+              assign_to: userId,
+              follow_up_date: { gte: todayStart, lte: todayEnd },
+              ...notLostFilter,
+            },
+          }),
+          prisma.online_leads.count({
+            where: {
+              vendor_id: vendorId,
+              assign_to: userId,
+              follow_up_date: { gt: todayEnd },
+              ...notLostFilter,
+            },
+          }),
+          prisma.online_leads.count({
+            where: {
+              vendor_id: vendorId,
+              assign_to: userId,
+              follow_up_date: { lt: todayStart },
+              ...notLostFilter,
+            },
+          }),
+        ]);
+
+        totalMyTasks = (totalMyTasks || 0) + todayCount + upcomingCount + overdueCount;
+      }
+
       if (shouldUseMapping) {
         // Pre-prod and factory are mapping-only — taskLeads would pull leads they
         // don't own (e.g. tasks they created) and inflate the sidebar count.

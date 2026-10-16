@@ -97,6 +97,29 @@ async function fixStaleApprovedOnlineLeads() {
   }
 }
 
+async function ensureHrmsAdminUserType() {
+  try {
+    await prisma.$executeRawUnsafe(
+      `SELECT setval(pg_get_serial_sequence('"UserTypeMaster"', 'id'), coalesce(max(id), 0) + 1, false) FROM "UserTypeMaster";`
+    );
+    const existing = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: { in: ["hrms-admin", "hrms admin", "HRMS Admin"], mode: "insensitive" },
+      },
+    });
+    if (!existing) {
+      await prisma.userTypeMaster.create({
+        data: {
+          user_type: "hrms-admin",
+        },
+      });
+      logger.info("[MIGRATION] Created 'hrms-admin' user type");
+    }
+  } catch (err) {
+    logger.error("Error ensuring hrms-admin user type:", err);
+  }
+}
+
 const server = app.listen(PORT, () => {
   logger.info("Server started", { port: PORT, env: process.env.NODE_ENV });
   console.log('DATABASE_URL:', process.env.DATABASE_URL);
@@ -104,6 +127,7 @@ const server = app.listen(PORT, () => {
   // Start scheduler jobs
   startCronJobs();
   fixStaleApprovedOnlineLeads();
+  ensureHrmsAdminUserType();
 });
 
 // Graceful shutdown (optional but recommended)

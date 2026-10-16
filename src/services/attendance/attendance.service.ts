@@ -54,17 +54,18 @@ export function formatInTimeZone(
 ): string | null {
   if (!date) return null;
   try {
-    return new Intl.DateTimeFormat("en-GB", {
+    return new Intl.DateTimeFormat("en-IN", {
       timeZone,
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
-      hour12: false,
+      hour12: true,
     }).format(date);
   } catch {
     return date.toISOString();
   }
 }
+
 
 /**
  * Decorate attendance record with vendor-local formatted strings.

@@ -416,8 +416,15 @@ export const getUsersByVendorService = async ({
   };
 
   if (normalizedUserType) {
+    const types = normalizedUserType
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
     where.user_type = {
-      user_type: { equals: normalizedUserType, mode: "insensitive" as const },
+      user_type:
+        types.length > 1
+          ? { in: types, mode: "insensitive" as const }
+          : { equals: types[0], mode: "insensitive" as const },
     };
   } else if (normalizedExcludeUserType) {
     where.user_type = {
