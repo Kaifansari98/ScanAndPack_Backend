@@ -28,74 +28,78 @@ export type AggregateTime_zone_master = {
 
 export type Time_zone_masterAvgAggregateOutputType = {
   id: number | null
+  mins: number | null
 }
 
 export type Time_zone_masterSumAggregateOutputType = {
   id: number | null
+  mins: number | null
 }
 
 export type Time_zone_masterMinAggregateOutputType = {
   id: number | null
-  name: string | null
-  time_zone_code: string | null
-  is_active: boolean | null
-  created_at: Date | null
-  updated_at: Date | null
+  country: string | null
+  time_zone_name: string | null
+  time_zone: string | null
+  active: boolean | null
+  mins: number | null
 }
 
 export type Time_zone_masterMaxAggregateOutputType = {
   id: number | null
-  name: string | null
-  time_zone_code: string | null
-  is_active: boolean | null
-  created_at: Date | null
-  updated_at: Date | null
+  country: string | null
+  time_zone_name: string | null
+  time_zone: string | null
+  active: boolean | null
+  mins: number | null
 }
 
 export type Time_zone_masterCountAggregateOutputType = {
   id: number
-  name: number
-  time_zone_code: number
-  is_active: number
-  created_at: number
-  updated_at: number
+  country: number
+  time_zone_name: number
+  time_zone: number
+  active: number
+  mins: number
   _all: number
 }
 
 
 export type Time_zone_masterAvgAggregateInputType = {
   id?: true
+  mins?: true
 }
 
 export type Time_zone_masterSumAggregateInputType = {
   id?: true
+  mins?: true
 }
 
 export type Time_zone_masterMinAggregateInputType = {
   id?: true
-  name?: true
-  time_zone_code?: true
-  is_active?: true
-  created_at?: true
-  updated_at?: true
+  country?: true
+  time_zone_name?: true
+  time_zone?: true
+  active?: true
+  mins?: true
 }
 
 export type Time_zone_masterMaxAggregateInputType = {
   id?: true
-  name?: true
-  time_zone_code?: true
-  is_active?: true
-  created_at?: true
-  updated_at?: true
+  country?: true
+  time_zone_name?: true
+  time_zone?: true
+  active?: true
+  mins?: true
 }
 
 export type Time_zone_masterCountAggregateInputType = {
   id?: true
-  name?: true
-  time_zone_code?: true
-  is_active?: true
-  created_at?: true
-  updated_at?: true
+  country?: true
+  time_zone_name?: true
+  time_zone?: true
+  active?: true
+  mins?: true
   _all?: true
 }
 
@@ -187,11 +191,11 @@ export type time_zone_masterGroupByArgs<ExtArgs extends runtime.Types.Extensions
 
 export type Time_zone_masterGroupByOutputType = {
   id: number
-  name: string
-  time_zone_code: string
-  is_active: boolean
-  created_at: Date
-  updated_at: Date
+  country: string
+  time_zone_name: string
+  time_zone: string | null
+  active: boolean
+  mins: number | null
   _count: Time_zone_masterCountAggregateOutputType | null
   _avg: Time_zone_masterAvgAggregateOutputType | null
   _sum: Time_zone_masterSumAggregateOutputType | null
@@ -219,44 +223,44 @@ export type time_zone_masterWhereInput = {
   OR?: Prisma.time_zone_masterWhereInput[]
   NOT?: Prisma.time_zone_masterWhereInput | Prisma.time_zone_masterWhereInput[]
   id?: Prisma.IntFilter<"time_zone_master"> | number
-  name?: Prisma.StringFilter<"time_zone_master"> | string
-  time_zone_code?: Prisma.StringFilter<"time_zone_master"> | string
-  is_active?: Prisma.BoolFilter<"time_zone_master"> | boolean
-  created_at?: Prisma.DateTimeFilter<"time_zone_master"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"time_zone_master"> | Date | string
+  country?: Prisma.StringFilter<"time_zone_master"> | string
+  time_zone_name?: Prisma.StringFilter<"time_zone_master"> | string
+  time_zone?: Prisma.StringNullableFilter<"time_zone_master"> | string | null
+  active?: Prisma.BoolFilter<"time_zone_master"> | boolean
+  mins?: Prisma.IntNullableFilter<"time_zone_master"> | number | null
   vendors?: Prisma.VendorMasterListRelationFilter
 }
 
 export type time_zone_masterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  time_zone_code?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  time_zone_name?: Prisma.SortOrder
+  time_zone?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
+  mins?: Prisma.SortOrderInput | Prisma.SortOrder
   vendors?: Prisma.VendorMasterOrderByRelationAggregateInput
 }
 
 export type time_zone_masterWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  time_zone_code?: string
+  time_zone_name?: string
   AND?: Prisma.time_zone_masterWhereInput | Prisma.time_zone_masterWhereInput[]
   OR?: Prisma.time_zone_masterWhereInput[]
   NOT?: Prisma.time_zone_masterWhereInput | Prisma.time_zone_masterWhereInput[]
-  name?: Prisma.StringFilter<"time_zone_master"> | string
-  is_active?: Prisma.BoolFilter<"time_zone_master"> | boolean
-  created_at?: Prisma.DateTimeFilter<"time_zone_master"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"time_zone_master"> | Date | string
+  country?: Prisma.StringFilter<"time_zone_master"> | string
+  time_zone?: Prisma.StringNullableFilter<"time_zone_master"> | string | null
+  active?: Prisma.BoolFilter<"time_zone_master"> | boolean
+  mins?: Prisma.IntNullableFilter<"time_zone_master"> | number | null
   vendors?: Prisma.VendorMasterListRelationFilter
-}, "id" | "time_zone_code">
+}, "id" | "time_zone_name">
 
 export type time_zone_masterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  time_zone_code?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  time_zone_name?: Prisma.SortOrder
+  time_zone?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
+  mins?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.time_zone_masterCountOrderByAggregateInput
   _avg?: Prisma.time_zone_masterAvgOrderByAggregateInput
   _max?: Prisma.time_zone_masterMaxOrderByAggregateInput
@@ -269,75 +273,75 @@ export type time_zone_masterScalarWhereWithAggregatesInput = {
   OR?: Prisma.time_zone_masterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.time_zone_masterScalarWhereWithAggregatesInput | Prisma.time_zone_masterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"time_zone_master"> | number
-  name?: Prisma.StringWithAggregatesFilter<"time_zone_master"> | string
-  time_zone_code?: Prisma.StringWithAggregatesFilter<"time_zone_master"> | string
-  is_active?: Prisma.BoolWithAggregatesFilter<"time_zone_master"> | boolean
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"time_zone_master"> | Date | string
-  updated_at?: Prisma.DateTimeWithAggregatesFilter<"time_zone_master"> | Date | string
+  country?: Prisma.StringWithAggregatesFilter<"time_zone_master"> | string
+  time_zone_name?: Prisma.StringWithAggregatesFilter<"time_zone_master"> | string
+  time_zone?: Prisma.StringNullableWithAggregatesFilter<"time_zone_master"> | string | null
+  active?: Prisma.BoolWithAggregatesFilter<"time_zone_master"> | boolean
+  mins?: Prisma.IntNullableWithAggregatesFilter<"time_zone_master"> | number | null
 }
 
 export type time_zone_masterCreateInput = {
-  name: string
-  time_zone_code: string
-  is_active?: boolean
-  created_at?: Date | string
-  updated_at?: Date | string
+  country: string
+  time_zone_name: string
+  time_zone?: string | null
+  active?: boolean
+  mins?: number | null
   vendors?: Prisma.VendorMasterCreateNestedManyWithoutTime_zone_masterInput
 }
 
 export type time_zone_masterUncheckedCreateInput = {
   id?: number
-  name: string
-  time_zone_code: string
-  is_active?: boolean
-  created_at?: Date | string
-  updated_at?: Date | string
+  country: string
+  time_zone_name: string
+  time_zone?: string | null
+  active?: boolean
+  mins?: number | null
   vendors?: Prisma.VendorMasterUncheckedCreateNestedManyWithoutTime_zone_masterInput
 }
 
 export type time_zone_masterUpdateInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  time_zone_code?: Prisma.StringFieldUpdateOperationsInput | string
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone_name?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mins?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendors?: Prisma.VendorMasterUpdateManyWithoutTime_zone_masterNestedInput
 }
 
 export type time_zone_masterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  time_zone_code?: Prisma.StringFieldUpdateOperationsInput | string
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone_name?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mins?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendors?: Prisma.VendorMasterUncheckedUpdateManyWithoutTime_zone_masterNestedInput
 }
 
 export type time_zone_masterCreateManyInput = {
   id?: number
-  name: string
-  time_zone_code: string
-  is_active?: boolean
-  created_at?: Date | string
-  updated_at?: Date | string
+  country: string
+  time_zone_name: string
+  time_zone?: string | null
+  active?: boolean
+  mins?: number | null
 }
 
 export type time_zone_masterUpdateManyMutationInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  time_zone_code?: Prisma.StringFieldUpdateOperationsInput | string
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone_name?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mins?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type time_zone_masterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  time_zone_code?: Prisma.StringFieldUpdateOperationsInput | string
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone_name?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mins?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type Time_zone_masterNullableScalarRelationFilter = {
@@ -347,37 +351,39 @@ export type Time_zone_masterNullableScalarRelationFilter = {
 
 export type time_zone_masterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  time_zone_code?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  time_zone_name?: Prisma.SortOrder
+  time_zone?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  mins?: Prisma.SortOrder
 }
 
 export type time_zone_masterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  mins?: Prisma.SortOrder
 }
 
 export type time_zone_masterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  time_zone_code?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  time_zone_name?: Prisma.SortOrder
+  time_zone?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  mins?: Prisma.SortOrder
 }
 
 export type time_zone_masterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  time_zone_code?: Prisma.SortOrder
-  is_active?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
-  updated_at?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  time_zone_name?: Prisma.SortOrder
+  time_zone?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  mins?: Prisma.SortOrder
 }
 
 export type time_zone_masterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  mins?: Prisma.SortOrder
 }
 
 export type time_zone_masterCreateNestedOneWithoutVendorsInput = {
@@ -397,20 +403,20 @@ export type time_zone_masterUpdateOneWithoutVendorsNestedInput = {
 }
 
 export type time_zone_masterCreateWithoutVendorsInput = {
-  name: string
-  time_zone_code: string
-  is_active?: boolean
-  created_at?: Date | string
-  updated_at?: Date | string
+  country: string
+  time_zone_name: string
+  time_zone?: string | null
+  active?: boolean
+  mins?: number | null
 }
 
 export type time_zone_masterUncheckedCreateWithoutVendorsInput = {
   id?: number
-  name: string
-  time_zone_code: string
-  is_active?: boolean
-  created_at?: Date | string
-  updated_at?: Date | string
+  country: string
+  time_zone_name: string
+  time_zone?: string | null
+  active?: boolean
+  mins?: number | null
 }
 
 export type time_zone_masterCreateOrConnectWithoutVendorsInput = {
@@ -430,20 +436,20 @@ export type time_zone_masterUpdateToOneWithWhereWithoutVendorsInput = {
 }
 
 export type time_zone_masterUpdateWithoutVendorsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  time_zone_code?: Prisma.StringFieldUpdateOperationsInput | string
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone_name?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mins?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type time_zone_masterUncheckedUpdateWithoutVendorsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  time_zone_code?: Prisma.StringFieldUpdateOperationsInput | string
-  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone_name?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mins?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -479,43 +485,43 @@ export type Time_zone_masterCountOutputTypeCountVendorsArgs<ExtArgs extends runt
 
 export type time_zone_masterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  time_zone_code?: boolean
-  is_active?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  country?: boolean
+  time_zone_name?: boolean
+  time_zone?: boolean
+  active?: boolean
+  mins?: boolean
   vendors?: boolean | Prisma.time_zone_master$vendorsArgs<ExtArgs>
   _count?: boolean | Prisma.Time_zone_masterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["time_zone_master"]>
 
 export type time_zone_masterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  time_zone_code?: boolean
-  is_active?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  country?: boolean
+  time_zone_name?: boolean
+  time_zone?: boolean
+  active?: boolean
+  mins?: boolean
 }, ExtArgs["result"]["time_zone_master"]>
 
 export type time_zone_masterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  time_zone_code?: boolean
-  is_active?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  country?: boolean
+  time_zone_name?: boolean
+  time_zone?: boolean
+  active?: boolean
+  mins?: boolean
 }, ExtArgs["result"]["time_zone_master"]>
 
 export type time_zone_masterSelectScalar = {
   id?: boolean
-  name?: boolean
-  time_zone_code?: boolean
-  is_active?: boolean
-  created_at?: boolean
-  updated_at?: boolean
+  country?: boolean
+  time_zone_name?: boolean
+  time_zone?: boolean
+  active?: boolean
+  mins?: boolean
 }
 
-export type time_zone_masterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "time_zone_code" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["time_zone_master"]>
+export type time_zone_masterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "country" | "time_zone_name" | "time_zone" | "active" | "mins", ExtArgs["result"]["time_zone_master"]>
 export type time_zone_masterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendors?: boolean | Prisma.time_zone_master$vendorsArgs<ExtArgs>
   _count?: boolean | Prisma.Time_zone_masterCountOutputTypeDefaultArgs<ExtArgs>
@@ -530,11 +536,11 @@ export type $time_zone_masterPayload<ExtArgs extends runtime.Types.Extensions.In
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    name: string
-    time_zone_code: string
-    is_active: boolean
-    created_at: Date
-    updated_at: Date
+    country: string
+    time_zone_name: string
+    time_zone: string | null
+    active: boolean
+    mins: number | null
   }, ExtArgs["result"]["time_zone_master"]>
   composites: {}
 }
@@ -960,11 +966,11 @@ export interface Prisma__time_zone_masterClient<T, Null = never, ExtArgs extends
  */
 export interface time_zone_masterFieldRefs {
   readonly id: Prisma.FieldRef<"time_zone_master", 'Int'>
-  readonly name: Prisma.FieldRef<"time_zone_master", 'String'>
-  readonly time_zone_code: Prisma.FieldRef<"time_zone_master", 'String'>
-  readonly is_active: Prisma.FieldRef<"time_zone_master", 'Boolean'>
-  readonly created_at: Prisma.FieldRef<"time_zone_master", 'DateTime'>
-  readonly updated_at: Prisma.FieldRef<"time_zone_master", 'DateTime'>
+  readonly country: Prisma.FieldRef<"time_zone_master", 'String'>
+  readonly time_zone_name: Prisma.FieldRef<"time_zone_master", 'String'>
+  readonly time_zone: Prisma.FieldRef<"time_zone_master", 'String'>
+  readonly active: Prisma.FieldRef<"time_zone_master", 'Boolean'>
+  readonly mins: Prisma.FieldRef<"time_zone_master", 'Int'>
 }
     
 

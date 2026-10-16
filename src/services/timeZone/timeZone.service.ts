@@ -11,28 +11,28 @@ export function isValidIANATimeZone(timeZone: string): boolean {
 }
 
 export interface ListTimeZonesParams {
-  is_active?: boolean;
+  active?: boolean;
   search?: string;
 }
 
 export const listTimeZones = async (params: ListTimeZonesParams = {}) => {
   const where: any = {};
 
-  if (typeof params.is_active === "boolean") {
-    where.is_active = params.is_active;
+  if (typeof params.active === "boolean") {
+    where.active = params.active;
   }
 
   if (params.search && params.search.trim()) {
     const s = params.search.trim();
     where.OR = [
-      { name: { contains: s, mode: "insensitive" } },
-      { time_zone_code: { contains: s, mode: "insensitive" } },
+      { country: { contains: s, mode: "insensitive" } },
+      { time_zone_name: { contains: s, mode: "insensitive" } },
     ];
   }
 
   return prisma.time_zone_master.findMany({
     where,
-    orderBy: [{ name: "asc" }, { time_zone_code: "asc" }],
+    orderBy: [{ country: "asc" }, { time_zone_name: "asc" }],
   });
 };
 
@@ -42,47 +42,49 @@ export const getTimeZoneById = async (id: number) => {
   });
 };
 
-export const getTimeZoneByCode = async (timeZoneCode: string) => {
+export const getTimeZoneByCode = async (timeZoneName: string) => {
   return prisma.time_zone_master.findUnique({
-    where: { time_zone_code: timeZoneCode },
+    where: { time_zone_name: timeZoneName },
   });
 };
 
 export const createTimeZone = async (data: {
-  name: string;
-  time_zone_code: string;
-  is_active?: boolean;
+  country: string;
+  time_zone_name: string;
+  time_zone?: string;
+  active?: boolean;
+  mins?: number;
 }) => {
-  const name = data.name?.trim();
-  const time_zone_code = data.time_zone_code?.trim();
+  const country = data.country?.trim();
+  const time_zone_name = data.time_zone_name?.trim();
 
-  if (!name) {
-    const err: any = new Error("Time zone name is required");
+  if (!country) {
+    const err: any = new Error("Country name is required");
     err.statusCode = 400;
     throw err;
   }
 
-  if (!time_zone_code) {
-    const err: any = new Error("time_zone_code is required");
+  if (!time_zone_name) {
+    const err: any = new Error("time_zone_name is required");
     err.statusCode = 400;
     throw err;
   }
 
-  if (!isValidIANATimeZone(time_zone_code)) {
+  if (!isValidIANATimeZone(time_zone_name)) {
     const err: any = new Error(
-      `'${time_zone_code}' is not a valid IANA time zone identifier`
+      `'${time_zone_name}' is not a valid IANA time zone identifier`
     );
     err.statusCode = 400;
     throw err;
   }
 
   const existing = await prisma.time_zone_master.findUnique({
-    where: { time_zone_code },
+    where: { time_zone_name },
   });
 
   if (existing) {
     const err: any = new Error(
-      `Time zone with code '${time_zone_code}' already exists`
+      `Time zone with name '${time_zone_name}' already exists`
     );
     err.statusCode = 409;
     throw err;
@@ -90,9 +92,11 @@ export const createTimeZone = async (data: {
 
   return prisma.time_zone_master.create({
     data: {
-      name,
-      time_zone_code,
-      is_active: data.is_active !== undefined ? Boolean(data.is_active) : true,
+      country,
+      time_zone_name,
+      time_zone: data.time_zone?.trim() || null,
+      active: data.active !== undefined ? Boolean(data.active) : true,
+      mins: data.mins !== undefined ? Number(data.mins) : null,
     },
   });
 };
@@ -100,8 +104,10 @@ export const createTimeZone = async (data: {
 export const updateTimeZone = async (
   id: number,
   data: {
-    name?: string;
-    is_active?: boolean;
+    country?: string;
+    active?: boolean;
+    time_zone?: string;
+    mins?: number;
   }
 ) => {
   const existing = await prisma.time_zone_master.findUnique({
@@ -117,8 +123,10 @@ export const updateTimeZone = async (
   return prisma.time_zone_master.update({
     where: { id },
     data: {
-      ...(data.name !== undefined && { name: data.name.trim() }),
-      ...(data.is_active !== undefined && { is_active: Boolean(data.is_active) }),
+      ...(data.country !== undefined && { country: data.country.trim() }),
+      ...(data.active !== undefined && { active: Boolean(data.active) }),
+      ...(data.time_zone !== undefined && { time_zone: data.time_zone?.trim() || null }),
+      ...(data.mins !== undefined && { mins: data.mins !== null ? Number(data.mins) : null }),
     },
   });
 };

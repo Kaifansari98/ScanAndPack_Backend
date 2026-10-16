@@ -4309,11 +4309,11 @@ export type WalkinLeadUploadScalarFieldEnum = (typeof WalkinLeadUploadScalarFiel
 
 export const Time_zone_masterScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  time_zone_code: 'time_zone_code',
-  is_active: 'is_active',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  country: 'country',
+  time_zone_name: 'time_zone_name',
+  time_zone: 'time_zone',
+  active: 'active',
+  mins: 'mins'
 } as const
 
 export type Time_zone_masterScalarFieldEnum = (typeof Time_zone_masterScalarFieldEnum)[keyof typeof Time_zone_masterScalarFieldEnum]
