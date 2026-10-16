@@ -16,6 +16,7 @@ import Statsrouter from "./generic/leadStats.routes";
 
 // Leads Routes
 import leadModuleRoutes from "./leadModuleRoutes/lead.routes";
+import walkinLeadQuestionsRoutes from "./leadModuleRoutes/walkinLeadQuestions.routes";
 import onlineLeadRoutes from "./onlineLeadRoutes/onlineLead.routes";
 import { paymentUploadRoutes } from "./leadModuleRoutes/initial-site-measurement.routes";
 import DesigningStageRouter from "./leadModuleRoutes/desigingStage/designing-stage.routes";
@@ -68,6 +69,8 @@ import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
   import architectureMasterRoutes from "./architectureMasterRoutes/architectureMaster.route";
   import paymentRequisitionRoutes from "./inventoryRoutes/payment-requisitions.routes";
   import broadcastRouter from "./broadcast/broadcast.routes";
+import timeZoneRoutes from "./timeZone/timeZone.routes";
+import attendanceRoutes from "./attendance/attendance.routes";
   const router = Router();
 
   router.use("/dashboard", DashboardRouter);
@@ -85,6 +88,7 @@ import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
   router.use("/boxes", boxRoutes);
   router.use("/scan-items", scanItemRoutes);
   router.use("/auth", authRoutes);
+  router.use("/leads/walkin-questions", walkinLeadQuestionsRoutes);
   router.use("/clients", clientRoutes);
   router.use("/client-types", clientTypeRoutes);
   router.use("/leads", leadModuleRoutes);
@@ -155,5 +159,7 @@ router.use(
 router.use("/inventory/payment-requisitions", paymentRequisitionRoutes);
 
 router.use("/broadcasts", broadcastRouter);
+router.use("/time-zones", timeZoneRoutes);
+router.use("/attendance", attendanceRoutes);
 
 export { router };

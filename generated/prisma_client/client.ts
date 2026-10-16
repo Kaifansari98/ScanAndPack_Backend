@@ -1179,3 +1179,33 @@ export type SiteSupervisorFranchiseMapping = Prisma.SiteSupervisorFranchiseMappi
  * 
  */
 export type WixStudioDataCapture = Prisma.WixStudioDataCaptureModel
+/**
+ * Model WalkinLeadQuestionnaire
+ * 
+ */
+export type WalkinLeadQuestionnaire = Prisma.WalkinLeadQuestionnaireModel
+/**
+ * Model WalkinLeadResponse
+ * 
+ */
+export type WalkinLeadResponse = Prisma.WalkinLeadResponseModel
+/**
+ * Model WalkinLeadUpload
+ * 
+ */
+export type WalkinLeadUpload = Prisma.WalkinLeadUploadModel
+/**
+ * Model time_zone_master
+ * 
+ */
+export type time_zone_master = Prisma.time_zone_masterModel
+/**
+ * Model attendance
+ * 
+ */
+export type attendance = Prisma.attendanceModel
+/**
+ * Model attendance_logs
+ * 
+ */
+export type attendance_logs = Prisma.attendance_logsModel

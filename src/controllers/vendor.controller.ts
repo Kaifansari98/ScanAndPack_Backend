@@ -97,6 +97,7 @@ export const createVendor = async (req: Request, res: Response) => {
       pincode: cleanString(req.body.pincode),
       city: cleanString(req.body.city),
       state_id: cleanNumberOrNull(req.body.state_id),
+      time_zone_id: cleanNumberOrNull(req.body.time_zone_id),
 
       handlesLargeScaleProjects: req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true,
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
@@ -182,6 +183,10 @@ export const updateVendorController = async (req: Request, res: Response) => {
       state_id:
         req.body.state_id !== undefined
           ? cleanNumberOrNull(req.body.state_id)
+          : undefined,
+      time_zone_id:
+        req.body.time_zone_id !== undefined
+          ? cleanNumberOrNull(req.body.time_zone_id)
           : undefined,
 
       handlesLargeScaleProjects: req.body.handlesLargeScaleProjects !== undefined
@@ -412,6 +417,7 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       pincode: cleanString(req.body.pincode),
       city: cleanString(req.body.city),
       state_id: cleanNumberOrNull(req.body.state_id),
+      time_zone_id: cleanNumberOrNull(req.body.time_zone_id),
 
       handlesLargeScaleProjects: req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true,
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,

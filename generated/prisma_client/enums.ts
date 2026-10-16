@@ -45,6 +45,14 @@ export const PackingType = {
 export type PackingType = (typeof PackingType)[keyof typeof PackingType]
 
 
+export const FabricationType = {
+  METALWORK: 'METALWORK',
+  WOODWORK: 'WOODWORK'
+} as const
+
+export type FabricationType = (typeof FabricationType)[keyof typeof FabricationType]
+
+
 export const AdditionalCostCalculationType = {
   Fixed: 'Fixed',
   Percentage: 'Percentage'
@@ -756,3 +764,20 @@ export const RuleFieldDataType = {
 } as const
 
 export type RuleFieldDataType = (typeof RuleFieldDataType)[keyof typeof RuleFieldDataType]
+
+
+export const AttendanceAction = {
+  IN: 'IN',
+  OUT: 'OUT'
+} as const
+
+export type AttendanceAction = (typeof AttendanceAction)[keyof typeof AttendanceAction]
+
+
+export const AttendanceSource = {
+  MANUAL: 'MANUAL',
+  PHONE: 'PHONE',
+  CARD: 'CARD'
+} as const
+
+export type AttendanceSource = (typeof AttendanceSource)[keyof typeof AttendanceSource]

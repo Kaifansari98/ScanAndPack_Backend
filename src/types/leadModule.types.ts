@@ -256,6 +256,7 @@ export interface StatusType {
 }
 
 export interface CreateLeadDTO {
+  walkin_answers?: import("../services/leadModuleServices/walkinLeadQuestions/validation").AnswerGroup[];
   firstname: string;
   lastname: string;
   country_code: string;

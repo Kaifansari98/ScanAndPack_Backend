@@ -1,3 +1,4 @@
+import { parseAnswerGroups } from "../../../services/leadModuleServices/walkinLeadQuestions/validation";
 import { Request, Response } from "express";
 import {
   createLeadService,
@@ -268,6 +269,14 @@ export class LeadController {
       const { vendor_id, is_draft } = req.body;
       const draftMode = String(is_draft) === "true";
       const numericVendorId = Number(vendor_id);
+      if (req.body.walkin_answers !== undefined &&
+          (Number((req as any).user?.vendor_id) !== numericVendorId ||
+           Number((req as any).user?.id) !== Number(req.body.created_by))) {
+        return res.status(403).json({ success: false, message: "Walk-in answers must be submitted for your vendor and user" });
+      }
+      const walkinAnswers = req.body.walkin_answers === undefined
+        ? undefined
+        : parseAnswerGroups(req.body.walkin_answers);
       let productStructureInstances = req.body.product_structure_instances;
 
       if (typeof productStructureInstances === "string") {
@@ -321,6 +330,7 @@ export class LeadController {
 
       const payload = {
         ...req.body,
+        walkin_answers: walkinAnswers,
         site_type_id: req.body.site_type_id
           ? Number(req.body.site_type_id)
           : undefined,

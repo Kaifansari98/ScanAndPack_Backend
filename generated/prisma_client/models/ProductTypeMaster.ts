@@ -230,6 +230,8 @@ export type ProductTypeMasterWhereInput = {
   productStructures?: Prisma.ProductStructureListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireListRelationFilter
+  walkinResponses?: Prisma.WalkinLeadResponseListRelationFilter
 }
 
 export type ProductTypeMasterOrderByWithRelationInput = {
@@ -248,6 +250,8 @@ export type ProductTypeMasterOrderByWithRelationInput = {
   productStructures?: Prisma.ProductStructureOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   leadBillingAddresses?: Prisma.LeadBillingAddressOrderByRelationAggregateInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireOrderByRelationAggregateInput
+  walkinResponses?: Prisma.WalkinLeadResponseOrderByRelationAggregateInput
 }
 
 export type ProductTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -269,6 +273,8 @@ export type ProductTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   productStructures?: Prisma.ProductStructureListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireListRelationFilter
+  walkinResponses?: Prisma.WalkinLeadResponseListRelationFilter
 }, "id">
 
 export type ProductTypeMasterOrderByWithAggregationInput = {
@@ -309,6 +315,8 @@ export type ProductTypeMasterCreateInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateInput = {
@@ -326,6 +334,8 @@ export type ProductTypeMasterUncheckedCreateInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUpdateInput = {
@@ -342,6 +352,8 @@ export type ProductTypeMasterUpdateInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateInput = {
@@ -359,6 +371,8 @@ export type ProductTypeMasterUncheckedUpdateInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateManyInput = {
@@ -619,6 +633,34 @@ export type ProductTypeMasterUpdateOneWithoutProductsRequiredForProductionNested
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionInput, Prisma.ProductTypeMasterUpdateWithoutProductsRequiredForProductionInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
 }
 
+export type ProductTypeMasterCreateNestedOneWithoutWalkinQuestionnairesInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinQuestionnairesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutWalkinQuestionnairesInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+}
+
+export type ProductTypeMasterUpdateOneRequiredWithoutWalkinQuestionnairesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinQuestionnairesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutWalkinQuestionnairesInput
+  upsert?: Prisma.ProductTypeMasterUpsertWithoutWalkinQuestionnairesInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutWalkinQuestionnairesInput, Prisma.ProductTypeMasterUpdateWithoutWalkinQuestionnairesInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutWalkinQuestionnairesInput>
+}
+
+export type ProductTypeMasterCreateNestedOneWithoutWalkinResponsesInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinResponsesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinResponsesInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutWalkinResponsesInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+}
+
+export type ProductTypeMasterUpdateOneRequiredWithoutWalkinResponsesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinResponsesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinResponsesInput>
+  connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutWalkinResponsesInput
+  upsert?: Prisma.ProductTypeMasterUpsertWithoutWalkinResponsesInput
+  connect?: Prisma.ProductTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutWalkinResponsesInput, Prisma.ProductTypeMasterUpdateWithoutWalkinResponsesInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutWalkinResponsesInput>
+}
+
 export type ProductTypeMasterCreateWithoutVendorInput = {
   type: string
   tag: string
@@ -632,6 +674,8 @@ export type ProductTypeMasterCreateWithoutVendorInput = {
   PaymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutVendorInput = {
@@ -648,6 +692,8 @@ export type ProductTypeMasterUncheckedCreateWithoutVendorInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -700,6 +746,8 @@ export type ProductTypeMasterCreateWithoutLeadsInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutLeadsInput = {
@@ -716,6 +764,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadsInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutLeadsInput = {
@@ -747,6 +797,8 @@ export type ProductTypeMasterUpdateWithoutLeadsInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutLeadsInput = {
@@ -763,6 +815,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadsInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutDocumentsInput = {
@@ -778,6 +832,8 @@ export type ProductTypeMasterCreateWithoutDocumentsInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutDocumentsInput = {
@@ -794,6 +850,8 @@ export type ProductTypeMasterUncheckedCreateWithoutDocumentsInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutDocumentsInput = {
@@ -825,6 +883,8 @@ export type ProductTypeMasterUpdateWithoutDocumentsInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -841,6 +901,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutDocumentsInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutProductStructuresInput = {
@@ -856,6 +918,8 @@ export type ProductTypeMasterCreateWithoutProductStructuresInput = {
   PaymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutProductTypeMasterInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutProductStructuresInput = {
@@ -872,6 +936,8 @@ export type ProductTypeMasterUncheckedCreateWithoutProductStructuresInput = {
   Ledger?: Prisma.LedgerUncheckedCreateNestedManyWithoutProductTypeMasterInput
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutProductStructuresInput = {
@@ -903,6 +969,8 @@ export type ProductTypeMasterUpdateWithoutProductStructuresInput = {
   PaymentInfo?: Prisma.PaymentInfoUpdateManyWithoutProductTypeMasterNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutProductStructuresInput = {
@@ -919,6 +987,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductStructuresInput = {
   Ledger?: Prisma.LedgerUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutProductStructureInstancesInput = {
@@ -934,6 +1004,8 @@ export type ProductTypeMasterCreateWithoutProductStructureInstancesInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -950,6 +1022,8 @@ export type ProductTypeMasterUncheckedCreateWithoutProductStructureInstancesInpu
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -981,6 +1055,8 @@ export type ProductTypeMasterUpdateWithoutProductStructureInstancesInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -997,6 +1073,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductStructureInstancesInpu
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutPaymentInfoInput = {
@@ -1012,6 +1090,8 @@ export type ProductTypeMasterCreateWithoutPaymentInfoInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutPaymentInfoInput = {
@@ -1028,6 +1108,8 @@ export type ProductTypeMasterUncheckedCreateWithoutPaymentInfoInput = {
   Ledger?: Prisma.LedgerUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutPaymentInfoInput = {
@@ -1059,6 +1141,8 @@ export type ProductTypeMasterUpdateWithoutPaymentInfoInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutPaymentInfoInput = {
@@ -1075,6 +1159,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutPaymentInfoInput = {
   Ledger?: Prisma.LedgerUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutLedgerInput = {
@@ -1090,6 +1176,8 @@ export type ProductTypeMasterCreateWithoutLedgerInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutLedgerInput = {
@@ -1106,6 +1194,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLedgerInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutLedgerInput = {
@@ -1137,6 +1227,8 @@ export type ProductTypeMasterUpdateWithoutLedgerInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutLedgerInput = {
@@ -1153,6 +1245,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLedgerInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutLeadDetailedLogsInput = {
@@ -1168,6 +1262,8 @@ export type ProductTypeMasterCreateWithoutLeadDetailedLogsInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -1184,6 +1280,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -1215,6 +1313,8 @@ export type ProductTypeMasterUpdateWithoutLeadDetailedLogsInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -1231,6 +1331,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutLeadBillingAddressesInput = {
@@ -1246,6 +1348,8 @@ export type ProductTypeMasterCreateWithoutLeadBillingAddressesInput = {
   PaymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
@@ -1262,6 +1366,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   Ledger?: Prisma.LedgerUncheckedCreateNestedManyWithoutProductTypeMasterInput
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutLeadBillingAddressesInput = {
@@ -1293,6 +1399,8 @@ export type ProductTypeMasterUpdateWithoutLeadBillingAddressesInput = {
   PaymentInfo?: Prisma.PaymentInfoUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
@@ -1309,6 +1417,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   Ledger?: Prisma.LedgerUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateWithoutProductsRequiredForProductionInput = {
@@ -1324,6 +1434,8 @@ export type ProductTypeMasterCreateWithoutProductsRequiredForProductionInput = {
   productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
@@ -1340,6 +1452,8 @@ export type ProductTypeMasterUncheckedCreateWithoutProductsRequiredForProduction
   PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
   productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
 }
 
 export type ProductTypeMasterCreateOrConnectWithoutProductsRequiredForProductionInput = {
@@ -1371,6 +1485,8 @@ export type ProductTypeMasterUpdateWithoutProductsRequiredForProductionInput = {
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
@@ -1387,6 +1503,180 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductsRequiredForProduction
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
+}
+
+export type ProductTypeMasterCreateWithoutWalkinQuestionnairesInput = {
+  type: string
+  tag: string
+  status?: string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
+  leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
+  Ledger?: Prisma.LedgerCreateNestedManyWithoutProductTypeMasterInput
+  PaymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutProductTypeMasterInput
+  productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutProductTypeInput
+}
+
+export type ProductTypeMasterUncheckedCreateWithoutWalkinQuestionnairesInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  status?: string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
+  leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
+  Ledger?: Prisma.LedgerUncheckedCreateNestedManyWithoutProductTypeMasterInput
+  PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
+  productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutProductTypeInput
+}
+
+export type ProductTypeMasterCreateOrConnectWithoutWalkinQuestionnairesInput = {
+  where: Prisma.ProductTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinQuestionnairesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+}
+
+export type ProductTypeMasterUpsertWithoutWalkinQuestionnairesInput = {
+  update: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutWalkinQuestionnairesInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutWalkinQuestionnairesInput>
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinQuestionnairesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinQuestionnairesInput>
+  where?: Prisma.ProductTypeMasterWhereInput
+}
+
+export type ProductTypeMasterUpdateToOneWithWhereWithoutWalkinQuestionnairesInput = {
+  where?: Prisma.ProductTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutWalkinQuestionnairesInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutWalkinQuestionnairesInput>
+}
+
+export type ProductTypeMasterUpdateWithoutWalkinQuestionnairesInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
+  leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
+  Ledger?: Prisma.LedgerUpdateManyWithoutProductTypeMasterNestedInput
+  PaymentInfo?: Prisma.PaymentInfoUpdateManyWithoutProductTypeMasterNestedInput
+  productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
+}
+
+export type ProductTypeMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
+  leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
+  Ledger?: Prisma.LedgerUncheckedUpdateManyWithoutProductTypeMasterNestedInput
+  PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
+  productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
+}
+
+export type ProductTypeMasterCreateWithoutWalkinResponsesInput = {
+  type: string
+  tag: string
+  status?: string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
+  leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductTypeInput
+  Ledger?: Prisma.LedgerCreateNestedManyWithoutProductTypeMasterInput
+  PaymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutProductTypeMasterInput
+  productStructures?: Prisma.ProductStructureCreateNestedManyWithoutProductTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductTypesInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutProductTypeInput
+}
+
+export type ProductTypeMasterUncheckedCreateWithoutWalkinResponsesInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  status?: string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
+  leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductTypeInput
+  Ledger?: Prisma.LedgerUncheckedCreateNestedManyWithoutProductTypeMasterInput
+  PaymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutProductTypeMasterInput
+  productStructures?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutProductTypeInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutProductTypeInput
+}
+
+export type ProductTypeMasterCreateOrConnectWithoutWalkinResponsesInput = {
+  where: Prisma.ProductTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinResponsesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinResponsesInput>
+}
+
+export type ProductTypeMasterUpsertWithoutWalkinResponsesInput = {
+  update: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutWalkinResponsesInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutWalkinResponsesInput>
+  create: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutWalkinResponsesInput, Prisma.ProductTypeMasterUncheckedCreateWithoutWalkinResponsesInput>
+  where?: Prisma.ProductTypeMasterWhereInput
+}
+
+export type ProductTypeMasterUpdateToOneWithWhereWithoutWalkinResponsesInput = {
+  where?: Prisma.ProductTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductTypeMasterUpdateWithoutWalkinResponsesInput, Prisma.ProductTypeMasterUncheckedUpdateWithoutWalkinResponsesInput>
+}
+
+export type ProductTypeMasterUpdateWithoutWalkinResponsesInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
+  leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductTypeNestedInput
+  Ledger?: Prisma.LedgerUpdateManyWithoutProductTypeMasterNestedInput
+  PaymentInfo?: Prisma.PaymentInfoUpdateManyWithoutProductTypeMasterNestedInput
+  productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+}
+
+export type ProductTypeMasterUncheckedUpdateWithoutWalkinResponsesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
+  LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
+  leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeNestedInput
+  Ledger?: Prisma.LedgerUncheckedUpdateManyWithoutProductTypeMasterNestedInput
+  PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
+  productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterCreateManyVendorInput = {
@@ -1409,6 +1699,8 @@ export type ProductTypeMasterUpdateWithoutVendorInput = {
   PaymentInfo?: Prisma.PaymentInfoUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateWithoutVendorInput = {
@@ -1425,6 +1717,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutVendorInput = {
   PaymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   productStructures?: Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutProductTypeNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutProductTypeNestedInput
 }
 
 export type ProductTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1449,6 +1743,8 @@ export type ProductTypeMasterCountOutputType = {
   PaymentInfo: number
   productStructures: number
   leadBillingAddresses: number
+  walkinQuestionnaires: number
+  walkinResponses: number
 }
 
 export type ProductTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1461,6 +1757,8 @@ export type ProductTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types
   PaymentInfo?: boolean | ProductTypeMasterCountOutputTypeCountPaymentInfoArgs
   productStructures?: boolean | ProductTypeMasterCountOutputTypeCountProductStructuresArgs
   leadBillingAddresses?: boolean | ProductTypeMasterCountOutputTypeCountLeadBillingAddressesArgs
+  walkinQuestionnaires?: boolean | ProductTypeMasterCountOutputTypeCountWalkinQuestionnairesArgs
+  walkinResponses?: boolean | ProductTypeMasterCountOutputTypeCountWalkinResponsesArgs
 }
 
 /**
@@ -1536,6 +1834,20 @@ export type ProductTypeMasterCountOutputTypeCountLeadBillingAddressesArgs<ExtArg
   where?: Prisma.LeadBillingAddressWhereInput
 }
 
+/**
+ * ProductTypeMasterCountOutputType without action
+ */
+export type ProductTypeMasterCountOutputTypeCountWalkinQuestionnairesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalkinLeadQuestionnaireWhereInput
+}
+
+/**
+ * ProductTypeMasterCountOutputType without action
+ */
+export type ProductTypeMasterCountOutputTypeCountWalkinResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalkinLeadResponseWhereInput
+}
+
 
 export type ProductTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1553,6 +1865,8 @@ export type ProductTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   productStructures?: boolean | Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leadBillingAddresses?: boolean | Prisma.ProductTypeMaster$leadBillingAddressesArgs<ExtArgs>
+  walkinQuestionnaires?: boolean | Prisma.ProductTypeMaster$walkinQuestionnairesArgs<ExtArgs>
+  walkinResponses?: boolean | Prisma.ProductTypeMaster$walkinResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.ProductTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productTypeMaster"]>
 
@@ -1594,6 +1908,8 @@ export type ProductTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.In
   productStructures?: boolean | Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leadBillingAddresses?: boolean | Prisma.ProductTypeMaster$leadBillingAddressesArgs<ExtArgs>
+  walkinQuestionnaires?: boolean | Prisma.ProductTypeMaster$walkinQuestionnairesArgs<ExtArgs>
+  walkinResponses?: boolean | Prisma.ProductTypeMaster$walkinResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.ProductTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1616,6 +1932,8 @@ export type $ProductTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
     productStructures: Prisma.$ProductStructurePayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     leadBillingAddresses: Prisma.$LeadBillingAddressPayload<ExtArgs>[]
+    walkinQuestionnaires: Prisma.$WalkinLeadQuestionnairePayload<ExtArgs>[]
+    walkinResponses: Prisma.$WalkinLeadResponsePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2027,6 +2345,8 @@ export interface Prisma__ProductTypeMasterClient<T, Null = never, ExtArgs extend
   productStructures<T extends Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$productStructuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductStructurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   leadBillingAddresses<T extends Prisma.ProductTypeMaster$leadBillingAddressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$leadBillingAddressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadBillingAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walkinQuestionnaires<T extends Prisma.ProductTypeMaster$walkinQuestionnairesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$walkinQuestionnairesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalkinLeadQuestionnairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walkinResponses<T extends Prisma.ProductTypeMaster$walkinResponsesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMaster$walkinResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalkinLeadResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2675,6 +2995,54 @@ export type ProductTypeMaster$leadBillingAddressesArgs<ExtArgs extends runtime.T
   take?: number
   skip?: number
   distinct?: Prisma.LeadBillingAddressScalarFieldEnum | Prisma.LeadBillingAddressScalarFieldEnum[]
+}
+
+/**
+ * ProductTypeMaster.walkinQuestionnaires
+ */
+export type ProductTypeMaster$walkinQuestionnairesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalkinLeadQuestionnaire
+   */
+  select?: Prisma.WalkinLeadQuestionnaireSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalkinLeadQuestionnaire
+   */
+  omit?: Prisma.WalkinLeadQuestionnaireOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalkinLeadQuestionnaireInclude<ExtArgs> | null
+  where?: Prisma.WalkinLeadQuestionnaireWhereInput
+  orderBy?: Prisma.WalkinLeadQuestionnaireOrderByWithRelationInput | Prisma.WalkinLeadQuestionnaireOrderByWithRelationInput[]
+  cursor?: Prisma.WalkinLeadQuestionnaireWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalkinLeadQuestionnaireScalarFieldEnum | Prisma.WalkinLeadQuestionnaireScalarFieldEnum[]
+}
+
+/**
+ * ProductTypeMaster.walkinResponses
+ */
+export type ProductTypeMaster$walkinResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalkinLeadResponse
+   */
+  select?: Prisma.WalkinLeadResponseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalkinLeadResponse
+   */
+  omit?: Prisma.WalkinLeadResponseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalkinLeadResponseInclude<ExtArgs> | null
+  where?: Prisma.WalkinLeadResponseWhereInput
+  orderBy?: Prisma.WalkinLeadResponseOrderByWithRelationInput | Prisma.WalkinLeadResponseOrderByWithRelationInput[]
+  cursor?: Prisma.WalkinLeadResponseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalkinLeadResponseScalarFieldEnum | Prisma.WalkinLeadResponseScalarFieldEnum[]
 }
 
 /**

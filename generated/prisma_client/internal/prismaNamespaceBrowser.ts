@@ -278,7 +278,13 @@ export const ModelName = {
   RuleFieldMaster: 'RuleFieldMaster',
   RuleActionMaster: 'RuleActionMaster',
   SiteSupervisorFranchiseMapping: 'SiteSupervisorFranchiseMapping',
-  WixStudioDataCapture: 'WixStudioDataCapture'
+  WixStudioDataCapture: 'WixStudioDataCapture',
+  WalkinLeadQuestionnaire: 'WalkinLeadQuestionnaire',
+  WalkinLeadResponse: 'WalkinLeadResponse',
+  WalkinLeadUpload: 'WalkinLeadUpload',
+  time_zone_master: 'time_zone_master',
+  attendance: 'attendance',
+  attendance_logs: 'attendance_logs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -310,6 +316,7 @@ export const VendorMasterScalarFieldEnum = {
   status: 'status',
   logo: 'logo',
   time_zone: 'time_zone',
+  time_zone_id: 'time_zone_id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   vendor_report_code: 'vendor_report_code',
@@ -344,6 +351,7 @@ export const VendorMasterScalarFieldEnum = {
   is_scanpack_enabled: 'is_scanpack_enabled',
   is_hrms_master_enabled: 'is_hrms_master_enabled',
   is_online_lead_feature_enabled: 'is_online_lead_feature_enabled',
+  is_walkin_questions_feature_enabled: 'is_walkin_questions_feature_enabled',
   push_lead_to_cadbid: 'push_lead_to_cadbid',
   is_available_unique_code: 'is_available_unique_code'
 } as const
@@ -2494,7 +2502,9 @@ export const CutListScalarFieldEnum = {
   include_in_packing: 'include_in_packing',
   scan_pack_validate: 'scan_pack_validate',
   custom_packing_group: 'custom_packing_group',
-  no_of_qty_in_boxes: 'no_of_qty_in_boxes'
+  no_of_qty_in_boxes: 'no_of_qty_in_boxes',
+  fabrication: 'fabrication',
+  image_key: 'image_key'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
@@ -2636,6 +2646,7 @@ export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[k
 
 
 export const FranchiseMasterScalarFieldEnum = {
+  online_lead_sales_executive_id: 'online_lead_sales_executive_id',
   id: 'id',
   vendor_id: 'vendor_id',
   franchise_name: 'franchise_name',
@@ -4246,6 +4257,97 @@ export const WixStudioDataCaptureScalarFieldEnum = {
 } as const
 
 export type WixStudioDataCaptureScalarFieldEnum = (typeof WixStudioDataCaptureScalarFieldEnum)[keyof typeof WixStudioDataCaptureScalarFieldEnum]
+
+
+export const WalkinLeadQuestionnaireScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
+  questions: 'questions',
+  version: 'version',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type WalkinLeadQuestionnaireScalarFieldEnum = (typeof WalkinLeadQuestionnaireScalarFieldEnum)[keyof typeof WalkinLeadQuestionnaireScalarFieldEnum]
+
+
+export const WalkinLeadResponseScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  product_type_id: 'product_type_id',
+  questionnaire_key: 'questionnaire_key',
+  questionnaire_version: 'questionnaire_version',
+  question_snapshot: 'question_snapshot',
+  answers: 'answers',
+  is_complete: 'is_complete',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type WalkinLeadResponseScalarFieldEnum = (typeof WalkinLeadResponseScalarFieldEnum)[keyof typeof WalkinLeadResponseScalarFieldEnum]
+
+
+export const WalkinLeadUploadScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  created_by: 'created_by',
+  original_name: 'original_name',
+  storage_key: 'storage_key',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  created_at: 'created_at'
+} as const
+
+export type WalkinLeadUploadScalarFieldEnum = (typeof WalkinLeadUploadScalarFieldEnum)[keyof typeof WalkinLeadUploadScalarFieldEnum]
+
+
+export const Time_zone_masterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  time_zone_code: 'time_zone_code',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Time_zone_masterScalarFieldEnum = (typeof Time_zone_masterScalarFieldEnum)[keyof typeof Time_zone_masterScalarFieldEnum]
+
+
+export const AttendanceScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  user_id: 'user_id',
+  attendance_date: 'attendance_date',
+  check_in: 'check_in',
+  check_out: 'check_out',
+  source: 'source',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
+
+
+export const Attendance_logsScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  user_id: 'user_id',
+  attendance_id: 'attendance_id',
+  action: 'action',
+  action_time: 'action_time',
+  source: 'source',
+  created_at: 'created_at'
+} as const
+
+export type Attendance_logsScalarFieldEnum = (typeof Attendance_logsScalarFieldEnum)[keyof typeof Attendance_logsScalarFieldEnum]
 
 
 export const SortOrder = {
