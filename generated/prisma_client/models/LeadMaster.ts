@@ -1087,6 +1087,7 @@ export type LeadMasterWhereInput = {
   specificationDocumentMappings?: Prisma.SpecificationDocumentMappingListRelationFilter
   BoxMaster?: Prisma.BoxMasterListRelationFilter
   leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
+  walkinResponses?: Prisma.WalkinLeadResponseListRelationFilter
 }
 
 export type LeadMasterOrderByWithRelationInput = {
@@ -1256,6 +1257,7 @@ export type LeadMasterOrderByWithRelationInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingOrderByRelationAggregateInput
   BoxMaster?: Prisma.BoxMasterOrderByRelationAggregateInput
   leadBillingAddresses?: Prisma.LeadBillingAddressOrderByRelationAggregateInput
+  walkinResponses?: Prisma.WalkinLeadResponseOrderByRelationAggregateInput
 }
 
 export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -1429,6 +1431,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   specificationDocumentMappings?: Prisma.SpecificationDocumentMappingListRelationFilter
   BoxMaster?: Prisma.BoxMasterListRelationFilter
   leadBillingAddresses?: Prisma.LeadBillingAddressListRelationFilter
+  walkinResponses?: Prisma.WalkinLeadResponseListRelationFilter
 }, "id" | "uniq_vendor_lead_code">
 
 export type LeadMasterOrderByWithAggregationInput = {
@@ -1789,6 +1792,7 @@ export type LeadMasterCreateInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateInput = {
@@ -1946,6 +1950,7 @@ export type LeadMasterUncheckedCreateInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUpdateInput = {
@@ -2102,6 +2107,7 @@ export type LeadMasterUpdateInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateInput = {
@@ -2259,6 +2265,7 @@ export type LeadMasterUncheckedUpdateInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateManyInput = {
@@ -4293,6 +4300,20 @@ export type LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNeste
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUpdateWithoutProductsRequiredForProductionInput>, Prisma.LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
 }
 
+export type LeadMasterCreateNestedOneWithoutWalkinResponsesInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutWalkinResponsesInput, Prisma.LeadMasterUncheckedCreateWithoutWalkinResponsesInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutWalkinResponsesInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutWalkinResponsesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutWalkinResponsesInput, Prisma.LeadMasterUncheckedCreateWithoutWalkinResponsesInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutWalkinResponsesInput
+  upsert?: Prisma.LeadMasterUpsertWithoutWalkinResponsesInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutWalkinResponsesInput, Prisma.LeadMasterUpdateWithoutWalkinResponsesInput>, Prisma.LeadMasterUncheckedUpdateWithoutWalkinResponsesInput>
+}
+
 export type LeadMasterCreateWithoutVendorInput = {
   firstname: string
   lastname: string
@@ -4446,6 +4467,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutVendorInput = {
@@ -4602,6 +4624,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutVendorInput = {
@@ -4884,6 +4907,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
@@ -5040,6 +5064,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAssignedToInput = {
@@ -5205,6 +5230,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
@@ -5361,6 +5387,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAssignedByInput = {
@@ -5526,6 +5553,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
@@ -5682,6 +5710,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCreatedByInput = {
@@ -5847,6 +5876,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -6003,6 +6033,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -6232,6 +6263,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProjectsInput = {
@@ -6388,6 +6420,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProjectsInput = {
@@ -6559,6 +6592,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
@@ -6715,6 +6749,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutProjectDetailsInput = {
@@ -6870,6 +6905,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
@@ -7026,6 +7062,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProjectDetailsInput = {
@@ -7197,6 +7234,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
@@ -7353,6 +7391,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutBoxMasterInput = {
@@ -7508,6 +7547,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
@@ -7664,6 +7704,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutBoxMasterInput = {
@@ -7840,6 +7881,7 @@ export type LeadMasterCreateWithoutClientInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutClientInput = {
@@ -7996,6 +8038,7 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutClientInput = {
@@ -8177,6 +8220,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
@@ -8333,6 +8377,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSpecificationsInput = {
@@ -8504,6 +8549,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
@@ -8660,6 +8706,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
@@ -8815,6 +8862,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
@@ -8971,6 +9019,7 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCarcassMaterialMappingsInput = {
@@ -9142,6 +9191,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
@@ -9298,6 +9348,7 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
@@ -9453,6 +9504,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
@@ -9609,6 +9661,7 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutShutterMaterialMappingsInput = {
@@ -9780,6 +9833,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
@@ -9936,6 +9990,7 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
@@ -10091,6 +10146,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
@@ -10247,6 +10303,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSuperAdminApprovalLocInsInput = {
@@ -10418,6 +10475,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
@@ -10574,6 +10632,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutUserMappingsInput = {
@@ -10729,6 +10788,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
@@ -10885,6 +10945,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutUserMappingsInput = {
@@ -11056,6 +11117,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
@@ -11212,6 +11274,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -11367,6 +11430,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -11523,6 +11587,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -11694,6 +11759,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -11850,6 +11916,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
@@ -12005,6 +12072,7 @@ export type LeadMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = {
@@ -12161,6 +12229,7 @@ export type LeadMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = 
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadScopedActivityStatusLogsInput = {
@@ -12332,6 +12401,7 @@ export type LeadMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = {
@@ -12488,6 +12558,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = 
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteTypeInput = {
@@ -12643,6 +12714,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
@@ -12799,6 +12871,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteTypeInput = {
@@ -12980,6 +13053,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSourceInput = {
@@ -13136,6 +13210,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSourceInput = {
@@ -13317,6 +13392,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAccountInput = {
@@ -13473,6 +13549,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAccountInput = {
@@ -13654,6 +13731,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
@@ -13810,6 +13888,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProductMappingsInput = {
@@ -13981,6 +14060,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
@@ -14137,6 +14217,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadProcessBriefsInput = {
@@ -14292,6 +14373,7 @@ export type LeadMasterCreateWithoutLeadProcessBriefsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
@@ -14448,6 +14530,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadProcessBriefsInput = {
@@ -14619,6 +14702,7 @@ export type LeadMasterUpdateWithoutLeadProcessBriefsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
@@ -14775,6 +14859,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadRequirementMaterialsInput = {
@@ -14930,6 +15015,7 @@ export type LeadMasterCreateWithoutLeadRequirementMaterialsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
@@ -15086,6 +15172,7 @@ export type LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadRequirementMaterialsInput = {
@@ -15257,6 +15344,7 @@ export type LeadMasterUpdateWithoutLeadRequirementMaterialsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
@@ -15413,6 +15501,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutHardwareMappingsInput = {
@@ -15568,6 +15657,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
@@ -15724,6 +15814,7 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutHardwareMappingsInput = {
@@ -15895,6 +15986,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
@@ -16051,6 +16143,7 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
@@ -16206,6 +16299,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
@@ -16362,6 +16456,7 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLightCarcasUnitMappingsInput = {
@@ -16533,6 +16628,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
@@ -16689,6 +16785,7 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
@@ -16844,6 +16941,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
@@ -17000,6 +17098,7 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutOtherAppliancesMappingsInput = {
@@ -17171,6 +17270,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
@@ -17327,6 +17427,7 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
@@ -17482,6 +17583,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput = {
@@ -17638,6 +17740,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSpecificationDocumentMappingsInput = {
@@ -17809,6 +17912,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput = {
@@ -17965,6 +18069,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDocumentsInput = {
@@ -18120,6 +18225,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
@@ -18276,6 +18382,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDocumentsInput = {
@@ -18447,6 +18554,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -18603,6 +18711,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutB2bDocumentsInput = {
@@ -18758,6 +18867,7 @@ export type LeadMasterCreateWithoutB2bDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutB2bDocumentsInput = {
@@ -18914,6 +19024,7 @@ export type LeadMasterUncheckedCreateWithoutB2bDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutB2bDocumentsInput = {
@@ -19085,6 +19196,7 @@ export type LeadMasterUpdateWithoutB2bDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutB2bDocumentsInput = {
@@ -19241,6 +19353,7 @@ export type LeadMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadChatRoomsInput = {
@@ -19396,6 +19509,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
@@ -19552,6 +19666,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadChatRoomsInput = {
@@ -19723,6 +19838,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
@@ -19879,6 +19995,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
@@ -20034,6 +20151,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
@@ -20190,6 +20308,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadChatDocumentsInput = {
@@ -20361,6 +20480,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
@@ -20517,6 +20637,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -20672,6 +20793,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -20828,6 +20950,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -20999,6 +21122,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -21155,6 +21279,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutProductStructureInstancesInput = {
@@ -21310,6 +21435,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -21466,6 +21592,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -21637,6 +21764,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -21793,6 +21921,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutPaymentsInput = {
@@ -21948,6 +22077,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
@@ -22104,6 +22234,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutPaymentsInput = {
@@ -22275,6 +22406,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -22431,6 +22563,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLedgersInput = {
@@ -22586,6 +22719,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLedgersInput = {
@@ -22742,6 +22876,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLedgersInput = {
@@ -22913,6 +23048,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
@@ -23069,6 +23205,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
@@ -23224,6 +23361,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
@@ -23380,6 +23518,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSmallOrderRequestsInput = {
@@ -23551,6 +23690,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
@@ -23707,6 +23847,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutAmcContractsInput = {
@@ -23862,6 +24003,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
@@ -24018,6 +24160,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAmcContractsInput = {
@@ -24189,6 +24332,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
@@ -24345,6 +24489,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutServiceSchedulesInput = {
@@ -24500,6 +24645,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
@@ -24656,6 +24802,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutServiceSchedulesInput = {
@@ -24827,6 +24974,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
@@ -24983,6 +25131,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutStatusTypeInput = {
@@ -25138,6 +25287,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
@@ -25294,6 +25444,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutStatusTypeInput = {
@@ -25475,6 +25626,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -25631,6 +25783,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -25802,6 +25955,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -25958,6 +26112,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignMeetingInput = {
@@ -26113,6 +26268,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -26269,6 +26425,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -26440,6 +26597,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -26596,6 +26754,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutClientVisitsInput = {
@@ -26751,6 +26910,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
@@ -26907,6 +27067,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutClientVisitsInput = {
@@ -27078,6 +27239,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
@@ -27234,6 +27396,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -27389,6 +27552,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -27545,6 +27709,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -27716,6 +27881,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -27872,6 +28038,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
@@ -28027,6 +28194,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
@@ -28183,6 +28351,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
@@ -28354,6 +28523,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
@@ -28510,6 +28680,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignSelectionInput = {
@@ -28665,6 +28836,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -28821,6 +28993,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -28992,6 +29165,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -29148,6 +29322,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
@@ -29303,6 +29478,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
@@ -29459,6 +29635,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -29630,6 +29807,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
@@ -29786,6 +29964,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteSupervisorsInput = {
@@ -29941,6 +30120,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -30097,6 +30277,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -30268,6 +30449,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -30424,6 +30606,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutTasksInput = {
@@ -30579,6 +30762,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutTasksInput = {
@@ -30735,6 +30919,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutTasksInput = {
@@ -30906,6 +31091,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutTasksInput = {
@@ -31062,6 +31248,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
@@ -31217,6 +31404,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = {
@@ -31373,6 +31561,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutFastProductionRequestBatchesInput = {
@@ -31544,6 +31733,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = {
@@ -31700,6 +31890,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutFastProductionRequestsInput = {
@@ -31855,6 +32046,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
@@ -32011,6 +32203,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutFastProductionRequestsInput = {
@@ -32182,6 +32375,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
@@ -32338,6 +32532,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
@@ -32493,6 +32688,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -32649,6 +32845,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -32820,6 +33017,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -32976,6 +33174,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
@@ -33131,6 +33330,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -33287,6 +33487,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -33458,6 +33659,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -33614,6 +33816,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -33769,6 +33972,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -33925,6 +34129,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -34096,6 +34301,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -34252,6 +34458,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
@@ -34407,6 +34614,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -34563,6 +34771,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -34734,6 +34943,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -34890,6 +35100,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteReadinessInput = {
@@ -35045,6 +35256,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -35201,6 +35413,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -35372,6 +35585,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -35528,6 +35742,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallerMappingsInput = {
@@ -35683,6 +35898,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -35839,6 +36055,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -36010,6 +36227,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -36166,6 +36384,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallationUpdatesInput = {
@@ -36321,6 +36540,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -36477,6 +36697,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -36648,6 +36869,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -36804,6 +37026,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
@@ -36959,6 +37182,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -37115,6 +37339,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -37286,6 +37511,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -37442,6 +37668,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutMiscellaneousFollowupsInput = {
@@ -37597,6 +37824,7 @@ export type LeadMasterCreateWithoutMiscellaneousFollowupsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
@@ -37753,6 +37981,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutMiscellaneousFollowupsInput = {
@@ -37924,6 +38153,7 @@ export type LeadMasterUpdateWithoutMiscellaneousFollowupsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
@@ -38080,6 +38310,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -38235,6 +38466,7 @@ export type LeadMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappingI
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -38391,6 +38623,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMateria
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -38562,6 +38795,7 @@ export type LeadMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappingI
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
@@ -38718,6 +38952,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMateria
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -38873,6 +39108,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -39029,6 +39265,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -39200,6 +39437,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -39356,6 +39594,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutCutListInput = {
@@ -39511,6 +39750,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCutListInput = {
@@ -39667,6 +39907,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCutListInput = {
@@ -39838,6 +40079,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCutListInput = {
@@ -39994,6 +40236,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutCutListMachineMappingInput = {
@@ -40149,6 +40392,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -40305,6 +40549,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -40476,6 +40721,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -40632,6 +40878,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
@@ -40787,6 +41034,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
@@ -40943,6 +41191,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutOrderLoginPoFilesInput = {
@@ -41114,6 +41363,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
@@ -41270,6 +41520,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutFranchiseInput = {
@@ -41425,6 +41676,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
@@ -41581,6 +41833,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutFranchiseInput = {
@@ -41762,6 +42015,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInput = {
@@ -41918,6 +42172,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutExternalPlatformCustomerMappingsInput = {
@@ -42089,6 +42344,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInput = {
@@ -42245,6 +42501,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutArchitectInput = {
@@ -42400,6 +42657,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutArchitectInput = {
@@ -42556,6 +42814,7 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutArchitectInput = {
@@ -42737,6 +42996,7 @@ export type LeadMasterCreateWithoutLeadB2BReqMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
@@ -42893,6 +43153,7 @@ export type LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadB2BReqMappingsInput = {
@@ -43064,6 +43325,7 @@ export type LeadMasterUpdateWithoutLeadB2BReqMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
@@ -43220,6 +43482,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -43375,6 +43638,7 @@ export type LeadMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -43531,6 +43795,7 @@ export type LeadMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -43702,6 +43967,7 @@ export type LeadMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
@@ -43858,6 +44124,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutOnline_leadsInput = {
@@ -44013,6 +44280,7 @@ export type LeadMasterCreateWithoutOnline_leadsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutOnline_leadsInput = {
@@ -44169,6 +44437,7 @@ export type LeadMasterUncheckedCreateWithoutOnline_leadsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutOnline_leadsInput = {
@@ -44340,6 +44609,7 @@ export type LeadMasterUpdateWithoutOnline_leadsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutOnline_leadsInput = {
@@ -44496,6 +44766,7 @@ export type LeadMasterUncheckedUpdateWithoutOnline_leadsInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadBillingAddressesInput = {
@@ -44651,6 +44922,7 @@ export type LeadMasterCreateWithoutLeadBillingAddressesInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
@@ -44807,6 +45079,7 @@ export type LeadMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadBillingAddressesInput = {
@@ -44978,6 +45251,7 @@ export type LeadMasterUpdateWithoutLeadBillingAddressesInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
@@ -45134,6 +45408,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutProductsRequiredForProductionInput = {
@@ -45289,6 +45564,7 @@ export type LeadMasterCreateWithoutProductsRequiredForProductionInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
@@ -45445,6 +45721,7 @@ export type LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProductsRequiredForProductionInput = {
@@ -45616,6 +45893,7 @@ export type LeadMasterUpdateWithoutProductsRequiredForProductionInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
@@ -45714,6 +45992,649 @@ export type LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterCreateWithoutWalkinResponsesInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  draft_in_open_leads?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  order_login_prod_files_remark?: string | null
+  usable_handover_completed_at?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  order_number?: string | null
+  refered_by?: string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutLeadMasterInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutLeadsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutWalkinResponsesInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  draft_in_open_leads?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  usable_handover_completed_at?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  architect_id?: number | null
+  client_id?: number | null
+  order_number?: string | null
+  refered_by?: string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutLeadMasterInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutWalkinResponsesInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutWalkinResponsesInput, Prisma.LeadMasterUncheckedCreateWithoutWalkinResponsesInput>
+}
+
+export type LeadMasterUpsertWithoutWalkinResponsesInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutWalkinResponsesInput, Prisma.LeadMasterUncheckedUpdateWithoutWalkinResponsesInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutWalkinResponsesInput, Prisma.LeadMasterUncheckedCreateWithoutWalkinResponsesInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutWalkinResponsesInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutWalkinResponsesInput, Prisma.LeadMasterUncheckedUpdateWithoutWalkinResponsesInput>
+}
+
+export type LeadMasterUpdateWithoutWalkinResponsesInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutLeadMasterNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutLeadsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutWalkinResponsesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -46024,6 +46945,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutVendorInput = {
@@ -46180,6 +47102,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -46820,6 +47743,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
@@ -46976,6 +47900,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
@@ -47228,6 +48153,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
@@ -47384,6 +48310,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
@@ -47636,6 +48563,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -47792,6 +48720,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -48044,6 +48973,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -48200,6 +49130,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -48452,6 +49383,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
@@ -48608,6 +49540,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
@@ -48958,6 +49891,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutClientInput = {
@@ -49114,6 +50048,7 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutClientInput = {
@@ -49463,6 +50398,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
@@ -49619,6 +50555,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
@@ -49968,6 +50905,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSourceInput = {
@@ -50124,6 +51062,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
@@ -50473,6 +51412,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAccountInput = {
@@ -50629,6 +51569,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
@@ -50978,6 +51919,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
@@ -51134,6 +52076,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
@@ -51483,6 +52426,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
@@ -51639,6 +52583,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
@@ -51988,6 +52933,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
@@ -52144,6 +53090,7 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
   leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutArchitectInput = {
@@ -52308,6 +53255,7 @@ export type LeadMasterCountOutputType = {
   specificationDocumentMappings: number
   BoxMaster: number
   leadBillingAddresses: number
+  walkinResponses: number
 }
 
 export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -52370,6 +53318,7 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   specificationDocumentMappings?: boolean | LeadMasterCountOutputTypeCountSpecificationDocumentMappingsArgs
   BoxMaster?: boolean | LeadMasterCountOutputTypeCountBoxMasterArgs
   leadBillingAddresses?: boolean | LeadMasterCountOutputTypeCountLeadBillingAddressesArgs
+  walkinResponses?: boolean | LeadMasterCountOutputTypeCountWalkinResponsesArgs
 }
 
 /**
@@ -52795,6 +53744,13 @@ export type LeadMasterCountOutputTypeCountLeadBillingAddressesArgs<ExtArgs exten
   where?: Prisma.LeadBillingAddressWhereInput
 }
 
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountWalkinResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalkinLeadResponseWhereInput
+}
+
 
 export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -52963,6 +53919,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   specificationDocumentMappings?: boolean | Prisma.LeadMaster$specificationDocumentMappingsArgs<ExtArgs>
   BoxMaster?: boolean | Prisma.LeadMaster$BoxMasterArgs<ExtArgs>
   leadBillingAddresses?: boolean | Prisma.LeadMaster$leadBillingAddressesArgs<ExtArgs>
+  walkinResponses?: boolean | Prisma.LeadMaster$walkinResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadMaster"]>
 
@@ -53357,6 +54314,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   specificationDocumentMappings?: boolean | Prisma.LeadMaster$specificationDocumentMappingsArgs<ExtArgs>
   BoxMaster?: boolean | Prisma.LeadMaster$BoxMasterArgs<ExtArgs>
   leadBillingAddresses?: boolean | Prisma.LeadMaster$leadBillingAddressesArgs<ExtArgs>
+  walkinResponses?: boolean | Prisma.LeadMaster$walkinResponsesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -53462,6 +54420,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     specificationDocumentMappings: Prisma.$specificationDocumentMappingPayload<ExtArgs>[]
     BoxMaster: Prisma.$BoxMasterPayload<ExtArgs>[]
     leadBillingAddresses: Prisma.$LeadBillingAddressPayload<ExtArgs>[]
+    walkinResponses: Prisma.$WalkinLeadResponsePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -54024,6 +54983,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   specificationDocumentMappings<T extends Prisma.LeadMaster$specificationDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$specificationDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$specificationDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   BoxMaster<T extends Prisma.LeadMaster$BoxMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$BoxMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadBillingAddresses<T extends Prisma.LeadMaster$leadBillingAddressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadBillingAddressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadBillingAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walkinResponses<T extends Prisma.LeadMaster$walkinResponsesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$walkinResponsesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalkinLeadResponsePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -56152,6 +57112,30 @@ export type LeadMaster$leadBillingAddressesArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.LeadBillingAddressScalarFieldEnum | Prisma.LeadBillingAddressScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.walkinResponses
+ */
+export type LeadMaster$walkinResponsesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalkinLeadResponse
+   */
+  select?: Prisma.WalkinLeadResponseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalkinLeadResponse
+   */
+  omit?: Prisma.WalkinLeadResponseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalkinLeadResponseInclude<ExtArgs> | null
+  where?: Prisma.WalkinLeadResponseWhereInput
+  orderBy?: Prisma.WalkinLeadResponseOrderByWithRelationInput | Prisma.WalkinLeadResponseOrderByWithRelationInput[]
+  cursor?: Prisma.WalkinLeadResponseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalkinLeadResponseScalarFieldEnum | Prisma.WalkinLeadResponseScalarFieldEnum[]
 }
 
 /**

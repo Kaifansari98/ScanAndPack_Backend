@@ -1180,6 +1180,21 @@ export type SiteSupervisorFranchiseMapping = Prisma.SiteSupervisorFranchiseMappi
  */
 export type WixStudioDataCapture = Prisma.WixStudioDataCaptureModel
 /**
+ * Model WalkinLeadQuestionnaire
+ * 
+ */
+export type WalkinLeadQuestionnaire = Prisma.WalkinLeadQuestionnaireModel
+/**
+ * Model WalkinLeadResponse
+ * 
+ */
+export type WalkinLeadResponse = Prisma.WalkinLeadResponseModel
+/**
+ * Model WalkinLeadUpload
+ * 
+ */
+export type WalkinLeadUpload = Prisma.WalkinLeadUploadModel
+/**
  * Model time_zone_master
  * 
  */

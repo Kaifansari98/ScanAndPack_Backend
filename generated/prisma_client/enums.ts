@@ -45,6 +45,14 @@ export const PackingType = {
 export type PackingType = (typeof PackingType)[keyof typeof PackingType]
 
 
+export const FabricationType = {
+  METALWORK: 'METALWORK',
+  WOODWORK: 'WOODWORK'
+} as const
+
+export type FabricationType = (typeof FabricationType)[keyof typeof FabricationType]
+
+
 export const AdditionalCostCalculationType = {
   Fixed: 'Fixed',
   Percentage: 'Percentage'

@@ -1,3 +1,4 @@
+import { getOnlineLeadExecutiveMappings, saveOnlineLeadExecutiveMapping } from "../controllers/onlineLeadExecutiveMapping.controller";
 import { Router } from "express";
 import { getCutlistHeaders, saveCutlistHeaders } from "../controllers/cutlistHeaders.controller";
 import {
@@ -25,6 +26,9 @@ import { handleMulterUpload } from "../middlewares/handleMulterUpload";
 import { uploadVendorAssets } from "../middlewares/uploadWasabi";
 
 const router = Router();
+
+router.get("/:vendor_id/online-lead-executive-mappings", verifyToken, getOnlineLeadExecutiveMappings);
+router.put("/:vendor_id/online-lead-executive-mappings", verifyToken, saveOnlineLeadExecutiveMapping);
 
 router.get("/:vendor_id/cutlist-header-mappings", verifyToken, getCutlistHeaders);
 router.put("/:vendor_id/cutlist-header-mappings", verifyToken, saveCutlistHeaders);

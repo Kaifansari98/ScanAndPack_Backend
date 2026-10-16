@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { PreProductionController } from "../../../controllers/leadModuleControllers/production/pre-production/PreProduction.controller";
+import { MetalCutlistController } from "../../../controllers/leadModuleControllers/production/pre-production/MetalCutlist.controller";
 import { upload } from "../../../middlewares/uploadWasabi";
 
 const preProductionRoutes = Router();
@@ -37,6 +38,17 @@ preProductionRoutes.get(
 preProductionRoutes.get(
   "/vendorId/:vendorId/get-latest-order-login",
   PreProductionController.getLatestOrderLoginByLead
+);
+
+preProductionRoutes.get(
+  "/vendorId/:vendorId/leadId/:leadId/metal-cutlist",
+  MetalCutlistController.getMetalCutlist
+);
+
+preProductionRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/metal-cutlist",
+  upload.array("images", 1000),
+  MetalCutlistController.saveMetalCutlist
 );
 
 export default preProductionRoutes;

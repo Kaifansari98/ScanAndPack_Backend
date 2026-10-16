@@ -1,3 +1,4 @@
+import { answerGroupsSchema } from "../services/leadModuleServices/walkinLeadQuestions/validation";
 import Joi from "joi";
 import { prisma } from "../prisma/client";
 import { UserRoleInfo } from "../types/leadModule.types";
@@ -34,6 +35,7 @@ const prioritySchema = Joi.string()
   .valid("High", "Medium", "Low");
 
 export const createLeadSchema = Joi.object({
+  walkin_answers: answerGroupsSchema.optional(),
   firstname: Joi.string().trim().min(1).max(50).required(),
   lastname: Joi.string().trim().min(1).max(50).required(),
 
@@ -104,6 +106,7 @@ export const createLeadSchema = Joi.object({
 });
 
 export const createLeadDraftSchema = Joi.object({
+  walkin_answers: answerGroupsSchema.optional(),
   firstname: Joi.string().trim().min(1).max(50).required(),
   lastname: Joi.string().trim().max(50).optional().allow("", null),
 

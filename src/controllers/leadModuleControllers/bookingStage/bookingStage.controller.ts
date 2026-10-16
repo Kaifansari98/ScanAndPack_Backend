@@ -1879,9 +1879,11 @@ export class BookingStageController {
       };
 
       const sitePhotos = files?.current_site_photos || [];
+      const requiredDocuments = files?.required_documents || [];
 
       // 🔴 HARD RULE
       if (sitePhotos.length === 0) {
+        await Promise.all(requiredDocuments.map((doc) => fs.unlink(doc.path).catch(() => {})));
         return res.status(400).json({
           success: false,
           message: "Current site photos are mandatory",
@@ -1907,12 +1909,33 @@ export class BookingStageController {
         });
       }
 
+      const uploadedRequiredDocuments: UploadedFileRef[] = [];
+
+      for (const doc of requiredDocuments) {
+        const sysName = await uploadToWasabiCSPBookingPhotoFile(
+          doc.path,
+          Number(vendor_id),
+          Number(lead_id),
+          doc.originalname,
+          doc.mimetype,
+          "fm-required-documents-at-booking-stage",
+        );
+
+        await fs.unlink(doc.path);
+
+        uploadedRequiredDocuments.push({
+          originalName: doc.originalname,
+          sysName,
+        });
+      }
+
       const result = await this.bookingStageService.uploadCSPBookingService({
         lead_id: +lead_id,
         account_id: +account_id,
         vendor_id: +vendor_id,
         created_by: +created_by,
         sitePhotos: uploadedSitePhotos,
+        requiredDocuments: uploadedRequiredDocuments,
       });
 
       res.status(201).json({

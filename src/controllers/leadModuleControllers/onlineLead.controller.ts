@@ -1,3 +1,4 @@
+import { resolveOnlineLeadExecutive } from "../../utils/online-lead-executive";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { prisma } from "../../prisma/client";
@@ -2440,8 +2441,11 @@ export class OnlineLeadController {
 
       const targetStore = await prisma.franchiseMaster.findUnique({
         where: { id: Number(to_store_id) },
-        select: { franchise_name: true },
+        select: { franchise_name: true, vendor_id: true, online_lead_sales_executive_id: true },
       });
+      if (!targetStore || targetStore.vendor_id !== lead.vendor_id) {
+        return res.status(400).json({ success: false, error: "Invalid store for this vendor." });
+      }
       const targetStoreName = targetStore?.franchise_name || `Store #${to_store_id}`;
       if (targetStore) {
         storeLocation = targetStore.franchise_name;
@@ -2481,6 +2485,7 @@ export class OnlineLeadController {
       // 1. Query active users for the target store
       const storeUsers = await prisma.userMaster.findMany({
         where: {
+          vendor_id: lead.vendor_id,
           franchise_id: Number(to_store_id),
           status: "active",
         },
@@ -2508,9 +2513,12 @@ export class OnlineLeadController {
       });
 
       if (storeSalesExecutives.length > 0) {
-        // Condition 1: Active Store Sales Executive available -> Assign to Store Sales Executive
-        finalAssignedUserId = storeSalesExecutives[0].id;
-        assignmentMessage = `Assigned to Store Sales Executive: ${storeSalesExecutives[0].user_name}`;
+        const executive = resolveOnlineLeadExecutive(storeSalesExecutives, targetStore.online_lead_sales_executive_id);
+        if (!executive) {
+          return res.status(409).json({ success: false, error: "Select a sales executive for this store in Configure & Edit Vendor → Sales executive Online Leads mapping before assigning this lead." });
+        }
+        finalAssignedUserId = executive.id;
+        assignmentMessage = `Assigned to Store Sales Executive: ${executive.user_name}`;
       } else if (storeAdmins.length > 0) {
         // Condition 2: Store Admin available -> Assign to active Store Admin
         finalAssignedUserId = storeAdmins[0].id;

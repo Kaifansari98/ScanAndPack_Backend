@@ -133,7 +133,8 @@ bookingStageRouter.put(
 );
 
 const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
-  { name: "current_site_photos" },
+  { name: "current_site_photos", maxCount: 10 },
+  { name: "required_documents", maxCount: 10 },
 ]);
 
 bookingStageRouter.post(

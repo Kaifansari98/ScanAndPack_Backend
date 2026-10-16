@@ -64,6 +64,17 @@ export const generateSignedUrl = async (
   return await getSignedUrl(wasabi, command, { expiresIn });
 };
 
+export const uploadWalkinReferenceFile = async (buffer: Buffer, vendorId: number, mimeType: string) => {
+  const extensions: Record<string, string> = {
+    "application/pdf": "pdf", "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif",
+  };
+  const key = `walkin_lead_questions/${vendorId}/${uuidv4()}.${extensions[mimeType]}`;
+  await wasabi.send(new PutObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!, Key: key, Body: buffer, ContentType: mimeType,
+  }));
+  return key;
+};
+
 export const uploadToWasabi = async (
   buffer: Buffer,
   vendorId: number,
@@ -533,6 +544,26 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocsFile = async (
   });
 
   await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiMetalCutlistImage = async (
+  buffer: Buffer,
+  vendorId: number,
+  leadId: number,
+  projectId: number,
+) => {
+  const sysName = `metal_cutlist/${vendorId}/${leadId}/${projectId}/${uuidv4()}.png`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: "image/png",
+    }),
+  );
 
   return sysName;
 };
@@ -1741,9 +1772,10 @@ export const uploadToWasabiCSPBookingPhotoFile = async (
   leadId: number,
   originalName: string,
   contentType: string,
+  folder = "current-site-photos-at-booking-stage",
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
-  const sysName = `current-site-photos-at-booking-stage/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
+  const sysName = `${folder}/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
 
   const upload = new Upload({
     client: wasabi,

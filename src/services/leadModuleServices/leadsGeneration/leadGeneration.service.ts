@@ -1,3 +1,4 @@
+import { saveWalkinAnswers } from "../walkinLeadQuestions/response.service";
 import { UnderInstallationStageService } from "../../installation/under-installation/underInstallationStageService";
 import { resolveMiscTask } from "../../installation/under-installation/resolveMiscTask";
 import { prisma } from "../../../prisma/client";
@@ -648,6 +649,19 @@ export const createLeadService = async (
         logger.info("✅ LeadDetailedLogs entry created for lead creation", {
           lead_id: lead.id,
         });
+
+        // Optional during backend-first rollout; supplied answers are saved atomically.
+        if (payload.walkin_answers !== undefined) {
+          await saveWalkinAnswers(tx, {
+            vendorId: vendor_id,
+            leadId: lead.id,
+            actorId: created_by,
+            sourceId: source_id ?? null,
+            productTypeIds: product_types.map(Number),
+            groups: payload.walkin_answers,
+            draft: !!payload.is_draft,
+          });
+        }
 
         // 8. Return final result
         return {

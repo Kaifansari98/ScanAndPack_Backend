@@ -59,6 +59,7 @@ model VendorMaster {
   is_scanpack_enabled                          Boolean                                        @default(false)
   is_hrms_master_enabled                       Boolean                                        @default(false)
   is_online_lead_feature_enabled               Boolean                                        @default(false)
+  is_walkin_questions_feature_enabled          Boolean                                        @default(true)
   push_lead_to_cadbid                          Boolean                                        @default(false)
   is_available_unique_code                     Boolean                                        @default(false)
   accounts                                     AccountMaster[]
@@ -224,6 +225,10 @@ model VendorMaster {
   boxUnpackLogs                                BoxUnpackLog[]
   cutlistHeadersMappings                       CutlistHeadersMapping[]
 
+  walkinQuestionnaires WalkinLeadQuestionnaire[]
+  walkinResponses WalkinLeadResponse[]
+  walkinUploads WalkinLeadUpload[]
+
   @@index([state_id])
   @@index([time_zone_id])
 }
@@ -280,6 +285,7 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  onlineLeadAssignedFranchises FranchiseMaster[] @relation("OnlineLeadSalesExecutive")
   productsRequiredForProduction                                                  ProductsRequiredForProduction[]
   id                                                                             Int                                            @id @default(autoincrement())
   vendor_id                                                                      Int
@@ -1010,6 +1016,8 @@ model LeadMaster {
   BoxMaster                                    BoxMaster[]                                    @relation("BoxMasterToLeadMaster")
   leadBillingAddresses                         LeadBillingAddress[]
 
+  walkinResponses WalkinLeadResponse[]
+
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
 
@@ -1309,6 +1317,9 @@ model ProductTypeMaster {
   productStructures             ProductStructure[]
   vendor                        VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   leadBillingAddresses          LeadBillingAddress[]
+  walkinQuestionnaires WalkinLeadQuestionnaire[]
+  walkinResponses WalkinLeadResponse[]
+
 }
 
 model ProcessBriefMaster {
@@ -3195,6 +3206,8 @@ model CutList {
   scan_pack_validate       Boolean?
   custom_packing_group     String?
   no_of_qty_in_boxes       Int                      @default(1)
+  fabrication              FabricationType          @default(WOODWORK)
+  image_key                String?
   lead                     LeadMaster?              @relation(fields: [lead_id], references: [id])
   project                  ProjectMaster            @relation(fields: [project_id], references: [id])
   vendor                   VendorMaster             @relation(fields: [vendor_id], references: [id])
@@ -3206,6 +3219,7 @@ model CutList {
   @@index([unique_code])
   @@index([category_id])
   @@index([vendor_id, unique_code, project_id], map: "idx_cutlist_vendor_code_project")
+  @@index([project_id, fabrication])
 }
 
 model CutListMachineMapping {
@@ -3385,6 +3399,10 @@ model DefectedItem {
 }
 
 model FranchiseMaster {
+  online_lead_sales_executive_id Int?
+  onlineLeadSalesExecutive UserMaster? @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
+
+  @@index([online_lead_sales_executive_id])
   productsRequiredForProduction                                              ProductsRequiredForProduction[]
   id                                                                         Int                                  @id @default(autoincrement())
   vendor_id                                                                  Int
@@ -5136,6 +5154,11 @@ enum PackingType {
   CUSTOM_GROUP
 }
 
+enum FabricationType {
+  METALWORK
+  WOODWORK
+}
+
 enum AdditionalCostCalculationType {
   Fixed
   Percentage
@@ -5864,6 +5887,61 @@ model WixStudioDataCapture {
   @@map("wix_studio_data_capture")
 }
 
+// A vendor's complete override for one furniture type; absence uses bundled defaults.
+model WalkinLeadQuestionnaire {
+  id              Int @id @default(autoincrement())
+  vendor_id       Int
+  product_type_id Int
+  questions       Json
+  version         Int @default(1)
+  created_by      Int
+  updated_by      Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  vendor          VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  productType     ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, product_type_id])
+}
+
+// Store the exact questions alongside answers so later master edits preserve history.
+model WalkinLeadResponse {
+  id                Int @id @default(autoincrement())
+  vendor_id         Int
+  lead_id           Int
+  product_type_id   Int
+  questionnaire_key String
+  questionnaire_version Int
+  question_snapshot Json
+  answers           Json
+  is_complete       Boolean @default(false)
+  created_by        Int
+  updated_by        Int
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  vendor            VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead              LeadMaster @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productType       ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+
+  @@unique([lead_id, product_type_id])
+  @@index([vendor_id, lead_id])
+}
+
+// Upload before lead creation; answers refer to these IDs, never arbitrary storage keys.
+model WalkinLeadUpload {
+  id            String @id @default(uuid())
+  vendor_id     Int
+  created_by    Int
+  original_name String
+  storage_key   String @unique
+  mime_type     String
+  size_bytes    Int
+  created_at    DateTime @default(now())
+  vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id, created_by])
+}
+
 enum AttendanceAction {
   IN
   OUT
@@ -5931,4 +6009,3 @@ model attendance_logs {
   @@index([user_id])
   @@index([action_time])
 }
-
