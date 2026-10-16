@@ -16,6 +16,11 @@ export const getAllProjectsTrackTrace = async (
       });
     }
 
+    const fabrication = req.query.fabrication;
+    if (fabrication !== undefined && fabrication !== "WOODWORK" && fabrication !== "METALWORK") {
+      return res.status(400).json({ success: false, error: "Invalid fabrication type" });
+    }
+
     const page = Math.max(Number(req.query.page) || 1, 1);
 
     const limit = Math.min(
@@ -70,6 +75,7 @@ export const getAllProjectsTrackTrace = async (
       await projectService.getAllProjectsTrackTrace(
         vendor_id,
         {
+          fabrication,
           page,
           limit,
           search,

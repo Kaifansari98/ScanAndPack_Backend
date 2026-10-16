@@ -37,7 +37,7 @@ export class MetalCutlistController {
       const data = await service.getMetalCutlist(vendorId, leadId);
       return res.status(200).json({
         success: true,
-        message: "Metal cutlist fetched successfully",
+        message: "Metalwork Cutlist fetched successfully",
         data,
       });
     } catch (error: any) {
@@ -81,7 +81,7 @@ export class MetalCutlistController {
 
       return res.status(201).json({
         success: true,
-        message: "Metal cutlist saved successfully",
+        message: "Metalwork Cutlist saved successfully",
         data,
       });
     } catch (error: any) {
