@@ -1409,24 +1409,32 @@ export const updateScannedItem = async (
           },
         },
       });
-      const qtyPerBox = Math.max(
-        1,
-        Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
-      );
-      const maximumItemQty = locationAllocation.qty * qtyPerBox;
+      let maximumItemQty = Number.MAX_SAFE_INTEGER;
+      // Custom-group packing validates the location capacity below using the
 
-      if (scannedAtLocation >= maximumItemQty) {
-        return validationResponse(
-          0,
-          `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${locationAllocation.qty} at location "${locationAllocation.location_name}"`,
+      if (eligibleMapping.project.packing_type !== PackingType.CUSTOM_GROUP) {
+        const qtyPerBox = Math.max(
+          1,
+          Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
         );
+        maximumItemQty = locationAllocation.qty * qtyPerBox;
+
+        if (scannedAtLocation >= maximumItemQty) {
+          return validationResponse(
+            0,
+            `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${locationAllocation.qty} at location "${locationAllocation.location_name}"`,
+          );
+        }
       }
 
       selectedLocationAllocation = {
         id: locationAllocation.id,
         locationName: locationAllocation.location_name,
         allocatedProductQty: locationAllocation.qty,
-        maximumItemQty,
+        maximumItemQty:
+          eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP
+            ? Number.MAX_SAFE_INTEGER
+            : maximumItemQty,
       };
     }
 
@@ -1519,6 +1527,16 @@ export const updateScannedItem = async (
         ).values(),
       ).sort((a, b) => a.localeCompare(b));
       const normalizedPackingGroupName = packingGroupName.toLocaleLowerCase();
+      const groupBaseQuantity = Math.min(
+        ...productRows
+          .filter(
+            (row) =>
+              row.custom_packing_group?.trim().toLocaleLowerCase() ===
+              normalizedPackingGroupName,
+          )
+          .map((row) => Number(row.qty || 0))
+          .filter((quantity) => quantity > 0),
+      );
       const packingGroupItems = productRows
         .filter(
           (row) =>
@@ -1528,7 +1546,10 @@ export const updateScannedItem = async (
         .map((row) => ({
           cutListId: row.id,
           itemName: row.item_name,
-          qtyPerBox: Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
+          qtyPerBox:
+            groupBaseQuantity > 0
+              ? Math.max(1, Math.floor(Number(row.qty || 0) / groupBaseQuantity))
+              : Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
           availableQty: Math.max(0, Number(row.qty || 0)),
         }));
 
@@ -1788,8 +1809,7 @@ export const updateScannedItem = async (
                 quantitiesByOperator.get(mapping.in_operator) ?? new Map();
               operatorQuantities.set(
                 mapping.cut_list_id,
-                (operatorQuantities.get(mapping.cut_list_id) ?? 0) +
-                  Math.max(1, Number(mapping.qty || 1)),
+                (operatorQuantities.get(mapping.cut_list_id) ?? 0) + 1,
               );
               quantitiesByOperator.set(mapping.in_operator, operatorQuantities);
             }
@@ -1930,7 +1950,7 @@ export const updateScannedItem = async (
                 candidate.cutListMachineMapping.reduce(
                   (quantity, mapping) =>
                     mapping.cut_list_id === cut_list_id
-                      ? quantity + Math.max(1, Number(mapping.qty || 1))
+                      ? quantity + 1
                       : quantity,
                   0,
                 );
@@ -2066,7 +2086,7 @@ export const updateScannedItem = async (
               packedQuantityByCutListId.set(
                 component.cut_list_id,
                 (packedQuantityByCutListId.get(component.cut_list_id) ?? 0) +
-                  Math.max(1, Number(component.qty || 1)),
+                  1,
               );
             }
 
