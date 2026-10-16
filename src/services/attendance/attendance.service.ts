@@ -72,6 +72,25 @@ export function formatInTimeZone(
  */
 export function decorateAttendance(att: any, timeZone: string) {
   if (!att) return att;
+
+  let duration_formatted: string | null = null;
+  let status: "CHECKED_IN" | "COMPLETED" = "CHECKED_IN";
+
+  if (att.check_in && att.check_out) {
+    status = "COMPLETED";
+    const diffMs = new Date(att.check_out).getTime() - new Date(att.check_in).getTime();
+    if (diffMs > 0) {
+      const totalMinutes = Math.floor(diffMs / (1000 * 60));
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      duration_formatted = `${hours}h ${minutes}m`;
+    } else {
+      duration_formatted = "0h 0m";
+    }
+  } else if (att.check_in) {
+    status = "CHECKED_IN";
+  }
+
   return {
     ...att,
     vendor_time_zone: timeZone,
@@ -85,6 +104,8 @@ export function decorateAttendance(att: any, timeZone: string) {
       : null,
     check_in_local: formatInTimeZone(att.check_in, timeZone),
     check_out_local: formatInTimeZone(att.check_out, timeZone),
+    duration_formatted,
+    status,
   };
 }
 
@@ -467,6 +488,12 @@ export const listAttendance = async (params: ListAttendanceFilters) => {
             user_name: true,
             user_contact: true,
             user_email: true,
+            designation: true,
+            user_type: {
+              select: {
+                user_type: true,
+              },
+            },
           },
         },
         vendor: {
