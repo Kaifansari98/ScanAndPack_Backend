@@ -4613,7 +4613,7 @@ export class BookingStageService {
       [
         "sales-executive",
         "site-supervisor",
-        "head-site-supervisor",
+        ...(isInstallationStage ? [] : ["head-site-supervisor"]),
         "admin",
         "super-admin",
         "auditor",
@@ -4629,13 +4629,13 @@ export class BookingStageService {
       normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive" ||
       normalizedUserType === "site-supervisor" ||
-      normalizedUserType === "head-site-supervisor" ||
+      (normalizedUserType === "head-site-supervisor" && !isInstallationStage) ||
       isCaller;
     const effectiveFranchiseId =
       franchiseId && !Number.isNaN(franchiseId)
         ? franchiseId
         : normalizedUserType === "site-supervisor" ||
-            normalizedUserType === "head-site-supervisor" ||
+            (normalizedUserType === "head-site-supervisor" && !isInstallationStage) ||
             normalizedUserType === "sales-executive"
           ? creator?.franchise_id ?? undefined
           : undefined;
@@ -5257,7 +5257,8 @@ export class BookingStageService {
         !isFactoryInstallation &&
         (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
         effectiveFranchiseId &&
-        !ignoreFranchiseForStage;
+        !ignoreFranchiseForStage &&
+        !(normalizedUserType === "head-site-supervisor" && isInstallationStage);
       if (includeFranchise) {
         baseWhere.franchise_id = effectiveFranchiseId;
       }
@@ -5412,10 +5413,39 @@ export class BookingStageService {
       select: { lead_id: true },
     });
 
+    let headSupervisorFranchiseLeadIds: number[] = [];
+    if (normalizedUserType === "head-site-supervisor" && isInstallationStage) {
+      const franchiseMappings =
+        await prisma.headSiteSupervisorFranchiseMapping.findMany({
+          where: {
+            vendor_id: vendorId,
+            user_id: userId,
+            status: true,
+          },
+          select: { franchise_id: true },
+        });
+
+      if (franchiseMappings.length > 0) {
+        const mappedFranchiseIds = franchiseMappings.map(
+          (m) => m.franchise_id,
+        );
+        const franchiseLeads = await prisma.leadMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            is_deleted: false,
+            franchise_id: { in: mappedFranchiseIds },
+          },
+          select: { id: true },
+        });
+        headSupervisorFranchiseLeadIds = franchiseLeads.map((l) => l.id);
+      }
+    }
+
     const leadIds = [
       ...new Set([
         ...mappedLeads.map((m) => m.lead_id),
         ...taskLeads.map((t) => t.lead_id),
+        ...headSupervisorFranchiseLeadIds,
         ...callerExtraLeadIds,
       ]),
     ];
@@ -5446,18 +5476,21 @@ export class BookingStageService {
         : { in: ["onGoing", "lostApproval"] },
     };
 
-    // Site supervisors can be mapped to leads across multiple franchises
-    // (see SiteSupervisorFranchiseMapping); leads individually assigned to
-    // them via LeadUserMapping/UserLeadTask (the `leadIds` gate above) must
-    // surface regardless of the lead's franchise, so franchise scoping is
-    // skipped for this role here.
-    const isSiteSupervisorLeadOwner = normalizedUserType === "site-supervisor";
+    // Site supervisors and head site supervisors (on under installation)
+    // can be mapped to leads across multiple franchises (see SiteSupervisorFranchiseMapping
+    // and HeadSiteSupervisorFranchiseMapping); leads assigned to them via
+    // LeadUserMapping/UserLeadTask/HeadSiteSupervisorFranchiseMapping (the `leadIds` gate above)
+    // must surface regardless of the lead's franchise, so franchise scoping is
+    // skipped for these roles here.
+    const isSupervisorLeadOwner =
+      normalizedUserType === "site-supervisor" ||
+      (normalizedUserType === "head-site-supervisor" && isInstallationStage);
 
     if (
       shouldIncludeFranchise &&
       effectiveFranchiseId &&
       !ignoreFranchiseForStage &&
-      !isSiteSupervisorLeadOwner &&
+      !isSupervisorLeadOwner &&
       !isCaller
     ) {
       baseWhere.franchise_id = effectiveFranchiseId;
@@ -5474,7 +5507,7 @@ export class BookingStageService {
       (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
       effectiveFranchiseId &&
       !ignoreFranchiseForStage &&
-      !isSiteSupervisorLeadOwner &&
+      !isSupervisorLeadOwner &&
       !isCaller;
     if (includeFranchise) {
       baseWhere.franchise_id = effectiveFranchiseId;

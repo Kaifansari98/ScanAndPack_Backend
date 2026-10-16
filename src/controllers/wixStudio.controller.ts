@@ -4,32 +4,46 @@ import logger from "../utils/logger";
 
 export class WixStudioController {
   /**
-   * Flow A: POST /api/wix-studio/data?vendor_id=1
-   * Mandatory vendor_id query parameter. Validates vendor and feature flag,
+   * Flow A: POST /api/wix-studio/data?vendor_token=<token>
+   * Mandatory vendor_token query parameter (or header/body). Validates vendor and feature flag,
    * captures raw Wix Studio webhook payload, saves to DB with vendor_id,
    * then processes into Lead Pool via common service.
    */
   captureData = async (req: Request, res: Response): Promise<Response> => {
     try {
-      // 1. Mandatory vendor_id query parameter check
-      const rawVendorId = req.query.vendor_id || req.query.vendorId;
-      if (!rawVendorId || isNaN(Number(rawVendorId)) || Number(rawVendorId) <= 0) {
+      // 1. Extract vendor_token strictly (vendor_id is NOT accepted)
+      const rawVendorToken =
+        req.query.vendor_token ||
+        req.query.vendorToken ||
+        req.headers["x-vendor-token"] ||
+        req.headers["vendor_token"] ||
+        req.headers["vendor-token"] ||
+        req.body?.vendor_token ||
+        req.body?.vendorToken;
+
+      const vendorToken =
+        typeof rawVendorToken === "string"
+          ? rawVendorToken.trim()
+          : Array.isArray(rawVendorToken)
+          ? String(rawVendorToken[0]).trim()
+          : "";
+
+      if (!vendorToken) {
         return res.status(400).json({
           success: false,
-          message: "vendor_id query parameter is required (e.g. /api/wix-studio/data?vendor_id=1)",
+          message: "vendor_token query parameter is required (e.g. /api/wix-studio/data?vendor_token=<VENDOR_TOKEN>)",
         });
       }
 
-      const vendorId = Number(rawVendorId);
-
-      // 2. Validate VendorMaster (exists, active, is_online_lead_feature_enabled === true)
-      const vendorCheck = await wixStudioService.validateVendor(vendorId);
+      const vendorCheck = await wixStudioService.validateVendorToken(vendorToken);
       if (!vendorCheck.valid) {
-        return res.status(vendorCheck.statusCode || 400).json({
+        return res.status(vendorCheck.statusCode || 401).json({
           success: false,
           message: vendorCheck.error,
         });
       }
+
+      const vendorId = vendorCheck.vendor.id;
 
       let payload = req.body;
       if (typeof payload === "string") {
@@ -41,10 +55,10 @@ export class WixStudioController {
         }
       }
 
-      // 3. Save raw payload into wix_studio_data_capture table with vendor_id
+      // 2. Save raw payload into wix_studio_data_capture table with vendor_id
       const record = await wixStudioService.captureData(payload, vendorId);
 
-      // 4. Process into Lead Pool using the ONE common processing service for this vendor
+      // 3. Process into Lead Pool using the ONE common processing service for this vendor
       let leadPoolResult: ProcessWixLeadResult = { leadCreated: false };
       try {
         leadPoolResult = await wixStudioService.processWixPayload(record.payload, {
@@ -60,7 +74,7 @@ export class WixStudioController {
         };
       }
 
-      // 5. Return response with capture ID, vendor info, and Lead Pool status
+      // 4. Return response with capture ID, vendor info, and Lead Pool status
       return res.status(200).json({
         success: true,
         message: leadPoolResult.leadCreated
@@ -71,6 +85,7 @@ export class WixStudioController {
         data: {
           id: record.id,
           vendor_id: vendorId,
+          vendor_token: vendorToken,
           vendor_name: vendorCheck.vendor.vendor_name,
           lead_created: leadPoolResult.leadCreated,
           lead_id: leadPoolResult.lead?.id || null,
@@ -92,7 +107,7 @@ export class WixStudioController {
   /**
    * Flow B: POST /api/wix-studio/data/:id/process
    * Processes a specific existing record from wix_studio_data_capture by ID.
-   * Uses stored vendor_id or explicit query parameter.
+   * Uses stored vendor_id or optional explicit vendor_token parameter.
    */
   processCapturedRecord = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -106,17 +121,30 @@ export class WixStudioController {
         });
       }
 
-      // Optional explicit vendor_id query override
-      const rawVendorId = req.query.vendor_id || req.query.vendorId;
+      // Optional explicit vendor_token override (vendor_id is NOT accepted)
+      const rawVendorToken =
+        req.query.vendor_token ||
+        req.query.vendorToken ||
+        req.headers["x-vendor-token"] ||
+        req.headers["vendor_token"] ||
+        req.headers["vendor-token"];
+      const vendorToken =
+        typeof rawVendorToken === "string"
+          ? rawVendorToken.trim()
+          : Array.isArray(rawVendorToken)
+          ? String(rawVendorToken[0]).trim()
+          : "";
+
       let explicitVendorId: number | undefined;
-      if (rawVendorId) {
-        explicitVendorId = Number(rawVendorId);
-        if (isNaN(explicitVendorId) || explicitVendorId <= 0) {
-          return res.status(400).json({
+      if (vendorToken) {
+        const tokenCheck = await wixStudioService.validateVendorToken(vendorToken);
+        if (!tokenCheck.valid) {
+          return res.status(tokenCheck.statusCode || 401).json({
             success: false,
-            message: `Invalid vendor_id query parameter: '${rawVendorId}'. Must be a positive integer.`,
+            message: tokenCheck.error,
           });
         }
+        explicitVendorId = tokenCheck.vendor.id;
       }
 
       // Process the existing record by ID
@@ -176,35 +204,50 @@ export class WixStudioController {
   };
 
   /**
-   * Flow C: POST /api/wix-studio/data/process?vendor_id=1
-   * Mandatory vendor_id query parameter. Validates vendor and feature flag.
+   * Flow C: POST or GET /api/wix-studio/data/process?vendor_token=<token>
+   * Mandatory vendor_token query parameter. Validates vendor and feature flag.
    * Finds the oldest unprocessed wix_studio_data_capture record and processes it
    * into Lead Pool for this vendor.
    * Already processed records are prevented from creating duplicate leads.
    */
   processUnprocessedRecords = async (req: Request, res: Response): Promise<Response> => {
     try {
-      // 1. Mandatory vendor_id query parameter check
-      const rawVendorId = req.query.vendor_id || req.query.vendorId;
-      if (!rawVendorId || isNaN(Number(rawVendorId)) || Number(rawVendorId) <= 0) {
+      // 1. Mandatory vendor_token check (accepts only vendor_token; vendor_id is NOT accepted)
+      const rawVendorToken =
+        req.query.vendor_token ||
+        req.query.vendorToken ||
+        req.headers["x-vendor-token"] ||
+        req.headers["vendor_token"] ||
+        req.headers["vendor-token"] ||
+        req.body?.vendor_token ||
+        req.body?.vendorToken;
+
+      const vendorToken =
+        typeof rawVendorToken === "string"
+          ? rawVendorToken.trim()
+          : Array.isArray(rawVendorToken)
+          ? String(rawVendorToken[0]).trim()
+          : "";
+
+      if (!vendorToken) {
         return res.status(400).json({
           success: false,
-          message: "vendor_id query parameter is required (e.g. /api/wix-studio/data/process?vendor_id=1)",
+          message: "vendor_token query parameter is required (e.g. /api/wix-studio/data/process?vendor_token=<VENDOR_TOKEN>)",
         });
       }
 
-      const vendorId = Number(rawVendorId);
-
-      // 2. Validate VendorMaster (exists, active, is_online_lead_feature_enabled === true)
-      const vendorCheck = await wixStudioService.validateVendor(vendorId);
+      // Validate vendor token strictly
+      const vendorCheck = await wixStudioService.validateVendorToken(vendorToken);
       if (!vendorCheck.valid) {
-        return res.status(vendorCheck.statusCode || 400).json({
+        return res.status(vendorCheck.statusCode || 401).json({
           success: false,
           message: vendorCheck.error,
         });
       }
 
-      // 3. Process the oldest unprocessed record for this vendor
+      const vendorId = vendorCheck.vendor.id;
+
+      // 2. Process the oldest unprocessed record for this vendor
       const result = await wixStudioService.processOldestUnprocessedRecord(vendorId, req);
 
       if (!result.processed) {
@@ -223,6 +266,7 @@ export class WixStudioController {
         data: {
           capture_id: result.recordId,
           vendor_id: vendorId,
+          vendor_token: vendorToken,
           vendor_name: vendorCheck.vendor.vendor_name,
           lead_created: result.leadCreated,
           lead_id: result.leadId || null,

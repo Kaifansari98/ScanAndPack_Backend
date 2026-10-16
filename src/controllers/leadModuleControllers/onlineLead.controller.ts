@@ -23,6 +23,7 @@ import {
   createOrUpdateOnlineLead,
   generateOnlineLeadCode as generateCodeHelper,
   ensureDefaultStatuses,
+  getOrCreateInactiveStatus,
   formatDesignRemarks,
   extractSurveyDetails,
 } from "../../services/leadModuleServices/onlineLead.service";
@@ -109,6 +110,24 @@ const mapOnlineLeadToFrontend = (lead: any) => {
             let remark = h.remark || "";
 
             if (isOnlineLeadFeatureEnabled) {
+              const cleanRem = remark.trim().toLowerCase();
+              const leadRem = (lead.remark || "").trim().toLowerCase();
+              const isInitialCreationRemark =
+                (leadRem && cleanRem === leadRem) ||
+                cleanRem.startsWith("lead registered via") ||
+                cleanRem.startsWith("lead updated with new data via") ||
+                cleanRem.includes("lead automatically created") ||
+                cleanRem.startsWith("design remarks updated") ||
+                cleanRem.startsWith("bulk imported") ||
+                cleanRem.startsWith("lead bulk imported") ||
+                cleanRem.startsWith("**•") ||
+                cleanRem.startsWith("•") ||
+                cleanRem.includes("**•");
+
+              if (isInitialCreationRemark) {
+                continue;
+              }
+
               remark = remark
                 .replace(
                   /Lead conversion approved and moved to Draft Lead stage/gi,
@@ -219,16 +238,15 @@ const mapOnlineLeadToFrontend = (lead: any) => {
                 })
                 .filter(Boolean);
 
-              if (itemsToInject.length > 0) {
-                const conversionEntry = historyList.find((h: any) =>
-                  (h.remark || "").toLowerCase().includes("conversion")
-                );
-                const baseTime = conversionEntry
-                  ? new Date(conversionEntry.created_at).getTime() - 1000
-                  : lead.created_at
-                  ? new Date(lead.created_at).getTime()
-                  : Date.now();
-                const baseUser = conversionEntry?.createdBy ||
+              const conversionEntry = historyList.find((h: any) =>
+                (h.remark || "").toLowerCase().includes("conversion")
+              );
+
+              // Only inject synthetic structure entries for converted leads that have a conversion timeline event.
+              // Brand-new or unconverted leads in Lead Pool must NOT have synthetic product structure history entries.
+              if (conversionEntry && itemsToInject.length > 0) {
+                const baseTime = new Date(conversionEntry.created_at).getTime() - 1000;
+                const baseUser = conversionEntry.createdBy ||
                   lead.UserMaster_online_leads_created_byToUserMaster ||
                   { user_name: "Super Admin" };
 
@@ -238,8 +256,8 @@ const mapOnlineLeadToFrontend = (lead: any) => {
                     remark: `Product structure instance added : ${item}`,
                     created_at: new Date(baseTime - idx * 500).toISOString(),
                     createdBy: baseUser,
-                    status: conversionEntry?.status || { status_name: "Status Change" },
-                    franchise: conversionEntry?.franchise || lead.FranchiseMaster || null,
+                    status: conversionEntry.status || { status_name: "Status Change" },
+                    franchise: conversionEntry.franchise || lead.FranchiseMaster || null,
                   });
                 });
               }
@@ -641,7 +659,7 @@ export class OnlineLeadController {
         NOT: {
           online_lead_followup_status: {
             status_name: {
-              in: ["Store Assigned", "Store Visit Done"],
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
               mode: "insensitive",
             },
           },
@@ -720,7 +738,7 @@ export class OnlineLeadController {
         NOT: {
           online_lead_followup_status: {
             status_name: {
-              in: ["Store Assigned", "Store Visit Done"],
+              in: ["Store Assigned", "Store Visit Done", "Inactive"],
               mode: "insensitive",
             },
           },
@@ -3530,15 +3548,21 @@ export class OnlineLeadController {
         currentLead &&
         currentLead.remark !== remark
       ) {
-        await prisma.online_lead_history.create({
-          data: {
-            vendor_id: currentLead.vendor_id,
-            online_lead_id: id,
-            remark: `Design remarks updated: ${remark || "N/A"}`,
-            created_by: updated_by ? Number(updated_by) : 1,
-            online_lead_status_id: currentLead.status || 1,
-          },
+        const vendorRec = await prisma.vendorMaster.findUnique({
+          where: { id: currentLead.vendor_id },
+          select: { is_online_lead_feature_enabled: true },
         });
+        if (!vendorRec?.is_online_lead_feature_enabled) {
+          await prisma.online_lead_history.create({
+            data: {
+              vendor_id: currentLead.vendor_id,
+              online_lead_id: id,
+              remark: `Design remarks updated: ${remark || "N/A"}`,
+              created_by: updated_by ? Number(updated_by) : 1,
+              online_lead_status_id: currentLead.status || 1,
+            },
+          });
+        }
       }
 
       const updated = await prisma.online_leads.update({
@@ -4395,16 +4419,18 @@ export class OnlineLeadController {
                   ? `Bulk imported:\n\n${remark}`
                   : "Lead registered via bulk upload");
 
-            await tx.online_lead_history.create({
-              data: {
-                vendor_id: Number(vendor_id),
-                online_lead_id: createdLead.id,
-                remark: historyRemark,
-                created_by: Number(created_by),
-                store_id: storeId || null,
-                online_lead_status_id: walkInStatus.id,
-              },
-            });
+            if (!isOnlineLeadFeatureEnabled) {
+              await tx.online_lead_history.create({
+                data: {
+                  vendor_id: Number(vendor_id),
+                  online_lead_id: createdLead.id,
+                  remark: historyRemark,
+                  created_by: Number(created_by),
+                  store_id: storeId || null,
+                  online_lead_status_id: walkInStatus.id,
+                },
+              });
+            }
 
             // Record store preference log if showroom identified
             if (storeId) {
@@ -4604,35 +4630,79 @@ export class OnlineLeadController {
         }
       }
 
+      const requestingUser = await getRequestingUser(req);
+      const inactiveStatus = await getOrCreateInactiveStatus(lead.vendor_id);
+
       await prisma.$transaction(async (tx) => {
         if (lead.lead_master_id) {
           await tx.leadMaster.updateMany({
             where: { id: lead.lead_master_id },
-            data: { is_deleted: true },
+            data: { is_deleted: true, deleted_at: new Date() },
           });
         }
 
-        await tx.online_lead_history.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.online_lead_call_log.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.online_lead_store_log.deleteMany({
-          where: { online_lead_id: id },
-        });
-        await tx.telecaller_campaign_leads.deleteMany({
-          where: { online_lead_id: id },
+        // Mark lead as inactive in online_leads
+        await tx.online_leads.update({
+          where: { id },
+          data: {
+            approval_status: "INACTIVE",
+            status: inactiveStatus.id,
+            updated_at: new Date(),
+          },
         });
 
-        await tx.online_leads.delete({
-          where: { id },
+        // Add history record for audit/tracking
+        await tx.online_lead_history.create({
+          data: {
+            vendor_id: lead.vendor_id,
+            online_lead_id: id,
+            remark: "Lead deleted from Lead Pool (marked inactive)",
+            created_by: requestingUser?.id || lead.created_by || 1,
+            online_lead_status_id: inactiveStatus.id,
+          },
         });
+
+        // Treat corresponding Wix Studio capture record(s) as inactive/consumed
+        const cleanContactDigits = String(lead.contact || "").replace(/\D/g, "");
+        const last10Digits = cleanContactDigits.slice(-10);
+
+        const wixCaptures = await tx.wixStudioDataCapture.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+          },
+        });
+
+        for (const capture of wixCaptures) {
+          const payloadStr = JSON.stringify(capture.payload || {});
+          const matchesPhone =
+            (last10Digits && payloadStr.includes(last10Digits)) ||
+            (cleanContactDigits && payloadStr.includes(cleanContactDigits)) ||
+            (lead.email && payloadStr.toLowerCase().includes(lead.email.toLowerCase()));
+
+          if (matchesPhone) {
+            const currentPayload =
+              typeof capture.payload === "object" && capture.payload !== null
+                ? (capture.payload as Record<string, any>)
+                : {};
+            await tx.wixStudioDataCapture.update({
+              where: { id: capture.id },
+              data: {
+                payload: {
+                  ...currentPayload,
+                  is_inactive: true,
+                  status: "inactive",
+                  consumed: true,
+                  inactive_at: new Date().toISOString(),
+                },
+              },
+            });
+          }
+        }
       });
 
       return res
         .status(200)
-        .json({ success: true, message: "Lead deleted successfully" });
+        .json({ success: true, message: "Lead marked inactive successfully" });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] deleteLead error:", error);
       return res.status(500).json({

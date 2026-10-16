@@ -349,6 +349,29 @@ export const ensureDefaultStatuses = async (vendorId: number) => {
   }
 };
 
+export const getOrCreateInactiveStatus = async (vendorId: number) => {
+  let inactiveStatus = await prisma.online_lead_followup_status.findFirst({
+    where: {
+      vendor_id: vendorId,
+      status_name: { equals: "Inactive", mode: "insensitive" },
+    },
+  });
+
+  if (!inactiveStatus) {
+    inactiveStatus = await prisma.online_lead_followup_status.create({
+      data: {
+        vendor_id: vendorId,
+        status_name: "Inactive",
+        followup_required: false,
+        is_active: false,
+        updated_at: new Date(),
+      },
+    });
+  }
+
+  return inactiveStatus;
+};
+
 /**
  * Generates an incremented online lead code (e.g. VK-101) with row-level locking.
  */
@@ -1026,6 +1049,9 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
         );
 
     if (existingOnlineLead) {
+      if (existingOnlineLead.approval_status === "INACTIVE") {
+        return existingOnlineLead;
+      }
       const existingTypes = Array.isArray(existingOnlineLead.product_types)
         ? existingOnlineLead.product_types
         : [];
@@ -1048,8 +1074,8 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
       let combinedTypes: string[] = [];
       let combinedStructs: string[] = [];
 
-      if (isSheetLead && isInLeadPool) {
-        // When lead is in Lead Pool from Google Sheet, keep product types and structures empty
+      if ((isSheetLead || vendor.is_online_lead_feature_enabled) && isInLeadPool) {
+        // When lead is in Lead Pool from Google Sheet or feature enabled, keep product types and structures empty
         combinedTypes = [];
         combinedStructs = [];
       } else {
@@ -1181,13 +1207,15 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
         priority: priority || "Medium",
         city: city || null,
         product_types:
-          isGoogleSheetLead && (assign_to === null || assign_to === undefined)
+          (isGoogleSheetLead || vendor.is_online_lead_feature_enabled) &&
+          (assign_to === null || assign_to === undefined)
             ? []
             : Array.isArray(product_types)
             ? sanitizeProductTypes(product_types)
             : [],
         product_structures:
-          isGoogleSheetLead && (assign_to === null || assign_to === undefined)
+          (isGoogleSheetLead || vendor.is_online_lead_feature_enabled) &&
+          (assign_to === null || assign_to === undefined)
             ? []
             : Array.isArray(product_structures)
             ? product_structures
@@ -1196,8 +1224,15 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
     });
   });
 
+  if (lead.approval_status === "INACTIVE") {
+    return { lead, isNew: false };
+  }
+
   // Create lead history entry
-  if (defaultStatus) {
+  // For vendors with is_online_lead_feature_enabled, do NOT create an initial dummy history entry.
+  // The requirement/design remark is stored in online_leads.remark (Design Remarks) only.
+  // Latest Remark remains empty until an actual follow-up action is performed.
+  if (defaultStatus && !vendor.is_online_lead_feature_enabled) {
     try {
       await prisma.online_lead_history.create({
         data: {
