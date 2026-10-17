@@ -14616,6 +14616,11 @@ export const getProjectItemTrackingService = async (
           scanned_quantity: mScanned ? 1 : 0,
           status: mScanned ? ("scanned" as const) : ("pending" as const),
           scanned_at: mappingForUnit?.actual_in_at ?? null,
+          scanned_by:
+            mappingForUnit?.operator?.user_name ??
+            (mappingForUnit?.in_operator
+              ? `User #${mappingForUnit.in_operator}`
+              : null),
           box_id: mIsPackaging
             ? mappingForUnit?.box_id || bId
             : mappingForUnit?.box_id ?? null,
@@ -14755,6 +14760,13 @@ export const getProjectItemTrackingService = async (
         remaining_quantity: bId ? 0 : 1,
         packed_by: packedBy,
         packed_at: packedAt,
+        scanned_by:
+          targetMapping?.operator?.user_name ??
+          (targetMapping?.in_operator
+            ? `User #${targetMapping.in_operator}`
+            : null) ??
+          packedBy,
+        scanned_at: targetMapping?.actual_in_at ?? packedAt,
         packed_by_id: bMaster?.packed_by ?? packMapping?.in_operator ?? null,
         factory_out_at: factoryOutAt,
         factory_out_by: factoryOutBy,
