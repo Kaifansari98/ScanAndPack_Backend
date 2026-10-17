@@ -3913,12 +3913,16 @@ export const getCutListMachine = async (
       };
     });
 
-    // Mark assigned machines
+    // Mark assigned machines. There is one mapping per piece, so also count
+    // how many pieces have been scanned at each machine.
     cutList.cutListMachineMapping.forEach((mapping) => {
-      row[mapping.machine.machine_code] = {
-        assigned: true,
-        machineId: mapping.machine.id,
-      };
+      const code = mapping.machine.machine_code;
+      const cell = row[code]?.assigned
+        ? row[code]
+        : { assigned: true, machineId: mapping.machine.id, total: 0, scanned: 0 };
+      cell.total += 1;
+      if (mapping.actual_in_at || mapping.actual_out_at) cell.scanned += 1;
+      row[code] = cell;
     });
 
     return row;
