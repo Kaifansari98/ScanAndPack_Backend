@@ -409,7 +409,11 @@ export const uploadCutListMachineExcel = async (
       skipDuplicates: true,
     }),
     prisma.cutListMachineMapping.deleteMany({
-      where: { id: { in: toDeleteIds } },
+      where: {
+        id: { in: toDeleteIds },
+        actual_in_at: null,
+        actual_out_at: null,
+      },
     }),
   ]);
 

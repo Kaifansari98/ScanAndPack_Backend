@@ -1478,19 +1478,18 @@ export const updateScannedItem = async (
         },
       });
       let maximumItemQty = Number.MAX_SAFE_INTEGER;
-      // Custom-group packing validates the location capacity below using the
 
       if (eligibleMapping.project.packing_type !== PackingType.CUSTOM_GROUP) {
         const qtyPerBox = Math.max(
           1,
           Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
         );
-        maximumItemQty = locationAllocation.qty * qtyPerBox;
+        maximumItemQty = allocatedProductQty * qtyPerBox;
 
         if (scannedAtLocation >= maximumItemQty) {
           return validationResponse(
             0,
-            `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${locationAllocation.qty} at location "${locationAllocation.location_name}"`,
+            `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${allocatedProductQty} at location "${locationAllocation.location_name}"`,
           );
         }
       }
@@ -1498,7 +1497,7 @@ export const updateScannedItem = async (
       selectedLocationAllocation = {
         id: locationAllocation.id,
         locationName: locationAllocation.location_name,
-        allocatedProductQty: locationAllocation.qty,
+        allocatedProductQty,
         maximumItemQty:
           eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP
             ? Number.MAX_SAFE_INTEGER
@@ -1616,7 +1615,10 @@ export const updateScannedItem = async (
           itemName: row.item_name,
           qtyPerBox:
             groupBaseQuantity > 0
-              ? Math.max(1, Math.floor(Number(row.qty || 0) / groupBaseQuantity))
+              ? Math.max(
+                  Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
+                  Math.floor(Number(row.qty || 0) / groupBaseQuantity),
+                )
               : Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
           availableQty: Math.max(0, Number(row.qty || 0)),
         }));
@@ -3987,6 +3989,8 @@ export const getCutListMachine = async (
           machine_id: true,
           sequence_no: true,
           actual_in_at: true,
+          actual_out_at: true,
+          status: true,
           box_id: true,
           machine: {
             select: {
@@ -4030,6 +4034,9 @@ export const getCutListMachine = async (
         machineId: machine.id,
         machine_type_id: machine.machine_type_id,
         mapping_id: null,
+        scanned: false,
+        scanned_count: 0,
+        total_mappings: 0,
       };
     }
 
@@ -4039,15 +4046,23 @@ export const getCutListMachine = async (
       const machineCode = machineCodeById.get(mapping.machine_id);
       if (!machineCode) continue;
 
-      const isScanned = mapping.actual_in_at !== null;
+      const isScanned =
+        mapping.actual_in_at !== null ||
+        mapping.actual_out_at !== null ||
+        (mapping.status && !["pending", ""].includes(String(mapping.status).toLowerCase()));
+
       const existingCell = row[machineCode];
+      const prevScannedCount = existingCell?.scanned_count || 0;
+      const prevTotal = existingCell?.total_mappings || 0;
 
       row[machineCode] = {
         assigned: true,
         machineId: mapping.machine_id,
         mapping_id: existingCell?.mapping_id ?? mapping.id,
         machine_type_id: existingCell?.machine_type_id ?? null,
-        scanned: existingCell?.scanned || isScanned,
+        scanned: Boolean(existingCell?.scanned || isScanned),
+        scanned_count: prevScannedCount + (isScanned ? 1 : 0),
+        total_mappings: prevTotal + 1,
         scanned_at: existingCell?.scanned_at || mapping.actual_in_at,
         box_id: existingCell?.box_id || mapping.box_id,
       };
@@ -4130,34 +4145,6 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       return validationResponse(0, "Project not found");
     }
 
-    // Check if project has already started (at least 1 item scanned in cutListMachineMapping)
-    const scannedMappingCount = await prisma.cutListMachineMapping.count({
-      where: {
-        project_id: Number(projectId),
-        OR: [
-          { actual_in_at: { not: null } },
-          { actual_out_at: { not: null } },
-          { status: { notIn: ["Pending", "pending", ""] } },
-        ],
-      },
-    });
-
-    const isStarted = scannedMappingCount > 0;
-
-    const role = (payload.user_role || "").trim().toLowerCase();
-    const isSuperAdmin =
-      role === "super-admin" ||
-      role === "superadmin" ||
-      role === "super admin" ||
-      role === "super_admin";
-
-    if (isStarted && !isSuperAdmin) {
-      return validationResponse(
-        0,
-        "Project Started: You cannot assign. Only Super Admin can do this.",
-      );
-    }
-
     const cutListIdArray = payload.cutListIds
       .split(",")
       .map((id) => Number(id.trim()))
@@ -4165,15 +4152,52 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
     return await prisma.$transaction(async (tx) => {
       if (!payload.assigned) {
-        await tx.cutListMachineMapping.deleteMany({
+        // Find which items have ALREADY been scanned at this machine
+        const scannedMappings = await tx.cutListMachineMapping.findMany({
           where: {
             cut_list_id: { in: cutListIdArray },
             machine_id: payload.machine_id,
             project_id: Number(projectId),
+            OR: [
+              { actual_in_at: { not: null } },
+              { actual_out_at: { not: null } },
+              { status: { notIn: ["Pending", "pending", ""] } },
+            ],
+          },
+          select: { cut_list_id: true },
+        });
+
+        const scannedCutListIds = new Set(scannedMappings.map((m) => m.cut_list_id));
+        const unassignableCutListIds = cutListIdArray.filter(
+          (id) => !scannedCutListIds.has(id),
+        );
+
+        if (unassignableCutListIds.length === 0) {
+          return validationResponse(
+            0,
+            "Cannot unassign machine: Item has already been scanned at this machine",
+          );
+        }
+
+        // Delete mappings ONLY for items that have NOT been scanned at this machine
+        await tx.cutListMachineMapping.deleteMany({
+          where: {
+            cut_list_id: { in: unassignableCutListIds },
+            machine_id: payload.machine_id,
+            project_id: Number(projectId),
+            actual_in_at: null,
+            actual_out_at: null,
           },
         });
 
-        return validationResponse(1, "Machine unmapped");
+        if (scannedCutListIds.size > 0) {
+          return validationResponse(
+            1,
+            `Unassigned unscanned item(s). Note: ${scannedCutListIds.size} item(s) already scanned at this machine could not be unassigned.`,
+          );
+        }
+
+        return validationResponse(1, "Machine unmapped successfully");
       }
 
       // ✅ Fetch cutList rows to get qty and lead_id per cut_list_id
@@ -14548,16 +14572,6 @@ export const getProjectItemTrackingService = async (
 
   for (const item of candidateCutLists) {
     const rawMappings = item.cutListMachineMapping as MappingRow[];
-    const targetMappings = query.machineId
-      ? rawMappings.filter(
-          (m) => (m.machine_id ?? m.machine?.id) === query.machineId,
-        )
-      : rawMappings;
-
-    // A cutlist item with qty > 1 is expanded so each unit (panel) is on its own row.
-    // If item.qty is 2, it produces 2 separate rows (Piece 1 of 2, Piece 2 of 2).
-    const itemQty = Math.max(1, Number(item.qty || 1));
-    const unitCount = Math.max(itemQty, targetMappings.length);
 
     // Group mappings by machine to assign to units
     const byMachine = new Map<number, MappingRow[]>();
@@ -14580,18 +14594,37 @@ export const getProjectItemTrackingService = async (
       ),
     );
 
+    const targetMappings = query.machineId
+      ? (byMachine.get(query.machineId) ?? [])
+      : query.isDispatch
+        ? packagingMappings
+        : [];
+
+    // A cutlist item with qty > 1 is expanded so each unit (panel) is on its own row.
+    // If item.qty is 2, it produces 2 separate rows (Piece 1 of 2, Piece 2 of 2).
+    const itemQty = Math.max(1, Number(item.qty || 1));
+    const unitCount = query.machineId
+      ? Math.max(itemQty, targetMappings.length)
+      : query.isDispatch
+        ? Math.max(itemQty, packagingMappings.length)
+        : Math.max(
+            itemQty,
+            ...Array.from(byMachine.values()).map((r) => r.length),
+            0,
+          );
+
     for (let u = 0; u < unitCount; u++) {
-      const targetMapping = targetMappings[u] ?? targetMappings[0] ?? null;
-      const packMapping = packagingMappings[u] ?? packagingMappings[0] ?? null;
+      const targetMapping = targetMappings[u] ?? null;
+      const packMapping = packagingMappings[u] ?? null;
 
       const bId =
-        targetMapping?.boxMaster?.id ??
-        targetMapping?.box_id ??
         packMapping?.boxMaster?.id ??
         packMapping?.box_id ??
+        targetMapping?.boxMaster?.id ??
+        targetMapping?.box_id ??
         null;
       const bMaster =
-        targetMapping?.boxMaster ?? packMapping?.boxMaster ?? null;
+        packMapping?.boxMaster ?? targetMapping?.boxMaster ?? null;
       const rawName = bMaster?.box_name ?? (bId ? `Box ${bId}` : null);
       const boxName = rawName
         ? /^box/i.test(rawName.trim())
@@ -14606,9 +14639,12 @@ export const getProjectItemTrackingService = async (
       // Build machine summaries for this unit
       const unitMachines: any[] = [];
       for (const [mId, mMappings] of byMachine) {
-        const mappingForUnit = mMappings[u] ?? mMappings[0];
-        const mObj = mappingForUnit.machine;
-        const mScanned = Boolean(mappingForUnit.actual_in_at);
+        const mappingForUnit = mMappings[u] ?? null;
+        const fallbackMapping = mMappings[0];
+        const mObj = mappingForUnit?.machine ?? fallbackMapping?.machine;
+        if (!mObj) continue;
+
+        const mScanned = Boolean(mappingForUnit?.actual_in_at);
         const mIsPackaging = /pack/i.test(mObj.machine_name);
 
         unitMachines.push({
@@ -14616,18 +14652,25 @@ export const getProjectItemTrackingService = async (
           machine_name: mObj.machine_name,
           machine_code: mObj.machine_code,
           scan_type: String(mObj.scan_type),
-          sequence_no: mappingForUnit.sequence_no,
-          is_optional: mappingForUnit.is_optional,
+          sequence_no:
+            mappingForUnit?.sequence_no ?? fallbackMapping?.sequence_no ?? 0,
+          is_optional:
+            mappingForUnit?.is_optional ?? fallbackMapping?.is_optional ?? false,
           total_quantity: 1,
           scanned_quantity: mScanned ? 1 : 0,
           status: mScanned ? ("scanned" as const) : ("pending" as const),
-          scanned_at: mappingForUnit.actual_in_at,
+          scanned_at: mappingForUnit?.actual_in_at ?? null,
+          scanned_by:
+            mappingForUnit?.operator?.user_name ??
+            (mappingForUnit?.in_operator
+              ? `User #${mappingForUnit.in_operator}`
+              : null),
           box_id: mIsPackaging
-            ? mappingForUnit.box_id || bId
-            : mappingForUnit.box_id,
+            ? mappingForUnit?.box_id || bId
+            : mappingForUnit?.box_id ?? null,
           box_name: mIsPackaging
             ? boxName ||
-              (mappingForUnit.box_id ? `Box ${mappingForUnit.box_id}` : null)
+              (mappingForUnit?.box_id ? `Box ${mappingForUnit.box_id}` : null)
             : null,
           box_status: mIsPackaging ? boxStatus : null,
         });
@@ -14661,17 +14704,15 @@ export const getProjectItemTrackingService = async (
         (bMaster?.packed_by ? `User #${bMaster.packed_by}` : null);
       const packedAt = bMaster?.packed_at ?? packMapping?.actual_in_at ?? null;
 
-      // Item-level site verify: check packMapping, targetMapping, or unit mapping
+      // Item-level site verify: check packMapping or targetMapping
       const itemSiteVerifyAt =
         packMapping?.site_in_at ??
         targetMapping?.site_in_at ??
-        rawMappings[u]?.site_in_at ??
         null;
 
       const itemSiteVerifyUser =
         packMapping?.siteInByUser ??
         targetMapping?.siteInByUser ??
-        rawMappings[u]?.siteInByUser ??
         null;
 
       const itemSiteVerifyBy =
@@ -14680,9 +14721,7 @@ export const getProjectItemTrackingService = async (
           ? `User #${packMapping.site_in_by}`
           : targetMapping?.site_in_by
             ? `User #${targetMapping.site_in_by}`
-            : rawMappings[u]?.site_in_by
-              ? `User #${rawMappings[u].site_in_by}`
-              : null);
+            : null);
 
       const boxSiteInAt = bMaster?.site_in_at ?? null;
       const boxSiteInBy =
@@ -14765,6 +14804,13 @@ export const getProjectItemTrackingService = async (
         remaining_quantity: bId ? 0 : 1,
         packed_by: packedBy,
         packed_at: packedAt,
+        scanned_by:
+          targetMapping?.operator?.user_name ??
+          (targetMapping?.in_operator
+            ? `User #${targetMapping.in_operator}`
+            : null) ??
+          packedBy,
+        scanned_at: targetMapping?.actual_in_at ?? packedAt,
         packed_by_id: bMaster?.packed_by ?? packMapping?.in_operator ?? null,
         factory_out_at: factoryOutAt,
         factory_out_by: factoryOutBy,
