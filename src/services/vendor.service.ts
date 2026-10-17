@@ -142,12 +142,12 @@ export const createVendor = async (data: any) => {
     const tzRecord = await prisma.time_zone_master.findUnique({
       where: { id: resolvedTimeZoneId },
     });
-    if (!tzRecord || !tzRecord.is_active) {
+    if (!tzRecord || !tzRecord.active) {
       const err: any = new Error("Selected time zone must be an active time zone");
       err.statusCode = 400;
       throw err;
     }
-    resolvedTimeZoneStr = tzRecord.time_zone_code;
+    resolvedTimeZoneStr = tzRecord.time_zone_name;
   }
 
   const vendor = await prisma.vendorMaster.create({
@@ -1985,12 +1985,12 @@ export const onboardVendor = async (data: any) => {
     const tzRecord = await prisma.time_zone_master.findUnique({
       where: { id: resolvedTimeZoneId },
     });
-    if (!tzRecord || !tzRecord.is_active) {
+    if (!tzRecord || !tzRecord.active) {
       const err: any = new Error("Selected time zone must be an active time zone");
       err.statusCode = 400;
       throw err;
     }
-    resolvedTimeZoneStr = tzRecord.time_zone_code;
+    resolvedTimeZoneStr = tzRecord.time_zone_name;
   }
 
   const vendor = await prisma.vendorMaster.create({
@@ -2172,14 +2172,14 @@ export const updateVendor = async (vendorId: number, data: any) => {
       throw err;
     }
     // Require active choice when changing time zone
-    if (currentVendor.time_zone_id !== updatedTimeZoneId && !tzRecord.is_active) {
+    if (currentVendor.time_zone_id !== updatedTimeZoneId && !tzRecord.active) {
       const err: any = new Error(
         "Selected time zone must be an active time zone when changing selection"
       );
       err.statusCode = 400;
       throw err;
     }
-    updatedTimeZoneStr = tzRecord.time_zone_code;
+    updatedTimeZoneStr = tzRecord.time_zone_name;
   }
 
   const vendor = await prisma.vendorMaster.update({

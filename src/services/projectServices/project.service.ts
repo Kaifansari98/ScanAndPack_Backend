@@ -72,6 +72,7 @@ export const createProjectDetails = async (data: Omit<ProjectDetails, 'id'>) => 
 
 
 export interface GetTrackTraceProjectsOptions {
+  fabrication?: "WOODWORK" | "METALWORK";
   page?: number;
   limit?: number;
   search?: string;
@@ -137,6 +138,10 @@ export const getAllProjectsTrackTrace = async (
   const where: Prisma.ProjectMasterWhereInput = {
     vendor_id,
   };
+
+  if (options.fabrication) {
+    where.CutList = { some: { vendor_id, fabrication: options.fabrication } };
+  }
 
   /*
   |--------------------------------------------------------------------------
