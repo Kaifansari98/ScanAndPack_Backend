@@ -1834,90 +1834,40 @@ export const updateScannedItem = async (
           }
 
           if (automaticPackingDefinition) {
-            const groupCutListIds =
-              automaticPackingDefinition.packingGroupItems.map(
-                (item) => item.cutListId,
-              );
-            const scannedGroupMappings =
-              await tx.cutListMachineMapping.findMany({
-                where: {
-                  project_id: eligibleMapping.project_id,
-                  vendor_id,
-                  machine_id,
-                  expected_in: true,
-                  actual_in_at: {
-                    not: null,
-                  },
-                  in_operator: {
-                    not: null,
-                  },
-                  cut_list_id: {
-                    in: groupCutListIds,
-                  },
-                  ...(selectedLocationAllocation
-                    ? {
-                        project_location_product_quantity_id:
-                          selectedLocationAllocation.id,
-                      }
-                    : {
-                        project_location_product_quantity_id: null,
-                      }),
-                },
-                select: {
-                  cut_list_id: true,
-                  in_operator: true,
-                  qty: true,
-                },
-              });
-
-            const quantitiesByOperator = new Map<number, Map<number, number>>();
-
-            for (const mapping of scannedGroupMappings) {
-              if (!mapping.in_operator) continue;
-
-              const operatorQuantities =
-                quantitiesByOperator.get(mapping.in_operator) ?? new Map();
-              operatorQuantities.set(
-                mapping.cut_list_id,
-                (operatorQuantities.get(mapping.cut_list_id) ?? 0) + 1,
-              );
-              quantitiesByOperator.set(mapping.in_operator, operatorQuantities);
-            }
-
-            const reservedQuantities = new Map<number, number>();
-
-            for (const operatorQuantities of quantitiesByOperator.values()) {
-              const requiredBoxCount = Math.max(
-                ...automaticPackingDefinition.packingGroupItems.map((item) =>
-                  Math.ceil(
-                    (operatorQuantities.get(item.cutListId) ?? 0) /
-                      item.qtyPerBox,
-                  ),
-                ),
-                0,
+            const incomingItemRequirement =
+              automaticPackingDefinition.packingGroupItems.find(
+                (item) => item.cutListId === cut_list_id,
               );
 
-              for (const item of automaticPackingDefinition.packingGroupItems) {
-                reservedQuantities.set(
-                  item.cutListId,
-                  (reservedQuantities.get(item.cutListId) ?? 0) +
-                    requiredBoxCount * item.qtyPerBox,
-                );
-              }
-            }
+            if (incomingItemRequirement) {
+              const totalScannedForThisItem =
+                await tx.cutListMachineMapping.count({
+                  where: {
+                    project_id: eligibleMapping.project_id,
+                    vendor_id,
+                    machine_id,
+                    cut_list_id,
+                    actual_in_at: { not: null },
+                    ...(selectedLocationAllocation
+                      ? {
+                          project_location_product_quantity_id:
+                            selectedLocationAllocation.id,
+                        }
+                      : {
+                          project_location_product_quantity_id: null,
+                        }),
+                  },
+                });
 
-            for (const item of automaticPackingDefinition.packingGroupItems) {
               const availableQty = selectedLocationAllocation
                 ? selectedLocationAllocation.allocatedProductQty *
-                  item.qtyPerBox
-                : item.availableQty;
-              const reservedQty = reservedQuantities.get(item.cutListId) ?? 0;
+                  incomingItemRequirement.qtyPerBox
+                : incomingItemRequirement.availableQty;
 
-              if (reservedQty > availableQty) {
+              if (totalScannedForThisItem > availableQty) {
                 throw new Error(
                   `Cannot scan "${eligibleMapping.cut_list.item_name}". ` +
-                    `The scan would require ${reservedQty} "${item.itemName}" ` +
-                    `items for this custom group, but only ${availableQty} are available.`,
+                    `All ${availableQty} required pieces for this custom group have already been scanned.`,
                 );
               }
             }
@@ -1973,7 +1923,6 @@ export const updateScannedItem = async (
             const automaticBoxFilter = {
               project_id: eligibleMapping.project_id,
               vendor_id,
-              created_by,
               is_deleted: false,
               is_auto_created: true,
               product_group_name: {
@@ -1989,9 +1938,19 @@ export const updateScannedItem = async (
               where: {
                 ...automaticBoxFilter,
                 box_status: BoxStatus.unpacked,
-                cutListMachineMapping: {
-                  some: locationMappingFilter,
-                },
+                is_deleted: false,
+                ...(selectedLocationAllocation
+                  ? {
+                      cutListMachineMapping: {
+                        none: {
+                          actual_in_at: { not: null },
+                          project_location_product_quantity_id: {
+                            not: selectedLocationAllocation.id,
+                          },
+                        },
+                      },
+                    }
+                  : {}),
               },
               select: {
                 id: true,
@@ -2029,45 +1988,79 @@ export const updateScannedItem = async (
             });
 
             if (!targetBox) {
-              // Do not claim or wait on another operator's open box. Each
-              // operator gets an independent sequence of automatic boxes.
-              const [
-                sequenceAggregate,
-                totalProjectBoxes,
-                packingGroupSetAggregate,
-              ] = await Promise.all([
-                tx.boxMaster.aggregate({
-                  where: {
-                    project_id: eligibleMapping.project_id,
-                    vendor_id,
-                  },
-                  _max: {
-                    sequence_no: true,
-                  },
+              const maxBoxesAllowed = Math.min(
+                ...automaticPackingDefinition.packingGroupItems.map((item) => {
+                  const availableQty = selectedLocationAllocation
+                    ? selectedLocationAllocation.allocatedProductQty *
+                      item.qtyPerBox
+                    : item.availableQty;
+                  return Math.floor(availableQty / item.qtyPerBox);
                 }),
-                tx.boxMaster.count({
-                  where: {
-                    project_id: eligibleMapping.project_id,
-                    vendor_id,
-                  },
-                }),
-                tx.boxMaster.aggregate({
-                  where: {
-                    ...automaticBoxFilter,
-                    cutListMachineMapping: {
-                      some: locationMappingFilter,
-                    },
-                  },
-                  _max: {
-                    product_set_no: true,
-                  },
-                }),
-              ]);
-              const nextSequence =
-                Math.max(
-                  sequenceAggregate._max.sequence_no ?? 0,
-                  totalProjectBoxes,
-                ) + 1;
+              );
+
+              const existingBoxesCount = await tx.boxMaster.count({
+                where: {
+                  ...automaticBoxFilter,
+                  is_deleted: false,
+                },
+              });
+
+              if (existingBoxesCount >= maxBoxesAllowed) {
+                throw new Error(
+                  `Cannot scan "${eligibleMapping.cut_list.item_name}". ` +
+                    `All ${maxBoxesAllowed} boxes for this custom group have already been started. ` +
+                    (openBoxes.length > 0
+                      ? `Please complete open Box "${openBoxes[0].box_name}" first.`
+                      : `All boxes for this group are already packed.`),
+                );
+              }
+
+              const existingActiveBoxes = await tx.boxMaster.findMany({
+                where: {
+                  project_id: eligibleMapping.project_id,
+                  vendor_id,
+                  is_deleted: false,
+                },
+                select: {
+                  sequence_no: true,
+                },
+              });
+              const usedSequences = new Set<number>(
+                existingActiveBoxes
+                  .map((b) => b.sequence_no)
+                  .filter(
+                    (seq): seq is number =>
+                      seq !== null && seq !== undefined && seq > 0,
+                  ),
+              );
+
+              let nextSequence = 1;
+              while (usedSequences.has(nextSequence)) {
+                nextSequence++;
+              }
+
+              const existingGroupBoxes = await tx.boxMaster.findMany({
+                where: {
+                  ...automaticBoxFilter,
+                  is_deleted: false,
+                },
+                select: {
+                  product_set_no: true,
+                },
+              });
+              const usedSetNos = new Set<number>(
+                existingGroupBoxes
+                  .map((b) => b.product_set_no)
+                  .filter(
+                    (s): s is number =>
+                      s !== null && s !== undefined && s > 0,
+                  ),
+              );
+
+              let nextSetNo = 1;
+              while (usedSetNos.has(nextSetNo)) {
+                nextSetNo++;
+              }
 
               targetBox = await tx.boxMaster.create({
                 data: {
@@ -2086,8 +2079,7 @@ export const updateScannedItem = async (
                     automaticPackingDefinition.productGroupName,
                   packing_group_name:
                     automaticPackingDefinition.packingGroupName,
-                  product_set_no:
-                    (packingGroupSetAggregate._max.product_set_no ?? 0) + 1,
+                  product_set_no: nextSetNo,
                   box_position: automaticPackingDefinition.boxPosition,
                   boxes_per_product: automaticPackingDefinition.boxesPerProduct,
                   is_auto_created: true,
@@ -2432,7 +2424,9 @@ export const updateProjectStatus = async (
   try {
     const projectId = Number(project_id);
 
-    if (current_status === "Not Started") {
+    const statusLower = (current_status || "").trim().toLowerCase();
+
+    if (statusLower === "not started") {
       return await prisma.projectMaster.update({
         where: {
           id: projectId,
@@ -2444,7 +2438,7 @@ export const updateProjectStatus = async (
       });
     }
 
-    if (current_status === "Started") {
+    if (statusLower === "started") {
       const pendingCount = await getPendingCutListMachineMappings(projectId);
 
       if (pendingCount === 0) {
@@ -2455,6 +2449,28 @@ export const updateProjectStatus = async (
           data: {
             track_trace_status: "Completed",
             track_completed_at: new Date(),
+          },
+        });
+      }
+
+      return await prisma.projectMaster.findUnique({
+        where: {
+          id: projectId,
+        },
+      });
+    }
+
+    if (statusLower === "completed") {
+      const pendingCount = await getPendingCutListMachineMappings(projectId);
+
+      if (pendingCount > 0) {
+        return await prisma.projectMaster.update({
+          where: {
+            id: projectId,
+          },
+          data: {
+            track_trace_status: "Started",
+            track_completed_at: null,
           },
         });
       }
@@ -7076,6 +7092,35 @@ export const unsetBoxFromMappingService = async (
         },
       }),
     ]);
+
+    // If project track_trace_status is "Completed", revert it to "Started"
+    try {
+      const currentProject = await prisma.projectMaster.findUnique({
+        where: { id: project_id },
+        select: { id: true, track_trace_status: true },
+      });
+
+      if (
+        currentProject?.track_trace_status &&
+        currentProject.track_trace_status.trim().toLowerCase() === "completed"
+      ) {
+        await prisma.projectMaster.update({
+          where: { id: project_id },
+          data: {
+            track_trace_status: "Started",
+            track_completed_at: null,
+          },
+        });
+        console.log(
+          `Project ${project_id} track_trace_status reverted from Completed to Started after item removed from box`,
+        );
+      }
+    } catch (statusError) {
+      console.error(
+        "Error reverting project track_trace_status to Started in unsetBoxFromMappingService:",
+        statusError,
+      );
+    }
 
     return validationResponse(1, "Item removed from box successfully", {
       mapping_id,
