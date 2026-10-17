@@ -3989,6 +3989,8 @@ export const getCutListMachine = async (
           machine_id: true,
           sequence_no: true,
           actual_in_at: true,
+          actual_out_at: true,
+          status: true,
           box_id: true,
           machine: {
             select: {
@@ -4032,6 +4034,9 @@ export const getCutListMachine = async (
         machineId: machine.id,
         machine_type_id: machine.machine_type_id,
         mapping_id: null,
+        scanned: false,
+        scanned_count: 0,
+        total_mappings: 0,
       };
     }
 
@@ -4040,15 +4045,23 @@ export const getCutListMachine = async (
       const machineCode = machineCodeById.get(mapping.machine_id);
       if (!machineCode) continue;
 
-      const isScanned = mapping.actual_in_at !== null;
+      const isScanned =
+        mapping.actual_in_at !== null ||
+        mapping.actual_out_at !== null ||
+        (mapping.status && !["pending", ""].includes(String(mapping.status).toLowerCase()));
+
       const existingCell = row[machineCode];
+      const prevScannedCount = existingCell?.scanned_count || 0;
+      const prevTotal = existingCell?.total_mappings || 0;
 
       row[machineCode] = {
         assigned: true,
         machineId: mapping.machine_id,
         mapping_id: existingCell?.mapping_id ?? mapping.id,
         machine_type_id: existingCell?.machine_type_id ?? null,
-        scanned: existingCell?.scanned || isScanned,
+        scanned: Boolean(existingCell?.scanned || isScanned),
+        scanned_count: prevScannedCount + (isScanned ? 1 : 0),
+        total_mappings: prevTotal + 1,
         scanned_at: existingCell?.scanned_at || mapping.actual_in_at,
         box_id: existingCell?.box_id || mapping.box_id,
       };
@@ -4110,34 +4123,6 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       return validationResponse(0, "Project not found");
     }
 
-    // Check if project has already started (at least 1 item scanned in cutListMachineMapping)
-    const scannedMappingCount = await prisma.cutListMachineMapping.count({
-      where: {
-        project_id: Number(projectId),
-        OR: [
-          { actual_in_at: { not: null } },
-          { actual_out_at: { not: null } },
-          { status: { notIn: ["Pending", "pending", ""] } },
-        ],
-      },
-    });
-
-    const isStarted = scannedMappingCount > 0;
-
-    const role = (payload.user_role || "").trim().toLowerCase();
-    const isSuperAdmin =
-      role === "super-admin" ||
-      role === "superadmin" ||
-      role === "super admin" ||
-      role === "super_admin";
-
-    if (isStarted && !isSuperAdmin) {
-      return validationResponse(
-        0,
-        "Project Started: You cannot assign. Only Super Admin can do this.",
-      );
-    }
-
     const cutListIdArray = payload.cutListIds
       .split(",")
       .map((id) => Number(id.trim()))
@@ -4145,15 +4130,52 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
     return await prisma.$transaction(async (tx) => {
       if (!payload.assigned) {
-        await tx.cutListMachineMapping.deleteMany({
+        // Find which items have ALREADY been scanned at this machine
+        const scannedMappings = await tx.cutListMachineMapping.findMany({
           where: {
             cut_list_id: { in: cutListIdArray },
             machine_id: payload.machine_id,
             project_id: Number(projectId),
+            OR: [
+              { actual_in_at: { not: null } },
+              { actual_out_at: { not: null } },
+              { status: { notIn: ["Pending", "pending", ""] } },
+            ],
+          },
+          select: { cut_list_id: true },
+        });
+
+        const scannedCutListIds = new Set(scannedMappings.map((m) => m.cut_list_id));
+        const unassignableCutListIds = cutListIdArray.filter(
+          (id) => !scannedCutListIds.has(id),
+        );
+
+        if (unassignableCutListIds.length === 0) {
+          return validationResponse(
+            0,
+            "Cannot unassign machine: Item has already been scanned at this machine",
+          );
+        }
+
+        // Delete mappings ONLY for items that have NOT been scanned at this machine
+        await tx.cutListMachineMapping.deleteMany({
+          where: {
+            cut_list_id: { in: unassignableCutListIds },
+            machine_id: payload.machine_id,
+            project_id: Number(projectId),
+            actual_in_at: null,
+            actual_out_at: null,
           },
         });
 
-        return validationResponse(1, "Machine unmapped");
+        if (scannedCutListIds.size > 0) {
+          return validationResponse(
+            1,
+            `Unassigned unscanned item(s). Note: ${scannedCutListIds.size} item(s) already scanned at this machine could not be unassigned.`,
+          );
+        }
+
+        return validationResponse(1, "Machine unmapped successfully");
       }
 
       // ✅ Fetch cutList rows to get qty and lead_id per cut_list_id
