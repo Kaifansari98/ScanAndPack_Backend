@@ -46,11 +46,12 @@ export const confirmGRN = async (req: Request, res: Response) => {
 export const listGRNs = async (req: Request, res: Response) => {
   const v = vid(req);
   if (!v) return err(res, "Invalid vendor_id");
-  const page   = Math.max(1, Number(req.query.page) || 1);
-  const po_id  = req.query.po_id  ? Number(req.query.po_id)  : undefined;
-  const search = req.query.search ? String(req.query.search)  : undefined;
-  const status = req.query.status ? String(req.query.status)  : undefined;
-  const r = await listGRNsService(v, page, po_id, search, status);
+  const page     = Math.max(1, Number(req.query.page) || 1);
+  const pageSize = Number(req.query.limit || req.query.pageSize || req.query.page_size) || 20;
+  const po_id    = req.query.po_id  ? Number(req.query.po_id)  : undefined;
+  const search   = req.query.search ? String(req.query.search)  : undefined;
+  const status   = req.query.status ? String(req.query.status)  : undefined;
+  const r = await listGRNsService(v, page, po_id, search, status, pageSize);
   return ok(res, r.data, r.message);
 };
 

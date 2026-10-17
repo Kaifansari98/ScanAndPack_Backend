@@ -871,9 +871,10 @@ export const listPurchaseIntents = async (
   page: number,
   status?: string,
   search?: string,
+  pageSize: number = 20,
 ) => {
   try {
-    const PAGE_SIZE = 20;
+    const PAGE_SIZE = Math.max(1, Math.min(100, Number(pageSize) || 20));
     const skip = (page - 1) * PAGE_SIZE;
 
     const where: any = {

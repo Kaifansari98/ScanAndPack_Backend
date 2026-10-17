@@ -922,9 +922,9 @@ export const confirmGRNService = async (
 // ─── LIST GRNs ────────────────────────────────────────────────────────────────
 
 export const listGRNsService = async (
-  vendor_id: number, page: number, po_id?: number, search?: string, status?: string
+  vendor_id: number, page: number, po_id?: number, search?: string, status?: string, pageSize: number = 20
 ) => {
-  const PAGE_SIZE = 20;
+  const PAGE_SIZE = Math.max(1, Math.min(100, Number(pageSize) || 20));
   const skip = (page - 1) * PAGE_SIZE;
   const where: any = {
     vendor_id,
