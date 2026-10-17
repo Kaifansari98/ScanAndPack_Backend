@@ -1478,19 +1478,18 @@ export const updateScannedItem = async (
         },
       });
       let maximumItemQty = Number.MAX_SAFE_INTEGER;
-      // Custom-group packing validates the location capacity below using the
 
       if (eligibleMapping.project.packing_type !== PackingType.CUSTOM_GROUP) {
         const qtyPerBox = Math.max(
           1,
           Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
         );
-        maximumItemQty = locationAllocation.qty * qtyPerBox;
+        maximumItemQty = allocatedProductQty * qtyPerBox;
 
         if (scannedAtLocation >= maximumItemQty) {
           return validationResponse(
             0,
-            `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${locationAllocation.qty} at location "${locationAllocation.location_name}"`,
+            `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${allocatedProductQty} at location "${locationAllocation.location_name}"`,
           );
         }
       }
@@ -1616,7 +1615,10 @@ export const updateScannedItem = async (
           itemName: row.item_name,
           qtyPerBox:
             groupBaseQuantity > 0
-              ? Math.max(1, Math.floor(Number(row.qty || 0) / groupBaseQuantity))
+              ? Math.max(
+                  Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
+                  Math.floor(Number(row.qty || 0) / groupBaseQuantity),
+                )
               : Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
           availableQty: Math.max(0, Number(row.qty || 0)),
         }));
@@ -14526,16 +14528,6 @@ export const getProjectItemTrackingService = async (
 
   for (const item of candidateCutLists) {
     const rawMappings = item.cutListMachineMapping as MappingRow[];
-    const targetMappings = query.machineId
-      ? rawMappings.filter(
-          (m) => (m.machine_id ?? m.machine?.id) === query.machineId,
-        )
-      : rawMappings;
-
-    // A cutlist item with qty > 1 is expanded so each unit (panel) is on its own row.
-    // If item.qty is 2, it produces 2 separate rows (Piece 1 of 2, Piece 2 of 2).
-    const itemQty = Math.max(1, Number(item.qty || 1));
-    const unitCount = Math.max(itemQty, targetMappings.length);
 
     // Group mappings by machine to assign to units
     const byMachine = new Map<number, MappingRow[]>();
@@ -14558,18 +14550,37 @@ export const getProjectItemTrackingService = async (
       ),
     );
 
+    const targetMappings = query.machineId
+      ? (byMachine.get(query.machineId) ?? [])
+      : query.isDispatch
+        ? packagingMappings
+        : [];
+
+    // A cutlist item with qty > 1 is expanded so each unit (panel) is on its own row.
+    // If item.qty is 2, it produces 2 separate rows (Piece 1 of 2, Piece 2 of 2).
+    const itemQty = Math.max(1, Number(item.qty || 1));
+    const unitCount = query.machineId
+      ? Math.max(itemQty, targetMappings.length)
+      : query.isDispatch
+        ? Math.max(itemQty, packagingMappings.length)
+        : Math.max(
+            itemQty,
+            ...Array.from(byMachine.values()).map((r) => r.length),
+            0,
+          );
+
     for (let u = 0; u < unitCount; u++) {
-      const targetMapping = targetMappings[u] ?? targetMappings[0] ?? null;
-      const packMapping = packagingMappings[u] ?? packagingMappings[0] ?? null;
+      const targetMapping = targetMappings[u] ?? null;
+      const packMapping = packagingMappings[u] ?? null;
 
       const bId =
-        targetMapping?.boxMaster?.id ??
-        targetMapping?.box_id ??
         packMapping?.boxMaster?.id ??
         packMapping?.box_id ??
+        targetMapping?.boxMaster?.id ??
+        targetMapping?.box_id ??
         null;
       const bMaster =
-        targetMapping?.boxMaster ?? packMapping?.boxMaster ?? null;
+        packMapping?.boxMaster ?? targetMapping?.boxMaster ?? null;
       const rawName = bMaster?.box_name ?? (bId ? `Box ${bId}` : null);
       const boxName = rawName
         ? /^box/i.test(rawName.trim())
@@ -14584,9 +14595,12 @@ export const getProjectItemTrackingService = async (
       // Build machine summaries for this unit
       const unitMachines: any[] = [];
       for (const [mId, mMappings] of byMachine) {
-        const mappingForUnit = mMappings[u] ?? mMappings[0];
-        const mObj = mappingForUnit.machine;
-        const mScanned = Boolean(mappingForUnit.actual_in_at);
+        const mappingForUnit = mMappings[u] ?? null;
+        const fallbackMapping = mMappings[0];
+        const mObj = mappingForUnit?.machine ?? fallbackMapping?.machine;
+        if (!mObj) continue;
+
+        const mScanned = Boolean(mappingForUnit?.actual_in_at);
         const mIsPackaging = /pack/i.test(mObj.machine_name);
 
         unitMachines.push({
@@ -14594,18 +14608,20 @@ export const getProjectItemTrackingService = async (
           machine_name: mObj.machine_name,
           machine_code: mObj.machine_code,
           scan_type: String(mObj.scan_type),
-          sequence_no: mappingForUnit.sequence_no,
-          is_optional: mappingForUnit.is_optional,
+          sequence_no:
+            mappingForUnit?.sequence_no ?? fallbackMapping?.sequence_no ?? 0,
+          is_optional:
+            mappingForUnit?.is_optional ?? fallbackMapping?.is_optional ?? false,
           total_quantity: 1,
           scanned_quantity: mScanned ? 1 : 0,
           status: mScanned ? ("scanned" as const) : ("pending" as const),
-          scanned_at: mappingForUnit.actual_in_at,
+          scanned_at: mappingForUnit?.actual_in_at ?? null,
           box_id: mIsPackaging
-            ? mappingForUnit.box_id || bId
-            : mappingForUnit.box_id,
+            ? mappingForUnit?.box_id || bId
+            : mappingForUnit?.box_id ?? null,
           box_name: mIsPackaging
             ? boxName ||
-              (mappingForUnit.box_id ? `Box ${mappingForUnit.box_id}` : null)
+              (mappingForUnit?.box_id ? `Box ${mappingForUnit.box_id}` : null)
             : null,
           box_status: mIsPackaging ? boxStatus : null,
         });
@@ -14639,17 +14655,15 @@ export const getProjectItemTrackingService = async (
         (bMaster?.packed_by ? `User #${bMaster.packed_by}` : null);
       const packedAt = bMaster?.packed_at ?? packMapping?.actual_in_at ?? null;
 
-      // Item-level site verify: check packMapping, targetMapping, or unit mapping
+      // Item-level site verify: check packMapping or targetMapping
       const itemSiteVerifyAt =
         packMapping?.site_in_at ??
         targetMapping?.site_in_at ??
-        rawMappings[u]?.site_in_at ??
         null;
 
       const itemSiteVerifyUser =
         packMapping?.siteInByUser ??
         targetMapping?.siteInByUser ??
-        rawMappings[u]?.siteInByUser ??
         null;
 
       const itemSiteVerifyBy =
@@ -14658,9 +14672,7 @@ export const getProjectItemTrackingService = async (
           ? `User #${packMapping.site_in_by}`
           : targetMapping?.site_in_by
             ? `User #${targetMapping.site_in_by}`
-            : rawMappings[u]?.site_in_by
-              ? `User #${rawMappings[u].site_in_by}`
-              : null);
+            : null);
 
       const boxSiteInAt = bMaster?.site_in_at ?? null;
       const boxSiteInBy =

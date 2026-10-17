@@ -123,7 +123,7 @@ const normalizeBooleanFlag = (value: unknown, fallback = false): boolean => {
 };
 
 const calculateQtyPerCustomPackingBox = (
-  items: Array<Pick<CadbidItem, "groupName" | "name" | "qty" | "categoryName">>,
+  items: Array<Pick<CadbidItem, "groupName" | "name" | "qty" | "categoryName" | "customPackingGroup">>,
   packingType: PackingType,
   scanPackByCategory?: ReadonlyMap<string, boolean>,
 ): number[] => {
@@ -132,6 +132,7 @@ const calculateQtyPerCustomPackingBox = (
   }
 
   const isScanAndPackItem = (item: (typeof items)[number]) => {
+    if (cleanText(item.customPackingGroup)) return true;
     const categoryName = cleanText(item.categoryName).toLowerCase();
     // Unknown categories retain the existing behavior. Known false categories
     // are manual-only and must not participate in custom-group quota math.
@@ -143,7 +144,7 @@ const calculateQtyPerCustomPackingBox = (
   for (const item of items) {
     if (!isScanAndPackItem(item)) continue;
 
-    const groupKey = cleanText(item.groupName).toLocaleLowerCase();
+    const groupKey = cleanText(item.customPackingGroup || item.groupName).toLocaleLowerCase();
     const quantity = Number(item.qty);
     const currentMinimum = minimumQtyByGroup.get(groupKey);
 
@@ -155,13 +156,13 @@ const calculateQtyPerCustomPackingBox = (
   return items.map((item, index) => {
     if (!isScanAndPackItem(item)) return 1;
 
-    const groupName = cleanText(item.groupName);
+    const groupName = cleanText(item.customPackingGroup || item.groupName);
     const minimumQty = minimumQtyByGroup.get(groupName.toLocaleLowerCase());
     const quantity = Number(item.qty);
 
     if (!minimumQty || quantity % minimumQty !== 0) {
       throw new Error(
-        `Qty ${quantity} for item "${item.name}" in Product Group "${groupName}" must be a multiple of the minimum group quantity ${minimumQty || 0} (Excel row ${index + 2})`
+        `Qty ${quantity} for item "${item.name}" in Packing Group "${groupName}" must be a multiple of the minimum group quantity ${minimumQty || 0} (Excel row ${index + 2})`
       );
     }
 
@@ -212,6 +213,7 @@ export const recalculateStoredQtyPerCustomPackingBox = async (
   });
 
   const isScanAndPack = (item: (typeof storedItems)[0]) => {
+    if (cleanText(item.custom_packing_group)) return true;
     const categoryName = item.category_name?.trim().toLowerCase();
     if (!categoryName || categoryName === "no category") {
       return false;
@@ -228,7 +230,7 @@ export const recalculateStoredQtyPerCustomPackingBox = async (
     ) {
       return Boolean(item.category.scan_pack_validate);
     }
-    return false;
+    return true;
   };
 
   const minimumQtyByGroup = new Map<string, number>();
