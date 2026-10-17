@@ -3924,6 +3924,15 @@ export const getCutListMachine = async (
     return row;
   });
 
+  // Part images (metalwork cutlist thumbnails) are private in Wasabi.
+  await Promise.all(
+    result
+      .filter((row) => row.image_key)
+      .map(async (row) => {
+        row.image_url = await generateSignedUrl(row.image_key);
+      }),
+  );
+
   // Count scanned items for this project in cutListMachineMapping
   let scannedMappingCount = 0;
   if (projectId) {
