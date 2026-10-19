@@ -5036,6 +5036,9 @@ export const downloadCutListExcel = async (
       ELB: row.elb || "",
       ESL: row.esl || "",
       ESR: row.esr || "",
+      "Top Drill": row.top_drill || "",
+      "Bottom Drill": row.bottom_drill || "",
+      "Is Drill": row.is_drill || "",
     };
 
     // Add machine columns (1 or 0)
