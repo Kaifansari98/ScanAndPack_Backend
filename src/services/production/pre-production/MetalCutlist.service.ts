@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { FabricationType } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
@@ -23,7 +24,7 @@ export class MetalCutlistError extends Error {
 
 const MAX_PARTS = 1000;
 
-/** The Track & Trace project created for a lead from the woodwork cutlist upload. */
+/** The latest active Track & Trace project linked to the lead. */
 const findLeadProject = (vendorId: number, leadId: number) =>
   prisma.projectMaster.findFirst({
     where: { vendor_id: vendorId, lead_id: leadId, isDeleted: false },
@@ -39,7 +40,7 @@ export const validateMetalCutlistParts = (
     throw new MetalCutlistError("parts must be a non-empty array", 400);
   }
   if (value.length > MAX_PARTS) {
-    throw new MetalCutlistError(`A metal cutlist can have at most ${MAX_PARTS} parts`, 400);
+    throw new MetalCutlistError(`A Metalwork Cutlist can have at most ${MAX_PARTS} parts`, 400);
   }
 
   return value.map((raw, index) => {
@@ -104,7 +105,7 @@ export class MetalCutlistService {
     };
   }
 
-  /** Replaces the project's metal cutlist with the given parts. */
+  /** Replaces the project's Metalwork Cutlist with the given parts. */
   async saveMetalCutlist(
     vendorId: number,
     leadId: number,
@@ -118,41 +119,60 @@ export class MetalCutlistService {
     });
     if (!user) throw new MetalCutlistError("Invalid created_by for this vendor", 400);
 
-    const project = await findLeadProject(vendorId, leadId);
-    if (!project) {
-      throw new MetalCutlistError(
-        "No Track & Trace project exists for this lead. Upload the woodwork cutlist first to create one.",
-        409,
-      );
-    }
-
-    const existingWhere = {
-      vendor_id: vendorId,
-      project_id: project.id,
-      fabrication: FabricationType.METALWORK,
-    };
-
-    // Rows already in production (machine scans or defects) must not be silently replaced.
-    const inUse = await prisma.cutList.count({
-      where: {
-        ...existingWhere,
-        OR: [{ cutListMachineMapping: { some: {} } }, { defectedItems: { some: {} } }],
-      },
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { id: true, lead_code: true, firstname: true, lastname: true, contact_no: true, site_address: true },
     });
-    if (inUse > 0) {
-      throw new MetalCutlistError(
-        "The existing metal cutlist is already in production and cannot be replaced.",
-        409,
-      );
-    }
-
-    const imageKeys = await Promise.all(
-      images.map((image) =>
-        uploadToWasabiMetalCutlistImage(image.buffer, vendorId, leadId, project.id),
-      ),
-    );
+    if (!lead) throw new MetalCutlistError("Invalid lead_id for this vendor", 400);
 
     const result = await prisma.$transaction(async (tx) => {
+      // Serialize Metalwork submissions for this lead to avoid duplicate projects.
+      await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+      const existingProject = await tx.projectMaster.findFirst({
+        where: { vendor_id: vendorId, lead_id: leadId, isDeleted: false },
+        orderBy: { id: "desc" },
+        select: { id: true, unique_project_id: true, project_name: true },
+      });
+      const project = existingProject ?? await tx.projectMaster.create({
+        data: {
+          project_name: `Pre-Production Import - Lead #${leadId}`,
+          unique_project_id: randomUUID(),
+          vendor_id: vendorId,
+          lead_id: leadId,
+          created_by: createdBy,
+          order_no: lead.lead_code,
+          client_name: [lead.firstname, lead.lastname].filter(Boolean).join(" ").trim(),
+          client_address: lead.site_address,
+          client_contact_no: lead.contact_no,
+        },
+        select: { id: true, unique_project_id: true, project_name: true },
+      });
+      const existingWhere = {
+        vendor_id: vendorId,
+        project_id: project.id,
+        fabrication: FabricationType.METALWORK,
+      };
+
+      // Rows already in production must not be silently replaced.
+      const inUse = await tx.cutList.count({
+        where: {
+          ...existingWhere,
+          OR: [{ cutListMachineMapping: { some: {} } }, { defectedItems: { some: {} } }],
+        },
+      });
+      if (inUse > 0) {
+        throw new MetalCutlistError(
+          "The existing Metalwork Cutlist is already in production and cannot be replaced.",
+          409,
+        );
+      }
+
+      const imageKeys = await Promise.all(
+        images.map((image) =>
+          uploadToWasabiMetalCutlistImage(image.buffer, vendorId, leadId, project.id),
+        ),
+      );
+
       const { count: replaced } = await tx.cutList.deleteMany({ where: existingWhere });
 
       const created = await tx.cutList.createManyAndReturn({
@@ -181,17 +201,17 @@ export class MetalCutlistService {
         ),
       );
 
-      return { replaced, created: created.length };
+      return { project, projectCreated: !existingProject, replaced, created: created.length };
     }, { timeout: 30000 });
 
-    logger.info("Metal cutlist saved", {
+    logger.info("Metalwork Cutlist saved", {
       vendorId,
       leadId,
-      projectId: project.id,
+      projectId: result.project.id,
       ...result,
-      images: imageKeys.length,
+      images: images.length,
     });
 
-    return { project, ...result };
+    return result;
   }
 }

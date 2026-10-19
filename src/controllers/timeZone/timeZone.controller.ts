@@ -8,15 +8,15 @@ import {
 
 export const listTimeZonesController = async (req: Request, res: Response) => {
   try {
-    const isActiveQuery = req.query.is_active;
-    let isActive: boolean | undefined = undefined;
-    if (isActiveQuery === "true") isActive = true;
-    if (isActiveQuery === "false") isActive = false;
+    const activeQuery = req.query.active ?? req.query.is_active;
+    let active: boolean | undefined = undefined;
+    if (activeQuery === "true") active = true;
+    if (activeQuery === "false") active = false;
 
     const search = typeof req.query.search === "string" ? req.query.search : undefined;
 
     const timeZones = await listTimeZones({
-      is_active: isActive,
+      active,
       search,
     });
 
@@ -68,12 +68,14 @@ export const getTimeZoneByIdController = async (req: Request, res: Response) => 
 
 export const createTimeZoneController = async (req: Request, res: Response) => {
   try {
-    const { name, time_zone_code, is_active } = req.body ?? {};
+    const { country, time_zone_name, time_zone, active, mins } = req.body ?? {};
 
     const created = await createTimeZone({
-      name,
-      time_zone_code,
-      is_active,
+      country,
+      time_zone_name,
+      time_zone,
+      active,
+      mins,
     });
 
     return res.status(201).json({
@@ -100,11 +102,13 @@ export const updateTimeZoneController = async (req: Request, res: Response) => {
       });
     }
 
-    const { name, is_active } = req.body ?? {};
+    const { country, active, time_zone, mins } = req.body ?? {};
 
     const updated = await updateTimeZone(id, {
-      name,
-      is_active,
+      country,
+      active,
+      time_zone,
+      mins,
     });
 
     return res.status(200).json({

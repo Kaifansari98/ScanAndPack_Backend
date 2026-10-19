@@ -72,6 +72,25 @@ export function formatInTimeZone(
  */
 export function decorateAttendance(att: any, timeZone: string) {
   if (!att) return att;
+
+  let duration_formatted: string | null = null;
+  let status: "CHECKED_IN" | "COMPLETED" = "CHECKED_IN";
+
+  if (att.check_in && att.check_out) {
+    status = "COMPLETED";
+    const diffMs = new Date(att.check_out).getTime() - new Date(att.check_in).getTime();
+    if (diffMs > 0) {
+      const totalMinutes = Math.floor(diffMs / (1000 * 60));
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      duration_formatted = `${hours}h ${minutes}m`;
+    } else {
+      duration_formatted = "0h 0m";
+    }
+  } else if (att.check_in) {
+    status = "CHECKED_IN";
+  }
+
   return {
     ...att,
     vendor_time_zone: timeZone,
@@ -85,6 +104,8 @@ export function decorateAttendance(att: any, timeZone: string) {
       : null,
     check_in_local: formatInTimeZone(att.check_in, timeZone),
     check_out_local: formatInTimeZone(att.check_out, timeZone),
+    duration_formatted,
+    status,
   };
 }
 
@@ -218,8 +239,8 @@ export const markAttendance = async (
   }
 
   let ianaTimeZone: string | null = null;
-  if (vendor.time_zone_master?.time_zone_code && isValidIANATimeZone(vendor.time_zone_master.time_zone_code)) {
-    ianaTimeZone = vendor.time_zone_master.time_zone_code;
+  if (vendor.time_zone_master?.time_zone_name && isValidIANATimeZone(vendor.time_zone_master.time_zone_name)) {
+    ianaTimeZone = vendor.time_zone_master.time_zone_name;
   } else if (vendor.time_zone && isValidIANATimeZone(vendor.time_zone)) {
     ianaTimeZone = vendor.time_zone;
   }
@@ -406,7 +427,7 @@ export const getAttendanceById = async (id: number) => {
   if (!record) return null;
 
   const tz =
-    record.vendor.time_zone_master?.time_zone_code ||
+    record.vendor.time_zone_master?.time_zone_name ||
     record.vendor.time_zone ||
     "UTC";
 
@@ -467,6 +488,12 @@ export const listAttendance = async (params: ListAttendanceFilters) => {
             user_name: true,
             user_contact: true,
             user_email: true,
+            designation: true,
+            user_type: {
+              select: {
+                user_type: true,
+              },
+            },
           },
         },
         vendor: {
@@ -490,7 +517,7 @@ export const listAttendance = async (params: ListAttendanceFilters) => {
 
   const decorated = items.map((item) => {
     const tz =
-      item.vendor.time_zone_master?.time_zone_code ||
+      item.vendor.time_zone_master?.time_zone_name ||
       item.vendor.time_zone ||
       "UTC";
     return decorateAttendance(item, tz);
@@ -527,7 +554,7 @@ export const getAttendanceLogs = async (attendanceId: number) => {
   }
 
   const tz =
-    attendance.vendor.time_zone_master?.time_zone_code ||
+    attendance.vendor.time_zone_master?.time_zone_name ||
     attendance.vendor.time_zone ||
     "UTC";
 
@@ -567,7 +594,7 @@ export const getEmployeeTodayAttendance = async (userId: number) => {
   }
 
   const tz =
-    employee.vendor.time_zone_master?.time_zone_code ||
+    employee.vendor.time_zone_master?.time_zone_name ||
     employee.vendor.time_zone ||
     "UTC";
 

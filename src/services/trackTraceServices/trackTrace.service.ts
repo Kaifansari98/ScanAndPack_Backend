@@ -4262,7 +4262,8 @@ export const getCutListMachine = async (
         machineId: machine.id,
         machine_type_id: machine.machine_type_id,
         mapping_id: null,
-        scanned: false,
+        scanned: 0,
+        total: 0,
         scanned_count: 0,
         total_mappings: 0,
       };
@@ -4274,8 +4275,8 @@ export const getCutListMachine = async (
       if (!machineCode) continue;
 
       const isScanned =
-        mapping.actual_in_at !== null ||
-        mapping.actual_out_at !== null ||
+        mapping.actual_in_at != null ||
+        mapping.actual_out_at != null ||
         (mapping.status &&
           !["pending", ""].includes(String(mapping.status).toLowerCase()));
 
@@ -4288,7 +4289,8 @@ export const getCutListMachine = async (
         machineId: mapping.machine_id,
         mapping_id: existingCell?.mapping_id ?? mapping.id,
         machine_type_id: existingCell?.machine_type_id ?? null,
-        scanned: Boolean(existingCell?.scanned || isScanned),
+        scanned: prevScannedCount + (isScanned ? 1 : 0),
+        total: prevTotal + 1,
         scanned_count: prevScannedCount + (isScanned ? 1 : 0),
         total_mappings: prevTotal + 1,
         scanned_at: existingCell?.scanned_at || mapping.actual_in_at,
@@ -4298,6 +4300,15 @@ export const getCutListMachine = async (
 
     return row;
   });
+
+  // Part images (metalwork cutlist thumbnails) are private in Wasabi.
+  await Promise.all(
+    result
+      .filter((row) => row.image_key)
+      .map(async (row) => {
+        row.image_url = await generateSignedUrl(row.image_key);
+      }),
+  );
 
   // Count scanned items for this project in cutListMachineMapping
   let scannedMappingCount = 0;

@@ -427,9 +427,16 @@ export const getUsersByVendorService = async ({
           : { equals: types[0], mode: "insensitive" as const },
     };
   } else if (normalizedExcludeUserType) {
+    const excludeTypes = normalizedExcludeUserType
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
     where.user_type = {
       isNot: {
-        user_type: { equals: normalizedExcludeUserType, mode: "insensitive" as const },
+        user_type:
+          excludeTypes.length > 1
+            ? { in: excludeTypes, mode: "insensitive" as const }
+            : { equals: excludeTypes[0], mode: "insensitive" as const },
       },
     };
   }
