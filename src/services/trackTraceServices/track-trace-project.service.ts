@@ -1,3 +1,4 @@
+import { loadWoodworkMachineRules } from "./woodwork-machine-rules.service";
 import { z } from "zod";
 import { resolveCutlistColumns } from "../../utils/cutlist-headers";
 import fs from "fs";
@@ -1869,6 +1870,7 @@ export const createProjectService = async (
       },
       select: {
         id: true,
+        cutlist_configuration: true,
         is_crm_enabled: true,
         is_tracktrace_enabled: true,
         is_scanpack_enabled: true,
@@ -2304,6 +2306,10 @@ export const createProjectService = async (
         },
       });
 
+    const assignWoodworkRules = await loadWoodworkMachineRules(
+      vendor.cutlist_configuration, vendor.id, machines
+    );
+
     const getMachine = (
       machineTypeId: number,
       activeOnly: boolean = false
@@ -2599,6 +2605,27 @@ export const createProjectService = async (
               unique_code: uniqueCode,
             },
           });
+
+          if (assignWoodworkRules) {
+            const assignments = assignWoodworkRules({
+              ...row,
+              length: Number(item.l1),
+              width: Number(item.l2),
+              thickness: Number(item.l3),
+              unique_code: uniqueCode,
+              weight: perItemWeight,
+              has_edge_banding: hasEdgeBanding,
+            });
+            for (const assignment of assignments) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                ...assignment,
+                quantity,
+                perItemWeight,
+              });
+            }
+            continue;
+          }
 
           const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
 

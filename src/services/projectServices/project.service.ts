@@ -1,3 +1,4 @@
+import { loadWoodworkMachineRules } from "../trackTraceServices/woodwork-machine-rules.service";
 import { prisma } from '../../prisma/client';
 import { Prisma, ProjectMaster, ProjectDetails, ProjectItemsMaster } from '../../prisma/generated';
 import { CadbidPayload, FullProjectCreateInput } from '../../types/project.types';
@@ -4570,6 +4571,10 @@ export const handelItems = async (
       },
     });
 
+    const assignWoodworkRules = await loadWoodworkMachineRules(
+      vendor.cutlist_configuration, vendor.id, machines
+    );
+
     const getMachine = (
       machineTypeId: number,
       activeOnly: boolean = false
@@ -4633,6 +4638,7 @@ export const handelItems = async (
           machine,
           quantity,
           perItemWeight,
+          ruleId,
         }: {
           cutListId: number;
           machine: {
@@ -4642,6 +4648,7 @@ export const handelItems = async (
           };
           quantity: number;
           perItemWeight: number;
+          ruleId?: number | null;
         }) => {
           for (let i = 0; i < quantity; i++) {
             cutListMachineMappingRows.push({
@@ -4654,6 +4661,7 @@ export const handelItems = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              rule_id: ruleId ?? null,
 
               /*
               |--------------------------------------------------------------------------
@@ -4760,6 +4768,27 @@ export const handelItems = async (
               unique_code: uniqueCode,
             },
           });
+
+          if (assignWoodworkRules) {
+            const assignments = assignWoodworkRules({
+              ...row,
+              length: Number(item.l1),
+              width: Number(item.l2),
+              thickness: Number(item.l3),
+              unique_code: uniqueCode,
+              weight: perItemWeight,
+              has_edge_banding: hasEdgeBanding,
+            });
+            for (const assignment of assignments) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                ...assignment,
+                quantity,
+                perItemWeight,
+              });
+            }
+            continue;
+          }
 
           const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
 
