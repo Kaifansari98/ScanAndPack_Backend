@@ -46,7 +46,7 @@ export function validateHeaderMappings(value: unknown, allowedFields: AllowedRul
     let rule_field_id: number | null = null;
     // Resolve stable field keys server-side so a new mapping does not depend on a prior GET.
     if (row.field_key !== null && row.field_key !== undefined) {
-      if (typeof row.field_key !== "string" || !allowedByKey.has(row.field_key)) return fail("Unsupported CutList field.");
+      if (typeof row.field_key !== "string" || !allowedByKey.has(row.field_key)) return fail(`Unsupported CutList field: "${row.field_key}".`);
       rule_field_id = allowedByKey.get(row.field_key)!;
       if (row.rule_field_id != null && Number(row.rule_field_id) !== rule_field_id) return fail("CutList field key and ID do not match.");
     } else if (row.rule_field_id !== null && row.rule_field_id !== undefined) {
@@ -54,7 +54,7 @@ export function validateHeaderMappings(value: unknown, allowedFields: AllowedRul
     }
     if (rule_field_id !== null) {
       const fieldKey = Number.isInteger(rule_field_id) ? allowedById.get(rule_field_id) : undefined;
-      if (!fieldKey) return fail("Unsupported CutList field.");
+      if (!fieldKey) return fail(`Unsupported CutList field ID: ${rule_field_id}.`);
       if (usedFieldKeys.has(fieldKey)) return fail(`Map ${fieldKey} only once.`);
       usedFieldKeys.add(fieldKey);
     }
