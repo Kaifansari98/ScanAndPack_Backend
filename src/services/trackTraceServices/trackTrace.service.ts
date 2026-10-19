@@ -1297,6 +1297,83 @@ export const updateScannedItem = async (
     // /scan/check-item validates the scan and either returns item details for the
     // confirmation modal (normal mode) OR auto-completes the item (continuous mode).
     if (is_check) {
+      if (
+        eligibleMapping.machine.machine_type_id === 18 &&
+        eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP
+      ) {
+        const productGroupName = eligibleMapping.cut_list.group_name?.trim();
+        const packingGroupName =
+          eligibleMapping.cut_list.custom_packing_group?.trim();
+
+        if (productGroupName && packingGroupName) {
+          // If all boxes for this group are already started, ensure another user is not packing the only open box
+          const allActiveCutLists = await prisma.cutList.findMany({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              status: { equals: "active", mode: "insensitive" },
+              group_name: { equals: productGroupName, mode: "insensitive" },
+            },
+            select: { qty: true },
+          });
+          const groupTotalSets = allActiveCutLists.reduce(
+            (max, item) => Math.max(max, Number(item.qty || 0)),
+            0,
+          );
+
+          const existingBoxesCount = await prisma.boxMaster.count({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              is_deleted: false,
+              is_auto_created: true,
+              product_group_name: {
+                equals: productGroupName,
+                mode: "insensitive",
+              },
+              packing_group_name: {
+                equals: packingGroupName,
+                mode: "insensitive",
+              },
+            },
+          });
+
+          if (groupTotalSets > 0 && existingBoxesCount >= groupTotalSets) {
+            const otherOpenBox = await prisma.boxMaster.findFirst({
+              where: {
+                project_id: eligibleMapping.project_id,
+                vendor_id,
+                is_deleted: false,
+                is_auto_created: true,
+                box_status: BoxStatus.unpacked,
+                product_group_name: {
+                  equals: productGroupName,
+                  mode: "insensitive",
+                },
+                packing_group_name: {
+                  equals: packingGroupName,
+                  mode: "insensitive",
+                },
+                created_by: { not: created_by },
+              },
+            });
+
+            if (otherOpenBox) {
+              const otherUser = await prisma.userMaster.findUnique({
+                where: { id: otherOpenBox.created_by },
+                select: { user_name: true },
+              });
+              const otherOperatorName =
+                otherUser?.user_name ?? `User #${otherOpenBox.created_by}`;
+              return validationResponse(
+                0,
+                `Cannot scan "${eligibleMapping.cut_list.item_name}". Box "${otherOpenBox.box_name}" is currently open and being packed by ${otherOperatorName}. Another user cannot scan for this box.`,
+              );
+            }
+          }
+        }
+      }
+
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
           cut_list_id,
@@ -2055,6 +2132,7 @@ export const updateScannedItem = async (
             const openBoxes = await tx.boxMaster.findMany({
               where: {
                 ...automaticBoxFilter,
+                created_by,
                 box_status: BoxStatus.unpacked,
                 is_deleted: false,
                 cutListMachineMapping: {
@@ -2123,6 +2201,27 @@ export const updateScannedItem = async (
               });
 
               if (existingBoxesCount >= maxBoxesAllowed) {
+                const otherOpenBox = await tx.boxMaster.findFirst({
+                  where: {
+                    ...automaticBoxFilter,
+                    box_status: BoxStatus.unpacked,
+                    is_deleted: false,
+                    created_by: { not: created_by },
+                  },
+                });
+
+                if (otherOpenBox) {
+                  const otherUser = await tx.userMaster.findUnique({
+                    where: { id: otherOpenBox.created_by },
+                    select: { user_name: true },
+                  });
+                  const otherOperatorName =
+                    otherUser?.user_name ?? `User #${otherOpenBox.created_by}`;
+                  throw new Error(
+                    `Cannot scan "${eligibleMapping.cut_list.item_name}". Box "${otherOpenBox.box_name}" is currently open and being packed by ${otherOperatorName}. Another user cannot scan for this box.`,
+                  );
+                }
+
                 throw new Error(
                   `Cannot scan "${eligibleMapping.cut_list.item_name}". ` +
                     `All ${maxBoxesAllowed} boxes for this custom group have already been started. ` +
