@@ -23,7 +23,8 @@ export async function loadWoodworkMachineRules(
     const assignments = new Map<number, { machine: Machine; ruleId: number | null }>();
     for (const candidate of machines) {
       const result = CutListRuleEngineService.evaluateRules(item, candidate.id, rules);
-      if (!result.allowed) continue;
+      // In rule-manage mode a machine only receives a panel when one of its rules matches.
+      if (result.appliedRuleId === null || !result.allowed) continue;
       const machine = machinesById.get(result.targetMachineId);
       if (!machine) {
         throw new Error(`Cutlist rule ${result.matchingRuleName ?? result.appliedRuleId} targets an inactive, disabled, or different vendor's machine`);
