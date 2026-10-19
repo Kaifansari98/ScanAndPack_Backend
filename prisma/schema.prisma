@@ -3196,6 +3196,9 @@ model CutList {
   elb                      String?
   esl                      String?
   esr                      String?
+  top_drill                String?
+  bottom_drill             String?
+  is_drill                 String?
   category_name            String?
   group_name               String?
   procurement              String?

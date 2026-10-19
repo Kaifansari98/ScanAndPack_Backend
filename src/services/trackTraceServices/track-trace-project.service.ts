@@ -57,6 +57,10 @@ export interface CadbidItem {
   el2?: string | null;
   sl1?: string | null;
   sl2?: string | null;
+
+  topDrill?: string | null;
+  bottomDrill?: string | null;
+  isDrill?: string | null;
 }
 
 /* ------------------ HELPERS ------------------ */
@@ -746,6 +750,20 @@ const HEADER_FIELD_MAP: Record<string, keyof CadbidItem | "customer_id"> = {
   "esr": "sl2",
   "sl2": "sl2",
 
+  "top drill": "topDrill",
+  "topdrill": "topDrill",
+  "top_drill": "topDrill",
+
+  "bottom drill": "bottomDrill",
+  "bottomdrill": "bottomDrill",
+  "bottom_drill": "bottomDrill",
+  "btm drill": "bottomDrill",
+
+  "is drill": "isDrill",
+  "isdrill": "isDrill",
+  "is_drill": "isDrill",
+  "drill": "isDrill",
+
   "procurement": "procurement",
 
   "customer id": "customer_id",
@@ -927,6 +945,10 @@ const itemSchema = z.object({
   el2: z.string().optional().nullable(),
   sl1: z.string().optional().nullable(),
   sl2: z.string().optional().nullable(),
+
+  topDrill: z.string().optional().nullable(),
+  bottomDrill: z.string().optional().nullable(),
+  isDrill: z.string().optional().nullable(),
 });
 
 const payloadSchema = z.object({
@@ -1626,6 +1648,9 @@ export const createProjectService_old = async (
               elb: item.el2 || "",
               esl: item.sl1 || "",
               esr: item.sl2 || "",
+              top_drill: item.topDrill || null,
+              bottom_drill: item.bottomDrill || null,
+              is_drill: item.isDrill || null,
               unique_code: "",
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
@@ -2636,6 +2661,9 @@ export const createProjectService = async (
               elb: item.el2 || "",
               esl: item.sl1 || "",
               esr: item.sl2 || "",
+              top_drill: item.topDrill || null,
+              bottom_drill: item.bottomDrill || null,
+              is_drill: item.isDrill || null,
               unique_code: "",
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,

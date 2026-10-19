@@ -17,6 +17,9 @@ export const CUTLIST_HEADER_FIELDS = [
   { field: "esr", label: "SL2 / ESR", importField: "sl2", required: false, aliases: ["sl2", "esr"] },
   { field: "weight", label: "Weight", importField: "weight", required: false, aliases: ["wt", "wt.", "weight kg", "weight (kg)", "total weight", "totalweight"] },
   { field: "custom_packing_group", label: "Custom Packing Group", importField: "customPackingGroup", required: false, aliases: [] },
+  { field: "top_drill", label: "Top Drill", importField: "topDrill", required: false, aliases: ["topdrill", "top drill", "top_drill"] },
+  { field: "bottom_drill", label: "Bottom Drill", importField: "bottomDrill", required: false, aliases: ["bottomdrill", "bottom drill", "bottom_drill", "btm drill", "btmdrill"] },
+  { field: "is_drill", label: "Is Drill", importField: "isDrill", required: false, aliases: ["isdrill", "is drill", "is_drill", "drill"] },
 ] as const;
 
 export const normalizeCutlistHeader = (value: string) => value.trim().toLowerCase().replace(/[_-]+/g, " ").replace(/\s+/g, " ");
