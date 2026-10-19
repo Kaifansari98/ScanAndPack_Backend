@@ -987,6 +987,7 @@ export const updateBoxStatus = async (
   newStatus: BoxStatus,
   user_id: number,
   reason?: string,
+  locationName?: string,
 ) => {
   const box = await prisma.boxMaster.findFirst({
     where: {
@@ -999,6 +1000,8 @@ export const updateBoxStatus = async (
           id: true,
           isDeleted: true,
           project_status: true,
+          packing_type: true,
+          is_multi_location: true,
         },
       },
     },
@@ -1079,9 +1082,121 @@ export const updateBoxStatus = async (
 
   const now = new Date();
 
-  return await prisma.boxMaster.update({
-    where: { id: boxId },
-    data: { box_status: newStatus, packed_at: now, packed_by: user_id },
+  if (newStatus === BoxStatus.packed) {
+    const itemsCount = await prisma.cutListMachineMapping.count({
+      where: {
+        box_id: box.id,
+        project_id: box.project_id,
+        vendor_id: box.vendor_id,
+        actual_in_at: { not: null },
+      },
+    });
+
+    if (itemsCount === 0) {
+      throw new Error(
+        `Empty box ${box.box_name} cannot be packed, it should have at least 1 item inside it`
+      );
+    }
+  }
+
+  let locationAllocationId: number | null = null;
+  const normalizedLocationName = String(locationName ?? "").trim();
+
+  if (
+    newStatus === BoxStatus.packed &&
+    box.project.packing_type === PackingType.CUSTOM_GROUP &&
+    box.project.is_multi_location &&
+    normalizedLocationName
+  ) {
+
+    const mappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        box_id: box.id,
+        project_id: box.project_id,
+        vendor_id: box.vendor_id,
+        actual_in_at: { not: null },
+      },
+      select: {
+        id: true,
+        project_location_product_quantity_id: true,
+        cut_list: { select: { group_name: true } },
+      },
+    });
+
+    const groupNames = Array.from(
+      new Set(
+        mappings
+          .map((mapping) => mapping.cut_list.group_name?.trim())
+          .filter((group): group is string => Boolean(group)),
+      ),
+    );
+
+    if (groupNames.length === 0) {
+      throw new Error("Product Group is required before assigning a location");
+    }
+
+    const allocations = await prisma.projectLocationProductQuantity.findMany({
+      where: {
+        project_id: box.project_id,
+        vendor_id: box.vendor_id,
+        location_name: { equals: normalizedLocationName, mode: "insensitive" },
+        group_name: { in: groupNames, mode: "insensitive" },
+      },
+      select: { id: true, location_name: true, group_name: true },
+    });
+
+    const allocationByGroup = new Map(
+      allocations.map((allocation) => [
+        allocation.group_name.trim().toLocaleLowerCase(),
+        allocation,
+      ]),
+    );
+
+    for (const groupName of groupNames) {
+      if (!allocationByGroup.has(groupName.toLocaleLowerCase())) {
+        throw new Error(
+          `Location "${normalizedLocationName}" is not configured for Product Group "${groupName}"`,
+        );
+      }
+    }
+
+    const distinctAllocationIds = new Set(
+      mappings.map((mapping) => {
+        const allocation = allocationByGroup.get(
+          mapping.cut_list.group_name!.trim().toLocaleLowerCase(),
+        );
+        return allocation?.id;
+      }),
+    );
+
+    if (distinctAllocationIds.size !== 1) {
+      throw new Error(
+        "All items in a custom group box must use the same selected location",
+      );
+    }
+
+    locationAllocationId = allocations[0]?.id ?? null;
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const updatedBox = await tx.boxMaster.update({
+      where: { id: boxId },
+      data: { box_status: newStatus, packed_at: now, packed_by: user_id },
+    });
+
+    if (locationAllocationId) {
+      await tx.cutListMachineMapping.updateMany({
+        where: {
+          box_id: box.id,
+          project_id: box.project_id,
+          vendor_id: box.vendor_id,
+          actual_in_at: { not: null },
+        },
+        data: { project_location_product_quantity_id: locationAllocationId },
+      });
+    }
+
+    return updatedBox;
   });
 };
 

@@ -1,4 +1,5 @@
 import { prisma } from "../../prisma/client";
+import { BoxStatus } from "../../prisma/generated";
 
 export const getScanItemsByFields = async ({
   project_id,
@@ -269,12 +270,84 @@ export const deleteScanAndPackItemById = async (
       },
     });
 
-    console.log("Manual item removed from box successfully");
+    let boxDeleted = false;
+    if (box_id) {
+      const [remainingMappingCount, remainingScanItemCount] = await Promise.all([
+        prisma.cutListMachineMapping.count({
+          where: {
+            box_id: Number(box_id),
+            actual_in_at: { not: null },
+          },
+        }),
+        prisma.scanAndPackItem.count({
+          where: {
+            box_id: Number(box_id),
+          },
+        }),
+      ]);
+
+      const remainingTotal = remainingMappingCount + remainingScanItemCount;
+
+      if (remainingTotal === 0) {
+        await prisma.boxMaster.update({
+          where: { id: Number(box_id) },
+          data: {
+            is_deleted: true,
+            deleted_at: new Date(),
+            deleted_by: deleted_by ? Number(deleted_by) : null,
+            sequence_no: null,
+          },
+        });
+        boxDeleted = true;
+        console.log(`Box ${box_id} is now empty and has been deleted.`);
+      } else {
+        // Revert box_status to unpacked if it was packed
+        await prisma.boxMaster.updateMany({
+          where: {
+            id: Number(box_id),
+            box_status: BoxStatus.packed,
+          },
+          data: {
+            box_status: BoxStatus.unpacked,
+          },
+        });
+      }
+    }
+
+    // If track_trace_status is "Completed", revert it back to "Started"
+    try {
+      const currentProject = await prisma.projectMaster.findUnique({
+        where: { id: Number(project_id) },
+        select: { id: true, track_trace_status: true },
+      });
+
+      if (
+        currentProject?.track_trace_status &&
+        currentProject.track_trace_status.trim().toLowerCase() === "completed"
+      ) {
+        await prisma.projectMaster.update({
+          where: { id: Number(project_id) },
+          data: {
+            track_trace_status: "Started",
+            track_completed_at: null,
+          },
+        });
+        console.log(
+          `Project ${project_id} track_trace_status reverted from Completed to Started after manual item removed from box`,
+        );
+      }
+    } catch (statusError) {
+      console.error("Error reverting project track_trace_status to Started:", statusError);
+    }
 
     return {
-      message: "Manual item removed from box successfully",
+      message: boxDeleted
+        ? "Manual item removed and empty box deleted successfully"
+        : "Manual item removed from box successfully",
 
       action: "deleted",
+
+      box_deleted: boxDeleted,
 
       removed_mapping_id: existingMapping.id,
 
@@ -327,12 +400,84 @@ export const deleteScanAndPackItemById = async (
     },
   });
 
-  console.log("Item removed from box successfully");
+    let boxDeleted = false;
+    if (box_id) {
+      const [remainingMappingCount, remainingScanItemCount] = await Promise.all([
+        prisma.cutListMachineMapping.count({
+          where: {
+            box_id: Number(box_id),
+            actual_in_at: { not: null },
+          },
+        }),
+        prisma.scanAndPackItem.count({
+          where: {
+            box_id: Number(box_id),
+          },
+        }),
+      ]);
 
-  return {
-    message: "Item removed from box successfully",
+      const remainingTotal = remainingMappingCount + remainingScanItemCount;
 
-    action: "box_unassigned",
+      if (remainingTotal === 0) {
+        await prisma.boxMaster.update({
+          where: { id: Number(box_id) },
+          data: {
+            is_deleted: true,
+            deleted_at: new Date(),
+            deleted_by: deleted_by ? Number(deleted_by) : null,
+            sequence_no: null,
+          },
+        });
+        boxDeleted = true;
+        console.log(`Box ${box_id} is now empty and has been deleted.`);
+      } else {
+        // Revert box_status to unpacked if it was packed
+        await prisma.boxMaster.updateMany({
+          where: {
+            id: Number(box_id),
+            box_status: BoxStatus.packed,
+          },
+          data: {
+            box_status: BoxStatus.unpacked,
+          },
+        });
+      }
+    }
+
+    // If track_trace_status is "Completed", revert it back to "Started"
+    try {
+      const currentProject = await prisma.projectMaster.findUnique({
+        where: { id: Number(project_id) },
+        select: { id: true, track_trace_status: true },
+      });
+
+      if (
+        currentProject?.track_trace_status &&
+        currentProject.track_trace_status.trim().toLowerCase() === "completed"
+      ) {
+        await prisma.projectMaster.update({
+          where: { id: Number(project_id) },
+          data: {
+            track_trace_status: "Started",
+            track_completed_at: null,
+          },
+        });
+        console.log(
+          `Project ${project_id} track_trace_status reverted from Completed to Started after item removed from box`,
+        );
+      }
+    } catch (statusError) {
+      console.error("Error reverting project track_trace_status to Started:", statusError);
+    }
+
+    return {
+      message: boxDeleted
+        ? "Item removed and empty box deleted successfully"
+        : "Item removed from box successfully",
+
+      action: "box_unassigned",
+
+      box_deleted: boxDeleted,
 
     removed_mapping_id: updatedMapping.id,
 
