@@ -19,12 +19,27 @@ export async function loadWoodworkMachineRules(
   const rules = await CutListRuleEngineService.loadRules(vendorId, machines.map(m => m.id));
   const machinesById = new Map(machines.map(machine => [machine.id, machine]));
 
+  // A machine whose rules are all "Do Not Send" is exclusion-only: it receives every
+  // panel except the ones its rules exclude.
+  const exclusionOnlyMachineIds = new Set(
+    machines
+      .filter(machine => {
+        const machineRules = rules.filter(rule => rule.machine_id === machine.id);
+        return machineRules.length > 0 && machineRules.every(rule =>
+          rule.actions.length > 0 &&
+          rule.actions.every(act => act.actionMaster?.action_code === "DO_NOT_SEND_TO_MACHINE")
+        );
+      })
+      .map(machine => machine.id)
+  );
+
   return (item: CutListItemPayload) => {
     const assignments = new Map<number, { machine: Machine; ruleId: number | null }>();
     for (const candidate of machines) {
       const result = CutListRuleEngineService.evaluateRules(item, candidate.id, rules);
-      // In rule-manage mode a machine only receives a panel when one of its rules matches.
-      if (result.appliedRuleId === null || !result.allowed) continue;
+      if (!result.allowed) continue;
+      // Otherwise a machine only receives a panel when one of its rules matches.
+      if (result.appliedRuleId === null && !exclusionOnlyMachineIds.has(candidate.id)) continue;
       const machine = machinesById.get(result.targetMachineId);
       if (!machine) {
         throw new Error(`Cutlist rule ${result.matchingRuleName ?? result.appliedRuleId} targets an inactive, disabled, or different vendor's machine`);
