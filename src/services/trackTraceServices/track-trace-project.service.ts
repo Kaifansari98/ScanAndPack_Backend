@@ -3129,6 +3129,7 @@ export const getActiveMachinesByVendorService = async (vendorId: number) => {
       machine_type_id: true,
       image_path: true,
       sequence_no: true,
+      fabrication: true,
     },
     orderBy: [
       { sequence_no: "asc" },

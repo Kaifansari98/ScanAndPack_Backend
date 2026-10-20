@@ -2,7 +2,7 @@ import { validationResponse } from "../../../src/utils/validationResponse";
 import axios from "axios";
 import { prisma, Prisma } from "../../prisma/client";
 
-import { BoxStatus, PackingType } from "../../prisma/generated";
+import { BoxStatus, FabricationType, PackingType } from "../../prisma/generated";
 import {
   CutListSavePayload,
   MarkDefectPayload,
@@ -6101,8 +6101,17 @@ export const getTraceTraceDashboard = async (
   vendor_id: number,
   statusFilter: string = "all",
   scope: { lead_id?: number; project_id?: number } = {},
+  fabrication?: FabricationType,
 ) => {
   try {
+    // Woodwork also keeps projects with no cutlist yet; Metalwork needs metal parts.
+    const fabricationWhere =
+      fabrication === FabricationType.METALWORK
+        ? { CutList: { some: { fabrication } } }
+        : fabrication === FabricationType.WOODWORK
+          ? { OR: [{ CutList: { some: { fabrication } } }, { CutList: { none: {} } }] }
+          : {};
+
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
     const [projects, machines] = await Promise.all([
       prisma.projectMaster.findMany({
@@ -6111,6 +6120,7 @@ export const getTraceTraceDashboard = async (
           isDeleted: false,
           ...(scope.lead_id ? { lead_id: scope.lead_id } : {}),
           ...(scope.project_id ? { id: scope.project_id } : {}),
+          ...fabricationWhere,
           NOT: [
             { project_status: { equals: "Deactivated", mode: "insensitive" } },
             { project_status: { equals: "Deleted", mode: "insensitive" } },
@@ -6136,6 +6146,7 @@ export const getTraceTraceDashboard = async (
           vendor_id,
           status: "ACTIVE",
           scan_type: { not: "PASS" },
+          ...(fabrication ? { fabrication } : {}),
         },
         select: {
           id: true,
