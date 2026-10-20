@@ -432,8 +432,7 @@ export const uploadCutListMachineExcel = async (
       projectId,
       userId: createdBy,
       cutListIds: changedCutListIds,
-      describe: ({ projectName, fabrication, parts }) =>
-        `${fabrication} cutlist (${projectName}): machine mapping updated via Excel upload — ${createResult.count} assignment(s) added, ${deleteResult.count} removed across ${changedCutListIds.length} part(s) — ${parts}`,
+      change: { kind: "excel", added: createResult.count, removed: deleteResult.count },
     });
   }
 

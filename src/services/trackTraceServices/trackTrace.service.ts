@@ -4424,10 +4424,10 @@ export const assignMachine = async (payload: CutListSavePayload) => {
         projectId,
         userId: payload.user_id,
         cutListIds: changedCutListIds,
-        describe: ({ projectName, fabrication, parts }) =>
-          payload.assigned
-            ? `${fabrication} cutlist (${projectName}): assigned machine "${payload.machine_name}" to ${changedCutListIds.length} part(s) — ${parts}`
-            : `${fabrication} cutlist (${projectName}): removed machine "${payload.machine_name}" from ${changedCutListIds.length} part(s) — ${parts}`,
+        change: {
+          kind: payload.assigned ? "assigned" : "removed",
+          machineName: payload.machine_name,
+        },
       });
     }
 
