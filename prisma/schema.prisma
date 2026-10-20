@@ -3128,6 +3128,7 @@ model VendorModulesMapping {
 }
 
 model MachineMaster {
+  fabrication           FabricationType              @default(WOODWORK)
   id                    Int                          @id @default(autoincrement())
   machine_name          String
   machine_code          String

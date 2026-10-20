@@ -2435,6 +2435,7 @@ export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingSc
 
 
 export const MachineMasterScalarFieldEnum = {
+  fabrication: 'fabrication',
   id: 'id',
   machine_name: 'machine_name',
   machine_code: 'machine_code',

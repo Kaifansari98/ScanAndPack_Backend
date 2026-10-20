@@ -4608,6 +4608,7 @@ export const handelItems = async (
 
     const machines = await prisma.machineMaster.findMany({
       where: {
+        fabrication: "WOODWORK",
         vendor_id: vendor.id,
         status: "ACTIVE",
         machine_type_id: {

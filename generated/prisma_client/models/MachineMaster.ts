@@ -49,6 +49,7 @@ export type MachineMasterSumAggregateOutputType = {
 }
 
 export type MachineMasterMinAggregateOutputType = {
+  fabrication: $Enums.FabricationType | null
   id: number | null
   machine_name: string | null
   machine_code: string | null
@@ -69,6 +70,7 @@ export type MachineMasterMinAggregateOutputType = {
 }
 
 export type MachineMasterMaxAggregateOutputType = {
+  fabrication: $Enums.FabricationType | null
   id: number | null
   machine_name: string | null
   machine_code: string | null
@@ -89,6 +91,7 @@ export type MachineMasterMaxAggregateOutputType = {
 }
 
 export type MachineMasterCountAggregateOutputType = {
+  fabrication: number
   id: number
   machine_name: number
   machine_code: number
@@ -133,6 +136,7 @@ export type MachineMasterSumAggregateInputType = {
 }
 
 export type MachineMasterMinAggregateInputType = {
+  fabrication?: true
   id?: true
   machine_name?: true
   machine_code?: true
@@ -153,6 +157,7 @@ export type MachineMasterMinAggregateInputType = {
 }
 
 export type MachineMasterMaxAggregateInputType = {
+  fabrication?: true
   id?: true
   machine_name?: true
   machine_code?: true
@@ -173,6 +178,7 @@ export type MachineMasterMaxAggregateInputType = {
 }
 
 export type MachineMasterCountAggregateInputType = {
+  fabrication?: true
   id?: true
   machine_name?: true
   machine_code?: true
@@ -280,6 +286,7 @@ export type MachineMasterGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 export type MachineMasterGroupByOutputType = {
+  fabrication: $Enums.FabricationType
   id: number
   machine_name: string
   machine_code: string
@@ -323,6 +330,7 @@ export type MachineMasterWhereInput = {
   AND?: Prisma.MachineMasterWhereInput | Prisma.MachineMasterWhereInput[]
   OR?: Prisma.MachineMasterWhereInput[]
   NOT?: Prisma.MachineMasterWhereInput | Prisma.MachineMasterWhereInput[]
+  fabrication?: Prisma.EnumFabricationTypeFilter<"MachineMaster"> | $Enums.FabricationType
   id?: Prisma.IntFilter<"MachineMaster"> | number
   machine_name?: Prisma.StringFilter<"MachineMaster"> | string
   machine_code?: Prisma.StringFilter<"MachineMaster"> | string
@@ -351,6 +359,7 @@ export type MachineMasterWhereInput = {
 }
 
 export type MachineMasterOrderByWithRelationInput = {
+  fabrication?: Prisma.SortOrder
   id?: Prisma.SortOrder
   machine_name?: Prisma.SortOrder
   machine_code?: Prisma.SortOrder
@@ -384,6 +393,7 @@ export type MachineMasterWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MachineMasterWhereInput | Prisma.MachineMasterWhereInput[]
   OR?: Prisma.MachineMasterWhereInput[]
   NOT?: Prisma.MachineMasterWhereInput | Prisma.MachineMasterWhereInput[]
+  fabrication?: Prisma.EnumFabricationTypeFilter<"MachineMaster"> | $Enums.FabricationType
   machine_name?: Prisma.StringFilter<"MachineMaster"> | string
   machine_code?: Prisma.StringFilter<"MachineMaster"> | string
   machine_type?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
@@ -411,6 +421,7 @@ export type MachineMasterWhereUniqueInput = Prisma.AtLeast<{
 }, "id" | "machine_code_vendor_status_unique">
 
 export type MachineMasterOrderByWithAggregationInput = {
+  fabrication?: Prisma.SortOrder
   id?: Prisma.SortOrder
   machine_name?: Prisma.SortOrder
   machine_code?: Prisma.SortOrder
@@ -439,6 +450,7 @@ export type MachineMasterScalarWhereWithAggregatesInput = {
   AND?: Prisma.MachineMasterScalarWhereWithAggregatesInput | Prisma.MachineMasterScalarWhereWithAggregatesInput[]
   OR?: Prisma.MachineMasterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MachineMasterScalarWhereWithAggregatesInput | Prisma.MachineMasterScalarWhereWithAggregatesInput[]
+  fabrication?: Prisma.EnumFabricationTypeWithAggregatesFilter<"MachineMaster"> | $Enums.FabricationType
   id?: Prisma.IntWithAggregatesFilter<"MachineMaster"> | number
   machine_name?: Prisma.StringWithAggregatesFilter<"MachineMaster"> | string
   machine_code?: Prisma.StringWithAggregatesFilter<"MachineMaster"> | string
@@ -459,6 +471,7 @@ export type MachineMasterScalarWhereWithAggregatesInput = {
 }
 
 export type MachineMasterCreateInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -484,6 +497,7 @@ export type MachineMasterCreateInput = {
 }
 
 export type MachineMasterUncheckedCreateInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -510,6 +524,7 @@ export type MachineMasterUncheckedCreateInput = {
 }
 
 export type MachineMasterUpdateInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -535,6 +550,7 @@ export type MachineMasterUpdateInput = {
 }
 
 export type MachineMasterUncheckedUpdateInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -561,6 +577,7 @@ export type MachineMasterUncheckedUpdateInput = {
 }
 
 export type MachineMasterCreateManyInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -581,6 +598,7 @@ export type MachineMasterCreateManyInput = {
 }
 
 export type MachineMasterUpdateManyMutationInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -598,6 +616,7 @@ export type MachineMasterUpdateManyMutationInput = {
 }
 
 export type MachineMasterUncheckedUpdateManyInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -639,6 +658,7 @@ export type MachineMasterMachine_code_vendor_status_uniqueCompoundUniqueInput = 
 }
 
 export type MachineMasterCountOrderByAggregateInput = {
+  fabrication?: Prisma.SortOrder
   id?: Prisma.SortOrder
   machine_name?: Prisma.SortOrder
   machine_code?: Prisma.SortOrder
@@ -670,6 +690,7 @@ export type MachineMasterAvgOrderByAggregateInput = {
 }
 
 export type MachineMasterMaxOrderByAggregateInput = {
+  fabrication?: Prisma.SortOrder
   id?: Prisma.SortOrder
   machine_name?: Prisma.SortOrder
   machine_code?: Prisma.SortOrder
@@ -690,6 +711,7 @@ export type MachineMasterMaxOrderByAggregateInput = {
 }
 
 export type MachineMasterMinOrderByAggregateInput = {
+  fabrication?: Prisma.SortOrder
   id?: Prisma.SortOrder
   machine_name?: Prisma.SortOrder
   machine_code?: Prisma.SortOrder
@@ -799,6 +821,10 @@ export type MachineMasterUpdateOneWithoutProcessBriefMappingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MachineMasterUpdateToOneWithWhereWithoutProcessBriefMappingsInput, Prisma.MachineMasterUpdateWithoutProcessBriefMappingsInput>, Prisma.MachineMasterUncheckedUpdateWithoutProcessBriefMappingsInput>
 }
 
+export type EnumFabricationTypeFieldUpdateOperationsInput = {
+  set?: $Enums.FabricationType
+}
+
 export type EnumMachineStatusFieldUpdateOperationsInput = {
   set?: $Enums.MachineStatus
 }
@@ -906,6 +932,7 @@ export type MachineMasterUpdateOneRequiredWithoutCutListRulesNestedInput = {
 }
 
 export type MachineMasterCreateWithoutVendorInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -930,6 +957,7 @@ export type MachineMasterCreateWithoutVendorInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutVendorInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -984,6 +1012,7 @@ export type MachineMasterScalarWhereInput = {
   AND?: Prisma.MachineMasterScalarWhereInput | Prisma.MachineMasterScalarWhereInput[]
   OR?: Prisma.MachineMasterScalarWhereInput[]
   NOT?: Prisma.MachineMasterScalarWhereInput | Prisma.MachineMasterScalarWhereInput[]
+  fabrication?: Prisma.EnumFabricationTypeFilter<"MachineMaster"> | $Enums.FabricationType
   id?: Prisma.IntFilter<"MachineMaster"> | number
   machine_name?: Prisma.StringFilter<"MachineMaster"> | string
   machine_code?: Prisma.StringFilter<"MachineMaster"> | string
@@ -1004,6 +1033,7 @@ export type MachineMasterScalarWhereInput = {
 }
 
 export type MachineMasterCreateWithoutLeadProcessBriefsInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -1028,6 +1058,7 @@ export type MachineMasterCreateWithoutLeadProcessBriefsInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1069,6 +1100,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutLeadProcessBriefsInput = {
 }
 
 export type MachineMasterUpdateWithoutLeadProcessBriefsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1093,6 +1125,7 @@ export type MachineMasterUpdateWithoutLeadProcessBriefsInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1118,6 +1151,7 @@ export type MachineMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
 }
 
 export type MachineMasterCreateWithoutProcessBriefMappingsInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -1142,6 +1176,7 @@ export type MachineMasterCreateWithoutProcessBriefMappingsInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutProcessBriefMappingsInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1183,6 +1218,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutProcessBriefMappingsInput = 
 }
 
 export type MachineMasterUpdateWithoutProcessBriefMappingsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1207,6 +1243,7 @@ export type MachineMasterUpdateWithoutProcessBriefMappingsInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutProcessBriefMappingsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1232,6 +1269,7 @@ export type MachineMasterUncheckedUpdateWithoutProcessBriefMappingsInput = {
 }
 
 export type MachineMasterCreateWithoutCutListMachineMappingInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -1256,6 +1294,7 @@ export type MachineMasterCreateWithoutCutListMachineMappingInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutCutListMachineMappingInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1297,6 +1336,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput =
 }
 
 export type MachineMasterUpdateWithoutCutListMachineMappingInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1321,6 +1361,7 @@ export type MachineMasterUpdateWithoutCutListMachineMappingInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1346,6 +1387,7 @@ export type MachineMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
 }
 
 export type MachineMasterCreateWithoutUserMachineMappingsInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -1370,6 +1412,7 @@ export type MachineMasterCreateWithoutUserMachineMappingsInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutUserMachineMappingsInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1411,6 +1454,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutUserMachineMappingsInput = {
 }
 
 export type MachineMasterUpdateWithoutUserMachineMappingsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1435,6 +1479,7 @@ export type MachineMasterUpdateWithoutUserMachineMappingsInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1460,6 +1505,7 @@ export type MachineMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
 }
 
 export type MachineMasterCreateWithoutMachineTypeInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -1484,6 +1530,7 @@ export type MachineMasterCreateWithoutMachineTypeInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutMachineTypeInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1535,6 +1582,7 @@ export type MachineMasterUpdateManyWithWhereWithoutMachineTypeInput = {
 }
 
 export type MachineMasterCreateWithoutDefectedItemsInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -1559,6 +1607,7 @@ export type MachineMasterCreateWithoutDefectedItemsInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutDefectedItemsInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1600,6 +1649,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutDefectedItemsInput = {
 }
 
 export type MachineMasterUpdateWithoutDefectedItemsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1624,6 +1674,7 @@ export type MachineMasterUpdateWithoutDefectedItemsInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutDefectedItemsInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1649,6 +1700,7 @@ export type MachineMasterUncheckedUpdateWithoutDefectedItemsInput = {
 }
 
 export type MachineMasterCreateWithoutCutListRulesInput = {
+  fabrication?: $Enums.FabricationType
   machine_name: string
   machine_code: string
   machine_type?: string | null
@@ -1673,6 +1725,7 @@ export type MachineMasterCreateWithoutCutListRulesInput = {
 }
 
 export type MachineMasterUncheckedCreateWithoutCutListRulesInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1714,6 +1767,7 @@ export type MachineMasterUpdateToOneWithWhereWithoutCutListRulesInput = {
 }
 
 export type MachineMasterUpdateWithoutCutListRulesInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1738,6 +1792,7 @@ export type MachineMasterUpdateWithoutCutListRulesInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutCutListRulesInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1763,6 +1818,7 @@ export type MachineMasterUncheckedUpdateWithoutCutListRulesInput = {
 }
 
 export type MachineMasterCreateManyVendorInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1782,6 +1838,7 @@ export type MachineMasterCreateManyVendorInput = {
 }
 
 export type MachineMasterUpdateWithoutVendorInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1806,6 +1863,7 @@ export type MachineMasterUpdateWithoutVendorInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutVendorInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1831,6 +1889,7 @@ export type MachineMasterUncheckedUpdateWithoutVendorInput = {
 }
 
 export type MachineMasterUncheckedUpdateManyWithoutVendorInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1850,6 +1909,7 @@ export type MachineMasterUncheckedUpdateManyWithoutVendorInput = {
 }
 
 export type MachineMasterCreateManyMachineTypeInput = {
+  fabrication?: $Enums.FabricationType
   id?: number
   machine_name: string
   machine_code: string
@@ -1869,6 +1929,7 @@ export type MachineMasterCreateManyMachineTypeInput = {
 }
 
 export type MachineMasterUpdateWithoutMachineTypeInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
   machine_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1893,6 +1954,7 @@ export type MachineMasterUpdateWithoutMachineTypeInput = {
 }
 
 export type MachineMasterUncheckedUpdateWithoutMachineTypeInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1918,6 +1980,7 @@ export type MachineMasterUncheckedUpdateWithoutMachineTypeInput = {
 }
 
 export type MachineMasterUncheckedUpdateManyWithoutMachineTypeInput = {
+  fabrication?: Prisma.EnumFabricationTypeFieldUpdateOperationsInput | $Enums.FabricationType
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_name?: Prisma.StringFieldUpdateOperationsInput | string
   machine_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2013,6 +2076,7 @@ export type MachineMasterCountOutputTypeCountCutListRulesArgs<ExtArgs extends ru
 
 
 export type MachineMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  fabrication?: boolean
   id?: boolean
   machine_name?: boolean
   machine_code?: boolean
@@ -2042,6 +2106,7 @@ export type MachineMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
 }, ExtArgs["result"]["machineMaster"]>
 
 export type MachineMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  fabrication?: boolean
   id?: boolean
   machine_name?: boolean
   machine_code?: boolean
@@ -2064,6 +2129,7 @@ export type MachineMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
 }, ExtArgs["result"]["machineMaster"]>
 
 export type MachineMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  fabrication?: boolean
   id?: boolean
   machine_name?: boolean
   machine_code?: boolean
@@ -2086,6 +2152,7 @@ export type MachineMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
 }, ExtArgs["result"]["machineMaster"]>
 
 export type MachineMasterSelectScalar = {
+  fabrication?: boolean
   id?: boolean
   machine_name?: boolean
   machine_code?: boolean
@@ -2105,7 +2172,7 @@ export type MachineMasterSelectScalar = {
   updated_by?: boolean
 }
 
-export type MachineMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "machine_name" | "machine_code" | "machine_type" | "machine_type_id" | "status" | "scan_type" | "description" | "vendor_id" | "factory_id" | "sequence_no" | "target_per_hour" | "image_path" | "created_by" | "created_at" | "updated_at" | "updated_by", ExtArgs["result"]["machineMaster"]>
+export type MachineMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"fabrication" | "id" | "machine_name" | "machine_code" | "machine_type" | "machine_type_id" | "status" | "scan_type" | "description" | "vendor_id" | "factory_id" | "sequence_no" | "target_per_hour" | "image_path" | "created_by" | "created_at" | "updated_at" | "updated_by", ExtArgs["result"]["machineMaster"]>
 export type MachineMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutListMachineMapping?: boolean | Prisma.MachineMaster$cutListMachineMappingArgs<ExtArgs>
   defectedItems?: boolean | Prisma.MachineMaster$defectedItemsArgs<ExtArgs>
@@ -2139,6 +2206,7 @@ export type $MachineMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     cutListRules: Prisma.$CutListRuleMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    fabrication: $Enums.FabricationType
     id: number
     machine_name: string
     machine_code: string
@@ -2587,6 +2655,7 @@ export interface Prisma__MachineMasterClient<T, Null = never, ExtArgs extends ru
  * Fields of the MachineMaster model
  */
 export interface MachineMasterFieldRefs {
+  readonly fabrication: Prisma.FieldRef<"MachineMaster", 'FabricationType'>
   readonly id: Prisma.FieldRef<"MachineMaster", 'Int'>
   readonly machine_name: Prisma.FieldRef<"MachineMaster", 'String'>
   readonly machine_code: Prisma.FieldRef<"MachineMaster", 'String'>
