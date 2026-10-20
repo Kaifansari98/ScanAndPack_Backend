@@ -332,7 +332,6 @@ export class CutListRuleService {
     const defaultActions = [
       { action_code: "SEND_TO_MACHINE", action_name: "Send To Machine" },
       { action_code: "DO_NOT_SEND_TO_MACHINE", action_name: "Do Not Send To Machine" },
-      { action_code: "REPLACE_MACHINE", action_name: "Replace Machine" },
       { action_code: "REQUIRE_APPROVAL", action_name: "Require Manual Approval" },
     ];
 
