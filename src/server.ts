@@ -1,4 +1,8 @@
 // src/server.ts
+import * as dotenv from "dotenv";
+
+dotenv.config();
+
 import { app } from "./app";
 import { env } from "./config/env";
 import logger from "./utils/logger";
@@ -122,7 +126,7 @@ async function ensureHrmsAdminUserType() {
 
 const server = app.listen(PORT, () => {
   logger.info("Server started", { port: PORT, env: process.env.NODE_ENV });
-  console.log('DATABASE_URL:', process.env.DATABASE_URL);
+  console.log("DATABASE_URL:", process.env.DATABASE_URL);
   
   // Start scheduler jobs
   startCronJobs();

@@ -1,3 +1,4 @@
+import cadbidRoutes from "./cadbid/cadbid.routes";
 import { Router } from "express";
 import vendorRoutes from "./vendor.routes";
 import vendorAddressRoutes from "./vendorAddress.routes";
@@ -161,5 +162,7 @@ router.use("/inventory/payment-requisitions", paymentRequisitionRoutes);
 router.use("/broadcasts", broadcastRouter);
 router.use("/time-zones", timeZoneRoutes);
 router.use("/attendance", attendanceRoutes);
+
+router.use("/cadbid", cadbidRoutes);
 
 export { router };
