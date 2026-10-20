@@ -8,6 +8,10 @@ export interface CreateRuleConditionDto {
     | "NOT_EQUALS"
     | "CONTAINS"
     | "NOT_CONTAINS"
+    | "STARTS_WITH"
+    | "ENDS_WITH"
+    | "IS_BLANK"
+    | "IS_NOT_BLANK"
     | "LESS_THAN"
     | "LESS_THAN_OR_EQUAL"
     | "GREATER_THAN"
@@ -319,5 +323,427 @@ export class CutListRuleService {
       where: { vendor_id: vendorId, status: "ACTIVE" },
       orderBy: { id: "asc" },
     });
+  }
+
+  /**
+   * Ensure default vendor actions exist for a vendor
+   */
+  static async ensureVendorActions(vendorId: number) {
+    const defaultActions = [
+      { action_code: "SEND_TO_MACHINE", action_name: "Send To Machine" },
+      { action_code: "DO_NOT_SEND_TO_MACHINE", action_name: "Do Not Send To Machine" },
+      { action_code: "REPLACE_MACHINE", action_name: "Replace Machine" },
+      { action_code: "REQUIRE_APPROVAL", action_name: "Require Manual Approval" },
+    ];
+
+    for (const def of defaultActions) {
+      const existing = await prisma.ruleActionMaster.findFirst({
+        where: { vendor_id: vendorId, action_code: def.action_code },
+      });
+      if (!existing) {
+        await prisma.ruleActionMaster.create({
+          data: {
+            vendor_id: vendorId,
+            action_code: def.action_code,
+            action_name: def.action_name,
+            status: "ACTIVE",
+          },
+        });
+      }
+    }
+  }
+
+  /**
+   * Build default rule payload for a machine based on hardcoded system logic
+   */
+  static buildDefaultRulePayload(
+    machine: {
+      id: number;
+      machine_name: string;
+      machine_code?: string | null;
+      machine_type_id?: number | null;
+      machineType?: { id: number; machine_type: string } | null;
+    },
+    actionId: number,
+    vendorId: number,
+    userId?: number,
+    categories: any[] = [],
+    doNotSendActionId?: number
+  ): CreateRuleDto {
+    const typeId = Number(machine.machine_type_id);
+    const typeName = (
+      machine.machineType?.machine_type ||
+      machine.machine_name ||
+      ""
+    ).toLowerCase();
+
+    const isEdgeBander =
+      typeId === 11 ||
+      typeName.includes("edge");
+
+    const isCncOrDrill =
+      typeId === 6 ||
+      typeId === 7 ||
+      typeId === 8 ||
+      typeName.includes("cnc") ||
+      typeName.includes("router") ||
+      typeName.includes("drill");
+
+    const isQc =
+      typeId === 17 ||
+      typeName.includes("qc") ||
+      typeName.includes("quality");
+
+    const isPackaging =
+      typeId === 18 ||
+      typeName.includes("pack");
+
+    const isCuttingSaw =
+      typeId === 3 ||
+      typeName.includes("saw") ||
+      typeName.includes("cutting") ||
+      typeName.includes("nesting") ||
+      typeName.includes("beam") ||
+      typeName.includes("panel");
+
+    let ruleName = `${machine.machine_name} - Standard Cutlist Routing`;
+    let ruleCode = `${(machine.machine_code || machine.machine_name)
+      .trim()
+      .replace(/[\s\W]+/g, "_")
+      .toUpperCase()}_DEFAULT`;
+
+    let conditionGroups: CreateRuleConditionGroupDto[] = [];
+    const finalActionId = (isCncOrDrill && doNotSendActionId) ? doNotSendActionId : actionId;
+
+    if (isEdgeBander) {
+      ruleName = `${machine.machine_name} - Edgebanding Required`;
+      conditionGroups = [
+        {
+          sequence_no: 1,
+          logical_operator: null,
+          conditions: [
+            {
+              sequence_no: 1,
+              condition_type: "COLUMN",
+              field_key: "elf",
+              operator: "IS_NOT_BLANK",
+              value: "",
+              logical_operator: "OR",
+            },
+            {
+              sequence_no: 2,
+              condition_type: "COLUMN",
+              field_key: "elb",
+              operator: "IS_NOT_BLANK",
+              value: "",
+              logical_operator: "OR",
+            },
+            {
+              sequence_no: 3,
+              condition_type: "COLUMN",
+              field_key: "esl",
+              operator: "IS_NOT_BLANK",
+              value: "",
+              logical_operator: "OR",
+            },
+            {
+              sequence_no: 4,
+              condition_type: "COLUMN",
+              field_key: "esr",
+              operator: "IS_NOT_BLANK",
+              value: "",
+              logical_operator: null,
+            },
+          ],
+        },
+      ];
+    } else if (isCncOrDrill) {
+      // Horizontal CNC & CNC Drilling operations:
+      // Factory standard: Do Not Send back panels (contains "back") or thin panels (< 8mm) to Horizontal CNC.
+      ruleName = machine.machine_name || "Horizontal CNC";
+      ruleCode = machine.machine_code || machine.machine_name || "Horizontal CNC";
+      conditionGroups = [
+        {
+          sequence_no: 1,
+          logical_operator: null,
+          conditions: [
+            {
+              sequence_no: 1,
+              condition_type: "COLUMN",
+              field_key: "thickness",
+              operator: "LESS_THAN",
+              value: 8,
+              logical_operator: "OR",
+            },
+            {
+              sequence_no: 2,
+              condition_type: "COLUMN",
+              field_key: "item_name",
+              operator: "CONTAINS",
+              value: "back",
+              logical_operator: null,
+            },
+          ],
+        },
+      ];
+    } else if (isQc) {
+      ruleName = `${machine.machine_name} - Quality Check Scan`;
+      conditionGroups = [
+        {
+          sequence_no: 1,
+          logical_operator: null,
+          conditions: [
+            {
+              sequence_no: 1,
+              condition_type: "CATEGORY",
+              operator: "IN",
+              value: "ALL",
+              logical_operator: null,
+            },
+          ],
+        },
+      ];
+    } else if (isPackaging) {
+      ruleName = `${machine.machine_name} - Packaging Station Flow`;
+      conditionGroups = [
+        {
+          sequence_no: 1,
+          logical_operator: null,
+          conditions: [
+            {
+              sequence_no: 1,
+              condition_type: "CATEGORY",
+              operator: "IN",
+              value: "ALL",
+              logical_operator: null,
+            },
+          ],
+        },
+      ];
+    } else if (isCuttingSaw) {
+      ruleName = `${machine.machine_name} - Standard Cutting Flow`;
+
+      const validCategoryIds = (categories || [])
+        .filter((cat: any) => {
+          const mappings = cat.projectCategoriesMasterVendorMapping || [];
+          const typeIds: number[] = mappings
+            .map((m: any) =>
+              Number(
+                m.project_categories_type_master_id ??
+                  m.projectCategoriesTypeMaster?.id
+              )
+            )
+            .filter((id: number) => !isNaN(id) && id > 0);
+
+          const hasType4 = typeIds.includes(4);
+          const hasType3 = typeIds.includes(3);
+          const hasType1Or2 = typeIds.some((t) => t === 1 || t === 2);
+          const isNormalFlow = hasType1Or2 || typeIds.length === 0;
+
+          // Exclude Type 4 (Hardware / Non-Production Outsource)
+          if (hasType4) return false;
+          // Exclude Type 3-only (Non-Production / Scan & Pack only)
+          if (hasType3 && !isNormalFlow) return false;
+
+          return true;
+        })
+        .map((cat: any) => Number(cat.id));
+
+      conditionGroups = [
+        {
+          sequence_no: 1,
+          logical_operator: null,
+          conditions: [
+            {
+              sequence_no: 1,
+              condition_type: "CATEGORY",
+              operator: "IN",
+              value: validCategoryIds.length > 0 ? validCategoryIds : "ALL",
+              logical_operator: null,
+            },
+          ],
+        },
+      ];
+    } else {
+      // Presses & General Machines
+      ruleName = `${machine.machine_name} - Standard Cutlist Routing`;
+      conditionGroups = [
+        {
+          sequence_no: 1,
+          logical_operator: null,
+          conditions: [
+            {
+              sequence_no: 1,
+              condition_type: "CATEGORY",
+              operator: "IN",
+              value: "ALL",
+              logical_operator: null,
+            },
+          ],
+        },
+      ];
+    }
+
+    return {
+      vendor_id: vendorId,
+      machine_id: machine.id,
+      rule_name: ruleName,
+      rule_code: ruleCode,
+      rule_tag: "CUTLIST_MACHINE_ROUTING",
+      priority: 1,
+      status: "ACTIVE",
+      created_by: userId,
+      conditionGroups,
+      actions: [
+        {
+          action_id: finalActionId,
+          action_value: null,
+          sequence_no: 1,
+        },
+      ],
+    };
+  }
+
+  /**
+   * Get default rule template for a machine (used by frontend to preview/populate)
+   */
+  static async getDefaultRuleTemplate(machineId: number, vendorId: number) {
+    await this.ensureVendorActions(vendorId);
+
+    const machine = await prisma.machineMaster.findFirst({
+      where: { id: machineId, vendor_id: vendorId },
+      include: { machineType: true },
+    });
+
+    if (!machine) {
+      throw new Error(`Machine with ID ${machineId} not found for vendor`);
+    }
+
+    const sendAction = await prisma.ruleActionMaster.findFirst({
+      where: { vendor_id: vendorId, action_code: "SEND_TO_MACHINE", status: "ACTIVE" },
+    });
+
+    const doNotSendAction = await prisma.ruleActionMaster.findFirst({
+      where: { vendor_id: vendorId, action_code: "DO_NOT_SEND_TO_MACHINE", status: "ACTIVE" },
+    });
+
+    if (!sendAction) {
+      throw new Error("SEND_TO_MACHINE action could not be found or created for this vendor");
+    }
+
+    const categories = await prisma.projectCategoriesMaster.findMany({
+      where: { vendor_id: vendorId, status: "Yes" },
+      include: {
+        projectCategoriesMasterVendorMapping: true,
+      },
+    });
+
+    return this.buildDefaultRulePayload(
+      machine,
+      sendAction.id,
+      vendorId,
+      undefined,
+      categories,
+      doNotSendAction?.id
+    );
+  }
+
+  /**
+   * Automatically generate default rules for all vendor machines
+   */
+  static async generateDefaultRules(
+    vendorId: number,
+    options: { overwrite?: boolean; created_by?: number; machine_id?: number } = {}
+  ) {
+    await this.ensureVendorActions(vendorId);
+
+    const sendAction = await prisma.ruleActionMaster.findFirst({
+      where: { vendor_id: vendorId, action_code: "SEND_TO_MACHINE", status: "ACTIVE" },
+    });
+
+    const doNotSendAction = await prisma.ruleActionMaster.findFirst({
+      where: { vendor_id: vendorId, action_code: "DO_NOT_SEND_TO_MACHINE", status: "ACTIVE" },
+    });
+
+    if (!sendAction) {
+      throw new Error("SEND_TO_MACHINE action could not be found or created for this vendor");
+    }
+
+    const machineWhere: any = { vendor_id: vendorId, status: "ACTIVE" };
+    if (options.machine_id) {
+      machineWhere.id = options.machine_id;
+    }
+
+    const machines = await prisma.machineMaster.findMany({
+      where: machineWhere,
+      include: { machineType: true },
+      orderBy: { sequence_no: "asc" },
+    });
+
+    if (machines.length === 0) {
+      return {
+        success: true,
+        message: "No active machines found for vendor",
+        createdCount: 0,
+        skippedCount: 0,
+        updatedCount: 0,
+        totalMachines: 0,
+        rules: [],
+      };
+    }
+
+    const categories = await prisma.projectCategoriesMaster.findMany({
+      where: { vendor_id: vendorId, status: "Yes" },
+      include: {
+        projectCategoriesMasterVendorMapping: true,
+      },
+    });
+
+    let createdCount = 0;
+    let updatedCount = 0;
+    let skippedCount = 0;
+    const rulesCreatedOrUpdated: any[] = [];
+
+    for (const machine of machines) {
+      const existingRules = await prisma.cutListRuleMaster.findMany({
+        where: { vendor_id: vendorId, machine_id: machine.id },
+      });
+
+      if (existingRules.length > 0 && !options.overwrite) {
+        skippedCount++;
+        continue;
+      }
+
+      if (existingRules.length > 0 && options.overwrite) {
+        for (const oldRule of existingRules) {
+          await this.deleteRule(oldRule.id);
+        }
+        updatedCount++;
+      } else {
+        createdCount++;
+      }
+
+      const defaultRulePayload = this.buildDefaultRulePayload(
+        machine,
+        sendAction.id,
+        vendorId,
+        options.created_by,
+        categories,
+        doNotSendAction?.id
+      );
+
+      const created = await this.createRule(defaultRulePayload);
+      rulesCreatedOrUpdated.push(created);
+    }
+
+    return {
+      success: true,
+      message: `Default rules processed: ${createdCount} created, ${updatedCount} updated, ${skippedCount} skipped.`,
+      createdCount,
+      updatedCount,
+      skippedCount,
+      totalMachines: machines.length,
+      rules: rulesCreatedOrUpdated,
+    };
   }
 }

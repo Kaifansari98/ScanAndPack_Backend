@@ -8,6 +8,7 @@ import {
   getActiveMachinesByVendorService,
   getPackagingProjectContextService,
   generateMultiLocationTemplateService,
+  previewCutlistMachineMappingService,
 } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 import { PackingType } from "../../../generated/prisma_client/enums";
@@ -599,3 +600,39 @@ const parseRemoveBoxIds = (value: any): number[] => {
       .filter((id) => Number.isFinite(id) && id > 0);
   }
 };
+
+export const previewCutlistMachineMappingController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+    if (!Number.isInteger(vendorId) || vendorId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid vendor_id",
+        data: { machines: [], rowMappings: [] },
+      });
+    }
+
+    const { items, packing_type } = req.body;
+    const result = await previewCutlistMachineMappingService(
+      vendorId,
+      Array.isArray(items) ? items : [],
+      packing_type
+    );
+
+    return res.status(result.success ? 200 : 400).json(result);
+  } catch (error: any) {
+    logger.error("previewCutlistMachineMappingController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to preview machine mappings",
+      data: { machines: [], rowMappings: [] },
+    });
+  }
+};
+

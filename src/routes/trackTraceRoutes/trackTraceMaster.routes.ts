@@ -42,7 +42,10 @@ router.get("/rule-masters/actions", CutListRuleController.getVendorRuleActions);
 
 router.get("/machines/:machine_id/rules", CutListRuleController.getRulesByMachine);
 router.get("/machines/:machine_id/rules/:rule_id", CutListRuleController.getRuleById);
+router.get("/machines/:machine_id/default-rule-template", CutListRuleController.getDefaultRuleTemplate);
 router.post("/machines/:machine_id/rules", CutListRuleController.createRule);
+router.post("/machines/:machine_id/generate-default-rule", CutListRuleController.generateDefaultRuleForMachine);
+router.post("/vendors/:vendor_id/generate-default-rules", CutListRuleController.generateDefaultRules);
 router.put("/machines/:machine_id/rules/:rule_id", CutListRuleController.updateRule);
 router.delete("/machines/:machine_id/rules/:rule_id", CutListRuleController.deleteRule);
 router.patch("/machines/:machine_id/rules/:rule_id/status", CutListRuleController.toggleRuleStatus);
