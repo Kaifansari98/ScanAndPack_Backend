@@ -33,6 +33,7 @@ model VendorMaster {
   state_id                                     Int?
   is_inventory_enabled                         Boolean                                        @default(false)
   is_tracktrace_enabled                        Boolean                                        @default(false)
+  cutlist_configuration                         String?                                        @default("default")
   is_approval_task_enabled                     Boolean                                        @default(true)
   eligible_booking_days                        Int?
   is_self_assign_task_type_master_enabed       Boolean                                        @default(true)
@@ -229,6 +230,7 @@ model VendorMaster {
   walkinUploads WalkinLeadUpload[]
 
   @@index([state_id])
+  @@index([time_zone_id])
 }
 
 model VendorAddress {
@@ -486,6 +488,8 @@ model UserMaster {
   siteSupervisorFranchiseMappings                                                SiteSupervisorFranchiseMapping[]
   siteSupervisorFranchiseMappingsCreated                                         SiteSupervisorFranchiseMapping[]               @relation("SiteSupervisorFranchiseMappingCreatedBy")
   siteSupervisorFranchiseMappingsUpdated                                         SiteSupervisorFranchiseMapping[]               @relation("SiteSupervisorFranchiseMappingUpdatedBy")
+  attendances                                                                    attendance[]
+  attendance_logs                                                                attendance_logs[]
 }
 
 model UserDocument {
@@ -1012,6 +1016,8 @@ model LeadMaster {
   specificationDocumentMappings                specificationDocumentMapping[]
   BoxMaster                                    BoxMaster[]                                    @relation("BoxMasterToLeadMaster")
   leadBillingAddresses                         LeadBillingAddress[]
+
+  walkinResponses WalkinLeadResponse[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
