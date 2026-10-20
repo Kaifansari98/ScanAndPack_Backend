@@ -4095,6 +4095,7 @@ export const getCutListMachine = async (
         id: true,
         machine_code: true,
         machine_type_id: true,
+        fabrication: true,
       },
       orderBy: { sequence_no: "asc" },
     }),
@@ -4103,6 +4104,10 @@ export const getCutListMachine = async (
   const projectId = projectMaster?.id;
 
   const machineColumns = allMachines.map((m) => m.machine_code);
+  // machine_code → WOODWORK/METALWORK, so the UI can show only the relevant machines
+  const machineFabrication = Object.fromEntries(
+    allMachines.map((m) => [m.machine_code, m.fabrication]),
+  );
 
   // Step 2: Fetch all cutlists with machine mapping relations, ordered for consistent unit indexing
   const cutLists = await prisma.cutList.findMany({
@@ -4230,6 +4235,7 @@ export const getCutListMachine = async (
   return {
     data: result,
     machineColumns: machineColumns,
+    machineFabrication,
     project: projectMaster
       ? {
           ...projectMaster,
