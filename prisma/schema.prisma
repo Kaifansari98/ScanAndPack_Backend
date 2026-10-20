@@ -5960,8 +5960,8 @@ enum AttendanceSource {
 
 model time_zone_master {
   id             Int            @id @default(autoincrement())
-  country        String
-  time_zone_name String         @unique
+  country        String?
+  time_zone_name String?        @unique
   time_zone      String?
   active         Boolean        @default(true)
   mins           Int?
