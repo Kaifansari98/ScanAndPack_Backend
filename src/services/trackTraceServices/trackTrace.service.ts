@@ -3,6 +3,7 @@ import axios from "axios";
 import { prisma, Prisma } from "../../prisma/client";
 
 import { BoxStatus, FabricationType, PackingType } from "../../prisma/generated";
+import { logCutlistMappingChange } from "../../utils/trackTraceHistory";
 import {
   CutListSavePayload,
   MarkDefectPayload,
@@ -4275,7 +4276,10 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       .map((id) => Number(id.trim()))
       .filter((id) => !isNaN(id));
 
-    return await prisma.$transaction(async (tx) => {
+    // Parts whose mapping actually changed, for the lead's Track Trace history.
+    let changedCutListIds: number[] = [];
+
+    const result = await prisma.$transaction(async (tx) => {
       if (!payload.assigned) {
         // Find which items have ALREADY been scanned at this machine
         const scannedMappings = await tx.cutListMachineMapping.findMany({
@@ -4316,6 +4320,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
             actual_out_at: null,
           },
         });
+        changedCutListIds = unassignableCutListIds;
 
         if (scannedCutListIds.size > 0) {
           return validationResponse(
@@ -4408,9 +4413,25 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       await tx.cutListMachineMapping.createMany({
         data: mappingData,
       });
+      changedCutListIds = newCutListRows.map((row) => row.id);
 
       return validationResponse(1, "Machine mapped successfully");
     });
+
+    if (result.status === 1) {
+      await logCutlistMappingChange({
+        vendorId: payload.vendor_id,
+        projectId,
+        userId: payload.user_id,
+        cutListIds: changedCutListIds,
+        describe: ({ projectName, fabrication, parts }) =>
+          payload.assigned
+            ? `${fabrication} cutlist (${projectName}): assigned machine "${payload.machine_name}" to ${changedCutListIds.length} part(s) — ${parts}`
+            : `${fabrication} cutlist (${projectName}): removed machine "${payload.machine_name}" from ${changedCutListIds.length} part(s) — ${parts}`,
+      });
+    }
+
+    return result;
   } catch (error) {
     console.log(error);
     return validationResponse(0, "Something went wrong");

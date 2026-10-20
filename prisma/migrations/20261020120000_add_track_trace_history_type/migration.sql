@@ -1,0 +1,1 @@
+ALTER TYPE "HistoryType" ADD VALUE IF NOT EXISTS 'TrackTrace';

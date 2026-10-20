@@ -630,6 +630,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       machine_name,
       assigned,
       user_role,
+      user_id,
     } = _req.body;
 
     if (!project_id || project_id === "undefined") {
@@ -677,6 +678,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       assigned: Boolean(assigned),
       created_by: Number(vendor_id),
       user_role: user_role ? String(user_role) : undefined,
+      user_id: Number(user_id) || undefined,
     };
 
     const serviceResponse = await trackTraceService.assignMachine(payload);

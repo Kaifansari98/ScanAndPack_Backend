@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { Prisma } from "../../prisma/generated";
 import { prisma } from "../../../src/prisma/client";
+import { logCutlistMappingChange } from "../../utils/trackTraceHistory";
 
 // ─────────────────────────────────────────────
 // Error messages — single source of truth
@@ -416,6 +417,25 @@ export const uploadCutListMachineExcel = async (
       },
     }),
   ]);
+
+  if (createResult.count > 0 || deleteResult.count > 0) {
+    const changedCutListIds = [
+      ...new Set([
+        ...toCreate.map((mapping) => mapping.cut_list_id),
+        ...existingMappings
+          .filter((mapping) => toDeleteIds.includes(mapping.id))
+          .map((mapping) => mapping.cut_list_id),
+      ]),
+    ];
+    await logCutlistMappingChange({
+      vendorId,
+      projectId,
+      userId: createdBy,
+      cutListIds: changedCutListIds,
+      describe: ({ projectName, fabrication, parts }) =>
+        `${fabrication} cutlist (${projectName}): machine mapping updated via Excel upload — ${createResult.count} assignment(s) added, ${deleteResult.count} removed across ${changedCutListIds.length} part(s) — ${parts}`,
+    });
+  }
 
   return {
     message: "Excel processed successfully.",

@@ -4604,7 +4604,7 @@ export const getLeadLogsWithDocuments = async (params: {
   vendor_id: number;
   limit?: number;
   cursor?: number;
-  history_type?: "Lead" | "Task" | "FollowUp" | "Approval";
+  history_type?: "Lead" | "Task" | "FollowUp" | "Approval" | "TrackTrace";
   search?: string;
   user_type_id?: number;
 }) => {
@@ -4644,7 +4644,7 @@ export const getLeadLogsWithDocuments = async (params: {
   const allowedHistoryTypes = isFullAccessRole
     ? null
     : isTaskAndFollowUpOnlyRole
-      ? ["Task", "FollowUp", "Approval"]
+      ? ["Task", "FollowUp", "Approval", "TrackTrace"]
       : null;
 
   const restrictedTaskStageTags =

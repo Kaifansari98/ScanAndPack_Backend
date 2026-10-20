@@ -5366,6 +5366,7 @@ enum HistoryType {
   Task
   FollowUp
   Approval
+  TrackTrace
 }
 
 enum ApprovalRequestStatus {
