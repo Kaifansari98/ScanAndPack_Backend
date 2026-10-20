@@ -351,7 +351,8 @@ export const HistoryType = {
   Lead: 'Lead',
   Task: 'Task',
   FollowUp: 'FollowUp',
-  Approval: 'Approval'
+  Approval: 'Approval',
+  TrackTrace: 'TrackTrace'
 } as const
 
 export type HistoryType = (typeof HistoryType)[keyof typeof HistoryType]

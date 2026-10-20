@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { FabricationType } from "../../../prisma/generated";
+import { logProjectSentToTrackTrace, resolveLeadProjectName } from "../../../utils/trackTraceHistory";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import {
@@ -112,6 +113,7 @@ export class MetalCutlistService {
     createdBy: number,
     parts: MetalCutlistPartInput[],
     images: Express.Multer.File[],
+    instanceId?: number | null,
   ) {
     const user = await prisma.userMaster.findFirst({
       where: { id: createdBy, vendor_id: vendorId },
@@ -124,6 +126,7 @@ export class MetalCutlistService {
       select: { id: true, lead_code: true, firstname: true, lastname: true, contact_no: true, site_address: true },
     });
     if (!lead) throw new MetalCutlistError("Invalid lead_id for this vendor", 400);
+    const leadProjectName = await resolveLeadProjectName(vendorId, leadId, instanceId);
 
     const result = await prisma.$transaction(async (tx) => {
       // Serialize Metalwork submissions for this lead to avoid duplicate projects.
@@ -135,7 +138,7 @@ export class MetalCutlistService {
       });
       const project = existingProject ?? await tx.projectMaster.create({
         data: {
-          project_name: `Pre-Production Import - Lead #${leadId}`,
+          project_name: leadProjectName,
           unique_project_id: randomUUID(),
           vendor_id: vendorId,
           lead_id: leadId,
@@ -203,6 +206,16 @@ export class MetalCutlistService {
 
       return { project, projectCreated: !existingProject, replaced, created: created.length };
     }, { timeout: 30000 });
+
+    if (result.projectCreated) {
+      await logProjectSentToTrackTrace({
+        vendorId,
+        leadId,
+        userId: createdBy,
+        projectName: result.project.project_name,
+        fabrication: "METALWORK",
+      });
+    }
 
     logger.info("Metalwork Cutlist saved", {
       vendorId,

@@ -2,7 +2,8 @@ import { validationResponse } from "../../../src/utils/validationResponse";
 import axios from "axios";
 import { prisma, Prisma } from "../../prisma/client";
 
-import { BoxStatus, PackingType } from "../../prisma/generated";
+import { BoxStatus, FabricationType, PackingType } from "../../prisma/generated";
+import { logCutlistMappingChange } from "../../utils/trackTraceHistory";
 import {
   CutListSavePayload,
   MarkDefectPayload,
@@ -4194,6 +4195,7 @@ export const getCutListMachine = async (
         id: true,
         machine_code: true,
         machine_type_id: true,
+        fabrication: true,
       },
       orderBy: { sequence_no: "asc" },
     }),
@@ -4202,6 +4204,10 @@ export const getCutListMachine = async (
   const projectId = projectMaster?.id;
 
   const machineColumns = allMachines.map((m) => m.machine_code);
+  // machine_code → WOODWORK/METALWORK, so the UI can show only the relevant machines
+  const machineFabrication = Object.fromEntries(
+    allMachines.map((m) => [m.machine_code, m.fabrication]),
+  );
 
   // Step 2: Fetch all cutlists with machine mapping relations, ordered for consistent unit indexing
   const cutLists = await prisma.cutList.findMany({
@@ -4329,6 +4335,7 @@ export const getCutListMachine = async (
   return {
     data: result,
     machineColumns: machineColumns,
+    machineFabrication,
     project: projectMaster
       ? {
           ...projectMaster,
@@ -4368,7 +4375,10 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       .map((id) => Number(id.trim()))
       .filter((id) => !isNaN(id));
 
-    return await prisma.$transaction(async (tx) => {
+    // Parts whose mapping actually changed, for the lead's Track Trace history.
+    let changedCutListIds: number[] = [];
+
+    const result = await prisma.$transaction(async (tx) => {
       if (!payload.assigned) {
         // Find which items have ALREADY been scanned at this machine
         const scannedMappings = await tx.cutListMachineMapping.findMany({
@@ -4409,6 +4419,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
             actual_out_at: null,
           },
         });
+        changedCutListIds = unassignableCutListIds;
 
         if (scannedCutListIds.size > 0) {
           return validationResponse(
@@ -4501,9 +4512,25 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       await tx.cutListMachineMapping.createMany({
         data: mappingData,
       });
+      changedCutListIds = newCutListRows.map((row) => row.id);
 
       return validationResponse(1, "Machine mapped successfully");
     });
+
+    if (result.status === 1) {
+      await logCutlistMappingChange({
+        vendorId: payload.vendor_id,
+        projectId,
+        userId: payload.user_id,
+        cutListIds: changedCutListIds,
+        change: {
+          kind: payload.assigned ? "assigned" : "removed",
+          machineName: payload.machine_name,
+        },
+      });
+    }
+
+    return result;
   } catch (error) {
     console.log(error);
     return validationResponse(0, "Something went wrong");
@@ -6197,8 +6224,17 @@ export const getTraceTraceDashboard = async (
   vendor_id: number,
   statusFilter: string = "all",
   scope: { lead_id?: number; project_id?: number } = {},
+  fabrication?: FabricationType,
 ) => {
   try {
+    // Woodwork also keeps projects with no cutlist yet; Metalwork needs metal parts.
+    const fabricationWhere =
+      fabrication === FabricationType.METALWORK
+        ? { CutList: { some: { fabrication } } }
+        : fabrication === FabricationType.WOODWORK
+          ? { OR: [{ CutList: { some: { fabrication } } }, { CutList: { none: {} } }] }
+          : {};
+
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
     const [projects, machines] = await Promise.all([
       prisma.projectMaster.findMany({
@@ -6207,6 +6243,7 @@ export const getTraceTraceDashboard = async (
           isDeleted: false,
           ...(scope.lead_id ? { lead_id: scope.lead_id } : {}),
           ...(scope.project_id ? { id: scope.project_id } : {}),
+          ...fabricationWhere,
           NOT: [
             { project_status: { equals: "Deactivated", mode: "insensitive" } },
             { project_status: { equals: "Deleted", mode: "insensitive" } },
@@ -6232,6 +6269,7 @@ export const getTraceTraceDashboard = async (
           vendor_id,
           status: "ACTIVE",
           scan_type: { not: "PASS" },
+          ...(fabrication ? { fabrication } : {}),
         },
         select: {
           id: true,

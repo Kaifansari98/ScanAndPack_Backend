@@ -2386,6 +2386,7 @@ export const createProjectService = async (
     const machines =
       await prisma.machineMaster.findMany({
         where: {
+          fabrication: "WOODWORK",
           vendor_id: vendor.id,
           status: "ACTIVE",
           machine_type_id: {
@@ -3156,6 +3157,7 @@ export const getActiveMachinesByVendorService = async (vendorId: number) => {
       machine_type_id: true,
       image_path: true,
       sequence_no: true,
+      fabrication: true,
     },
     orderBy: [
       { sequence_no: "asc" },

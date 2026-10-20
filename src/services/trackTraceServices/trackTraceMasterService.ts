@@ -1,12 +1,20 @@
 import { generateSignedUrl } from "../../../src/utils/wasabiClient";
 import {
+  FabricationType,
   MachineStatus,
   ScanType,
 } from "../../../generated/prisma_client/client";
 import { prisma } from "../../../src/prisma/client";
 import logger from "../../../src/utils/logger";
 
+export function validateMachineFabrication(value: unknown) {
+  if (value !== undefined && value !== "WOODWORK" && value !== "METALWORK") {
+    throw new Error("Machine Type must be Woodwork or Metalwork");
+  }
+}
+
 export interface MachineData {
+  fabrication?: FabricationType;
   machine_name: string;
   machine_code: string;
   machine_type_id: number;
@@ -22,6 +30,7 @@ export interface MachineData {
 }
 
 export interface UpdateMachineData {
+  fabrication?: FabricationType;
   machine_name?: string;
   machine_type_id: number;
   scan_type?: ScanType;
@@ -148,6 +157,7 @@ export class TrackTraceMasterService {
 
 
   static async createMachine(data: MachineData) {
+    validateMachineFabrication(data.fabrication);
     try {
       logger.info("Creating machine", {
         vendor_id: data.vendor_id,
@@ -257,6 +267,7 @@ export class TrackTraceMasterService {
     vendor_id: number,
     data: UpdateMachineData
   ) {
+    validateMachineFabrication(data.fabrication);
     try {
       logger.info("Updating machine", {
         id,

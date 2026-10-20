@@ -1297,10 +1297,6 @@ export type CutListUncheckedUpdateManyWithoutLeadNestedInput = {
   deleteMany?: Prisma.CutListScalarWhereInput | Prisma.CutListScalarWhereInput[]
 }
 
-export type EnumFabricationTypeFieldUpdateOperationsInput = {
-  set?: $Enums.FabricationType
-}
-
 export type CutListCreateNestedOneWithoutCutListMachineMappingInput = {
   create?: Prisma.XOR<Prisma.CutListCreateWithoutCutListMachineMappingInput, Prisma.CutListUncheckedCreateWithoutCutListMachineMappingInput>
   connectOrCreate?: Prisma.CutListCreateOrConnectWithoutCutListMachineMappingInput

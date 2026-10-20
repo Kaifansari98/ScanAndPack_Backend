@@ -20137,6 +20137,7 @@ export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingSc
 
 
 export const MachineMasterScalarFieldEnum = {
+  fabrication: 'fabrication',
   id: 'id',
   machine_name: 'machine_name',
   machine_code: 'machine_code',
@@ -22719,6 +22720,20 @@ export type ListEnumModulesVendorMappingActiveStatusFieldRefInput<$PrismaModel> 
 
 
 /**
+ * Reference to a field of type 'FabricationType'
+ */
+export type EnumFabricationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FabricationType'>
+    
+
+
+/**
+ * Reference to a field of type 'FabricationType[]'
+ */
+export type ListEnumFabricationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FabricationType[]'>
+    
+
+
+/**
  * Reference to a field of type 'MachineStatus'
  */
 export type EnumMachineStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineStatus'>
@@ -22743,20 +22758,6 @@ export type EnumScanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'ScanType[]'
  */
 export type ListEnumScanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScanType[]'>
-    
-
-
-/**
- * Reference to a field of type 'FabricationType'
- */
-export type EnumFabricationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FabricationType'>
-    
-
-
-/**
- * Reference to a field of type 'FabricationType[]'
- */
-export type ListEnumFabricationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FabricationType[]'>
     
 
 
