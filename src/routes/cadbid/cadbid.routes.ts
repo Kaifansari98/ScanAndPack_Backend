@@ -8,6 +8,7 @@ import {
   disconnectCadbidController,
   getStudioSsoUrlController,
   createCadbidCustomerFromLeadController,
+  updateCadbidCustomerFromLeadController,
 } from "../../controllers/cadbid/cadbid.controller";
 
 const router = Router();
@@ -21,6 +22,11 @@ router.post(
   "/leads/:leadId/create-customer",
   verifyToken,
   createCadbidCustomerFromLeadController,
+);
+router.put(
+  "/leads/:leadId/update-customer",
+  verifyToken,
+  updateCadbidCustomerFromLeadController,
 );
 
 export default router;

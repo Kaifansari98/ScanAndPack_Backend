@@ -160,6 +160,37 @@ export interface CreateCadbidCustomerResult {
   statusCode: number;
 }
 
+export interface UpdateCadbidCustomerResult {
+  success: boolean;
+  skipped: boolean;
+  message: string;
+  statusCode: number;
+}
+
+// Status tags of leads that haven't reached Designing; these never sync to Cadbid
+const PRE_DESIGNING_STATUS_TAGS = ["Type 1", "Type 2"];
+
+const buildCadbidCustomerPayload = (lead: {
+  firstname: string | null;
+  lastname: string | null;
+  site_address: string | null;
+  email: string | null;
+  country_code: string | null;
+  contact_no: string | null;
+}) => {
+  const fullName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+  const mobileNo =
+    `${lead.country_code ?? ""}${lead.contact_no ?? ""}`.trim() || undefined;
+
+  return {
+    sName: fullName || "-",
+    sAddr1: lead.site_address?.trim() || undefined,
+    sContactPerson: fullName || undefined,
+    sEmail: lead.email?.trim() || undefined,
+    sMobileNo: mobileNo,
+  };
+};
+
 export const createCadbidCustomerFromLead = async (
   cadbidToken: string,
   vendorId: number,
@@ -185,17 +216,7 @@ export const createCadbidCustomerFromLead = async (
     };
   }
 
-  const fullName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-  const mobileNo =
-    `${lead.country_code ?? ""}${lead.contact_no ?? ""}`.trim() || undefined;
-
-  const payload = {
-    sName: fullName || "-",
-    sAddr1: lead.site_address?.trim() || undefined,
-    sContactPerson: fullName || undefined,
-    sEmail: lead.email?.trim() || undefined,
-    sMobileNo: mobileNo,
-  };
+  const payload = buildCadbidCustomerPayload(lead);
 
   try {
     const res = await fetch(`${getCadbidBaseUrl()}/api/customers/create-customer`, {
@@ -265,6 +286,129 @@ export const createCadbidCustomerFromLead = async (
       success: false,
       message:
         "We couldn't reach Cadbid, so the project was not created there. Please try again later.",
+      statusCode: 502,
+    };
+  }
+};
+
+export const updateCadbidCustomerFromLead = async (
+  cadbidToken: string,
+  vendorId: number,
+  leadId: number,
+): Promise<UpdateCadbidCustomerResult> => {
+  const lead = await prisma.leadMaster.findFirst({
+    where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+    select: {
+      firstname: true,
+      lastname: true,
+      site_address: true,
+      email: true,
+      country_code: true,
+      contact_no: true,
+      cadbid_customer_id: true,
+      statusType: { select: { tag: true } },
+    },
+  });
+
+  if (!lead) {
+    return {
+      success: false,
+      skipped: false,
+      message: "We couldn't find this lead, so Cadbid was not updated.",
+      statusCode: 404,
+    };
+  }
+
+  const statusTag = lead.statusType?.tag;
+  if (!statusTag || PRE_DESIGNING_STATUS_TAGS.includes(statusTag)) {
+    return {
+      success: true,
+      skipped: true,
+      message: "Lead has not reached Designing yet",
+      statusCode: 200,
+    };
+  }
+
+  // Lead was never pushed to Cadbid (e.g. moved to Designing before linking)
+  if (!lead.cadbid_customer_id) {
+    return {
+      success: true,
+      skipped: true,
+      message: "Lead is not linked to a Cadbid customer",
+      statusCode: 200,
+    };
+  }
+
+  const payload = {
+    nCustId: lead.cadbid_customer_id,
+    ...buildCadbidCustomerPayload(lead),
+  };
+
+  try {
+    const res = await fetch(`${getCadbidBaseUrl()}/api/customers/update-customer`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${cadbidToken.trim()}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const body = (await res.json().catch(() => ({}))) as any;
+
+    if (res.ok) {
+      return {
+        success: true,
+        skipped: false,
+        message: "The lead's details have also been updated in Cadbid.",
+        statusCode: res.status,
+      };
+    }
+
+    if (res.status === 404) {
+      return {
+        success: false,
+        skipped: false,
+        message:
+          "This lead's project could not be found in Cadbid, so it was not updated there.",
+        statusCode: 404,
+      };
+    }
+
+    if (res.status === 409) {
+      return {
+        success: false,
+        skipped: false,
+        message: `Another customer named "${payload.sName}" already exists in Cadbid, so the details were not updated there.`,
+        statusCode: 409,
+      };
+    }
+
+    if (res.status === 401 || res.status === 403) {
+      return {
+        success: false,
+        skipped: false,
+        message:
+          "Your Cadbid connection has expired or is invalid. Please reconnect your Cadbid account and try again.",
+        statusCode: res.status,
+      };
+    }
+
+    console.error("Cadbid update-customer failed:", res.status, body?.message);
+    return {
+      success: false,
+      skipped: false,
+      message:
+        "Cadbid couldn't update this lead's details right now. Please try again later.",
+      statusCode: 502,
+    };
+  } catch (err: any) {
+    console.error("Error reaching Cadbid update-customer:", err?.message || err);
+    return {
+      success: false,
+      skipped: false,
+      message:
+        "We couldn't reach Cadbid, so the lead's details were not updated there. Please try again later.",
       statusCode: 502,
     };
   }
