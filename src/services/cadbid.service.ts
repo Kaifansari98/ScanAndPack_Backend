@@ -414,6 +414,126 @@ export const updateCadbidCustomerFromLead = async (
   }
 };
 
+export interface CadbidCustomerQuote {
+  nQuotationId: number;
+  sDocumentNo: string | null;
+  sRefNo: string | null;
+  sName: string | null;
+  sStage: string | null;
+  sUserName: string | null;
+  nTotalAmt: number | null;
+  nDiscountAmt: number | null;
+  dtCreated: string | null;
+}
+
+export interface GetCadbidQuotesResult {
+  success: boolean;
+  linked: boolean;
+  quotes: CadbidCustomerQuote[];
+  message: string;
+  statusCode: number;
+}
+
+export const getCadbidQuotesForLead = async (
+  cadbidToken: string,
+  vendorId: number,
+  leadId: number,
+): Promise<GetCadbidQuotesResult> => {
+  const lead = await prisma.leadMaster.findFirst({
+    where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+    select: { cadbid_customer_id: true },
+  });
+
+  if (!lead) {
+    return {
+      success: false,
+      linked: false,
+      quotes: [],
+      message: "We couldn't find this lead.",
+      statusCode: 404,
+    };
+  }
+
+  if (!lead.cadbid_customer_id) {
+    return {
+      success: true,
+      linked: false,
+      quotes: [],
+      message: "This lead is not linked to a Cadbid project yet.",
+      statusCode: 200,
+    };
+  }
+
+  try {
+    const res = await fetch(
+      `${getCadbidBaseUrl()}/api/quotes/get-cq?nCustId=${lead.cadbid_customer_id}`,
+      { headers: { Authorization: `Bearer ${cadbidToken.trim()}` } },
+    );
+
+    const body = (await res.json().catch(() => null)) as any;
+
+    if (res.ok) {
+      const rows = Array.isArray(body) ? body : Array.isArray(body?.data) ? body.data : [];
+      return {
+        success: true,
+        linked: true,
+        quotes: rows.map((row: any) => ({
+          nQuotationId: Number(row.nQuotationId),
+          sDocumentNo: row.sDocumentNo ?? null,
+          sRefNo: row.sRefNo ?? null,
+          sName: row.sName ?? null,
+          sStage: row.sStage ?? null,
+          sUserName: row.sUserName ?? null,
+          nTotalAmt: row.nTotalAmt != null ? Number(row.nTotalAmt) : null,
+          nDiscountAmt: row.nDiscountAmt != null ? Number(row.nDiscountAmt) : null,
+          dtCreated: row.dtCreated ?? null,
+        })),
+        message: "Quotations loaded from Cadbid",
+        statusCode: 200,
+      };
+    }
+
+    if (res.status === 404) {
+      return {
+        success: false,
+        linked: true,
+        quotes: [],
+        message: "This lead's project could not be found in Cadbid.",
+        statusCode: 404,
+      };
+    }
+
+    if (res.status === 401 || res.status === 403) {
+      return {
+        success: false,
+        linked: true,
+        quotes: [],
+        message:
+          "Your Cadbid connection has expired or is invalid. Please reconnect your Cadbid account.",
+        statusCode: res.status,
+      };
+    }
+
+    console.error("Cadbid get-cq failed:", res.status, body?.message);
+    return {
+      success: false,
+      linked: true,
+      quotes: [],
+      message: "Cadbid couldn't load the quotations right now. Please try again later.",
+      statusCode: 502,
+    };
+  } catch (err: any) {
+    console.error("Error reaching Cadbid get-cq:", err?.message || err);
+    return {
+      success: false,
+      linked: true,
+      quotes: [],
+      message: "We couldn't reach Cadbid to load the quotations. Please try again later.",
+      statusCode: 502,
+    };
+  }
+};
+
 export const getUserCadbidToken = async (
   userId: number,
 ): Promise<string | null> => {

@@ -9,6 +9,7 @@ import {
   getStudioSsoUrlController,
   createCadbidCustomerFromLeadController,
   updateCadbidCustomerFromLeadController,
+  getCadbidQuotesForLeadController,
 } from "../../controllers/cadbid/cadbid.controller";
 
 const router = Router();
@@ -28,5 +29,6 @@ router.put(
   verifyToken,
   updateCadbidCustomerFromLeadController,
 );
+router.get("/leads/:leadId/quotes", verifyToken, getCadbidQuotesForLeadController);
 
 export default router;

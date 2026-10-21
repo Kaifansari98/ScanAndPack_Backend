@@ -10,6 +10,7 @@ import {
   getStudioBaseUrl,
   createCadbidCustomerFromLead,
   updateCadbidCustomerFromLead,
+  getCadbidQuotesForLead,
 } from "../../services/cadbid.service";
 import { prisma } from "../../prisma/client";
 
@@ -343,6 +344,57 @@ export const updateCadbidCustomerFromLeadController = async (
       success: false,
       message:
         "Something went wrong while updating the lead in Cadbid. Please try again later.",
+    });
+  }
+};
+
+export const getCadbidQuotesForLeadController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const userId = (req as any).user?.id;
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const leadId = Number(req.params.leadId);
+    if (!leadId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "A valid leadId is required" });
+    }
+
+    const token = await getUserCadbidToken(userId);
+    if (!token) {
+      return res.status(200).json({
+        success: true,
+        message: "Cadbid account is not connected",
+        data: { connected: false, linked: false, quotes: [] },
+      });
+    }
+
+    const user = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      select: { vendor_id: true },
+    });
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const result = await getCadbidQuotesForLead(token, user.vendor_id, leadId);
+
+    return res.status(result.statusCode).json({
+      success: result.success,
+      message: result.message,
+      data: { connected: true, linked: result.linked, quotes: result.quotes },
+    });
+  } catch (err: any) {
+    console.error("Error in getCadbidQuotesForLeadController:", err);
+    return res.status(500).json({
+      success: false,
+      message:
+        "Something went wrong while loading quotations from Cadbid. Please try again later.",
     });
   }
 };
