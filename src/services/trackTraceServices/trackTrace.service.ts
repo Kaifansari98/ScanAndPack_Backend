@@ -7774,14 +7774,14 @@ export const markBoxFactoryOutService = async (
             if (currentPosCountWithThisBox > effectiveQuota) {
               return validationResponse(
                 0,
-                `Location "${selectedLocation}" already has ${currentPosCountBefore} box(es) of Position ${currentBoxPosition} for ${currentGroupName} (Quota: ${effectiveQuota} set(s)). Cannot dispatch another box of this position to ${selectedLocation}.`,
+                `Location "${selectedLocation}" already has enough boxes of this type (Quota: ${effectiveQuota}).`,
               );
             }
 
             if (targetSetsStartedWithThisBox > effectiveQuota) {
               return validationResponse(
                 0,
-                `Location "${selectedLocation}" is full (${effectiveQuota} of ${effectiveQuota} products already allocated/dispatched for ${currentGroupName}). This box cannot be dispatched to ${selectedLocation}.`,
+                `Location "${selectedLocation}" is full (Quota: ${effectiveQuota} set${effectiveQuota === 1 ? "" : "s"}).`,
               );
             }
 
@@ -7811,7 +7811,7 @@ export const markBoxFactoryOutService = async (
                 const starvedLoc = otherLocationsWithDeficit[0];
                 return validationResponse(
                   0,
-                  `Cannot dispatch ${boxDisplayName} to ${selectedLocation}. Location "${starvedLoc.locationName}" has already started a product set (${starvedLoc.sampleBoxName}) and requires this box (Position ${currentBoxPosition} of ${boxesPerProduct}) to complete its set.`,
+                  `Cannot dispatch ${boxDisplayName} to ${selectedLocation}: ${starvedLoc.locationName} needs this box to complete its set.`,
                 );
               }
             }
