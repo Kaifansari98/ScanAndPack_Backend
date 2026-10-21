@@ -22,7 +22,7 @@ export const getCadbidBaseUrl = (): string => {
   if (process.env.CADBID_API_URL) {
     return process.env.CADBID_API_URL.replace(/\/+$/, "");
   }
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV === "development") {
     return "http://localhost:3002";
   }
   return (process.env.CADBID_URL || "https://core.cadbid.com").replace(
@@ -39,7 +39,7 @@ export const getStudioBaseUrl = (): string => {
       ""
     ).replace(/\/+$/, "");
   }
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV === "development") {
     return "http://localhost:5174";
   }
   return "https://studio.cadbid.com";
