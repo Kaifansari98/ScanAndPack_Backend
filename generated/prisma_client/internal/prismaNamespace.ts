@@ -18458,6 +18458,7 @@ export const LeadMasterScalarFieldEnum = {
   is_draft: 'is_draft',
   draft_in_open_leads: 'draft_in_open_leads',
   lead_code: 'lead_code',
+  cadbid_customer_id: 'cadbid_customer_id',
   is_client_approval_submitted: 'is_client_approval_submitted',
   client_required_order_login_complition_date: 'client_required_order_login_complition_date',
   expected_order_login_ready_date: 'expected_order_login_ready_date',

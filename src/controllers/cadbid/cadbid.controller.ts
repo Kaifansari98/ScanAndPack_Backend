@@ -8,7 +8,9 @@ import {
   saveUserCadbidToken,
   clearUserCadbidToken,
   getStudioBaseUrl,
+  createCadbidCustomerFromLead,
 } from "../../services/cadbid.service";
+import { prisma } from "../../prisma/client";
 
 export const verifyTokenController = async (req: Request, res: Response) => {
   try {
@@ -226,5 +228,64 @@ export const getStudioSsoUrlController = async (
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });
+  }
+};
+
+export const createCadbidCustomerFromLeadController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const userId = (req as any).user?.id;
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const leadId = Number(req.params.leadId);
+    if (!leadId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "A valid leadId is required" });
+    }
+
+    // Only users who have linked their Cadbid account get a customer created
+    const token = await getUserCadbidToken(userId);
+    if (!token) {
+      return res.status(200).json({
+        success: true,
+        data: { skipped: true },
+        message: "Cadbid account is not connected",
+      });
+    }
+
+    const user = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      select: { vendor_id: true },
+    });
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const result = await createCadbidCustomerFromLead(
+      token,
+      user.vendor_id,
+      leadId,
+    );
+
+    return res.status(result.statusCode).json({
+      success: result.success,
+      message: result.message,
+      data: {
+        skipped: false,
+        cadbidCustomerId: result.cadbidCustomerId ?? null,
+      },
+    });
+  } catch (err: any) {
+    console.error("Error in createCadbidCustomerFromLeadController:", err);
+    return res.status(500).json({
+      success: false,
+      message:
+        "Something went wrong while creating the project in Cadbid. Please try again later.",
+    });
   }
 };
