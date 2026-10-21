@@ -1919,12 +1919,8 @@ export const updateScannedItem = async (
                 actual_in_at: scanTime,
                 in_operator: created_by,
                 ...(box_id ? { box_id } : {}),
-                ...(selectedLocationAllocation
-                  ? {
-                      project_location_product_quantity_id:
-                        selectedLocationAllocation.id,
-                    }
-                  : {}),
+                project_location_product_quantity_id:
+                  selectedLocationAllocation?.id ?? null,
               },
             });
 
@@ -7350,6 +7346,7 @@ export const unsetBoxFromMappingService = async (
           box_id: null,
           actual_in_at: null,
           in_operator: null,
+          project_location_product_quantity_id: null,
         },
       }),
       prisma.projectDetails.update({

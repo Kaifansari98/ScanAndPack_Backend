@@ -386,6 +386,7 @@ export const deleteScanAndPackItemById = async (
       box_id: null,
       actual_in_at: null,
       in_operator: null,
+      project_location_product_quantity_id: null,
     },
 
     select: {
