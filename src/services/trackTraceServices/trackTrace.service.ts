@@ -4076,6 +4076,7 @@ export const getAllUsersByVendorId = (vendor_id: number) => {
 export const getCutListMachine = async (
   vendorId: number,
   unique_project_id: string,
+  fabrication?: "WOODWORK" | "METALWORK",
 ) => {
   // Run independent queries in parallel
   const [projectMaster, allMachines] = await Promise.all([
@@ -4091,7 +4092,7 @@ export const getCutListMachine = async (
     }),
     // Step 1: Get all machines for this vendor (ordered for column display)
     prisma.machineMaster.findMany({
-      where: { vendor_id: vendorId },
+      where: { vendor_id: vendorId, ...(fabrication ? { fabrication } : {}) },
       select: {
         id: true,
         machine_code: true,

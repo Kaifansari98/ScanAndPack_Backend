@@ -596,9 +596,15 @@ export const getCutListMachine = async (_req: Request, res: Response) => {
         .json(ApiResponse.error("Invalid project_id provided", 400));
     }
 
+    const fabrication = _req.query.fabrication;
+    if (fabrication !== undefined && fabrication !== "WOODWORK" && fabrication !== "METALWORK") {
+      return res.status(400).json(ApiResponse.error("Invalid fabrication provided", 400));
+    }
+
     const projects = await trackTraceService.getCutListMachine(
       vendor_id,
       project_id,
+      fabrication,
     );
 
     return res
