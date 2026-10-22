@@ -14551,7 +14551,7 @@ export type ProjectItemScanFilter = "all" | "scanned" | "pending";
 export interface ProjectItemTrackingQuery {
   page: number;
   limit: number;
-  search: string;
+  search?: string;
   scanStatus: ProjectItemScanFilter;
   machineId?: number;
   isDispatch?: boolean;
@@ -14619,10 +14619,10 @@ const getMappingScope = (
 });
 
 const getSearchWhere = (
-  search: string,
+  search: string | undefined | null,
   mappingScope: Prisma.CutListMachineMappingWhereInput,
 ): Prisma.CutListWhereInput | undefined => {
-  const value = search.trim();
+  const value = (search || "").trim();
 
   if (!value) {
     return undefined;
@@ -15103,6 +15103,18 @@ export const getProjectItemTrackingService = async (
   for (const item of candidateCutLists) {
     const rawMappings = item.cutListMachineMapping as MappingRow[];
 
+    // Expand helper for multi-quantity mapping rows (e.g. manual packing for hardware items)
+    const expandMappingRowsByQty = (rows: MappingRow[]): MappingRow[] => {
+      const expanded: MappingRow[] = [];
+      for (const row of rows) {
+        const rowQty = Math.max(1, Number(row.qty ?? 1));
+        for (let i = 0; i < rowQty; i++) {
+          expanded.push(row);
+        }
+      }
+      return expanded;
+    };
+
     // Group mappings by machine to assign to units
     const byMachine = new Map<number, MappingRow[]>();
     for (const m of rawMappings) {
@@ -15115,17 +15127,23 @@ export const getProjectItemTrackingService = async (
       }
     }
 
+    const expandedByMachine = new Map<number, MappingRow[]>();
+    for (const [mId, mMappings] of byMachine) {
+      expandedByMachine.set(mId, expandMappingRowsByQty(mMappings));
+    }
+
     // Identify packaging mappings across all machines for this cutlist item
-    const packagingMappings = rawMappings.filter((m) =>
+    const rawPackagingMappings = rawMappings.filter((m) =>
       Boolean(
         m.box_id ||
         m.boxMaster ||
         (m.machine?.machine_name && /pack/i.test(m.machine.machine_name)),
       ),
     );
+    const packagingMappings = expandMappingRowsByQty(rawPackagingMappings);
 
     const targetMappings = query.machineId
-      ? (byMachine.get(query.machineId) ?? [])
+      ? (expandedByMachine.get(query.machineId) ?? [])
       : query.isDispatch
         ? packagingMappings
         : [];
@@ -15139,7 +15157,7 @@ export const getProjectItemTrackingService = async (
         ? Math.max(itemQty, packagingMappings.length)
         : Math.max(
             itemQty,
-            ...Array.from(byMachine.values()).map((r) => r.length),
+            ...Array.from(expandedByMachine.values()).map((r) => r.length),
             0,
           );
 
@@ -15168,7 +15186,7 @@ export const getProjectItemTrackingService = async (
 
       // Build machine summaries for this unit
       const unitMachines: any[] = [];
-      for (const [mId, mMappings] of byMachine) {
+      for (const [mId, mMappings] of expandedByMachine) {
         const mappingForUnit = mMappings[u] ?? null;
         const fallbackMapping = mMappings[0];
         const mObj = mappingForUnit?.machine ?? fallbackMapping?.machine;
