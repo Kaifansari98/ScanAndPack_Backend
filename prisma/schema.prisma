@@ -3183,6 +3183,7 @@ model MachineMaster {
   factory_id            Int?
   sequence_no           Int?
   target_per_hour       Decimal?
+  purchased_at          DateTime?                    @db.Date
   image_path            String?
   created_by            Int
   created_at            DateTime                     @default(now())

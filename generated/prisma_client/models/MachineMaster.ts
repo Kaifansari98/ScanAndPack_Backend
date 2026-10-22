@@ -62,6 +62,7 @@ export type MachineMasterMinAggregateOutputType = {
   factory_id: number | null
   sequence_no: number | null
   target_per_hour: runtime.Decimal | null
+  purchased_at: Date | null
   image_path: string | null
   created_by: number | null
   created_at: Date | null
@@ -83,6 +84,7 @@ export type MachineMasterMaxAggregateOutputType = {
   factory_id: number | null
   sequence_no: number | null
   target_per_hour: runtime.Decimal | null
+  purchased_at: Date | null
   image_path: string | null
   created_by: number | null
   created_at: Date | null
@@ -104,6 +106,7 @@ export type MachineMasterCountAggregateOutputType = {
   factory_id: number
   sequence_no: number
   target_per_hour: number
+  purchased_at: number
   image_path: number
   created_by: number
   created_at: number
@@ -149,6 +152,7 @@ export type MachineMasterMinAggregateInputType = {
   factory_id?: true
   sequence_no?: true
   target_per_hour?: true
+  purchased_at?: true
   image_path?: true
   created_by?: true
   created_at?: true
@@ -170,6 +174,7 @@ export type MachineMasterMaxAggregateInputType = {
   factory_id?: true
   sequence_no?: true
   target_per_hour?: true
+  purchased_at?: true
   image_path?: true
   created_by?: true
   created_at?: true
@@ -191,6 +196,7 @@ export type MachineMasterCountAggregateInputType = {
   factory_id?: true
   sequence_no?: true
   target_per_hour?: true
+  purchased_at?: true
   image_path?: true
   created_by?: true
   created_at?: true
@@ -299,6 +305,7 @@ export type MachineMasterGroupByOutputType = {
   factory_id: number | null
   sequence_no: number | null
   target_per_hour: runtime.Decimal | null
+  purchased_at: Date | null
   image_path: string | null
   created_by: number
   created_at: Date
@@ -343,6 +350,7 @@ export type MachineMasterWhereInput = {
   factory_id?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   sequence_no?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   target_per_hour?: Prisma.DecimalNullableFilter<"MachineMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.DateTimeNullableFilter<"MachineMaster"> | Date | string | null
   image_path?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
   created_by?: Prisma.IntFilter<"MachineMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MachineMaster"> | Date | string
@@ -373,6 +381,7 @@ export type MachineMasterOrderByWithRelationInput = {
   factory_id?: Prisma.SortOrderInput | Prisma.SortOrder
   sequence_no?: Prisma.SortOrderInput | Prisma.SortOrder
   target_per_hour?: Prisma.SortOrderInput | Prisma.SortOrder
+  purchased_at?: Prisma.SortOrderInput | Prisma.SortOrder
   image_path?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -408,6 +417,7 @@ export type MachineMasterWhereUniqueInput = Prisma.AtLeast<{
   factory_id?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   sequence_no?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   target_per_hour?: Prisma.DecimalNullableFilter<"MachineMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.DateTimeNullableFilter<"MachineMaster"> | Date | string | null
   image_path?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
   created_by?: Prisma.IntFilter<"MachineMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MachineMaster"> | Date | string
@@ -438,6 +448,7 @@ export type MachineMasterOrderByWithAggregationInput = {
   factory_id?: Prisma.SortOrderInput | Prisma.SortOrder
   sequence_no?: Prisma.SortOrderInput | Prisma.SortOrder
   target_per_hour?: Prisma.SortOrderInput | Prisma.SortOrder
+  purchased_at?: Prisma.SortOrderInput | Prisma.SortOrder
   image_path?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -467,6 +478,7 @@ export type MachineMasterScalarWhereWithAggregatesInput = {
   factory_id?: Prisma.IntNullableWithAggregatesFilter<"MachineMaster"> | number | null
   sequence_no?: Prisma.IntNullableWithAggregatesFilter<"MachineMaster"> | number | null
   target_per_hour?: Prisma.DecimalNullableWithAggregatesFilter<"MachineMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.DateTimeNullableWithAggregatesFilter<"MachineMaster"> | Date | string | null
   image_path?: Prisma.StringNullableWithAggregatesFilter<"MachineMaster"> | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"MachineMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"MachineMaster"> | Date | string
@@ -485,6 +497,7 @@ export type MachineMasterCreateInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -515,6 +528,7 @@ export type MachineMasterUncheckedCreateInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -540,6 +554,7 @@ export type MachineMasterUpdateInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -570,6 +585,7 @@ export type MachineMasterUncheckedUpdateInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -598,6 +614,7 @@ export type MachineMasterCreateManyInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -616,6 +633,7 @@ export type MachineMasterUpdateManyMutationInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -637,6 +655,7 @@ export type MachineMasterUncheckedUpdateManyInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -689,6 +708,7 @@ export type MachineMasterCountOrderByAggregateInput = {
   factory_id?: Prisma.SortOrder
   sequence_no?: Prisma.SortOrder
   target_per_hour?: Prisma.SortOrder
+  purchased_at?: Prisma.SortOrder
   image_path?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -721,6 +741,7 @@ export type MachineMasterMaxOrderByAggregateInput = {
   factory_id?: Prisma.SortOrder
   sequence_no?: Prisma.SortOrder
   target_per_hour?: Prisma.SortOrder
+  purchased_at?: Prisma.SortOrder
   image_path?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -742,6 +763,7 @@ export type MachineMasterMinOrderByAggregateInput = {
   factory_id?: Prisma.SortOrder
   sequence_no?: Prisma.SortOrder
   target_per_hour?: Prisma.SortOrder
+  purchased_at?: Prisma.SortOrder
   image_path?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -969,6 +991,7 @@ export type MachineMasterCreateWithoutVendorInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -997,6 +1020,7 @@ export type MachineMasterUncheckedCreateWithoutVendorInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1054,6 +1078,7 @@ export type MachineMasterScalarWhereInput = {
   factory_id?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   sequence_no?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   target_per_hour?: Prisma.DecimalNullableFilter<"MachineMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.DateTimeNullableFilter<"MachineMaster"> | Date | string | null
   image_path?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
   created_by?: Prisma.IntFilter<"MachineMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MachineMaster"> | Date | string
@@ -1072,6 +1097,7 @@ export type MachineMasterCreateWithoutLeadProcessBriefsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1101,6 +1127,7 @@ export type MachineMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1141,6 +1168,7 @@ export type MachineMasterUpdateWithoutLeadProcessBriefsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1170,6 +1198,7 @@ export type MachineMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1194,6 +1223,7 @@ export type MachineMasterCreateWithoutProcessBriefMappingsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1223,6 +1253,7 @@ export type MachineMasterUncheckedCreateWithoutProcessBriefMappingsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1263,6 +1294,7 @@ export type MachineMasterUpdateWithoutProcessBriefMappingsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1292,6 +1324,7 @@ export type MachineMasterUncheckedUpdateWithoutProcessBriefMappingsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1316,6 +1349,7 @@ export type MachineMasterCreateWithoutCostDescriptionsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1345,6 +1379,7 @@ export type MachineMasterUncheckedCreateWithoutCostDescriptionsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1385,6 +1420,7 @@ export type MachineMasterUpdateWithoutCostDescriptionsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1414,6 +1450,7 @@ export type MachineMasterUncheckedUpdateWithoutCostDescriptionsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1438,6 +1475,7 @@ export type MachineMasterCreateWithoutCutListMachineMappingInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1467,6 +1505,7 @@ export type MachineMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1507,6 +1546,7 @@ export type MachineMasterUpdateWithoutCutListMachineMappingInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1536,6 +1576,7 @@ export type MachineMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1560,6 +1601,7 @@ export type MachineMasterCreateWithoutUserMachineMappingsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1589,6 +1631,7 @@ export type MachineMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1629,6 +1672,7 @@ export type MachineMasterUpdateWithoutUserMachineMappingsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1658,6 +1702,7 @@ export type MachineMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1682,6 +1727,7 @@ export type MachineMasterCreateWithoutMachineTypeInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1710,6 +1756,7 @@ export type MachineMasterUncheckedCreateWithoutMachineTypeInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1761,6 +1808,7 @@ export type MachineMasterCreateWithoutDefectedItemsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1790,6 +1838,7 @@ export type MachineMasterUncheckedCreateWithoutDefectedItemsInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1830,6 +1879,7 @@ export type MachineMasterUpdateWithoutDefectedItemsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1859,6 +1909,7 @@ export type MachineMasterUncheckedUpdateWithoutDefectedItemsInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1883,6 +1934,7 @@ export type MachineMasterCreateWithoutCutListRulesInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1912,6 +1964,7 @@ export type MachineMasterUncheckedCreateWithoutCutListRulesInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -1952,6 +2005,7 @@ export type MachineMasterUpdateWithoutCutListRulesInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1981,6 +2035,7 @@ export type MachineMasterUncheckedUpdateWithoutCutListRulesInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2007,6 +2062,7 @@ export type MachineMasterCreateManyVendorInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -2025,6 +2081,7 @@ export type MachineMasterUpdateWithoutVendorInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2053,6 +2110,7 @@ export type MachineMasterUncheckedUpdateWithoutVendorInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2080,6 +2138,7 @@ export type MachineMasterUncheckedUpdateManyWithoutVendorInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2100,6 +2159,7 @@ export type MachineMasterCreateManyMachineTypeInput = {
   factory_id?: number | null
   sequence_no?: number | null
   target_per_hour?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Date | string | null
   image_path?: string | null
   created_by: number
   created_at?: Date | string
@@ -2118,6 +2178,7 @@ export type MachineMasterUpdateWithoutMachineTypeInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2146,6 +2207,7 @@ export type MachineMasterUncheckedUpdateWithoutMachineTypeInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2173,6 +2235,7 @@ export type MachineMasterUncheckedUpdateManyWithoutMachineTypeInput = {
   factory_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   target_per_hour?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchased_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2279,6 +2342,7 @@ export type MachineMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   factory_id?: boolean
   sequence_no?: boolean
   target_per_hour?: boolean
+  purchased_at?: boolean
   image_path?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -2310,6 +2374,7 @@ export type MachineMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   factory_id?: boolean
   sequence_no?: boolean
   target_per_hour?: boolean
+  purchased_at?: boolean
   image_path?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -2333,6 +2398,7 @@ export type MachineMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   factory_id?: boolean
   sequence_no?: boolean
   target_per_hour?: boolean
+  purchased_at?: boolean
   image_path?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -2356,6 +2422,7 @@ export type MachineMasterSelectScalar = {
   factory_id?: boolean
   sequence_no?: boolean
   target_per_hour?: boolean
+  purchased_at?: boolean
   image_path?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -2363,7 +2430,7 @@ export type MachineMasterSelectScalar = {
   updated_by?: boolean
 }
 
-export type MachineMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"fabrication" | "id" | "machine_name" | "machine_code" | "machine_type" | "machine_type_id" | "status" | "scan_type" | "description" | "vendor_id" | "factory_id" | "sequence_no" | "target_per_hour" | "image_path" | "created_by" | "created_at" | "updated_at" | "updated_by", ExtArgs["result"]["machineMaster"]>
+export type MachineMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"fabrication" | "id" | "machine_name" | "machine_code" | "machine_type" | "machine_type_id" | "status" | "scan_type" | "description" | "vendor_id" | "factory_id" | "sequence_no" | "target_per_hour" | "purchased_at" | "image_path" | "created_by" | "created_at" | "updated_at" | "updated_by", ExtArgs["result"]["machineMaster"]>
 export type MachineMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   costDescriptions?: boolean | Prisma.MachineMaster$costDescriptionsArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.MachineMaster$cutListMachineMappingArgs<ExtArgs>
@@ -2412,6 +2479,7 @@ export type $MachineMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     factory_id: number | null
     sequence_no: number | null
     target_per_hour: runtime.Decimal | null
+    purchased_at: Date | null
     image_path: string | null
     created_by: number
     created_at: Date
@@ -2862,6 +2930,7 @@ export interface MachineMasterFieldRefs {
   readonly factory_id: Prisma.FieldRef<"MachineMaster", 'Int'>
   readonly sequence_no: Prisma.FieldRef<"MachineMaster", 'Int'>
   readonly target_per_hour: Prisma.FieldRef<"MachineMaster", 'Decimal'>
+  readonly purchased_at: Prisma.FieldRef<"MachineMaster", 'DateTime'>
   readonly image_path: Prisma.FieldRef<"MachineMaster", 'String'>
   readonly created_by: Prisma.FieldRef<"MachineMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"MachineMaster", 'DateTime'>

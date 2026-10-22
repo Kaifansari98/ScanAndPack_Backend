@@ -20244,6 +20244,7 @@ export const MachineMasterScalarFieldEnum = {
   factory_id: 'factory_id',
   sequence_no: 'sequence_no',
   target_per_hour: 'target_per_hour',
+  purchased_at: 'purchased_at',
   image_path: 'image_path',
   created_by: 'created_by',
   created_at: 'created_at',
