@@ -17,6 +17,20 @@ export const ReturnOrderDeliveryMethod = {
 export type ReturnOrderDeliveryMethod = (typeof ReturnOrderDeliveryMethod)[keyof typeof ReturnOrderDeliveryMethod]
 
 
+export const MachineCostSheet = {
+  MACHINE_COST: 'MACHINE_COST',
+  MACHINE_ELECTRICALS: 'MACHINE_ELECTRICALS',
+  MACHINE_MAINTENANCE: 'MACHINE_MAINTENANCE',
+  MACHINE_CAPACITY: 'MACHINE_CAPACITY',
+  MACHINE_TOOL_GLUE: 'MACHINE_TOOL_GLUE',
+  MACHINE_LABOUR: 'MACHINE_LABOUR',
+  GENERAL_DATA: 'GENERAL_DATA',
+  PROCESS_COST: 'PROCESS_COST'
+} as const
+
+export type MachineCostSheet = (typeof MachineCostSheet)[keyof typeof MachineCostSheet]
+
+
 export const MaterialSupplyType = {
   Frankvin: 'Frankvin',
   Client: 'Client',

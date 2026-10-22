@@ -41,6 +41,7 @@ export type LeadMasterAvgAggregateOutputType = {
   booking_amount: number | null
   pending_amount: number | null
   total_project_amount: number | null
+  cadbid_customer_id: number | null
   no_of_client_documents_initially_submitted: number | null
   no_of_boxes: number | null
   mrp_value: number | null
@@ -65,6 +66,7 @@ export type LeadMasterSumAggregateOutputType = {
   booking_amount: number | null
   pending_amount: number | null
   total_project_amount: number | null
+  cadbid_customer_id: number | null
   no_of_client_documents_initially_submitted: number | null
   no_of_boxes: number | null
   mrp_value: number | null
@@ -111,6 +113,7 @@ export type LeadMasterMinAggregateOutputType = {
   is_draft: boolean | null
   draft_in_open_leads: boolean | null
   lead_code: string | null
+  cadbid_customer_id: number | null
   is_client_approval_submitted: boolean | null
   client_required_order_login_complition_date: Date | null
   expected_order_login_ready_date: Date | null
@@ -209,6 +212,7 @@ export type LeadMasterMaxAggregateOutputType = {
   is_draft: boolean | null
   draft_in_open_leads: boolean | null
   lead_code: string | null
+  cadbid_customer_id: number | null
   is_client_approval_submitted: boolean | null
   client_required_order_login_complition_date: Date | null
   expected_order_login_ready_date: Date | null
@@ -307,6 +311,7 @@ export type LeadMasterCountAggregateOutputType = {
   is_draft: number
   draft_in_open_leads: number
   lead_code: number
+  cadbid_customer_id: number
   is_client_approval_submitted: number
   client_required_order_login_complition_date: number
   expected_order_login_ready_date: number
@@ -385,6 +390,7 @@ export type LeadMasterAvgAggregateInputType = {
   booking_amount?: true
   pending_amount?: true
   total_project_amount?: true
+  cadbid_customer_id?: true
   no_of_client_documents_initially_submitted?: true
   no_of_boxes?: true
   mrp_value?: true
@@ -409,6 +415,7 @@ export type LeadMasterSumAggregateInputType = {
   booking_amount?: true
   pending_amount?: true
   total_project_amount?: true
+  cadbid_customer_id?: true
   no_of_client_documents_initially_submitted?: true
   no_of_boxes?: true
   mrp_value?: true
@@ -455,6 +462,7 @@ export type LeadMasterMinAggregateInputType = {
   is_draft?: true
   draft_in_open_leads?: true
   lead_code?: true
+  cadbid_customer_id?: true
   is_client_approval_submitted?: true
   client_required_order_login_complition_date?: true
   expected_order_login_ready_date?: true
@@ -553,6 +561,7 @@ export type LeadMasterMaxAggregateInputType = {
   is_draft?: true
   draft_in_open_leads?: true
   lead_code?: true
+  cadbid_customer_id?: true
   is_client_approval_submitted?: true
   client_required_order_login_complition_date?: true
   expected_order_login_ready_date?: true
@@ -651,6 +660,7 @@ export type LeadMasterCountAggregateInputType = {
   is_draft?: true
   draft_in_open_leads?: true
   lead_code?: true
+  cadbid_customer_id?: true
   is_client_approval_submitted?: true
   client_required_order_login_complition_date?: true
   expected_order_login_ready_date?: true
@@ -836,6 +846,7 @@ export type LeadMasterGroupByOutputType = {
   is_draft: boolean
   draft_in_open_leads: boolean
   lead_code: string
+  cadbid_customer_id: number | null
   is_client_approval_submitted: boolean
   client_required_order_login_complition_date: Date | null
   expected_order_login_ready_date: Date | null
@@ -957,6 +968,7 @@ export type LeadMasterWhereInput = {
   is_draft?: Prisma.BoolFilter<"LeadMaster"> | boolean
   draft_in_open_leads?: Prisma.BoolFilter<"LeadMaster"> | boolean
   lead_code?: Prisma.StringFilter<"LeadMaster"> | string
+  cadbid_customer_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   is_client_approval_submitted?: Prisma.BoolFilter<"LeadMaster"> | boolean
   client_required_order_login_complition_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   expected_order_login_ready_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -1127,6 +1139,7 @@ export type LeadMasterOrderByWithRelationInput = {
   is_draft?: Prisma.SortOrder
   draft_in_open_leads?: Prisma.SortOrder
   lead_code?: Prisma.SortOrder
+  cadbid_customer_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_client_approval_submitted?: Prisma.SortOrder
   client_required_order_login_complition_date?: Prisma.SortOrderInput | Prisma.SortOrder
   expected_order_login_ready_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1301,6 +1314,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   is_draft?: Prisma.BoolFilter<"LeadMaster"> | boolean
   draft_in_open_leads?: Prisma.BoolFilter<"LeadMaster"> | boolean
   lead_code?: Prisma.StringFilter<"LeadMaster"> | string
+  cadbid_customer_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   is_client_approval_submitted?: Prisma.BoolFilter<"LeadMaster"> | boolean
   client_required_order_login_complition_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   expected_order_login_ready_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -1471,6 +1485,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   is_draft?: Prisma.SortOrder
   draft_in_open_leads?: Prisma.SortOrder
   lead_code?: Prisma.SortOrder
+  cadbid_customer_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_client_approval_submitted?: Prisma.SortOrder
   client_required_order_login_complition_date?: Prisma.SortOrderInput | Prisma.SortOrder
   expected_order_login_ready_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1577,6 +1592,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   is_draft?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
   draft_in_open_leads?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
   lead_code?: Prisma.StringWithAggregatesFilter<"LeadMaster"> | string
+  cadbid_customer_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   is_client_approval_submitted?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
   client_required_order_login_complition_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   expected_order_login_ready_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
@@ -1665,6 +1681,7 @@ export type LeadMasterCreateInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -1832,6 +1849,7 @@ export type LeadMasterUncheckedCreateInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -1980,6 +1998,7 @@ export type LeadMasterUpdateInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2147,6 +2166,7 @@ export type LeadMasterUncheckedUpdateInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2305,6 +2325,7 @@ export type LeadMasterCreateManyInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -2393,6 +2414,7 @@ export type LeadMasterUpdateManyMutationInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2488,6 +2510,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2606,6 +2629,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   is_draft?: Prisma.SortOrder
   draft_in_open_leads?: Prisma.SortOrder
   lead_code?: Prisma.SortOrder
+  cadbid_customer_id?: Prisma.SortOrder
   is_client_approval_submitted?: Prisma.SortOrder
   client_required_order_login_complition_date?: Prisma.SortOrder
   expected_order_login_ready_date?: Prisma.SortOrder
@@ -2682,6 +2706,7 @@ export type LeadMasterAvgOrderByAggregateInput = {
   booking_amount?: Prisma.SortOrder
   pending_amount?: Prisma.SortOrder
   total_project_amount?: Prisma.SortOrder
+  cadbid_customer_id?: Prisma.SortOrder
   no_of_client_documents_initially_submitted?: Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
@@ -2728,6 +2753,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   is_draft?: Prisma.SortOrder
   draft_in_open_leads?: Prisma.SortOrder
   lead_code?: Prisma.SortOrder
+  cadbid_customer_id?: Prisma.SortOrder
   is_client_approval_submitted?: Prisma.SortOrder
   client_required_order_login_complition_date?: Prisma.SortOrder
   expected_order_login_ready_date?: Prisma.SortOrder
@@ -2826,6 +2852,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   is_draft?: Prisma.SortOrder
   draft_in_open_leads?: Prisma.SortOrder
   lead_code?: Prisma.SortOrder
+  cadbid_customer_id?: Prisma.SortOrder
   is_client_approval_submitted?: Prisma.SortOrder
   client_required_order_login_complition_date?: Prisma.SortOrder
   expected_order_login_ready_date?: Prisma.SortOrder
@@ -2902,6 +2929,7 @@ export type LeadMasterSumOrderByAggregateInput = {
   booking_amount?: Prisma.SortOrder
   pending_amount?: Prisma.SortOrder
   total_project_amount?: Prisma.SortOrder
+  cadbid_customer_id?: Prisma.SortOrder
   no_of_client_documents_initially_submitted?: Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
@@ -4341,6 +4369,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -4506,6 +4535,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -4693,6 +4723,7 @@ export type LeadMasterScalarWhereInput = {
   is_draft?: Prisma.BoolFilter<"LeadMaster"> | boolean
   draft_in_open_leads?: Prisma.BoolFilter<"LeadMaster"> | boolean
   lead_code?: Prisma.StringFilter<"LeadMaster"> | string
+  cadbid_customer_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   is_client_approval_submitted?: Prisma.BoolFilter<"LeadMaster"> | boolean
   client_required_order_login_complition_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   expected_order_login_ready_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -4781,6 +4812,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -4946,6 +4978,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -5104,6 +5137,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -5269,6 +5303,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -5427,6 +5462,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -5592,6 +5628,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -5750,6 +5787,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -5915,6 +5953,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -6137,6 +6176,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -6303,6 +6343,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -6466,6 +6507,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6632,6 +6674,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6779,6 +6822,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -6945,6 +6989,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -7108,6 +7153,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7274,6 +7320,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7421,6 +7468,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -7587,6 +7635,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -7755,6 +7804,7 @@ export type LeadMasterCreateWithoutClientInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -7921,6 +7971,7 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -8094,6 +8145,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -8260,6 +8312,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -8423,6 +8476,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8589,6 +8643,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8736,6 +8791,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -8902,6 +8958,7 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -9065,6 +9122,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9231,6 +9289,7 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9378,6 +9437,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -9544,6 +9604,7 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -9707,6 +9768,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9873,6 +9935,7 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10020,6 +10083,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -10186,6 +10250,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -10349,6 +10414,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10515,6 +10581,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10662,6 +10729,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -10828,6 +10896,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -10991,6 +11060,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11157,6 +11227,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11304,6 +11375,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -11470,6 +11542,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -11633,6 +11706,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11799,6 +11873,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11946,6 +12021,7 @@ export type LeadMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -12112,6 +12188,7 @@ export type LeadMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = 
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -12275,6 +12352,7 @@ export type LeadMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12441,6 +12519,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = 
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12588,6 +12667,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -12753,6 +12833,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -12927,6 +13008,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -13092,6 +13174,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -13266,6 +13349,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -13431,6 +13515,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -13605,6 +13690,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -13771,6 +13857,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -13934,6 +14021,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14100,6 +14188,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14247,6 +14336,7 @@ export type LeadMasterCreateWithoutLeadProcessBriefsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -14413,6 +14503,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -14576,6 +14667,7 @@ export type LeadMasterUpdateWithoutLeadProcessBriefsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14742,6 +14834,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14889,6 +14982,7 @@ export type LeadMasterCreateWithoutLeadRequirementMaterialsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -15055,6 +15149,7 @@ export type LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -15218,6 +15313,7 @@ export type LeadMasterUpdateWithoutLeadRequirementMaterialsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15384,6 +15480,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15531,6 +15628,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -15697,6 +15795,7 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -15860,6 +15959,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16026,6 +16126,7 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16173,6 +16274,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -16339,6 +16441,7 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -16502,6 +16605,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16668,6 +16772,7 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16815,6 +16920,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -16981,6 +17087,7 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -17144,6 +17251,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17310,6 +17418,7 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17457,6 +17566,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -17623,6 +17733,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -17786,6 +17897,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17952,6 +18064,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18099,6 +18212,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -18265,6 +18379,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -18428,6 +18543,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18594,6 +18710,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18741,6 +18858,7 @@ export type LeadMasterCreateWithoutB2bDocumentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -18907,6 +19025,7 @@ export type LeadMasterUncheckedCreateWithoutB2bDocumentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -19070,6 +19189,7 @@ export type LeadMasterUpdateWithoutB2bDocumentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19236,6 +19356,7 @@ export type LeadMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19383,6 +19504,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -19549,6 +19671,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -19712,6 +19835,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19878,6 +20002,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20025,6 +20150,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -20191,6 +20317,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -20354,6 +20481,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20520,6 +20648,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20667,6 +20796,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -20833,6 +20963,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -20996,6 +21127,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21162,6 +21294,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21309,6 +21442,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -21475,6 +21609,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -21638,6 +21773,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21804,6 +21940,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21951,6 +22088,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -22117,6 +22255,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -22280,6 +22419,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22446,6 +22586,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22593,6 +22734,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -22759,6 +22901,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -22922,6 +23065,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23088,6 +23232,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23235,6 +23380,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -23401,6 +23547,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -23564,6 +23711,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23730,6 +23878,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23877,6 +24026,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -24043,6 +24193,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -24206,6 +24357,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24372,6 +24524,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24519,6 +24672,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -24685,6 +24839,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -24848,6 +25003,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25014,6 +25170,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25161,6 +25318,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -25326,6 +25484,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -25500,6 +25659,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -25666,6 +25826,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -25829,6 +25990,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25995,6 +26157,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26142,6 +26305,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -26308,6 +26472,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -26471,6 +26636,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26637,6 +26803,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26784,6 +26951,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -26950,6 +27118,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -27113,6 +27282,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27279,6 +27449,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27426,6 +27597,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -27592,6 +27764,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -27755,6 +27928,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27921,6 +28095,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28068,6 +28243,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -28234,6 +28410,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -28397,6 +28574,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28563,6 +28741,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28710,6 +28889,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -28876,6 +29056,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -29039,6 +29220,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29205,6 +29387,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29352,6 +29535,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -29518,6 +29702,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -29681,6 +29866,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29847,6 +30033,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29994,6 +30181,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -30160,6 +30348,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -30323,6 +30512,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30489,6 +30679,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30636,6 +30827,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -30802,6 +30994,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -30965,6 +31158,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31131,6 +31325,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31278,6 +31473,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -31444,6 +31640,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -31607,6 +31804,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31773,6 +31971,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31920,6 +32119,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -32086,6 +32286,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -32249,6 +32450,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32415,6 +32617,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32562,6 +32765,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -32728,6 +32932,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -32891,6 +33096,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33057,6 +33263,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33204,6 +33411,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -33370,6 +33578,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -33533,6 +33742,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33699,6 +33909,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33846,6 +34057,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -34012,6 +34224,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -34175,6 +34388,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34341,6 +34555,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34488,6 +34703,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -34654,6 +34870,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -34817,6 +35034,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34983,6 +35201,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35130,6 +35349,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -35296,6 +35516,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -35459,6 +35680,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35625,6 +35847,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35772,6 +35995,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -35938,6 +36162,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -36101,6 +36326,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36267,6 +36493,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36414,6 +36641,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -36580,6 +36808,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -36743,6 +36972,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36909,6 +37139,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37056,6 +37287,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -37222,6 +37454,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -37385,6 +37618,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37551,6 +37785,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37698,6 +37933,7 @@ export type LeadMasterCreateWithoutMiscellaneousFollowupsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -37864,6 +38100,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -38027,6 +38264,7 @@ export type LeadMasterUpdateWithoutMiscellaneousFollowupsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38193,6 +38431,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38340,6 +38579,7 @@ export type LeadMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappingI
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -38506,6 +38746,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMateria
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -38669,6 +38910,7 @@ export type LeadMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappingI
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38835,6 +39077,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMateria
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38982,6 +39225,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -39148,6 +39392,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -39311,6 +39556,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39477,6 +39723,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39624,6 +39871,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -39790,6 +40038,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -39953,6 +40202,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40119,6 +40369,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40266,6 +40517,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -40432,6 +40684,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -40595,6 +40848,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40761,6 +41015,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40908,6 +41163,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -41074,6 +41330,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -41237,6 +41494,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -41403,6 +41661,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -41550,6 +41809,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -41716,6 +41976,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -41889,6 +42150,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -42055,6 +42317,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -42218,6 +42481,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42384,6 +42648,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42531,6 +42796,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -42697,6 +42963,7 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -42870,6 +43137,7 @@ export type LeadMasterCreateWithoutLeadB2BReqMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -43036,6 +43304,7 @@ export type LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -43199,6 +43468,7 @@ export type LeadMasterUpdateWithoutLeadB2BReqMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43365,6 +43635,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43512,6 +43783,7 @@ export type LeadMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -43678,6 +43950,7 @@ export type LeadMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -43841,6 +44114,7 @@ export type LeadMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44007,6 +44281,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44154,6 +44429,7 @@ export type LeadMasterCreateWithoutOnline_leadsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -44320,6 +44596,7 @@ export type LeadMasterUncheckedCreateWithoutOnline_leadsInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -44483,6 +44760,7 @@ export type LeadMasterUpdateWithoutOnline_leadsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44649,6 +44927,7 @@ export type LeadMasterUncheckedUpdateWithoutOnline_leadsInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44796,6 +45075,7 @@ export type LeadMasterCreateWithoutLeadBillingAddressesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -44962,6 +45242,7 @@ export type LeadMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -45125,6 +45406,7 @@ export type LeadMasterUpdateWithoutLeadBillingAddressesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45291,6 +45573,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45438,6 +45721,7 @@ export type LeadMasterCreateWithoutProductsRequiredForProductionInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -45604,6 +45888,7 @@ export type LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -45767,6 +46052,7 @@ export type LeadMasterUpdateWithoutProductsRequiredForProductionInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45933,6 +46219,7 @@ export type LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -46080,6 +46367,7 @@ export type LeadMasterCreateWithoutWalkinResponsesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -46246,6 +46534,7 @@ export type LeadMasterUncheckedCreateWithoutWalkinResponsesInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -46409,6 +46698,7 @@ export type LeadMasterUpdateWithoutWalkinResponsesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -46575,6 +46865,7 @@ export type LeadMasterUncheckedUpdateWithoutWalkinResponsesInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -46731,6 +47022,7 @@ export type LeadMasterCreateManyVendorInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -46819,6 +47111,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -46984,6 +47277,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47141,6 +47435,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47238,6 +47533,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -47335,6 +47631,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -47432,6 +47729,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -47529,6 +47827,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -47617,6 +47916,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47782,6 +48082,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47939,6 +48240,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48027,6 +48329,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48192,6 +48495,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48349,6 +48653,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48437,6 +48742,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48602,6 +48908,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48759,6 +49066,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -48847,6 +49155,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49012,6 +49321,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49169,6 +49479,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49257,6 +49568,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49423,6 +49735,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49580,6 +49893,7 @@ export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49678,6 +49992,7 @@ export type LeadMasterCreateManyClientInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -49765,6 +50080,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49931,6 +50247,7 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50088,6 +50405,7 @@ export type LeadMasterUncheckedUpdateManyWithoutClientInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50184,6 +50502,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -50272,6 +50591,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50437,6 +50757,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50594,6 +50915,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50691,6 +51013,7 @@ export type LeadMasterCreateManySourceInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -50779,6 +51102,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50944,6 +51268,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51101,6 +51426,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51198,6 +51524,7 @@ export type LeadMasterCreateManyAccountInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -51286,6 +51613,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51451,6 +51779,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51608,6 +51937,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51705,6 +52035,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -51793,6 +52124,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51958,6 +52290,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52115,6 +52448,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52213,6 +52547,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -52300,6 +52635,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52466,6 +52802,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52623,6 +52960,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52720,6 +53058,7 @@ export type LeadMasterCreateManyArchitectInput = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code: string
+  cadbid_customer_id?: number | null
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: Date | string | null
   expected_order_login_ready_date?: Date | string | null
@@ -52807,6 +53146,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52973,6 +53313,7 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53130,6 +53471,7 @@ export type LeadMasterUncheckedUpdateManyWithoutArchitectInput = {
   is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   draft_in_open_leads?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbid_customer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53789,6 +54131,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code?: boolean
+  cadbid_customer_id?: boolean
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: boolean
   expected_order_login_ready_date?: boolean
@@ -53960,6 +54303,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code?: boolean
+  cadbid_customer_id?: boolean
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: boolean
   expected_order_login_ready_date?: boolean
@@ -54070,6 +54414,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code?: boolean
+  cadbid_customer_id?: boolean
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: boolean
   expected_order_login_ready_date?: boolean
@@ -54180,6 +54525,7 @@ export type LeadMasterSelectScalar = {
   is_draft?: boolean
   draft_in_open_leads?: boolean
   lead_code?: boolean
+  cadbid_customer_id?: boolean
   is_client_approval_submitted?: boolean
   client_required_order_login_complition_date?: boolean
   expected_order_login_ready_date?: boolean
@@ -54241,7 +54587,7 @@ export type LeadMasterSelectScalar = {
   project_status?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "draft_in_open_leads" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark" | "usable_handover_completed_at" | "actual_installation_completion_at" | "final_handover_marked_at" | "tech_check_completed_at" | "tech_check_reached_at" | "priority" | "amc_opted_at" | "is_amc_opted" | "amc_plan_closed_at" | "amc_plan_started_at" | "vehicle_approachability_for_dispatch" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at" | "archetech_number" | "is_small_order_request" | "material_lift_size" | "fast_production_approved_at" | "fast_production_status" | "is_fast_production" | "tentative_order_login_date" | "isLargeScaleProjectLead" | "architect_id" | "client_id" | "order_number" | "refered_by" | "is_so_value_received" | "so_value_received_at" | "project_status", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "draft_in_open_leads" | "lead_code" | "cadbid_customer_id" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark" | "usable_handover_completed_at" | "actual_installation_completion_at" | "final_handover_marked_at" | "tech_check_completed_at" | "tech_check_reached_at" | "priority" | "amc_opted_at" | "is_amc_opted" | "amc_plan_closed_at" | "amc_plan_started_at" | "vehicle_approachability_for_dispatch" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at" | "archetech_number" | "is_small_order_request" | "material_lift_size" | "fast_production_approved_at" | "fast_production_status" | "is_fast_production" | "tentative_order_login_date" | "isLargeScaleProjectLead" | "architect_id" | "client_id" | "order_number" | "refered_by" | "is_so_value_received" | "so_value_received_at" | "project_status", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.LeadMaster$productsRequiredForProductionArgs<ExtArgs>
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
@@ -54459,6 +54805,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     is_draft: boolean
     draft_in_open_leads: boolean
     lead_code: string
+    cadbid_customer_id: number | null
     is_client_approval_submitted: boolean
     client_required_order_login_complition_date: Date | null
     expected_order_login_ready_date: Date | null
@@ -55049,6 +55396,7 @@ export interface LeadMasterFieldRefs {
   readonly is_draft: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly draft_in_open_leads: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly lead_code: Prisma.FieldRef<"LeadMaster", 'String'>
+  readonly cadbid_customer_id: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly is_client_approval_submitted: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly client_required_order_login_complition_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly expected_order_login_ready_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>

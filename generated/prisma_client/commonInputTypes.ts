@@ -1003,6 +1003,23 @@ export type EnumModulesVendorMappingActiveStatusWithAggregatesFilter<$PrismaMode
   _max?: Prisma.NestedEnumModulesVendorMappingActiveStatusFilter<$PrismaModel>
 }
 
+export type EnumMachineCostSheetFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineCostSheet | Prisma.EnumMachineCostSheetFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineCostSheetFilter<$PrismaModel> | $Enums.MachineCostSheet
+}
+
+export type EnumMachineCostSheetWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineCostSheet | Prisma.EnumMachineCostSheetFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineCostSheetWithAggregatesFilter<$PrismaModel> | $Enums.MachineCostSheet
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMachineCostSheetFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMachineCostSheetFilter<$PrismaModel>
+}
+
 export type EnumFabricationTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.FabricationType | Prisma.EnumFabricationTypeFieldRefInput<$PrismaModel>
   in?: $Enums.FabricationType[] | Prisma.ListEnumFabricationTypeFieldRefInput<$PrismaModel>
@@ -2909,6 +2926,23 @@ export type NestedEnumModulesVendorMappingActiveStatusWithAggregatesFilter<$Pris
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumModulesVendorMappingActiveStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumModulesVendorMappingActiveStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumMachineCostSheetFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineCostSheet | Prisma.EnumMachineCostSheetFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineCostSheetFilter<$PrismaModel> | $Enums.MachineCostSheet
+}
+
+export type NestedEnumMachineCostSheetWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MachineCostSheet | Prisma.EnumMachineCostSheetFieldRefInput<$PrismaModel>
+  in?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MachineCostSheet[] | Prisma.ListEnumMachineCostSheetFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMachineCostSheetWithAggregatesFilter<$PrismaModel> | $Enums.MachineCostSheet
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMachineCostSheetFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMachineCostSheetFilter<$PrismaModel>
 }
 
 export type NestedEnumFabricationTypeFilter<$PrismaModel = never> = {

@@ -25,7 +25,8 @@ export interface MachineData {
   updated_by: number;
   factory_id?: number;
   sequence_no: number;
-  target_per_hour: number;
+  target_per_hour?: number;
+  purchased_at?: Date | null;
   image_path: string;
 }
 
@@ -40,6 +41,7 @@ export interface UpdateMachineData {
   factory_id?: number;
   sequence_no?: number;
   target_per_hour?: number;
+  purchased_at?: Date | null;
   image_path?: string;
   updated_by: number;
 }
@@ -60,7 +62,6 @@ export const validateCreateMachine = (data: any) => {
   if (!data.created_by) throw new Error("created_by required");
   if (!data.updated_by) throw new Error("updated_by required");
   if (!data.sequence_no) throw new Error("sequence_no is required");
-  if (!data.target_per_hour) throw new Error("target_per_hour is required");
   if (!data.image_path) throw new Error("image_path is required");
 };
 
