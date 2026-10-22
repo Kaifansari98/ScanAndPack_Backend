@@ -1890,6 +1890,7 @@ export const getProjectsByVendorIdService = async (
         project_status: true,
         track_trace_status: true,
         created_at: true,
+        is_multi_location: true,
 
         createdByUser: {
           select: {
@@ -1955,7 +1956,7 @@ export const getProjectsByVendorIdService = async (
   |--------------------------------------------------------------------------
   */
 
-  const [manualCutListItems, allBoxes] =
+  const [manualCutListItems, allBoxes, allLocationQuantities] =
     await Promise.all([
       prisma.cutList.findMany({
         where: {
@@ -1997,12 +1998,52 @@ export const getProjectsByVendorIdService = async (
         },
 
         select: {
+          id: true,
           project_id: true,
           factory_out_at: true,
           site_in_at: true,
+          cutListMachineMapping: {
+            where: {
+              actual_in_at: { not: null },
+            },
+            select: {
+              projectLocationProductQuantity: {
+                select: {
+                  location_name: true,
+                },
+              },
+            },
+          },
         },
       }),
+
+      prisma.projectLocationProductQuantity.findMany({
+        where: {
+          vendor_id: vendorId,
+          project_id: {
+            in: allProjectIds,
+          },
+        },
+        select: {
+          project_id: true,
+          location_name: true,
+        },
+        distinct: ["project_id", "location_name"],
+      }),
     ]);
+
+  const locationsByProject = new Map<number, string[]>();
+  for (const loc of allLocationQuantities) {
+    const locName = loc.location_name?.trim();
+    if (!locName) continue;
+    if (!locationsByProject.has(loc.project_id)) {
+      locationsByProject.set(loc.project_id, []);
+    }
+    const list = locationsByProject.get(loc.project_id)!;
+    if (!list.includes(locName)) {
+      list.push(locName);
+    }
+  }
 
   /*
   |--------------------------------------------------------------------------
@@ -2738,6 +2779,56 @@ export const getProjectsByVendorIdService = async (
               null
           );
 
+        const allSiteInSet =
+          projectBoxes.length > 0 &&
+          projectBoxes.every((box: any) => box.site_in_at !== null);
+
+        const anySiteInSet = projectBoxes.some(
+          (box: any) => box.site_in_at !== null
+        );
+
+        const configuredLocations = locationsByProject.get(pid) ?? [];
+
+        const locationStatuses = configuredLocations.map((locName) => {
+          const normLoc = locName.trim().toLocaleLowerCase();
+          const locBoxes = projectBoxes.filter((box: any) => {
+            const bLocs = Array.from(
+              new Set(
+                (box.cutListMachineMapping || [])
+                  .map((m: any) =>
+                    m.projectLocationProductQuantity?.location_name
+                      ?.trim()
+                      ?.toLocaleLowerCase()
+                  )
+                  .filter(Boolean)
+              )
+            );
+            return bLocs.includes(normLoc);
+          });
+
+          const totalBoxes = locBoxes.length;
+          const factoryOutBoxes = locBoxes.filter(
+            (b: any) => b.factory_out_at !== null
+          ).length;
+          const siteInBoxes = locBoxes.filter(
+            (b: any) => b.site_in_at !== null
+          ).length;
+
+          return {
+            location_name: locName,
+            total_boxes: totalBoxes,
+            factory_out_boxes: factoryOutBoxes,
+            site_in_boxes: siteInBoxes,
+            all_factory_out: totalBoxes > 0 && factoryOutBoxes === totalBoxes,
+            all_site_in: totalBoxes > 0 && siteInBoxes === totalBoxes,
+            any_site_in: siteInBoxes > 0,
+          };
+        });
+
+        const hasSiteItems = project.is_multi_location
+          ? locationStatuses.some((l) => l.all_site_in || l.site_in_boxes > 0)
+          : anySiteInSet;
+
         /*
         |--------------------------------------------------------------------------
         | Latest Factory Out
@@ -2836,6 +2927,9 @@ export const getProjectsByVendorIdService = async (
           created_at:
             project.created_at,
 
+          is_multi_location:
+            Boolean(project.is_multi_location),
+
           createdByUser:
             project.createdByUser,
 
@@ -2864,6 +2958,18 @@ export const getProjectsByVendorIdService = async (
 
           any_factory_out:
             anyFactoryOutSet,
+
+          all_site_in:
+            allSiteInSet,
+
+          any_site_in:
+            anySiteInSet,
+
+          has_site_items:
+            hasSiteItems,
+
+          locations:
+            locationStatuses,
         };
       }
     );
