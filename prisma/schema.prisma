@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  machineCostDescriptions                      MachineCostDescription[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
   id                                           Int                                            @id @default(autoincrement())
   vendor_name                                  String
@@ -3136,7 +3137,39 @@ model VendorModulesMapping {
   vendor     VendorMaster                     @relation(fields: [vendor_id], references: [id])
 }
 
+model MachineCostDescription {
+  id            Int          @id @default(autoincrement())
+  vendor_id     Int
+  machine_id    Int
+  code          String
+  description   String
+  sequence_no   Int
+  amount        Decimal?     @db.Decimal(20, 6)
+  formula       String?
+  text_value    String?
+  value_format  String?
+  sheet         MachineCostSheet @default(MACHINE_COST)
+  vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  machine       MachineMaster @relation(fields: [machine_id, vendor_id], references: [id, vendor_id], onDelete: Cascade)
+
+  @@unique([vendor_id, machine_id, code])
+  @@index([vendor_id, machine_id, sequence_no])
+  @@index([vendor_id, machine_id, sheet, sequence_no])
+}
+
+enum MachineCostSheet {
+  MACHINE_COST
+  MACHINE_ELECTRICALS
+  MACHINE_MAINTENANCE
+  MACHINE_CAPACITY
+  MACHINE_TOOL_GLUE
+  MACHINE_LABOUR
+  GENERAL_DATA
+  PROCESS_COST
+}
+
 model MachineMaster {
+  costDescriptions      MachineCostDescription[]
   fabrication           FabricationType              @default(WOODWORK)
   id                    Int                          @id @default(autoincrement())
   machine_name          String
@@ -3165,6 +3198,7 @@ model MachineMaster {
   cutListRules          CutListRuleMaster[]          @relation("CutListRules")
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
+  @@unique([id, vendor_id])
   @@index([vendor_id, status])
 }
 

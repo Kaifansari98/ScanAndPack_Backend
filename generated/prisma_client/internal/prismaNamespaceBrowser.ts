@@ -177,6 +177,7 @@ export const ModelName = {
   VloqEmailLogs: 'VloqEmailLogs',
   ModulesMaster: 'ModulesMaster',
   VendorModulesMapping: 'VendorModulesMapping',
+  MachineCostDescription: 'MachineCostDescription',
   MachineMaster: 'MachineMaster',
   CutlistHeadersMapping: 'CutlistHeadersMapping',
   CutList: 'CutList',
@@ -2434,6 +2435,23 @@ export const VendorModulesMappingScalarFieldEnum = {
 } as const
 
 export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingScalarFieldEnum)[keyof typeof VendorModulesMappingScalarFieldEnum]
+
+
+export const MachineCostDescriptionScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  machine_id: 'machine_id',
+  code: 'code',
+  description: 'description',
+  sequence_no: 'sequence_no',
+  amount: 'amount',
+  formula: 'formula',
+  text_value: 'text_value',
+  value_format: 'value_format',
+  sheet: 'sheet'
+} as const
+
+export type MachineCostDescriptionScalarFieldEnum = (typeof MachineCostDescriptionScalarFieldEnum)[keyof typeof MachineCostDescriptionScalarFieldEnum]
 
 
 export const MachineMasterScalarFieldEnum = {
