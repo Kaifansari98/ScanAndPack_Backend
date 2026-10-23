@@ -1366,20 +1366,6 @@ const getPackagingStats = async (
       continue;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Only rows created by manual selection
-    |--------------------------------------------------------------------------
-    */
-
-    if (
-      row.row_created_source
-        ?.trim()
-        .toLowerCase() !==
-      "manual"
-    ) {
-      continue;
-    }
 
     if (
       !manualMappingsByCutList.has(
@@ -2443,20 +2429,6 @@ export const getProjectsByVendorIdService = async (
       continue;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Only manually created rows
-    |--------------------------------------------------------------------------
-    */
-
-    if (
-      row.row_created_source
-        ?.trim()
-        .toLowerCase() !==
-      "manual"
-    ) {
-      continue;
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -2933,8 +2905,12 @@ export const getProjectsByVendorIdService = async (
           createdByUser:
             project.createdByUser,
 
-          details:
-            project.details,
+          details: (project.details || []).map((d) => ({
+            ...d,
+            total_items: totalItems,
+            total_packed: totalPacked,
+            total_unpacked: totalUnpacked,
+          })),
 
           aggregatedTotals: {
             total_items:
