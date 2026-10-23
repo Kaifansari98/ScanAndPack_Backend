@@ -7492,9 +7492,74 @@ export const markBoxFactoryOutService = async (
         const hasProjectLocations =
           locationRows.length > 0 || project?.is_multi_location === true;
 
-        // Location is assigned only to the selected box. Product completion
-        // happens when the operator dispatches a compatible component box.
-        const locationScope = box.cutListMachineMapping;
+        // A product set can span multiple component boxes (for example,
+        // top/middle/bottom boxes). Its location belongs to the complete set,
+        // not only to the box currently being dispatched.
+        const boxGroupNames = Array.from(
+          new Set(
+            [
+              box.product_group_name?.trim(),
+              ...box.cutListMachineMapping
+                .map((mapping) => mapping.cut_list.group_name?.trim())
+                .filter((groupName): groupName is string => Boolean(groupName)),
+            ].filter((groupName): groupName is string => Boolean(groupName)),
+          ),
+        );
+
+        const productSetMappings =
+          box.product_set_no != null
+            ? await tx.cutListMachineMapping.findMany({
+                where: {
+                  project_id,
+                  vendor_id,
+                  actual_in_at: { not: null },
+                  boxMaster: {
+                    is_deleted: false,
+                    product_set_no: box.product_set_no,
+                    ...(box.product_group_name
+                      ? {
+                          product_group_name: {
+                            equals: box.product_group_name,
+                            mode: "insensitive" as const,
+                          },
+                        }
+                      : {}),
+                  },
+                  ...(boxGroupNames.length > 0
+                    ? {
+                        cut_list: {
+                          group_name: { in: boxGroupNames },
+                        },
+                      }
+                    : {}),
+                },
+                select: {
+                  id: true,
+                  box_id: true,
+                  cut_list: { select: { group_name: true } },
+                  projectLocationProductQuantity: {
+                    select: {
+                      id: true,
+                      location_name: true,
+                      group_name: true,
+                    },
+                  },
+                },
+              })
+            : [];
+
+        const normalizedBoxGroupSet = new Set(
+          boxGroupNames.map((groupName) => groupName.toLowerCase()),
+        );
+        const scopedProductSetMappings = productSetMappings.filter((mapping) => {
+          if (normalizedBoxGroupSet.size === 0) return true;
+          const groupName = mapping.cut_list.group_name?.trim().toLowerCase();
+          return groupName ? normalizedBoxGroupSet.has(groupName) : true;
+        });
+
+        const locationScope = scopedProductSetMappings.length
+          ? scopedProductSetMappings
+          : box.cutListMachineMapping;
 
         const allExistingLocations = Array.from(
           new Set(
@@ -7578,9 +7643,7 @@ export const markBoxFactoryOutService = async (
           // Manual boxes or boxes containing only non-scan-pack items (e.g. hardware, accessories, scan_pack_validate=false)
           // do not represent structured product sets (Box 1 of N, etc.) and must not be blocked by set quotas.
           const isManualOrNonScanBox =
-            (box.box_position == null && box.boxes_per_product == null) ||
-            (box.cutListMachineMapping.length > 0 &&
-              box.cutListMachineMapping.every((m) => !isItemScanAndPack(m)));
+            box.box_position == null && box.boxes_per_product == null;
 
           // ── Quota Check (Applies to structured scan-and-pack product sets) ──
           if (!isManualOrNonScanBox) {
@@ -7688,12 +7751,6 @@ export const markBoxFactoryOutService = async (
               // Exclude manual / non-scan boxes from counting as product set boxes
               const allGroupBoxes = allGroupBoxesRaw.filter((b) => {
                 if (b.box_position == null && b.boxes_per_product == null) return false;
-                if (
-                  b.cutListMachineMapping.length > 0 &&
-                  b.cutListMachineMapping.every((m) => !isItemScanAndPack(m))
-                ) {
-                  return false;
-                }
                 return true;
               });
 
@@ -7929,10 +7986,14 @@ export const markBoxFactoryOutService = async (
             }
           }
 
-          // Bind only the selected box's mappings to the target location.
-          const mappingsToBind = box.cutListMachineMapping.filter(
-            (mapping) => !mapping.projectLocationProductQuantity,
-          );
+          // Bind every unassigned mapping in the product set to the selected
+          // location. This makes the location stick to the complete set when
+          // any one of its component boxes is dispatched.
+          const mappingsToBind = (
+            scopedProductSetMappings.length
+              ? scopedProductSetMappings
+              : box.cutListMachineMapping
+          ).filter((mapping) => !mapping.projectLocationProductQuantity);
 
           if (mappingsToBind.length > 0) {
             for (const mapping of mappingsToBind) {
