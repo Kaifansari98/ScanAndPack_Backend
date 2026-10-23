@@ -2020,41 +2020,92 @@ export const updateScannedItem = async (
                 ? String(selectedLocationAllocation.id)
                 : "__without_location__";
 
-              const otherClaims: string[] = [];
-              let otherCommittedTotal = 0;
-
-              for (const [locKey, sets] of setsCommittedByLocation.entries()) {
-                if (locKey !== currentLocKey && sets > 0) {
-                  otherCommittedTotal += sets;
-                  const label = locationLabels.get(locKey) ?? "another location";
-                  otherClaims.push(`${sets} set${sets > 1 ? "s" : ""} allocated for ${label}`);
-                }
-              }
-
               const currentLocName = selectedLocationAllocation
                 ? selectedLocationAllocation.locationName
                 : "without location";
 
-              // 1. Check if total sets across all locations + unassigned exceeds product group total sets
-              if (
-                totalSetsCommitted > automaticPackingDefinition.groupTotalSets
-              ) {
-                const remainingSets = Math.max(
-                  0,
-                  automaticPackingDefinition.groupTotalSets - otherCommittedTotal,
-                );
-                const claimStr =
-                  otherClaims.length > 0
-                    ? otherClaims.join(", ")
-                    : "other locations";
+              // Retrieve configured quotas for all project locations for this product group
+              const allLocationAllocations =
+                await tx.projectLocationProductQuantity.findMany({
+                  where: {
+                    project_id: eligibleMapping.project_id,
+                    vendor_id,
+                    group_name: {
+                      equals: automaticPackingDefinition.productGroupName,
+                      mode: "insensitive",
+                    },
+                  },
+                  select: {
+                    id: true,
+                    location_name: true,
+                    qty: true,
+                  },
+                });
 
+              for (const loc of allLocationAllocations) {
+                if (!locationLabels.has(String(loc.id))) {
+                  locationLabels.set(String(loc.id), loc.location_name);
+                }
+              }
+
+              const totalConfiguredQuotas = allLocationAllocations.reduce(
+                (sum, loc) => sum + Math.max(0, loc.qty),
+                0,
+              );
+              const totalUnallocatedPool = Math.max(
+                0,
+                automaticPackingDefinition.groupTotalSets - totalConfiguredQuotas,
+              );
+
+              const quotaByLocKey = new Map<string, number>();
+              for (const loc of allLocationAllocations) {
+                quotaByLocKey.set(String(loc.id), loc.qty);
+              }
+
+              // Calculate other locations' reserved quotas that have not yet been consumed
+              let otherReservedQuotaRemaining = 0;
+              const reservedQuotaLocationsSummary: string[] = [];
+
+              for (const loc of allLocationAllocations) {
+                const locKey = String(loc.id);
+                if (loc.qty > 0) {
+                  const committed = setsCommittedByLocation.get(locKey) ?? 0;
+                  const remaining = Math.max(0, loc.qty - committed);
+                  if (locKey !== currentLocKey && remaining > 0) {
+                    otherReservedQuotaRemaining += remaining;
+                    reservedQuotaLocationsSummary.push(
+                      `${loc.location_name} (${remaining} set${remaining > 1 ? "s" : ""})`,
+                    );
+                  }
+                }
+              }
+
+              // Total unallocated sets committed across all zero-quota locations and without-location
+              let unallocatedSetsCommitted = 0;
+              for (const [locKey, sets] of setsCommittedByLocation.entries()) {
+                const locQuota = quotaByLocKey.get(locKey) ?? 0;
+                if (locQuota === 0 || locKey === "__without_location__") {
+                  unallocatedSetsCommitted += sets;
+                }
+              }
+
+              // 1. Check if total sets physically committed + other locations' reserved quota exceeds total project sets
+              if (
+                totalSetsCommitted + otherReservedQuotaRemaining >
+                automaticPackingDefinition.groupTotalSets
+              ) {
+                const reservedMsg =
+                  reservedQuotaLocationsSummary.length > 0
+                    ? ` and ${otherReservedQuotaRemaining} set${otherReservedQuotaRemaining > 1 ? "s are" : " is"} reserved for ${reservedQuotaLocationsSummary.join(", ")}`
+                    : "";
                 throw new Error(
                   `Cannot scan "${eligibleMapping.cut_list.item_name}" for ${currentLocName}. ` +
-                    `Already ${claimStr}. Only ${remainingSets} set${remainingSets === 1 ? "" : "s"} remain available for this product.`,
+                    `Product total is ${automaticPackingDefinition.groupTotalSets} set${automaticPackingDefinition.groupTotalSets === 1 ? "" : "s"}${reservedMsg}. ` +
+                    `No additional sets can be allocated.`,
                 );
               }
 
-              // 2. Check if current location has an explicit quota configured in project settings
+              // 2. If current location has an explicit quota (qty > 0), enforce that quota
               if (
                 selectedLocationAllocation &&
                 selectedLocationAllocation.configuredQty > 0
@@ -2067,22 +2118,43 @@ export const updateScannedItem = async (
                       `Location quota is ${selectedLocationAllocation.configuredQty} set${selectedLocationAllocation.configuredQty === 1 ? "" : "s"}, and all ${selectedLocationAllocation.configuredQty} sets are already packed/started.`,
                   );
                 }
+              } else {
+                // 3. Current location is zero-quota (or without-location), so it draws from the unallocated pool
+                if (unallocatedSetsCommitted > totalUnallocatedPool) {
+                  const reservedMsg =
+                    reservedQuotaLocationsSummary.length > 0
+                      ? ` The remaining quantity is reserved for ${reservedQuotaLocationsSummary.join(", ")}.`
+                      : "";
+                  throw new Error(
+                    `Cannot scan "${eligibleMapping.cut_list.item_name}" for ${currentLocName}. ` +
+                      `Only ${totalUnallocatedPool} unallocated set${totalUnallocatedPool === 1 ? "" : "s were"} available for this product group, which ${totalUnallocatedPool === 1 ? "has" : "have"} already been claimed.${reservedMsg}`,
+                  );
+                }
               }
 
-              // 3. Check individual piece limit for this item at this location
-              const currentItemScansForThisLoc =
-                scansByLocation.get(currentLocKey)?.get(cut_list_id) ?? 0;
-              const maxSetsForThisLoc =
+              // 4. Check individual piece limit for this item at this location
+              const currentSetsForThisLoc =
+                setsCommittedByLocation.get(currentLocKey) ?? 0;
+              let maxSetsForThisLoc: number;
+
+              if (
                 selectedLocationAllocation &&
                 selectedLocationAllocation.configuredQty > 0
-                  ? selectedLocationAllocation.configuredQty
-                  : Math.max(
-                      0,
-                      automaticPackingDefinition.groupTotalSets -
-                        otherCommittedTotal,
-                    );
+              ) {
+                maxSetsForThisLoc = selectedLocationAllocation.configuredQty;
+              } else {
+                const otherUnallocatedCommitted =
+                  unallocatedSetsCommitted - currentSetsForThisLoc;
+                maxSetsForThisLoc = Math.max(
+                  0,
+                  totalUnallocatedPool - otherUnallocatedCommitted,
+                );
+              }
+
               const maxPiecesAllowed =
                 maxSetsForThisLoc * incomingItemRequirement.qtyPerBox;
+              const currentItemScansForThisLoc =
+                scansByLocation.get(currentLocKey)?.get(cut_list_id) ?? 0;
 
               if (currentItemScansForThisLoc > maxPiecesAllowed) {
                 throw new Error(
@@ -13707,6 +13779,9 @@ export const getManualPackingItemsService = async (
       include_in_packing: true,
       scan_pack_validate: false,
       status: "Active",
+      category: {
+        scan_pack_validate: false,
+      },
     },
     select: {
       id: true,
@@ -14099,6 +14174,9 @@ export const addManualPackingItemService = async (
         scan_pack_validate: false,
 
         status: "Active",
+        category: {
+          scan_pack_validate: false,
+        },
       },
 
       select: {
