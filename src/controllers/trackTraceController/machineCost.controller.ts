@@ -3,9 +3,10 @@ import { prisma } from "../../prisma/client";
 import { MachineCostSheet } from "../../../generated/prisma_client/enums";
 
 // Missing sheet means the original Machine Cost sheet, so older clients keep working.
-const parseSheet = (value: unknown): MachineCostSheet | null => {
+const customSheetPattern = /^CUSTOM_\d{13}_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const parseSheet = (value: unknown): string | null => {
   if (value === undefined || value === null || value === "") return MachineCostSheet.MACHINE_COST;
-  return Object.values(MachineCostSheet).includes(value as MachineCostSheet) ? (value as MachineCostSheet) : null;
+  return (Object.values(MachineCostSheet).includes(value as MachineCostSheet) || (typeof value === "string" && customSheetPattern.test(value))) ? (value as MachineCostSheet) : null;
 };
 
 export async function getMachineCostDescriptions(req: Request, res: Response) {
@@ -24,11 +25,12 @@ export async function getMachineCostDescriptions(req: Request, res: Response) {
   }
   try {
     const machine = await prisma.machineMaster.findFirst({
-      where: { id: machineId, vendor_id: vendorId }, select: { id: true },
+      where: { id: machineId, vendor_id: vendorId }, select: { id: true, mcp_sheet_names: true },
     });
     if (!machine) {
       return res.status(404).json({ success: false, message: "Workstation not found" });
     }
+    if (!(sheet in defaultSheetNames) && !Object.prototype.hasOwnProperty.call(machine.mcp_sheet_names, sheet)) return res.status(404).json({ success: false, message: "Sheet not found" });
     const descriptions = await prisma.machineCostDescription.findMany({
       where: { vendor_id: vendorId, machine_id: machineId, sheet },
       orderBy: [{ sequence_no: "asc" }, { id: "asc" }],
@@ -74,8 +76,9 @@ export async function saveMachineCostAmount(req: Request, res: Response) {
     return res.status(400).json({ success: false, message: "Enter a non-negative number with at most 14 digits and 6 decimal places" });
   }
   const description = typeof req.body?.description === "string" ? req.body.description.trim() : "";
-  if (descriptionId === null && (!description || description.length > 2000)) {
-    return res.status(400).json({ success: false, message: "Enter a cost description (up to 2000 characters) before saving its amount" });
+  const hasDescription = req.body?.description !== undefined;
+  if ((descriptionId === null || hasDescription) && (!description || description.length > 2000)) {
+    return res.status(400).json({ success: false, message: "Enter a cost description (up to 2000 characters)" });
   }
   const draftKey = req.body?.draft_key;
   if (descriptionId === null && (typeof draftKey !== "string" || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(draftKey))) {
@@ -86,8 +89,9 @@ export async function saveMachineCostAmount(req: Request, res: Response) {
     return res.status(400).json({ success: false, message: "Invalid sheet" });
   }
   try {
-    const machine = await prisma.machineMaster.findFirst({ where: { id: machineId, vendor_id: vendorId }, select: { id: true } });
+    const machine = await prisma.machineMaster.findFirst({ where: { id: machineId, vendor_id: vendorId }, select: { id: true, mcp_sheet_names: true } });
     if (!machine) return res.status(404).json({ success: false, message: "Workstation not found" });
+    if (descriptionId === null && sheet && !(sheet in defaultSheetNames) && !Object.prototype.hasOwnProperty.call(machine.mcp_sheet_names, sheet)) return res.status(404).json({ success: false, message: "Sheet not found" });
     if (descriptionId === null) {
       const lastRow = await prisma.machineCostDescription.findFirst({
         where: { vendor_id: vendorId, machine_id: machineId, sheet: sheet! }, orderBy: { sequence_no: "desc" }, select: { sequence_no: true },
@@ -96,16 +100,16 @@ export async function saveMachineCostAmount(req: Request, res: Response) {
       const data = await prisma.machineCostDescription.upsert({
         where: { vendor_id_machine_id_code: { vendor_id: vendorId, machine_id: machineId, code } },
         create: { vendor_id: vendorId, machine_id: machineId, code, description, sequence_no: (lastRow?.sequence_no ?? 0) + 1, amount, formula, text_value: textValue, value_format: valueFormat, sheet: sheet! },
-        update: { amount, formula, text_value: textValue, value_format: valueFormat },
+        update: { description, amount, formula, text_value: textValue, value_format: valueFormat },
         select: { id: true, code: true, description: true, sequence_no: true, amount: true, formula: true, text_value: true, value_format: true },
       });
       return res.status(201).json({ success: true, data });
     }
     const result = await prisma.machineCostDescription.updateMany({
-      where: { id: descriptionId, vendor_id: vendorId, machine_id: machineId }, data: { amount, formula, text_value: textValue, value_format: valueFormat },
+      where: { id: descriptionId, vendor_id: vendorId, machine_id: machineId }, data: { ...(hasDescription ? { description } : {}), amount, formula, text_value: textValue, value_format: valueFormat },
     });
     if (!result.count) return res.status(404).json({ success: false, message: "Cost description not found" });
-    return res.json({ success: true, data: { id: descriptionId, amount, formula, text_value: textValue, value_format: valueFormat } });
+    return res.json({ success: true, data: { id: descriptionId, ...(hasDescription ? { description } : {}), amount, formula, text_value: textValue, value_format: valueFormat } });
   } catch (error) {
     console.error("Failed to save machine cost amount", error);
     return res.status(500).json({ success: false, message: "Unable to save amount. Please try again." });
@@ -132,5 +136,45 @@ export async function deleteMachineCostDescription(req: Request, res: Response) 
   } catch (error) {
     console.error("Failed to delete machine cost description", error);
     return res.status(500).json({ success: false, message: "Unable to delete this row. Please try again." });
+  }
+}
+
+const defaultSheetNames: Record<MachineCostSheet, string> = {
+  MACHINE_COST: "Machine Cost", MACHINE_ELECTRICALS: "Machine Electricals",
+  MACHINE_MAINTENANCE: "Machine Maintenance", MACHINE_CAPACITY: "Machine Capacity",
+  MACHINE_TOOL_GLUE: "Machine Tool / Glue", MACHINE_LABOUR: "Machine Labour",
+  GENERAL_DATA: "General Data", PROCESS_COST: "Process Cost",
+};
+
+export async function machineCostSheetNames(req: Request, res: Response) {
+  const vendorId = Number((req as Request & { user?: { vendor_id?: number } }).user?.vendor_id);
+  const machineId = Number(req.params.machine_id);
+  if (!Number.isSafeInteger(vendorId) || vendorId <= 0) return res.status(403).json({ success: false, message: "Vendor session required" });
+  if (!Number.isSafeInteger(machineId) || machineId <= 0) return res.status(400).json({ success: false, message: "Invalid machine ID" });
+  const sheet = req.body?.sheet;
+  const name = typeof req.body?.name === "string" ? req.body.name.trim() : "";
+  if (req.method !== "GET" && (!parseSheet(sheet) || typeof sheet !== "string" || !name || name.length > 60 || /[\[\]\r\n\t]/.test(name))) {
+    return res.status(400).json({ success: false, message: "Enter a sheet name of 1–60 characters without brackets or line breaks" });
+  }
+  try {
+    const machine = await prisma.machineMaster.findFirst({ where: { id: machineId, vendor_id: vendorId }, select: { mcp_sheet_names: true } });
+    if (!machine) return res.status(404).json({ success: false, message: "Workstation not found" });
+    const names = machine.mcp_sheet_names as Record<string, string>;
+    if (req.method === "GET") return res.json({ success: true, data: { ...defaultSheetNames, ...names } });
+    const exists = Object.prototype.hasOwnProperty.call(defaultSheetNames, sheet) || Object.prototype.hasOwnProperty.call(names, sheet);
+    if (req.method === "POST" && (!customSheetPattern.test(sheet) || exists)) return res.status(400).json({ success: false, message: "Use a new custom sheet ID" });
+    if (req.method === "PATCH" && !exists) return res.status(404).json({ success: false, message: "Sheet not found" });
+    const duplicate = Object.entries({ ...defaultSheetNames, ...names }).some(([key, title]) => key !== sheet && title.toLowerCase() === name.toLowerCase());
+    if (duplicate) return res.status(400).json({ success: false, message: "Another sheet already uses this name" });
+    const updated = { ...names, [sheet]: name };
+    const result = await prisma.machineMaster.updateMany({
+      where: { id: machineId, vendor_id: vendorId, mcp_sheet_names: { equals: names } },
+      data: { mcp_sheet_names: updated },
+    });
+    if (!result.count) return res.status(409).json({ success: false, message: "Sheet names changed. Please try again." });
+    return res.status(req.method === "POST" ? 201 : 200).json({ success: true, data: { ...defaultSheetNames, ...updated } });
+  } catch (error) {
+    console.error("Failed to access MCP sheet names", error);
+    return res.status(500).json({ success: false, message: "Unable to access sheet names. Please try again." });
   }
 }

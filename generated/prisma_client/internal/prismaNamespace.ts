@@ -20231,6 +20231,7 @@ export type MachineCostDescriptionScalarFieldEnum = (typeof MachineCostDescripti
 
 
 export const MachineMasterScalarFieldEnum = {
+  mcp_sheet_names: 'mcp_sheet_names',
   fabrication: 'fabrication',
   id: 'id',
   machine_name: 'machine_name',
@@ -22156,19 +22157,19 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -22812,16 +22813,16 @@ export type ListEnumModulesVendorMappingActiveStatusFieldRefInput<$PrismaModel> 
 
 
 /**
- * Reference to a field of type 'MachineCostSheet'
+ * Reference to a field of type 'Json'
  */
-export type EnumMachineCostSheetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineCostSheet'>
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
 /**
- * Reference to a field of type 'MachineCostSheet[]'
+ * Reference to a field of type 'QueryMode'
  */
-export type ListEnumMachineCostSheetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineCostSheet[]'>
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -22906,20 +22907,6 @@ export type EnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'DefectStatus[]'
  */
 export type ListEnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DefectStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 

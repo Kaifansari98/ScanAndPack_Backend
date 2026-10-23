@@ -7,8 +7,12 @@ import {
   getMachineType
 } from '../../controllers/trackTraceController/trackTraceMasterController';
 import { verifyToken } from "../../middlewares/auth.middleware";
-import { deleteMachineCostDescription, getMachineCostDescriptions, saveMachineCostAmount } from "../../controllers/trackTraceController/machineCost.controller";
+import { machineCostSheetNames, deleteMachineCostDescription, getMachineCostDescriptions, saveMachineCostAmount } from "../../controllers/trackTraceController/machineCost.controller";
 const router = Router();
+
+router.get("/machines/:machine_id/cost-sheet-names", verifyToken, machineCostSheetNames);
+router.patch("/machines/:machine_id/cost-sheet-names", verifyToken, machineCostSheetNames);
+router.post("/machines/:machine_id/cost-sheet-names", verifyToken, machineCostSheetNames);
 
 router.get("/machines/:machine_id/cost-descriptions", verifyToken, getMachineCostDescriptions);
 router.patch("/machines/:machine_id/cost-descriptions/:description_id/amount", verifyToken, saveMachineCostAmount);
