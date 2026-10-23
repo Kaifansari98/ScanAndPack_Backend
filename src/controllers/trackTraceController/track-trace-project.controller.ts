@@ -76,6 +76,7 @@ export const createProjectController = async (
       created_by,
       instance_id,
       use_lead_project_name,
+      fabrication,
     } = req.body;
 
     const parsedLeadId =
@@ -119,12 +120,17 @@ export const createProjectController = async (
     const parsedBoxInfoFields =
       parseBoxInfoFields(box_info_fields);
 
+    const targetFabrication: "WOODWORK" | "METALWORK" =
+      fabrication === "METALWORK" ? "METALWORK" : "WOODWORK";
+
     const result = await createProjectService({
       projectName: resolvedProjectName,
 
       vendorId: Number(vendorId),
 
       leadId: parsedLeadId,
+
+      fabrication: targetFabrication,
 
       order_no,
 
@@ -155,7 +161,7 @@ export const createProjectController = async (
         leadId: parsedLeadId,
         userId: created_by ? Number(created_by) : null,
         projectName: resolvedProjectName,
-        fabrication: "WOODWORK",
+        fabrication: targetFabrication,
       });
     }
 
@@ -641,11 +647,15 @@ export const previewCutlistMachineMappingController = async (
       });
     }
 
-    const { items, packing_type } = req.body;
+    const { items, packing_type, fabrication } = req.body;
+    const targetFabrication: "WOODWORK" | "METALWORK" =
+      fabrication === "METALWORK" ? "METALWORK" : "WOODWORK";
+
     const result = await previewCutlistMachineMappingService(
       vendorId,
       Array.isArray(items) ? items : [],
-      packing_type
+      packing_type,
+      targetFabrication
     );
 
     return res.status(result.success ? 200 : 400).json(result);

@@ -14,6 +14,7 @@ import {
   PackingType,
   BoxStatus,
   MachineStatus,
+  FabricationType,
 } from "../../../generated/prisma_client/enums";
 import {
   syncProjectBoxInfoFields,
@@ -1037,6 +1038,7 @@ export type CreateProjectServicePayload = {
   projectName: string;
   vendorId: number;
   leadId?: number | null;
+  fabrication?: "WOODWORK" | "METALWORK";
 
   order_no?: string;
   client_name?: string;
@@ -1940,6 +1942,7 @@ export const createProjectService = async (
     projectName,
     vendorId,
     leadId,
+    fabrication,
     order_no,
     client_name,
     client_address,
@@ -2383,15 +2386,24 @@ export const createProjectService = async (
     |--------------------------------------------------------------------------
     */
 
+    const targetFabrication: FabricationType =
+      fabrication === "METALWORK"
+        ? FabricationType.METALWORK
+        : FabricationType.WOODWORK;
+
     const machines =
       await prisma.machineMaster.findMany({
         where: {
-          fabrication: "WOODWORK",
+          fabrication: targetFabrication,
           vendor_id: vendor.id,
           status: "ACTIVE",
-          machine_type_id: {
-            in: enabledMachineTypeIds,
-          },
+          ...(targetFabrication === FabricationType.WOODWORK
+            ? {
+                machine_type_id: {
+                  in: enabledMachineTypeIds,
+                },
+              }
+            : {}),
         },
         select: {
           id: true,
@@ -2404,9 +2416,12 @@ export const createProjectService = async (
         },
       });
 
-    const assignWoodworkRules = await loadWoodworkMachineRules(
-      vendor.cutlist_configuration, vendor.id, machines
-    );
+    const assignWoodworkRules =
+      targetFabrication === FabricationType.WOODWORK
+        ? await loadWoodworkMachineRules(
+            vendor.cutlist_configuration, vendor.id, machines
+          )
+        : null;
 
     const getMachine = (
       machineTypeId: number,
@@ -2648,6 +2663,7 @@ export const createProjectService = async (
             data: {
               project_id: project.id,
               vendor_id: vendor.id,
+              fabrication: targetFabrication,
               description: item.name,
               length: item.l1 == null ? null : Number(item.l1),
               width: item.l2 == null ? null : Number(item.l2),
@@ -2776,7 +2792,7 @@ export const createProjectService = async (
           |--------------------------------------------------------------------------
           */
 
-          if (!hasType4) {
+          if (targetFabrication === FabricationType.WOODWORK && !hasType4) {
             /*
             |--------------------------------------------------------------------------
             | Type 3 — Scan validation machine 17 only
@@ -3377,6 +3393,12 @@ export const getTrackTraceProjectService = async (
             active: true,
           },
         },
+        CutList: {
+          take: 1,
+          select: {
+            fabrication: true,
+          },
+        },
       },
     });
 
@@ -3388,10 +3410,15 @@ export const getTrackTraceProjectService = async (
       };
     }
 
+    const projectFabrication = project.CutList?.[0]?.fabrication ?? "WOODWORK";
+
     return {
       success: true,
       message: "Project fetched successfully",
-      data: project,
+      data: {
+        ...project,
+        fabrication: projectFabrication,
+      },
     };
   } catch (error: any) {
     console.error("getTrackTraceProjectService error:", error);
@@ -4050,7 +4077,8 @@ export const updateTrackTraceProjectService = async (
 export const previewCutlistMachineMappingService = async (
   vendorId: number,
   items: any[],
-  packingType?: string
+  packingType?: string,
+  fabrication?: "WOODWORK" | "METALWORK"
 ) => {
   try {
     const vendor = await prisma.vendorMaster.findFirst({
@@ -4076,6 +4104,11 @@ export const previewCutlistMachineMappingService = async (
       };
     }
 
+    const targetFabrication: FabricationType =
+      fabrication === "METALWORK"
+        ? FabricationType.METALWORK
+        : FabricationType.WOODWORK;
+
     const isTrackTraceEnabled = vendor.is_tracktrace_enabled === true;
     const isScanPackEnabled = vendor.is_scanpack_enabled === true;
 
@@ -4088,6 +4121,7 @@ export const previewCutlistMachineMappingService = async (
       where: {
         vendor_id: vendor.id,
         status: "ACTIVE",
+        fabrication: targetFabrication,
       },
       select: {
         id: true,
@@ -4096,6 +4130,7 @@ export const previewCutlistMachineMappingService = async (
         machine_type_id: true,
         sequence_no: true,
         status: true,
+        fabrication: true,
       },
       orderBy: [
         { sequence_no: "asc" },
@@ -4105,21 +4140,24 @@ export const previewCutlistMachineMappingService = async (
 
     const enabledMachines = allMachines.filter(
       (m) =>
-        m.machine_type_id != null &&
-        enabledMachineTypeIds.includes(m.machine_type_id)
+        targetFabrication === FabricationType.METALWORK ||
+        (m.machine_type_id != null &&
+          enabledMachineTypeIds.includes(m.machine_type_id))
     );
 
     let assignWoodworkRules: any = null;
-    try {
-      assignWoodworkRules = await loadWoodworkMachineRules(
-        vendor.cutlist_configuration,
-        vendor.id,
-        allMachines
-      );
-    } catch (err: any) {
-      logger.warn("previewCutlistMachineMappingService: loadWoodworkMachineRules warning", {
-        error: err.message,
-      });
+    if (targetFabrication === FabricationType.WOODWORK) {
+      try {
+        assignWoodworkRules = await loadWoodworkMachineRules(
+          vendor.cutlist_configuration,
+          vendor.id,
+          allMachines
+        );
+      } catch (err: any) {
+        logger.warn("previewCutlistMachineMappingService: loadWoodworkMachineRules warning", {
+          error: err.message,
+        });
+      }
     }
 
     const getMachine = (machineTypeId: number) => {
@@ -4225,7 +4263,7 @@ export const previewCutlistMachineMappingService = async (
         );
         const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
 
-        if (!hasType4) {
+        if (targetFabrication === FabricationType.WOODWORK && !hasType4) {
           if (hasType3 && !isNormalFlow) {
             if (isScanPackEnabled) {
               const scanMachine = getMachine(17);
