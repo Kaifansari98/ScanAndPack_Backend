@@ -2091,6 +2091,7 @@ export const updateScannedItem = async (
 
               // 1. Check if total sets physically committed + other locations' reserved quota exceeds total project sets
               if (
+                selectedLocationAllocation &&
                 totalSetsCommitted + otherReservedQuotaRemaining >
                 automaticPackingDefinition.groupTotalSets
               ) {
@@ -2118,8 +2119,8 @@ export const updateScannedItem = async (
                       `Location quota is ${selectedLocationAllocation.configuredQty} set${selectedLocationAllocation.configuredQty === 1 ? "" : "s"}, and all ${selectedLocationAllocation.configuredQty} sets are already packed/started.`,
                   );
                 }
-              } else {
-                // 3. Current location is zero-quota (or without-location), so it draws from the unallocated pool
+              } else if (selectedLocationAllocation) {
+                // 3. A configured zero-quota location draws from the unallocated pool.
                 if (unallocatedSetsCommitted > totalUnallocatedPool) {
                   const reservedMsg =
                     reservedQuotaLocationsSummary.length > 0
@@ -2132,7 +2133,9 @@ export const updateScannedItem = async (
                 }
               }
 
-              // 4. Check individual piece limit for this item at this location
+              // 4. Check individual piece limit for this item at this location.
+              // A scan without a location intentionally skips location quota
+              // enforcement and remains unassigned.
               const currentSetsForThisLoc =
                 setsCommittedByLocation.get(currentLocKey) ?? 0;
               let maxSetsForThisLoc: number;
@@ -2156,7 +2159,10 @@ export const updateScannedItem = async (
               const currentItemScansForThisLoc =
                 scansByLocation.get(currentLocKey)?.get(cut_list_id) ?? 0;
 
-              if (currentItemScansForThisLoc > maxPiecesAllowed) {
+              if (
+                selectedLocationAllocation &&
+                currentItemScansForThisLoc > maxPiecesAllowed
+              ) {
                 throw new Error(
                   `Cannot scan "${eligibleMapping.cut_list.item_name}". ` +
                     `All ${maxPiecesAllowed} required pieces for this location have already been scanned.`,
