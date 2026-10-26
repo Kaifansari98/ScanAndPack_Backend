@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import * as trackTraceService from "../../services/trackTraceServices/trackTrace.service";
 import * as machineService from "../../services/machineService/machineService.service";
+import { getVendorSettingValue } from "../../services/vendor.service";
 import {
   generateSignedUrl,
   uploadToWasabiCompanyVendorDocument,
@@ -13,6 +14,7 @@ import {
   CutListSavePayload,
   MarkDefectPayload,
   QRParam,
+  UpdateCutListQtyPayload,
 } from "../../../src/types/track-trace";
 import { generateCutListLabelsPDF } from "../../utils/cutlist-label-generator";
 import { prisma } from "../../prisma/client";
@@ -342,11 +344,34 @@ export const check_item = async (req: Request, res: Response) => {
       .status(200)
       .json(ApiResponse.error(serviceResponse?.message, 500));
   } else {
-    let mappedItem = serviceResponse?.data;
+    const mappedItem = serviceResponse?.data;
+    const responseData =
+      typeof mappedItem === "object" && mappedItem !== null
+        ? { ...mappedItem, mappedItem }
+        : { mappedItem };
 
     return res
       .status(200)
-      .json(ApiResponse.success({ mappedItem }, serviceResponse?.message, 200));
+      .json(ApiResponse.success(responseData, serviceResponse?.message, 200));
+  }
+};
+
+export const getScanSettings = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const showStatus = await getVendorSettingValue(vendor_id, "SHOW_STATUS_ON_SCAN");
+    return res.status(200).json(
+      ApiResponse.success(
+        {
+          show_status_on_scan: showStatus ?? "1",
+          continuous_scan_default: showStatus === "0",
+        },
+        "",
+        200,
+      ),
+    );
+  } catch (err: any) {
+    return res.status(500).json(ApiResponse.error(err?.message || "Failed to fetch scan settings", 500));
   }
 };
 
@@ -571,9 +596,15 @@ export const getCutListMachine = async (_req: Request, res: Response) => {
         .json(ApiResponse.error("Invalid project_id provided", 400));
     }
 
+    const fabrication = _req.query.fabrication;
+    if (fabrication !== undefined && fabrication !== "WOODWORK" && fabrication !== "METALWORK") {
+      return res.status(400).json(ApiResponse.error("Invalid fabrication provided", 400));
+    }
+
     const projects = await trackTraceService.getCutListMachine(
       vendor_id,
       project_id,
+      fabrication,
     );
 
     return res
@@ -605,6 +636,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       machine_name,
       assigned,
       user_role,
+      user_id,
     } = _req.body;
 
     if (!project_id || project_id === "undefined") {
@@ -652,6 +684,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       assigned: Boolean(assigned),
       created_by: Number(vendor_id),
       user_role: user_role ? String(user_role) : undefined,
+      user_id: Number(user_id) || undefined,
     };
 
     const serviceResponse = await trackTraceService.assignMachine(payload);
@@ -683,6 +716,80 @@ export const assignMachine = async (_req: Request, res: Response) => {
     return res
       .status(500)
       .json(ApiResponse.error("Failed to assign machine", 500));
+  }
+};
+
+export const updateCutListQty = async (_req: Request, res: Response) => {
+  try {
+    const { project_id, vendor_id, cut_list_id, new_qty, user_role } = _req.body;
+
+    if (!project_id || project_id === "undefined") {
+      return res
+        .status(400)
+        .json(ApiResponse.error("project_id is required", 400));
+    }
+
+    if (!vendor_id || isNaN(Number(vendor_id))) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Valid vendor_id is required", 400));
+    }
+
+    if (!cut_list_id || isNaN(Number(cut_list_id))) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Valid cut_list_id is required", 400));
+    }
+
+    if (
+      new_qty === undefined ||
+      new_qty === null ||
+      isNaN(Number(new_qty)) ||
+      Number(new_qty) < 0 ||
+      Number(new_qty) > 999
+    ) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Valid new_qty (between 0 and 999) is required", 400));
+    }
+
+    const payload: UpdateCutListQtyPayload = {
+      project_id: String(project_id),
+      vendor_id: Number(vendor_id),
+      cut_list_id: Number(cut_list_id),
+      new_qty: Number(new_qty),
+      user_role: user_role ? String(user_role) : undefined,
+    };
+
+    const serviceResponse = await trackTraceService.updateCutListQty(payload);
+
+    if (serviceResponse.status === 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.error(serviceResponse.message, 400));
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          serviceResponse.status,
+          serviceResponse.message,
+          200,
+        ),
+      );
+  } catch (err: any) {
+    console.error("updateCutListQty controller error:", err);
+
+    if (err.statusCode) {
+      return res
+        .status(err.statusCode)
+        .json(ApiResponse.error(err.message, err.statusCode));
+    }
+
+    return res
+      .status(500)
+      .json(ApiResponse.error("Failed to update cutlist quantity", 500));
   }
 };
 
@@ -1147,10 +1254,15 @@ export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
       scope[key] = value;
     }
   }
+  const { fabrication } = _req.query;
+  if (fabrication !== undefined && fabrication !== "WOODWORK" && fabrication !== "METALWORK") {
+    return res.status(400).json(ApiResponse.error("Invalid fabrication", 400));
+  }
   const serviceResponse = await trackTraceService.getTraceTraceDashboard(
     Number(vendor_id),
     status,
     scope,
+    fabrication,
   );
   if (serviceResponse.status == 0) {
     return res
@@ -1392,7 +1504,7 @@ export const toggleProjectCategoryStatus = async (
   }
   return res
     .status(200)
-    .json(ApiResponse.success(serviceResponse.data, "", 200));
+    .json(ApiResponse.success(serviceResponse.data, serviceResponse.message, 200));
 };
 
 export const unsetBoxFromMapping = async (req: Request, res: Response) => {
@@ -2224,9 +2336,11 @@ export const getManualPackingItemsController = async (
       });
     }
 
+    const machineId = req.query.machine_id ? Number(req.query.machine_id) : undefined;
     const result = await trackTraceService.getManualPackingItemsService(
       projectId,
       vendorId,
+      machineId
     );
 
     return res
@@ -2309,24 +2423,43 @@ const toPositiveInteger = (
 export const getProjectItemTracking = async (req: Request, res: Response) => {
   try {
     const vendorId = toPositiveInteger(req.params.vendorId);
-    const projectId = toPositiveInteger(req.params.projectId);
+    let projectId = toPositiveInteger(req.params.projectId);
     const page = toPositiveInteger(req.query.page, 1);
     const limit = toPositiveInteger(req.query.limit, 10);
     const search = String(req.query.search ?? "")
       .trim()
       .slice(0, 100);
     const rawStatus = String(req.query.scanStatus ?? "all").toLowerCase();
-    const machineId = toPositiveInteger(req.query.machineId);
+    const isDispatch =
+      String(req.query.stage ?? "").toLowerCase() === "dispatch" ||
+      String(req.query.machineId ?? "").toLowerCase() === "dispatch";
+    const machineId = isDispatch ? undefined : toPositiveInteger(req.query.machineId);
 
-    if (!vendorId || !projectId) {
+    if (!vendorId) {
       return res.status(400).json({
-        error: "vendorId and projectId must be positive integers",
+        error: "vendorId must be a positive integer",
       });
     }
 
-    if (!page || !limit || limit > 50) {
+    if (!projectId) {
+      const projectLookup = await prisma.projectMaster.findFirst({
+        where: {
+          vendor_id: vendorId,
+          unique_project_id: String(req.params.projectId),
+        },
+        select: { id: true },
+      });
+
+      if (projectLookup) {
+        projectId = projectLookup.id;
+      } else {
+        return res.status(404).json({ error: "Project not found" });
+      }
+    }
+
+    if (!page || !limit || limit > 100) {
       return res.status(400).json({
-        error: "page must be positive and limit must be between 1 and 50",
+        error: "page must be positive and limit must be between 1 and 100",
       });
     }
 
@@ -2341,6 +2474,7 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
     }
 
     if (
+      !isDispatch &&
       req.query.machineId !== undefined &&
       req.query.machineId !== "" &&
       !machineId
@@ -2349,6 +2483,9 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
         .status(400)
         .json({ error: "machineId must be a positive integer" });
     }
+
+    const category = req.query.category ? String(req.query.category).trim() : undefined;
+    const group = req.query.group ? String(req.query.group).trim() : undefined;
 
     const result = await trackTraceService.getProjectItemTrackingService(
       vendorId,
@@ -2359,6 +2496,9 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
         search,
         scanStatus: rawStatus as trackTraceService.ProjectItemScanFilter,
         machineId,
+        isDispatch,
+        category,
+        group,
       },
     );
 
@@ -2376,5 +2516,33 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
           ? error.message
           : "Unable to load project item tracking",
     });
+  }
+};
+export const addManualQualityItemController = async (req: Request, res: Response) => {
+  try {
+    const serviceResponse = await trackTraceService.addManualQualityItemService(
+      req.body,
+    );
+
+    if (serviceResponse?.status === 0) {
+      return res
+        .status(200)
+        .json(ApiResponse.error(serviceResponse?.message, 500));
+    } else {
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            serviceResponse?.data || serviceResponse?.status,
+            serviceResponse?.message,
+            200
+          )
+        );
+    }
+  } catch (error) {
+    console.error("addManualQualityItemController error:", error);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Internal Server Error", 500));
   }
 };

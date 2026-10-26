@@ -10,6 +10,10 @@ import {
   generateMultiLocationTemplateService,
 } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
+import {
+  logProjectSentToTrackTrace,
+  resolveLeadProjectName,
+} from "../../utils/trackTraceHistory";
 import { PackingType } from "../../../generated/prisma_client/enums";
 import {
   generateDispatchDocumentService,
@@ -69,9 +73,28 @@ export const createProjectController = async (
       no_of_boxes,
       box_info_fields,
       created_by,
+      instance_id,
+      use_lead_project_name,
     } = req.body;
 
-    if (!projectName || !vendorId) {
+    const parsedLeadId =
+      lead_id !== undefined &&
+        lead_id !== null &&
+        lead_id !== ""
+        ? Number(lead_id)
+        : null;
+
+    // Pre-Production uploads name the project after the lead: Firstname-Lastname-LEADCODE[.index]
+    const resolvedProjectName =
+      parseBooleanFlag(use_lead_project_name) && parsedLeadId && vendorId
+        ? await resolveLeadProjectName(
+          Number(vendorId),
+          parsedLeadId,
+          instance_id ? Number(instance_id) : null,
+        )
+        : projectName;
+
+    if (!resolvedProjectName || !vendorId) {
       return res.status(400).json({
         success: false,
         message: "vendorId and projectName are required",
@@ -85,13 +108,6 @@ export const createProjectController = async (
       });
     }
 
-    const parsedLeadId =
-      lead_id !== undefined &&
-        lead_id !== null &&
-        lead_id !== ""
-        ? Number(lead_id)
-        : null;
-
     const resolvedPackingType: PackingType =
       packing_type === PackingType.CUSTOM_GROUP
         ? PackingType.CUSTOM_GROUP
@@ -103,7 +119,7 @@ export const createProjectController = async (
       parseBoxInfoFields(box_info_fields);
 
     const result = await createProjectService({
-      projectName,
+      projectName: resolvedProjectName,
 
       vendorId: Number(vendorId),
 
@@ -131,6 +147,16 @@ export const createProjectController = async (
 
       file: req.file,
     });
+
+    if (parsedLeadId) {
+      await logProjectSentToTrackTrace({
+        vendorId: Number(vendorId),
+        leadId: parsedLeadId,
+        userId: created_by ? Number(created_by) : null,
+        projectName: resolvedProjectName,
+        fabrication: "WOODWORK",
+      });
+    }
 
     return res.status(201).json({
       ...result,

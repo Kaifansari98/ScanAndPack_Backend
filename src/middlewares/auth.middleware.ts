@@ -1,7 +1,12 @@
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../services/auth/auth.service";
 
+dotenv.config();
+
 const authService = new AuthService();
+const secret = process.env.JWT_SECRET || "supersecretkey";
 
 export const verifyToken = async (
   req: Request,
@@ -18,8 +23,16 @@ export const verifyToken = async (
   try {
     const decoded = await authService.verifySessionToken(token);
     (req as any).user = decoded;
-    next();
+    return next();
   } catch (err: any) {
+    try {
+      const legacyDecoded = jwt.verify(token, secret) as any;
+      if (legacyDecoded && !legacyDecoded.session_id) {
+        (req as any).user = legacyDecoded;
+        return next();
+      }
+    } catch {}
+
     return res
       .status(err?.statusCode || 403)
       .json({ message: err?.message || "Invalid token" });

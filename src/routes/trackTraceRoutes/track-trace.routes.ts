@@ -24,6 +24,7 @@ import {
   get_filter_track_trace,
   getCutListMachine,
   assignMachine,
+  updateCutListQty,
   createQR,
   downloadCutListExcel,
   downloadCutListExcelFile,
@@ -82,6 +83,7 @@ import {
   createUnitMaster,
   getManualPackingItemsController,
   addManualPackingItem,
+  addManualQualityItemController,
   getProjectCutList,
   getProjectItemTracking
 } from "../../controllers/trackTraceController/trackTrace.controller";
@@ -90,6 +92,7 @@ import {
   scan_item,
   scan_machine_item,
   check_item,
+  getScanSettings,
   get_defect,
   mark_Defect,
   check_defect,
@@ -115,6 +118,7 @@ router.post("/scan/check-item", check_item);
 // Step 2: persist completion only after the user confirms Mark Completed.
 router.post("/scan/item", uploadDisk.array("photos[]", 10), scan_item);
 router.post("/scan/machine-item", scan_machine_item);
+router.get("/scan-settings/:vendor_id", getScanSettings);
 // router.post('/scan/item', scan_item);
 
 router.get("/machines/:vendor_id/:user_id", getAllMachines);
@@ -132,6 +136,7 @@ router.get("/bottle-neck/:vendor_id", getBottleNeck);
 router.get("/cut-list-machine/:vendor_id/:project_id", getCutListMachine);
 
 router.post("/assign-machine", assignMachine);
+router.post("/update-cutlist-qty", updateCutListQty);
 
 router.post("/create-qr-code", createQR);
 router.get("/qr-labels/:filename", downloadQrLabelsFile);
@@ -269,6 +274,11 @@ router.get(
 router.post(
   "/boxes/packing/manual-items",
   addManualPackingItem
+);
+
+router.post(
+  "/quality/manual-items",
+  addManualQualityItemController
 );
 
 router.get(

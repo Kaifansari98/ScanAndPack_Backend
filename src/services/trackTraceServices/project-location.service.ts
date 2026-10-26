@@ -229,6 +229,25 @@ const validateAndFlattenRows = ({
     }
   });
 
+
+  for (const groupName of groupNames) {
+    const groupKey = normalizeName(groupName);
+    const groupLimit = groupQuantityLimits.get(groupKey) ?? 0;
+    const groupEntries = entries.filter(
+      (entry) => normalizeName(entry.group_name) === groupKey,
+    );
+    const blankEntries = groupEntries.filter((entry) => entry.qty === 0);
+    const allocatedQuantity = groupEntries.reduce(
+      (total, entry) => total + entry.qty,
+      0,
+    );
+    const remainingQuantity = groupLimit - allocatedQuantity;
+
+    if (blankEntries.length === 1 && remainingQuantity > 0) {
+      blankEntries[0].qty = remainingQuantity;
+    }
+  }
+
   return entries;
 };
 

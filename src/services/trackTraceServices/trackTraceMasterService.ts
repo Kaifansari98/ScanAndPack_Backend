@@ -1,12 +1,20 @@
 import { generateSignedUrl } from "../../../src/utils/wasabiClient";
 import {
+  FabricationType,
   MachineStatus,
   ScanType,
 } from "../../../generated/prisma_client/client";
 import { prisma } from "../../../src/prisma/client";
 import logger from "../../../src/utils/logger";
 
+export function validateMachineFabrication(value: unknown) {
+  if (value !== undefined && value !== "WOODWORK" && value !== "METALWORK") {
+    throw new Error("Machine Type must be Woodwork or Metalwork");
+  }
+}
+
 export interface MachineData {
+  fabrication?: FabricationType;
   machine_name: string;
   machine_code: string;
   machine_type_id: number;
@@ -17,11 +25,13 @@ export interface MachineData {
   updated_by: number;
   factory_id?: number;
   sequence_no: number;
-  target_per_hour: number;
+  target_per_hour?: number;
+  purchased_at?: Date | null;
   image_path: string;
 }
 
 export interface UpdateMachineData {
+  fabrication?: FabricationType;
   machine_name?: string;
   machine_type_id: number;
   scan_type?: ScanType;
@@ -31,6 +41,7 @@ export interface UpdateMachineData {
   factory_id?: number;
   sequence_no?: number;
   target_per_hour?: number;
+  purchased_at?: Date | null;
   image_path?: string;
   updated_by: number;
 }
@@ -51,7 +62,6 @@ export const validateCreateMachine = (data: any) => {
   if (!data.created_by) throw new Error("created_by required");
   if (!data.updated_by) throw new Error("updated_by required");
   if (!data.sequence_no) throw new Error("sequence_no is required");
-  if (!data.target_per_hour) throw new Error("target_per_hour is required");
   if (!data.image_path) throw new Error("image_path is required");
 };
 
@@ -148,6 +158,7 @@ export class TrackTraceMasterService {
 
 
   static async createMachine(data: MachineData) {
+    validateMachineFabrication(data.fabrication);
     try {
       logger.info("Creating machine", {
         vendor_id: data.vendor_id,
@@ -257,6 +268,7 @@ export class TrackTraceMasterService {
     vendor_id: number,
     data: UpdateMachineData
   ) {
+    validateMachineFabrication(data.fabrication);
     try {
       logger.info("Updating machine", {
         id,

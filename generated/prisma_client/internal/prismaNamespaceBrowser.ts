@@ -177,6 +177,7 @@ export const ModelName = {
   VloqEmailLogs: 'VloqEmailLogs',
   ModulesMaster: 'ModulesMaster',
   VendorModulesMapping: 'VendorModulesMapping',
+  MachineCostDescription: 'MachineCostDescription',
   MachineMaster: 'MachineMaster',
   CutlistHeadersMapping: 'CutlistHeadersMapping',
   CutList: 'CutList',
@@ -422,6 +423,7 @@ export const UserMasterScalarFieldEnum = {
   password: 'password',
   user_type_id: 'user_type_id',
   status: 'status',
+  cadbidToken: 'cadbidToken',
   created_at: 'created_at',
   updated_at: 'updated_at',
   franchise_id: 'franchise_id'
@@ -755,6 +757,7 @@ export const LeadMasterScalarFieldEnum = {
   is_draft: 'is_draft',
   draft_in_open_leads: 'draft_in_open_leads',
   lead_code: 'lead_code',
+  cadbid_customer_id: 'cadbid_customer_id',
   is_client_approval_submitted: 'is_client_approval_submitted',
   client_required_order_login_complition_date: 'client_required_order_login_complition_date',
   expected_order_login_ready_date: 'expected_order_login_ready_date',
@@ -2434,7 +2437,26 @@ export const VendorModulesMappingScalarFieldEnum = {
 export type VendorModulesMappingScalarFieldEnum = (typeof VendorModulesMappingScalarFieldEnum)[keyof typeof VendorModulesMappingScalarFieldEnum]
 
 
+export const MachineCostDescriptionScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  machine_id: 'machine_id',
+  code: 'code',
+  description: 'description',
+  sequence_no: 'sequence_no',
+  amount: 'amount',
+  formula: 'formula',
+  text_value: 'text_value',
+  value_format: 'value_format',
+  sheet: 'sheet'
+} as const
+
+export type MachineCostDescriptionScalarFieldEnum = (typeof MachineCostDescriptionScalarFieldEnum)[keyof typeof MachineCostDescriptionScalarFieldEnum]
+
+
 export const MachineMasterScalarFieldEnum = {
+  mcp_sheet_names: 'mcp_sheet_names',
+  fabrication: 'fabrication',
   id: 'id',
   machine_name: 'machine_name',
   machine_code: 'machine_code',
@@ -2447,6 +2469,7 @@ export const MachineMasterScalarFieldEnum = {
   factory_id: 'factory_id',
   sequence_no: 'sequence_no',
   target_per_hour: 'target_per_hour',
+  purchased_at: 'purchased_at',
   image_path: 'image_path',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -4358,19 +4381,19 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

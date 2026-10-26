@@ -39,20 +39,16 @@ export class CutListRuleEngineService {
     candidateMachineId: number,
     vendorId: number
   ): Promise<RuleEvaluationOutcome> {
-    const outcome: RuleEvaluationOutcome = {
-      allowed: true,
-      targetMachineId: candidateMachineId,
-      appliedRuleId: null,
-      matchingRuleCode: null,
-      matchingRuleName: null,
-      actionsApplied: [],
-    };
-
     // 1. Fetch active rules for the vendor and machine, ordered by priority
-    const rules = await prisma.cutListRuleMaster.findMany({
+    const rules = await this.loadRules(vendorId, [candidateMachineId]);
+    return this.evaluateRules(cutItem, candidateMachineId, rules);
+  }
+
+  static async loadRules(vendorId: number, machineIds: number[]) {
+    return prisma.cutListRuleMaster.findMany({
       where: {
         vendor_id: vendorId,
-        machine_id: candidateMachineId,
+        machine_id: { in: machineIds },
         status: "ACTIVE",
       },
       include: {
@@ -74,12 +70,29 @@ export class CutListRuleEngineService {
       orderBy: [{ priority: "asc" }, { id: "asc" }],
     });
 
+  }
+
+  static evaluateRules(
+    cutItem: CutListItemPayload,
+    candidateMachineId: number,
+    rules: Awaited<ReturnType<typeof CutListRuleEngineService.loadRules>>
+  ): RuleEvaluationOutcome {
+    const outcome: RuleEvaluationOutcome = {
+      allowed: true,
+      targetMachineId: candidateMachineId,
+      appliedRuleId: null,
+      matchingRuleCode: null,
+      matchingRuleName: null,
+      actionsApplied: [],
+    };
+
     if (!rules || rules.length === 0) {
       return outcome;
     }
 
     // 2. Evaluate rules sequentially (highest priority first)
     for (const rule of rules) {
+      if (rule.machine_id !== candidateMachineId) continue;
       const isMatch = this.evaluateRuleConditions(rule.conditionGroups, cutItem);
 
       if (isMatch) {

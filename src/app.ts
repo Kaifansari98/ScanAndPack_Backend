@@ -23,11 +23,14 @@ export const app = express();
 // ✅ CORS CONFIG (Wildcard Support)
 // ===============================
 const allowedOrigins = [
+  "https://shambhala.furnixcrm.com",
+  "https://vloq.furnixcrm.com",
   "https://cadbid.com",
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:3002",
   "http://localhost:3003",
+  "http://localhost:3008",
   "http://localhost:5173",
   "https://vloq.com",
 ];
