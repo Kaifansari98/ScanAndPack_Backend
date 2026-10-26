@@ -24,7 +24,7 @@ interface CreateLeadLogParams {
   action_type: "CREATE" | "UPDATE" | "DELETE" | "UPLOAD" | "STATUS_CHANGE";
   created_by: number;
   created_at?: Date;
-  history_type?: "Lead" | "Task" | "FollowUp" | "Approval";
+  history_type?: "Lead" | "Task" | "FollowUp" | "Approval" | "TrackTrace";
   stage_id?: number;   // if provided, skips all resolution logic
   instance_id?: number; // used to resolve Type 9 / Type 10 when multi-instance
 }

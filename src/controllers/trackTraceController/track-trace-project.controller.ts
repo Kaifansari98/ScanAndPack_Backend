@@ -8,8 +8,13 @@ import {
   getActiveMachinesByVendorService,
   getPackagingProjectContextService,
   generateMultiLocationTemplateService,
+  previewCutlistMachineMappingService,
 } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
+import {
+  logProjectSentToTrackTrace,
+  resolveLeadProjectName,
+} from "../../utils/trackTraceHistory";
 import { PackingType } from "../../../generated/prisma_client/enums";
 import {
   generateDispatchDocumentService,
@@ -69,9 +74,29 @@ export const createProjectController = async (
       no_of_boxes,
       box_info_fields,
       created_by,
+      instance_id,
+      use_lead_project_name,
+      fabrication,
     } = req.body;
 
-    if (!projectName || !vendorId) {
+    const parsedLeadId =
+      lead_id !== undefined &&
+        lead_id !== null &&
+        lead_id !== ""
+        ? Number(lead_id)
+        : null;
+
+    // Pre-Production uploads name the project after the lead: Firstname-Lastname-LEADCODE[.index]
+    const resolvedProjectName =
+      parseBooleanFlag(use_lead_project_name) && parsedLeadId && vendorId
+        ? await resolveLeadProjectName(
+          Number(vendorId),
+          parsedLeadId,
+          instance_id ? Number(instance_id) : null,
+        )
+        : projectName;
+
+    if (!resolvedProjectName || !vendorId) {
       return res.status(400).json({
         success: false,
         message: "vendorId and projectName are required",
@@ -85,13 +110,6 @@ export const createProjectController = async (
       });
     }
 
-    const parsedLeadId =
-      lead_id !== undefined &&
-        lead_id !== null &&
-        lead_id !== ""
-        ? Number(lead_id)
-        : null;
-
     const resolvedPackingType: PackingType =
       packing_type === PackingType.CUSTOM_GROUP
         ? PackingType.CUSTOM_GROUP
@@ -102,12 +120,17 @@ export const createProjectController = async (
     const parsedBoxInfoFields =
       parseBoxInfoFields(box_info_fields);
 
+    const targetFabrication: "WOODWORK" | "METALWORK" =
+      fabrication === "METALWORK" ? "METALWORK" : "WOODWORK";
+
     const result = await createProjectService({
-      projectName,
+      projectName: resolvedProjectName,
 
       vendorId: Number(vendorId),
 
       leadId: parsedLeadId,
+
+      fabrication: targetFabrication,
 
       order_no,
 
@@ -131,6 +154,16 @@ export const createProjectController = async (
 
       file: req.file,
     });
+
+    if (parsedLeadId) {
+      await logProjectSentToTrackTrace({
+        vendorId: Number(vendorId),
+        leadId: parsedLeadId,
+        userId: created_by ? Number(created_by) : null,
+        projectName: resolvedProjectName,
+        fabrication: targetFabrication,
+      });
+    }
 
     return res.status(201).json({
       ...result,
@@ -599,3 +632,43 @@ const parseRemoveBoxIds = (value: any): number[] => {
       .filter((id) => Number.isFinite(id) && id > 0);
   }
 };
+
+export const previewCutlistMachineMappingController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+    if (!Number.isInteger(vendorId) || vendorId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid vendor_id",
+        data: { machines: [], rowMappings: [] },
+      });
+    }
+
+    const { items, packing_type, fabrication } = req.body;
+    const targetFabrication: "WOODWORK" | "METALWORK" =
+      fabrication === "METALWORK" ? "METALWORK" : "WOODWORK";
+
+    const result = await previewCutlistMachineMappingService(
+      vendorId,
+      Array.isArray(items) ? items : [],
+      packing_type,
+      targetFabrication
+    );
+
+    return res.status(result.success ? 200 : 400).json(result);
+  } catch (error: any) {
+    logger.error("previewCutlistMachineMappingController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to preview machine mappings",
+      data: { machines: [], rowMappings: [] },
+    });
+  }
+};
+

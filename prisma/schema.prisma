@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  machineCostDescriptions                      MachineCostDescription[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
   id                                           Int                                            @id @default(autoincrement())
   vendor_name                                  String
@@ -297,6 +298,7 @@ model UserMaster {
   password                                                                       String
   user_type_id                                                                   Int
   status                                                                         String                                         @default("inactive")
+  cadbidToken                                                                    String?                                        @map("cadbid_token")
   created_at                                                                     DateTime                                       @default(now())
   updated_at                                                                     DateTime                                       @updatedAt
   franchise_id                                                                   Int?
@@ -886,7 +888,8 @@ model LeadMaster {
   is_draft                                     Boolean                                        @default(false)
   draft_in_open_leads                          Boolean                                        @default(false)
   lead_code                                    String
-  is_client_approval_submitted                 Boolean                                        @default(false)
+  cadbid_customer_id                           Int?
+  is_client_approval_submitted                Boolean                                        @default(false)
   client_required_order_login_complition_date  DateTime?
   expected_order_login_ready_date              DateTime?
   no_of_client_documents_initially_submitted   Int?
@@ -1705,6 +1708,7 @@ model specificationDocumentMapping {
   @@index([specs_id])
   @@index([document_id])
   @@index([created_by])
+
 }
 
 model LeadDocuments {
@@ -1809,7 +1813,7 @@ model LeadChatMessage {
   chat_room_id        Int
   sender_id           Int
   message_type        LeadChatMessageType  @default(text)
-  message_text        String?
+  message_text        String?              @db.Text
   created_at          DateTime             @default(now())
   reply_to_message_id Int?
   attachments         LeadChatAttachment[]
@@ -1818,6 +1822,7 @@ model LeadChatMessage {
   repliedToMessage    LeadChatMessage?     @relation("LeadChatMessageReplies", fields: [reply_to_message_id], references: [id])
   replies             LeadChatMessage[]    @relation("LeadChatMessageReplies")
   sender              UserMaster           @relation("LeadChatMessageSender", fields: [sender_id], references: [id], onDelete: Cascade)
+
 }
 
 model LeadChatAttachment {
@@ -1917,6 +1922,7 @@ model ProductItemCode {
   @@index([vendor_id])
   @@index([product_structure_id])
   @@index([sub_product_structure_id])
+
 }
 
 model LeadProductStructureMapping {
@@ -1985,6 +1991,7 @@ model LeadProductStructureInstance {
   vendor                                     VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   activityStatusLogs                         LeadScopedActivityStatusLog[]
   tasks                                      UserLeadTask[]
+
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
   @@index([sub_product_structure_id])
@@ -2737,6 +2744,7 @@ model CompanyVendorsMaster {
   @@index([default_payment_term_id])
   @@index([state_id])
   @@index([primary_contact_id])
+
 }
 
 model OrderLoginDetails {
@@ -3057,6 +3065,7 @@ model Notification {
   created_at   DateTime                   @default(now())
   sender       UserMaster?                @relation("NotificationSender", fields: [sender_id], references: [id])
   user         UserMaster                 @relation("NotificationUser", fields: [user_id], references: [id])
+
   vendor       VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   deliveryLogs NotificationDeliveryLogs[]
 
@@ -3075,6 +3084,7 @@ model UserPushToken {
   created_at   DateTime                   @default(now())
   last_used_at DateTime?                  @map("last_used")
   device_id    String?
+
   deliveryLogs NotificationDeliveryLogs[]
   user         UserMaster                 @relation(fields: [user_id], references: [id])
   vendor       VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -3127,7 +3137,40 @@ model VendorModulesMapping {
   vendor     VendorMaster                     @relation(fields: [vendor_id], references: [id])
 }
 
+model MachineCostDescription {
+  id            Int          @id @default(autoincrement())
+  vendor_id     Int
+  machine_id    Int
+  code          String
+  description   String
+  sequence_no   Int
+  amount        Decimal?     @db.Decimal(20, 6)
+  formula       String?
+  text_value    String?
+  value_format  String?
+  sheet         MachineCostSheet @default(MACHINE_COST)
+  vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  machine       MachineMaster @relation(fields: [machine_id, vendor_id], references: [id, vendor_id], onDelete: Cascade)
+
+  @@unique([vendor_id, machine_id, code])
+  @@index([vendor_id, machine_id, sequence_no])
+  @@index([vendor_id, machine_id, sheet, sequence_no])
+}
+
+enum MachineCostSheet {
+  MACHINE_COST
+  MACHINE_ELECTRICALS
+  MACHINE_MAINTENANCE
+  MACHINE_CAPACITY
+  MACHINE_TOOL_GLUE
+  MACHINE_LABOUR
+  GENERAL_DATA
+  PROCESS_COST
+}
+
 model MachineMaster {
+  costDescriptions      MachineCostDescription[]
+  fabrication           FabricationType              @default(WOODWORK)
   id                    Int                          @id @default(autoincrement())
   machine_name          String
   machine_code          String
@@ -3140,6 +3183,7 @@ model MachineMaster {
   factory_id            Int?
   sequence_no           Int?
   target_per_hour       Decimal?
+  purchased_at          DateTime?                    @db.Date
   image_path            String?
   created_by            Int
   created_at            DateTime                     @default(now())
@@ -3155,6 +3199,7 @@ model MachineMaster {
   cutListRules          CutListRuleMaster[]          @relation("CutListRules")
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
+  @@unique([id, vendor_id])
   @@index([vendor_id, status])
 }
 
@@ -3196,6 +3241,9 @@ model CutList {
   elb                      String?
   esl                      String?
   esr                      String?
+  top_drill                String?
+  bottom_drill             String?
+  is_drill                 String?
   category_name            String?
   group_name               String?
   procurement              String?
@@ -5365,6 +5413,7 @@ enum HistoryType {
   Task
   FollowUp
   Approval
+  TrackTrace
 }
 
 enum ApprovalRequestStatus {
@@ -5955,8 +6004,8 @@ enum AttendanceSource {
 
 model time_zone_master {
   id             Int            @id @default(autoincrement())
-  country        String
-  time_zone_name String         @unique
+  country        String?
+  time_zone_name String?        @unique
   time_zone      String?
   active         Boolean        @default(true)
   mins           Int?

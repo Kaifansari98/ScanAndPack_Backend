@@ -51,6 +51,7 @@ export type UserMasterMinAggregateOutputType = {
   password: string | null
   user_type_id: number | null
   status: string | null
+  cadbidToken: string | null
   created_at: Date | null
   updated_at: Date | null
   franchise_id: number | null
@@ -67,6 +68,7 @@ export type UserMasterMaxAggregateOutputType = {
   password: string | null
   user_type_id: number | null
   status: string | null
+  cadbidToken: string | null
   created_at: Date | null
   updated_at: Date | null
   franchise_id: number | null
@@ -83,6 +85,7 @@ export type UserMasterCountAggregateOutputType = {
   password: number
   user_type_id: number
   status: number
+  cadbidToken: number
   created_at: number
   updated_at: number
   franchise_id: number
@@ -115,6 +118,7 @@ export type UserMasterMinAggregateInputType = {
   password?: true
   user_type_id?: true
   status?: true
+  cadbidToken?: true
   created_at?: true
   updated_at?: true
   franchise_id?: true
@@ -131,6 +135,7 @@ export type UserMasterMaxAggregateInputType = {
   password?: true
   user_type_id?: true
   status?: true
+  cadbidToken?: true
   created_at?: true
   updated_at?: true
   franchise_id?: true
@@ -147,6 +152,7 @@ export type UserMasterCountAggregateInputType = {
   password?: true
   user_type_id?: true
   status?: true
+  cadbidToken?: true
   created_at?: true
   updated_at?: true
   franchise_id?: true
@@ -250,6 +256,7 @@ export type UserMasterGroupByOutputType = {
   password: string
   user_type_id: number
   status: string
+  cadbidToken: string | null
   created_at: Date
   updated_at: Date
   franchise_id: number | null
@@ -289,6 +296,7 @@ export type UserMasterWhereInput = {
   password?: Prisma.StringFilter<"UserMaster"> | string
   user_type_id?: Prisma.IntFilter<"UserMaster"> | number
   status?: Prisma.StringFilter<"UserMaster"> | string
+  cadbidToken?: Prisma.StringNullableFilter<"UserMaster"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
@@ -496,6 +504,7 @@ export type UserMasterOrderByWithRelationInput = {
   password?: Prisma.SortOrder
   user_type_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cadbidToken?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -706,6 +715,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"UserMaster"> | string
   user_type_id?: Prisma.IntFilter<"UserMaster"> | number
   status?: Prisma.StringFilter<"UserMaster"> | string
+  cadbidToken?: Prisma.StringNullableFilter<"UserMaster"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
@@ -913,6 +923,7 @@ export type UserMasterOrderByWithAggregationInput = {
   password?: Prisma.SortOrder
   user_type_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cadbidToken?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -937,6 +948,7 @@ export type UserMasterScalarWhereWithAggregatesInput = {
   password?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
   user_type_id?: Prisma.IntWithAggregatesFilter<"UserMaster"> | number
   status?: Prisma.StringWithAggregatesFilter<"UserMaster"> | string
+  cadbidToken?: Prisma.StringNullableWithAggregatesFilter<"UserMaster"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"UserMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"UserMaster"> | Date | string
   franchise_id?: Prisma.IntNullableWithAggregatesFilter<"UserMaster"> | number | null
@@ -950,6 +962,7 @@ export type UserMasterCreateInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -1156,6 +1169,7 @@ export type UserMasterUncheckedCreateInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -1357,6 +1371,7 @@ export type UserMasterUpdateInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -1563,6 +1578,7 @@ export type UserMasterUncheckedUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1767,6 +1783,7 @@ export type UserMasterCreateManyInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -1780,6 +1797,7 @@ export type UserMasterUpdateManyMutationInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1795,6 +1813,7 @@ export type UserMasterUncheckedUpdateManyInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1821,6 +1840,7 @@ export type UserMasterCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   user_type_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cadbidToken?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -1844,6 +1864,7 @@ export type UserMasterMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   user_type_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cadbidToken?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -1860,6 +1881,7 @@ export type UserMasterMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   user_type_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  cadbidToken?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
@@ -4804,6 +4826,7 @@ export type UserMasterCreateWithoutVendorInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -5008,6 +5031,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -5241,6 +5265,7 @@ export type UserMasterScalarWhereInput = {
   password?: Prisma.StringFilter<"UserMaster"> | string
   user_type_id?: Prisma.IntFilter<"UserMaster"> | number
   status?: Prisma.StringFilter<"UserMaster"> | string
+  cadbidToken?: Prisma.StringNullableFilter<"UserMaster"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserMaster"> | Date | string
   franchise_id?: Prisma.IntNullableFilter<"UserMaster"> | number | null
@@ -5254,6 +5279,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -5458,6 +5484,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -5685,6 +5712,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -5890,6 +5918,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -6106,6 +6135,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -6311,6 +6341,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6511,6 +6542,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -6716,6 +6748,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -6921,6 +6954,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -7126,6 +7160,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -7342,6 +7377,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -7547,6 +7583,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7758,6 +7795,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -7963,6 +8001,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8163,6 +8202,7 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -8368,6 +8408,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -8584,6 +8625,7 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -8789,6 +8831,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8989,6 +9032,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -9194,6 +9238,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -9399,6 +9444,7 @@ export type UserMasterCreateWithoutDeletedProjectsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -9604,6 +9650,7 @@ export type UserMasterUncheckedCreateWithoutDeletedProjectsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -9809,6 +9856,7 @@ export type UserMasterCreateWithoutProjectMastersInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -10014,6 +10062,7 @@ export type UserMasterUncheckedCreateWithoutProjectMastersInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -10230,6 +10279,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -10435,6 +10485,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10646,6 +10697,7 @@ export type UserMasterUpdateWithoutDeletedProjectsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -10851,6 +10903,7 @@ export type UserMasterUncheckedUpdateWithoutDeletedProjectsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11062,6 +11115,7 @@ export type UserMasterUpdateWithoutProjectMastersInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -11267,6 +11321,7 @@ export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11467,6 +11522,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -11672,6 +11728,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -11877,6 +11934,7 @@ export type UserMasterCreateWithoutBoxesPackedByInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -12082,6 +12140,7 @@ export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -12287,6 +12346,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -12492,6 +12552,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -12708,6 +12769,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -12913,6 +12975,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13124,6 +13187,7 @@ export type UserMasterUpdateWithoutBoxesPackedByInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -13329,6 +13393,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13540,6 +13605,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -13745,6 +13811,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13945,6 +14012,7 @@ export type UserMasterCreateWithoutFactoryOutRevertsMadeInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -14150,6 +14218,7 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsMadeInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -14355,6 +14424,7 @@ export type UserMasterCreateWithoutFactoryOutRevertsOriginalInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -14560,6 +14630,7 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsOriginalInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -14776,6 +14847,7 @@ export type UserMasterUpdateWithoutFactoryOutRevertsMadeInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -14981,6 +15053,7 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsMadeInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15192,6 +15265,7 @@ export type UserMasterUpdateWithoutFactoryOutRevertsOriginalInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -15397,6 +15471,7 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsOriginalInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15597,6 +15672,7 @@ export type UserMasterCreateWithoutBoxUnpacksMadeInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -15802,6 +15878,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksMadeInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -16007,6 +16084,7 @@ export type UserMasterCreateWithoutBoxUnpacksPackedByInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -16212,6 +16290,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksPackedByInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -16417,6 +16496,7 @@ export type UserMasterCreateWithoutBoxUnpacksCreatedByInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -16622,6 +16702,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksCreatedByInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -16838,6 +16919,7 @@ export type UserMasterUpdateWithoutBoxUnpacksMadeInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -17043,6 +17125,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksMadeInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17254,6 +17337,7 @@ export type UserMasterUpdateWithoutBoxUnpacksPackedByInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -17459,6 +17543,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksPackedByInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17670,6 +17755,7 @@ export type UserMasterUpdateWithoutBoxUnpacksCreatedByInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -17875,6 +17961,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksCreatedByInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18075,6 +18162,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -18280,6 +18368,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -18496,6 +18585,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -18701,6 +18791,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18901,6 +18992,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -19106,6 +19198,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -19311,6 +19404,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -19516,6 +19610,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -19721,6 +19816,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -19926,6 +20022,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -20131,6 +20228,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -20336,6 +20434,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -20552,6 +20651,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -20757,6 +20857,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20968,6 +21069,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -21173,6 +21275,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21384,6 +21487,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -21589,6 +21693,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21800,6 +21905,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -22005,6 +22111,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22205,6 +22312,7 @@ export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -22410,6 +22518,7 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -22626,6 +22735,7 @@ export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -22831,6 +22941,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23031,6 +23142,7 @@ export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -23236,6 +23348,7 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -23452,6 +23565,7 @@ export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -23657,6 +23771,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23857,6 +23972,7 @@ export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -24062,6 +24178,7 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -24278,6 +24395,7 @@ export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -24483,6 +24601,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24683,6 +24802,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -24888,6 +25008,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -25093,6 +25214,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -25298,6 +25420,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -25514,6 +25637,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -25719,6 +25843,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25930,6 +26055,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -26135,6 +26261,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26335,6 +26462,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -26540,6 +26668,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -26745,6 +26874,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -26950,6 +27080,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -27155,6 +27286,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -27360,6 +27492,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -27576,6 +27709,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -27781,6 +27915,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27992,6 +28127,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -28197,6 +28333,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28408,6 +28545,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -28613,6 +28751,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28813,6 +28952,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -29018,6 +29158,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -29234,6 +29375,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -29439,6 +29581,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29639,6 +29782,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -29844,6 +29988,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsCreatedI
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -30049,6 +30194,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -30254,6 +30400,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsReleased
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -30470,6 +30617,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -30675,6 +30823,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsCreatedI
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30886,6 +31035,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -31091,6 +31241,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleased
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31291,6 +31442,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -31496,6 +31648,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -31701,6 +31854,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -31906,6 +32060,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -32122,6 +32277,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -32327,6 +32483,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32538,6 +32695,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -32743,6 +32901,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32943,6 +33102,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -33148,6 +33308,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -33364,6 +33525,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -33569,6 +33731,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33769,6 +33932,7 @@ export type UserMasterCreateWithoutProcessBriefsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -33974,6 +34138,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -34179,6 +34344,7 @@ export type UserMasterCreateWithoutProcessBriefsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -34384,6 +34550,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -34600,6 +34767,7 @@ export type UserMasterUpdateWithoutProcessBriefsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -34805,6 +34973,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35016,6 +35185,7 @@ export type UserMasterUpdateWithoutProcessBriefsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -35221,6 +35391,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35421,6 +35592,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -35626,6 +35798,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -35831,6 +36004,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -36036,6 +36210,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -36252,6 +36427,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -36457,6 +36633,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36668,6 +36845,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -36873,6 +37051,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37073,6 +37252,7 @@ export type UserMasterCreateWithoutPbmCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -37278,6 +37458,7 @@ export type UserMasterUncheckedCreateWithoutPbmCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -37483,6 +37664,7 @@ export type UserMasterCreateWithoutPbmUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -37688,6 +37870,7 @@ export type UserMasterUncheckedCreateWithoutPbmUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -37904,6 +38087,7 @@ export type UserMasterUpdateWithoutPbmCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -38109,6 +38293,7 @@ export type UserMasterUncheckedUpdateWithoutPbmCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38320,6 +38505,7 @@ export type UserMasterUpdateWithoutPbmUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -38525,6 +38711,7 @@ export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38725,6 +38912,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -38930,6 +39118,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -39135,6 +39324,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -39340,6 +39530,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -39556,6 +39747,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -39761,6 +39953,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39972,6 +40165,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -40177,6 +40371,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40377,6 +40572,7 @@ export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -40582,6 +40778,7 @@ export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -40798,6 +40995,7 @@ export type UserMasterUpdateWithoutLeadHardwareMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -41003,6 +41201,7 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41203,6 +41402,7 @@ export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -41408,6 +41608,7 @@ export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedIn
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -41624,6 +41825,7 @@ export type UserMasterUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -41829,6 +42031,7 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42029,6 +42232,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -42234,6 +42438,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedIn
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -42450,6 +42655,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -42655,6 +42861,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42855,6 +43062,7 @@ export type UserMasterCreateWithoutSpecificationDocumentMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -43060,6 +43268,7 @@ export type UserMasterUncheckedCreateWithoutSpecificationDocumentMappingsCreated
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -43276,6 +43485,7 @@ export type UserMasterUpdateWithoutSpecificationDocumentMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -43481,6 +43691,7 @@ export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreated
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43681,6 +43892,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -43886,6 +44098,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -44091,6 +44304,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -44296,6 +44510,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -44512,6 +44727,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -44717,6 +44933,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44928,6 +45145,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -45133,6 +45351,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45333,6 +45552,7 @@ export type UserMasterCreateWithoutB2bDocumentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -45538,6 +45758,7 @@ export type UserMasterUncheckedCreateWithoutB2bDocumentsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -45754,6 +45975,7 @@ export type UserMasterUpdateWithoutB2bDocumentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -45959,6 +46181,7 @@ export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46159,6 +46382,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -46364,6 +46588,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -46569,6 +46794,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -46774,6 +47000,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -46990,6 +47217,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -47195,6 +47423,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47406,6 +47635,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -47611,6 +47841,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47811,6 +48042,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -48016,6 +48248,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -48232,6 +48465,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -48437,6 +48671,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48637,6 +48872,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -48842,6 +49078,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -49058,6 +49295,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -49263,6 +49501,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49463,6 +49702,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -49668,6 +49908,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -49873,6 +50114,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -50078,6 +50320,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -50294,6 +50537,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -50499,6 +50743,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -50710,6 +50955,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -50915,6 +51161,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -51115,6 +51362,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -51320,6 +51568,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -51536,6 +51785,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -51741,6 +51991,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -51941,6 +52192,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -52146,6 +52398,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -52362,6 +52615,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -52567,6 +52821,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -52767,6 +53022,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -52972,6 +53228,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -53188,6 +53445,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -53393,6 +53651,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -53593,6 +53852,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -53798,6 +54058,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -54003,6 +54264,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -54208,6 +54470,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -54424,6 +54687,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -54629,6 +54893,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -54840,6 +55105,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -55045,6 +55311,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -55245,6 +55512,7 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -55450,6 +55718,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -55666,6 +55935,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -55871,6 +56141,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -56071,6 +56342,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -56276,6 +56548,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -56481,6 +56754,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -56686,6 +56960,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -56902,6 +57177,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -57107,6 +57383,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -57318,6 +57595,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -57523,6 +57801,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -57723,6 +58002,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -57928,6 +58208,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -58133,6 +58414,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -58338,6 +58620,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -58543,6 +58826,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -58748,6 +59032,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -58953,6 +59238,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -59158,6 +59444,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -59374,6 +59661,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -59579,6 +59867,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -59790,6 +60079,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -59995,6 +60285,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -60206,6 +60497,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -60411,6 +60703,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -60622,6 +60915,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -60827,6 +61121,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -61027,6 +61322,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -61232,6 +61528,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -61448,6 +61745,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -61653,6 +61951,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -61853,6 +62152,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -62058,6 +62358,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -62263,6 +62564,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -62468,6 +62770,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -62684,6 +62987,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -62889,6 +63193,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -63100,6 +63405,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -63305,6 +63611,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -63505,6 +63812,7 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -63710,6 +64018,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -63915,6 +64224,7 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -64120,6 +64430,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -64336,6 +64647,7 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -64541,6 +64853,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -64752,6 +65065,7 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -64957,6 +65271,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -65157,6 +65472,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -65362,6 +65678,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -65578,6 +65895,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -65783,6 +66101,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -65983,6 +66302,7 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -66188,6 +66508,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -66404,6 +66725,7 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -66609,6 +66931,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -66809,6 +67132,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -67014,6 +67338,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -67219,6 +67544,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -67424,6 +67750,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -67640,6 +67967,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -67845,6 +68173,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -68056,6 +68385,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -68261,6 +68591,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -68461,6 +68792,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -68666,6 +68998,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -68871,6 +69204,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -69076,6 +69410,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -69292,6 +69627,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -69497,6 +69833,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -69708,6 +70045,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -69913,6 +70251,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -70113,6 +70452,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -70318,6 +70658,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -70523,6 +70864,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -70728,6 +71070,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -70944,6 +71287,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -71149,6 +71493,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -71360,6 +71705,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -71565,6 +71911,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -71765,6 +72112,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -71970,6 +72318,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -72175,6 +72524,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -72380,6 +72730,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -72585,6 +72936,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -72790,6 +73142,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -73006,6 +73359,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -73211,6 +73565,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -73422,6 +73777,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -73627,6 +73983,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -73838,6 +74195,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -74043,6 +74401,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -74243,6 +74602,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -74448,6 +74808,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -74653,6 +75014,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput 
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -74858,6 +75220,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -75063,6 +75426,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -75268,6 +75632,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -75473,6 +75838,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -75678,6 +76044,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -75894,6 +76261,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -76099,6 +76467,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -76310,6 +76679,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput 
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -76515,6 +76885,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -76726,6 +77097,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -76931,6 +77303,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -77142,6 +77515,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -77347,6 +77721,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -77547,6 +77922,7 @@ export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -77752,6 +78128,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -77957,6 +78334,7 @@ export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -78162,6 +78540,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -78367,6 +78746,7 @@ export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -78572,6 +78952,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -78777,6 +79158,7 @@ export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -78982,6 +79364,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -79198,6 +79581,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -79403,6 +79787,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -79614,6 +79999,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -79819,6 +80205,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -80030,6 +80417,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -80235,6 +80623,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -80446,6 +80835,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -80651,6 +81041,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -80851,6 +81242,7 @@ export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -81056,6 +81448,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -81272,6 +81665,7 @@ export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -81477,6 +81871,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -81677,6 +82072,7 @@ export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = 
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -81882,6 +82278,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -82098,6 +82495,7 @@ export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = 
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -82303,6 +82701,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -82503,6 +82902,7 @@ export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -82708,6 +83108,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -82924,6 +83325,7 @@ export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -83129,6 +83531,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -83329,6 +83732,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -83534,6 +83938,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -83750,6 +84155,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -83955,6 +84361,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -84155,6 +84562,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -84360,6 +84768,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -84576,6 +84985,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -84781,6 +85191,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -84981,6 +85392,7 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -85186,6 +85598,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -85402,6 +85815,7 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -85607,6 +86021,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -85807,6 +86222,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -86012,6 +86428,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -86217,6 +86634,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -86422,6 +86840,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -86627,6 +87046,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -86832,6 +87252,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -87048,6 +87469,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -87253,6 +87675,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -87464,6 +87887,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -87669,6 +88093,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -87880,6 +88305,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -88085,6 +88511,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -88285,6 +88712,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -88490,6 +88918,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -88695,6 +89124,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -88900,6 +89330,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -89116,6 +89547,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -89321,6 +89753,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -89532,6 +89965,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -89737,6 +90171,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -89937,6 +90372,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -90142,6 +90578,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -90347,6 +90784,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -90552,6 +90990,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -90768,6 +91207,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -90973,6 +91413,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -91184,6 +91625,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -91389,6 +91831,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -91589,6 +92032,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -91794,6 +92238,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -92010,6 +92455,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -92215,6 +92661,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -92415,6 +92862,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -92620,6 +93068,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -92836,6 +93285,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -93041,6 +93491,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -93241,6 +93692,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -93446,6 +93898,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -93662,6 +94115,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -93867,6 +94321,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -94067,6 +94522,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -94272,6 +94728,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -94477,6 +94934,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -94682,6 +95140,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -94887,6 +95346,7 @@ export type UserMasterCreateWithoutMiscReturnedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -95092,6 +95552,7 @@ export type UserMasterUncheckedCreateWithoutMiscReturnedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -95308,6 +95769,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -95513,6 +95975,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -95724,6 +96187,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -95929,6 +96393,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -96140,6 +96605,7 @@ export type UserMasterUpdateWithoutMiscReturnedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -96345,6 +96811,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -96545,6 +97012,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -96750,6 +97218,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -96966,6 +97435,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -97171,6 +97641,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -97371,6 +97842,7 @@ export type UserMasterCreateWithoutMiscFollowupsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -97576,6 +98048,7 @@ export type UserMasterUncheckedCreateWithoutMiscFollowupsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -97792,6 +98265,7 @@ export type UserMasterUpdateWithoutMiscFollowupsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -97997,6 +98471,7 @@ export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -98197,6 +98672,7 @@ export type UserMasterCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -98402,6 +98878,7 @@ export type UserMasterUncheckedCreateWithoutMiscReorderInstanceMaterialMappingsC
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -98618,6 +99095,7 @@ export type UserMasterUpdateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -98823,6 +99301,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsC
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -99023,6 +99502,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -99228,6 +99708,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -99444,6 +99925,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -99649,6 +100131,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -99849,6 +100332,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -100054,6 +100538,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -100259,6 +100744,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -100464,6 +100950,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -100680,6 +101167,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -100885,6 +101373,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -101096,6 +101585,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -101301,6 +101791,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -101501,6 +101992,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -101706,6 +102198,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -101922,6 +102415,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -102127,6 +102621,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -102327,6 +102822,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -102532,6 +103028,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -102737,6 +103234,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -102942,6 +103440,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -103158,6 +103657,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -103363,6 +103863,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -103574,6 +104075,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -103779,6 +104281,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -103979,6 +104482,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -104184,6 +104688,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -104389,6 +104894,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -104594,6 +105100,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -104799,6 +105306,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -105004,6 +105512,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -105220,6 +105729,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -105425,6 +105935,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -105636,6 +106147,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -105841,6 +106353,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -106052,6 +106565,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -106257,6 +106771,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -106457,6 +106972,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -106662,6 +107178,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -106867,6 +107384,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -107072,6 +107590,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -107288,6 +107807,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -107493,6 +108013,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -107704,6 +108225,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -107909,6 +108431,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -108109,6 +108632,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -108314,6 +108838,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -108530,6 +109055,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -108735,6 +109261,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -108935,6 +109462,7 @@ export type UserMasterCreateWithoutOnlineLeadAssignedFranchisesInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
@@ -109140,6 +109668,7 @@ export type UserMasterUncheckedCreateWithoutOnlineLeadAssignedFranchisesInput = 
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -109345,6 +109874,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -109550,6 +110080,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -109771,6 +110302,7 @@ export type UserMasterUpdateWithoutOnlineLeadAssignedFranchisesInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
@@ -109976,6 +110508,7 @@ export type UserMasterUncheckedUpdateWithoutOnlineLeadAssignedFranchisesInput = 
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -110192,6 +110725,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -110397,6 +110931,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -110602,6 +111137,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -110807,6 +111343,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -111023,6 +111560,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -111228,6 +111766,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -111439,6 +111978,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -111644,6 +112184,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -111844,6 +112385,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -112049,6 +112591,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -112265,6 +112808,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -112470,6 +113014,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -112670,6 +113215,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -112875,6 +113421,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -113091,6 +113638,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -113296,6 +113844,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -113496,6 +114045,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -113701,6 +114251,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -113906,6 +114457,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -114111,6 +114663,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -114327,6 +114880,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -114532,6 +115086,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -114743,6 +115298,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -114948,6 +115504,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -115148,6 +115705,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -115353,6 +115911,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -115569,6 +116128,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -115774,6 +116334,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -115974,6 +116535,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -116179,6 +116741,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -116384,6 +116947,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -116589,6 +117153,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -116805,6 +117370,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -117010,6 +117576,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -117221,6 +117788,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -117426,6 +117994,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -117626,6 +118195,7 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -117831,6 +118401,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -118036,6 +118607,7 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -118241,6 +118813,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -118446,6 +119019,7 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -118651,6 +119225,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -118856,6 +119431,7 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -119061,6 +119637,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -119266,6 +119843,7 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -119471,6 +120049,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -119687,6 +120266,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -119892,6 +120472,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -120103,6 +120684,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -120308,6 +120890,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -120519,6 +121102,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -120724,6 +121308,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -120935,6 +121520,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -121140,6 +121726,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -121351,6 +121938,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -121556,6 +122144,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -121756,6 +122345,7 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -121961,6 +122551,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -122177,6 +122768,7 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -122382,6 +122974,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -122582,6 +123175,7 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -122787,6 +123381,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -122992,6 +123587,7 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -123197,6 +123793,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -123413,6 +124010,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -123618,6 +124216,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -123829,6 +124428,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -124034,6 +124634,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -124234,6 +124835,7 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -124439,6 +125041,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -124644,6 +125247,7 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -124849,6 +125453,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -125054,6 +125659,7 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -125259,6 +125865,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -125475,6 +126082,7 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -125680,6 +126288,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -125891,6 +126500,7 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -126096,6 +126706,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -126307,6 +126918,7 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -126512,6 +127124,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -126712,6 +127325,7 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -126917,6 +127531,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -127122,6 +127737,7 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -127327,6 +127943,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -127532,6 +128149,7 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -127737,6 +128355,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -127953,6 +128572,7 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -128158,6 +128778,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -128369,6 +128990,7 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -128574,6 +129196,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -128785,6 +129408,7 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -128990,6 +129614,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -129190,6 +129815,7 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -129395,6 +130021,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -129600,6 +130227,7 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -129805,6 +130433,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -130021,6 +130650,7 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -130226,6 +130856,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -130437,6 +131068,7 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -130642,6 +131274,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -130842,6 +131475,7 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -131047,6 +131681,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -131263,6 +131898,7 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -131468,6 +132104,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -131668,6 +132305,7 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -131873,6 +132511,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -132089,6 +132728,7 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -132294,6 +132934,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -132494,6 +133135,7 @@ export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -132699,6 +133341,7 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -132915,6 +133558,7 @@ export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -133120,6 +133764,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -133320,6 +133965,7 @@ export type UserMasterCreateWithoutArchitechuremastersInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -133525,6 +134171,7 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -133741,6 +134388,7 @@ export type UserMasterUpdateWithoutArchitechuremastersInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -133946,6 +134594,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -134146,6 +134795,7 @@ export type UserMasterCreateWithoutBroadcastsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -134351,6 +135001,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -134556,6 +135207,7 @@ export type UserMasterCreateWithoutBroadcastsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -134761,6 +135413,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -134977,6 +135630,7 @@ export type UserMasterUpdateWithoutBroadcastsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -135182,6 +135836,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -135393,6 +136048,7 @@ export type UserMasterUpdateWithoutBroadcastsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -135598,6 +136254,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -135798,6 +136455,7 @@ export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -136003,6 +136661,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -136219,6 +136878,7 @@ export type UserMasterUpdateWithoutBroadcastCategoriesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -136424,6 +137084,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -136624,6 +137285,7 @@ export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -136829,6 +137491,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -137034,6 +137697,7 @@ export type UserMasterCreateWithoutBroadcastAudienceUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -137239,6 +137903,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -137455,6 +138120,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -137660,6 +138326,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -137871,6 +138538,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -138076,6 +138744,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -138276,6 +138945,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -138481,6 +139151,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -138686,6 +139357,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -138891,6 +139563,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -139107,6 +139780,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -139312,6 +139986,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -139523,6 +140198,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -139728,6 +140404,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -139928,6 +140605,7 @@ export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -140133,6 +140811,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -140338,6 +141017,7 @@ export type UserMasterCreateWithoutBroadcastReadsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -140543,6 +141223,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -140748,6 +141429,7 @@ export type UserMasterCreateWithoutBroadcastReadsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -140953,6 +141635,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -141169,6 +141852,7 @@ export type UserMasterUpdateWithoutBroadcastReadsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -141374,6 +142058,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -141585,6 +142270,7 @@ export type UserMasterUpdateWithoutBroadcastReadsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -141790,6 +142476,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -142001,6 +142688,7 @@ export type UserMasterUpdateWithoutBroadcastReadsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -142206,6 +142894,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -142406,6 +143095,7 @@ export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -142611,6 +143301,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -142816,6 +143507,7 @@ export type UserMasterCreateWithoutNotificationQueuesUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -143021,6 +143713,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -143237,6 +143930,7 @@ export type UserMasterUpdateWithoutNotificationQueuesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -143442,6 +144136,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -143653,6 +144348,7 @@ export type UserMasterUpdateWithoutNotificationQueuesUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -143858,6 +144554,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -144058,6 +144755,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -144263,6 +144961,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -144468,6 +145167,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -144673,6 +145373,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -144889,6 +145590,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -145094,6 +145796,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -145305,6 +146008,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -145510,6 +146214,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -145710,6 +146415,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -145915,6 +146621,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -146131,6 +146838,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -146336,6 +147044,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -146536,6 +147245,7 @@ export type UserMasterCreateWithoutOnline_lead_call_logInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -146741,6 +147451,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -146957,6 +147668,7 @@ export type UserMasterUpdateWithoutOnline_lead_call_logInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -147162,6 +147874,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -147362,6 +148075,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -147567,6 +148281,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -147772,6 +148487,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -147977,6 +148693,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -148193,6 +148910,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -148398,6 +149116,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -148609,6 +149328,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -148814,6 +149534,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -149014,6 +149735,7 @@ export type UserMasterCreateWithoutOnline_lead_historyInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -149219,6 +149941,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -149435,6 +150158,7 @@ export type UserMasterUpdateWithoutOnline_lead_historyInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -149640,6 +150364,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -149840,6 +150565,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_a
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -150045,6 +150771,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -150250,6 +150977,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_s
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -150455,6 +151183,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -150671,6 +151400,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_a
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -150876,6 +151606,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -151087,6 +151818,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_s
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -151292,6 +152024,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -151492,6 +152225,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_assign_toToUserMast
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -151697,6 +152431,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_assign_toT
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -151902,6 +152637,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_created_byToUserMas
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -152107,6 +152843,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_created_by
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -152312,6 +153049,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_final_assigned_lead
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -152517,6 +153255,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_final_assi
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -152722,6 +153461,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_updated_byToUserMas
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -152927,6 +153667,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_updated_by
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -153143,6 +153884,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_assign_toToUserMast
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -153348,6 +154090,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_assign_toT
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -153559,6 +154302,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_created_byToUserMas
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -153764,6 +154508,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_created_by
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -153975,6 +154720,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_final_assigned_lead
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -154180,6 +154926,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_final_assi
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -154391,6 +155138,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_updated_byToUserMas
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -154596,6 +155344,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_by
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -154796,6 +155545,7 @@ export type UserMasterCreateWithoutProductsRequiredForProductionInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -155001,6 +155751,7 @@ export type UserMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -155217,6 +155968,7 @@ export type UserMasterUpdateWithoutProductsRequiredForProductionInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -155422,6 +156174,7 @@ export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -155622,6 +156375,7 @@ export type UserMasterCreateWithoutCutListRulesCreatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -155827,6 +156581,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesCreatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -156032,6 +156787,7 @@ export type UserMasterCreateWithoutCutListRulesUpdatedInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -156237,6 +156993,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesUpdatedInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -156453,6 +157210,7 @@ export type UserMasterUpdateWithoutCutListRulesCreatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -156658,6 +157416,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesCreatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -156869,6 +157628,7 @@ export type UserMasterUpdateWithoutCutListRulesUpdatedInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -157074,6 +157834,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -157274,6 +158035,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput =
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -157479,6 +158241,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreat
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -157684,6 +158447,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput =
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -157889,6 +158653,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdat
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -158094,6 +158859,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -158299,6 +159065,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -158515,6 +159282,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput =
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -158720,6 +159488,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsCreat
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -158931,6 +159700,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput =
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -159136,6 +159906,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsUpdat
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -159347,6 +160118,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -159552,6 +160324,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -159752,6 +160525,7 @@ export type UserMasterCreateWithoutAttendancesInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -159957,6 +160731,7 @@ export type UserMasterUncheckedCreateWithoutAttendancesInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -160173,6 +160948,7 @@ export type UserMasterUpdateWithoutAttendancesInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -160378,6 +161154,7 @@ export type UserMasterUncheckedUpdateWithoutAttendancesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -160578,6 +161355,7 @@ export type UserMasterCreateWithoutAttendance_logsInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
@@ -160783,6 +161561,7 @@ export type UserMasterUncheckedCreateWithoutAttendance_logsInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -160999,6 +161778,7 @@ export type UserMasterUpdateWithoutAttendance_logsInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -161204,6 +161984,7 @@ export type UserMasterUncheckedUpdateWithoutAttendance_logsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -161406,6 +162187,7 @@ export type UserMasterCreateManyVendorInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -161419,6 +162201,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -161623,6 +162406,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -161826,6 +162610,7 @@ export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -161841,6 +162626,7 @@ export type UserMasterCreateManyUser_typeInput = {
   user_timezone: string
   password: string
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
   franchise_id?: number | null
@@ -161854,6 +162640,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -162058,6 +162845,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -162261,6 +163049,7 @@ export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -162277,6 +163066,7 @@ export type UserMasterCreateManyFranchiseInput = {
   password: string
   user_type_id: number
   status?: string
+  cadbidToken?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -162289,6 +163079,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -162494,6 +163285,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
@@ -162697,6 +163489,7 @@ export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -164426,6 +165219,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   password?: boolean
   user_type_id?: boolean
   status?: boolean
+  cadbidToken?: boolean
   created_at?: boolean
   updated_at?: boolean
   franchise_id?: boolean
@@ -164634,6 +165428,7 @@ export type UserMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   password?: boolean
   user_type_id?: boolean
   status?: boolean
+  cadbidToken?: boolean
   created_at?: boolean
   updated_at?: boolean
   franchise_id?: boolean
@@ -164653,6 +165448,7 @@ export type UserMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   password?: boolean
   user_type_id?: boolean
   status?: boolean
+  cadbidToken?: boolean
   created_at?: boolean
   updated_at?: boolean
   franchise_id?: boolean
@@ -164672,12 +165468,13 @@ export type UserMasterSelectScalar = {
   password?: boolean
   user_type_id?: boolean
   status?: boolean
+  cadbidToken?: boolean
   created_at?: boolean
   updated_at?: boolean
   franchise_id?: boolean
 }
 
-export type UserMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_name" | "designation" | "user_contact" | "user_email" | "user_timezone" | "password" | "user_type_id" | "status" | "created_at" | "updated_at" | "franchise_id", ExtArgs["result"]["userMaster"]>
+export type UserMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_name" | "designation" | "user_contact" | "user_email" | "user_timezone" | "password" | "user_type_id" | "status" | "cadbidToken" | "created_at" | "updated_at" | "franchise_id", ExtArgs["result"]["userMaster"]>
 export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   onlineLeadAssignedFranchises?: boolean | Prisma.UserMaster$onlineLeadAssignedFranchisesArgs<ExtArgs>
   productsRequiredForProduction?: boolean | Prisma.UserMaster$productsRequiredForProductionArgs<ExtArgs>
@@ -165089,6 +165886,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     password: string
     user_type_id: number
     status: string
+    cadbidToken: string | null
     created_at: Date
     updated_at: Date
     franchise_id: number | null
@@ -165716,6 +166514,7 @@ export interface UserMasterFieldRefs {
   readonly password: Prisma.FieldRef<"UserMaster", 'String'>
   readonly user_type_id: Prisma.FieldRef<"UserMaster", 'Int'>
   readonly status: Prisma.FieldRef<"UserMaster", 'String'>
+  readonly cadbidToken: Prisma.FieldRef<"UserMaster", 'String'>
   readonly created_at: Prisma.FieldRef<"UserMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"UserMaster", 'DateTime'>
   readonly franchise_id: Prisma.FieldRef<"UserMaster", 'Int'>

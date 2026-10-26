@@ -648,6 +648,11 @@ export type ModulesMaster = Prisma.ModulesMasterModel
  */
 export type VendorModulesMapping = Prisma.VendorModulesMappingModel
 /**
+ * Model MachineCostDescription
+ * 
+ */
+export type MachineCostDescription = Prisma.MachineCostDescriptionModel
+/**
  * Model MachineMaster
  * 
  */

@@ -6,7 +6,14 @@ import {
 
   getMachineType
 } from '../../controllers/trackTraceController/trackTraceMasterController';
+import { verifyToken } from "../../middlewares/auth.middleware";
+import { deleteMachineCostDescription, getMachineCostDescriptions, saveMachineCostAmount } from "../../controllers/trackTraceController/machineCost.controller";
 const router = Router();
+
+router.get("/machines/:machine_id/cost-descriptions", verifyToken, getMachineCostDescriptions);
+router.patch("/machines/:machine_id/cost-descriptions/:description_id/amount", verifyToken, saveMachineCostAmount);
+router.post("/machines/:machine_id/cost-descriptions", verifyToken, saveMachineCostAmount);
+router.delete("/machines/:machine_id/cost-descriptions/:description_id", verifyToken, deleteMachineCostDescription);
 
 
 router.post(
@@ -42,7 +49,10 @@ router.get("/rule-masters/actions", CutListRuleController.getVendorRuleActions);
 
 router.get("/machines/:machine_id/rules", CutListRuleController.getRulesByMachine);
 router.get("/machines/:machine_id/rules/:rule_id", CutListRuleController.getRuleById);
+router.get("/machines/:machine_id/default-rule-template", CutListRuleController.getDefaultRuleTemplate);
 router.post("/machines/:machine_id/rules", CutListRuleController.createRule);
+router.post("/machines/:machine_id/generate-default-rule", CutListRuleController.generateDefaultRuleForMachine);
+router.post("/vendors/:vendor_id/generate-default-rules", CutListRuleController.generateDefaultRules);
 router.put("/machines/:machine_id/rules/:rule_id", CutListRuleController.updateRule);
 router.delete("/machines/:machine_id/rules/:rule_id", CutListRuleController.deleteRule);
 router.patch("/machines/:machine_id/rules/:rule_id/status", CutListRuleController.toggleRuleStatus);

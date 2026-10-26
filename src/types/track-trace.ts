@@ -14,6 +14,8 @@ export interface CutListSavePayload {
     assigned: boolean;
     created_by: Number;
     user_role?: string;
+    /** Acting user, recorded in the lead's Track Trace history. */
+    user_id?: number;
 }
 
 
@@ -45,4 +47,4 @@ export interface UpdateCutListQtyPayload {
   cut_list_id: number;
   new_qty: number;
   user_role?: string;
-}
+}

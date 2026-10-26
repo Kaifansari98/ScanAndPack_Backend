@@ -6,6 +6,20 @@ import * as trackTraceService from "../../services/trackTraceServices/trackTrace
 import path from "path";
 import { uploadToWasabiMachineImage } from "../../../src/utils/wasabiClient";
 
+// Workstation purchase date from the form ("yyyy-MM-dd"). Missing keeps the current value; "" clears it.
+const parsePurchasedAt = (value: unknown): Date | null | undefined => {
+  if (value === undefined) return undefined;
+  if (value === null || value === "") return null;
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new Error("Purchased At must be a valid date");
+  }
+  const date = new Date(`${value}T00:00:00.000Z`);
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value) {
+    throw new Error("Purchased At must be a valid date");
+  }
+  return date;
+};
+
 export class TrackTraceMasterController {
   static async createMachine(req: Request, res: Response) {
     try {
@@ -42,6 +56,7 @@ export class TrackTraceMasterController {
         target_per_hour: req.body.target_per_hour
           ? Number(req.body.target_per_hour)
           : undefined,
+        purchased_at: parsePurchasedAt(req.body.purchased_at),
         created_by: Number(req.body.created_by),
         updated_by: Number(req.body.created_by),
         image_path: imagePath,
@@ -125,6 +140,7 @@ export class TrackTraceMasterController {
           target_per_hour: req.body.target_per_hour
             ? Number(req.body.target_per_hour)
             : undefined,
+          purchased_at: parsePurchasedAt(req.body.purchased_at),
           updated_by: Number(req.body.updated_by),
           ...(imagePath && { image_path: imagePath }),
         },
