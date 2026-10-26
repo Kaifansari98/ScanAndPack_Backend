@@ -4350,6 +4350,7 @@ export const getCutListMachine = async (
       };
     }
 
+    
     // Populate machine assignment and scan status from mappings
     for (const mapping of cutListMachineMapping as any[]) {
       const machineCode = machineCodeById.get(mapping.machine_id);
@@ -4378,6 +4379,18 @@ export const getCutListMachine = async (
         box_id: existingCell?.box_id || mapping.box_id,
       };
     }
+
+    // Mark assigned machines. There is one mapping per piece, so also count
+    // how many pieces have been scanned at each machine.
+    cutList.cutListMachineMapping.forEach((mapping) => {
+      const code = mapping.machine.machine_code;
+      const cell = row[code]?.assigned
+        ? row[code]
+        : { assigned: true, machineId: mapping.machine.id, total: 0, scanned: 0 };
+      cell.total += 1;
+      if (mapping.actual_in_at || mapping.actual_out_at) cell.scanned += 1;
+      row[code] = cell;
+    });
 
     return row;
   });
@@ -4798,7 +4811,7 @@ export const updateCutListQty = async (payload: UpdateCutListQtyPayload) => {
             .filter((qty) => qty > 0),
         );
         const oldQty = Number(cutListItem.qty || 0);
-        const changingBase = oldQty === baseQty;
+        const changingBase = oldQty === baseQty;track-trace-v1
 
         if (!changingBase && baseQty > 0 && newQty % baseQty !== 0) {
           return validationResponse(
