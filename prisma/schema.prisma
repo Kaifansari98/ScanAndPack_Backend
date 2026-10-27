@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  site_readiness_questions Json?
   machineCostDescriptions                      MachineCostDescription[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
   id                                           Int                                            @id @default(autoincrement())
@@ -563,6 +564,7 @@ model ProjectMaster {
   unique_project_id  String
   is_grouping        Boolean     @default(false)
   lead_id            Int?
+  instance_id        Int?
   track_trace_status String      @default("Not Started")
   track_completed_at DateTime?
   track_started_at   DateTime?
@@ -592,6 +594,7 @@ model ProjectMaster {
   client                  ClientMaster?                    @relation(fields: [client_id], references: [id], onDelete: Cascade)
   createdByUser           UserMaster                       @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster?                      @relation(fields: [lead_id], references: [id])
+  instance                LeadProductStructureInstance?    @relation(fields: [instance_id], references: [id], onDelete: SetNull)
   vendor                  VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems               ScanAndPackItem[]
   locationQuantities      ProjectLocationProductQuantity[]
@@ -600,6 +603,7 @@ model ProjectMaster {
   userMasterId            Int?
 
   @@index([vendor_id, isDeleted])
+  @@index([lead_id, instance_id])
 }
 
 model ProjectLocationProductQuantity {
@@ -1991,6 +1995,7 @@ model LeadProductStructureInstance {
   vendor                                     VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   activityStatusLogs                         LeadScopedActivityStatusLog[]
   tasks                                      UserLeadTask[]
+  trackTraceProjects                         ProjectMaster[]
 
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
@@ -3220,6 +3225,7 @@ model CutlistHeadersMapping {
 }
 
 model CutList {
+  source_document_id       Int?
   id                       Int                      @id @default(autoincrement())
   project_id               Int
   vendor_id                Int
@@ -3242,6 +3248,9 @@ model CutList {
   elb                      String?
   esl                      String?
   esr                      String?
+  top_drill                String?
+  bottom_drill             String?
+  is_drill                 String?
   category_name            String?
   group_name               String?
   procurement              String?
@@ -3262,6 +3271,7 @@ model CutList {
   defectedItems            DefectedItem[]
   category                 ProjectCategoriesMaster? @relation("CutListCategory", fields: [category_id], references: [id], onDelete: SetNull)
 
+  @@index([source_document_id])
   @@index([unique_code])
   @@index([category_id])
   @@index([vendor_id, unique_code, project_id], map: "idx_cutlist_vendor_code_project")

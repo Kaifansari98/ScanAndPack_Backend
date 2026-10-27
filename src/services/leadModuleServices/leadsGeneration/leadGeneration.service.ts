@@ -2160,11 +2160,11 @@ export const createLeadProductStructureInstance = async ({
       });
     }
 
+    // quantity_index is sequential per lead (1, 2, 3...), across all structures
     const maxIndex = await prisma.leadProductStructureInstance.aggregate({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        product_structure_id: resolvedStructureId,
       },
       _max: { quantity_index: true },
     });

@@ -9,6 +9,10 @@ import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/l
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
+import {
+  isTrackTraceBoxCountVendor,
+  syncTrackTraceBoxCount,
+} from "./trackTraceBoxCount.service";
 
 export class PostProductionService {
   async uploadQcPhotos(
@@ -571,6 +575,15 @@ export class PostProductionService {
     noOfBoxes: number,
     instanceId?: number | null
   ) {
+    if (await isTrackTraceBoxCountVendor(vendorId)) {
+      throw Object.assign(
+        new Error(
+          "No. of Boxes is set automatically from the Track & Trace project for this vendor"
+        ),
+        { statusCode: 403 }
+      );
+    }
+
     if (instanceId) {
       const instance = await prisma.leadProductStructureInstance.findFirst({
         where: {
@@ -677,6 +690,8 @@ export class PostProductionService {
     leadId: number,
     instanceId?: number | null
   ) {
+    const syncedCount = await syncTrackTraceBoxCount(vendorId, leadId);
+
     if (instanceId) {
       const instance = await prisma.leadProductStructureInstance.findFirst({
         where: { id: instanceId, vendor_id: vendorId, lead_id: leadId },
@@ -688,7 +703,11 @@ export class PostProductionService {
       });
 
       if (instance?.no_of_boxes != null) {
-        return { ...instance, source: "instance" as const };
+        return {
+          ...instance,
+          source: "instance" as const,
+          is_system_managed: syncedCount !== null,
+        };
       }
     }
 
@@ -701,7 +720,13 @@ export class PostProductionService {
       },
     });
 
-    return lead ? { ...lead, source: "lead" as const } : null;
+    return lead
+      ? {
+          ...lead,
+          source: "lead" as const,
+          is_system_managed: syncedCount !== null,
+        }
+      : null;
   }
 
   // ✅ Check Post-Production Completeness
@@ -710,6 +735,8 @@ export class PostProductionService {
     leadId: number,
     instanceId?: number | null
   ) {
+    await syncTrackTraceBoxCount(vendorId, leadId);
+
     const instances = await prisma.leadProductStructureInstance.findMany({
       where: { lead_id: leadId, vendor_id: vendorId },
       select: {
@@ -855,24 +882,29 @@ export class PostProductionService {
         { statusCode: 404 },
       );
 
-    const uploadedDocs = [];
+    const uploadedDocs = await prisma.$transaction(async (tx) => {
+      await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+      const uploaded = [];
 
-    for (const file of files) {
-      const doc = await prisma.leadDocuments.create({
-        data: {
-          doc_og_name: file.originalName,
-          doc_sys_name: file.sysName,
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          created_by: userId,
-          doc_type_id: docType.id,
-          product_structure_instance_id:
-            typeof instanceId !== "undefined" ? instanceId : null,
-        },
-      });
-      uploadedDocs.push(doc);
-    }
+      for (const file of files) {
+        const doc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            created_by: userId,
+            doc_type_id: docType.id,
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
+          },
+        });
+        uploaded.push(doc);
+      }
+
+      return uploaded;
+    });
 
     if (accountId) {
       let instanceTitle: string | undefined;
@@ -1097,6 +1129,17 @@ export class PostProductionService {
 
     if (!instance) {
       throw new Error("Product structure instance not found for this lead");
+    }
+
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true, is_tracktrace_enabled: true },
+    });
+    if (vendor?.handlesLargeScaleProjects && vendor?.is_tracktrace_enabled) {
+      const readiness = await this.checkPreProductionFilesReady(vendorId, leadId, instanceId);
+      if (!readiness.readyForUnderProduction) {
+        throw Object.assign(new Error("Upload a Woodwork or Metalwork file in Pre-Production Files for this instance before marking production completed."), { statusCode: 400 });
+      }
     }
 
     const updatedInstance = await prisma.leadProductStructureInstance.update({

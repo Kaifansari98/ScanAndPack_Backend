@@ -305,6 +305,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const VendorMasterScalarFieldEnum = {
+  site_readiness_questions: 'site_readiness_questions',
   id: 'id',
   vendor_name: 'vendor_name',
   vendor_code: 'vendor_code',
@@ -494,6 +495,7 @@ export const ProjectMasterScalarFieldEnum = {
   unique_project_id: 'unique_project_id',
   is_grouping: 'is_grouping',
   lead_id: 'lead_id',
+  instance_id: 'instance_id',
   track_trace_status: 'track_trace_status',
   track_completed_at: 'track_completed_at',
   track_started_at: 'track_started_at',
@@ -2494,6 +2496,7 @@ export type CutlistHeadersMappingScalarFieldEnum = (typeof CutlistHeadersMapping
 
 
 export const CutListScalarFieldEnum = {
+  source_document_id: 'source_document_id',
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
@@ -2516,6 +2519,9 @@ export const CutListScalarFieldEnum = {
   elb: 'elb',
   esl: 'esl',
   esr: 'esr',
+  top_drill: 'top_drill',
+  bottom_drill: 'bottom_drill',
+  is_drill: 'is_drill',
   category_name: 'category_name',
   group_name: 'group_name',
   procurement: 'procurement',
@@ -4381,6 +4387,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const JsonNullValueInput = {
   JsonNull: JsonNull
 } as const
@@ -4388,12 +4402,13 @@ export const JsonNullValueInput = {
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
-export const NullableJsonNullValueInput = {
+export const JsonNullValueFilter = {
   DbNull: DbNull,
-  JsonNull: JsonNull
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
 } as const
 
-export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 export const QueryMode = {
@@ -4410,13 +4425,4 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

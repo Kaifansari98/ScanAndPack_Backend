@@ -18,6 +18,9 @@ export interface CutListItemPayload {
   elb?: string | null;
   esl?: string | null;
   esr?: string | null;
+  top_drill?: string | null;
+  bottom_drill?: string | null;
+  is_drill?: string | null;
   [key: string]: any;
 }
 
@@ -209,7 +212,7 @@ export class CutListRuleEngineService {
     if (cond.condition_type === "COLUMN") {
       const key = cond.field_key;
       if (!key) return false;
-      itemValue = cutItem[key];
+      itemValue = cutItem[key] ?? cutItem[key.replace(/_/g, "")];
     } else if (cond.condition_type === "CATEGORY") {
       itemValue = cutItem.category_id ?? cutItem.category_name;
       const isAll =

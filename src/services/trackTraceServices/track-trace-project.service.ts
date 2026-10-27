@@ -14,6 +14,7 @@ import {
   PackingType,
   BoxStatus,
   MachineStatus,
+  FabricationType,
 } from "../../../generated/prisma_client/enums";
 import {
   syncProjectBoxInfoFields,
@@ -57,6 +58,10 @@ export interface CadbidItem {
   el2?: string | null;
   sl1?: string | null;
   sl2?: string | null;
+
+  topDrill?: string | null;
+  bottomDrill?: string | null;
+  isDrill?: string | null;
 }
 
 /* ------------------ HELPERS ------------------ */
@@ -746,6 +751,20 @@ const HEADER_FIELD_MAP: Record<string, keyof CadbidItem | "customer_id"> = {
   "esr": "sl2",
   "sl2": "sl2",
 
+  "top drill": "topDrill",
+  "topdrill": "topDrill",
+  "top_drill": "topDrill",
+
+  "bottom drill": "bottomDrill",
+  "bottomdrill": "bottomDrill",
+  "bottom_drill": "bottomDrill",
+  "btm drill": "bottomDrill",
+
+  "is drill": "isDrill",
+  "isdrill": "isDrill",
+  "is_drill": "isDrill",
+  "drill": "isDrill",
+
   "procurement": "procurement",
 
   "customer id": "customer_id",
@@ -927,6 +946,10 @@ const itemSchema = z.object({
   el2: z.string().optional().nullable(),
   sl1: z.string().optional().nullable(),
   sl2: z.string().optional().nullable(),
+
+  topDrill: z.string().optional().nullable(),
+  bottomDrill: z.string().optional().nullable(),
+  isDrill: z.string().optional().nullable(),
 });
 
 const payloadSchema = z.object({
@@ -1015,6 +1038,10 @@ export type CreateProjectServicePayload = {
   projectName: string;
   vendorId: number;
   leadId?: number | null;
+  /** LeadProductStructureInstance the project belongs to (one project per instance). */
+  instanceId?: number | null;
+  fabrication?: "WOODWORK" | "METALWORK";
+  sourceDocumentId?: number | null;
 
   order_no?: string;
   client_name?: string;
@@ -1626,6 +1653,9 @@ export const createProjectService_old = async (
               elb: item.el2 || "",
               esl: item.sl1 || "",
               esr: item.sl2 || "",
+              top_drill: item.topDrill || null,
+              bottom_drill: item.bottomDrill || null,
+              is_drill: item.isDrill || null,
               unique_code: "",
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
@@ -1915,6 +1945,9 @@ export const createProjectService = async (
     projectName,
     vendorId,
     leadId,
+    instanceId,
+    sourceDocumentId,
+    fabrication,
     order_no,
     client_name,
     client_address,
@@ -2041,6 +2074,7 @@ export const createProjectService = async (
     |--------------------------------------------------------------------------
     */
     let lead_id: number | null = null;
+    let instance_id: number | null = null;
 
     let resolvedOrderNo = order_no?.trim() || null;
     let resolvedClientName = client_name?.trim() || null;
@@ -2068,6 +2102,23 @@ export const createProjectService = async (
       }
 
       lead_id = lead.id;
+
+      if (instanceId && Number(instanceId) > 0) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: Number(instanceId),
+            lead_id: lead.id,
+            vendor_id: vendor.id,
+          },
+          select: { id: true },
+        });
+
+        if (!instance) {
+          throw new Error("Invalid instance_id for this lead");
+        }
+
+        instance_id = instance.id;
+      }
 
       const leadClientName = [lead.firstname, lead.lastname]
         .filter(Boolean)
@@ -2358,15 +2409,24 @@ export const createProjectService = async (
     |--------------------------------------------------------------------------
     */
 
+    const targetFabrication: FabricationType =
+      fabrication === "METALWORK"
+        ? FabricationType.METALWORK
+        : FabricationType.WOODWORK;
+
     const machines =
       await prisma.machineMaster.findMany({
         where: {
-          fabrication: "WOODWORK",
+          fabrication: targetFabrication,
           vendor_id: vendor.id,
           status: "ACTIVE",
-          machine_type_id: {
-            in: enabledMachineTypeIds,
-          },
+          ...(targetFabrication === FabricationType.WOODWORK
+            ? {
+                machine_type_id: {
+                  in: enabledMachineTypeIds,
+                },
+              }
+            : {}),
         },
         select: {
           id: true,
@@ -2379,9 +2439,12 @@ export const createProjectService = async (
         },
       });
 
-    const assignWoodworkRules = await loadWoodworkMachineRules(
-      vendor.cutlist_configuration, vendor.id, machines
-    );
+    const assignWoodworkRules =
+      targetFabrication === FabricationType.WOODWORK
+        ? await loadWoodworkMachineRules(
+            vendor.cutlist_configuration, vendor.id, machines
+          )
+        : null;
 
     const getMachine = (
       machineTypeId: number,
@@ -2451,6 +2514,11 @@ export const createProjectService = async (
     */
     const result = await prisma.$transaction(
       async (tx) => {
+        if (lead_id) await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${lead_id} AND vendor_id = ${vendor.id} FOR UPDATE`;
+        if (sourceDocumentId) {
+          const source = await tx.leadDocuments.findFirst({ where: { id: sourceDocumentId, vendor_id: vendor.id, lead_id, product_structure_instance_id: instance_id, is_deleted: false, documentType: { tag: "Type 38" } } });
+          if (!source || !lead_id) throw new Error("Source file not found for this instance");
+        }
         const project = await tx.projectMaster.create({
           data: {
             project_name: validPayload.projectName,
@@ -2460,6 +2528,7 @@ export const createProjectService = async (
             project_status: "Initiated",
             is_grouping: false,
             lead_id,
+            instance_id,
             packing_type: resolvedPackingType,
             is_multi_location: resolvedIsMultiLocation,
             order_no: resolvedOrderNo,
@@ -2623,6 +2692,8 @@ export const createProjectService = async (
             data: {
               project_id: project.id,
               vendor_id: vendor.id,
+              fabrication: targetFabrication,
+              source_document_id: sourceDocumentId ?? null,
               description: item.name,
               length: item.l1 == null ? null : Number(item.l1),
               width: item.l2 == null ? null : Number(item.l2),
@@ -2637,6 +2708,9 @@ export const createProjectService = async (
               elb: item.el2 || "",
               esl: item.sl1 || "",
               esr: item.sl2 || "",
+              top_drill: item.topDrill || null,
+              bottom_drill: item.bottomDrill || null,
+              is_drill: item.isDrill || null,
               unique_code: "",
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
@@ -2748,7 +2822,7 @@ export const createProjectService = async (
           |--------------------------------------------------------------------------
           */
 
-          if (!hasType4) {
+          if (targetFabrication === FabricationType.WOODWORK && !hasType4) {
             /*
             |--------------------------------------------------------------------------
             | Type 3 — Scan validation machine 17 only
@@ -3349,6 +3423,12 @@ export const getTrackTraceProjectService = async (
             active: true,
           },
         },
+        CutList: {
+          take: 1,
+          select: {
+            fabrication: true,
+          },
+        },
       },
     });
 
@@ -3360,10 +3440,15 @@ export const getTrackTraceProjectService = async (
       };
     }
 
+    const projectFabrication = project.CutList?.[0]?.fabrication ?? "WOODWORK";
+
     return {
       success: true,
       message: "Project fetched successfully",
-      data: project,
+      data: {
+        ...project,
+        fabrication: projectFabrication,
+      },
     };
   } catch (error: any) {
     console.error("getTrackTraceProjectService error:", error);
@@ -4018,3 +4103,279 @@ export const updateTrackTraceProjectService = async (
     };
   }
 };
+
+export const previewCutlistMachineMappingService = async (
+  vendorId: number,
+  items: any[],
+  packingType?: string,
+  fabrication?: "WOODWORK" | "METALWORK"
+) => {
+  try {
+    const vendor = await prisma.vendorMaster.findFirst({
+      where: {
+        id: Number(vendorId),
+      },
+      select: {
+        id: true,
+        cutlist_configuration: true,
+        is_tracktrace_enabled: true,
+        is_scanpack_enabled: true,
+      },
+    });
+
+    if (!vendor) {
+      return {
+        success: false,
+        message: "Vendor not found",
+        data: {
+          machines: [],
+          rowMappings: [],
+        },
+      };
+    }
+
+    const targetFabrication: FabricationType =
+      fabrication === "METALWORK"
+        ? FabricationType.METALWORK
+        : FabricationType.WOODWORK;
+
+    const isTrackTraceEnabled = vendor.is_tracktrace_enabled === true;
+    const isScanPackEnabled = vendor.is_scanpack_enabled === true;
+
+    const enabledMachineTypeIds = [
+      ...(isTrackTraceEnabled ? [3, 7, 11] : []),
+      ...(isScanPackEnabled ? [17, 18] : []),
+    ];
+
+    const allMachines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id: vendor.id,
+        status: "ACTIVE",
+        fabrication: targetFabrication,
+      },
+      select: {
+        id: true,
+        machine_name: true,
+        machine_code: true,
+        machine_type_id: true,
+        sequence_no: true,
+        status: true,
+        fabrication: true,
+      },
+      orderBy: [
+        { sequence_no: "asc" },
+        { machine_name: "asc" },
+      ],
+    });
+
+    const enabledMachines = allMachines.filter(
+      (m) =>
+        targetFabrication === FabricationType.METALWORK ||
+        (m.machine_type_id != null &&
+          enabledMachineTypeIds.includes(m.machine_type_id))
+    );
+
+    let assignWoodworkRules: any = null;
+    if (targetFabrication === FabricationType.WOODWORK) {
+      try {
+        assignWoodworkRules = await loadWoodworkMachineRules(
+          vendor.cutlist_configuration,
+          vendor.id,
+          allMachines
+        );
+      } catch (err: any) {
+        logger.warn("previewCutlistMachineMappingService: loadWoodworkMachineRules warning", {
+          error: err.message,
+        });
+      }
+    }
+
+    const getMachine = (machineTypeId: number) => {
+      return enabledMachines.find(
+        (machine) => machine.machine_type_id === machineTypeId && machine.status === "ACTIVE"
+      );
+    };
+
+    const categoryMappingsRaw = await prisma.projectCategoriesMaster.findMany({
+      where: {
+        vendor_id: vendor.id,
+        status: "Yes",
+      },
+      select: {
+        id: true,
+        category_name: true,
+        use_in_assembled_packing: true,
+        include_in_packing: true,
+        scan_pack_validate: true,
+        projectCategoriesMasterVendorMapping: {
+          select: {
+            project_categories_type_master_id: true,
+          },
+        },
+      },
+    });
+
+    const categoryTypeMap = new Map<string, number[]>();
+    const categoryMasterMap = new Map<
+      string,
+      {
+        id: number;
+        include_in_packing: boolean;
+        scan_pack_validate: boolean;
+      }
+    >();
+
+    for (const category of categoryMappingsRaw) {
+      const categoryKey = category.category_name.trim().toLowerCase();
+      const typeIds = category.projectCategoriesMasterVendorMapping.map(
+        (m) => m.project_categories_type_master_id
+      );
+      categoryTypeMap.set(categoryKey, typeIds);
+      categoryMasterMap.set(categoryKey, {
+        id: category.id,
+        include_in_packing: category.include_in_packing === true,
+        scan_pack_validate: category.scan_pack_validate === true,
+      });
+    }
+
+    const rowMappings = (items || []).map((item: any, rowIndex: number) => {
+      const assignedMachineIds = new Set<number>();
+
+      const hasEdgeBanding =
+        Boolean(item.elf || item.el1) ||
+        Boolean(item.elb || item.el2) ||
+        Boolean(item.esl || item.sl1) ||
+        Boolean(item.esr || item.sl2);
+
+      const itemCategoryName = (item.category_name || item.categoryName || "")
+        .trim()
+        .toLowerCase();
+      const categoryConfig = categoryMasterMap.get(itemCategoryName) ?? null;
+      const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
+
+      const shouldInsertPackagingMachineMapping =
+        !categoryConfig ||
+        (categoryConfig.include_in_packing === true &&
+          categoryConfig.scan_pack_validate === true);
+
+      if (assignWoodworkRules) {
+        try {
+          const assignments = assignWoodworkRules({
+            ...item,
+            length: Number(item.length || item.l1 || 0),
+            width: Number(item.width || item.l2 || 0),
+            thickness: Number(item.thickness || item.l3 || 0),
+            unique_code: item.unique_code || item.barcode1 || "",
+            weight: Number(item.weight || 0),
+            has_edge_banding: hasEdgeBanding,
+            category_name: item.category_name || item.categoryName || "",
+            category_id: categoryConfig?.id ?? null,
+            item_name: item.item_name || item.name || "",
+            group_name: item.group_name || item.groupName || "",
+            material_details: item.material_details || item.articleCode || "",
+          });
+          for (const assignment of assignments) {
+            if (assignment?.machine?.id) {
+              assignedMachineIds.add(assignment.machine.id);
+            }
+          }
+        } catch (ruleErr: any) {
+          logger.warn("preview rule evaluation error for item", {
+            rowIndex,
+            error: ruleErr.message,
+          });
+        }
+      } else {
+        const hasType4 = categoryTypeIds.includes(4);
+        const hasType3 = categoryTypeIds.includes(3);
+        const hasType1Or2 = categoryTypeIds.some(
+          (typeId) => typeId === 1 || typeId === 2
+        );
+        const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
+
+        if (targetFabrication === FabricationType.WOODWORK && !hasType4) {
+          if (hasType3 && !isNormalFlow) {
+            if (isScanPackEnabled) {
+              const scanMachine = getMachine(17);
+              if (scanMachine) assignedMachineIds.add(scanMachine.id);
+            }
+          } else {
+            if (isTrackTraceEnabled) {
+              if (hasEdgeBanding) {
+                const edgeBandingMachine = getMachine(11);
+                if (edgeBandingMachine) assignedMachineIds.add(edgeBandingMachine.id);
+              }
+
+              const cuttingMachine = getMachine(3);
+              if (cuttingMachine) assignedMachineIds.add(cuttingMachine.id);
+
+              const thickness = Number(item.thickness || item.l3 || 0);
+              if (thickness > 9) {
+                const cncMachine = getMachine(7);
+                if (cncMachine) assignedMachineIds.add(cncMachine.id);
+              }
+            }
+
+            if (isScanPackEnabled) {
+              const scanMachine = getMachine(17);
+              if (scanMachine) assignedMachineIds.add(scanMachine.id);
+            }
+          }
+        }
+
+        if (isScanPackEnabled && shouldInsertPackagingMachineMapping) {
+          const packMachine = getMachine(18);
+          if (packMachine) assignedMachineIds.add(packMachine.id);
+        }
+      }
+
+      const machineAssignments: Record<string, boolean> = {};
+      const assignedMachineCodes: string[] = [];
+
+      for (const machine of allMachines) {
+        const isAssigned = assignedMachineIds.has(machine.id);
+        machineAssignments[machine.machine_code] = isAssigned;
+        if (isAssigned) {
+          assignedMachineCodes.push(machine.machine_code);
+        }
+      }
+
+      return {
+        rowIndex,
+        assignedMachineIds: [...assignedMachineIds],
+        assignedMachineCodes,
+        machineAssignments,
+      };
+    });
+
+    return {
+      success: true,
+      message: "Preview machine mapping computed successfully",
+      data: {
+        machines: allMachines.map((m) => ({
+          id: m.id,
+          machine_code: m.machine_code,
+          machine_name: m.machine_name,
+          machine_type_id: m.machine_type_id,
+          sequence_no: m.sequence_no,
+        })),
+        rowMappings,
+      },
+    };
+  } catch (error: any) {
+    logger.error("previewCutlistMachineMappingService error", {
+      error: error.message,
+      stack: error.stack,
+    });
+
+    return {
+      success: false,
+      message: error.message || "Failed to preview machine mappings",
+      data: {
+        machines: [],
+        rowMappings: [],
+      },
+    };
+  }
+};
+

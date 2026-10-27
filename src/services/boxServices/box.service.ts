@@ -8982,16 +8982,16 @@ export const getManualBoxSiteInItemsService = async (
         received_qty: mapping.received_qty === null ? null : receivedQty,
 
         /*
-            |--------------------------------------------------------------------------
-            | Initial textbox value:
-            |
-            | Never verified -> packed quantity
-            | Already saved  -> saved received quantity
-            |--------------------------------------------------------------------------
-            */
+        |--------------------------------------------------------------------------
+        | Initial textbox value:
+        |
+        | Never verified -> packed quantity
+        | Already partially saved -> remaining pending quantity
+        |--------------------------------------------------------------------------
+        */
 
         suggested_received_qty:
-          mapping.received_qty === null ? packedQty : receivedQty,
+          mapping.received_qty === null ? packedQty : pendingQty,
 
         pending_qty: pendingQty,
 
@@ -9074,6 +9074,7 @@ export const verifyManualBoxSiteInItemService = async (
   vendor_id: number,
   user_id: number,
   received_qty: number,
+  mode: "set" | "add" = "set",
 ) => {
   try {
     /*
@@ -9216,11 +9217,18 @@ export const verifyManualBoxSiteInItemService = async (
     }
 
     const packedQty = Math.max(0, Number(mapping.qty ?? 0));
+    const currentReceived = clampReceivedQty(mapping.received_qty, packedQty);
 
-    if (received_qty > packedQty) {
+    let finalReceivedQty = received_qty;
+
+    if (mode === "add") {
+      finalReceivedQty = currentReceived + received_qty;
+    }
+
+    if (finalReceivedQty > packedQty) {
       return validationResponse(
         0,
-        `Received quantity cannot be greater than packed quantity (${packedQty})`,
+        `Total received quantity (${finalReceivedQty}) cannot be greater than packed quantity (${packedQty})`,
       );
     }
 
@@ -9231,7 +9239,7 @@ export const verifyManualBoxSiteInItemService = async (
     |
     | site_in_at / site_in_by become the manual verification audit fields.
     |
-    | If received_qty = 0:
+    | If finalReceivedQty = 0:
     |   received_qty is still saved as 0,
     |   site_in_at is cleared because nothing was received.
     |--------------------------------------------------------------------------
@@ -9245,11 +9253,11 @@ export const verifyManualBoxSiteInItemService = async (
       },
 
       data: {
-        received_qty,
+        received_qty: finalReceivedQty,
 
-        site_in_at: received_qty > 0 ? now : null,
+        site_in_at: finalReceivedQty > 0 ? now : null,
 
-        site_in_by: received_qty > 0 ? user_id : null,
+        site_in_by: finalReceivedQty > 0 ? user_id : null,
       },
 
       select: {
@@ -9271,7 +9279,7 @@ export const verifyManualBoxSiteInItemService = async (
       },
     });
 
-    const pendingQty = Math.max(packedQty - received_qty, 0);
+    const pendingQty = Math.max(packedQty - finalReceivedQty, 0);
 
     /*
     |--------------------------------------------------------------------------
@@ -9321,9 +9329,13 @@ export const verifyManualBoxSiteInItemService = async (
     const message =
       pendingQty === 0
         ? "Manual item verified successfully"
-        : `Manual item verified. ${pendingQty} unit${
-            pendingQty > 1 ? "s" : ""
-          } pending for this item`;
+        : mode === "add"
+          ? `Added ${received_qty} units. ${pendingQty} unit${
+              pendingQty > 1 ? "s" : ""
+            } pending for this item`
+          : `Received quantity updated to ${finalReceivedQty}. ${pendingQty} unit${
+              pendingQty > 1 ? "s" : ""
+            } pending for this item`;
 
     return validationResponse(1, message, {
       mapping_id: updated.id,
@@ -9346,7 +9358,7 @@ export const verifyManualBoxSiteInItemService = async (
 
       site_in_by: updated.site_in_by,
 
-      site_in_by_name: received_qty > 0 ? user.user_name : null,
+      site_in_by_name: finalReceivedQty > 0 ? user.user_name : null,
 
       box_summary: {
         total_qty: boxManualTotalQty,

@@ -2243,6 +2243,13 @@ export class OnlineLeadController {
           // Create Product Structure Instances for all combinations
           const firstTypeId = mappedTypeIds[0] || null;
           const maxLen = Math.max(prodTypes.length, prodStructures.length);
+          // quantity_index continues sequentially from the lead's existing instances
+          const existingMaxIndex =
+            await tx.leadProductStructureInstance.aggregate({
+              where: { lead_id: leadIdForMapping },
+              _max: { quantity_index: true },
+            });
+          let nextQuantityIndex = existingMaxIndex._max.quantity_index || 0;
           for (let idx = 0; idx < maxLen; idx++) {
             const rawType = prodTypes[idx];
             const structObj = mappedStructs[idx] || mappedStructs[0];
@@ -2271,7 +2278,7 @@ export class OnlineLeadController {
                     account_id: accountIdForMapping,
                     product_type_id: typeIdForInstance,
                     product_structure_id: structObj.id,
-                    quantity_index: idx + 1,
+                    quantity_index: ++nextQuantityIndex,
                     title: customTitle,
                     description: null,
                     created_by: Number(telecaller_id || lead.created_by || 1),
@@ -2975,6 +2982,13 @@ export class OnlineLeadController {
 
             // Create Product Structure Instances for all combinations
             const firstTypeId = mappedTypeIds[0] || null;
+            // quantity_index continues sequentially from the lead's existing instances
+            const existingMaxIndex =
+              await tx.leadProductStructureInstance.aggregate({
+                where: { lead_id: leadIdForMapping },
+                _max: { quantity_index: true },
+              });
+            let nextQuantityIndex = existingMaxIndex._max.quantity_index || 0;
             for (let idx = 0; idx < maxLen; idx++) {
               const rawType = prodTypes[idx];
               const structObj = mappedStructs[idx] || mappedStructs[0];
@@ -3003,7 +3017,7 @@ export class OnlineLeadController {
                       account_id: accountIdForMapping,
                       product_type_id: typeIdForInstance,
                       product_structure_id: structObj.id,
-                      quantity_index: idx + 1,
+                      quantity_index: ++nextQuantityIndex,
                       title: customTitle,
                       description: null,
                       created_by: Number(selected_by || lead.created_by || 1),
@@ -5704,6 +5718,12 @@ export class OnlineLeadController {
         }
 
         const loopLen = Math.max(maxLen, 1);
+        // quantity_index continues sequentially from the lead's existing instances
+        const existingMaxIndex = await tx.leadProductStructureInstance.aggregate({
+          where: { lead_id: leadIdForMapping, vendor_id: lead.vendor_id },
+          _max: { quantity_index: true },
+        });
+        let nextQuantityIndex = existingMaxIndex._max.quantity_index || 0;
         for (let idx = 0; idx < loopLen; idx++) {
           const rawType = productTypes[idx];
           const structObj = mappedStructs[idx] || resolvedStructObj;
@@ -5735,7 +5755,7 @@ export class OnlineLeadController {
                   product_type_id: typeIdForInstance,
                   product_structure_id: structObj.id,
                   title: customTitle,
-                  quantity_index: idx + 1,
+                  quantity_index: ++nextQuantityIndex,
                   created_by: Number(user_id || lead.created_by || 1),
                 },
               });

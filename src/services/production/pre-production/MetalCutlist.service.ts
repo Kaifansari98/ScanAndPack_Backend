@@ -25,10 +25,21 @@ export class MetalCutlistError extends Error {
 
 const MAX_PARTS = 1000;
 
-/** The latest active Track & Trace project linked to the lead. */
-const findLeadProject = (vendorId: number, leadId: number) =>
+/**
+ * Where-clause for the lead's active Track & Trace project. Each product instance
+ * has its own project, so an instance id narrows it to that instance's project.
+ */
+const leadProjectWhere = (vendorId: number, leadId: number, instanceId?: number | null) => ({
+  vendor_id: vendorId,
+  lead_id: leadId,
+  isDeleted: false,
+  ...(instanceId ? { instance_id: instanceId } : {}),
+});
+
+/** The latest active Track & Trace project linked to the lead (instance). */
+const findLeadProject = (vendorId: number, leadId: number, instanceId?: number | null) =>
   prisma.projectMaster.findFirst({
-    where: { vendor_id: vendorId, lead_id: leadId, isDeleted: false },
+    where: leadProjectWhere(vendorId, leadId, instanceId),
     orderBy: { id: "desc" },
     select: { id: true, unique_project_id: true, project_name: true },
   });
@@ -70,8 +81,8 @@ export const validateMetalCutlistParts = (
 };
 
 export class MetalCutlistService {
-  async getMetalCutlist(vendorId: number, leadId: number) {
-    const project = await findLeadProject(vendorId, leadId);
+  async getMetalCutlist(vendorId: number, leadId: number, instanceId?: number | null) {
+    const project = await findLeadProject(vendorId, leadId, instanceId);
     if (!project) return { project: null, rows: [] };
 
     const rows = await prisma.cutList.findMany({
@@ -114,6 +125,7 @@ export class MetalCutlistService {
     parts: MetalCutlistPartInput[],
     images: Express.Multer.File[],
     instanceId?: number | null,
+    sourceDocumentId?: number | null,
   ) {
     const user = await prisma.userMaster.findFirst({
       where: { id: createdBy, vendor_id: vendorId },
@@ -126,13 +138,24 @@ export class MetalCutlistService {
       select: { id: true, lead_code: true, firstname: true, lastname: true, contact_no: true, site_address: true },
     });
     if (!lead) throw new MetalCutlistError("Invalid lead_id for this vendor", 400);
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+        select: { id: true },
+      });
+      if (!instance) throw new MetalCutlistError("Invalid instance_id for this lead", 400);
+    }
     const leadProjectName = await resolveLeadProjectName(vendorId, leadId, instanceId);
 
     const result = await prisma.$transaction(async (tx) => {
       // Serialize Metalwork submissions for this lead to avoid duplicate projects.
       await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+      if (sourceDocumentId) {
+        const source = await tx.leadDocuments.findFirst({ where: { id: sourceDocumentId, vendor_id: vendorId, lead_id: leadId, product_structure_instance_id: instanceId ?? null, is_deleted: false, documentType: { tag: "Type 38" } } });
+        if (!source) throw new MetalCutlistError("Source file not found for this instance", 400);
+      }
       const existingProject = await tx.projectMaster.findFirst({
-        where: { vendor_id: vendorId, lead_id: leadId, isDeleted: false },
+        where: { ...leadProjectWhere(vendorId, leadId, instanceId), instance_id: instanceId ?? null },
         orderBy: { id: "desc" },
         select: { id: true, unique_project_id: true, project_name: true },
       });
@@ -142,6 +165,7 @@ export class MetalCutlistService {
           unique_project_id: randomUUID(),
           vendor_id: vendorId,
           lead_id: leadId,
+          instance_id: instanceId ?? null,
           created_by: createdBy,
           order_no: lead.lead_code,
           client_name: [lead.firstname, lead.lastname].filter(Boolean).join(" ").trim(),
@@ -192,6 +216,7 @@ export class MetalCutlistService {
           status: "Active",
           created_by: createdBy,
           fabrication: FabricationType.METALWORK,
+          source_document_id: sourceDocumentId ?? null,
           image_key: part.image_index === null ? null : imageKeys[part.image_index],
         })),
         select: { id: true },

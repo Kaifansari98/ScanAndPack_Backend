@@ -34,7 +34,8 @@ export class MetalCutlistController {
         });
       }
 
-      const data = await service.getMetalCutlist(vendorId, leadId);
+      const instanceId = Number(getParam(req.query.instance_id as string | string[] | undefined)) || null;
+      const data = await service.getMetalCutlist(vendorId, leadId, instanceId);
       return res.status(200).json({
         success: true,
         message: "Metalwork Cutlist fetched successfully",
@@ -78,7 +79,7 @@ export class MetalCutlistController {
 
       const parts = validateMetalCutlistParts(rawParts, images.length);
       const instanceId = Number(req.body.instance_id) || null;
-      const data = await service.saveMetalCutlist(vendorId, leadId, createdBy, parts, images, instanceId);
+      const data = await service.saveMetalCutlist(vendorId, leadId, createdBy, parts, images, instanceId, Number(req.body.source_document_id) || null);
 
       return res.status(201).json({
         success: true,

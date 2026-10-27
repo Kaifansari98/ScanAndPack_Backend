@@ -1,3 +1,4 @@
+import { deletePreProductionFile } from "../../../services/production/pre-production/deletePreProductionFile";
 import { parseAnswerGroups } from "../../../services/leadModuleServices/walkinLeadQuestions/validation";
 import { Request, Response } from "express";
 import {
@@ -2812,9 +2813,11 @@ export class LeadController {
         },
       });
 
-      if (existingDoc && !existingDoc.lead?.franchise?.moduled_for_b2b) {
+      if (existingDoc && (existingDoc.documentType?.tag === "Type 38" || !existingDoc.lead?.franchise?.moduled_for_b2b)) {
         // 🧹 Soft delete it
-        const updatedDoc = await prisma.leadDocuments.update({
+        const updatedDoc = existingDoc.documentType?.tag === "Type 38"
+          ? await deletePreProductionFile(Number(vendorId), Number(documentId), Number(deleted_by))
+          : await prisma.leadDocuments.update({
           where: { id: Number(documentId) },
           data: {
             is_deleted: true,
@@ -2923,9 +2926,9 @@ export class LeadController {
       });
     } catch (error: any) {
       console.error("Error deleting document:", error);
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
-        message: "Internal server error while deleting document",
+        message: error.statusCode ? error.message : "Internal server error while deleting document",
         error: error.message,
       });
     }

@@ -692,7 +692,7 @@ export class PostProductionController {
         "[PostProductionController] markProductionCompleted error:",
         error
       );
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
         message: error.message || "Internal server error",
       });

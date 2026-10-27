@@ -3,7 +3,13 @@ import { SiteReadinessController } from "../../../controllers/installation/site-
 import { uploadSiteReadinessPhotos } from "../../../middlewares/uploadWasabi";
 import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
+import { verifyToken } from "../../../middlewares/auth.middleware";
+import { readinessQuestionMaster } from "../../../controllers/installation/site-readiness/questions.controller";
+
 const siteReadinessRoutes = Router();
+siteReadinessRoutes.get("/vendorId/:vendorId/questions-master", verifyToken, readinessQuestionMaster);
+siteReadinessRoutes.put("/vendorId/:vendorId/questions-master", verifyToken, readinessQuestionMaster);
+siteReadinessRoutes.delete("/vendorId/:vendorId/questions-master", verifyToken, readinessQuestionMaster);
 const controller = new SiteReadinessController();
 
 // ✅ GET → Fetch all Site Readiness leads (paginated)
