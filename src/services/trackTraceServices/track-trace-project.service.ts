@@ -1038,6 +1038,8 @@ export type CreateProjectServicePayload = {
   projectName: string;
   vendorId: number;
   leadId?: number | null;
+  /** LeadProductStructureInstance the project belongs to (one project per instance). */
+  instanceId?: number | null;
   fabrication?: "WOODWORK" | "METALWORK";
 
   order_no?: string;
@@ -1942,6 +1944,7 @@ export const createProjectService = async (
     projectName,
     vendorId,
     leadId,
+    instanceId,
     fabrication,
     order_no,
     client_name,
@@ -2069,6 +2072,7 @@ export const createProjectService = async (
     |--------------------------------------------------------------------------
     */
     let lead_id: number | null = null;
+    let instance_id: number | null = null;
 
     let resolvedOrderNo = order_no?.trim() || null;
     let resolvedClientName = client_name?.trim() || null;
@@ -2096,6 +2100,23 @@ export const createProjectService = async (
       }
 
       lead_id = lead.id;
+
+      if (instanceId && Number(instanceId) > 0) {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: Number(instanceId),
+            lead_id: lead.id,
+            vendor_id: vendor.id,
+          },
+          select: { id: true },
+        });
+
+        if (!instance) {
+          throw new Error("Invalid instance_id for this lead");
+        }
+
+        instance_id = instance.id;
+      }
 
       const leadClientName = [lead.firstname, lead.lastname]
         .filter(Boolean)
@@ -2500,6 +2521,7 @@ export const createProjectService = async (
             project_status: "Initiated",
             is_grouping: false,
             lead_id,
+            instance_id,
             packing_type: resolvedPackingType,
             is_multi_location: resolvedIsMultiLocation,
             order_no: resolvedOrderNo,

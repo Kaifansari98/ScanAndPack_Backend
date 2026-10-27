@@ -564,6 +564,7 @@ model ProjectMaster {
   unique_project_id  String
   is_grouping        Boolean     @default(false)
   lead_id            Int?
+  instance_id        Int?
   track_trace_status String      @default("Not Started")
   track_completed_at DateTime?
   track_started_at   DateTime?
@@ -593,6 +594,7 @@ model ProjectMaster {
   client                  ClientMaster?                    @relation(fields: [client_id], references: [id], onDelete: Cascade)
   createdByUser           UserMaster                       @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster?                      @relation(fields: [lead_id], references: [id])
+  instance                LeadProductStructureInstance?    @relation(fields: [instance_id], references: [id], onDelete: SetNull)
   vendor                  VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems               ScanAndPackItem[]
   locationQuantities      ProjectLocationProductQuantity[]
@@ -601,6 +603,7 @@ model ProjectMaster {
   userMasterId            Int?
 
   @@index([vendor_id, isDeleted])
+  @@index([lead_id, instance_id])
 }
 
 model ProjectLocationProductQuantity {
@@ -1992,6 +1995,7 @@ model LeadProductStructureInstance {
   vendor                                     VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   activityStatusLogs                         LeadScopedActivityStatusLog[]
   tasks                                      UserLeadTask[]
+  trackTraceProjects                         ProjectMaster[]
 
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")

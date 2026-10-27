@@ -21,23 +21,35 @@ const formatList = (names: string[]) => {
 const namePart = (value?: string | null) => (value ?? "").trim().replace(/\s+/g, "-");
 
 /**
- * Track & Trace project name for a lead: Firstname-Lastname-LEADCODE, with the
- * instance's quantity index appended (LEADCODE.3) only when the lead has more
- * than one product instance.
+ * Track & Trace project name for a lead instance:
+ * Firstname-Lastname-StructureType-LEADCODE, with the instance's quantity index
+ * appended (LEADCODE.3) only when the lead has more than one product instance.
+ * Without an instance the structure type is omitted.
  */
 export async function resolveLeadProjectName(
   vendorId: number,
   leadId: number,
   instanceId?: number | null,
 ) {
-  const [lead, leadCode] = await Promise.all([
+  const [lead, instance, leadCode] = await Promise.all([
     prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId },
       select: { firstname: true, lastname: true },
     }),
+    instanceId
+      ? prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+          select: { productStructure: { select: { type: true } } },
+        })
+      : null,
     resolveLeadCode(vendorId, leadId, instanceId ?? undefined),
   ]);
-  return [namePart(lead?.firstname), namePart(lead?.lastname), leadCode]
+  return [
+    namePart(lead?.firstname),
+    namePart(lead?.lastname),
+    namePart(instance?.productStructure?.type),
+    leadCode,
+  ]
     .filter(Boolean)
     .join("-");
 }

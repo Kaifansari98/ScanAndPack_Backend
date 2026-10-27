@@ -130,6 +130,8 @@ export const createProjectController = async (
 
       leadId: parsedLeadId,
 
+      instanceId: instance_id ? Number(instance_id) : null,
+
       fabrication: targetFabrication,
 
       order_no,

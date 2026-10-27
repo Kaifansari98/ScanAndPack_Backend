@@ -495,6 +495,7 @@ export const ProjectMasterScalarFieldEnum = {
   unique_project_id: 'unique_project_id',
   is_grouping: 'is_grouping',
   lead_id: 'lead_id',
+  instance_id: 'instance_id',
   track_trace_status: 'track_trace_status',
   track_completed_at: 'track_completed_at',
   track_started_at: 'track_started_at',
