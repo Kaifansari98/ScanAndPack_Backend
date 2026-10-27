@@ -166,6 +166,7 @@ export class BookingStageService {
       productStructureInstances: {
         select: {
           id: true,
+          is_archived: true,
           title: true,
           description: true,
           quantity_index: true,
