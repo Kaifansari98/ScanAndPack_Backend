@@ -18081,6 +18081,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const VendorMasterScalarFieldEnum = {
+  site_readiness_questions: 'site_readiness_questions',
   id: 'id',
   vendor_name: 'vendor_name',
   vendor_code: 'vendor_code',
@@ -20231,6 +20232,7 @@ export type MachineCostDescriptionScalarFieldEnum = (typeof MachineCostDescripti
 
 
 export const MachineMasterScalarFieldEnum = {
+  mcp_sheet_names: 'mcp_sheet_names',
   fabrication: 'fabrication',
   id: 'id',
   machine_name: 'machine_name',
@@ -22174,6 +22176,15 @@ export const JsonNullValueInput = {
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -22190,19 +22201,31 @@ export const NullsOrder = {
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
 
 /**
  * Field references
  */
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'String'
+ */
+export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
 
 
 /**
@@ -22216,13 +22239,6 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
- * Reference to a field of type 'String'
- */
-export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
     
 
 
@@ -22815,20 +22831,6 @@ export type ListEnumModulesVendorMappingActiveStatusFieldRefInput<$PrismaModel> 
 
 
 /**
- * Reference to a field of type 'MachineCostSheet'
- */
-export type EnumMachineCostSheetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineCostSheet'>
-    
-
-
-/**
- * Reference to a field of type 'MachineCostSheet[]'
- */
-export type ListEnumMachineCostSheetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MachineCostSheet[]'>
-    
-
-
-/**
  * Reference to a field of type 'FabricationType'
  */
 export type EnumFabricationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FabricationType'>
@@ -22909,20 +22911,6 @@ export type EnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'DefectStatus[]'
  */
 export type ListEnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DefectStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 

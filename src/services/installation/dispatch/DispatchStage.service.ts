@@ -4,6 +4,7 @@ import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { syncTrackTraceBoxCount } from "../../production/post-production/trackTraceBoxCount.service";
 
 export class DispatchStageService {
   /** ✅ Fetch all leads with status = Type 14 (Dispatch Stage) */
@@ -394,6 +395,8 @@ export class DispatchStageService {
 
   // ✅ Check if Lead is Ready for Post-Dispatch
   async checkReadyForPostDispatch(vendorId: number, leadId: number) {
+    await syncTrackTraceBoxCount(vendorId, leadId);
+
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
       select: {

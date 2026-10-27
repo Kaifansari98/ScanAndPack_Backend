@@ -305,6 +305,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const VendorMasterScalarFieldEnum = {
+  site_readiness_questions: 'site_readiness_questions',
   id: 'id',
   vendor_name: 'vendor_name',
   vendor_code: 'vendor_code',
@@ -2455,6 +2456,7 @@ export type MachineCostDescriptionScalarFieldEnum = (typeof MachineCostDescripti
 
 
 export const MachineMasterScalarFieldEnum = {
+  mcp_sheet_names: 'mcp_sheet_names',
   fabrication: 'fabrication',
   id: 'id',
   machine_name: 'machine_name',
@@ -4398,6 +4400,15 @@ export const JsonNullValueInput = {
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -4412,13 +4423,4 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

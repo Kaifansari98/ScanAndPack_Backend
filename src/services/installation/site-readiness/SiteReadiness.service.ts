@@ -1,3 +1,4 @@
+import { getReadinessQuestionMaster, readinessAnswersComplete } from "./questions";
 import { UserLeadTask } from "./../../../../generated/prisma_client/browser";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
@@ -213,12 +214,13 @@ export class SiteReadinessService {
           select: { id: true, user_name: true },
         },
       },
-      orderBy: { created_at: "desc" },
+      orderBy: [{ updated_at: "desc" }, { id: "desc" }],
     });
 
     return {
       count: records.length,
       records,
+      questions: (await getReadinessQuestionMaster(vendorId)).questions,
     };
   }
 
@@ -241,7 +243,7 @@ export class SiteReadinessService {
       }
 
       const updated = await prisma.siteReadiness.update({
-        where: { id: item.id },
+        where: { id: item.id, vendor_id: vendorId, lead_id: leadId },
         data: {
           remark: item.remark ?? undefined,
           value: item.value ?? undefined,
@@ -352,7 +354,7 @@ export class SiteReadinessService {
    * ✅ Check if Site Readiness is completed for a given lead
    * Conditions:
    *  1. At least one Current Site Photo exists (doc_type = "Type 19")
-   *  2. All 6 site readiness items are present in SiteReadiness table
+   *  2. All current site readiness questions have a Yes or No answer
    */
   async checkSiteReadinessCompletion(vendorId: number, leadId: number) {
     if (!vendorId || !leadId) {
@@ -386,7 +388,7 @@ export class SiteReadinessService {
 
     const hasPhoto = sitePhotos > 0;
 
-    // 🔹 3. Fetch all 6 site readiness rows
+    // Load answers in newest-first order for the current master questions.
     const readinessRows = await prisma.siteReadiness.findMany({
       where: {
         vendor_id: vendorId,
@@ -395,23 +397,14 @@ export class SiteReadinessService {
       select: {
         id: true,
         type: true,
-        value: true, // <--- we need this
+        value: true,
       },
+      orderBy: [{ updated_at: "desc" }, { id: "desc" }],
     });
 
-    const totalItems = readinessRows.length;
+    const { questions } = await getReadinessQuestionMaster(vendorId);
+    const allValuesPresent = readinessAnswersComplete(questions, readinessRows);
 
-    // 🔹 All 6 items must exist
-    const hasSixRows = totalItems === 6;
-
-    // 🔹 All 6 items must have value === true
-    const allValuesPresent =
-      hasSixRows &&
-      readinessRows.every(
-        (item) => item.value !== null && item.value !== undefined,
-      );
-
-    // 🔹 Final flag (photo + 6 items + all true)
     const isCompleted = hasPhoto && allValuesPresent;
 
     return {

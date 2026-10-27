@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  site_readiness_questions Json?
   machineCostDescriptions                      MachineCostDescription[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
   id                                           Int                                            @id @default(autoincrement())
@@ -3148,7 +3149,7 @@ model MachineCostDescription {
   formula       String?
   text_value    String?
   value_format  String?
-  sheet         MachineCostSheet @default(MACHINE_COST)
+  sheet         String       @default("MACHINE_COST")
   vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   machine       MachineMaster @relation(fields: [machine_id, vendor_id], references: [id, vendor_id], onDelete: Cascade)
 
@@ -3169,6 +3170,7 @@ enum MachineCostSheet {
 }
 
 model MachineMaster {
+  mcp_sheet_names       Json                         @default("{}")
   costDescriptions      MachineCostDescription[]
   fabrication           FabricationType              @default(WOODWORK)
   id                    Int                          @id @default(autoincrement())

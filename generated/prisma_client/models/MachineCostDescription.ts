@@ -53,7 +53,7 @@ export type MachineCostDescriptionMinAggregateOutputType = {
   formula: string | null
   text_value: string | null
   value_format: string | null
-  sheet: $Enums.MachineCostSheet | null
+  sheet: string | null
 }
 
 export type MachineCostDescriptionMaxAggregateOutputType = {
@@ -67,7 +67,7 @@ export type MachineCostDescriptionMaxAggregateOutputType = {
   formula: string | null
   text_value: string | null
   value_format: string | null
-  sheet: $Enums.MachineCostSheet | null
+  sheet: string | null
 }
 
 export type MachineCostDescriptionCountAggregateOutputType = {
@@ -242,7 +242,7 @@ export type MachineCostDescriptionGroupByOutputType = {
   formula: string | null
   text_value: string | null
   value_format: string | null
-  sheet: $Enums.MachineCostSheet
+  sheet: string
   _count: MachineCostDescriptionCountAggregateOutputType | null
   _avg: MachineCostDescriptionAvgAggregateOutputType | null
   _sum: MachineCostDescriptionSumAggregateOutputType | null
@@ -279,7 +279,7 @@ export type MachineCostDescriptionWhereInput = {
   formula?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
   text_value?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
   value_format?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
-  sheet?: Prisma.EnumMachineCostSheetFilter<"MachineCostDescription"> | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFilter<"MachineCostDescription"> | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
 }
@@ -315,7 +315,7 @@ export type MachineCostDescriptionWhereUniqueInput = Prisma.AtLeast<{
   formula?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
   text_value?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
   value_format?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
-  sheet?: Prisma.EnumMachineCostSheetFilter<"MachineCostDescription"> | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFilter<"MachineCostDescription"> | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   machine?: Prisma.XOR<Prisma.MachineMasterScalarRelationFilter, Prisma.MachineMasterWhereInput>
 }, "id" | "vendor_id_machine_id_code">
@@ -353,7 +353,7 @@ export type MachineCostDescriptionScalarWhereWithAggregatesInput = {
   formula?: Prisma.StringNullableWithAggregatesFilter<"MachineCostDescription"> | string | null
   text_value?: Prisma.StringNullableWithAggregatesFilter<"MachineCostDescription"> | string | null
   value_format?: Prisma.StringNullableWithAggregatesFilter<"MachineCostDescription"> | string | null
-  sheet?: Prisma.EnumMachineCostSheetWithAggregatesFilter<"MachineCostDescription"> | $Enums.MachineCostSheet
+  sheet?: Prisma.StringWithAggregatesFilter<"MachineCostDescription"> | string
 }
 
 export type MachineCostDescriptionCreateInput = {
@@ -364,7 +364,7 @@ export type MachineCostDescriptionCreateInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMachineCostDescriptionsInput
   machine: Prisma.MachineMasterCreateNestedOneWithoutCostDescriptionsInput
 }
@@ -380,7 +380,7 @@ export type MachineCostDescriptionUncheckedCreateInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
 }
 
 export type MachineCostDescriptionUpdateInput = {
@@ -391,7 +391,7 @@ export type MachineCostDescriptionUpdateInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMachineCostDescriptionsNestedInput
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutCostDescriptionsNestedInput
 }
@@ -407,7 +407,7 @@ export type MachineCostDescriptionUncheckedUpdateInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MachineCostDescriptionCreateManyInput = {
@@ -421,7 +421,7 @@ export type MachineCostDescriptionCreateManyInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
 }
 
 export type MachineCostDescriptionUpdateManyMutationInput = {
@@ -432,7 +432,7 @@ export type MachineCostDescriptionUpdateManyMutationInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MachineCostDescriptionUncheckedUpdateManyInput = {
@@ -446,7 +446,7 @@ export type MachineCostDescriptionUncheckedUpdateManyInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MachineCostDescriptionListRelationFilter = {
@@ -565,10 +565,6 @@ export type MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput = 
   deleteMany?: Prisma.MachineCostDescriptionScalarWhereInput | Prisma.MachineCostDescriptionScalarWhereInput[]
 }
 
-export type EnumMachineCostSheetFieldUpdateOperationsInput = {
-  set?: $Enums.MachineCostSheet
-}
-
 export type MachineCostDescriptionCreateNestedManyWithoutMachineInput = {
   create?: Prisma.XOR<Prisma.MachineCostDescriptionCreateWithoutMachineInput, Prisma.MachineCostDescriptionUncheckedCreateWithoutMachineInput> | Prisma.MachineCostDescriptionCreateWithoutMachineInput[] | Prisma.MachineCostDescriptionUncheckedCreateWithoutMachineInput[]
   connectOrCreate?: Prisma.MachineCostDescriptionCreateOrConnectWithoutMachineInput | Prisma.MachineCostDescriptionCreateOrConnectWithoutMachineInput[]
@@ -619,7 +615,7 @@ export type MachineCostDescriptionCreateWithoutVendorInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
   machine: Prisma.MachineMasterCreateNestedOneWithoutCostDescriptionsInput
 }
 
@@ -633,7 +629,7 @@ export type MachineCostDescriptionUncheckedCreateWithoutVendorInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
 }
 
 export type MachineCostDescriptionCreateOrConnectWithoutVendorInput = {
@@ -676,7 +672,7 @@ export type MachineCostDescriptionScalarWhereInput = {
   formula?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
   text_value?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
   value_format?: Prisma.StringNullableFilter<"MachineCostDescription"> | string | null
-  sheet?: Prisma.EnumMachineCostSheetFilter<"MachineCostDescription"> | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFilter<"MachineCostDescription"> | string
 }
 
 export type MachineCostDescriptionCreateWithoutMachineInput = {
@@ -687,7 +683,7 @@ export type MachineCostDescriptionCreateWithoutMachineInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMachineCostDescriptionsInput
 }
 
@@ -700,7 +696,7 @@ export type MachineCostDescriptionUncheckedCreateWithoutMachineInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
 }
 
 export type MachineCostDescriptionCreateOrConnectWithoutMachineInput = {
@@ -739,7 +735,7 @@ export type MachineCostDescriptionCreateManyVendorInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
 }
 
 export type MachineCostDescriptionUpdateWithoutVendorInput = {
@@ -750,7 +746,7 @@ export type MachineCostDescriptionUpdateWithoutVendorInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
   machine?: Prisma.MachineMasterUpdateOneRequiredWithoutCostDescriptionsNestedInput
 }
 
@@ -764,7 +760,7 @@ export type MachineCostDescriptionUncheckedUpdateWithoutVendorInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MachineCostDescriptionUncheckedUpdateManyWithoutVendorInput = {
@@ -777,7 +773,7 @@ export type MachineCostDescriptionUncheckedUpdateManyWithoutVendorInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MachineCostDescriptionCreateManyMachineInput = {
@@ -789,7 +785,7 @@ export type MachineCostDescriptionCreateManyMachineInput = {
   formula?: string | null
   text_value?: string | null
   value_format?: string | null
-  sheet?: $Enums.MachineCostSheet
+  sheet?: string
 }
 
 export type MachineCostDescriptionUpdateWithoutMachineInput = {
@@ -800,7 +796,7 @@ export type MachineCostDescriptionUpdateWithoutMachineInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMachineCostDescriptionsNestedInput
 }
 
@@ -813,7 +809,7 @@ export type MachineCostDescriptionUncheckedUpdateWithoutMachineInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MachineCostDescriptionUncheckedUpdateManyWithoutMachineInput = {
@@ -825,7 +821,7 @@ export type MachineCostDescriptionUncheckedUpdateManyWithoutMachineInput = {
   formula?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   text_value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value_format?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sheet?: Prisma.EnumMachineCostSheetFieldUpdateOperationsInput | $Enums.MachineCostSheet
+  sheet?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -923,7 +919,7 @@ export type $MachineCostDescriptionPayload<ExtArgs extends runtime.Types.Extensi
     formula: string | null
     text_value: string | null
     value_format: string | null
-    sheet: $Enums.MachineCostSheet
+    sheet: string
   }, ExtArgs["result"]["machineCostDescription"]>
   composites: {}
 }
@@ -1359,7 +1355,7 @@ export interface MachineCostDescriptionFieldRefs {
   readonly formula: Prisma.FieldRef<"MachineCostDescription", 'String'>
   readonly text_value: Prisma.FieldRef<"MachineCostDescription", 'String'>
   readonly value_format: Prisma.FieldRef<"MachineCostDescription", 'String'>
-  readonly sheet: Prisma.FieldRef<"MachineCostDescription", 'MachineCostSheet'>
+  readonly sheet: Prisma.FieldRef<"MachineCostDescription", 'String'>
 }
     
 

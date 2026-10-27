@@ -149,6 +149,7 @@ export type VendorMasterMaxAggregateOutputType = {
 }
 
 export type VendorMasterCountAggregateOutputType = {
+  site_readiness_questions: number
   id: number
   vendor_name: number
   vendor_code: number
@@ -326,6 +327,7 @@ export type VendorMasterMaxAggregateInputType = {
 }
 
 export type VendorMasterCountAggregateInputType = {
+  site_readiness_questions?: true
   id?: true
   vendor_name?: true
   vendor_code?: true
@@ -466,6 +468,7 @@ export type VendorMasterGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 export type VendorMasterGroupByOutputType = {
+  site_readiness_questions: runtime.JsonValue | null
   id: number
   vendor_name: string
   vendor_code: string
@@ -542,6 +545,7 @@ export type VendorMasterWhereInput = {
   AND?: Prisma.VendorMasterWhereInput | Prisma.VendorMasterWhereInput[]
   OR?: Prisma.VendorMasterWhereInput[]
   NOT?: Prisma.VendorMasterWhereInput | Prisma.VendorMasterWhereInput[]
+  site_readiness_questions?: Prisma.JsonNullableFilter<"VendorMaster">
   id?: Prisma.IntFilter<"VendorMaster"> | number
   vendor_name?: Prisma.StringFilter<"VendorMaster"> | string
   vendor_code?: Prisma.StringFilter<"VendorMaster"> | string
@@ -765,6 +769,7 @@ export type VendorMasterWhereInput = {
 }
 
 export type VendorMasterOrderByWithRelationInput = {
+  site_readiness_questions?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
@@ -992,6 +997,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VendorMasterWhereInput | Prisma.VendorMasterWhereInput[]
   OR?: Prisma.VendorMasterWhereInput[]
   NOT?: Prisma.VendorMasterWhereInput | Prisma.VendorMasterWhereInput[]
+  site_readiness_questions?: Prisma.JsonNullableFilter<"VendorMaster">
   vendor_name?: Prisma.StringFilter<"VendorMaster"> | string
   vendor_code?: Prisma.StringFilter<"VendorMaster"> | string
   online_leads_lead_code?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
@@ -1214,6 +1220,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
 }, "id">
 
 export type VendorMasterOrderByWithAggregationInput = {
+  site_readiness_questions?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
@@ -1275,6 +1282,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   AND?: Prisma.VendorMasterScalarWhereWithAggregatesInput | Prisma.VendorMasterScalarWhereWithAggregatesInput[]
   OR?: Prisma.VendorMasterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VendorMasterScalarWhereWithAggregatesInput | Prisma.VendorMasterScalarWhereWithAggregatesInput[]
+  site_readiness_questions?: Prisma.JsonNullableWithAggregatesFilter<"VendorMaster">
   id?: Prisma.IntWithAggregatesFilter<"VendorMaster"> | number
   vendor_name?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   vendor_code?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
@@ -1328,6 +1336,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
 }
 
 export type VendorMasterCreateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -1548,6 +1557,7 @@ export type VendorMasterCreateInput = {
 }
 
 export type VendorMasterUncheckedCreateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -1769,6 +1779,7 @@ export type VendorMasterUncheckedCreateInput = {
 }
 
 export type VendorMasterUpdateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1989,6 +2000,7 @@ export type VendorMasterUpdateInput = {
 }
 
 export type VendorMasterUncheckedUpdateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2210,6 +2222,7 @@ export type VendorMasterUncheckedUpdateInput = {
 }
 
 export type VendorMasterCreateManyInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -2263,6 +2276,7 @@ export type VendorMasterCreateManyInput = {
 }
 
 export type VendorMasterUpdateManyMutationInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2313,6 +2327,7 @@ export type VendorMasterUpdateManyMutationInput = {
 }
 
 export type VendorMasterUncheckedUpdateManyInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2366,6 +2381,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
 }
 
 export type VendorMasterCountOrderByAggregateInput = {
+  site_readiness_questions?: Prisma.SortOrder
   id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   vendor_code?: Prisma.SortOrder
@@ -5037,6 +5053,7 @@ export type VendorMasterUpdateOneRequiredWithoutAttendance_logsNestedInput = {
 }
 
 export type VendorMasterCreateWithoutAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -5256,6 +5273,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -5492,6 +5510,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutAddressesInput = {
 }
 
 export type VendorMasterUpdateWithoutAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5711,6 +5730,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5931,6 +5951,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
 }
 
 export type VendorMasterCreateWithoutTaxInfoInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -6150,6 +6171,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -6386,6 +6408,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutTaxInfoInput = {
 }
 
 export type VendorMasterUpdateWithoutTaxInfoInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6605,6 +6628,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -6825,6 +6849,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
 }
 
 export type VendorMasterCreateWithoutPrivilegeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -7044,6 +7069,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -7280,6 +7306,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPrivilegeMastersInput = {
 }
 
 export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7499,6 +7526,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -7719,6 +7747,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
 }
 
 export type VendorMasterCreateWithoutUsersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -7938,6 +7967,7 @@ export type VendorMasterCreateWithoutUsersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUsersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -8174,6 +8204,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUsersInput = {
 }
 
 export type VendorMasterUpdateWithoutUsersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8393,6 +8424,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUsersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -8613,6 +8645,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
 }
 
 export type VendorMasterCreateWithoutUserSessionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -8832,6 +8865,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -9068,6 +9102,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserSessionsInput = {
 }
 
 export type VendorMasterUpdateWithoutUserSessionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9287,6 +9322,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -9507,6 +9543,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
 }
 
 export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -9726,6 +9763,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -9962,6 +10000,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserPrivilegeMappingsInput = 
 }
 
 export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10181,6 +10220,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -10401,6 +10441,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutProjectsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -10620,6 +10661,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -10856,6 +10898,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectsInput = {
 }
 
 export type VendorMasterUpdateWithoutProjectsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11075,6 +11118,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -11295,6 +11339,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
 }
 
 export type VendorMasterCreateWithoutProjectDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -11514,6 +11559,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -11750,6 +11796,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectDetailsInput = {
 }
 
 export type VendorMasterUpdateWithoutProjectDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11969,6 +12016,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -12189,6 +12237,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
 }
 
 export type VendorMasterCreateWithoutProjectItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -12408,6 +12457,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -12644,6 +12694,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectItemsInput = {
 }
 
 export type VendorMasterUpdateWithoutProjectItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12863,6 +12914,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13083,6 +13135,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
 }
 
 export type VendorMasterCreateWithoutBoxesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -13302,6 +13355,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutBoxesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -13538,6 +13592,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBoxesInput = {
 }
 
 export type VendorMasterUpdateWithoutBoxesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13757,6 +13812,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -13977,6 +14033,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
 }
 
 export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -14196,6 +14253,7 @@ export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutFactoryOutRevertLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -14432,6 +14490,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutFactoryOutRevertLogsInput = {
 }
 
 export type VendorMasterUpdateWithoutFactoryOutRevertLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14651,6 +14710,7 @@ export type VendorMasterUpdateWithoutFactoryOutRevertLogsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -14871,6 +14931,7 @@ export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
 }
 
 export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -15090,6 +15151,7 @@ export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutBoxUnpackLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -15326,6 +15388,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBoxUnpackLogsInput = {
 }
 
 export type VendorMasterUpdateWithoutBoxUnpackLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15545,6 +15608,7 @@ export type VendorMasterUpdateWithoutBoxUnpackLogsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -15765,6 +15829,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
 }
 
 export type VendorMasterCreateWithoutScanItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -15984,6 +16049,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -16220,6 +16286,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutScanItemsInput = {
 }
 
 export type VendorMasterUpdateWithoutScanItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16439,6 +16506,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -16659,6 +16727,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
 }
 
 export type VendorMasterCreateWithoutTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -16878,6 +16947,7 @@ export type VendorMasterCreateWithoutTokensInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -17114,6 +17184,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutTokensInput = {
 }
 
 export type VendorMasterUpdateWithoutTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17333,6 +17404,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -17553,6 +17625,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
 }
 
 export type VendorMasterCreateWithoutClientsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -17772,6 +17845,7 @@ export type VendorMasterCreateWithoutClientsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutClientsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -18008,6 +18082,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutClientsInput = {
 }
 
 export type VendorMasterUpdateWithoutClientsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18227,6 +18302,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -18447,6 +18523,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
 }
 
 export type VendorMasterCreateWithoutClientBankAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -18666,6 +18743,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -18902,6 +18980,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutClientBankAccountsInput = {
 }
 
 export type VendorMasterUpdateWithoutClientBankAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19121,6 +19200,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -19341,6 +19421,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
 }
 
 export type VendorMasterCreateWithoutClientTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -19560,6 +19641,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -19796,6 +19878,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutClientTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutClientTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20015,6 +20098,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -20235,6 +20319,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
 }
 
 export type VendorMasterCreateWithoutLeadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -20454,6 +20539,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -20690,6 +20776,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20909,6 +20996,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -21129,6 +21217,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadSpecificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -21348,6 +21437,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -21584,6 +21674,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadSpecificationsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21803,6 +21894,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22023,6 +22115,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -22242,6 +22335,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -22478,6 +22572,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadCarcassMaterialMappingsIn
 }
 
 export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22697,6 +22792,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -22917,6 +23013,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
 }
 
 export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -23136,6 +23233,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -23372,6 +23470,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadShutterMaterialMappingsIn
 }
 
 export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23591,6 +23690,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -23811,6 +23911,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
 }
 
 export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -24030,6 +24131,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -24266,6 +24368,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadSuperAdminApprovalLocInsI
 }
 
 export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24485,6 +24588,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -24705,6 +24809,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
 }
 
 export type VendorMasterCreateWithoutLeadUserMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -24924,6 +25029,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -25160,6 +25266,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadUserMappingsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25379,6 +25486,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -25599,6 +25707,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -25818,6 +25927,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -26054,6 +26164,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadActivityStatusLogInput = 
 }
 
 export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26273,6 +26384,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -26493,6 +26605,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
 }
 
 export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -26712,6 +26825,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -26948,6 +27062,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadScopedActivityStatusLogsI
 }
 
 export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27167,6 +27282,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -27387,6 +27503,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
 }
 
 export type VendorMasterCreateWithoutSiteTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -27606,6 +27723,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -27842,6 +27960,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSiteTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutSiteTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28061,6 +28180,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -28281,6 +28401,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
 }
 
 export type VendorMasterCreateWithoutSourcesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -28500,6 +28621,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSourcesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -28736,6 +28858,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSourcesInput = {
 }
 
 export type VendorMasterUpdateWithoutSourcesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28955,6 +29078,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -29175,6 +29299,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
 }
 
 export type VendorMasterCreateWithoutAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -29394,6 +29519,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -29630,6 +29756,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutAccountsInput = {
 }
 
 export type VendorMasterUpdateWithoutAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29849,6 +29976,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -30069,6 +30197,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadProductMapsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -30288,6 +30417,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -30524,6 +30654,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadProductMapsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadProductMapsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30743,6 +30874,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -30963,6 +31095,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
 }
 
 export type VendorMasterCreateWithoutProductTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -31182,6 +31315,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -31418,6 +31552,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutProductTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -31637,6 +31772,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -31857,6 +31993,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
 }
 
 export type VendorMasterCreateWithoutProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -32076,6 +32213,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -32312,6 +32450,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProcessBriefsInput = {
 }
 
 export type VendorMasterUpdateWithoutProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32531,6 +32670,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -32751,6 +32891,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -32970,6 +33111,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -33206,6 +33348,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadProcessBriefsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -33425,6 +33568,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -33645,6 +33789,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
 }
 
 export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -33864,6 +34009,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -34100,6 +34246,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProcessBriefMachineMappingsIn
 }
 
 export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34319,6 +34466,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -34539,6 +34687,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
 }
 
 export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -34758,6 +34907,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -34994,6 +35144,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput
 }
 
 export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -35213,6 +35364,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -35433,6 +35585,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
 }
 
 export type VendorMasterCreateWithoutCarcassTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -35652,6 +35805,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -35888,6 +36042,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCarcassTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutCarcassTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36107,6 +36262,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -36327,6 +36483,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
 }
 
 export type VendorMasterCreateWithoutCarcasMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -36546,6 +36703,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -36782,6 +36940,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCarcasMaterialsInput = {
 }
 
 export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37001,6 +37160,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -37221,6 +37381,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
 }
 
 export type VendorMasterCreateWithoutShutterTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -37440,6 +37601,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -37676,6 +37838,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutShutterTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutShutterTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37895,6 +38058,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -38115,6 +38279,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
 }
 
 export type VendorMasterCreateWithoutShutterMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -38334,6 +38499,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -38570,6 +38736,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutShutterMaterialsInput = {
 }
 
 export type VendorMasterUpdateWithoutShutterMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38789,6 +38956,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -39009,6 +39177,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
 }
 
 export type VendorMasterCreateWithoutCarcassLegsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -39228,6 +39397,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -39464,6 +39634,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCarcassLegsInput = {
 }
 
 export type VendorMasterUpdateWithoutCarcassLegsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -39683,6 +39854,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -39903,6 +40075,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -40122,6 +40295,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -40358,6 +40532,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadHardwareMappingsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -40577,6 +40752,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -40797,6 +40973,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutLightCarcasTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -41016,6 +41193,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -41252,6 +41430,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLightCarcasTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -41471,6 +41650,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -41691,6 +41871,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
 }
 
 export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -41910,6 +42091,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -42146,6 +42328,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLightCarcasUnitsInput = {
 }
 
 export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -42365,6 +42548,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -42585,6 +42769,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -42804,6 +42989,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -43040,6 +43226,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadLightCarcasUnitMappingsIn
 }
 
 export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -43259,6 +43446,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -43479,6 +43667,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
 }
 
 export type VendorMasterCreateWithoutOtherAppliancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -43698,6 +43887,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -43934,6 +44124,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOtherAppliancesInput = {
 }
 
 export type VendorMasterUpdateWithoutOtherAppliancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -44153,6 +44344,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -44373,6 +44565,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
 }
 
 export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -44592,6 +44785,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -44828,6 +45022,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadOtherAppliancesMappingsIn
 }
 
 export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -45047,6 +45242,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -45267,6 +45463,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
 }
 
 export type VendorMasterCreateWithoutHandleTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -45486,6 +45683,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -45722,6 +45920,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutHandleTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutHandleTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -45941,6 +46140,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -46161,6 +46361,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
 }
 
 export type VendorMasterCreateWithoutTimelineRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -46380,6 +46581,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -46616,6 +46818,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutTimelineRulesInput = {
 }
 
 export type VendorMasterUpdateWithoutTimelineRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -46835,6 +47038,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -47055,6 +47259,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
 }
 
 export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -47274,6 +47479,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -47510,6 +47716,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSpecificationDocumentMappings
 }
 
 export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -47729,6 +47936,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -47949,6 +48157,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
 }
 
 export type VendorMasterCreateWithoutDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -48168,6 +48377,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -48404,6 +48614,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDocumentsInput = {
 }
 
 export type VendorMasterUpdateWithoutDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -48623,6 +48834,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -48843,6 +49055,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
 }
 
 export type VendorMasterCreateWithoutB2bDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -49062,6 +49275,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -49298,6 +49512,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutB2bDocumentsInput = {
 }
 
 export type VendorMasterUpdateWithoutB2bDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -49517,6 +49732,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -49737,6 +49953,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadChatRoomsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -49956,6 +50173,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -50192,6 +50410,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadChatRoomsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -50411,6 +50630,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -50631,6 +50851,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -50850,6 +51071,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -51086,6 +51308,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadChatDocumentsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -51305,6 +51528,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -51525,6 +51749,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
 }
 
 export type VendorMasterCreateWithoutProductStructureInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -51744,6 +51969,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -51980,6 +52206,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductStructureInput = {
 }
 
 export type VendorMasterUpdateWithoutProductStructureInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -52199,6 +52426,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -52419,6 +52647,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
 }
 
 export type VendorMasterCreateWithoutProductSubStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -52638,6 +52867,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -52874,6 +53104,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductSubStructuresInput = {
 }
 
 export type VendorMasterUpdateWithoutProductSubStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -53093,6 +53324,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -53313,6 +53545,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
 }
 
 export type VendorMasterCreateWithoutProductItemCodesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -53532,6 +53765,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -53768,6 +54002,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductItemCodesInput = {
 }
 
 export type VendorMasterUpdateWithoutProductItemCodesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -53987,6 +54222,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -54207,6 +54443,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
 }
 
 export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -54426,6 +54663,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -54662,6 +54900,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadProductStructureMappingIn
 }
 
 export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -54881,6 +55120,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -55101,6 +55341,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
 }
 
 export type VendorMasterCreateWithoutProductStructureInstancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -55320,6 +55561,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -55556,6 +55798,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductStructureInstancesInpu
 }
 
 export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -55775,6 +56018,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -55995,6 +56239,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
 }
 
 export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -56214,6 +56459,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -56450,6 +56696,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSelfAssignTaskTypeMastersInpu
 }
 
 export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -56669,6 +56916,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -56889,6 +57137,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
 }
 
 export type VendorMasterCreateWithoutPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -57108,6 +57357,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -57344,6 +57594,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPaymentsInput = {
 }
 
 export type VendorMasterUpdateWithoutPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -57563,6 +57814,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -57783,6 +58035,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
 }
 
 export type VendorMasterCreateWithoutLedgersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -58002,6 +58255,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLedgersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -58238,6 +58492,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLedgersInput = {
 }
 
 export type VendorMasterUpdateWithoutLedgersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -58457,6 +58712,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -58677,6 +58933,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
 }
 
 export type VendorMasterCreateWithoutDocumentTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -58896,6 +59153,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -59132,6 +59390,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDocumentTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutDocumentTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -59351,6 +59610,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -59571,6 +59831,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -59790,6 +60051,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -60026,6 +60288,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSmallOrderRequestTypeMastersI
 }
 
 export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -60245,6 +60508,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -60465,6 +60729,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -60684,6 +60949,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -60920,6 +61186,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSmallOrderRequestsInput = {
 }
 
 export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -61139,6 +61406,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -61359,6 +61627,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -61578,6 +61847,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -61814,6 +62084,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSmallOrderRequestDocumentsInp
 }
 
 export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -62033,6 +62304,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -62253,6 +62525,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
 }
 
 export type VendorMasterCreateWithoutLeadAmcContractsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -62472,6 +62745,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -62708,6 +62982,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadAmcContractsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -62927,6 +63202,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -63147,6 +63423,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -63366,6 +63643,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -63602,6 +63880,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadServiceSchedulesInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -63821,6 +64100,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -64041,6 +64321,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
 }
 
 export type VendorMasterCreateWithoutStatusTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -64260,6 +64541,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -64496,6 +64778,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutStatusTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutStatusTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -64715,6 +64998,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -64935,6 +65219,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
 }
 
 export type VendorMasterCreateWithoutLeadStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -65154,6 +65439,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -65390,6 +65676,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadStatusLogsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -65609,6 +65896,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -65829,6 +66117,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
 }
 
 export type VendorMasterCreateWithoutDesignMeetingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -66048,6 +66337,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -66284,6 +66574,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDesignMeetingInput = {
 }
 
 export type VendorMasterUpdateWithoutDesignMeetingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -66503,6 +66794,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -66723,6 +67015,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
 }
 
 export type VendorMasterCreateWithoutClientVisitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -66942,6 +67235,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -67178,6 +67472,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutClientVisitsInput = {
 }
 
 export type VendorMasterUpdateWithoutClientVisitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -67397,6 +67692,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -67617,6 +67913,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
 }
 
 export type VendorMasterCreateWithoutMeetingTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -67836,6 +68133,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -68072,6 +68370,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMeetingTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutMeetingTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -68291,6 +68590,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -68511,6 +68811,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
 }
 
 export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -68730,6 +69031,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -68966,6 +69268,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDesignMeetingDocsMappingInput
 }
 
 export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -69185,6 +69488,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -69405,6 +69709,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
 }
 
 export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -69624,6 +69929,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -69860,6 +70166,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutClientVisitDocumentMappingsIn
 }
 
 export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -70079,6 +70386,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -70299,6 +70607,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
 }
 
 export type VendorMasterCreateWithoutDesignSelectionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -70518,6 +70827,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -70754,6 +71064,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDesignSelectionInput = {
 }
 
 export type VendorMasterUpdateWithoutDesignSelectionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -70973,6 +71284,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -71193,6 +71505,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
 }
 
 export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -71412,6 +71725,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -71648,6 +71962,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutChsSelectionMappingsInput = {
 }
 
 export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -71867,6 +72182,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -72087,6 +72403,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -72306,6 +72623,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -72542,6 +72860,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPaymentTypeMasterInput = {
 }
 
 export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -72761,6 +73080,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -72981,6 +73301,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
 }
 
 export type VendorMasterCreateWithoutSiteSupervisorsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -73200,6 +73521,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -73436,6 +73758,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSiteSupervisorsInput = {
 }
 
 export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -73655,6 +73978,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -73875,6 +74199,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
 }
 
 export type VendorMasterCreateWithoutUserLeadTasksInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -74094,6 +74419,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -74330,6 +74656,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserLeadTasksInput = {
 }
 
 export type VendorMasterUpdateWithoutUserLeadTasksInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -74549,6 +74876,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -74769,6 +75097,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -74988,6 +75317,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -75224,6 +75554,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutFastProductionRequestBatchesI
 }
 
 export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -75443,6 +75774,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -75663,6 +75995,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
 }
 
 export type VendorMasterCreateWithoutFastProductionRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -75882,6 +76215,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -76118,6 +76452,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutFastProductionRequestsInput =
 }
 
 export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -76337,6 +76672,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -76557,6 +76893,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -76776,6 +77113,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -77012,6 +77350,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadDetailedLogsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -77231,6 +77570,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -77451,6 +77791,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -77670,6 +78011,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -77906,6 +78248,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadDocumentLogsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -78125,6 +78468,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -78345,6 +78689,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -78564,6 +78909,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -78800,6 +79146,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadApprovalRequestDocumentMa
 }
 
 export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -79019,6 +79366,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -79239,6 +79587,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
 }
 
 export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -79458,6 +79807,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -79694,6 +80044,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCompanyVendorsMasterInput = {
 }
 
 export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -79913,6 +80264,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -80133,6 +80485,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
 }
 
 export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -80352,6 +80705,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -80588,6 +80942,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOrderLoginDetailsInput = {
 }
 
 export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -80807,6 +81162,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -81027,6 +81383,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
 }
 
 export type VendorMasterCreateWithoutSiteReadinessInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -81246,6 +81603,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -81482,6 +81840,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSiteReadinessInput = {
 }
 
 export type VendorMasterUpdateWithoutSiteReadinessInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -81701,6 +82060,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -81921,6 +82281,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
 }
 
 export type VendorMasterCreateWithoutInstallersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -82140,6 +82501,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -82376,6 +82738,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallersInput = {
 }
 
 export type VendorMasterUpdateWithoutInstallersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -82595,6 +82958,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -82815,6 +83179,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
 }
 
 export type VendorMasterCreateWithoutInstallerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -83034,6 +83399,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -83270,6 +83636,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallerMappingsInput = {
 }
 
 export type VendorMasterUpdateWithoutInstallerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -83489,6 +83856,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -83709,6 +84077,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutInstallationUpdatesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -83928,6 +84297,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -84164,6 +84534,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallationUpdatesInput = {
 }
 
 export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -84383,6 +84754,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -84603,6 +84975,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
 }
 
 export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -84822,6 +85195,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -85058,6 +85432,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallationUpdateDocsInput =
 }
 
 export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -85277,6 +85652,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -85497,6 +85873,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
 }
 
 export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -85716,6 +86093,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -85952,6 +86330,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousMasterInput = {
 }
 
 export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -86171,6 +86550,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -86391,6 +86771,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -86610,6 +86991,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -86846,6 +87228,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousTypeMasterInput 
 }
 
 export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -87065,6 +87448,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -87285,6 +87669,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -87504,6 +87889,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -87740,6 +88126,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousTeamMasterInput 
 }
 
 export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -87959,6 +88346,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -88179,6 +88567,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
 }
 
 export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -88398,6 +88787,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -88634,6 +89024,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousDocumentInput = 
 }
 
 export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -88853,6 +89244,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -89073,6 +89465,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
 }
 
 export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -89292,6 +89685,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -89528,6 +89922,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousFollowupsInput =
 }
 
 export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -89747,6 +90142,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -89967,6 +90363,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
 }
 
 export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -90186,6 +90583,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -90422,6 +90820,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMiscellaneousReorderInstances
 }
 
 export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -90641,6 +91040,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -90861,6 +91261,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
 }
 
 export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -91080,6 +91481,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -91316,6 +91718,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutInstallationIssueLogMasterInp
 }
 
 export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -91535,6 +91938,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -91755,6 +92159,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
 }
 
 export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -91974,6 +92379,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -92210,6 +92616,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutIssueLogTypeMasterInput = {
 }
 
 export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -92429,6 +92836,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -92649,6 +93057,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
 }
 
 export type VendorMasterCreateWithoutNotificationMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -92868,6 +93277,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -93104,6 +93514,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutNotificationMastersInput = {
 }
 
 export type VendorMasterUpdateWithoutNotificationMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -93323,6 +93734,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -93543,6 +93955,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
 }
 
 export type VendorMasterCreateWithoutNotificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -93762,6 +94175,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -93998,6 +94412,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutNotificationsInput = {
 }
 
 export type VendorMasterUpdateWithoutNotificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -94217,6 +94632,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -94437,6 +94853,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
 }
 
 export type VendorMasterCreateWithoutUserPushTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -94656,6 +95073,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -94892,6 +95310,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserPushTokensInput = {
 }
 
 export type VendorMasterUpdateWithoutUserPushTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -95111,6 +95530,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -95331,6 +95751,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
 }
 
 export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -95550,6 +95971,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -95786,6 +96208,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutVendorModulesMappingsInput = 
 }
 
 export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -96005,6 +96428,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -96225,6 +96649,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutMachineCostDescriptionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -96444,6 +96869,7 @@ export type VendorMasterCreateWithoutMachineCostDescriptionsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMachineCostDescriptionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -96680,6 +97106,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMachineCostDescriptionsInput 
 }
 
 export type VendorMasterUpdateWithoutMachineCostDescriptionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -96899,6 +97326,7 @@ export type VendorMasterUpdateWithoutMachineCostDescriptionsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMachineCostDescriptionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -97119,6 +97547,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineCostDescriptionsInput = {
 }
 
 export type VendorMasterCreateWithoutMachineMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -97338,6 +97767,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -97574,6 +98004,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutMachineMasterInput = {
 }
 
 export type VendorMasterUpdateWithoutMachineMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -97793,6 +98224,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -98013,6 +98445,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
 }
 
 export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -98232,6 +98665,7 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -98468,6 +98902,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCutlistHeadersMappingsInput =
 }
 
 export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -98687,6 +99122,7 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -98907,6 +99343,7 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutCutListInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -99126,6 +99563,7 @@ export type VendorMasterCreateWithoutCutListInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -99362,6 +99800,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCutListInput = {
 }
 
 export type VendorMasterUpdateWithoutCutListInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -99581,6 +100020,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -99801,6 +100241,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
 }
 
 export type VendorMasterCreateWithoutCutListMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -100020,6 +100461,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -100256,6 +100698,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput = 
 }
 
 export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -100475,6 +100918,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -100695,6 +101139,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
 }
 
 export type VendorMasterCreateWithoutUserMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -100914,6 +101359,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -101150,6 +101596,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserMachineMappingInput = {
 }
 
 export type VendorMasterUpdateWithoutUserMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -101369,6 +101816,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -101589,6 +102037,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
 }
 
 export type VendorMasterCreateWithoutVendorSettingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -101808,6 +102257,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -102044,6 +102494,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutVendorSettingInput = {
 }
 
 export type VendorMasterUpdateWithoutVendorSettingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -102263,6 +102714,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -102483,6 +102935,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
 }
 
 export type VendorMasterCreateWithoutDefectMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -102702,6 +103155,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -102938,6 +103392,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDefectMasterInput = {
 }
 
 export type VendorMasterUpdateWithoutDefectMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -103157,6 +103612,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -103377,6 +103833,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
 }
 
 export type VendorMasterCreateWithoutDefectedItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -103596,6 +104053,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -103832,6 +104290,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDefectedItemsInput = {
 }
 
 export type VendorMasterUpdateWithoutDefectedItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -104051,6 +104510,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -104271,6 +104731,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
 }
 
 export type VendorMasterCreateWithoutFranchisesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -104490,6 +104951,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -104726,6 +105188,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutFranchisesInput = {
 }
 
 export type VendorMasterUpdateWithoutFranchisesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -104945,6 +105408,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -105165,6 +105629,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
 }
 
 export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -105384,6 +105849,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
 }
 
 export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -105620,6 +106086,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutHeadSiteSupervisorFranchiseMa
 }
 
 export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -105839,6 +106306,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
 }
 
 export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -106059,6 +106527,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
 }
 
 export type VendorMasterCreateWithoutStateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -106278,6 +106747,7 @@ export type VendorMasterCreateWithoutStateInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutStateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -106527,6 +106997,7 @@ export type VendorMasterScalarWhereInput = {
   AND?: Prisma.VendorMasterScalarWhereInput | Prisma.VendorMasterScalarWhereInput[]
   OR?: Prisma.VendorMasterScalarWhereInput[]
   NOT?: Prisma.VendorMasterScalarWhereInput | Prisma.VendorMasterScalarWhereInput[]
+  site_readiness_questions?: Prisma.JsonNullableFilter<"VendorMaster">
   id?: Prisma.IntFilter<"VendorMaster"> | number
   vendor_name?: Prisma.StringFilter<"VendorMaster"> | string
   vendor_code?: Prisma.StringFilter<"VendorMaster"> | string
@@ -106580,6 +107051,7 @@ export type VendorMasterScalarWhereInput = {
 }
 
 export type VendorMasterCreateWithoutThemesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -106799,6 +107271,7 @@ export type VendorMasterCreateWithoutThemesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutThemesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -107035,6 +107508,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutThemesInput = {
 }
 
 export type VendorMasterUpdateWithoutThemesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -107254,6 +107728,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutThemesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -107474,6 +107949,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
 }
 
 export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -107693,6 +108169,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -107929,6 +108406,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutExternalPlatformTokensInput =
 }
 
 export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -108148,6 +108626,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -108368,6 +108847,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
 }
 
 export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -108587,6 +109067,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -108823,6 +109304,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadExternalPlatformCustomerM
 }
 
 export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -109042,6 +109524,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -109262,6 +109745,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
 }
 
 export type VendorMasterCreateWithoutCompletionPhotosInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -109481,6 +109965,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -109717,6 +110202,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCompletionPhotosInput = {
 }
 
 export type VendorMasterUpdateWithoutCompletionPhotosInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -109936,6 +110422,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -110156,6 +110643,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -110375,6 +110863,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -110611,6 +111100,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectCategoriesMasterInput 
 }
 
 export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -110830,6 +111320,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -111050,6 +111541,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
 }
 
 export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -111269,6 +111761,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -111505,6 +111998,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCategoryNamingStructuresInput
 }
 
 export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -111724,6 +112218,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -111944,6 +112439,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -112163,6 +112659,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -112399,6 +112896,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProjectCategoriesVendorMappin
 }
 
 export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -112618,6 +113116,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -112838,6 +113337,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
 }
 
 export type VendorMasterCreateWithoutBrandsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -113057,6 +113557,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutBrandsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -113293,6 +113794,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBrandsInput = {
 }
 
 export type VendorMasterUpdateWithoutBrandsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -113512,6 +114014,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -113732,6 +114235,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
 }
 
 export type VendorMasterCreateWithoutProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -113951,6 +114455,7 @@ export type VendorMasterCreateWithoutProductsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -114187,6 +114692,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductsInput = {
 }
 
 export type VendorMasterUpdateWithoutProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -114406,6 +114912,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -114626,6 +115133,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
 }
 
 export type VendorMasterCreateWithoutCoreProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -114845,6 +115353,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -115081,6 +115590,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCoreProductsInput = {
 }
 
 export type VendorMasterUpdateWithoutCoreProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -115300,6 +115810,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -115520,6 +116031,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
 }
 
 export type VendorMasterCreateWithoutGradesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -115739,6 +116251,7 @@ export type VendorMasterCreateWithoutGradesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutGradesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -115975,6 +116488,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutGradesInput = {
 }
 
 export type VendorMasterUpdateWithoutGradesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -116194,6 +116708,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutGradesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -116414,6 +116929,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
 }
 
 export type VendorMasterCreateWithoutFinishesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -116633,6 +117149,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutFinishesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -116869,6 +117386,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutFinishesInput = {
 }
 
 export type VendorMasterUpdateWithoutFinishesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -117088,6 +117606,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -117308,6 +117827,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
 }
 
 export type VendorMasterCreateWithoutTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -117527,6 +118047,7 @@ export type VendorMasterCreateWithoutTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -117763,6 +118284,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -117982,6 +118504,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -118202,6 +118725,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
 }
 
 export type VendorMasterCreateWithoutItemTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -118421,6 +118945,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -118657,6 +119182,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutItemTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutItemTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -118876,6 +119402,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -119096,6 +119623,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
 }
 
 export type VendorMasterCreateWithoutPurchaseIntentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -119315,6 +119843,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -119551,6 +120080,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPurchaseIntentsInput = {
 }
 
 export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -119770,6 +120300,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -119990,6 +120521,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
 }
 
 export type VendorMasterCreateWithoutPurchaseOrdersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -120209,6 +120741,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -120445,6 +120978,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPurchaseOrdersInput = {
 }
 
 export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -120664,6 +121198,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -120884,6 +121419,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
 }
 
 export type VendorMasterCreateWithoutGrnsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -121103,6 +121639,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutGrnsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -121339,6 +121876,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutGrnsInput = {
 }
 
 export type VendorMasterUpdateWithoutGrnsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -121558,6 +122096,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -121778,6 +122317,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
 }
 
 export type VendorMasterCreateWithoutDebitCreditNotesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -121997,6 +122537,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -122233,6 +122774,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutDebitCreditNotesInput = {
 }
 
 export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -122452,6 +122994,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -122672,6 +123215,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
 }
 
 export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -122891,6 +123435,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -123127,6 +123672,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutRedeliveryRequestsInput = {
 }
 
 export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -123346,6 +123892,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -123566,6 +124113,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
 }
 
 export type VendorMasterCreateWithoutHsnMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -123785,6 +124333,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -124021,6 +124570,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutHsnMappingsInput = {
 }
 
 export type VendorMasterUpdateWithoutHsnMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -124240,6 +124790,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -124460,6 +125011,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutStockHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -124679,6 +125231,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -124915,6 +125468,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutStockHistoriesInput = {
 }
 
 export type VendorMasterUpdateWithoutStockHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -125134,6 +125688,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -125354,6 +125909,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
 }
 
 export type VendorMasterCreateWithoutPaymentTermsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -125573,6 +126129,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -125809,6 +126366,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPaymentTermsInput = {
 }
 
 export type VendorMasterUpdateWithoutPaymentTermsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -126028,6 +126586,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -126248,6 +126807,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
 }
 
 export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -126467,6 +127027,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -126703,6 +127264,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPoPaymentSchedulesInput = {
 }
 
 export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -126922,6 +127484,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -127142,6 +127705,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
 }
 
 export type VendorMasterCreateWithoutPoPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -127361,6 +127925,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -127597,6 +128162,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPoPaymentsInput = {
 }
 
 export type VendorMasterUpdateWithoutPoPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -127816,6 +128382,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -128036,6 +128603,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
 }
 
 export type VendorMasterCreateWithoutUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -128255,6 +128823,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -128491,6 +129060,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUnitsInput = {
 }
 
 export type VendorMasterUpdateWithoutUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -128710,6 +129280,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -128930,6 +129501,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
 }
 
 export type VendorMasterCreateWithoutItemGroupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -129149,6 +129721,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -129385,6 +129958,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutItemGroupsInput = {
 }
 
 export type VendorMasterUpdateWithoutItemGroupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -129604,6 +130178,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -129824,6 +130399,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
 }
 
 export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -130043,6 +130619,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -130279,6 +130856,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductSupplierMappingsInput 
 }
 
 export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -130498,6 +131076,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -130718,6 +131297,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -130937,6 +131517,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -131173,6 +131754,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPopaymentScheduleHistoriesInp
 }
 
 export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -131392,6 +131974,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -131612,6 +132195,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
 }
 
 export type VendorMasterCreateWithoutArchitechuremastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -131831,6 +132415,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -132067,6 +132652,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutArchitechuremastersInput = {
 }
 
 export type VendorMasterUpdateWithoutArchitechuremastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -132286,6 +132872,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -132506,6 +133093,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
 }
 
 export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -132725,6 +133313,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -132961,6 +133550,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutAdditionalCostMastersInput = 
 }
 
 export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -133180,6 +133770,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -133400,6 +133991,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
 }
 
 export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -133619,6 +134211,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -133855,6 +134448,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPiSupplierAdditionalCostsInpu
 }
 
 export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -134074,6 +134668,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -134294,6 +134889,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
 }
 
 export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -134513,6 +135109,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -134749,6 +135346,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutPoSupplierAdditionalCostsInpu
 }
 
 export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -134968,6 +135566,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -135188,6 +135787,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
 }
 
 export type VendorMasterCreateWithoutBox_info_fieldsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -135407,6 +136007,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -135643,6 +136244,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBox_info_fieldsInput = {
 }
 
 export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -135862,6 +136464,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -136082,6 +136685,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
 }
 
 export type VendorMasterCreateWithoutBox_info_valuesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -136301,6 +136905,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -136537,6 +137142,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBox_info_valuesInput = {
 }
 
 export type VendorMasterUpdateWithoutBox_info_valuesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -136756,6 +137362,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -136976,6 +137583,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
 }
 
 export type VendorMasterCreateWithoutBroadcastsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -137195,6 +137803,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -137431,6 +138040,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBroadcastsInput = {
 }
 
 export type VendorMasterUpdateWithoutBroadcastsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -137650,6 +138260,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -137870,6 +138481,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
 }
 
 export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -138089,6 +138701,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -138325,6 +138938,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutBroadcastCategoriesInput = {
 }
 
 export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -138544,6 +139158,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -138764,6 +139379,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
 }
 
 export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -138983,6 +139599,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -139219,6 +139836,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutB2bRequirementTypesInput = {
 }
 
 export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -139438,6 +140056,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -139658,6 +140277,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
 }
 
 export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -139877,6 +140497,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -140113,6 +140734,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadB2BReqMappingsInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -140332,6 +140954,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -140552,6 +141175,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -140771,6 +141395,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -141007,6 +141632,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadOtherAppliancesRemarkMapp
 }
 
 export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -141226,6 +141852,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -141446,6 +142073,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
 }
 
 export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -141665,6 +142293,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -141901,6 +142530,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutUserTypePrivilegeMappingInput
 }
 
 export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -142120,6 +142750,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -142340,6 +142971,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
 }
 
 export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -142559,6 +143191,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -142795,6 +143428,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOnline_lead_call_logInput = {
 }
 
 export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -143014,6 +143648,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -143234,6 +143869,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
 }
 
 export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -143453,6 +144089,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -143689,6 +144326,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOnline_lead_followup_statusIn
 }
 
 export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -143908,6 +144546,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -144128,6 +144767,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
 }
 
 export type VendorMasterCreateWithoutOnline_lead_historyInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -144347,6 +144987,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -144583,6 +145224,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOnline_lead_historyInput = {
 }
 
 export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -144802,6 +145444,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -145022,6 +145665,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
 }
 
 export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -145241,6 +145885,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -145477,6 +146122,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOnline_lead_store_logInput = 
 }
 
 export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -145696,6 +146342,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -145916,6 +146563,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
 }
 
 export type VendorMasterCreateWithoutOnline_leadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -146135,6 +146783,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -146371,6 +147020,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutOnline_leadsInput = {
 }
 
 export type VendorMasterUpdateWithoutOnline_leadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -146590,6 +147240,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -146810,6 +147461,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
 }
 
 export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -147029,6 +147681,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -147265,6 +147918,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutLeadBillingAddressesInput = {
 }
 
 export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -147484,6 +148138,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -147704,6 +148359,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
 }
 
 export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -147923,6 +148579,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -148159,6 +148816,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutProductsRequiredForProduction
 }
 
 export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -148378,6 +149036,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -148598,6 +149257,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
 }
 
 export type VendorMasterCreateWithoutCutListRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -148817,6 +149477,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -149053,6 +149714,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutCutListRulesInput = {
 }
 
 export type VendorMasterUpdateWithoutCutListRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -149272,6 +149934,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -149492,6 +150155,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
 }
 
 export type VendorMasterCreateWithoutRuleActionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -149711,6 +150375,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -149947,6 +150612,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutRuleActionsInput = {
 }
 
 export type VendorMasterUpdateWithoutRuleActionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -150166,6 +150832,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -150386,6 +151053,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
 }
 
 export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -150605,6 +151273,7 @@ export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -150841,6 +151510,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutSiteSupervisorFranchiseMappin
 }
 
 export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -151060,6 +151730,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -151280,6 +151951,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInp
 }
 
 export type VendorMasterCreateWithoutWalkinQuestionnairesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -151499,6 +152171,7 @@ export type VendorMasterCreateWithoutWalkinQuestionnairesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -151735,6 +152408,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutWalkinQuestionnairesInput = {
 }
 
 export type VendorMasterUpdateWithoutWalkinQuestionnairesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -151954,6 +152628,7 @@ export type VendorMasterUpdateWithoutWalkinQuestionnairesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -152174,6 +152849,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
 }
 
 export type VendorMasterCreateWithoutWalkinResponsesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -152393,6 +153069,7 @@ export type VendorMasterCreateWithoutWalkinResponsesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutWalkinResponsesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -152629,6 +153306,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutWalkinResponsesInput = {
 }
 
 export type VendorMasterUpdateWithoutWalkinResponsesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -152848,6 +153526,7 @@ export type VendorMasterUpdateWithoutWalkinResponsesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutWalkinResponsesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -153068,6 +153747,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinResponsesInput = {
 }
 
 export type VendorMasterCreateWithoutWalkinUploadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -153287,6 +153967,7 @@ export type VendorMasterCreateWithoutWalkinUploadsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutWalkinUploadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -153523,6 +154204,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutWalkinUploadsInput = {
 }
 
 export type VendorMasterUpdateWithoutWalkinUploadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -153742,6 +154424,7 @@ export type VendorMasterUpdateWithoutWalkinUploadsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutWalkinUploadsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -153962,6 +154645,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinUploadsInput = {
 }
 
 export type VendorMasterCreateWithoutTime_zone_masterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -154181,6 +154865,7 @@ export type VendorMasterCreateWithoutTime_zone_masterInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutTime_zone_masterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -154427,6 +155112,7 @@ export type VendorMasterUpdateManyWithWhereWithoutTime_zone_masterInput = {
 }
 
 export type VendorMasterCreateWithoutAttendancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -154646,6 +155332,7 @@ export type VendorMasterCreateWithoutAttendancesInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutAttendancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -154882,6 +155569,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutAttendancesInput = {
 }
 
 export type VendorMasterUpdateWithoutAttendancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -155101,6 +155789,7 @@ export type VendorMasterUpdateWithoutAttendancesInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutAttendancesInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -155321,6 +156010,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendancesInput = {
 }
 
 export type VendorMasterCreateWithoutAttendance_logsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
   online_leads_lead_code?: string | null
@@ -155540,6 +156230,7 @@ export type VendorMasterCreateWithoutAttendance_logsInput = {
 }
 
 export type VendorMasterUncheckedCreateWithoutAttendance_logsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -155776,6 +156467,7 @@ export type VendorMasterUpdateToOneWithWhereWithoutAttendance_logsInput = {
 }
 
 export type VendorMasterUpdateWithoutAttendance_logsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -155995,6 +156687,7 @@ export type VendorMasterUpdateWithoutAttendance_logsInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutAttendance_logsInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -156215,6 +156908,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendance_logsInput = {
 }
 
 export type VendorMasterCreateManyStateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -156267,6 +156961,7 @@ export type VendorMasterCreateManyStateInput = {
 }
 
 export type VendorMasterUpdateWithoutStateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -156486,6 +157181,7 @@ export type VendorMasterUpdateWithoutStateInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutStateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -156706,6 +157402,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
 }
 
 export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -156758,6 +157455,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
 }
 
 export type VendorMasterCreateManyTime_zone_masterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
   vendor_code: string
@@ -156810,6 +157508,7 @@ export type VendorMasterCreateManyTime_zone_masterInput = {
 }
 
 export type VendorMasterUpdateWithoutTime_zone_masterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
   online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -157029,6 +157728,7 @@ export type VendorMasterUpdateWithoutTime_zone_masterInput = {
 }
 
 export type VendorMasterUncheckedUpdateWithoutTime_zone_masterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -157249,6 +157949,7 @@ export type VendorMasterUncheckedUpdateWithoutTime_zone_masterInput = {
 }
 
 export type VendorMasterUncheckedUpdateManyWithoutTime_zone_masterInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -158835,6 +159536,7 @@ export type VendorMasterCountOutputTypeCountWalkinUploadsArgs<ExtArgs extends ru
 
 
 export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  site_readiness_questions?: boolean
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
@@ -159059,6 +159761,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
 }, ExtArgs["result"]["vendorMaster"]>
 
 export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  site_readiness_questions?: boolean
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
@@ -159114,6 +159817,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 }, ExtArgs["result"]["vendorMaster"]>
 
 export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  site_readiness_questions?: boolean
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
@@ -159169,6 +159873,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 }, ExtArgs["result"]["vendorMaster"]>
 
 export type VendorMasterSelectScalar = {
+  site_readiness_questions?: boolean
   id?: boolean
   vendor_name?: boolean
   vendor_code?: boolean
@@ -159221,7 +159926,7 @@ export type VendorMasterSelectScalar = {
   is_available_unique_code?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "time_zone_id" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "is_walkin_questions_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"site_readiness_questions" | "id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "time_zone_id" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "is_walkin_questions_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   machineCostDescriptions?: boolean | Prisma.VendorMaster$machineCostDescriptionsArgs<ExtArgs>
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
@@ -159579,6 +160284,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     walkinUploads: Prisma.$WalkinLeadUploadPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    site_readiness_questions: runtime.JsonValue | null
     id: number
     vendor_name: string
     vendor_code: string
@@ -159712,8 +160418,8 @@ export interface VendorMasterDelegate<ExtArgs extends runtime.Types.Extensions.I
    * // Get first 10 VendorMasters
    * const vendorMasters = await prisma.vendorMaster.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const vendorMasterWithIdOnly = await prisma.vendorMaster.findMany({ select: { id: true } })
+   * // Only select the `site_readiness_questions`
+   * const vendorMasterWithSite_readiness_questionsOnly = await prisma.vendorMaster.findMany({ select: { site_readiness_questions: true } })
    * 
    */
   findMany<T extends VendorMasterFindManyArgs>(args?: Prisma.SelectSubset<T, VendorMasterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -159757,9 +160463,9 @@ export interface VendorMasterDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   ]
    * })
    * 
-   * // Create many VendorMasters and only return the `id`
-   * const vendorMasterWithIdOnly = await prisma.vendorMaster.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many VendorMasters and only return the `site_readiness_questions`
+   * const vendorMasterWithSite_readiness_questionsOnly = await prisma.vendorMaster.createManyAndReturn({
+   *   select: { site_readiness_questions: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -159848,9 +160554,9 @@ export interface VendorMasterDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   ]
    * })
    * 
-   * // Update zero or more VendorMasters and only return the `id`
-   * const vendorMasterWithIdOnly = await prisma.vendorMaster.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more VendorMasters and only return the `site_readiness_questions`
+   * const vendorMasterWithSite_readiness_questionsOnly = await prisma.vendorMaster.updateManyAndReturn({
+   *   select: { site_readiness_questions: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -160222,6 +160928,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
  * Fields of the VendorMaster model
  */
 export interface VendorMasterFieldRefs {
+  readonly site_readiness_questions: Prisma.FieldRef<"VendorMaster", 'Json'>
   readonly id: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly vendor_name: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly vendor_code: Prisma.FieldRef<"VendorMaster", 'String'>
