@@ -8,6 +8,7 @@ import {
   getActiveMachinesByVendorService,
   getPackagingProjectContextService,
   generateMultiLocationTemplateService,
+  previewCutlistMachineMappingService,
 } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 import {
@@ -75,6 +76,7 @@ export const createProjectController = async (
       created_by,
       instance_id,
       use_lead_project_name,
+      fabrication,
     } = req.body;
 
     const parsedLeadId =
@@ -118,12 +120,17 @@ export const createProjectController = async (
     const parsedBoxInfoFields =
       parseBoxInfoFields(box_info_fields);
 
+    const targetFabrication: "WOODWORK" | "METALWORK" =
+      fabrication === "METALWORK" ? "METALWORK" : "WOODWORK";
+
     const result = await createProjectService({
       projectName: resolvedProjectName,
 
       vendorId: Number(vendorId),
 
       leadId: parsedLeadId,
+
+      fabrication: targetFabrication,
 
       order_no,
 
@@ -154,7 +161,7 @@ export const createProjectController = async (
         leadId: parsedLeadId,
         userId: created_by ? Number(created_by) : null,
         projectName: resolvedProjectName,
-        fabrication: "WOODWORK",
+        fabrication: targetFabrication,
       });
     }
 
@@ -625,3 +632,43 @@ const parseRemoveBoxIds = (value: any): number[] => {
       .filter((id) => Number.isFinite(id) && id > 0);
   }
 };
+
+export const previewCutlistMachineMappingController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+    if (!Number.isInteger(vendorId) || vendorId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid vendor_id",
+        data: { machines: [], rowMappings: [] },
+      });
+    }
+
+    const { items, packing_type, fabrication } = req.body;
+    const targetFabrication: "WOODWORK" | "METALWORK" =
+      fabrication === "METALWORK" ? "METALWORK" : "WOODWORK";
+
+    const result = await previewCutlistMachineMappingService(
+      vendorId,
+      Array.isArray(items) ? items : [],
+      packing_type,
+      targetFabrication
+    );
+
+    return res.status(result.success ? 200 : 400).json(result);
+  } catch (error: any) {
+    logger.error("previewCutlistMachineMappingController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to preview machine mappings",
+      data: { machines: [], rowMappings: [] },
+    });
+  }
+};
+

@@ -66,7 +66,6 @@ export const validateCreateMachine = (data: any) => {
 };
 
 export class TrackTraceMasterService {
-
   static async assignUsersToMachineService({
     machine_id,
     vendor_id,
@@ -155,8 +154,6 @@ export class TrackTraceMasterService {
     };
   }
 
-
-
   static async createMachine(data: MachineData) {
     validateMachineFabrication(data.fabrication);
     try {
@@ -166,70 +163,58 @@ export class TrackTraceMasterService {
 
       validateCreateMachine(data);
 
-      const machineCode =
-        data.machine_code.trim();
+      const machineCode = data.machine_code.trim();
 
-      const machineStatus =
-        MachineStatus.ACTIVE;
+      const machineStatus = MachineStatus.ACTIVE;
 
       /* ---------------- UNIQUE VALIDATION ---------------- */
 
-      const existingMachine =
-        await prisma.machineMaster.findFirst({
-          where: {
-            vendor_id: data.vendor_id,
-            machine_code: machineCode,
-            status: machineStatus,
-          },
+      const existingMachine = await prisma.machineMaster.findFirst({
+        where: {
+          vendor_id: data.vendor_id,
+          machine_code: machineCode,
+          status: machineStatus,
+        },
 
-          select: {
-            id: true,
-          },
-        });
+        select: {
+          id: true,
+        },
+      });
 
       if (existingMachine) {
         throw new Error(
-          `Machine code '${machineCode}' already exists for this vendor with status '${machineStatus}'`
+          `Machine code '${machineCode}' already exists for this vendor with status '${machineStatus}'`,
         );
       }
 
       /* ---------------- CREATE MACHINE ---------------- */
 
-      const machine =
-        await prisma.machineMaster.create({
-          data: {
-            ...data,
+      const machine = await prisma.machineMaster.create({
+        data: {
+          ...data,
 
-            machine_code:
-              machineCode,
+          machine_code: machineCode,
 
-            status:
-              machineStatus,
+          status: machineStatus,
 
-            factory_id:
-              data.factory_id ??
-              null,
-          },
-        });
+          factory_id: data.factory_id ?? null,
+        },
+      });
 
-      logger.info(
-        "Machine created successfully",
-        {
-          id: machine.id,
-          vendor_id: machine.vendor_id,
-          machine_code: machine.machine_code,
-          status: machine.status,
-        }
-      );
+      logger.info("Machine created successfully", {
+        id: machine.id,
+        vendor_id: machine.vendor_id,
+        machine_code: machine.machine_code,
+        status: machine.status,
+      });
 
       return machine;
     } catch (error) {
       throw new Error(
-        `A machine with the same code, vendor and status already exists`
+        `A machine with the same code, vendor and status already exists`,
       );
     }
   }
-
 
   static async getMachinesByVendor(vendor_id: number) {
     try {
@@ -251,9 +236,11 @@ export class TrackTraceMasterService {
       const machines = await Promise.all(
         rawMachines.map(async ({ machineType, ...machine }) => ({
           ...machine,
-          image_path: machine.image_path ? await generateSignedUrl(machine.image_path) : null,
+          image_path: machine.image_path
+            ? await generateSignedUrl(machine.image_path)
+            : null,
           machine_type: machineType?.machine_type ?? null,
-        }))
+        })),
       );
 
       return machines;
@@ -266,7 +253,7 @@ export class TrackTraceMasterService {
   static async updateMachine(
     id: number,
     vendor_id: number,
-    data: UpdateMachineData
+    data: UpdateMachineData,
   ) {
     validateMachineFabrication(data.fabrication);
     try {
@@ -277,24 +264,21 @@ export class TrackTraceMasterService {
 
       /* -------- CHECK MACHINE EXISTS -------- */
 
-      const existing =
-        await prisma.machineMaster.findFirst({
-          where: {
-            id,
-            vendor_id,
-          },
+      const existing = await prisma.machineMaster.findFirst({
+        where: {
+          id,
+          vendor_id,
+        },
 
-          select: {
-            id: true,
-            machine_code: true,
-            status: true,
-          },
-        });
+        select: {
+          id: true,
+          machine_code: true,
+          status: true,
+        },
+      });
 
       if (!existing) {
-        throw new Error(
-          "Machine not found for this vendor"
-        );
+        throw new Error("Machine not found for this vendor");
       }
 
       /*
@@ -307,89 +291,71 @@ export class TrackTraceMasterService {
           : existing.machine_code;
 
       const machineStatus =
-        data.status !== undefined
-          ? data.status
-          : existing.status;
+        data.status !== undefined ? data.status : existing.status;
 
       /* -------- UNIQUE COMBINATION VALIDATION -------- */
 
-      const duplicate =
-        await prisma.machineMaster.findFirst({
-          where: {
-            vendor_id,
-            machine_code:
-              machineCode,
-            status:
-              machineStatus,
+      const duplicate = await prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_code: machineCode,
+          status: machineStatus,
 
-            NOT: {
-              id,
-            },
+          NOT: {
+            id,
           },
+        },
 
-          select: {
-            id: true,
-          },
-        });
+        select: {
+          id: true,
+        },
+      });
 
       if (duplicate) {
         throw new Error(
-          `Machine code '${machineCode}' already exists for this vendor with status '${machineStatus}'`
+          `Machine code '${machineCode}' already exists for this vendor with status '${machineStatus}'`,
         );
       }
 
       /* -------- UPDATE MACHINE -------- */
 
-      const updated =
-        await prisma.machineMaster.update({
-          where: {
-            id,
-          },
+      const updated = await prisma.machineMaster.update({
+        where: {
+          id,
+        },
 
-          data: {
-            ...data,
+        data: {
+          ...data,
 
-            // Prevent changing the machine's vendor
-            vendor_id,
+          // Prevent changing the machine's vendor
+          vendor_id,
 
-            machine_code:
-              machineCode,
+          machine_code: machineCode,
 
-            status:
-              machineStatus,
+          status: machineStatus,
 
-            ...(data.factory_id !== undefined
-              ? {
-                factory_id:
-                  data.factory_id ??
-                  null,
+          ...(data.factory_id !== undefined
+            ? {
+                factory_id: data.factory_id ?? null,
               }
-              : {}),
-          },
-        });
+            : {}),
+        },
+      });
 
-      logger.info(
-        "Machine updated successfully",
-        {
-          id: updated.id,
-          vendor_id:
-            updated.vendor_id,
-          machine_code:
-            updated.machine_code,
-          status:
-            updated.status,
-        }
-      );
+      logger.info("Machine updated successfully", {
+        id: updated.id,
+        vendor_id: updated.vendor_id,
+        machine_code: updated.machine_code,
+        status: updated.status,
+      });
 
       return updated;
     } catch (error) {
       /* -------- HANDLE DATABASE RACE CONDITION -------- */
 
       throw new Error(
-        "A machine with the same code, vendor and status already exists"
+        "A machine with the same code, vendor and status already exists",
       );
-
-
 
       throw error;
     }
@@ -437,5 +403,3 @@ export const getMachineType = async (vendor_id?: number) => {
     return null;
   }
 };
-
-

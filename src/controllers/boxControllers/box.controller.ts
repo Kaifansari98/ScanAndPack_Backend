@@ -765,6 +765,11 @@ export const verifyManualBoxSiteInItem = async (
         req.body.received_qty
       );
 
+    const mode: "set" | "add" =
+      req.body.mode === "add"
+        ? "add"
+        : "set";
+
     if (
       [
         box_id,
@@ -811,7 +816,8 @@ export const verifyManualBoxSiteInItem = async (
         project_id,
         vendor_id,
         user_id,
-        received_qty
+        received_qty,
+        mode
       );
 
     if (

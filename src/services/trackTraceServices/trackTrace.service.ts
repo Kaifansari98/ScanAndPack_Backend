@@ -1298,6 +1298,83 @@ export const updateScannedItem = async (
     // /scan/check-item validates the scan and either returns item details for the
     // confirmation modal (normal mode) OR auto-completes the item (continuous mode).
     if (is_check) {
+      if (
+        eligibleMapping.machine.machine_type_id === 18 &&
+        eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP
+      ) {
+        const productGroupName = eligibleMapping.cut_list.group_name?.trim();
+        const packingGroupName =
+          eligibleMapping.cut_list.custom_packing_group?.trim();
+
+        if (productGroupName && packingGroupName) {
+          // If all boxes for this group are already started, ensure another user is not packing the only open box
+          const allActiveCutLists = await prisma.cutList.findMany({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              status: { equals: "active", mode: "insensitive" },
+              group_name: { equals: productGroupName, mode: "insensitive" },
+            },
+            select: { qty: true },
+          });
+          const groupTotalSets = allActiveCutLists.reduce(
+            (max, item) => Math.max(max, Number(item.qty || 0)),
+            0,
+          );
+
+          const existingBoxesCount = await prisma.boxMaster.count({
+            where: {
+              project_id: eligibleMapping.project_id,
+              vendor_id,
+              is_deleted: false,
+              is_auto_created: true,
+              product_group_name: {
+                equals: productGroupName,
+                mode: "insensitive",
+              },
+              packing_group_name: {
+                equals: packingGroupName,
+                mode: "insensitive",
+              },
+            },
+          });
+
+          if (groupTotalSets > 0 && existingBoxesCount >= groupTotalSets) {
+            const otherOpenBox = await prisma.boxMaster.findFirst({
+              where: {
+                project_id: eligibleMapping.project_id,
+                vendor_id,
+                is_deleted: false,
+                is_auto_created: true,
+                box_status: BoxStatus.unpacked,
+                product_group_name: {
+                  equals: productGroupName,
+                  mode: "insensitive",
+                },
+                packing_group_name: {
+                  equals: packingGroupName,
+                  mode: "insensitive",
+                },
+                created_by: { not: created_by },
+              },
+            });
+
+            if (otherOpenBox) {
+              const otherUser = await prisma.userMaster.findUnique({
+                where: { id: otherOpenBox.created_by },
+                select: { user_name: true },
+              });
+              const otherOperatorName =
+                otherUser?.user_name ?? `User #${otherOpenBox.created_by}`;
+              return validationResponse(
+                0,
+                `Cannot scan "${eligibleMapping.cut_list.item_name}". Box "${otherOpenBox.box_name}" is currently open and being packed by ${otherOperatorName}. Another user cannot scan for this box.`,
+              );
+            }
+          }
+        }
+      }
+
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
           cut_list_id,
@@ -1842,12 +1919,8 @@ export const updateScannedItem = async (
                 actual_in_at: scanTime,
                 in_operator: created_by,
                 ...(box_id ? { box_id } : {}),
-                ...(selectedLocationAllocation
-                  ? {
-                      project_location_product_quantity_id:
-                        selectedLocationAllocation.id,
-                    }
-                  : {}),
+                project_location_product_quantity_id:
+                  selectedLocationAllocation?.id ?? null,
               },
             });
 
@@ -1947,41 +2020,93 @@ export const updateScannedItem = async (
                 ? String(selectedLocationAllocation.id)
                 : "__without_location__";
 
-              const otherClaims: string[] = [];
-              let otherCommittedTotal = 0;
-
-              for (const [locKey, sets] of setsCommittedByLocation.entries()) {
-                if (locKey !== currentLocKey && sets > 0) {
-                  otherCommittedTotal += sets;
-                  const label = locationLabels.get(locKey) ?? "another location";
-                  otherClaims.push(`${sets} set${sets > 1 ? "s" : ""} allocated for ${label}`);
-                }
-              }
-
               const currentLocName = selectedLocationAllocation
                 ? selectedLocationAllocation.locationName
                 : "without location";
 
-              // 1. Check if total sets across all locations + unassigned exceeds product group total sets
-              if (
-                totalSetsCommitted > automaticPackingDefinition.groupTotalSets
-              ) {
-                const remainingSets = Math.max(
-                  0,
-                  automaticPackingDefinition.groupTotalSets - otherCommittedTotal,
-                );
-                const claimStr =
-                  otherClaims.length > 0
-                    ? otherClaims.join(", ")
-                    : "other locations";
+              // Retrieve configured quotas for all project locations for this product group
+              const allLocationAllocations =
+                await tx.projectLocationProductQuantity.findMany({
+                  where: {
+                    project_id: eligibleMapping.project_id,
+                    vendor_id,
+                    group_name: {
+                      equals: automaticPackingDefinition.productGroupName,
+                      mode: "insensitive",
+                    },
+                  },
+                  select: {
+                    id: true,
+                    location_name: true,
+                    qty: true,
+                  },
+                });
 
+              for (const loc of allLocationAllocations) {
+                if (!locationLabels.has(String(loc.id))) {
+                  locationLabels.set(String(loc.id), loc.location_name);
+                }
+              }
+
+              const totalConfiguredQuotas = allLocationAllocations.reduce(
+                (sum, loc) => sum + Math.max(0, loc.qty),
+                0,
+              );
+              const totalUnallocatedPool = Math.max(
+                0,
+                automaticPackingDefinition.groupTotalSets - totalConfiguredQuotas,
+              );
+
+              const quotaByLocKey = new Map<string, number>();
+              for (const loc of allLocationAllocations) {
+                quotaByLocKey.set(String(loc.id), loc.qty);
+              }
+
+              // Calculate other locations' reserved quotas that have not yet been consumed
+              let otherReservedQuotaRemaining = 0;
+              const reservedQuotaLocationsSummary: string[] = [];
+
+              for (const loc of allLocationAllocations) {
+                const locKey = String(loc.id);
+                if (loc.qty > 0) {
+                  const committed = setsCommittedByLocation.get(locKey) ?? 0;
+                  const remaining = Math.max(0, loc.qty - committed);
+                  if (locKey !== currentLocKey && remaining > 0) {
+                    otherReservedQuotaRemaining += remaining;
+                    reservedQuotaLocationsSummary.push(
+                      `${loc.location_name} (${remaining} set${remaining > 1 ? "s" : ""})`,
+                    );
+                  }
+                }
+              }
+
+              // Total unallocated sets committed across all zero-quota locations and without-location
+              let unallocatedSetsCommitted = 0;
+              for (const [locKey, sets] of setsCommittedByLocation.entries()) {
+                const locQuota = quotaByLocKey.get(locKey) ?? 0;
+                if (locQuota === 0 || locKey === "__without_location__") {
+                  unallocatedSetsCommitted += sets;
+                }
+              }
+
+              // 1. Check if total sets physically committed + other locations' reserved quota exceeds total project sets
+              if (
+                selectedLocationAllocation &&
+                totalSetsCommitted + otherReservedQuotaRemaining >
+                automaticPackingDefinition.groupTotalSets
+              ) {
+                const reservedMsg =
+                  reservedQuotaLocationsSummary.length > 0
+                    ? ` and ${otherReservedQuotaRemaining} set${otherReservedQuotaRemaining > 1 ? "s are" : " is"} reserved for ${reservedQuotaLocationsSummary.join(", ")}`
+                    : "";
                 throw new Error(
                   `Cannot scan "${eligibleMapping.cut_list.item_name}" for ${currentLocName}. ` +
-                    `Already ${claimStr}. Only ${remainingSets} set${remainingSets === 1 ? "" : "s"} remain available for this product.`,
+                    `Product total is ${automaticPackingDefinition.groupTotalSets} set${automaticPackingDefinition.groupTotalSets === 1 ? "" : "s"}${reservedMsg}. ` +
+                    `No additional sets can be allocated.`,
                 );
               }
 
-              // 2. Check if current location has an explicit quota configured in project settings
+              // 2. If current location has an explicit quota (qty > 0), enforce that quota
               if (
                 selectedLocationAllocation &&
                 selectedLocationAllocation.configuredQty > 0
@@ -1994,24 +2119,50 @@ export const updateScannedItem = async (
                       `Location quota is ${selectedLocationAllocation.configuredQty} set${selectedLocationAllocation.configuredQty === 1 ? "" : "s"}, and all ${selectedLocationAllocation.configuredQty} sets are already packed/started.`,
                   );
                 }
+              } else if (selectedLocationAllocation) {
+                // 3. A configured zero-quota location draws from the unallocated pool.
+                if (unallocatedSetsCommitted > totalUnallocatedPool) {
+                  const reservedMsg =
+                    reservedQuotaLocationsSummary.length > 0
+                      ? ` The remaining quantity is reserved for ${reservedQuotaLocationsSummary.join(", ")}.`
+                      : "";
+                  throw new Error(
+                    `Cannot scan "${eligibleMapping.cut_list.item_name}" for ${currentLocName}. ` +
+                      `Only ${totalUnallocatedPool} unallocated set${totalUnallocatedPool === 1 ? "" : "s were"} available for this product group, which ${totalUnallocatedPool === 1 ? "has" : "have"} already been claimed.${reservedMsg}`,
+                  );
+                }
               }
 
-              // 3. Check individual piece limit for this item at this location
-              const currentItemScansForThisLoc =
-                scansByLocation.get(currentLocKey)?.get(cut_list_id) ?? 0;
-              const maxSetsForThisLoc =
+              // 4. Check individual piece limit for this item at this location.
+              // A scan without a location intentionally skips location quota
+              // enforcement and remains unassigned.
+              const currentSetsForThisLoc =
+                setsCommittedByLocation.get(currentLocKey) ?? 0;
+              let maxSetsForThisLoc: number;
+
+              if (
                 selectedLocationAllocation &&
                 selectedLocationAllocation.configuredQty > 0
-                  ? selectedLocationAllocation.configuredQty
-                  : Math.max(
-                      0,
-                      automaticPackingDefinition.groupTotalSets -
-                        otherCommittedTotal,
-                    );
+              ) {
+                maxSetsForThisLoc = selectedLocationAllocation.configuredQty;
+              } else {
+                const otherUnallocatedCommitted =
+                  unallocatedSetsCommitted - currentSetsForThisLoc;
+                maxSetsForThisLoc = Math.max(
+                  0,
+                  totalUnallocatedPool - otherUnallocatedCommitted,
+                );
+              }
+
               const maxPiecesAllowed =
                 maxSetsForThisLoc * incomingItemRequirement.qtyPerBox;
+              const currentItemScansForThisLoc =
+                scansByLocation.get(currentLocKey)?.get(cut_list_id) ?? 0;
 
-              if (currentItemScansForThisLoc > maxPiecesAllowed) {
+              if (
+                selectedLocationAllocation &&
+                currentItemScansForThisLoc > maxPiecesAllowed
+              ) {
                 throw new Error(
                   `Cannot scan "${eligibleMapping.cut_list.item_name}". ` +
                     `All ${maxPiecesAllowed} required pieces for this location have already been scanned.`,
@@ -2056,6 +2207,7 @@ export const updateScannedItem = async (
             const openBoxes = await tx.boxMaster.findMany({
               where: {
                 ...automaticBoxFilter,
+                created_by,
                 box_status: BoxStatus.unpacked,
                 is_deleted: false,
                 cutListMachineMapping: {
@@ -2124,6 +2276,27 @@ export const updateScannedItem = async (
               });
 
               if (existingBoxesCount >= maxBoxesAllowed) {
+                const otherOpenBox = await tx.boxMaster.findFirst({
+                  where: {
+                    ...automaticBoxFilter,
+                    box_status: BoxStatus.unpacked,
+                    is_deleted: false,
+                    created_by: { not: created_by },
+                  },
+                });
+
+                if (otherOpenBox) {
+                  const otherUser = await tx.userMaster.findUnique({
+                    where: { id: otherOpenBox.created_by },
+                    select: { user_name: true },
+                  });
+                  const otherOperatorName =
+                    otherUser?.user_name ?? `User #${otherOpenBox.created_by}`;
+                  throw new Error(
+                    `Cannot scan "${eligibleMapping.cut_list.item_name}". Box "${otherOpenBox.box_name}" is currently open and being packed by ${otherOperatorName}. Another user cannot scan for this box.`,
+                  );
+                }
+
                 throw new Error(
                   `Cannot scan "${eligibleMapping.cut_list.item_name}". ` +
                     `All ${maxBoxesAllowed} boxes for this custom group have already been started. ` +
@@ -4177,6 +4350,7 @@ export const getCutListMachine = async (
       };
     }
 
+    
     // Populate machine assignment and scan status from mappings
     for (const mapping of cutListMachineMapping as any[]) {
       const machineCode = machineCodeById.get(mapping.machine_id);
@@ -4205,6 +4379,18 @@ export const getCutListMachine = async (
         box_id: existingCell?.box_id || mapping.box_id,
       };
     }
+
+    // Mark assigned machines. There is one mapping per piece, so also count
+    // how many pieces have been scanned at each machine.
+    cutList.cutListMachineMapping.forEach((mapping) => {
+      const code = mapping.machine.machine_code;
+      const cell = row[code]?.assigned
+        ? row[code]
+        : { assigned: true, machineId: mapping.machine.id, total: 0, scanned: 0 };
+      cell.total += 1;
+      if (mapping.actual_in_at || mapping.actual_out_at) cell.scanned += 1;
+      row[code] = cell;
+    });
 
     return row;
   });
@@ -4625,7 +4811,7 @@ export const updateCutListQty = async (payload: UpdateCutListQtyPayload) => {
             .filter((qty) => qty > 0),
         );
         const oldQty = Number(cutListItem.qty || 0);
-        const changingBase = oldQty === baseQty;
+        const changingBase = oldQty === baseQty;track-trace-v1
 
         if (!changingBase && baseQty > 0 && newQty % baseQty !== 0) {
           return validationResponse(
@@ -4965,6 +5151,9 @@ export const downloadCutListExcel = async (
       ELB: row.elb || "",
       ESL: row.esl || "",
       ESR: row.esr || "",
+      "Top Drill": row.top_drill || "",
+      "Bottom Drill": row.bottom_drill || "",
+      "Is Drill": row.is_drill || "",
     };
 
     // Add machine columns (1 or 0)
@@ -7249,6 +7438,7 @@ export const unsetBoxFromMappingService = async (
           box_id: null,
           actual_in_at: null,
           in_operator: null,
+          project_location_product_quantity_id: null,
         },
       }),
       prisma.projectDetails.update({
@@ -7328,13 +7518,26 @@ export const markBoxFactoryOutService = async (
             box_status: true,
             factory_out_at: true,
             product_set_no: true,
+            box_position: true,
+            boxes_per_product: true,
             product_group_name: true,
             cutListMachineMapping: {
               where: { actual_in_at: { not: null } },
               select: {
                 id: true,
                 qty: true,
-                cut_list: { select: { group_name: true } },
+                row_created_source: true,
+                cut_list: {
+                  select: {
+                    group_name: true,
+                    scan_pack_validate: true,
+                    category: {
+                      select: {
+                        scan_pack_validate: true,
+                      },
+                    },
+                  },
+                },
                 projectLocationProductQuantity: {
                   select: { id: true, location_name: true, group_name: true },
                 },
@@ -7380,82 +7583,9 @@ export const markBoxFactoryOutService = async (
         const hasProjectLocations =
           locationRows.length > 0 || project?.is_multi_location === true;
 
-        const boxGroupNames = Array.from(
-          new Set(
-            [
-              box.product_group_name?.trim(),
-              ...box.cutListMachineMapping
-                .map((mapping) => mapping.cut_list.group_name?.trim())
-                .filter((groupName): groupName is string => Boolean(groupName)),
-            ].filter((groupName): groupName is string => Boolean(groupName)),
-          ),
-        );
-
-        // A product set can span multiple component boxes (A/B/C in the
-        // cutlist). Its location therefore belongs to the complete product
-        // set, not only to the box currently being scanned.
-        const productSetMappings =
-          box.product_set_no != null
-            ? await tx.cutListMachineMapping.findMany({
-                where: {
-                  project_id,
-                  vendor_id,
-                  actual_in_at: { not: null },
-                  boxMaster: {
-                    is_deleted: false,
-                    product_set_no: box.product_set_no,
-                    ...(box.product_group_name
-                      ? {
-                          product_group_name: {
-                            equals: box.product_group_name,
-                            mode: "insensitive" as const,
-                          },
-                        }
-                      : {}),
-                  },
-                  ...(boxGroupNames.length > 0
-                    ? {
-                        cut_list: {
-                          group_name: {
-                            in: boxGroupNames,
-                          },
-                        },
-                      }
-                    : {}),
-                },
-                select: {
-                  id: true,
-                  box_id: true,
-                  cut_list: { select: { group_name: true } },
-                  projectLocationProductQuantity: {
-                    select: {
-                      id: true,
-                      location_name: true,
-                      group_name: true,
-                    },
-                  },
-                },
-              })
-            : [];
-
-        const normalizedBoxGroupSet = new Set(
-          boxGroupNames.map((g) => g.toLowerCase()),
-        );
-        const scopedProductSetMappings = productSetMappings.filter(
-          (mapping) => {
-            if (normalizedBoxGroupSet.size === 0) return true;
-            const g = mapping.cut_list.group_name?.trim().toLowerCase();
-            return g ? normalizedBoxGroupSet.has(g) : true;
-          },
-        );
-
-        const locationScope = scopedProductSetMappings.length
-          ? scopedProductSetMappings
-          : box.cutListMachineMapping;
-
         const allExistingLocations = Array.from(
           new Set(
-            locationScope
+            box.cutListMachineMapping
               .map((mapping) =>
                 mapping.projectLocationProductQuantity?.location_name?.trim(),
               )
@@ -7486,6 +7616,7 @@ export const markBoxFactoryOutService = async (
         }
 
         let dispatchMessage = `${boxDisplayName} marked as factory out successfully`;
+        let targetProductSetNo = box.product_set_no;
 
         // ── Validation 2: Box dispatched with a location ──
         if (normalizedSelectedLocation) {
@@ -7515,160 +7646,386 @@ export const markBoxFactoryOutService = async (
             );
           }
 
-          // ── Quota Check ──
-          const cutListRows = await tx.cutList.findMany({
-            where: { project_id, vendor_id },
-            select: { group_name: true, qty: true },
-          });
-          const groupQuantityLimits = new Map<string, number>();
-          for (const row of cutListRows) {
-            const groupName = row.group_name?.trim().toLocaleLowerCase();
-            if (!groupName) continue;
-            const quantity = Math.max(0, Number(row.qty) || 0);
-            const currentLimit = groupQuantityLimits.get(groupName);
-            groupQuantityLimits.set(
-              groupName,
-              currentLimit === undefined
-                ? quantity
-                : Math.min(currentLimit, quantity),
-            );
-          }
+          // Check if item participates in scan and pack
+          const isItemScanAndPack = (mapping: {
+            row_created_source?: string | null;
+            cut_list?: {
+              scan_pack_validate?: boolean | null;
+              category?: { scan_pack_validate?: boolean | null } | null;
+            } | null;
+          }) => {
+            if (mapping.row_created_source === "Manual") return false;
+            if (mapping.cut_list?.scan_pack_validate === false) return false;
+            if (mapping.cut_list?.category?.scan_pack_validate === false) return false;
+            if (mapping.cut_list?.scan_pack_validate === true) return true;
+            if (mapping.cut_list?.category?.scan_pack_validate === true) return true;
+            return true;
+          };
 
-          const targetQuotaByGroup = new Map<string, number>();
-          for (const targetRow of targetRows) {
-            const groupName = targetRow.group_name.trim().toLocaleLowerCase();
-            const configuredQuantity = Math.max(0, Number(targetRow.qty) || 0);
-            const otherLocationsQuantity = locationRows
-              .filter(
-                (row) =>
-                  row.group_name.trim().toLocaleLowerCase() === groupName &&
-                  row.location_name.trim().toLocaleLowerCase() !==
-                    normalizedSelectedLocation,
-              )
-              .reduce(
-                (total, row) => total + Math.max(0, Number(row.qty) || 0),
-                0,
+          // Manual boxes or boxes containing only non-scan-pack items (e.g. hardware, accessories, scan_pack_validate=false)
+          // do not represent structured product sets (Box 1 of N, etc.) and must not be blocked by set quotas.
+          const isManualOrNonScanBox =
+            box.box_position == null && box.boxes_per_product == null;
+
+          // ── Quota Check (Applies to structured scan-and-pack product sets) ──
+          if (!isManualOrNonScanBox) {
+            const cutListRows = await tx.cutList.findMany({
+              where: { project_id, vendor_id },
+              select: { group_name: true, qty: true },
+            });
+            const groupQuantityLimits = new Map<string, number>();
+            for (const row of cutListRows) {
+              const groupName = row.group_name?.trim().toLocaleLowerCase();
+              if (!groupName) continue;
+              const quantity = Math.max(0, Number(row.qty) || 0);
+              const currentLimit = groupQuantityLimits.get(groupName);
+              groupQuantityLimits.set(
+                groupName,
+                currentLimit === undefined
+                  ? quantity
+                  : Math.min(currentLimit, quantity),
               );
-            const quota =
-              configuredQuantity > 0
-                ? configuredQuantity
-                : Math.max(
-                    0,
-                    (groupQuantityLimits.get(groupName) ?? 0) -
-                      otherLocationsQuantity,
-                  );
-            targetQuotaByGroup.set(groupName, quota);
-          }
+            }
 
-          // Query ALL active boxes already allocated to this target location (PACKED or DISPATCHED)
-          const targetLocationIds = targetRows.map((row) => row.id);
-          const allocatedMappings = await tx.cutListMachineMapping.findMany({
-            where: {
-              project_id,
-              vendor_id,
-              project_location_product_quantity_id: { in: targetLocationIds },
-              boxMaster: {
-                is_deleted: false,
-              },
-            },
-            select: {
-              box_id: true,
-              cut_list: { select: { group_name: true } },
-              boxMaster: {
+            // Determine groups present in the box
+            const boxGroups = Array.from(
+              new Set(
+                box.cutListMachineMapping
+                  .map((m) => m.cut_list.group_name?.trim())
+                  .filter((g): g is string => Boolean(g)),
+              ),
+            );
+            if (boxGroups.length === 0 && box.product_group_name?.trim()) {
+              boxGroups.push(box.product_group_name.trim());
+            }
+
+            targetProductSetNo = box.product_set_no;
+
+            for (const currentGroupName of boxGroups) {
+              const normalizedGroupName = currentGroupName.toLocaleLowerCase();
+              const targetRow = targetRows.find(
+                (row) =>
+                  row.group_name.trim().toLocaleLowerCase() === normalizedGroupName,
+              );
+
+              if (!targetRow) {
+                return validationResponse(
+                  0,
+                  `Location ${selectedLocation} has no allocation for ${currentGroupName}.`,
+                );
+              }
+
+              // Fetch ALL boxes in this project for this product group
+              const allGroupBoxesRaw = await tx.boxMaster.findMany({
+                where: {
+                  project_id,
+                  vendor_id,
+                  is_deleted: false,
+                  OR: [
+                    {
+                      product_group_name: {
+                        equals: currentGroupName,
+                        mode: "insensitive" as const,
+                      },
+                    },
+                    {
+                      cutListMachineMapping: {
+                        some: {
+                          actual_in_at: { not: null },
+                          cut_list: {
+                            group_name: {
+                              equals: currentGroupName,
+                              mode: "insensitive" as const,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
                 select: {
                   id: true,
+                  box_name: true,
+                  box_position: true,
+                  boxes_per_product: true,
                   product_set_no: true,
                   factory_out_at: true,
+                  cutListMachineMapping: {
+                    where: { actual_in_at: { not: null } },
+                    select: {
+                      id: true,
+                      row_created_source: true,
+                      project_location_product_quantity_id: true,
+                      cut_list: {
+                        select: {
+                          scan_pack_validate: true,
+                          category: { select: { scan_pack_validate: true } },
+                        },
+                      },
+                      projectLocationProductQuantity: {
+                        select: { id: true, location_name: true },
+                      },
+                    },
+                  },
                 },
-              },
-            },
-          });
+              });
 
-          const allocatedProductSetsByGroup = new Map<string, Set<string>>();
-          const dispatchedProductSetsByGroup = new Map<string, Set<string>>();
+              // Exclude manual / non-scan boxes from counting as product set boxes
+              const allGroupBoxes = allGroupBoxesRaw.filter((b) => {
+                if (b.box_position == null && b.boxes_per_product == null) return false;
+                return true;
+              });
 
-          for (const mapping of allocatedMappings) {
-            const groupName = mapping.cut_list.group_name
-              ?.trim()
-              .toLocaleLowerCase();
-            if (!groupName) continue;
-            const setNo = mapping.boxMaster?.product_set_no;
-            const productSetKey =
-              setNo != null ? `set:${setNo}` : `box:${mapping.box_id}`;
+              const getAssignedLocation = (
+                b: (typeof allGroupBoxes)[0],
+              ): string | null => {
+                for (const m of b.cutListMachineMapping) {
+                  const loc =
+                    m.projectLocationProductQuantity?.location_name
+                      ?.trim()
+                      .toLocaleLowerCase();
+                  if (loc) return loc;
+                }
+                return null;
+              };
 
-            const allocatedSets =
-              allocatedProductSetsByGroup.get(groupName) ?? new Set<string>();
-            allocatedSets.add(productSetKey);
-            allocatedProductSetsByGroup.set(groupName, allocatedSets);
+              const boxesPerProduct = Math.max(1, box.boxes_per_product ?? 1);
+              const currentBoxPosition = Math.max(1, box.box_position ?? 1);
+              const projectTotalSets =
+                groupQuantityLimits.get(normalizedGroupName) ?? 0;
 
-            if (mapping.boxMaster?.factory_out_at != null) {
-              const dispatchedSets =
-                dispatchedProductSetsByGroup.get(groupName) ?? new Set<string>();
-              dispatchedSets.add(productSetKey);
-              dispatchedProductSetsByGroup.set(groupName, dispatchedSets);
-            }
-          }
-
-          const currentBoxProductSetKey =
-            box.product_set_no != null
-              ? `set:${box.product_set_no}`
-              : `box:${box.id}`;
-
-          let totalQuota = 0;
-          let totalDispatched = 0;
-          let boxAddsProductSetTotal = 0;
-
-          for (const [groupName, quota] of targetQuotaByGroup) {
-            const allocatedSets =
-              allocatedProductSetsByGroup.get(groupName) ?? new Set<string>();
-            const dispatchedSets =
-              dispatchedProductSetsByGroup.get(groupName) ?? new Set<string>();
-
-            const boxBelongsToGroup = box.cutListMachineMapping.some(
-              (mapping) =>
-                mapping.cut_list.group_name?.trim().toLocaleLowerCase() ===
-                groupName,
-            );
-
-            // Is this box contributing a product set that is NOT yet in allocated sets?
-            const isNewProductSet =
-              boxBelongsToGroup && !allocatedSets.has(currentBoxProductSetKey);
-            const totalSetsWithThisBox =
-              allocatedSets.size + (isNewProductSet ? 1 : 0);
-
-            const isNewlyDispatchedSet =
-              boxBelongsToGroup && !dispatchedSets.has(currentBoxProductSetKey);
-
-            totalQuota += quota;
-            totalDispatched += dispatchedSets.size;
-            if (isNewlyDispatchedSet) {
-              boxAddsProductSetTotal += 1;
-            }
-
-            if (boxBelongsToGroup && totalSetsWithThisBox > quota) {
-              return validationResponse(
-                0,
-                `${selectedLocation} is full (${allocatedSets.size} of ${quota} products already allocated/packed). This box cannot be dispatched to ${selectedLocation}.`,
+              const groupLocationRows = locationRows.filter(
+                (row) =>
+                  row.group_name.trim().toLocaleLowerCase() === normalizedGroupName,
               );
+
+              // Compute committed sets across other locations
+              let otherLocationsCommittedTotal = 0;
+              const otherLocationsWithDeficit: Array<{
+                locationName: string;
+                deficit: number;
+                sampleBoxName: string;
+              }> = [];
+
+              for (const otherRow of groupLocationRows) {
+                const otherLocName = otherRow.location_name.trim();
+                const normalizedOtherLoc = otherLocName.toLocaleLowerCase();
+                if (normalizedOtherLoc === normalizedSelectedLocation) continue;
+
+                const otherBoxes = allGroupBoxes.filter(
+                  (b) =>
+                    b.id !== box.id &&
+                    getAssignedLocation(b) === normalizedOtherLoc,
+                );
+                const otherPosCounts = Array.from(
+                  { length: boxesPerProduct },
+                  (_, i) => {
+                    const pos = i + 1;
+                    return otherBoxes.filter(
+                      (b) => (b.box_position ?? 1) === pos,
+                    ).length;
+                  },
+                );
+
+                const otherSetsStarted = Math.max(0, ...otherPosCounts);
+                const otherConfiguredQty = Math.max(0, Number(otherRow.qty) || 0);
+                otherLocationsCommittedTotal += Math.max(
+                  otherConfiguredQty,
+                  otherSetsStarted,
+                );
+
+                const otherCountForThisPos = otherBoxes.filter(
+                  (b) => (b.box_position ?? 1) === currentBoxPosition,
+                ).length;
+                const otherDeficit = Math.max(
+                  0,
+                  otherSetsStarted - otherCountForThisPos,
+                );
+                if (otherDeficit > 0) {
+                  const sampleBox = otherBoxes.find(
+                    (b) => (b.box_position ?? 1) !== currentBoxPosition,
+                  );
+                  otherLocationsWithDeficit.push({
+                    locationName: otherLocName,
+                    deficit: otherDeficit,
+                    sampleBoxName: sampleBox?.box_name
+                      ? /^box/i.test(sampleBox.box_name.trim())
+                        ? sampleBox.box_name.trim()
+                        : `Box ${sampleBox.box_name.trim()}`
+                      : "an earlier box",
+                  });
+                }
+              }
+
+              const configuredQuantity = Math.max(0, Number(targetRow.qty) || 0);
+              const effectiveQuota =
+                configuredQuantity > 0
+                  ? configuredQuantity
+                  : Math.max(0, projectTotalSets - otherLocationsCommittedTotal);
+
+              if (effectiveQuota <= 0) {
+                return validationResponse(
+                  0,
+                  `Location "${selectedLocation}" has no available quota for ${currentGroupName}. All ${projectTotalSets} project set(s) are already allocated to other locations.`,
+                );
+              }
+
+              // Target location counts
+              const selectedBoxesBefore = allGroupBoxes.filter(
+                (b) =>
+                  b.id !== box.id &&
+                  getAssignedLocation(b) === normalizedSelectedLocation,
+              );
+
+              const posCountsBefore = Array.from(
+                { length: boxesPerProduct },
+                (_, i) => {
+                  const pos = i + 1;
+                  return selectedBoxesBefore.filter(
+                    (b) => (b.box_position ?? 1) === pos,
+                  ).length;
+                },
+              );
+
+              const currentPosCountBefore = selectedBoxesBefore.filter(
+                (b) => (b.box_position ?? 1) === currentBoxPosition,
+              ).length;
+              const currentPosCountWithThisBox = currentPosCountBefore + 1;
+
+              const posCountsWithThisBox = [...posCountsBefore];
+              posCountsWithThisBox[currentBoxPosition - 1] =
+                currentPosCountWithThisBox;
+
+              const targetSetsStartedWithThisBox = Math.max(
+                ...posCountsWithThisBox,
+              );
+              const targetSetsStartedBefore = Math.max(0, ...posCountsBefore);
+
+              // 1. Target location quota & position limits
+              if (currentPosCountWithThisBox > effectiveQuota) {
+                return validationResponse(
+                  0,
+                  `Location "${selectedLocation}" already has enough boxes of this type (Quota: ${effectiveQuota}).`,
+                );
+              }
+
+              if (targetSetsStartedWithThisBox > effectiveQuota) {
+                return validationResponse(
+                  0,
+                  `Location "${selectedLocation}" is full (Quota: ${effectiveQuota} set${effectiveQuota === 1 ? "" : "s"}).`,
+                );
+              }
+
+              // 2. Cross-location Starvation Check (Prevent orphaning sets started at other locations)
+              if (boxesPerProduct > 1) {
+                const selectedNeededThisPos =
+                  currentPosCountBefore < targetSetsStartedBefore;
+                const totalOtherDeficitForPos =
+                  otherLocationsWithDeficit.reduce(
+                    (sum, d) => sum + d.deficit,
+                    0,
+                  );
+
+                const unallocatedRemainingForPos = allGroupBoxes.filter(
+                  (b) =>
+                    b.id !== box.id &&
+                    getAssignedLocation(b) === null &&
+                    !b.factory_out_at &&
+                    (b.box_position ?? 1) === currentBoxPosition,
+                ).length;
+
+                if (
+                  !selectedNeededThisPos &&
+                  totalOtherDeficitForPos > 0 &&
+                  unallocatedRemainingForPos < totalOtherDeficitForPos
+                ) {
+                  const starvedLoc = otherLocationsWithDeficit[0];
+                  return validationResponse(
+                    0,
+                    `Cannot dispatch ${boxDisplayName} to ${selectedLocation}: ${starvedLoc.locationName} needs this box to complete its set.`,
+                  );
+                }
+              }
+
+              // Align product_set_no for multi-box products at selectedLocation
+              if (boxesPerProduct > 1) {
+                const setNosAtSelectedLocation = Array.from(
+                  new Set(
+                    selectedBoxesBefore
+                      .map((b) => b.product_set_no)
+                      .filter((s): s is number => s != null && s > 0),
+                  ),
+                );
+
+                let matchingOpenSetNo: number | null = null;
+                for (const s of setNosAtSelectedLocation) {
+                  const boxesInSet = selectedBoxesBefore.filter(
+                    (b) => b.product_set_no === s,
+                  );
+                  const hasPosition = boxesInSet.some(
+                    (b) => (b.box_position ?? 1) === currentBoxPosition,
+                  );
+                  if (!hasPosition) {
+                    matchingOpenSetNo = s;
+                    break;
+                  }
+                }
+
+                if (matchingOpenSetNo != null) {
+                  targetProductSetNo = matchingOpenSetNo;
+                } else {
+                  const usedSetNosOtherLocations = new Set(
+                    allGroupBoxes
+                      .filter(
+                        (b) =>
+                          b.id !== box.id &&
+                          getAssignedLocation(b) !== null &&
+                          getAssignedLocation(b) !== normalizedSelectedLocation &&
+                          b.product_set_no != null,
+                      )
+                      .map((b) => b.product_set_no!),
+                  );
+
+                  if (
+                    targetProductSetNo == null ||
+                    usedSetNosOtherLocations.has(targetProductSetNo)
+                  ) {
+                    let nextSetNo = 1;
+                    const allUsedSetNos = new Set(
+                      allGroupBoxes
+                        .filter(
+                          (b) => b.id !== box.id && b.product_set_no != null,
+                        )
+                        .map((b) => b.product_set_no!),
+                    );
+                    while (allUsedSetNos.has(nextSetNo)) {
+                      nextSetNo++;
+                    }
+                    targetProductSetNo = nextSetNo;
+                  }
+                }
+              }
             }
           }
 
-          // If the box (or its product set) was unallocated, bind it to targetRows now that quota is verified
-          const mappingsToBind = (
-            scopedProductSetMappings.length
-              ? scopedProductSetMappings
-              : box.cutListMachineMapping
-          ).filter((mapping) => !mapping.projectLocationProductQuantity);
+          // Bind only the selected box's mappings to the target location.
+          const mappingsToBind = box.cutListMachineMapping.filter(
+            (mapping) => !mapping.projectLocationProductQuantity,
+          );
 
           if (mappingsToBind.length > 0) {
             for (const mapping of mappingsToBind) {
               const groupName = mapping.cut_list.group_name
                 ?.trim()
                 .toLocaleLowerCase();
-              const targetRow = targetRows.find(
+              let targetRow = targetRows.find(
                 (row) =>
                   row.group_name.trim().toLocaleLowerCase() === groupName,
               );
+
+              if (!targetRow && isManualOrNonScanBox && targetRows.length > 0) {
+                targetRow = targetRows[0];
+              }
 
               if (!targetRow) {
                 return validationResponse(
@@ -7691,12 +8048,19 @@ export const markBoxFactoryOutService = async (
 
         const updated = await tx.boxMaster.update({
           where: { id: box_id },
-          data: { factory_out_at: new Date(), factory_out_by: user_id },
+          data: {
+            factory_out_at: new Date(),
+            factory_out_by: user_id,
+            ...(targetProductSetNo != null
+              ? { product_set_no: targetProductSetNo }
+              : {}),
+          },
           select: {
             id: true,
             box_name: true,
             factory_out_at: true,
             factory_out_by: true,
+            product_set_no: true,
           },
         });
 
@@ -13434,6 +13798,9 @@ export const getManualPackingItemsService = async (
       include_in_packing: true,
       scan_pack_validate: false,
       status: "Active",
+      category: {
+        scan_pack_validate: false,
+      },
     },
     select: {
       id: true,
@@ -13826,6 +14193,9 @@ export const addManualPackingItemService = async (
         scan_pack_validate: false,
 
         status: "Active",
+        category: {
+          scan_pack_validate: false,
+        },
       },
 
       select: {
@@ -14267,7 +14637,7 @@ export type ProjectItemScanFilter = "all" | "scanned" | "pending";
 export interface ProjectItemTrackingQuery {
   page: number;
   limit: number;
-  search: string;
+  search?: string;
   scanStatus: ProjectItemScanFilter;
   machineId?: number;
   isDispatch?: boolean;
@@ -14335,10 +14705,10 @@ const getMappingScope = (
 });
 
 const getSearchWhere = (
-  search: string,
+  search: string | undefined | null,
   mappingScope: Prisma.CutListMachineMappingWhereInput,
 ): Prisma.CutListWhereInput | undefined => {
-  const value = search.trim();
+  const value = (search || "").trim();
 
   if (!value) {
     return undefined;
@@ -14819,6 +15189,18 @@ export const getProjectItemTrackingService = async (
   for (const item of candidateCutLists) {
     const rawMappings = item.cutListMachineMapping as MappingRow[];
 
+    // Expand helper for multi-quantity mapping rows (e.g. manual packing for hardware items)
+    const expandMappingRowsByQty = (rows: MappingRow[]): MappingRow[] => {
+      const expanded: MappingRow[] = [];
+      for (const row of rows) {
+        const rowQty = Math.max(1, Number(row.qty ?? 1));
+        for (let i = 0; i < rowQty; i++) {
+          expanded.push(row);
+        }
+      }
+      return expanded;
+    };
+
     // Group mappings by machine to assign to units
     const byMachine = new Map<number, MappingRow[]>();
     for (const m of rawMappings) {
@@ -14831,17 +15213,23 @@ export const getProjectItemTrackingService = async (
       }
     }
 
+    const expandedByMachine = new Map<number, MappingRow[]>();
+    for (const [mId, mMappings] of byMachine) {
+      expandedByMachine.set(mId, expandMappingRowsByQty(mMappings));
+    }
+
     // Identify packaging mappings across all machines for this cutlist item
-    const packagingMappings = rawMappings.filter((m) =>
+    const rawPackagingMappings = rawMappings.filter((m) =>
       Boolean(
         m.box_id ||
         m.boxMaster ||
         (m.machine?.machine_name && /pack/i.test(m.machine.machine_name)),
       ),
     );
+    const packagingMappings = expandMappingRowsByQty(rawPackagingMappings);
 
     const targetMappings = query.machineId
-      ? (byMachine.get(query.machineId) ?? [])
+      ? (expandedByMachine.get(query.machineId) ?? [])
       : query.isDispatch
         ? packagingMappings
         : [];
@@ -14855,7 +15243,7 @@ export const getProjectItemTrackingService = async (
         ? Math.max(itemQty, packagingMappings.length)
         : Math.max(
             itemQty,
-            ...Array.from(byMachine.values()).map((r) => r.length),
+            ...Array.from(expandedByMachine.values()).map((r) => r.length),
             0,
           );
 
@@ -14884,7 +15272,7 @@ export const getProjectItemTrackingService = async (
 
       // Build machine summaries for this unit
       const unitMachines: any[] = [];
-      for (const [mId, mMappings] of byMachine) {
+      for (const [mId, mMappings] of expandedByMachine) {
         const mappingForUnit = mMappings[u] ?? null;
         const fallbackMapping = mMappings[0];
         const mObj = mappingForUnit?.machine ?? fallbackMapping?.machine;

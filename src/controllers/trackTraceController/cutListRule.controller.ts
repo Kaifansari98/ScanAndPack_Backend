@@ -243,4 +243,92 @@ export class CutListRuleController {
       });
     }
   }
+
+  /**
+   * GET /machines/:machine_id/default-rule-template
+   */
+  static async getDefaultRuleTemplate(req: Request, res: Response) {
+    try {
+      const machineId = Number(req.params.machine_id);
+      const vendorId = req.query.vendor_id ? Number(req.query.vendor_id) : undefined;
+
+      if (!machineId || isNaN(machineId)) {
+        return res.status(400).json({ success: false, message: "Invalid machine ID" });
+      }
+      if (!vendorId || isNaN(vendorId)) {
+        return res.status(400).json({ success: false, message: "vendor_id query parameter is required" });
+      }
+
+      const template = await CutListRuleService.getDefaultRuleTemplate(machineId, vendorId);
+      return res.status(200).json({
+        success: true,
+        data: template,
+      });
+    } catch (error: any) {
+      console.error("Controller Error - getDefaultRuleTemplate:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch default rule template",
+      });
+    }
+  }
+
+  /**
+   * POST /vendors/:vendor_id/generate-default-rules
+   */
+  static async generateDefaultRules(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendor_id);
+      const { overwrite, created_by, machine_id } = req.body;
+
+      if (!vendorId || isNaN(vendorId)) {
+        return res.status(400).json({ success: false, message: "Invalid vendor ID" });
+      }
+
+      const result = await CutListRuleService.generateDefaultRules(vendorId, {
+        overwrite: Boolean(overwrite),
+        created_by: created_by ? Number(created_by) : undefined,
+        machine_id: machine_id ? Number(machine_id) : undefined,
+      });
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      console.error("Controller Error - generateDefaultRules:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to generate default rules",
+      });
+    }
+  }
+
+  /**
+   * POST /machines/:machine_id/generate-default-rule
+   */
+  static async generateDefaultRuleForMachine(req: Request, res: Response) {
+    try {
+      const machineId = Number(req.params.machine_id);
+      const { vendor_id, overwrite, created_by } = req.body;
+
+      if (!machineId || isNaN(machineId)) {
+        return res.status(400).json({ success: false, message: "Invalid machine ID" });
+      }
+      if (!vendor_id || isNaN(Number(vendor_id))) {
+        return res.status(400).json({ success: false, message: "vendor_id is required" });
+      }
+
+      const result = await CutListRuleService.generateDefaultRules(Number(vendor_id), {
+        overwrite: overwrite !== undefined ? Boolean(overwrite) : true,
+        created_by: created_by ? Number(created_by) : undefined,
+        machine_id: machineId,
+      });
+
+      return res.status(200).json(result);
+    } catch (error: any) {
+      console.error("Controller Error - generateDefaultRuleForMachine:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to generate default rule for machine",
+      });
+    }
+  }
 }

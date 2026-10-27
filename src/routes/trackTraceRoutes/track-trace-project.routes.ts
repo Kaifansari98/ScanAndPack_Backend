@@ -9,6 +9,7 @@ import {
   getPackagingProjectContextController,
   downloadMultiLocationTemplateController,
   downloadDispatchDocumentController,
+  previewCutlistMachineMappingController,
 } from "../../../src/controllers/trackTraceController/track-trace-project.controller";
 import {
   uploadLocationExcel,
@@ -41,6 +42,11 @@ router.get(
 router.get(
   "/onboard/:vendor_id/machines",
   getActiveMachinesByVendorController
+);
+
+router.post(
+  "/onboard/:vendor_id/preview-machine-mapping",
+  previewCutlistMachineMappingController
 );
 
 router.get(

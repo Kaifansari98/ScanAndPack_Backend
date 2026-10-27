@@ -81,6 +81,9 @@ export type CutListMinAggregateOutputType = {
   elb: string | null
   esl: string | null
   esr: string | null
+  top_drill: string | null
+  bottom_drill: string | null
+  is_drill: string | null
   category_name: string | null
   group_name: string | null
   procurement: string | null
@@ -118,6 +121,9 @@ export type CutListMaxAggregateOutputType = {
   elb: string | null
   esl: string | null
   esr: string | null
+  top_drill: string | null
+  bottom_drill: string | null
+  is_drill: string | null
   category_name: string | null
   group_name: string | null
   procurement: string | null
@@ -155,6 +161,9 @@ export type CutListCountAggregateOutputType = {
   elb: number
   esl: number
   esr: number
+  top_drill: number
+  bottom_drill: number
+  is_drill: number
   category_name: number
   group_name: number
   procurement: number
@@ -226,6 +235,9 @@ export type CutListMinAggregateInputType = {
   elb?: true
   esl?: true
   esr?: true
+  top_drill?: true
+  bottom_drill?: true
+  is_drill?: true
   category_name?: true
   group_name?: true
   procurement?: true
@@ -263,6 +275,9 @@ export type CutListMaxAggregateInputType = {
   elb?: true
   esl?: true
   esr?: true
+  top_drill?: true
+  bottom_drill?: true
+  is_drill?: true
   category_name?: true
   group_name?: true
   procurement?: true
@@ -300,6 +315,9 @@ export type CutListCountAggregateInputType = {
   elb?: true
   esl?: true
   esr?: true
+  top_drill?: true
+  bottom_drill?: true
+  is_drill?: true
   category_name?: true
   group_name?: true
   procurement?: true
@@ -424,6 +442,9 @@ export type CutListGroupByOutputType = {
   elb: string | null
   esl: string | null
   esr: string | null
+  top_drill: string | null
+  bottom_drill: string | null
+  is_drill: string | null
   category_name: string | null
   group_name: string | null
   procurement: string | null
@@ -484,6 +505,9 @@ export type CutListWhereInput = {
   elb?: Prisma.StringNullableFilter<"CutList"> | string | null
   esl?: Prisma.StringNullableFilter<"CutList"> | string | null
   esr?: Prisma.StringNullableFilter<"CutList"> | string | null
+  top_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
+  bottom_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
+  is_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
   category_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   group_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableFilter<"CutList"> | string | null
@@ -528,6 +552,9 @@ export type CutListOrderByWithRelationInput = {
   elb?: Prisma.SortOrderInput | Prisma.SortOrder
   esl?: Prisma.SortOrderInput | Prisma.SortOrder
   esr?: Prisma.SortOrderInput | Prisma.SortOrder
+  top_drill?: Prisma.SortOrderInput | Prisma.SortOrder
+  bottom_drill?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_drill?: Prisma.SortOrderInput | Prisma.SortOrder
   category_name?: Prisma.SortOrderInput | Prisma.SortOrder
   group_name?: Prisma.SortOrderInput | Prisma.SortOrder
   procurement?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -575,6 +602,9 @@ export type CutListWhereUniqueInput = Prisma.AtLeast<{
   elb?: Prisma.StringNullableFilter<"CutList"> | string | null
   esl?: Prisma.StringNullableFilter<"CutList"> | string | null
   esr?: Prisma.StringNullableFilter<"CutList"> | string | null
+  top_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
+  bottom_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
+  is_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
   category_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   group_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableFilter<"CutList"> | string | null
@@ -619,6 +649,9 @@ export type CutListOrderByWithAggregationInput = {
   elb?: Prisma.SortOrderInput | Prisma.SortOrder
   esl?: Prisma.SortOrderInput | Prisma.SortOrder
   esr?: Prisma.SortOrderInput | Prisma.SortOrder
+  top_drill?: Prisma.SortOrderInput | Prisma.SortOrder
+  bottom_drill?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_drill?: Prisma.SortOrderInput | Prisma.SortOrder
   category_name?: Prisma.SortOrderInput | Prisma.SortOrder
   group_name?: Prisma.SortOrderInput | Prisma.SortOrder
   procurement?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -664,6 +697,9 @@ export type CutListScalarWhereWithAggregatesInput = {
   elb?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   esl?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   esr?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
+  top_drill?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
+  bottom_drill?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
+  is_drill?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   category_name?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   group_name?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
@@ -697,6 +733,9 @@ export type CutListCreateInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -740,6 +779,9 @@ export type CutListUncheckedCreateInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -776,6 +818,9 @@ export type CutListUpdateInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -819,6 +864,9 @@ export type CutListUncheckedUpdateInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -859,6 +907,9 @@ export type CutListCreateManyInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -892,6 +943,9 @@ export type CutListUpdateManyMutationInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -928,6 +982,9 @@ export type CutListUncheckedUpdateManyInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -975,6 +1032,9 @@ export type CutListCountOrderByAggregateInput = {
   elb?: Prisma.SortOrder
   esl?: Prisma.SortOrder
   esr?: Prisma.SortOrder
+  top_drill?: Prisma.SortOrder
+  bottom_drill?: Prisma.SortOrder
+  is_drill?: Prisma.SortOrder
   category_name?: Prisma.SortOrder
   group_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
@@ -1028,6 +1088,9 @@ export type CutListMaxOrderByAggregateInput = {
   elb?: Prisma.SortOrder
   esl?: Prisma.SortOrder
   esr?: Prisma.SortOrder
+  top_drill?: Prisma.SortOrder
+  bottom_drill?: Prisma.SortOrder
+  is_drill?: Prisma.SortOrder
   category_name?: Prisma.SortOrder
   group_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
@@ -1065,6 +1128,9 @@ export type CutListMinOrderByAggregateInput = {
   elb?: Prisma.SortOrder
   esl?: Prisma.SortOrder
   esr?: Prisma.SortOrder
+  top_drill?: Prisma.SortOrder
+  bottom_drill?: Prisma.SortOrder
+  is_drill?: Prisma.SortOrder
   category_name?: Prisma.SortOrder
   group_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
@@ -1336,6 +1402,9 @@ export type CutListCreateWithoutVendorInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1377,6 +1446,9 @@ export type CutListUncheckedCreateWithoutVendorInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1446,6 +1518,9 @@ export type CutListScalarWhereInput = {
   elb?: Prisma.StringNullableFilter<"CutList"> | string | null
   esl?: Prisma.StringNullableFilter<"CutList"> | string | null
   esr?: Prisma.StringNullableFilter<"CutList"> | string | null
+  top_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
+  bottom_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
+  is_drill?: Prisma.StringNullableFilter<"CutList"> | string | null
   category_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   group_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableFilter<"CutList"> | string | null
@@ -1479,6 +1554,9 @@ export type CutListCreateWithoutProjectInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1520,6 +1598,9 @@ export type CutListUncheckedCreateWithoutProjectInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1582,6 +1663,9 @@ export type CutListCreateWithoutLeadInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1623,6 +1707,9 @@ export type CutListUncheckedCreateWithoutLeadInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1685,6 +1772,9 @@ export type CutListCreateWithoutCutListMachineMappingInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1727,6 +1817,9 @@ export type CutListUncheckedCreateWithoutCutListMachineMappingInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1778,6 +1871,9 @@ export type CutListUpdateWithoutCutListMachineMappingInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1820,6 +1916,9 @@ export type CutListUncheckedUpdateWithoutCutListMachineMappingInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1855,6 +1954,9 @@ export type CutListCreateWithoutDefectedItemsInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1897,6 +1999,9 @@ export type CutListUncheckedCreateWithoutDefectedItemsInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -1948,6 +2053,9 @@ export type CutListUpdateWithoutDefectedItemsInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1990,6 +2098,9 @@ export type CutListUncheckedUpdateWithoutDefectedItemsInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2025,6 +2136,9 @@ export type CutListCreateWithoutCompletionPhotosInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2067,6 +2181,9 @@ export type CutListUncheckedCreateWithoutCompletionPhotosInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2118,6 +2235,9 @@ export type CutListUpdateWithoutCompletionPhotosInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2160,6 +2280,9 @@ export type CutListUncheckedUpdateWithoutCompletionPhotosInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2195,6 +2318,9 @@ export type CutListCreateWithoutCategoryInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2237,6 +2363,9 @@ export type CutListUncheckedCreateWithoutCategoryInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2301,6 +2430,9 @@ export type CutListCreateManyVendorInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2334,6 +2466,9 @@ export type CutListUpdateWithoutVendorInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2375,6 +2510,9 @@ export type CutListUncheckedUpdateWithoutVendorInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2414,6 +2552,9 @@ export type CutListUncheckedUpdateManyWithoutVendorInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2450,6 +2591,9 @@ export type CutListCreateManyProjectInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2483,6 +2627,9 @@ export type CutListUpdateWithoutProjectInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2524,6 +2671,9 @@ export type CutListUncheckedUpdateWithoutProjectInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2563,6 +2713,9 @@ export type CutListUncheckedUpdateManyWithoutProjectInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2599,6 +2752,9 @@ export type CutListCreateManyLeadInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2632,6 +2788,9 @@ export type CutListUpdateWithoutLeadInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2673,6 +2832,9 @@ export type CutListUncheckedUpdateWithoutLeadInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2712,6 +2874,9 @@ export type CutListUncheckedUpdateManyWithoutLeadInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2749,6 +2914,9 @@ export type CutListCreateManyCategoryInput = {
   elb?: string | null
   esl?: string | null
   esr?: string | null
+  top_drill?: string | null
+  bottom_drill?: string | null
+  is_drill?: string | null
   category_name?: string | null
   group_name?: string | null
   procurement?: string | null
@@ -2781,6 +2949,9 @@ export type CutListUpdateWithoutCategoryInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2823,6 +2994,9 @@ export type CutListUncheckedUpdateWithoutCategoryInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2862,6 +3036,9 @@ export type CutListUncheckedUpdateManyWithoutCategoryInput = {
   elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  top_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bottom_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_drill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2947,6 +3124,9 @@ export type CutListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   elb?: boolean
   esl?: boolean
   esr?: boolean
+  top_drill?: boolean
+  bottom_drill?: boolean
+  is_drill?: boolean
   category_name?: boolean
   group_name?: boolean
   procurement?: boolean
@@ -2992,6 +3172,9 @@ export type CutListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   elb?: boolean
   esl?: boolean
   esr?: boolean
+  top_drill?: boolean
+  bottom_drill?: boolean
+  is_drill?: boolean
   category_name?: boolean
   group_name?: boolean
   procurement?: boolean
@@ -3033,6 +3216,9 @@ export type CutListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   elb?: boolean
   esl?: boolean
   esr?: boolean
+  top_drill?: boolean
+  bottom_drill?: boolean
+  is_drill?: boolean
   category_name?: boolean
   group_name?: boolean
   procurement?: boolean
@@ -3074,6 +3260,9 @@ export type CutListSelectScalar = {
   elb?: boolean
   esl?: boolean
   esr?: boolean
+  top_drill?: boolean
+  bottom_drill?: boolean
+  is_drill?: boolean
   category_name?: boolean
   group_name?: boolean
   procurement?: boolean
@@ -3088,7 +3277,7 @@ export type CutListSelectScalar = {
   image_key?: boolean
 }
 
-export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "unique_code_2" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at" | "elf" | "elb" | "esl" | "esr" | "category_name" | "group_name" | "procurement" | "weight" | "category_id" | "use_in_assembled_packing" | "include_in_packing" | "scan_pack_validate" | "custom_packing_group" | "no_of_qty_in_boxes" | "fabrication" | "image_key", ExtArgs["result"]["cutList"]>
+export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "unique_code_2" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at" | "elf" | "elb" | "esl" | "esr" | "top_drill" | "bottom_drill" | "is_drill" | "category_name" | "group_name" | "procurement" | "weight" | "category_id" | "use_in_assembled_packing" | "include_in_packing" | "scan_pack_validate" | "custom_packing_group" | "no_of_qty_in_boxes" | "fabrication" | "image_key", ExtArgs["result"]["cutList"]>
 export type CutListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
@@ -3146,6 +3335,9 @@ export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     elb: string | null
     esl: string | null
     esr: string | null
+    top_drill: string | null
+    bottom_drill: string | null
+    is_drill: string | null
     category_name: string | null
     group_name: string | null
     procurement: string | null
@@ -3610,6 +3802,9 @@ export interface CutListFieldRefs {
   readonly elb: Prisma.FieldRef<"CutList", 'String'>
   readonly esl: Prisma.FieldRef<"CutList", 'String'>
   readonly esr: Prisma.FieldRef<"CutList", 'String'>
+  readonly top_drill: Prisma.FieldRef<"CutList", 'String'>
+  readonly bottom_drill: Prisma.FieldRef<"CutList", 'String'>
+  readonly is_drill: Prisma.FieldRef<"CutList", 'String'>
   readonly category_name: Prisma.FieldRef<"CutList", 'String'>
   readonly group_name: Prisma.FieldRef<"CutList", 'String'>
   readonly procurement: Prisma.FieldRef<"CutList", 'String'>
