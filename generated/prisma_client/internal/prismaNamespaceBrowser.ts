@@ -2496,6 +2496,7 @@ export type CutlistHeadersMappingScalarFieldEnum = (typeof CutlistHeadersMapping
 
 
 export const CutListScalarFieldEnum = {
+  source_document_id: 'source_document_id',
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',

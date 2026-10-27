@@ -125,6 +125,7 @@ export class MetalCutlistService {
     parts: MetalCutlistPartInput[],
     images: Express.Multer.File[],
     instanceId?: number | null,
+    sourceDocumentId?: number | null,
   ) {
     const user = await prisma.userMaster.findFirst({
       where: { id: createdBy, vendor_id: vendorId },
@@ -149,8 +150,12 @@ export class MetalCutlistService {
     const result = await prisma.$transaction(async (tx) => {
       // Serialize Metalwork submissions for this lead to avoid duplicate projects.
       await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+      if (sourceDocumentId) {
+        const source = await tx.leadDocuments.findFirst({ where: { id: sourceDocumentId, vendor_id: vendorId, lead_id: leadId, product_structure_instance_id: instanceId ?? null, is_deleted: false, documentType: { tag: "Type 38" } } });
+        if (!source) throw new MetalCutlistError("Source file not found for this instance", 400);
+      }
       const existingProject = await tx.projectMaster.findFirst({
-        where: leadProjectWhere(vendorId, leadId, instanceId),
+        where: { ...leadProjectWhere(vendorId, leadId, instanceId), instance_id: instanceId ?? null },
         orderBy: { id: "desc" },
         select: { id: true, unique_project_id: true, project_name: true },
       });
@@ -211,6 +216,7 @@ export class MetalCutlistService {
           status: "Active",
           created_by: createdBy,
           fabrication: FabricationType.METALWORK,
+          source_document_id: sourceDocumentId ?? null,
           image_key: part.image_index === null ? null : imageKeys[part.image_index],
         })),
         select: { id: true },

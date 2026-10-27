@@ -131,6 +131,7 @@ export const createProjectController = async (
       leadId: parsedLeadId,
 
       instanceId: instance_id ? Number(instance_id) : null,
+      sourceDocumentId: Number(req.body.source_document_id) || null,
 
       fabrication: targetFabrication,
 

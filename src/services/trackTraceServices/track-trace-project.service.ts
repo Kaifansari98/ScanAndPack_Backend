@@ -1041,6 +1041,7 @@ export type CreateProjectServicePayload = {
   /** LeadProductStructureInstance the project belongs to (one project per instance). */
   instanceId?: number | null;
   fabrication?: "WOODWORK" | "METALWORK";
+  sourceDocumentId?: number | null;
 
   order_no?: string;
   client_name?: string;
@@ -1945,6 +1946,7 @@ export const createProjectService = async (
     vendorId,
     leadId,
     instanceId,
+    sourceDocumentId,
     fabrication,
     order_no,
     client_name,
@@ -2512,6 +2514,11 @@ export const createProjectService = async (
     */
     const result = await prisma.$transaction(
       async (tx) => {
+        if (lead_id) await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${lead_id} AND vendor_id = ${vendor.id} FOR UPDATE`;
+        if (sourceDocumentId) {
+          const source = await tx.leadDocuments.findFirst({ where: { id: sourceDocumentId, vendor_id: vendor.id, lead_id, product_structure_instance_id: instance_id, is_deleted: false, documentType: { tag: "Type 38" } } });
+          if (!source || !lead_id) throw new Error("Source file not found for this instance");
+        }
         const project = await tx.projectMaster.create({
           data: {
             project_name: validPayload.projectName,
@@ -2686,6 +2693,7 @@ export const createProjectService = async (
               project_id: project.id,
               vendor_id: vendor.id,
               fabrication: targetFabrication,
+              source_document_id: sourceDocumentId ?? null,
               description: item.name,
               length: item.l1 == null ? null : Number(item.l1),
               width: item.l2 == null ? null : Number(item.l2),

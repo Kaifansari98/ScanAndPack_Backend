@@ -3225,6 +3225,7 @@ model CutlistHeadersMapping {
 }
 
 model CutList {
+  source_document_id       Int?
   id                       Int                      @id @default(autoincrement())
   project_id               Int
   vendor_id                Int
@@ -3270,6 +3271,7 @@ model CutList {
   defectedItems            DefectedItem[]
   category                 ProjectCategoriesMaster? @relation("CutListCategory", fields: [category_id], references: [id], onDelete: SetNull)
 
+  @@index([source_document_id])
   @@index([unique_code])
   @@index([category_id])
   @@index([vendor_id, unique_code, project_id], map: "idx_cutlist_vendor_code_project")

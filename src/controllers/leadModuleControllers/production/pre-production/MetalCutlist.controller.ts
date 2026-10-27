@@ -79,7 +79,7 @@ export class MetalCutlistController {
 
       const parts = validateMetalCutlistParts(rawParts, images.length);
       const instanceId = Number(req.body.instance_id) || null;
-      const data = await service.saveMetalCutlist(vendorId, leadId, createdBy, parts, images, instanceId);
+      const data = await service.saveMetalCutlist(vendorId, leadId, createdBy, parts, images, instanceId, Number(req.body.source_document_id) || null);
 
       return res.status(201).json({
         success: true,

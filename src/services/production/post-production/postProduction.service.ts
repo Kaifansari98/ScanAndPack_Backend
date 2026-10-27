@@ -882,24 +882,29 @@ export class PostProductionService {
         { statusCode: 404 },
       );
 
-    const uploadedDocs = [];
+    const uploadedDocs = await prisma.$transaction(async (tx) => {
+      await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+      const uploaded = [];
 
-    for (const file of files) {
-      const doc = await prisma.leadDocuments.create({
-        data: {
-          doc_og_name: file.originalName,
-          doc_sys_name: file.sysName,
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          created_by: userId,
-          doc_type_id: docType.id,
-          product_structure_instance_id:
-            typeof instanceId !== "undefined" ? instanceId : null,
-        },
-      });
-      uploadedDocs.push(doc);
-    }
+      for (const file of files) {
+        const doc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            created_by: userId,
+            doc_type_id: docType.id,
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
+          },
+        });
+        uploaded.push(doc);
+      }
+
+      return uploaded;
+    });
 
     if (accountId) {
       let instanceTitle: string | undefined;
