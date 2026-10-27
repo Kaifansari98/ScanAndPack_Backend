@@ -1126,6 +1126,17 @@ export class PostProductionService {
       throw new Error("Product structure instance not found for this lead");
     }
 
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true, is_tracktrace_enabled: true },
+    });
+    if (vendor?.handlesLargeScaleProjects && vendor?.is_tracktrace_enabled) {
+      const readiness = await this.checkPreProductionFilesReady(vendorId, leadId, instanceId);
+      if (!readiness.readyForUnderProduction) {
+        throw Object.assign(new Error("Upload a Woodwork or Metalwork file in Pre-Production Files for this instance before marking production completed."), { statusCode: 400 });
+      }
+    }
+
     const updatedInstance = await prisma.leadProductStructureInstance.update({
       where: { id: instanceId },
       data: {
