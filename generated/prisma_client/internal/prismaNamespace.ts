@@ -19990,6 +19990,7 @@ export const SiteReadinessScalarFieldEnum = {
   vendor_id: 'vendor_id',
   account_id: 'account_id',
   lead_id: 'lead_id',
+  instance_id: 'instance_id',
   type: 'type',
   remark: 'remark',
   value: 'value',

@@ -22,10 +22,12 @@ export class LeadStatsService {
 
     const vendorData = await prisma.vendorMaster.findUnique({
       where: { id: vendorId },
-      select: { is_online_lead_feature_enabled: true },
+      select: { is_online_lead_feature_enabled: true, handlesLargeScaleProjects: true },
     });
     const isOnlineLeadFeatureEnabled =
       vendorData?.is_online_lead_feature_enabled === true;
+    // Large-scale vendors move each product instance through the stages on its own.
+    const isLargeScale = vendorData?.handlesLargeScaleProjects === true;
 
     // ✅ Total My Tasks count (for current user)
     let totalMyTasks: number | null = null;
@@ -405,18 +407,31 @@ export class LeadStatsService {
     const totalClientApprovalStageLeads = await countByTag("Type 7");
     const instanceStageTags = ["Type 8", "Type 9", "Type 10"];
 
+    // An instance is in Production while its own stage is Type 8-10, or, before it
+    // has its own stage, while its lead is. Large-scale instances that already moved
+    // on (e.g. to Ready To Dispatch) must not stay counted here.
+    const productionStageWhere: any = isLargeScale
+      ? {
+          is_archived: false,
+          OR: [
+            { stageStatus: { tag: { in: instanceStageTags } } },
+            {
+              stage_status_id: null,
+              lead: { statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } } },
+            },
+          ],
+        }
+      : { lead: { statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } } } };
+
     const totalTechCheckStageLeads =
       await prisma.leadProductStructureInstance.count({
         where: {
           vendor_id: vendorId,
-          OR: [
-            { is_tech_check_completed: false },
-            { is_tech_check_completed: null },
+          AND: [
+            { OR: [{ is_tech_check_completed: false }, { is_tech_check_completed: null }] },
+            { lead: baseLeadScope },
+            productionStageWhere,
           ],
-          lead: {
-            ...baseLeadScope,
-            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
-          },
         },
       });
 
@@ -425,14 +440,11 @@ export class LeadStatsService {
         where: {
           vendor_id: vendorId,
           is_tech_check_completed: true,
-          OR: [
-            { is_order_login_completed: false },
-            { is_order_login_completed: null },
+          AND: [
+            { OR: [{ is_order_login_completed: false }, { is_order_login_completed: null }] },
+            { lead: baseLeadScope },
+            productionStageWhere,
           ],
-          lead: {
-            ...baseLeadScope,
-            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
-          },
         },
       });
 
@@ -442,71 +454,78 @@ export class LeadStatsService {
           vendor_id: vendorId,
           is_tech_check_completed: true,
           is_order_login_completed: true,
-          lead: {
-            ...baseLeadScope,
-            statusType: { vendor_id: vendorId, tag: { in: instanceStageTags } },
-          },
+          AND: [{ lead: baseLeadScope }, productionStageWhere],
         },
       });
-    const totalReadyToDispatchStageLeads = await countByTag("Type 11");
-    const totalSiteReadinessStageLeads = await countByTag("Type 12");
-    const totalDispatchPlanningStageLeads = await countByTag("Type 13");
-    const totalDispatchStageLeads = await countByTag("Type 14");
-    const totalUnderInstallationStageLeads = await prisma.leadMaster.count({
-      where: {
-        ...baseLeadScope,
-        ...(postDispatchHiddenLeadCodes.length > 0
-          ? { lead_code: { notIn: postDispatchHiddenLeadCodes } }
-          : {}),
 
-        // Stage Filter (Type 15)
-        statusType: {
-          vendor_id: vendorId,
-          tag: "Type 15",
-        },
+    // Stages after Production (Type 11+). Large-scale vendors count instance-wise, the
+    // same way the stage lists show them: an instance in its own stage, an instance
+    // without one by its lead's stage, and a lead without instances as one row.
+    const countPostProductionStage = async (statusTag: string, leadWhere: any = {}) => {
+      if (!isLargeScale) return countByTag(statusTag, leadWhere);
 
-        // Hide ONLY when usable completed + misc still pending
-        NOT: {
-          AND: [
-            { usable_handover_completed: true },
-            {
-              miscellaneousMaster: {
-                some: { is_resolved: false },
+      const [instances, leadsWithoutInstances] = await Promise.all([
+        prisma.leadProductStructureInstance.count({
+          where: {
+            vendor_id: vendorId,
+            is_archived: false,
+            AND: [
+              { lead: { ...baseLeadScope, ...leadWhere } },
+              {
+                OR: [
+                  { stageStatus: { tag: statusTag } },
+                  {
+                    stage_status_id: null,
+                    lead: { statusType: { vendor_id: vendorId, tag: statusTag } },
+                  },
+                ],
               },
-            },
-          ],
-        },
-      },
-    });
-    const totalFinalhandoverStageLeads = await prisma.leadMaster.count({
-      where: {
-        ...baseLeadScope,
-        ...(installationHiddenLeadCodes.length > 0
-          ? { lead_code: { notIn: installationHiddenLeadCodes } }
-          : {}),
-        statusType: { vendor_id: vendorId, tag: "Type 16" },
-      },
-    });
-    const totalProjectCompletedStageLeads = await prisma.leadMaster.count({
-      where: {
-        ...baseLeadScope,
-        ...(installationHiddenLeadCodes.length > 0
-          ? { lead_code: { notIn: installationHiddenLeadCodes } }
-          : {}),
-        statusType: { vendor_id: vendorId, tag: "Type 17" },
-      },
-    });
-    const totalServicingStageLeads = await prisma.leadMaster.count({
-      where: {
-        ...baseLeadScope,
-        ...(installationHiddenLeadCodes.length > 0
-          ? { lead_code: { notIn: installationHiddenLeadCodes } }
-          : {}),
-        statusType: { vendor_id: vendorId, tag: "Type 17" },
-        serviceSchedules: {
-          some: {
-            status: "open",
+            ],
           },
+        }),
+        countByTag(statusTag, { ...leadWhere, productStructureInstances: { none: {} } }),
+      ]);
+      return instances + leadsWithoutInstances;
+    };
+
+    const totalReadyToDispatchStageLeads = await countPostProductionStage("Type 11");
+    const totalSiteReadinessStageLeads = await countPostProductionStage("Type 12");
+    const totalDispatchPlanningStageLeads = await countPostProductionStage("Type 13");
+    const totalDispatchStageLeads = await countPostProductionStage("Type 14");
+    const totalUnderInstallationStageLeads = await countPostProductionStage("Type 15", {
+      ...(postDispatchHiddenLeadCodes.length > 0
+        ? { lead_code: { notIn: postDispatchHiddenLeadCodes } }
+        : {}),
+
+      // Hide ONLY when usable completed + misc still pending
+      NOT: {
+        AND: [
+          { usable_handover_completed: true },
+          {
+            miscellaneousMaster: {
+              some: { is_resolved: false },
+            },
+          },
+        ],
+      },
+    });
+    const totalFinalhandoverStageLeads = await countPostProductionStage("Type 16", {
+      ...(installationHiddenLeadCodes.length > 0
+        ? { lead_code: { notIn: installationHiddenLeadCodes } }
+        : {}),
+    });
+    const totalProjectCompletedStageLeads = await countPostProductionStage("Type 17", {
+      ...(installationHiddenLeadCodes.length > 0
+        ? { lead_code: { notIn: installationHiddenLeadCodes } }
+        : {}),
+    });
+    const totalServicingStageLeads = await countPostProductionStage("Type 17", {
+      ...(installationHiddenLeadCodes.length > 0
+        ? { lead_code: { notIn: installationHiddenLeadCodes } }
+        : {}),
+      serviceSchedules: {
+        some: {
+          status: "open",
         },
       },
     });

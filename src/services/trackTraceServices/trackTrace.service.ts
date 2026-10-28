@@ -2704,73 +2704,102 @@ export const check_defect = async (payload: TrackTracePayload) => {
   }
 };
 
-export const updateProjectStatus = async (
-  project_id: number,
-  current_status: string,
-) => {
+export const isProjectTrackTraceCompleted = async (
+  projectId: number,
+): Promise<boolean> => {
   try {
-    const projectId = Number(project_id);
-
-    const statusLower = (current_status || "").trim().toLowerCase();
-
-    if (statusLower === "not started") {
-      return await prisma.projectMaster.update({
-        where: {
-          id: projectId,
+    const [project, boxes, activeCutLists] = await Promise.all([
+      prisma.projectMaster.findUnique({
+        where: { id: projectId },
+        select: {
+          id: true,
+          isDeleted: true,
+          project_status: true,
+          vendor_id: true,
+          track_trace_status: true,
         },
-        data: {
-          track_trace_status: "Started",
-          track_started_at: new Date(),
+      }),
+      prisma.boxMaster.findMany({
+        where: { project_id: projectId, is_deleted: false },
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+          factory_out_at: true,
+          site_in_at: true,
         },
-      });
-    }
-
-    if (statusLower === "started") {
-      const pendingCount = await getPendingCutListMachineMappings(projectId);
-
-      if (pendingCount === 0) {
-        return await prisma.projectMaster.update({
-          where: {
-            id: projectId,
+      }),
+      prisma.cutList.findMany({
+        where: { project_id: projectId, status: "Active" },
+        select: {
+          id: true,
+          qty: true,
+          include_in_packing: true,
+          scan_pack_validate: true,
+          category: {
+            select: {
+              scan_pack_validate: true,
+            },
           },
-          data: {
-            track_trace_status: "Completed",
-            track_completed_at: new Date(),
-          },
-        });
+        },
+      }),
+    ]);
+
+    if (!project || project.isDeleted) return false;
+    if (activeCutLists.length === 0 && boxes.length === 0) return false;
+
+    // Case 1: Boxes exist in the project
+    if (boxes.length > 0) {
+      const allBoxesPacked = boxes.every(
+        (b) => String(b.box_status).toLowerCase() === "packed",
+      );
+      const allBoxesFactoryOut = boxes.every((b) => b.factory_out_at !== null);
+      const allBoxesSiteIn = boxes.every((b) => b.site_in_at !== null);
+
+      if (!allBoxesPacked || !allBoxesFactoryOut || !allBoxesSiteIn) {
+        return false;
       }
 
-      return await prisma.projectMaster.findUnique({
+      // Check that all items required for packing have been packed into boxes
+      const itemsRequiringPacking = activeCutLists.filter(
+        (item) => item.include_in_packing !== false,
+      );
+      const totalRequiredQty = itemsRequiringPacking.reduce(
+        (sum, item) => sum + Math.max(0, Number(item.qty || 0)),
+        0,
+      );
+
+      const packedBoxMappings = await prisma.cutListMachineMapping.findMany({
         where: {
-          id: projectId,
+          project_id: projectId,
+          box_id: { in: boxes.map((b) => b.id) },
+          actual_in_at: { not: null },
+        },
+        select: {
+          id: true,
+          qty: true,
         },
       });
-    }
 
-    if (statusLower === "completed") {
-      const pendingCount = await getPendingCutListMachineMappings(projectId);
+      const totalPackedQty = packedBoxMappings.reduce(
+        (sum, m) => sum + Math.max(0, Number(m.qty ?? 1)),
+        0,
+      );
 
-      if (pendingCount > 0) {
-        return await prisma.projectMaster.update({
-          where: {
-            id: projectId,
-          },
-          data: {
-            track_trace_status: "Started",
-            track_completed_at: null,
-          },
-        });
+      if (totalRequiredQty > 0 && totalPackedQty < totalRequiredQty) {
+        return false;
       }
 
-      return await prisma.projectMaster.findUnique({
-        where: {
-          id: projectId,
-        },
-      });
+      return true;
     }
+
+    // Case 2: No boxes created in project (only machine scanning)
+    const pendingMachineMappingsCount =
+      await getPendingCutListMachineMappings(projectId);
+    return pendingMachineMappingsCount === 0;
   } catch (error) {
-    console.error("Error updating project:", error);
-    throw error;
+    console.error("Error in isProjectTrackTraceCompleted:", error);
+    return false;
   }
 };
 
@@ -2778,16 +2807,140 @@ export const getPendingCutListMachineMappings = async (project_id: number) => {
   try {
     const projectId = Number(project_id);
 
-    const count = await prisma.cutListMachineMapping.count({
+    // 1. Pending scans on normal scan-pack validated items
+    const pendingScansCount = await prisma.cutListMachineMapping.count({
       where: {
         project_id: projectId,
+        expected_in: true,
+        is_optional: false,
         actual_in_at: null,
+        cut_list: {
+          status: "Active",
+          scan_pack_validate: true,
+        },
       },
     });
 
-    return count;
+    // 2. Pending packing on manual items
+    const manualCutLists = await prisma.cutList.findMany({
+      where: {
+        project_id: projectId,
+        status: "Active",
+        include_in_packing: true,
+        OR: [
+          { scan_pack_validate: false },
+          {
+            scan_pack_validate: null,
+            category: { scan_pack_validate: false },
+          },
+        ],
+      },
+      select: {
+        id: true,
+        qty: true,
+      },
+    });
+
+    let manualPendingCount = 0;
+    if (manualCutLists.length > 0) {
+      const packedManualMappings = await prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id: projectId,
+          cut_list_id: { in: manualCutLists.map((m) => m.id) },
+          box_id: { not: null },
+          actual_in_at: { not: null },
+        },
+        select: {
+          cut_list_id: true,
+          qty: true,
+        },
+      });
+
+      const packedQtyByCutList = new Map<number, number>();
+      for (const m of packedManualMappings) {
+        packedQtyByCutList.set(
+          m.cut_list_id,
+          (packedQtyByCutList.get(m.cut_list_id) ?? 0) +
+            Math.max(0, Number(m.qty ?? 0)),
+        );
+      }
+
+      for (const item of manualCutLists) {
+        const itemQty = Math.max(0, Number(item.qty || 0));
+        const packedQty = packedQtyByCutList.get(item.id) ?? 0;
+        if (packedQty < itemQty) {
+          manualPendingCount += itemQty - packedQty;
+        }
+      }
+    }
+
+    return pendingScansCount + manualPendingCount;
   } catch (error) {
     console.error("Error fetching pending machine mappings:", error);
+    throw error;
+  }
+};
+
+export const updateProjectStatus = async (
+  project_id: number,
+  current_status?: string,
+) => {
+  try {
+    const projectId = Number(project_id);
+    if (!projectId) return null;
+
+    const project = await prisma.projectMaster.findUnique({
+      where: { id: projectId },
+      select: { id: true, track_trace_status: true },
+    });
+
+    if (!project) return null;
+
+    const statusLower = (
+      current_status ||
+      project.track_trace_status ||
+      ""
+    )
+      .trim()
+      .toLowerCase();
+
+    if (statusLower === "not started") {
+      return await prisma.projectMaster.update({
+        where: { id: projectId },
+        data: {
+          track_trace_status: "Started",
+          track_started_at: new Date(),
+        },
+      });
+    }
+
+    const isCompleted = await isProjectTrackTraceCompleted(projectId);
+
+    if (isCompleted) {
+      if (statusLower !== "completed") {
+        return await prisma.projectMaster.update({
+          where: { id: projectId },
+          data: {
+            track_trace_status: "Completed",
+            track_completed_at: new Date(),
+          },
+        });
+      }
+      return project;
+    } else {
+      if (statusLower === "completed") {
+        return await prisma.projectMaster.update({
+          where: { id: projectId },
+          data: {
+            track_trace_status: "Started",
+            track_completed_at: null,
+          },
+        });
+      }
+      return project;
+    }
+  } catch (error) {
+    console.error("Error updating project status:", error);
     throw error;
   }
 };
@@ -8070,6 +8223,12 @@ export const markBoxFactoryOutService = async (
       { isolationLevel: Prisma.TransactionIsolationLevel.Serializable },
     );
 
+    try {
+      await updateProjectStatus(project_id);
+    } catch (statusErr) {
+      console.error("Error updating project status in markBoxFactoryOutService:", statusErr);
+    }
+
     return result;
   } catch (error) {
     console.error("Error in markBoxFactoryOutService:", error);
@@ -8120,6 +8279,12 @@ export const markBoxSiteInService = async (
       },
       select: { id: true, box_name: true, site_in_at: true, site_in_by: true },
     });
+
+    try {
+      await updateProjectStatus(project_id);
+    } catch (statusErr) {
+      console.error("Error updating project status in markBoxSiteInService:", statusErr);
+    }
 
     return validationResponse(1, "Box marked as site in successfully", updated);
   } catch (error) {
@@ -8235,6 +8400,12 @@ export const revertBoxFactoryOutService = async (
 
       return { updatedBox, log };
     });
+
+    try {
+      await updateProjectStatus(project_id);
+    } catch (statusErr) {
+      console.error("Error updating project status in revertBoxFactoryOutService:", statusErr);
+    }
 
     return validationResponse(1, "Factory out reverted successfully", result);
   } catch (error) {
@@ -9290,8 +9461,8 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [packagingMachine, manualCutListItems] = await Promise.all([
-      prisma.machineMaster.findFirst({
+    const [packagingMachines, manualCutListItems] = await Promise.all([
+      prisma.machineMaster.findMany({
         where: {
           vendor_id,
           machine_type_id: 18,
@@ -9300,6 +9471,7 @@ export const getProjectDetailService = async (
           id: true,
           machine_name: true,
           sequence_no: true,
+          status: true,
           machineType: {
             select: {
               machine_type: true,
@@ -9316,8 +9488,16 @@ export const getProjectDetailService = async (
           project_id,
           vendor_id,
           include_in_packing: true,
-          scan_pack_validate: false,
           status: "Active",
+          OR: [
+            { scan_pack_validate: false },
+            {
+              scan_pack_validate: null,
+              category: {
+                scan_pack_validate: false,
+              },
+            },
+          ],
         },
         select: {
           id: true,
@@ -9332,12 +9512,27 @@ export const getProjectDetailService = async (
           width: true,
           thickness: true,
           weight: true,
+          scan_pack_validate: true,
+          category: {
+            select: {
+              scan_pack_validate: true,
+            },
+          },
         },
         orderBy: {
           id: "asc",
         },
       }),
     ]);
+
+    const packagingMachine =
+      packagingMachines.find((m) => m.status === "ACTIVE") ??
+      packagingMachines[0] ??
+      null;
+
+    const packagingMachineIdSet = new Set(
+      packagingMachines.map((m) => Number(m.id)),
+    );
 
     const manualCutListIds = new Set<number>(
       manualCutListItems.map((item) => item.id),
@@ -9824,8 +10019,9 @@ export const getProjectDetailService = async (
         });
 
         const isPackagingMachine =
-          packagingMachine &&
-          Number(machineRow.machine_id) === Number(packagingMachine.id);
+          packagingMachineIdSet.has(Number(machineRow.machine_id)) ||
+          (packagingMachine &&
+            Number(machineRow.machine_id) === Number(packagingMachine.id));
 
         let total = 0;
         let scanned = 0;
@@ -9957,6 +10153,7 @@ export const getProjectDetailService = async (
           select: {
             id: true,
             machine_name: true,
+            machine_type_id: true,
           },
         },
 
@@ -10286,10 +10483,14 @@ export const getProjectDetailService = async (
       |--------------------------------------------------------------------------
       */
 
+      const isPackagingRow = (row: (typeof itemMappings)[number]) =>
+        row.box_id !== null ||
+        row.row_created_source === "Manual" ||
+        packagingMachineIdSet.has(Number(row.machine_id)) ||
+        (row as any).machine?.machine_type_id === 18;
+
       const nonPackagingRows = itemMappings.filter(
-        (row) =>
-          !packagingMachine ||
-          Number(row.machine_id) !== Number(packagingMachine.id),
+        (row) => !isPackagingRow(row),
       );
 
       const nonPackagingByMachine = new Map<number, typeof nonPackagingRows>();
@@ -10321,12 +10522,16 @@ export const getProjectDetailService = async (
       */
 
       const manualPackagingRows = itemMappings
-        .filter(
-          (row) =>
-            packagingMachine &&
-            Number(row.machine_id) === Number(packagingMachine.id),
-        )
-        .sort((a, b) => a.id - b.id);
+        .filter((row) => isPackagingRow(row))
+        .sort((a, b) => {
+          // Prioritize packed rows (box_id !== null and actual_in_at !== null)
+          const aPacked = a.box_id !== null && a.actual_in_at !== null ? 1 : 0;
+          const bPacked = b.box_id !== null && b.actual_in_at !== null ? 1 : 0;
+          if (aPacked !== bPacked) {
+            return bPacked - aPacked;
+          }
+          return a.id - b.id;
+        });
 
       const expandedManualPackagingRows = expandRowsByQty(
         manualPackagingRows,
@@ -10388,16 +10593,27 @@ export const getProjectDetailService = async (
 
         const manualPackagingRow = expandedManualPackagingRows[unitIndex];
 
-        if (packagingMachine) {
+        if (packagingMachine || manualPackagingRow) {
           if (manualPackagingRow) {
+            const rowMachineId =
+              manualPackagingRow.machine_id || packagingMachine?.id || 0;
+            const rowMachineName =
+              manualPackagingRow.machine?.machine_name ||
+              packagingMachine?.machine_name ||
+              "Packaging";
+            const rowSeq =
+              manualPackagingRow.sequence_no ??
+              packagingMachine?.sequence_no ??
+              0;
+
             machineColumns.push({
               mapping_id: manualPackagingRow.id,
 
-              machine_id: packagingMachine.id,
+              machine_id: rowMachineId,
 
-              machine_name: packagingMachine.machine_name,
+              machine_name: rowMachineName,
 
-              sequence_no: packagingMachine.sequence_no ?? 0,
+              sequence_no: rowSeq,
 
               box_id: manualPackagingRow.box_id,
 
@@ -10415,7 +10631,7 @@ export const getProjectDetailService = async (
                 ? (allOperatorMap.get(manualPackagingRow.in_operator) ?? null)
                 : null,
             });
-          } else {
+          } else if (packagingMachine) {
             /*
             |--------------------------------------------------------------------------
             | Synthetic pending row for UI only
@@ -11096,12 +11312,30 @@ export const getProjectDetailService = async (
       to: Math.min(startIndex + currentLimit, totalBoxesCount),
     };
 
+    let finalTrackTraceStatus = project.track_trace_status;
+    if (
+      finalTrackTraceStatus &&
+      finalTrackTraceStatus.trim().toLowerCase() !== "completed"
+    ) {
+      const isCompleted = await isProjectTrackTraceCompleted(project_id);
+      if (isCompleted) {
+        await prisma.projectMaster.update({
+          where: { id: project_id },
+          data: {
+            track_trace_status: "Completed",
+            track_completed_at: new Date(),
+          },
+        });
+        finalTrackTraceStatus = "Completed";
+      }
+    }
+
     return validationResponse(1, "Project detail fetched", {
       project: {
         id: project.id,
         project_name: project.project_name,
         project_status: project.project_status,
-        track_trace_status: project.track_trace_status,
+        track_trace_status: finalTrackTraceStatus,
         packing_type: project.packing_type,
         is_multi_location: project.is_multi_location,
         lead_id: project.lead_id,
@@ -11824,8 +12058,8 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [packagingMachine, boxes] = await Promise.all([
-      prisma.machineMaster.findFirst({
+    const [packagingMachines, boxes] = await Promise.all([
+      prisma.machineMaster.findMany({
         where: {
           vendor_id,
           machine_type_id: 18,
@@ -11835,6 +12069,7 @@ export const getProjectCutListPaginatedService = async (
           id: true,
           machine_name: true,
           sequence_no: true,
+          status: true,
         },
 
         orderBy: {
@@ -11869,6 +12104,15 @@ export const getProjectCutListPaginatedService = async (
 
     const boxSiteInMap = new Map<number, Date | null>(
       boxes.map((box) => [box.id, box.site_in_at]),
+    );
+
+    const packagingMachine =
+      packagingMachines.find((m) => m.status === "ACTIVE") ??
+      packagingMachines[0] ??
+      null;
+
+    const packagingMachineIdSet = new Set(
+      packagingMachines.map((m) => Number(m.id)),
     );
 
     /*
@@ -11918,6 +12162,11 @@ export const getProjectCutListPaginatedService = async (
 
         include_in_packing: true,
         scan_pack_validate: true,
+        category: {
+          select: {
+            scan_pack_validate: true,
+          },
+        },
       },
 
       orderBy: {
@@ -11953,9 +12202,18 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
+    const isItemManualPacking = (item: {
+      include_in_packing?: boolean | null;
+      scan_pack_validate?: boolean | null;
+      category?: { scan_pack_validate?: boolean | null } | null;
+    }) =>
+      item.include_in_packing === true &&
+      (item.scan_pack_validate === false ||
+        (item.scan_pack_validate !== true &&
+          item.category?.scan_pack_validate === false));
+
     const candidateCutLists = allProjectCutLists.filter((item) => {
-      const isManual =
-        item.include_in_packing === true && item.scan_pack_validate === false;
+      const isManual = isItemManualPacking(item);
 
       if (
         selectedGroup &&
@@ -12271,9 +12529,7 @@ export const getProjectCutListPaginatedService = async (
     for (const cutList of candidateCutLists) {
       const itemMappings = mappingsByCutList.get(cutList.id) ?? [];
 
-      const isManual =
-        cutList.include_in_packing === true &&
-        cutList.scan_pack_validate === false;
+      const isManual = isItemManualPacking(cutList);
 
       const totalQty = Math.max(0, Number(cutList.qty || 0));
 
@@ -12310,6 +12566,12 @@ export const getProjectCutListPaginatedService = async (
         |--------------------------------------------------------------------------
         */
 
+        const isPackagingRow = (row: (typeof itemMappings)[number]) =>
+          row.box_id !== null ||
+          row.row_created_source === "Manual" ||
+          packagingMachineIdSet.has(Number(row.machine_id)) ||
+          row.machine?.machine_type_id === 18;
+
         const expandedNonPackagingByMachine = new Map<
           number,
           typeof itemMappings
@@ -12317,16 +12579,20 @@ export const getProjectCutListPaginatedService = async (
 
         for (const [currentMachineId, machineRows] of byMachine) {
           if (
-            packagingMachine &&
-            Number(currentMachineId) === Number(packagingMachine.id)
+            packagingMachineIdSet.has(Number(currentMachineId)) ||
+            (packagingMachine &&
+              Number(currentMachineId) === Number(packagingMachine.id))
           ) {
             continue;
           }
 
-          expandedNonPackagingByMachine.set(
-            currentMachineId,
-            expandRowsByQty(machineRows),
-          );
+          const nonPackRows = machineRows.filter((r) => !isPackagingRow(r));
+          if (nonPackRows.length > 0) {
+            expandedNonPackagingByMachine.set(
+              currentMachineId,
+              expandRowsByQty(nonPackRows),
+            );
+          }
         }
 
         /*
@@ -12335,11 +12601,18 @@ export const getProjectCutListPaginatedService = async (
         |--------------------------------------------------------------------------
         */
 
-        const manualPackagingRows = packagingMachine
-          ? (byMachine.get(packagingMachine.id) ?? [])
-              .filter((row) => true)
-              .sort((a, b) => a.id - b.id)
-          : [];
+        const manualPackagingRows = itemMappings
+          .filter((row) => isPackagingRow(row))
+          .sort((a, b) => {
+            const aPacked =
+              a.box_id !== null && a.actual_in_at !== null ? 1 : 0;
+            const bPacked =
+              b.box_id !== null && b.actual_in_at !== null ? 1 : 0;
+            if (aPacked !== bPacked) {
+              return bPacked - aPacked;
+            }
+            return a.id - b.id;
+          });
 
         const expandedManualPackagingRows = expandRowsByQty(
           manualPackagingRows,
@@ -12401,16 +12674,28 @@ export const getProjectCutListPaginatedService = async (
 
           const manualPackagingRow = expandedManualPackagingRows[unitIndex];
 
-          if (packagingMachine) {
+          if (packagingMachine || manualPackagingRow) {
             if (manualPackagingRow) {
+              const rowMachineId =
+                manualPackagingRow.machine_id || packagingMachine?.id || 0;
+              const rowMachineName =
+                manualPackagingRow.machine?.machine_name ||
+                packagingMachine?.machine_name ||
+                "Packaging";
+              const rowSeq =
+                manualPackagingRow.sequence_no ??
+                manualPackagingRow.machine?.sequence_no ??
+                packagingMachine?.sequence_no ??
+                0;
+
               machineColumns.push({
                 mapping_id: manualPackagingRow.id,
 
-                machine_id: packagingMachine.id,
+                machine_id: rowMachineId,
 
-                machine_name: packagingMachine.machine_name,
+                machine_name: rowMachineName,
 
-                sequence_no: packagingMachine.sequence_no ?? 0,
+                sequence_no: rowSeq,
 
                 box_id: manualPackagingRow.box_id,
 
@@ -12430,7 +12715,7 @@ export const getProjectCutListPaginatedService = async (
                   ? (operatorMap.get(manualPackagingRow.in_operator) ?? null)
                   : null,
               });
-            } else {
+            } else if (packagingMachine) {
               /*
               |--------------------------------------------------------------------------
               | Synthetic pending packaging row.

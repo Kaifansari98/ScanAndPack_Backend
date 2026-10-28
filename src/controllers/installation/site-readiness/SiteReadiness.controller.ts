@@ -95,7 +95,8 @@ export class SiteReadinessController {
       const data = await SiteReadinessService.createSiteReadiness(
         vendorId,
         leadId,
-        payload
+        payload,
+        Number(req.query.instance_id) || null
       );
 
       return res
@@ -139,7 +140,8 @@ export class SiteReadinessController {
       const records = await SiteReadinessService.getSiteReadinessRecords(
         vendorId,
         leadId,
-        accountId
+        accountId,
+        Number(req.query.instance_id) || null
       );
 
       return res
@@ -201,7 +203,8 @@ export class SiteReadinessController {
       const result = await SiteReadinessService.updateSiteReadiness(
         vendorId,
         leadId,
-        payload
+        payload,
+        Number(req.query.instance_id) || null
       );
 
       return res
@@ -268,7 +271,8 @@ export class SiteReadinessController {
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
+        Number(req.body.instance_id) || null
       );
 
       return res.status(200).json({
@@ -305,7 +309,8 @@ export class SiteReadinessController {
 
       const photos = await service.getCurrentSitePhotosAtSiteReadiness(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        Number(req.query.instance_id) || null
       );
 
       return res.status(200).json({
@@ -346,7 +351,8 @@ export class SiteReadinessController {
 
       const result = await service.checkSiteReadinessCompletion(
         vendorId,
-        leadId
+        leadId,
+        Number(req.query.instance_id) || null
       );
 
       return res

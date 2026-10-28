@@ -2001,6 +2001,7 @@ model LeadProductStructureInstance {
   activityStatusLogs                         LeadScopedActivityStatusLog[]
   tasks                                      UserLeadTask[]
   trackTraceProjects                         ProjectMaster[]
+  siteReadinessAnswers                       SiteReadiness[]
 
 
   @@index([vendor_id, stage_status_id, lead_id])
@@ -2811,6 +2812,7 @@ model SiteReadiness {
   vendor_id             Int
   account_id            Int
   lead_id               Int
+  instance_id           Int?
   type                  String
   remark                String?         @db.VarChar(2000)
   value                 Boolean?
@@ -2821,11 +2823,13 @@ model SiteReadiness {
   account               AccountMaster   @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy             UserMaster      @relation("SiteReadinessCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                  LeadMaster      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  instance              LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
   updatedBy             UserMaster?     @relation("SiteReadinessUpdatedBy", fields: [updated_by], references: [id])
   vendor                VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   site_readiness_photos LeadDocuments[] @relation("LeadDocumentsToSiteReadiness")
 
   @@index([lead_id, vendor_id, type])
+  @@index([lead_id, instance_id])
 }
 
 model InstallerUserMaster {
