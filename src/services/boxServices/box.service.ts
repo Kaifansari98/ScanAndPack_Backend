@@ -10,6 +10,7 @@ import path from "path";
 import puppeteer from "puppeteer";
 
 import { validationResponse } from "../../../src/utils/validationResponse";
+import { updateProjectStatus } from "../trackTraceServices/trackTrace.service";
 
 const getPuppeteerOptions = () => {
   const options: any = {
@@ -1077,6 +1078,12 @@ export const updateBoxStatus = async (
       return { ...updatedBox, log };
     });
 
+    try {
+      await updateProjectStatus(box.project_id);
+    } catch (e) {
+      console.error("Error updating project status on unpack:", e);
+    }
+
     return result;
   }
 
@@ -1178,7 +1185,7 @@ export const updateBoxStatus = async (
     locationAllocationId = allocations[0]?.id ?? null;
   }
 
-  return prisma.$transaction(async (tx) => {
+  const updatedBoxResult = await prisma.$transaction(async (tx) => {
     const updatedBox = await tx.boxMaster.update({
       where: { id: boxId },
       data: { box_status: newStatus, packed_at: now, packed_by: user_id },
@@ -1198,6 +1205,14 @@ export const updateBoxStatus = async (
 
     return updatedBox;
   });
+
+  try {
+    await updateProjectStatus(box.project_id);
+  } catch (e) {
+    console.error("Error updating project status on pack:", e);
+  }
+
+  return updatedBoxResult;
 };
 
 const sanitizeFileName = (name: string) => name.replace(/[^a-zA-Z0-9-_]/g, "_");
@@ -8752,6 +8767,12 @@ export const markItemSiteInService = async (
           } of this item pending`
         : "Item marked as received at site";
 
+    try {
+      await updateProjectStatus(project_id);
+    } catch (e) {
+      console.error("Error updating project status in markItemSiteInService:", e);
+    }
+
     return validationResponse(1, message, {
       ...updated,
 
@@ -9336,6 +9357,12 @@ export const verifyManualBoxSiteInItemService = async (
           : `Received quantity updated to ${finalReceivedQty}. ${pendingQty} unit${
               pendingQty > 1 ? "s" : ""
             } pending for this item`;
+
+    try {
+      await updateProjectStatus(project_id);
+    } catch (e) {
+      console.error("Error updating project status in verifyManualBoxSiteInItemService:", e);
+    }
 
     return validationResponse(1, message, {
       mapping_id: updated.id,
