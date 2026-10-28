@@ -1527,6 +1527,15 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   is_post_production: 'is_post_production',
   pre_prod_remark: 'pre_prod_remark',
   isLargeScaleProjectInstance: 'isLargeScaleProjectInstance',
+  required_date_for_dispatch: 'required_date_for_dispatch',
+  onsite_contact_person_name: 'onsite_contact_person_name',
+  onsite_contact_person_number: 'onsite_contact_person_number',
+  alt_onsite_contact_person_name: 'alt_onsite_contact_person_name',
+  alt_onsite_contact_person_number: 'alt_onsite_contact_person_number',
+  material_lift_availability: 'material_lift_availability',
+  material_lift_size: 'material_lift_size',
+  vehicle_approachability_for_dispatch: 'vehicle_approachability_for_dispatch',
+  dispatch_planning_remark: 'dispatch_planning_remark',
   product_item_code_id: 'product_item_code_id',
   quantity: 'quantity',
   sub_product_structure_id: 'sub_product_structure_id'
@@ -1565,7 +1574,8 @@ export const PaymentInfoScalarFieldEnum = {
   gst_amount: 'gst_amount',
   gst_percentage: 'gst_percentage',
   total_amount: 'total_amount',
-  is_booking_received_amt: 'is_booking_received_amt'
+  is_booking_received_amt: 'is_booking_received_amt',
+  instance_id: 'instance_id'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]

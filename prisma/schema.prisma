@@ -1984,6 +1984,16 @@ model LeadProductStructureInstance {
   is_post_production                         Boolean?
   pre_prod_remark                            String?                         @db.VarChar(2000)
   isLargeScaleProjectInstance                Boolean                         @default(false)
+  // Dispatch Planning Information (large-scale vendors plan dispatch per instance)
+  required_date_for_dispatch                 DateTime?
+  onsite_contact_person_name                 String?
+  onsite_contact_person_number               String?
+  alt_onsite_contact_person_name             String?
+  alt_onsite_contact_person_number           String?
+  material_lift_availability                 Boolean?
+  material_lift_size                         String?
+  vehicle_approachability_for_dispatch       Boolean?
+  dispatch_planning_remark                   String?                         @db.VarChar(2000)
   product_item_code_id                       Int?
   quantity                                   Int?
   sub_product_structure_id                   Int?
@@ -2002,6 +2012,7 @@ model LeadProductStructureInstance {
   tasks                                      UserLeadTask[]
   trackTraceProjects                         ProjectMaster[]
   siteReadinessAnswers                       SiteReadiness[]
+  payments                                   PaymentInfo[]
 
 
   @@index([vendor_id, stage_status_id, lead_id])
@@ -2043,7 +2054,9 @@ model PaymentInfo {
   gst_percentage          Float?
   total_amount            Float?
   is_booking_received_amt Boolean            @default(false)
+  instance_id             Int?
   account                 AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  instance                LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: SetNull)
   createdBy               UserMaster         @relation(fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   document                LeadDocuments?     @relation(fields: [payment_file_id], references: [id])
@@ -2053,6 +2066,7 @@ model PaymentInfo {
   vendor                  VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([product_type_id])
+  @@index([lead_id, instance_id])
 }
 
 model Ledger {

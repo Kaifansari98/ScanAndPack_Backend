@@ -11,6 +11,10 @@ import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 
 const service = new DispatchPlanningService();
 
+/** Large-scale vendors scope Dispatch Planning to one instance. */
+const instanceIdFrom = (value: unknown): number | null =>
+  Number(Array.isArray(value) ? value[0] : value) || null;
+
 export class DispatchPlanningController {
   /** ✅ Get all leads under Dispatch Planning (Type 13) */
   async getAllDispatchPlanningLeads(req: Request, res: Response) {
@@ -106,6 +110,7 @@ export class DispatchPlanningController {
         vehicle_approachability: vehicle_approachability === "true",
         dispatch_planning_remark,
         created_by: Number(created_by),
+        instance_id: instanceIdFrom(req.body.instance_id),
       });
 
       return res
@@ -121,9 +126,12 @@ export class DispatchPlanningController {
         "[DispatchPlanningController] saveDispatchPlanningInfo Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode)
+        );
     }
   }
 
@@ -184,6 +192,7 @@ export class DispatchPlanningController {
         pending_payment_details,
         payment_proof_file: uploadedPaymentFile,
         created_by: Number(created_by),
+        instance_id: instanceIdFrom(req.body.instance_id),
       });
 
       return res
@@ -199,9 +208,12 @@ export class DispatchPlanningController {
         "[DispatchPlanningController] saveDispatchPlanningPayment Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode)
+        );
     }
   }
 
@@ -219,7 +231,8 @@ export class DispatchPlanningController {
 
       const info = await service.getDispatchPlanningInfoService(
         vendorId,
-        leadId
+        leadId,
+        instanceIdFrom(req.query.instance_id)
       );
 
       return res
@@ -235,9 +248,12 @@ export class DispatchPlanningController {
         "[DispatchPlanningController] getDispatchPlanningInfo Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode)
+        );
     }
   }
 
@@ -254,7 +270,11 @@ export class DispatchPlanningController {
       }
 
       const { payment, latestLog } =
-        await service.getDispatchPlanningPaymentService(vendorId, leadId);
+        await service.getDispatchPlanningPaymentService(
+          vendorId,
+          leadId,
+          instanceIdFrom(req.query.instance_id)
+        );
 
       let responsePayload = {
         ...payment,
@@ -291,9 +311,12 @@ export class DispatchPlanningController {
         "[DispatchPlanningController] getDispatchPlanningPayment Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode)
+        );
     }
   }
 
@@ -327,9 +350,12 @@ export class DispatchPlanningController {
         "[DispatchPlanningController] getPendingProjectAmount Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode)
+        );
     }
   }
 
@@ -359,6 +385,7 @@ export class DispatchPlanningController {
         leadId,
         updated_by,
         baseUrl,
+        instanceIdFrom(req.body.instance_id),
       );
 
       return res
@@ -374,9 +401,12 @@ export class DispatchPlanningController {
         "[DispatchPlanningController] moveLeadToDispatch Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode)
+        );
     }
   }
 
@@ -397,7 +427,8 @@ export class DispatchPlanningController {
 
       const result = await DispatchPlanningService.checkDispatchReadiness(
         vendorId,
-        leadId
+        leadId,
+        instanceIdFrom(req.query.instance_id)
       );
 
       return res
@@ -413,9 +444,12 @@ export class DispatchPlanningController {
         "[DispatchPlanningController] checkDispatchReadiness Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode)
+        );
     }
   }
 }
