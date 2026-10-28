@@ -396,7 +396,12 @@ leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
 
 leadsRouter.post(
   "/create",
-  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  handleMulterUpload(
+    uploadLeadSitePhotos.fields([
+      { name: "documents", maxCount: MAX_FILES },
+      { name: "site_dimension_documents", maxCount: MAX_FILES },
+    ]),
+  ),
   (req, res, next) => {
     if (req.body.walkin_answers !== undefined) return verifyToken(req, res, next);
     next();
@@ -408,6 +413,17 @@ leadsRouter.post(
   "/upload-more-site-photos",
   handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
   leadController.uploadMoreSitePhotos
+);
+
+// Current Site Dimension documents (large-scale vendors)
+leadsRouter.post(
+  "/upload-site-dimension-documents",
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  leadController.uploadSiteDimensionDocuments
+);
+leadsRouter.get(
+  "/vendorId/:vendorId/leadId/:leadId/site-dimension-documents",
+  leadController.getSiteDimensionDocuments
 );
 
 // GET all leads by vendorId

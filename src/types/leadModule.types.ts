@@ -90,8 +90,8 @@ export interface ProductItemCodeInput {
   item_code: string;
   product_structure_id: number;
   sub_product_structure_id: number;
-  description: string;
-  specification: string;
+  description?: string | null;
+  specification?: string | null;
 }
 
 export interface ProductItemCodeType {

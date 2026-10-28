@@ -150,9 +150,32 @@ const editTaskISMSchema = Joi.object({
   closed_by: Joi.number().integer().positive(),
 });
 
+/** Current Site Dimension documents (large-scale vendors), created per vendor on first use. */
+export const SITE_DIMENSION_DOC_TAG = "CURRENT_SITE_DIMENSION";
+
+const getSiteDimensionDocType = async (
+  db: Prisma.TransactionClient | typeof prisma,
+  vendorId: number,
+) => {
+  const existing = await db.documentTypeMaster.findFirst({
+    where: { vendor_id: vendorId, tag: SITE_DIMENSION_DOC_TAG },
+  });
+  if (existing) return existing;
+  return db.documentTypeMaster.create({
+    data: {
+      vendor_id: vendorId,
+      type: "current_site_dimension",
+      tag: SITE_DIMENSION_DOC_TAG,
+      doc_title: "Current Site Dimension",
+      stage: "Leads",
+    },
+  });
+};
+
 export const createLeadService = async (
   payload: CreateLeadDTO & { is_draft?: boolean },
   files: Express.Multer.File[],
+  siteDimensionFiles: Express.Multer.File[] = [],
 ) => {
   logger.debug("[SERVICE] createLeadService called", {
     fileCount: files.length,
@@ -753,11 +776,164 @@ export const createLeadService = async (
     logger.info("No documents to process - files are optional");
   }
 
+  if (siteDimensionFiles.length > 0) {
+    const dimensionDocType = await getSiteDimensionDocType(prisma, vendor_id);
+
+    for (const file of siteDimensionFiles) {
+      const s3Key = await uploadToWasabiLeadSitePhoto(
+        file.path,
+        vendor_id,
+        transactionResult.lead.id,
+        file.originalname,
+        file.mimetype,
+      );
+
+      await fs.promises.unlink(file.path);
+
+      const document = await prisma.leadDocuments.create({
+        data: {
+          doc_og_name: file.originalname,
+          doc_sys_name: s3Key,
+          doc_type_id: dimensionDocType.id,
+          vendor_id,
+          lead_id: transactionResult.lead.id,
+          account_id: transactionResult.account.id,
+          created_by,
+        },
+      });
+
+      uploadedFiles.push({
+        id: document.id,
+        type: SITE_DIMENSION_DOC_TAG,
+        originalName: file.originalname,
+        s3Key,
+        size: file.size,
+      });
+    }
+  }
+
   return {
     ...transactionResult,
-    documentsProcessed: files ? files.length : 0,
+    documentsProcessed: files.length + siteDimensionFiles.length,
     uploadedFiles,
   };
+};
+
+/** Upload Current Site Dimension documents for an existing lead. */
+export const uploadSiteDimensionDocumentsService = async (
+  payload: { vendor_id: number; lead_id: number; created_by: number },
+  files: Express.Multer.File[],
+) => {
+  const { vendor_id, lead_id, created_by } = payload;
+
+  if (!vendor_id || !lead_id || !created_by) {
+    throw Object.assign(
+      new Error("vendor_id, lead_id, and created_by are required"),
+      { statusCode: 400 },
+    );
+  }
+
+  if (!files || files.length === 0) {
+    throw Object.assign(new Error("At least one file must be uploaded"), {
+      statusCode: 400,
+    });
+  }
+
+  const lead = await prisma.leadMaster.findFirst({
+    where: { id: lead_id, vendor_id, is_deleted: false },
+    select: { id: true, account_id: true },
+  });
+
+  if (!lead) {
+    throw Object.assign(
+      new Error(`Lead ${lead_id} not found for vendor ${vendor_id}`),
+      { statusCode: 404 },
+    );
+  }
+
+  const docTypeRecord = await getSiteDimensionDocType(prisma, vendor_id);
+
+  const uploadedDocsData: { originalName: string; s3Key: string }[] = [];
+  for (const file of files) {
+    const s3Key = await uploadToWasabiLeadSitePhoto(
+      file.path,
+      vendor_id,
+      lead.id,
+      file.originalname,
+      file.mimetype,
+    );
+    await fs.promises.unlink(file.path);
+    uploadedDocsData.push({ originalName: file.originalname, s3Key });
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const uploadedDocs = [];
+
+    for (const uploaded of uploadedDocsData) {
+      const document = await tx.leadDocuments.create({
+        data: {
+          doc_og_name: uploaded.originalName,
+          doc_sys_name: uploaded.s3Key,
+          doc_type_id: docTypeRecord.id,
+          vendor_id,
+          lead_id: lead.id,
+          account_id: lead.account_id,
+          created_by,
+        },
+      });
+      uploadedDocs.push(document);
+    }
+
+    const detailedLog = await createLeadLog(tx, {
+      vendor_id,
+      lead_id: lead.id,
+      account_id: lead.account_id!,
+      action: `Current site dimension documents uploaded (${uploadedDocs.length})`,
+      action_type: "CREATE",
+      created_by,
+      created_at: new Date(),
+    });
+
+    await tx.leadDocumentLogs.createMany({
+      data: uploadedDocs.map((doc) => ({
+        vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        doc_id: doc.id,
+        lead_logs_id: detailedLog.id,
+        created_by,
+        created_at: new Date(),
+      })),
+    });
+
+    return uploadedDocs;
+  });
+};
+
+/** Current Site Dimension documents of a lead, with signed URLs. */
+export const getSiteDimensionDocumentsService = async (
+  vendorId: number,
+  leadId: number,
+) => {
+  const docs = await prisma.leadDocuments.findMany({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      deleted_at: null,
+      is_deleted: false,
+      documentType: { tag: SITE_DIMENSION_DOC_TAG },
+    },
+    orderBy: { created_at: "asc" },
+  });
+
+  return Promise.all(
+    docs.map(async (doc) => ({
+      ...doc,
+      signedUrl: doc.doc_sys_name
+        ? await generateSignedUrl(doc.doc_sys_name)
+        : null,
+    })),
+  );
 };
 
 export const uploadMoreSitePhotosService = async (
