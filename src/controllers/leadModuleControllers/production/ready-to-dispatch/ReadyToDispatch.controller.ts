@@ -82,7 +82,7 @@ export class ReadyToDispatchController {
   async uploadCurrentSitePhotosAtReadyToDispatch(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;
-      const { account_id, created_by } = req.body;
+      const { account_id, created_by, instance_id } = req.body;
       const files = req.files as Express.Multer.File[];
 
       if (!vendorId || !leadId || !created_by) {
@@ -123,7 +123,8 @@ export class ReadyToDispatchController {
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
+        Number(instance_id) || null
       );
 
       return res.status(200).json({
@@ -161,7 +162,8 @@ export class ReadyToDispatchController {
 
       const photos = await service.getCurrentSitePhotosAtReadyToDispatch(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        Number(req.query.instance_id) || null
       );
 
       return res.status(200).json({
@@ -200,7 +202,8 @@ export class ReadyToDispatchController {
 
       const result = await service.getCurrentSitePhotosCountAtReadyToDispatch(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        Number(req.query.instance_id) || null
       );
 
       return res.status(200).json({

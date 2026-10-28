@@ -229,13 +229,27 @@ export class ReadyToDispatchService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    files: { originalName: string; sysName: string }[]
+    files: { originalName: string; sysName: string }[],
+    instanceId: number | null = null
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
         new Error("vendorId, leadId and userId are required"),
         { statusCode: 400 }
       );
+
+    // 🔹 Photos belong to one product instance when the page is opened for one
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+        select: { id: true },
+      });
+
+      if (!instance)
+        throw Object.assign(new Error("Instance not found for this lead"), {
+          statusCode: 404,
+        });
+    }
 
     // 🔹 Get DocType for Current Site Photos (Type 16)
     const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
@@ -262,6 +276,7 @@ export class ReadyToDispatchService {
           account_id: accountId,
           created_by: userId,
           doc_type_id: sitePhotoDocType.id, // Type 16 → Current Site Photos
+          product_structure_instance_id: instanceId,
         },
       });
 
@@ -274,7 +289,8 @@ export class ReadyToDispatchService {
   // ✅ Get Current Site Photos at Ready-To-Dispatch
   async getCurrentSitePhotosAtReadyToDispatch(
     vendorId: number,
-    leadId: number
+    leadId: number,
+    instanceId: number | null = null
   ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -294,14 +310,15 @@ export class ReadyToDispatchService {
 
     const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
 
-    // 🔹 Fetch all uploaded Current Site Photos for this lead
+    // 🔹 Fetch uploaded Current Site Photos for this lead (or one of its instances)
     const documents = await prisma.leadDocuments.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
         is_deleted: false,
-        doc_sys_name: { startsWith: prefix }
+        doc_sys_name: { startsWith: prefix },
+        ...(instanceId ? { product_structure_instance_id: instanceId } : {}),
       },
       orderBy: { created_at: "desc" },
     });
@@ -319,7 +336,8 @@ export class ReadyToDispatchService {
 
   async getCurrentSitePhotosCountAtReadyToDispatch(
     vendorId: number,
-    leadId: number
+    leadId: number,
+    instanceId: number | null = null
   ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -339,13 +357,15 @@ export class ReadyToDispatchService {
 
     const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
 
-    // 🔹 Count all uploaded Current Site Photos for this lead
+    // 🔹 Count uploaded Current Site Photos for this lead (or one of its instances)
     const count = await prisma.leadDocuments.count({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
+        is_deleted: false,
         doc_sys_name: { startsWith: prefix },
+        ...(instanceId ? { product_structure_instance_id: instanceId } : {}),
       },
     });
 
