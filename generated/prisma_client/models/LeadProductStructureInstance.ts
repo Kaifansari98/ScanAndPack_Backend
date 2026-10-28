@@ -107,6 +107,11 @@ export type LeadProductStructureInstanceMinAggregateOutputType = {
   material_lift_size: string | null
   vehicle_approachability_for_dispatch: boolean | null
   dispatch_planning_remark: string | null
+  dispatch_date: Date | null
+  driver_name: string | null
+  driver_number: string | null
+  vehicle_no: string | null
+  dispatch_remark: string | null
   product_item_code_id: number | null
   quantity: number | null
   sub_product_structure_id: number | null
@@ -157,6 +162,11 @@ export type LeadProductStructureInstanceMaxAggregateOutputType = {
   material_lift_size: string | null
   vehicle_approachability_for_dispatch: boolean | null
   dispatch_planning_remark: string | null
+  dispatch_date: Date | null
+  driver_name: string | null
+  driver_number: string | null
+  vehicle_no: string | null
+  dispatch_remark: string | null
   product_item_code_id: number | null
   quantity: number | null
   sub_product_structure_id: number | null
@@ -207,6 +217,11 @@ export type LeadProductStructureInstanceCountAggregateOutputType = {
   material_lift_size: number
   vehicle_approachability_for_dispatch: number
   dispatch_planning_remark: number
+  dispatch_date: number
+  driver_name: number
+  driver_number: number
+  vehicle_no: number
+  dispatch_remark: number
   product_item_code_id: number
   quantity: number
   sub_product_structure_id: number
@@ -295,6 +310,11 @@ export type LeadProductStructureInstanceMinAggregateInputType = {
   material_lift_size?: true
   vehicle_approachability_for_dispatch?: true
   dispatch_planning_remark?: true
+  dispatch_date?: true
+  driver_name?: true
+  driver_number?: true
+  vehicle_no?: true
+  dispatch_remark?: true
   product_item_code_id?: true
   quantity?: true
   sub_product_structure_id?: true
@@ -345,6 +365,11 @@ export type LeadProductStructureInstanceMaxAggregateInputType = {
   material_lift_size?: true
   vehicle_approachability_for_dispatch?: true
   dispatch_planning_remark?: true
+  dispatch_date?: true
+  driver_name?: true
+  driver_number?: true
+  vehicle_no?: true
+  dispatch_remark?: true
   product_item_code_id?: true
   quantity?: true
   sub_product_structure_id?: true
@@ -395,6 +420,11 @@ export type LeadProductStructureInstanceCountAggregateInputType = {
   material_lift_size?: true
   vehicle_approachability_for_dispatch?: true
   dispatch_planning_remark?: true
+  dispatch_date?: true
+  driver_name?: true
+  driver_number?: true
+  vehicle_no?: true
+  dispatch_remark?: true
   product_item_code_id?: true
   quantity?: true
   sub_product_structure_id?: true
@@ -532,6 +562,11 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   material_lift_size: string | null
   vehicle_approachability_for_dispatch: boolean | null
   dispatch_planning_remark: string | null
+  dispatch_date: Date | null
+  driver_name: string | null
+  driver_number: string | null
+  vehicle_no: string | null
+  dispatch_remark: string | null
   product_item_code_id: number | null
   quantity: number | null
   sub_product_structure_id: number | null
@@ -605,6 +640,11 @@ export type LeadProductStructureInstanceWhereInput = {
   material_lift_size?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
@@ -674,6 +714,11 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   material_lift_size?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -747,6 +792,11 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   material_lift_size?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
@@ -816,6 +866,11 @@ export type LeadProductStructureInstanceOrderByWithAggregationInput = {
   material_lift_size?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -874,6 +929,11 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
   material_lift_size?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
   dispatch_planning_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
   product_item_code_id?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
@@ -916,6 +976,11 @@ export type LeadProductStructureInstanceCreateInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -983,6 +1048,11 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -1035,6 +1105,11 @@ export type LeadProductStructureInstanceUpdateInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -1102,6 +1177,11 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1162,6 +1242,11 @@ export type LeadProductStructureInstanceCreateManyInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -1204,6 +1289,11 @@ export type LeadProductStructureInstanceUpdateManyMutationInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -1252,6 +1342,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1324,6 +1419,11 @@ export type LeadProductStructureInstanceCountOrderByAggregateInput = {
   material_lift_size?: Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrder
+  driver_name?: Prisma.SortOrder
+  driver_number?: Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrder
@@ -1392,6 +1492,11 @@ export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
   material_lift_size?: Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrder
+  driver_name?: Prisma.SortOrder
+  driver_number?: Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrder
@@ -1442,6 +1547,11 @@ export type LeadProductStructureInstanceMinOrderByAggregateInput = {
   material_lift_size?: Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrder
+  driver_name?: Prisma.SortOrder
+  driver_number?: Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrder
@@ -2045,6 +2155,11 @@ export type LeadProductStructureInstanceCreateWithoutVendorInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -2110,6 +2225,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -2199,6 +2319,11 @@ export type LeadProductStructureInstanceScalarWhereInput = {
   material_lift_size?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
@@ -2241,6 +2366,11 @@ export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -2306,6 +2436,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -2384,6 +2519,11 @@ export type LeadProductStructureInstanceCreateWithoutTrackTraceProjectsInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -2450,6 +2590,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutTrackTraceProjects
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -2517,6 +2662,11 @@ export type LeadProductStructureInstanceUpdateWithoutTrackTraceProjectsInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -2583,6 +2733,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTrackTraceProjects
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2634,6 +2789,11 @@ export type LeadProductStructureInstanceCreateWithoutLeadInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -2699,6 +2859,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -2777,6 +2942,11 @@ export type LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -2843,6 +3013,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogs
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -2910,6 +3085,11 @@ export type LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -2976,6 +3156,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogs
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3027,6 +3212,11 @@ export type LeadProductStructureInstanceCreateWithoutAccountInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -3092,6 +3282,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -3170,6 +3365,11 @@ export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -3235,6 +3435,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -3313,6 +3518,11 @@ export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -3379,6 +3589,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -3446,6 +3661,11 @@ export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -3512,6 +3732,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3563,6 +3788,11 @@ export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -3628,6 +3858,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureIn
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -3706,6 +3941,11 @@ export type LeadProductStructureInstanceCreateWithoutSubProductStructureInput = 
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -3772,6 +4012,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructur
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
@@ -3849,6 +4094,11 @@ export type LeadProductStructureInstanceCreateWithoutProductItemCodeInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -3915,6 +4165,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInp
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
@@ -3992,6 +4247,11 @@ export type LeadProductStructureInstanceCreateWithoutPaymentsInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -4058,6 +4318,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutPaymentsInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -4125,6 +4390,11 @@ export type LeadProductStructureInstanceUpdateWithoutPaymentsInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -4191,6 +4461,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutPaymentsInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4242,6 +4517,11 @@ export type LeadProductStructureInstanceCreateWithoutStageStatusInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
@@ -4307,6 +4587,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutStageStatusInput =
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -4385,6 +4670,11 @@ export type LeadProductStructureInstanceCreateWithoutStageHistoryInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -4451,6 +4741,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutStageHistoryInput 
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -4518,6 +4813,11 @@ export type LeadProductStructureInstanceUpdateWithoutStageHistoryInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -4584,6 +4884,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutStageHistoryInput 
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4635,6 +4940,11 @@ export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -4701,6 +5011,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsIn
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -4768,6 +5083,11 @@ export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -4834,6 +5154,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsIn
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4885,6 +5210,11 @@ export type LeadProductStructureInstanceCreateWithoutTasksInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -4951,6 +5281,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5018,6 +5353,11 @@ export type LeadProductStructureInstanceUpdateWithoutTasksInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -5084,6 +5424,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5135,6 +5480,11 @@ export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -5201,6 +5551,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequ
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5268,6 +5623,11 @@ export type LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -5334,6 +5694,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequ
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5385,6 +5750,11 @@ export type LeadProductStructureInstanceCreateWithoutSiteReadinessAnswersInput =
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
@@ -5451,6 +5821,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutSiteReadinessAnswe
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5518,6 +5893,11 @@ export type LeadProductStructureInstanceUpdateWithoutSiteReadinessAnswersInput =
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -5584,6 +5964,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutSiteReadinessAnswe
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5635,6 +6020,11 @@ export type LeadProductStructureInstanceCreateWithoutProductsRequiredForProducti
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
@@ -5701,6 +6091,11 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredFo
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5768,6 +6163,11 @@ export type LeadProductStructureInstanceUpdateWithoutProductsRequiredForProducti
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
@@ -5834,6 +6234,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductsRequiredFo
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5892,6 +6297,11 @@ export type LeadProductStructureInstanceCreateManyVendorInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5934,6 +6344,11 @@ export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -5999,6 +6414,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6058,6 +6478,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = 
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6107,6 +6532,11 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -6149,6 +6579,11 @@ export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -6214,6 +6649,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6273,6 +6713,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6322,6 +6767,11 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -6364,6 +6814,11 @@ export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -6429,6 +6884,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6488,6 +6948,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6537,6 +7002,11 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -6579,6 +7049,11 @@ export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -6644,6 +7119,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6703,6 +7183,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput =
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6752,6 +7237,11 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -6794,6 +7284,11 @@ export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -6859,6 +7354,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6918,6 +7418,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInp
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6967,6 +7472,11 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -7009,6 +7519,11 @@ export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -7074,6 +7589,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7133,6 +7653,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7183,6 +7708,11 @@ export type LeadProductStructureInstanceCreateManySubProductStructureInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
 }
@@ -7224,6 +7754,11 @@ export type LeadProductStructureInstanceUpdateWithoutSubProductStructureInput = 
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -7290,6 +7825,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructur
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
@@ -7349,6 +7889,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStru
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -7398,6 +7943,11 @@ export type LeadProductStructureInstanceCreateManyProductItemCodeInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   quantity?: number | null
   sub_product_structure_id?: number | null
 }
@@ -7439,6 +7989,11 @@ export type LeadProductStructureInstanceUpdateWithoutProductItemCodeInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
@@ -7505,6 +8060,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInp
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
@@ -7564,6 +8124,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCod
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -7612,6 +8177,11 @@ export type LeadProductStructureInstanceCreateManyStageStatusInput = {
   material_lift_size?: string | null
   vehicle_approachability_for_dispatch?: boolean | null
   dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -7654,6 +8224,11 @@ export type LeadProductStructureInstanceUpdateWithoutStageStatusInput = {
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
@@ -7719,6 +8294,11 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutStageStatusInput =
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7778,6 +8358,11 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusInp
   material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7940,6 +8525,11 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
@@ -8010,6 +8600,11 @@ export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extend
   material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
@@ -8069,6 +8664,11 @@ export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extend
   material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
@@ -8128,12 +8728,17 @@ export type LeadProductStructureInstanceSelectScalar = {
   material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
 }
 
-export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "is_archived" | "product_structure_id" | "quantity_index" | "title" | "status" | "stage_status_id" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_tech_check_completed" | "tech_check_completed_at" | "is_order_login_completed" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "no_of_client_documents_initially_submitted" | "is_order_login_filled" | "is_pre_prod_done" | "is_under_production" | "pre_prod_done_at" | "under_production_at" | "production_erd_date" | "is_post_production" | "pre_prod_remark" | "isLargeScaleProjectInstance" | "required_date_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "dispatch_planning_remark" | "product_item_code_id" | "quantity" | "sub_product_structure_id", ExtArgs["result"]["leadProductStructureInstance"]>
+export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "is_archived" | "product_structure_id" | "quantity_index" | "title" | "status" | "stage_status_id" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_tech_check_completed" | "tech_check_completed_at" | "is_order_login_completed" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "no_of_client_documents_initially_submitted" | "is_order_login_filled" | "is_pre_prod_done" | "is_under_production" | "pre_prod_done_at" | "under_production_at" | "production_erd_date" | "is_post_production" | "pre_prod_remark" | "isLargeScaleProjectInstance" | "required_date_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "dispatch_planning_remark" | "dispatch_date" | "driver_name" | "driver_number" | "vehicle_no" | "dispatch_remark" | "product_item_code_id" | "quantity" | "sub_product_structure_id", ExtArgs["result"]["leadProductStructureInstance"]>
 export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs>
   stageStatus?: boolean | Prisma.LeadProductStructureInstance$stageStatusArgs<ExtArgs>
@@ -8247,6 +8852,11 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     material_lift_size: string | null
     vehicle_approachability_for_dispatch: boolean | null
     dispatch_planning_remark: string | null
+    dispatch_date: Date | null
+    driver_name: string | null
+    driver_number: string | null
+    vehicle_no: string | null
+    dispatch_remark: string | null
     product_item_code_id: number | null
     quantity: number | null
     sub_product_structure_id: number | null
@@ -8736,6 +9346,11 @@ export interface LeadProductStructureInstanceFieldRefs {
   readonly material_lift_size: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
   readonly vehicle_approachability_for_dispatch: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
   readonly dispatch_planning_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly dispatch_date: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly driver_name: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly driver_number: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly vehicle_no: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly dispatch_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
   readonly product_item_code_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly quantity: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly sub_product_structure_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>

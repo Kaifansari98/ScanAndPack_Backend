@@ -1994,6 +1994,12 @@ model LeadProductStructureInstance {
   material_lift_size                         String?
   vehicle_approachability_for_dispatch       Boolean?
   dispatch_planning_remark                   String?                         @db.VarChar(2000)
+  // Dispatch Details (large-scale vendors dispatch per instance)
+  dispatch_date                              DateTime?
+  driver_name                                String?                         @db.VarChar(255)
+  driver_number                              String?                         @db.VarChar(50)
+  vehicle_no                                 String?                         @db.VarChar(100)
+  dispatch_remark                            String?                         @db.VarChar(2000)
   product_item_code_id                       Int?
   quantity                                   Int?
   sub_product_structure_id                   Int?

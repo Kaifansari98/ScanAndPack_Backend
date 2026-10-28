@@ -1536,6 +1536,11 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   material_lift_size: 'material_lift_size',
   vehicle_approachability_for_dispatch: 'vehicle_approachability_for_dispatch',
   dispatch_planning_remark: 'dispatch_planning_remark',
+  dispatch_date: 'dispatch_date',
+  driver_name: 'driver_name',
+  driver_number: 'driver_number',
+  vehicle_no: 'vehicle_no',
+  dispatch_remark: 'dispatch_remark',
   product_item_code_id: 'product_item_code_id',
   quantity: 'quantity',
   sub_product_structure_id: 'sub_product_structure_id'
