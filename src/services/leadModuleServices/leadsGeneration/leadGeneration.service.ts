@@ -1727,6 +1727,7 @@ export const getLeadProductStructureInstances = async (
         vendor_id: vendorId,
       },
       include: {
+        stageStatus: { select: { id: true, tag: true } },
         productStructure: true,
         productType: true,
 

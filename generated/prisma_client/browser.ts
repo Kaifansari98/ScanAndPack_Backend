@@ -418,6 +418,11 @@ export type LeadServiceSchedule = Prisma.LeadServiceScheduleModel
  */
 export type StatusTypeMaster = Prisma.StatusTypeMasterModel
 /**
+ * Model InstanceStageHistory
+ * 
+ */
+export type InstanceStageHistory = Prisma.InstanceStageHistoryModel
+/**
  * Model LeadStatusLogs
  * 
  */

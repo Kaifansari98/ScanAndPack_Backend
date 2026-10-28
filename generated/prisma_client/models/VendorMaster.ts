@@ -596,6 +596,7 @@ export type VendorMasterWhereInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryListRelationFilter
   machineCostDescriptions?: Prisma.MachineCostDescriptionListRelationFilter
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   time_zone_master?: Prisma.XOR<Prisma.Time_zone_masterNullableScalarRelationFilter, Prisma.time_zone_masterWhereInput> | null
@@ -820,6 +821,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_walkin_questions_feature_enabled?: Prisma.SortOrder
   push_lead_to_cadbid?: Prisma.SortOrder
   is_available_unique_code?: Prisma.SortOrder
+  instanceStageHistory?: Prisma.InstanceStageHistoryOrderByRelationAggregateInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionOrderByRelationAggregateInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
   time_zone_master?: Prisma.time_zone_masterOrderByWithRelationInput
@@ -1047,6 +1049,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_walkin_questions_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_available_unique_code?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryListRelationFilter
   machineCostDescriptions?: Prisma.MachineCostDescriptionListRelationFilter
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   time_zone_master?: Prisma.XOR<Prisma.Time_zone_masterNullableScalarRelationFilter, Prisma.time_zone_masterWhereInput> | null
@@ -1384,6 +1387,7 @@ export type VendorMasterCreateInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -1608,6 +1612,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -1827,6 +1832,7 @@ export type VendorMasterUpdateInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -2051,6 +2057,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -3548,6 +3555,20 @@ export type VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput = {
   upsert?: Prisma.VendorMasterUpsertWithoutStatusTypesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutStatusTypesInput, Prisma.VendorMasterUpdateWithoutStatusTypesInput>, Prisma.VendorMasterUncheckedUpdateWithoutStatusTypesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutInstanceStageHistoryInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutInstanceStageHistoryInput, Prisma.VendorMasterUncheckedCreateWithoutInstanceStageHistoryInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutInstanceStageHistoryInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutInstanceStageHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutInstanceStageHistoryInput, Prisma.VendorMasterUncheckedCreateWithoutInstanceStageHistoryInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutInstanceStageHistoryInput
+  upsert?: Prisma.VendorMasterUpsertWithoutInstanceStageHistoryInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutInstanceStageHistoryInput, Prisma.VendorMasterUpdateWithoutInstanceStageHistoryInput>, Prisma.VendorMasterUncheckedUpdateWithoutInstanceStageHistoryInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutLeadStatusLogsInput = {
@@ -5101,6 +5122,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -5324,6 +5346,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -5558,6 +5581,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -5781,6 +5805,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -5999,6 +6024,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -6222,6 +6248,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -6456,6 +6483,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -6679,6 +6707,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -6897,6 +6926,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -7120,6 +7150,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -7354,6 +7385,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -7577,6 +7609,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -7795,6 +7828,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -8018,6 +8052,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -8252,6 +8287,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -8475,6 +8511,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -8693,6 +8730,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -8916,6 +8954,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -9150,6 +9189,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -9373,6 +9413,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -9591,6 +9632,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -9814,6 +9856,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -10048,6 +10091,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -10271,6 +10315,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -10489,6 +10534,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -10712,6 +10758,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -10946,6 +10993,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -11169,6 +11217,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -11387,6 +11436,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -11610,6 +11660,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -11844,6 +11895,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -12067,6 +12119,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -12285,6 +12338,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -12508,6 +12562,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -12742,6 +12797,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -12965,6 +13021,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -13183,6 +13240,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -13406,6 +13464,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -13640,6 +13699,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -13863,6 +13923,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -14081,6 +14142,7 @@ export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -14304,6 +14366,7 @@ export type VendorMasterUncheckedCreateWithoutFactoryOutRevertLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -14538,6 +14601,7 @@ export type VendorMasterUpdateWithoutFactoryOutRevertLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -14761,6 +14825,7 @@ export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -14979,6 +15044,7 @@ export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -15202,6 +15268,7 @@ export type VendorMasterUncheckedCreateWithoutBoxUnpackLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -15436,6 +15503,7 @@ export type VendorMasterUpdateWithoutBoxUnpackLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -15659,6 +15727,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -15877,6 +15946,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -16100,6 +16170,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -16334,6 +16405,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -16557,6 +16629,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -16775,6 +16848,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -16998,6 +17072,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -17232,6 +17307,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -17455,6 +17531,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -17673,6 +17750,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -17896,6 +17974,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -18130,6 +18209,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -18353,6 +18433,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -18571,6 +18652,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -18794,6 +18876,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -19028,6 +19111,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -19251,6 +19335,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -19469,6 +19554,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -19692,6 +19778,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -19926,6 +20013,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -20149,6 +20237,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -20367,6 +20456,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -20590,6 +20680,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -20824,6 +20915,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -21047,6 +21139,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -21265,6 +21358,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -21488,6 +21582,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -21722,6 +21817,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -21945,6 +22041,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -22163,6 +22260,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -22386,6 +22484,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -22620,6 +22719,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -22843,6 +22943,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -23061,6 +23162,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -23284,6 +23386,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -23518,6 +23621,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -23741,6 +23845,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -23959,6 +24064,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -24182,6 +24288,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -24416,6 +24523,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -24639,6 +24747,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -24857,6 +24966,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -25080,6 +25190,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -25314,6 +25425,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -25537,6 +25649,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -25755,6 +25868,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -25978,6 +26092,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -26212,6 +26327,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -26435,6 +26551,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -26653,6 +26770,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -26876,6 +26994,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -27110,6 +27229,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -27333,6 +27453,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -27551,6 +27672,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -27774,6 +27896,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -28008,6 +28131,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -28231,6 +28355,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -28449,6 +28574,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -28672,6 +28798,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -28906,6 +29033,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -29129,6 +29257,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -29347,6 +29476,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -29570,6 +29700,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -29804,6 +29935,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -30027,6 +30159,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -30245,6 +30378,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -30468,6 +30602,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -30702,6 +30837,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -30925,6 +31061,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -31143,6 +31280,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -31366,6 +31504,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -31600,6 +31739,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -31823,6 +31963,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -32041,6 +32182,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -32264,6 +32406,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -32498,6 +32641,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -32721,6 +32865,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -32939,6 +33084,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -33162,6 +33308,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -33396,6 +33543,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -33619,6 +33767,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -33837,6 +33986,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -34060,6 +34210,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -34294,6 +34445,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -34517,6 +34669,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -34735,6 +34888,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -34958,6 +35112,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -35192,6 +35347,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -35415,6 +35571,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -35633,6 +35790,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -35856,6 +36014,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -36090,6 +36249,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -36313,6 +36473,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -36531,6 +36692,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -36754,6 +36916,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -36988,6 +37151,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -37211,6 +37375,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -37429,6 +37594,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -37652,6 +37818,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -37886,6 +38053,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -38109,6 +38277,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -38327,6 +38496,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -38550,6 +38720,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -38784,6 +38955,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -39007,6 +39179,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -39225,6 +39398,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -39448,6 +39622,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -39682,6 +39857,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -39905,6 +40081,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -40123,6 +40300,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -40346,6 +40524,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -40580,6 +40759,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -40803,6 +40983,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -41021,6 +41202,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -41244,6 +41426,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -41478,6 +41661,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -41701,6 +41885,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -41919,6 +42104,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -42142,6 +42328,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -42376,6 +42563,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -42599,6 +42787,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -42817,6 +43006,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -43040,6 +43230,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -43274,6 +43465,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -43497,6 +43689,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -43715,6 +43908,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -43938,6 +44132,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -44172,6 +44367,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -44395,6 +44591,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -44613,6 +44810,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -44836,6 +45034,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -45070,6 +45269,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -45293,6 +45493,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -45511,6 +45712,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -45734,6 +45936,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -45968,6 +46171,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -46191,6 +46395,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -46409,6 +46614,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -46632,6 +46838,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -46866,6 +47073,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -47089,6 +47297,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -47307,6 +47516,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -47530,6 +47740,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -47764,6 +47975,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -47987,6 +48199,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -48205,6 +48418,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -48428,6 +48642,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -48662,6 +48877,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -48885,6 +49101,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -49103,6 +49320,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -49326,6 +49544,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -49560,6 +49779,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -49783,6 +50003,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -50001,6 +50222,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -50224,6 +50446,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -50458,6 +50681,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -50681,6 +50905,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -50899,6 +51124,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -51122,6 +51348,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -51356,6 +51583,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -51579,6 +51807,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -51797,6 +52026,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -52020,6 +52250,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -52254,6 +52485,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -52477,6 +52709,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -52695,6 +52928,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -52918,6 +53152,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -53152,6 +53387,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -53375,6 +53611,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -53593,6 +53830,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -53816,6 +54054,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -54050,6 +54289,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -54273,6 +54513,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -54491,6 +54732,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -54714,6 +54956,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -54948,6 +55191,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -55171,6 +55415,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -55389,6 +55634,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -55612,6 +55858,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -55846,6 +56093,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -56069,6 +56317,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -56287,6 +56536,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -56510,6 +56760,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -56744,6 +56995,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -56967,6 +57219,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -57185,6 +57438,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -57408,6 +57662,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -57642,6 +57897,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -57865,6 +58121,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -58083,6 +58340,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -58306,6 +58564,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -58540,6 +58799,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -58763,6 +59023,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -58981,6 +59242,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -59204,6 +59466,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -59438,6 +59701,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -59661,6 +59925,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -59879,6 +60144,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -60102,6 +60368,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -60336,6 +60603,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -60559,6 +60827,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -60777,6 +61046,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -61000,6 +61270,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -61234,6 +61505,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -61457,6 +61729,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -61675,6 +61948,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -61898,6 +62172,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -62132,6 +62407,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -62355,6 +62631,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -62573,6 +62850,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -62796,6 +63074,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -63030,6 +63309,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -63253,6 +63533,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -63471,6 +63752,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -63694,6 +63976,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -63928,6 +64211,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -64151,6 +64435,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -64369,6 +64654,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -64592,6 +64878,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -64826,6 +65113,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -65049,6 +65337,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -65218,6 +65507,908 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
+export type VendorMasterCreateWithoutInstanceStageHistoryInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
+  attendances?: Prisma.attendanceCreateNestedManyWithoutVendorInput
+  attendance_logs?: Prisma.attendance_logsCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutInstanceStageHistoryInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  time_zone_id?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_miscellaneous_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_hrms_master_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  is_walkin_questions_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
+  attendance_logs?: Prisma.attendance_logsUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedCreateNestedManyWithoutVendorInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedCreateNestedManyWithoutVendorInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedCreateNestedManyWithoutVendorInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutInstanceStageHistoryInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutInstanceStageHistoryInput, Prisma.VendorMasterUncheckedCreateWithoutInstanceStageHistoryInput>
+}
+
+export type VendorMasterUpsertWithoutInstanceStageHistoryInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutInstanceStageHistoryInput, Prisma.VendorMasterUncheckedUpdateWithoutInstanceStageHistoryInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutInstanceStageHistoryInput, Prisma.VendorMasterUncheckedCreateWithoutInstanceStageHistoryInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutInstanceStageHistoryInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutInstanceStageHistoryInput, Prisma.VendorMasterUncheckedUpdateWithoutInstanceStageHistoryInput>
+}
+
+export type VendorMasterUpdateWithoutInstanceStageHistoryInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
+  attendances?: Prisma.attendanceUpdateManyWithoutVendorNestedInput
+  attendance_logs?: Prisma.attendance_logsUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutInstanceStageHistoryInput = {
+  site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_miscellaneous_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_hrms_master_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
+  attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  factoryOutRevertLogs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  boxUnpackLogs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  cutlistHeadersMappings?: Prisma.CutlistHeadersMappingUncheckedUpdateManyWithoutVendorNestedInput
+  walkinQuestionnaires?: Prisma.WalkinLeadQuestionnaireUncheckedUpdateManyWithoutVendorNestedInput
+  walkinResponses?: Prisma.WalkinLeadResponseUncheckedUpdateManyWithoutVendorNestedInput
+  walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
+}
+
 export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
@@ -65267,6 +66458,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -65490,6 +66682,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -65724,6 +66917,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -65947,6 +67141,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -66165,6 +67360,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -66388,6 +67584,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -66622,6 +67819,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -66845,6 +68043,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -67063,6 +68262,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -67286,6 +68486,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -67520,6 +68721,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -67743,6 +68945,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -67961,6 +69164,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -68184,6 +69388,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -68418,6 +69623,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -68641,6 +69847,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -68859,6 +70066,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -69082,6 +70290,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -69316,6 +70525,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -69539,6 +70749,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -69757,6 +70968,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -69980,6 +71192,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -70214,6 +71427,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -70437,6 +71651,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -70655,6 +71870,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -70878,6 +72094,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -71112,6 +72329,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -71335,6 +72553,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -71553,6 +72772,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -71776,6 +72996,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -72010,6 +73231,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -72233,6 +73455,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -72451,6 +73674,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -72674,6 +73898,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -72908,6 +74133,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -73131,6 +74357,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -73349,6 +74576,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -73572,6 +74800,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -73806,6 +75035,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -74029,6 +75259,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -74247,6 +75478,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -74470,6 +75702,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -74704,6 +75937,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -74927,6 +76161,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -75145,6 +76380,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -75368,6 +76604,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -75602,6 +76839,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -75825,6 +77063,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -76043,6 +77282,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -76266,6 +77506,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -76500,6 +77741,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -76723,6 +77965,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -76941,6 +78184,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -77164,6 +78408,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -77398,6 +78643,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -77621,6 +78867,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -77839,6 +79086,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -78062,6 +79310,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -78296,6 +79545,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -78519,6 +79769,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -78737,6 +79988,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -78960,6 +80212,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -79194,6 +80447,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -79417,6 +80671,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -79635,6 +80890,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -79858,6 +81114,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -80092,6 +81349,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -80315,6 +81573,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -80533,6 +81792,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -80756,6 +82016,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -80990,6 +82251,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -81213,6 +82475,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -81431,6 +82694,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -81654,6 +82918,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -81888,6 +83153,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -82111,6 +83377,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -82329,6 +83596,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -82552,6 +83820,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -82786,6 +84055,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -83009,6 +84279,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -83227,6 +84498,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -83450,6 +84722,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -83684,6 +84957,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -83907,6 +85181,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -84125,6 +85400,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -84348,6 +85624,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -84582,6 +85859,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -84805,6 +86083,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -85023,6 +86302,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -85246,6 +86526,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -85480,6 +86761,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -85703,6 +86985,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -85921,6 +87204,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -86144,6 +87428,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -86378,6 +87663,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -86601,6 +87887,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -86819,6 +88106,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -87042,6 +88330,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -87276,6 +88565,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -87499,6 +88789,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -87717,6 +89008,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -87940,6 +89232,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -88174,6 +89467,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -88397,6 +89691,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -88615,6 +89910,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -88838,6 +90134,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -89072,6 +90369,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -89295,6 +90593,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -89513,6 +90812,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -89736,6 +91036,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -89970,6 +91271,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -90193,6 +91495,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -90411,6 +91714,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -90634,6 +91938,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -90868,6 +92173,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -91091,6 +92397,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -91309,6 +92616,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -91532,6 +92840,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -91766,6 +93075,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -91989,6 +93299,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -92207,6 +93518,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -92430,6 +93742,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -92664,6 +93977,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -92887,6 +94201,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -93105,6 +94420,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -93328,6 +94644,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -93562,6 +94879,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -93785,6 +95103,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -94003,6 +95322,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -94226,6 +95546,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -94460,6 +95781,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -94683,6 +96005,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -94901,6 +96224,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -95124,6 +96448,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -95358,6 +96683,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -95581,6 +96907,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -95799,6 +97126,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -96022,6 +97350,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -96256,6 +97585,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -96479,6 +97809,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -96697,6 +98028,7 @@ export type VendorMasterCreateWithoutMachineCostDescriptionsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
   attendances?: Prisma.attendanceCreateNestedManyWithoutVendorInput
@@ -96920,6 +98252,7 @@ export type VendorMasterUncheckedCreateWithoutMachineCostDescriptionsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
   attendance_logs?: Prisma.attendance_logsUncheckedCreateNestedManyWithoutVendorInput
@@ -97154,6 +98487,7 @@ export type VendorMasterUpdateWithoutMachineCostDescriptionsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
   attendances?: Prisma.attendanceUpdateManyWithoutVendorNestedInput
@@ -97377,6 +98711,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineCostDescriptionsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
   attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutVendorNestedInput
@@ -97595,6 +98930,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -97818,6 +99154,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -98052,6 +99389,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -98275,6 +99613,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -98493,6 +99832,7 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -98716,6 +100056,7 @@ export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -98950,6 +100291,7 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -99173,6 +100515,7 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -99391,6 +100734,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -99614,6 +100958,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -99848,6 +101193,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -100071,6 +101417,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -100289,6 +101636,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -100512,6 +101860,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -100746,6 +102095,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -100969,6 +102319,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -101187,6 +102538,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -101410,6 +102762,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -101644,6 +102997,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -101867,6 +103221,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -102085,6 +103440,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -102308,6 +103664,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -102542,6 +103899,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -102765,6 +104123,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -102983,6 +104342,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -103206,6 +104566,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -103440,6 +104801,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -103663,6 +105025,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -103881,6 +105244,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -104104,6 +105468,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -104338,6 +105703,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -104561,6 +105927,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -104779,6 +106146,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -105002,6 +106370,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -105236,6 +106605,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -105459,6 +106829,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -105677,6 +107048,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -105900,6 +107272,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -106134,6 +107507,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -106357,6 +107731,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -106575,6 +107950,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -106797,6 +108173,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -107099,6 +108476,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -107322,6 +108700,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -107556,6 +108935,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -107779,6 +109159,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -107997,6 +109378,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -108220,6 +109602,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -108454,6 +109837,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -108677,6 +110061,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -108895,6 +110280,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -109118,6 +110504,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -109352,6 +110739,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -109575,6 +110963,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -109793,6 +111182,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -110016,6 +111406,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -110250,6 +111641,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -110473,6 +111865,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -110691,6 +112084,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -110914,6 +112308,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -111148,6 +112543,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -111371,6 +112767,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -111589,6 +112986,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -111812,6 +113210,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -112046,6 +113445,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -112269,6 +113669,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -112487,6 +113888,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -112710,6 +114112,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -112944,6 +114347,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -113167,6 +114571,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -113385,6 +114790,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -113608,6 +115014,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -113842,6 +115249,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -114065,6 +115473,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -114283,6 +115692,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -114506,6 +115916,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -114740,6 +116151,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -114963,6 +116375,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -115181,6 +116594,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -115404,6 +116818,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -115638,6 +117053,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -115861,6 +117277,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -116079,6 +117496,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -116302,6 +117720,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -116536,6 +117955,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -116759,6 +118179,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -116977,6 +118398,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -117200,6 +118622,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -117434,6 +118857,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -117657,6 +119081,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -117875,6 +119300,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -118098,6 +119524,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -118332,6 +119759,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -118555,6 +119983,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -118773,6 +120202,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -118996,6 +120426,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -119230,6 +120661,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -119453,6 +120885,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -119671,6 +121104,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -119894,6 +121328,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -120128,6 +121563,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -120351,6 +121787,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -120569,6 +122006,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -120792,6 +122230,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -121026,6 +122465,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -121249,6 +122689,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -121467,6 +122908,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -121690,6 +123132,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -121924,6 +123367,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -122147,6 +123591,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -122365,6 +123810,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -122588,6 +124034,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -122822,6 +124269,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -123045,6 +124493,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -123263,6 +124712,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -123486,6 +124936,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -123720,6 +125171,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -123943,6 +125395,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -124161,6 +125614,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -124384,6 +125838,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -124618,6 +126073,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -124841,6 +126297,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -125059,6 +126516,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -125282,6 +126740,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -125516,6 +126975,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -125739,6 +127199,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -125957,6 +127418,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -126180,6 +127642,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -126414,6 +127877,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -126637,6 +128101,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -126855,6 +128320,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -127078,6 +128544,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -127312,6 +128779,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -127535,6 +129003,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -127753,6 +129222,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -127976,6 +129446,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -128210,6 +129681,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -128433,6 +129905,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -128651,6 +130124,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -128874,6 +130348,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -129108,6 +130583,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -129331,6 +130807,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -129549,6 +131026,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -129772,6 +131250,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -130006,6 +131485,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -130229,6 +131709,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -130447,6 +131928,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -130670,6 +132152,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -130904,6 +132387,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -131127,6 +132611,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -131345,6 +132830,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -131568,6 +133054,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -131802,6 +133289,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -132025,6 +133513,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -132243,6 +133732,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -132466,6 +133956,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -132700,6 +134191,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -132923,6 +134415,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -133141,6 +134634,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -133364,6 +134858,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -133598,6 +135093,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -133821,6 +135317,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -134039,6 +135536,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -134262,6 +135760,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -134496,6 +135995,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -134719,6 +136219,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -134937,6 +136438,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -135160,6 +136662,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -135394,6 +136897,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -135617,6 +137121,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -135835,6 +137340,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -136058,6 +137564,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -136292,6 +137799,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -136515,6 +138023,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -136733,6 +138242,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -136956,6 +138466,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -137190,6 +138701,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -137413,6 +138925,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -137631,6 +139144,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -137854,6 +139368,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -138088,6 +139603,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -138311,6 +139827,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -138529,6 +140046,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -138752,6 +140270,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -138986,6 +140505,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -139209,6 +140729,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -139427,6 +140948,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -139650,6 +141172,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -139884,6 +141407,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -140107,6 +141631,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -140325,6 +141850,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -140548,6 +142074,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -140782,6 +142309,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -141005,6 +142533,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -141223,6 +142752,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -141446,6 +142976,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -141680,6 +143211,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -141903,6 +143435,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -142121,6 +143654,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -142344,6 +143878,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -142578,6 +144113,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -142801,6 +144337,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -143019,6 +144556,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -143242,6 +144780,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -143476,6 +145015,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -143699,6 +145239,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -143917,6 +145458,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -144140,6 +145682,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -144374,6 +145917,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -144597,6 +146141,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -144815,6 +146360,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -145038,6 +146584,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -145272,6 +146819,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -145495,6 +147043,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -145713,6 +147262,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -145936,6 +147486,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -146170,6 +147721,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -146393,6 +147945,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -146611,6 +148164,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -146834,6 +148388,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -147068,6 +148623,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -147291,6 +148847,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -147509,6 +149066,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -147732,6 +149290,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -147966,6 +149525,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -148189,6 +149749,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -148407,6 +149968,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
   attendances?: Prisma.attendanceCreateNestedManyWithoutVendorInput
@@ -148630,6 +150192,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
   attendance_logs?: Prisma.attendance_logsUncheckedCreateNestedManyWithoutVendorInput
@@ -148864,6 +150427,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
   attendances?: Prisma.attendanceUpdateManyWithoutVendorNestedInput
@@ -149087,6 +150651,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
   attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutVendorNestedInput
@@ -149305,6 +150870,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -149528,6 +151094,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -149762,6 +151329,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -149985,6 +151553,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -150203,6 +151772,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -150426,6 +151996,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -150660,6 +152231,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -150883,6 +152455,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -151101,6 +152674,7 @@ export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -151324,6 +152898,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInp
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -151558,6 +153133,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -151781,6 +153357,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInp
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -151999,6 +153576,7 @@ export type VendorMasterCreateWithoutWalkinQuestionnairesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -152222,6 +153800,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -152456,6 +154035,7 @@ export type VendorMasterUpdateWithoutWalkinQuestionnairesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -152679,6 +154259,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -152897,6 +154478,7 @@ export type VendorMasterCreateWithoutWalkinResponsesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -153120,6 +154702,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinResponsesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -153354,6 +154937,7 @@ export type VendorMasterUpdateWithoutWalkinResponsesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -153577,6 +155161,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinResponsesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -153795,6 +155380,7 @@ export type VendorMasterCreateWithoutWalkinUploadsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -154018,6 +155604,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinUploadsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -154252,6 +155839,7 @@ export type VendorMasterUpdateWithoutWalkinUploadsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -154475,6 +156063,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinUploadsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -154693,6 +156282,7 @@ export type VendorMasterCreateWithoutTime_zone_masterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceCreateNestedManyWithoutVendorInput
@@ -154915,6 +156505,7 @@ export type VendorMasterUncheckedCreateWithoutTime_zone_masterInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -155160,6 +156751,7 @@ export type VendorMasterCreateWithoutAttendancesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -155383,6 +156975,7 @@ export type VendorMasterUncheckedCreateWithoutAttendancesInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendance_logs?: Prisma.attendance_logsUncheckedCreateNestedManyWithoutVendorInput
@@ -155617,6 +157210,7 @@ export type VendorMasterUpdateWithoutAttendancesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -155840,6 +157434,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendancesInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutVendorNestedInput
@@ -156058,6 +157653,7 @@ export type VendorMasterCreateWithoutAttendance_logsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
   time_zone_master?: Prisma.time_zone_masterCreateNestedOneWithoutVendorsInput
@@ -156281,6 +157877,7 @@ export type VendorMasterUncheckedCreateWithoutAttendance_logsInput = {
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutVendorInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedCreateNestedManyWithoutVendorInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
   attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutVendorInput
@@ -156515,6 +158112,7 @@ export type VendorMasterUpdateWithoutAttendance_logsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -156738,6 +158336,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendance_logsInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -157009,6 +158608,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   time_zone_master?: Prisma.time_zone_masterUpdateOneWithoutVendorsNestedInput
@@ -157231,6 +158831,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -157556,6 +159157,7 @@ export type VendorMasterUpdateWithoutTime_zone_masterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUpdateManyWithoutVendorNestedInput
@@ -157778,6 +159380,7 @@ export type VendorMasterUncheckedUpdateWithoutTime_zone_masterInput = {
   is_walkin_questions_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutVendorNestedInput
   machineCostDescriptions?: Prisma.MachineCostDescriptionUncheckedUpdateManyWithoutVendorNestedInput
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
   attendances?: Prisma.attendanceUncheckedUpdateManyWithoutVendorNestedInput
@@ -158007,6 +159610,7 @@ export type VendorMasterUncheckedUpdateManyWithoutTime_zone_masterInput = {
  */
 
 export type VendorMasterCountOutputType = {
+  instanceStageHistory: number
   machineCostDescriptions: number
   productsRequiredForProduction: number
   attendances: number
@@ -158178,6 +159782,7 @@ export type VendorMasterCountOutputType = {
 }
 
 export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  instanceStageHistory?: boolean | VendorMasterCountOutputTypeCountInstanceStageHistoryArgs
   machineCostDescriptions?: boolean | VendorMasterCountOutputTypeCountMachineCostDescriptionsArgs
   productsRequiredForProduction?: boolean | VendorMasterCountOutputTypeCountProductsRequiredForProductionArgs
   attendances?: boolean | VendorMasterCountOutputTypeCountAttendancesArgs
@@ -158356,6 +159961,13 @@ export type VendorMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
    * Select specific fields to fetch from the VendorMasterCountOutputType
    */
   select?: Prisma.VendorMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountInstanceStageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstanceStageHistoryWhereInput
 }
 
 /**
@@ -159587,6 +161199,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_walkin_questions_feature_enabled?: boolean
   push_lead_to_cadbid?: boolean
   is_available_unique_code?: boolean
+  instanceStageHistory?: boolean | Prisma.VendorMaster$instanceStageHistoryArgs<ExtArgs>
   machineCostDescriptions?: boolean | Prisma.VendorMaster$machineCostDescriptionsArgs<ExtArgs>
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
   time_zone_master?: boolean | Prisma.VendorMaster$time_zone_masterArgs<ExtArgs>
@@ -159928,6 +161541,7 @@ export type VendorMasterSelectScalar = {
 
 export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"site_readiness_questions" | "id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "time_zone_id" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_miscellaneous_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_hrms_master_enabled" | "is_online_lead_feature_enabled" | "is_walkin_questions_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  instanceStageHistory?: boolean | Prisma.VendorMaster$instanceStageHistoryArgs<ExtArgs>
   machineCostDescriptions?: boolean | Prisma.VendorMaster$machineCostDescriptionsArgs<ExtArgs>
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
   time_zone_master?: boolean | Prisma.VendorMaster$time_zone_masterArgs<ExtArgs>
@@ -160112,6 +161726,7 @@ export type VendorMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "VendorMaster"
   objects: {
+    instanceStageHistory: Prisma.$InstanceStageHistoryPayload<ExtArgs>[]
     machineCostDescriptions: Prisma.$MachineCostDescriptionPayload<ExtArgs>[]
     productsRequiredForProduction: Prisma.$ProductsRequiredForProductionPayload<ExtArgs>[]
     time_zone_master: Prisma.$time_zone_masterPayload<ExtArgs> | null
@@ -160729,6 +162344,7 @@ readonly fields: VendorMasterFieldRefs;
  */
 export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  instanceStageHistory<T extends Prisma.VendorMaster$instanceStageHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$instanceStageHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstanceStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   machineCostDescriptions<T extends Prisma.VendorMaster$machineCostDescriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$machineCostDescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MachineCostDescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productsRequiredForProduction<T extends Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsRequiredForProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   time_zone_master<T extends Prisma.VendorMaster$time_zone_masterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$time_zone_masterArgs<ExtArgs>>): Prisma.Prisma__time_zone_masterClient<runtime.Types.Result.GetResult<Prisma.$time_zone_masterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -161377,6 +162993,30 @@ export type VendorMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many VendorMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * VendorMaster.instanceStageHistory
+ */
+export type VendorMaster$instanceStageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InstanceStageHistory
+   */
+  select?: Prisma.InstanceStageHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InstanceStageHistory
+   */
+  omit?: Prisma.InstanceStageHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InstanceStageHistoryInclude<ExtArgs> | null
+  where?: Prisma.InstanceStageHistoryWhereInput
+  orderBy?: Prisma.InstanceStageHistoryOrderByWithRelationInput | Prisma.InstanceStageHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.InstanceStageHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InstanceStageHistoryScalarFieldEnum | Prisma.InstanceStageHistoryScalarFieldEnum[]
 }
 
 /**

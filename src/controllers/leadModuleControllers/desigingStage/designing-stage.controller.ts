@@ -5357,6 +5357,7 @@ export class DesigingStageController {
         select: {
           id: true,
           status_id: true,
+          vendor: { select: { handlesLargeScaleProjects: true } },
           statusType: {
             select: {
               id: true,
@@ -5380,6 +5381,7 @@ export class DesigingStageController {
           },
           select: {
             id: true,
+            stageStatus: { select: { id: true, type: true, tag: true } },
             is_tech_check_completed: true,
             is_order_login_completed: true,
           },
@@ -5410,6 +5412,12 @@ export class DesigingStageController {
             lead_status: lead.statusType?.type,
             lead_status_tag: lead.statusType?.tag,
 
+            instance_stage_tag: lead.vendor.handlesLargeScaleProjects
+              ? (instance.stageStatus && !["Type 8", "Type 9", "Type 10"].includes(instance.stageStatus.tag)
+                ? instance.stageStatus.tag
+                : instance.is_order_login_completed && instance.is_tech_check_completed ? "Type 10"
+                : instance.is_tech_check_completed ? "Type 9" : "Type 8")
+              : undefined,
             instance_id: instance.id,
             workflow_stage: stage,
           },

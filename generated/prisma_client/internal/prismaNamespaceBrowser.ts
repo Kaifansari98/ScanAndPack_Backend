@@ -131,6 +131,7 @@ export const ModelName = {
   LeadAmcContract: 'LeadAmcContract',
   LeadServiceSchedule: 'LeadServiceSchedule',
   StatusTypeMaster: 'StatusTypeMaster',
+  InstanceStageHistory: 'InstanceStageHistory',
   LeadStatusLogs: 'LeadStatusLogs',
   LeadDesignMeeting: 'LeadDesignMeeting',
   LeadClientVisit: 'LeadClientVisit',
@@ -1501,6 +1502,7 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   quantity_index: 'quantity_index',
   title: 'title',
   status: 'status',
+  stage_status_id: 'stage_status_id',
   description: 'description',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -1710,6 +1712,19 @@ export const StatusTypeMasterScalarFieldEnum = {
 } as const
 
 export type StatusTypeMasterScalarFieldEnum = (typeof StatusTypeMasterScalarFieldEnum)[keyof typeof StatusTypeMasterScalarFieldEnum]
+
+
+export const InstanceStageHistoryScalarFieldEnum = {
+  id: 'id',
+  instance_id: 'instance_id',
+  vendor_id: 'vendor_id',
+  from_status_id: 'from_status_id',
+  to_status_id: 'to_status_id',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type InstanceStageHistoryScalarFieldEnum = (typeof InstanceStageHistoryScalarFieldEnum)[keyof typeof InstanceStageHistoryScalarFieldEnum]
 
 
 export const LeadStatusLogsScalarFieldEnum = {

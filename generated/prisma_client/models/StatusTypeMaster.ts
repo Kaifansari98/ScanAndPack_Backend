@@ -212,6 +212,9 @@ export type StatusTypeMasterWhereInput = {
   type?: Prisma.StringFilter<"StatusTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"StatusTypeMaster"> | number
   tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
+  stageInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
+  instanceStagesFrom?: Prisma.InstanceStageHistoryListRelationFilter
+  instanceStagesTo?: Prisma.InstanceStageHistoryListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
   leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
@@ -224,6 +227,9 @@ export type StatusTypeMasterOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  stageInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryOrderByRelationAggregateInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryOrderByRelationAggregateInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
   leadStatusLogs?: Prisma.LeadStatusLogsOrderByRelationAggregateInput
@@ -239,6 +245,9 @@ export type StatusTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"StatusTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"StatusTypeMaster"> | number
   tag?: Prisma.StringFilter<"StatusTypeMaster"> | string
+  stageInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
+  instanceStagesFrom?: Prisma.InstanceStageHistoryListRelationFilter
+  instanceStagesTo?: Prisma.InstanceStageHistoryListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
   leadStatusLogs?: Prisma.LeadStatusLogsListRelationFilter
@@ -271,6 +280,9 @@ export type StatusTypeMasterScalarWhereWithAggregatesInput = {
 export type StatusTypeMasterCreateInput = {
   type: string
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
@@ -283,6 +295,9 @@ export type StatusTypeMasterUncheckedCreateInput = {
   type: string
   vendor_id: number
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
@@ -292,6 +307,9 @@ export type StatusTypeMasterUncheckedCreateInput = {
 export type StatusTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
@@ -304,6 +322,9 @@ export type StatusTypeMasterUncheckedUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
@@ -438,6 +459,22 @@ export type StatusTypeMasterUpdateOneWithoutLeadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StatusTypeMasterUpdateToOneWithWhereWithoutLeadsInput, Prisma.StatusTypeMasterUpdateWithoutLeadsInput>, Prisma.StatusTypeMasterUncheckedUpdateWithoutLeadsInput>
 }
 
+export type StatusTypeMasterCreateNestedOneWithoutStageInstancesInput = {
+  create?: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutStageInstancesInput, Prisma.StatusTypeMasterUncheckedCreateWithoutStageInstancesInput>
+  connectOrCreate?: Prisma.StatusTypeMasterCreateOrConnectWithoutStageInstancesInput
+  connect?: Prisma.StatusTypeMasterWhereUniqueInput
+}
+
+export type StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput = {
+  create?: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutStageInstancesInput, Prisma.StatusTypeMasterUncheckedCreateWithoutStageInstancesInput>
+  connectOrCreate?: Prisma.StatusTypeMasterCreateOrConnectWithoutStageInstancesInput
+  upsert?: Prisma.StatusTypeMasterUpsertWithoutStageInstancesInput
+  disconnect?: Prisma.StatusTypeMasterWhereInput | boolean
+  delete?: Prisma.StatusTypeMasterWhereInput | boolean
+  connect?: Prisma.StatusTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StatusTypeMasterUpdateToOneWithWhereWithoutStageInstancesInput, Prisma.StatusTypeMasterUpdateWithoutStageInstancesInput>, Prisma.StatusTypeMasterUncheckedUpdateWithoutStageInstancesInput>
+}
+
 export type StatusTypeMasterCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutPaymentsInput, Prisma.StatusTypeMasterUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.StatusTypeMasterCreateOrConnectWithoutPaymentsInput
@@ -452,6 +489,36 @@ export type StatusTypeMasterUpdateOneWithoutPaymentsNestedInput = {
   delete?: Prisma.StatusTypeMasterWhereInput | boolean
   connect?: Prisma.StatusTypeMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.StatusTypeMasterUpdateToOneWithWhereWithoutPaymentsInput, Prisma.StatusTypeMasterUpdateWithoutPaymentsInput>, Prisma.StatusTypeMasterUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type StatusTypeMasterCreateNestedOneWithoutInstanceStagesFromInput = {
+  create?: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesFromInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesFromInput>
+  connectOrCreate?: Prisma.StatusTypeMasterCreateOrConnectWithoutInstanceStagesFromInput
+  connect?: Prisma.StatusTypeMasterWhereUniqueInput
+}
+
+export type StatusTypeMasterCreateNestedOneWithoutInstanceStagesToInput = {
+  create?: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesToInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesToInput>
+  connectOrCreate?: Prisma.StatusTypeMasterCreateOrConnectWithoutInstanceStagesToInput
+  connect?: Prisma.StatusTypeMasterWhereUniqueInput
+}
+
+export type StatusTypeMasterUpdateOneWithoutInstanceStagesFromNestedInput = {
+  create?: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesFromInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesFromInput>
+  connectOrCreate?: Prisma.StatusTypeMasterCreateOrConnectWithoutInstanceStagesFromInput
+  upsert?: Prisma.StatusTypeMasterUpsertWithoutInstanceStagesFromInput
+  disconnect?: Prisma.StatusTypeMasterWhereInput | boolean
+  delete?: Prisma.StatusTypeMasterWhereInput | boolean
+  connect?: Prisma.StatusTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StatusTypeMasterUpdateToOneWithWhereWithoutInstanceStagesFromInput, Prisma.StatusTypeMasterUpdateWithoutInstanceStagesFromInput>, Prisma.StatusTypeMasterUncheckedUpdateWithoutInstanceStagesFromInput>
+}
+
+export type StatusTypeMasterUpdateOneRequiredWithoutInstanceStagesToNestedInput = {
+  create?: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesToInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesToInput>
+  connectOrCreate?: Prisma.StatusTypeMasterCreateOrConnectWithoutInstanceStagesToInput
+  upsert?: Prisma.StatusTypeMasterUpsertWithoutInstanceStagesToInput
+  connect?: Prisma.StatusTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StatusTypeMasterUpdateToOneWithWhereWithoutInstanceStagesToInput, Prisma.StatusTypeMasterUpdateWithoutInstanceStagesToInput>, Prisma.StatusTypeMasterUncheckedUpdateWithoutInstanceStagesToInput>
 }
 
 export type StatusTypeMasterCreateNestedOneWithoutLeadStatusLogsInput = {
@@ -487,6 +554,9 @@ export type StatusTypeMasterUpdateOneWithoutLeadDetailedLogsNestedInput = {
 export type StatusTypeMasterCreateWithoutVendorInput = {
   type: string
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
@@ -497,6 +567,9 @@ export type StatusTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   type: string
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
@@ -542,6 +615,9 @@ export type StatusTypeMasterScalarWhereInput = {
 export type StatusTypeMasterCreateWithoutLeadsInput = {
   type: string
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
   leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutStatusTypeInput
@@ -553,6 +629,9 @@ export type StatusTypeMasterUncheckedCreateWithoutLeadsInput = {
   type: string
   vendor_id: number
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutStatusTypeInput
@@ -577,6 +656,9 @@ export type StatusTypeMasterUpdateToOneWithWhereWithoutLeadsInput = {
 export type StatusTypeMasterUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutStatusTypeNestedInput
@@ -588,7 +670,76 @@ export type StatusTypeMasterUncheckedUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutStatusTypeNestedInput
+}
+
+export type StatusTypeMasterCreateWithoutStageInstancesInput = {
+  type: string
+  tag: string
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutStatusTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
+}
+
+export type StatusTypeMasterUncheckedCreateWithoutStageInstancesInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutStatusTypeInput
+}
+
+export type StatusTypeMasterCreateOrConnectWithoutStageInstancesInput = {
+  where: Prisma.StatusTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutStageInstancesInput, Prisma.StatusTypeMasterUncheckedCreateWithoutStageInstancesInput>
+}
+
+export type StatusTypeMasterUpsertWithoutStageInstancesInput = {
+  update: Prisma.XOR<Prisma.StatusTypeMasterUpdateWithoutStageInstancesInput, Prisma.StatusTypeMasterUncheckedUpdateWithoutStageInstancesInput>
+  create: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutStageInstancesInput, Prisma.StatusTypeMasterUncheckedCreateWithoutStageInstancesInput>
+  where?: Prisma.StatusTypeMasterWhereInput
+}
+
+export type StatusTypeMasterUpdateToOneWithWhereWithoutStageInstancesInput = {
+  where?: Prisma.StatusTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.StatusTypeMasterUpdateWithoutStageInstancesInput, Prisma.StatusTypeMasterUncheckedUpdateWithoutStageInstancesInput>
+}
+
+export type StatusTypeMasterUpdateWithoutStageInstancesInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutStatusTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
+}
+
+export type StatusTypeMasterUncheckedUpdateWithoutStageInstancesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutStatusTypeNestedInput
 }
@@ -596,6 +747,9 @@ export type StatusTypeMasterUncheckedUpdateWithoutLeadsInput = {
 export type StatusTypeMasterCreateWithoutPaymentsInput = {
   type: string
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
@@ -607,6 +761,9 @@ export type StatusTypeMasterUncheckedCreateWithoutPaymentsInput = {
   type: string
   vendor_id: number
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
@@ -631,6 +788,9 @@ export type StatusTypeMasterUpdateToOneWithWhereWithoutPaymentsInput = {
 export type StatusTypeMasterUpdateWithoutPaymentsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
@@ -642,14 +802,152 @@ export type StatusTypeMasterUncheckedUpdateWithoutPaymentsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
 }
 
+export type StatusTypeMasterCreateWithoutInstanceStagesFromInput = {
+  type: string
+  tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutStatusTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
+}
+
+export type StatusTypeMasterUncheckedCreateWithoutInstanceStagesFromInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutStatusTypeInput
+}
+
+export type StatusTypeMasterCreateOrConnectWithoutInstanceStagesFromInput = {
+  where: Prisma.StatusTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesFromInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesFromInput>
+}
+
+export type StatusTypeMasterCreateWithoutInstanceStagesToInput = {
+  type: string
+  tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutStatusTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutStatusTypesInput
+}
+
+export type StatusTypeMasterUncheckedCreateWithoutInstanceStagesToInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutStatusTypeInput
+}
+
+export type StatusTypeMasterCreateOrConnectWithoutInstanceStagesToInput = {
+  where: Prisma.StatusTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesToInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesToInput>
+}
+
+export type StatusTypeMasterUpsertWithoutInstanceStagesFromInput = {
+  update: Prisma.XOR<Prisma.StatusTypeMasterUpdateWithoutInstanceStagesFromInput, Prisma.StatusTypeMasterUncheckedUpdateWithoutInstanceStagesFromInput>
+  create: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesFromInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesFromInput>
+  where?: Prisma.StatusTypeMasterWhereInput
+}
+
+export type StatusTypeMasterUpdateToOneWithWhereWithoutInstanceStagesFromInput = {
+  where?: Prisma.StatusTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.StatusTypeMasterUpdateWithoutInstanceStagesFromInput, Prisma.StatusTypeMasterUncheckedUpdateWithoutInstanceStagesFromInput>
+}
+
+export type StatusTypeMasterUpdateWithoutInstanceStagesFromInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutStatusTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
+}
+
+export type StatusTypeMasterUncheckedUpdateWithoutInstanceStagesFromInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutStatusTypeNestedInput
+}
+
+export type StatusTypeMasterUpsertWithoutInstanceStagesToInput = {
+  update: Prisma.XOR<Prisma.StatusTypeMasterUpdateWithoutInstanceStagesToInput, Prisma.StatusTypeMasterUncheckedUpdateWithoutInstanceStagesToInput>
+  create: Prisma.XOR<Prisma.StatusTypeMasterCreateWithoutInstanceStagesToInput, Prisma.StatusTypeMasterUncheckedCreateWithoutInstanceStagesToInput>
+  where?: Prisma.StatusTypeMasterWhereInput
+}
+
+export type StatusTypeMasterUpdateToOneWithWhereWithoutInstanceStagesToInput = {
+  where?: Prisma.StatusTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.StatusTypeMasterUpdateWithoutInstanceStagesToInput, Prisma.StatusTypeMasterUncheckedUpdateWithoutInstanceStagesToInput>
+}
+
+export type StatusTypeMasterUpdateWithoutInstanceStagesToInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutStatusTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutStatusTypesNestedInput
+}
+
+export type StatusTypeMasterUncheckedUpdateWithoutInstanceStagesToInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutStatusTypeNestedInput
+}
+
 export type StatusTypeMasterCreateWithoutLeadStatusLogsInput = {
   type: string
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutStatusTypeInput
@@ -661,6 +959,9 @@ export type StatusTypeMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   type: string
   vendor_id: number
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutStageInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutStatusTypeInput
@@ -685,6 +986,9 @@ export type StatusTypeMasterUpdateToOneWithWhereWithoutLeadStatusLogsInput = {
 export type StatusTypeMasterUpdateWithoutLeadStatusLogsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutStatusTypeNestedInput
@@ -696,6 +1000,9 @@ export type StatusTypeMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutStatusTypeNestedInput
@@ -704,6 +1011,9 @@ export type StatusTypeMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
 export type StatusTypeMasterCreateWithoutLeadDetailedLogsInput = {
   type: string
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryCreateNestedManyWithoutToStatusInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutStatusTypeInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutStatusTypeInput
@@ -715,6 +1025,9 @@ export type StatusTypeMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   type: string
   vendor_id: number
   tag: string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutStageStatusInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutFromStatusInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutToStatusInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutStatusTypeInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutStatusTypeInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutStatusTypeInput
@@ -739,6 +1052,9 @@ export type StatusTypeMasterUpdateToOneWithWhereWithoutLeadDetailedLogsInput = {
 export type StatusTypeMasterUpdateWithoutLeadDetailedLogsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutStatusTypeNestedInput
@@ -750,6 +1066,9 @@ export type StatusTypeMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutStatusTypeNestedInput
@@ -764,6 +1083,9 @@ export type StatusTypeMasterCreateManyVendorInput = {
 export type StatusTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutStatusTypeNestedInput
@@ -774,6 +1096,9 @@ export type StatusTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  stageInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusNestedInput
+  instanceStagesFrom?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutFromStatusNestedInput
+  instanceStagesTo?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutToStatusNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutStageNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutStatusTypeNestedInput
   leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutStatusTypeNestedInput
@@ -792,6 +1117,9 @@ export type StatusTypeMasterUncheckedUpdateManyWithoutVendorInput = {
  */
 
 export type StatusTypeMasterCountOutputType = {
+  stageInstances: number
+  instanceStagesFrom: number
+  instanceStagesTo: number
   leadDetailedLogs: number
   leads: number
   leadStatusLogs: number
@@ -799,6 +1127,9 @@ export type StatusTypeMasterCountOutputType = {
 }
 
 export type StatusTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stageInstances?: boolean | StatusTypeMasterCountOutputTypeCountStageInstancesArgs
+  instanceStagesFrom?: boolean | StatusTypeMasterCountOutputTypeCountInstanceStagesFromArgs
+  instanceStagesTo?: boolean | StatusTypeMasterCountOutputTypeCountInstanceStagesToArgs
   leadDetailedLogs?: boolean | StatusTypeMasterCountOutputTypeCountLeadDetailedLogsArgs
   leads?: boolean | StatusTypeMasterCountOutputTypeCountLeadsArgs
   leadStatusLogs?: boolean | StatusTypeMasterCountOutputTypeCountLeadStatusLogsArgs
@@ -813,6 +1144,27 @@ export type StatusTypeMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.T
    * Select specific fields to fetch from the StatusTypeMasterCountOutputType
    */
   select?: Prisma.StatusTypeMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * StatusTypeMasterCountOutputType without action
+ */
+export type StatusTypeMasterCountOutputTypeCountStageInstancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+/**
+ * StatusTypeMasterCountOutputType without action
+ */
+export type StatusTypeMasterCountOutputTypeCountInstanceStagesFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstanceStageHistoryWhereInput
+}
+
+/**
+ * StatusTypeMasterCountOutputType without action
+ */
+export type StatusTypeMasterCountOutputTypeCountInstanceStagesToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstanceStageHistoryWhereInput
 }
 
 /**
@@ -849,6 +1201,9 @@ export type StatusTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Inte
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  stageInstances?: boolean | Prisma.StatusTypeMaster$stageInstancesArgs<ExtArgs>
+  instanceStagesFrom?: boolean | Prisma.StatusTypeMaster$instanceStagesFromArgs<ExtArgs>
+  instanceStagesTo?: boolean | Prisma.StatusTypeMaster$instanceStagesToArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.StatusTypeMaster$leadDetailedLogsArgs<ExtArgs>
   leads?: boolean | Prisma.StatusTypeMaster$leadsArgs<ExtArgs>
   leadStatusLogs?: boolean | Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs>
@@ -882,6 +1237,9 @@ export type StatusTypeMasterSelectScalar = {
 
 export type StatusTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag", ExtArgs["result"]["statusTypeMaster"]>
 export type StatusTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stageInstances?: boolean | Prisma.StatusTypeMaster$stageInstancesArgs<ExtArgs>
+  instanceStagesFrom?: boolean | Prisma.StatusTypeMaster$instanceStagesFromArgs<ExtArgs>
+  instanceStagesTo?: boolean | Prisma.StatusTypeMaster$instanceStagesToArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.StatusTypeMaster$leadDetailedLogsArgs<ExtArgs>
   leads?: boolean | Prisma.StatusTypeMaster$leadsArgs<ExtArgs>
   leadStatusLogs?: boolean | Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs>
@@ -899,6 +1257,9 @@ export type StatusTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $StatusTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "StatusTypeMaster"
   objects: {
+    stageInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
+    instanceStagesFrom: Prisma.$InstanceStageHistoryPayload<ExtArgs>[]
+    instanceStagesTo: Prisma.$InstanceStageHistoryPayload<ExtArgs>[]
     leadDetailedLogs: Prisma.$LeadDetailedLogsPayload<ExtArgs>[]
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
     leadStatusLogs: Prisma.$LeadStatusLogsPayload<ExtArgs>[]
@@ -1304,6 +1665,9 @@ readonly fields: StatusTypeMasterFieldRefs;
  */
 export interface Prisma__StatusTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  stageInstances<T extends Prisma.StatusTypeMaster$stageInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$stageInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  instanceStagesFrom<T extends Prisma.StatusTypeMaster$instanceStagesFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$instanceStagesFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstanceStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  instanceStagesTo<T extends Prisma.StatusTypeMaster$instanceStagesToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$instanceStagesToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstanceStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDetailedLogs<T extends Prisma.StatusTypeMaster$leadDetailedLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$leadDetailedLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.StatusTypeMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadStatusLogs<T extends Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StatusTypeMaster$leadStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadStatusLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1740,6 +2104,78 @@ export type StatusTypeMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many StatusTypeMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * StatusTypeMaster.stageInstances
+ */
+export type StatusTypeMaster$stageInstancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadProductStructureInstance
+   */
+  select?: Prisma.LeadProductStructureInstanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadProductStructureInstance
+   */
+  omit?: Prisma.LeadProductStructureInstanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadProductStructureInstanceInclude<ExtArgs> | null
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  orderBy?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput | Prisma.LeadProductStructureInstanceOrderByWithRelationInput[]
+  cursor?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadProductStructureInstanceScalarFieldEnum | Prisma.LeadProductStructureInstanceScalarFieldEnum[]
+}
+
+/**
+ * StatusTypeMaster.instanceStagesFrom
+ */
+export type StatusTypeMaster$instanceStagesFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InstanceStageHistory
+   */
+  select?: Prisma.InstanceStageHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InstanceStageHistory
+   */
+  omit?: Prisma.InstanceStageHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InstanceStageHistoryInclude<ExtArgs> | null
+  where?: Prisma.InstanceStageHistoryWhereInput
+  orderBy?: Prisma.InstanceStageHistoryOrderByWithRelationInput | Prisma.InstanceStageHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.InstanceStageHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InstanceStageHistoryScalarFieldEnum | Prisma.InstanceStageHistoryScalarFieldEnum[]
+}
+
+/**
+ * StatusTypeMaster.instanceStagesTo
+ */
+export type StatusTypeMaster$instanceStagesToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InstanceStageHistory
+   */
+  select?: Prisma.InstanceStageHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InstanceStageHistory
+   */
+  omit?: Prisma.InstanceStageHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InstanceStageHistoryInclude<ExtArgs> | null
+  where?: Prisma.InstanceStageHistoryWhereInput
+  orderBy?: Prisma.InstanceStageHistoryOrderByWithRelationInput | Prisma.InstanceStageHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.InstanceStageHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InstanceStageHistoryScalarFieldEnum | Prisma.InstanceStageHistoryScalarFieldEnum[]
 }
 
 /**

@@ -895,7 +895,7 @@ export class PostProductionController {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
       const leadId = Number(getParam(req.params.leadId));
-      const { updated_by } = req.body;
+      const { updated_by, instance_id } = req.body;
 
       if (!vendorId || !leadId || !updated_by) {
         return res.status(400).json({
@@ -910,12 +910,13 @@ export class PostProductionController {
         vendorId,
         leadId,
         updated_by,
-        baseUrl
+        baseUrl,
+        instance_id == null ? undefined : Number(instance_id),
       );
 
       return res.status(200).json({
         success: true,
-        message: "Lead successfully moved to Ready To Dispatch stage",
+        message: "Successfully moved to Ready To Dispatch stage",
         data: result,
       });
     } catch (error: any) {
@@ -923,7 +924,7 @@ export class PostProductionController {
         "[PreProductionController] moveLeadToReadyToDispatch error:",
         error
       );
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
         message: error.message || "Internal server error",
       });

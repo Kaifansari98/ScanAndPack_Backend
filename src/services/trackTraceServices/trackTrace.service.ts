@@ -4383,7 +4383,8 @@ export const getCutListMachine = async (
     // Mark assigned machines. There is one mapping per piece, so also count
     // how many pieces have been scanned at each machine.
     cutList.cutListMachineMapping.forEach((mapping) => {
-      const code = mapping.machine.machine_code;
+      const code = mapping.machine?.machine_code;
+      if (!code) return;
       const cell = row[code]?.assigned
         ? row[code]
         : { assigned: true, machineId: mapping.machine.id, total: 0, scanned: 0 };
@@ -13787,7 +13788,7 @@ export const getManualPackingItemsService = async (
 
   /*
   |--------------------------------------------------------------------------
-  | Step 2: Get CutList items applicable for manual packing
+  | Step 2: Get CutList items applicable for manual packing / QC
   |--------------------------------------------------------------------------
   */
 
@@ -13798,9 +13799,20 @@ export const getManualPackingItemsService = async (
       include_in_packing: true,
       scan_pack_validate: false,
       status: "Active",
-      category: {
-        scan_pack_validate: false,
-      },
+      OR: [
+        { category_id: null },
+        { category: { scan_pack_validate: false } },
+      ],
+      ...(machineId
+        ? {
+            cutListMachineMapping: {
+              some: {
+                machine_id: machineId,
+                project_id: projectId,
+              },
+            },
+          }
+        : {}),
     },
     select: {
       id: true,
@@ -13862,80 +13874,119 @@ export const getManualPackingItemsService = async (
     });
   }
 
+  const cutListIds = cutListItems.map((item) => item.id);
+
   /*
   |--------------------------------------------------------------------------
-  | Step 3: Get packaging machines
+  | Step 3: Handle QC Station inspection mode (machineId provided)
   |--------------------------------------------------------------------------
   */
 
-  let packagingMachineIds: number[] = [];
   if (machineId) {
-    packagingMachineIds = [machineId];
-  } else {
-    const packagingMachines = await prisma.machineMaster.findMany({
+    // For QC machine inspection: Calculate already passed QC quantity at this machine
+    const passedQcRows = await prisma.cutListMachineMapping.groupBy({
+      by: ["cut_list_id"],
       where: {
+        project_id: projectId,
         vendor_id: vendorId,
-        machine_type_id: 18,
+        cut_list_id: { in: cutListIds },
+        machine_id: machineId,
+        actual_in_at: { not: null },
       },
-      select: {
-        id: true,
+      _sum: {
+        qty: true,
       },
     });
 
-    packagingMachineIds = packagingMachines.map((machine) => machine.id);
+    const passedQcMap = new Map<number, number>();
+    for (const row of passedQcRows) {
+      passedQcMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
+    }
+
+    const items = cutListItems.map((item) => {
+      const projectTotalQty = Number(item.qty ?? 0);
+      const passedQty = Number(passedQcMap.get(item.id) ?? 0);
+      const pendingQty = Math.max(0, projectTotalQty - passedQty);
+
+      return {
+        ...item,
+        total_qty: projectTotalQty,
+        qc_passed_qty: passedQty,
+        is_qc_routed: true,
+        packed_qty: passedQty, // Checked quantity
+        pending_qty: pendingQty, // Pending QC quantity
+        packing_status:
+          pendingQty === 0
+            ? "Completed"
+            : passedQty > 0
+              ? "Partially Checked"
+              : "Pending",
+      };
+    });
+
+    const summary = items.reduce(
+      (result, item) => {
+        result.total_qty += item.total_qty;
+        result.packed_qty += item.packed_qty;
+        result.pending_qty += item.pending_qty;
+        return result;
+      },
+      {
+        total_items: items.length,
+        total_qty: 0,
+        packed_qty: 0,
+        pending_qty: 0,
+      },
+    );
+
+    return validationResponse(1, "", {
+      project,
+      summary,
+      items,
+    });
   }
 
   /*
   |--------------------------------------------------------------------------
-  | Step 4: Get packed quantities
+  | Step 4: Packing Mode (!machineId) - Find packaging and QC machines
   |--------------------------------------------------------------------------
   */
 
-  const cutListIds = cutListItems.map((item) => item.id);
+  const packagingMachines = await prisma.machineMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      machine_type_id: 18,
+    },
+    select: {
+      id: true,
+    },
+  });
+  const packagingMachineIds = packagingMachines.map((machine) => machine.id);
 
   const packedQtyRows =
     packagingMachineIds.length > 0
       ? await prisma.cutListMachineMapping.groupBy({
           by: ["cut_list_id"],
-
           where: {
             project_id: projectId,
             vendor_id: vendorId,
-
-            cut_list_id: {
-              in: cutListIds,
-            },
-
-            machine_id: {
-              in: packagingMachineIds,
-            },
-
-            // A machine assignment is not a packed item. Manual hardware is
-            // packed only after it has been placed in a box and scanned into
-            // that box. QC mappings do not have a box_id, so keep their
-            // actual-in rows eligible when this endpoint is used for QC.
+            cut_list_id: { in: cutListIds },
+            machine_id: { in: packagingMachineIds },
             actual_in_at: { not: null },
-            ...(!machineId ? { box_id: { not: null } } : {}),
+            box_id: { not: null },
           },
-
           _sum: {
             qty: true,
           },
         })
       : [];
 
-  /*
-  |--------------------------------------------------------------------------
-  | Step 5: Packed Qty Map
-  |--------------------------------------------------------------------------
-  */
-
   const packedQtyMap = new Map<number, number>();
   for (const row of packedQtyRows) {
     packedQtyMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
   }
 
-  // Find QC Machines if we are in Packing mode (!machineId)
+  // Find QC Machines
   const qcMachines = await prisma.machineMaster.findMany({
     where: { vendor_id: vendorId, machine_type_id: 17, status: "ACTIVE" },
     select: { id: true },
@@ -13943,76 +13994,90 @@ export const getManualPackingItemsService = async (
   const qcMachineIds = qcMachines.map((m) => m.id);
   const hasQcMachines = qcMachineIds.length > 0;
 
-  const qcQtyRows =
-    !machineId && hasQcMachines
-      ? await prisma.cutListMachineMapping.groupBy({
-          by: ["cut_list_id"],
+  // Determine which items were routed to QC machine and how much passed QC
+  const qcMappings =
+    hasQcMachines
+      ? await prisma.cutListMachineMapping.findMany({
           where: {
             project_id: projectId,
             vendor_id: vendorId,
             cut_list_id: { in: cutListIds },
             machine_id: { in: qcMachineIds },
           },
-          _sum: { qty: true },
+          select: {
+            cut_list_id: true,
+            actual_in_at: true,
+            qty: true,
+          },
         })
       : [];
 
-  const qcQtyMap = new Map<number, number>();
-  for (const row of qcQtyRows) {
-    qcQtyMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
+  const qcRoutedCutListIds = new Set(qcMappings.map((m) => m.cut_list_id));
+  const qcPassedMap = new Map<number, number>();
+  for (const m of qcMappings) {
+    if (m.actual_in_at != null) {
+      qcPassedMap.set(
+        m.cut_list_id,
+        (qcPassedMap.get(m.cut_list_id) ?? 0) + Number(m.qty ?? 1),
+      );
+    }
   }
 
   /*
   |--------------------------------------------------------------------------
-  | Step 6: Prepare items
+  | Step 5: Prepare items for packing
+  |--------------------------------------------------------------------------
+  |
+  | If an item is routed to QC station:
+  |   Only the quantity that PASSED QC is eligible to move forward during packing!
+  |   If 0 passed QC, effectiveMaxQty = 0 (cannot pack until passed at QC).
+  | If an item is NOT routed to QC station:
+  |   Full project quantity is available to pack.
   |--------------------------------------------------------------------------
   */
 
   const items = cutListItems.map((item) => {
     const projectTotalQty = Number(item.qty ?? 0);
+    const isRoutedToQc = qcRoutedCutListIds.has(item.id);
+    const qcPassedQty = isRoutedToQc
+      ? Number(qcPassedMap.get(item.id) ?? 0)
+      : projectTotalQty;
 
-    const qcPassedQty =
-      !machineId && hasQcMachines ? Number(qcQtyMap.get(item.id) ?? 0) : 0;
-
-    // QC is an optional gate for manual hardware packing. Once QC quantities
-    // exist, packing is limited to the quantity that passed QC. Before the
-    // first QC mark, keep the normal project quantity available so operators
-    // can still pack hardware; the UI separately hides QC/Ready counters.
-    const effectiveMaxQty =
-      !machineId && hasQcMachines && qcPassedQty > 0
-        ? qcPassedQty
-        : projectTotalQty;
+    const effectiveMaxQty = isRoutedToQc ? qcPassedQty : projectTotalQty;
 
     const packedQty = Math.min(
       Number(packedQtyMap.get(item.id) ?? 0),
       effectiveMaxQty,
     );
 
-    const pendingQty = Math.max(effectiveMaxQty - packedQty, 0);
+    const pendingQty = Math.max(0, effectiveMaxQty - packedQty);
 
     return {
       ...item,
 
       total_qty: projectTotalQty,
-      // In packing mode, QC-passed quantity exists only after a QC mapping
-      // has actually been created. Keep this separate from pending_qty so a
-      // project with no QC marks does not appear "Ready" with a zero count.
-      qc_passed_qty: qcPassedQty,
+      qc_passed_qty: isRoutedToQc ? qcPassedQty : null,
+      is_qc_routed: isRoutedToQc,
+      effective_max_qty: effectiveMaxQty,
       packed_qty: packedQty,
       pending_qty: pendingQty,
 
       packing_status:
-        pendingQty === 0
-          ? "Packed"
-          : packedQty > 0
-            ? "Partially Packed"
-            : "Pending",
+        effectiveMaxQty === 0
+          ? "Pending QC"
+          : pendingQty === 0
+            ? isRoutedToQc && qcPassedQty < projectTotalQty
+              ? "Pending QC"
+              : "Packed"
+            : packedQty > 0
+              ? "Partially Packed"
+              : "Pending",
     };
   });
 
   /*
   |--------------------------------------------------------------------------
-  | Step 7: Summary
+  | Step 6: Summary
   |--------------------------------------------------------------------------
   */
 
@@ -14422,7 +14487,51 @@ export const addManualPackingItemService = async (
 
         const packedQty = Number(packedQtyResult._sum.qty ?? 0);
 
-        const pendingQty = Math.max(totalQty - packedQty, 0);
+        /*
+        |--------------------------------------------------------------------------
+        | Check if item is routed to QC station
+        |--------------------------------------------------------------------------
+        | If item is routed to QC station, only quantity that passed QC
+        | can move forward during packing!
+        |--------------------------------------------------------------------------
+        */
+        const qcMachines = await tx.machineMaster.findMany({
+          where: { vendor_id, machine_type_id: 17, status: "ACTIVE" },
+          select: { id: true },
+        });
+        const qcMachineIds = qcMachines.map((m) => m.id);
+
+        let isRoutedToQc = false;
+        let qcPassedQty = totalQty;
+
+        if (qcMachineIds.length > 0) {
+          const qcMappingCount = await tx.cutListMachineMapping.count({
+            where: {
+              cut_list_id,
+              project_id,
+              vendor_id,
+              machine_id: { in: qcMachineIds },
+            },
+          });
+          isRoutedToQc = qcMappingCount > 0;
+
+          if (isRoutedToQc) {
+            const qcPassedResult = await tx.cutListMachineMapping.aggregate({
+              where: {
+                cut_list_id,
+                project_id,
+                vendor_id,
+                machine_id: { in: qcMachineIds },
+                actual_in_at: { not: null },
+              },
+              _sum: { qty: true },
+            });
+            qcPassedQty = Number(qcPassedResult._sum.qty ?? 0);
+          }
+        }
+
+        const effectiveMaxQty = isRoutedToQc ? qcPassedQty : totalQty;
+        const pendingQty = Math.max(effectiveMaxQty - packedQty, 0);
 
         /*
           |--------------------------------------------------------------------------
@@ -14431,6 +14540,12 @@ export const addManualPackingItemService = async (
           */
 
         if (pendingQty <= 0) {
+          if (isRoutedToQc && qcPassedQty < totalQty) {
+            return validationResponse(
+              0,
+              `Cannot pack item: only ${qcPassedQty} of ${totalQty} has passed Quality Check. Please pass remaining quantity at QC station first.`,
+            );
+          }
           return validationResponse(0, "Item is already fully packed");
         }
 
@@ -14441,6 +14556,12 @@ export const addManualPackingItemService = async (
           */
 
         if (qty > pendingQty) {
+          if (isRoutedToQc && qcPassedQty < totalQty) {
+            return validationResponse(
+              0,
+              `Only ${pendingQty} qty is available to pack (${qcPassedQty} passed QC, ${packedQty} already packed).`,
+            );
+          }
           return validationResponse(0, `Only ${pendingQty} qty is pending`);
         }
 
@@ -15524,12 +15645,14 @@ export const addManualQualityItemService = async (
     const { project_id, vendor_id, machine_id, cut_list_id, qty, user_id } =
       payload;
 
+    const parsedQty = Number(qty);
     if (
       !project_id ||
       !vendor_id ||
       !machine_id ||
       !cut_list_id ||
-      !qty ||
+      !parsedQty ||
+      parsedQty <= 0 ||
       !user_id
     ) {
       return validationResponse(0, "Missing required fields");
@@ -15547,43 +15670,118 @@ export const addManualQualityItemService = async (
 
     if (!machine) return validationResponse(0, "Machine not found");
 
+    const totalCutListQty = Number(cutList.qty ?? 0);
+
     const result = await prisma.$transaction(async (tx) => {
-      // Find existing mapping or create new
-      let mapping = await tx.cutListMachineMapping.findFirst({
+      // Check existing passed quantity
+      const existingPassedResult = await tx.cutListMachineMapping.aggregate({
         where: {
           cut_list_id,
           machine_id,
           vendor_id,
           project_id,
-          row_created_source: "Manual_QC",
+          actual_in_at: { not: null },
         },
+        _sum: { qty: true },
+      });
+      const alreadyPassedQty = Number(existingPassedResult._sum.qty ?? 0);
+      const pendingQcQty = Math.max(0, totalCutListQty - alreadyPassedQty);
+
+      if (pendingQcQty <= 0) {
+        return validationResponse(
+          0,
+          "Item has already passed full Quality Check quantity",
+        );
+      }
+
+      if (parsedQty > pendingQcQty) {
+        return validationResponse(
+          0,
+          `Cannot pass ${parsedQty}. Only ${pendingQcQty} quantity is pending for Quality Check.`,
+        );
+      }
+
+      // Check if there are pending unscanned mappings (e.g. from assignMachine)
+      const pendingMappings = await tx.cutListMachineMapping.findMany({
+        where: {
+          cut_list_id,
+          machine_id,
+          vendor_id,
+          project_id,
+          actual_in_at: null,
+        },
+        take: parsedQty,
+        select: { id: true },
       });
 
-      if (mapping) {
-        mapping = await tx.cutListMachineMapping.update({
-          where: { id: mapping.id },
-          data: { qty: mapping.qty + qty, actual_in_at: new Date() },
-        });
-      } else {
-        mapping = await tx.cutListMachineMapping.create({
+      if (pendingMappings.length > 0) {
+        await tx.cutListMachineMapping.updateMany({
+          where: {
+            id: { in: pendingMappings.map((m) => m.id) },
+          },
           data: {
-            cut_list_id,
-            machine_id,
-            project_id,
-            vendor_id,
-            sequence_no: machine.sequence_no ?? 0,
-            expected_in: true,
-            expected_out: false,
-            status: "Pending",
             actual_in_at: new Date(),
             in_operator: user_id,
-            created_by: user_id,
-            qty,
+            status: "Completed",
             row_created_source: "Manual_QC",
           },
         });
       }
+
+      const remainingQty = parsedQty - pendingMappings.length;
+      let mapping;
+      if (remainingQty > 0) {
+        let manualQcRow = await tx.cutListMachineMapping.findFirst({
+          where: {
+            cut_list_id,
+            machine_id,
+            vendor_id,
+            project_id,
+            row_created_source: "Manual_QC",
+            actual_in_at: { not: null },
+          },
+        });
+
+        if (manualQcRow) {
+          mapping = await tx.cutListMachineMapping.update({
+            where: { id: manualQcRow.id },
+            data: {
+              qty: manualQcRow.qty + remainingQty,
+              actual_in_at: new Date(),
+              in_operator: user_id,
+              status: "Completed",
+            },
+          });
+        } else {
+          mapping = await tx.cutListMachineMapping.create({
+            data: {
+              cut_list_id,
+              machine_id,
+              project_id,
+              vendor_id,
+              lead_id: cutList.lead_id,
+              sequence_no: machine.sequence_no ?? 0,
+              expected_in: true,
+              expected_out: false,
+              status: "Completed",
+              actual_in_at: new Date(),
+              in_operator: user_id,
+              created_by: user_id,
+              qty: remainingQty,
+              row_created_source: "Manual_QC",
+            },
+          });
+        }
+      }
+
+      const newPassedQty = alreadyPassedQty + parsedQty;
+      const newPendingQcQty = Math.max(0, totalCutListQty - newPassedQty);
+
       return validationResponse(1, "Quality check passed for manual item", {
+        cut_list_id,
+        passed_qty: parsedQty,
+        total_passed_qty: newPassedQty,
+        pending_qc_qty: newPendingQcQty,
         mapping,
       });
     });
