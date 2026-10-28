@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  instanceStageHistory InstanceStageHistory[]
   site_readiness_questions Json?
   machineCostDescriptions                      MachineCostDescription[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
@@ -287,6 +288,7 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  instanceStageHistory InstanceStageHistory[]
   onlineLeadAssignedFranchises FranchiseMaster[] @relation("OnlineLeadSalesExecutive")
   productsRequiredForProduction                                                  ProductsRequiredForProduction[]
   id                                                                             Int                                            @id @default(autoincrement())
@@ -1955,6 +1957,9 @@ model LeadProductStructureInstance {
   quantity_index                             Int
   title                                      String
   status                                     ProductInstanceStatus           @default(open)
+  stage_status_id                            Int?
+  stageStatus                                StatusTypeMaster? @relation("InstanceStage", fields: [stage_status_id], references: [id])
+  stageHistory                               InstanceStageHistory[]
   description                                String?                         @db.VarChar(2000)
   created_by                                 Int
   created_at                                 DateTime                        @default(now())
@@ -1998,6 +2003,7 @@ model LeadProductStructureInstance {
   trackTraceProjects                         ProjectMaster[]
 
 
+  @@index([vendor_id, stage_status_id, lead_id])
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
   @@index([sub_product_structure_id])
   @@index([product_item_code_id])
@@ -2224,6 +2230,9 @@ model LeadServiceSchedule {
 }
 
 model StatusTypeMaster {
+  stageInstances LeadProductStructureInstance[] @relation("InstanceStage")
+  instanceStagesFrom InstanceStageHistory[] @relation("InstanceStageFrom")
+  instanceStagesTo InstanceStageHistory[] @relation("InstanceStageTo")
   id               Int                @id @default(autoincrement())
   type             String
   vendor_id        Int
@@ -2233,6 +2242,23 @@ model StatusTypeMaster {
   leadStatusLogs   LeadStatusLogs[]
   payments         PaymentInfo[]
   vendor           VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model InstanceStageHistory {
+  id             Int @id @default(autoincrement())
+  instance_id    Int
+  vendor_id      Int
+  from_status_id Int?
+  to_status_id   Int
+  created_by     Int
+  created_at     DateTime @default(now())
+  instance       LeadProductStructureInstance @relation(fields: [instance_id], references: [id], onDelete: Cascade)
+  vendor         VendorMaster @relation(fields: [vendor_id], references: [id])
+  fromStatus     StatusTypeMaster? @relation("InstanceStageFrom", fields: [from_status_id], references: [id])
+  toStatus       StatusTypeMaster @relation("InstanceStageTo", fields: [to_status_id], references: [id])
+  createdBy      UserMaster @relation(fields: [created_by], references: [id])
+
+  @@index([vendor_id, instance_id, created_at])
 }
 
 model LeadStatusLogs {

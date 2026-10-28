@@ -1,3 +1,4 @@
+import { instanceAwareStageWhere } from "../stages/instanceStage";
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
@@ -127,10 +128,11 @@ export class ReadyToDispatchService {
       creator?.user_type?.user_type?.toLowerCase() === "admin" ||
       creator?.user_type?.user_type?.toLowerCase() === "super-admin";
 
+    const vendor = await prisma.vendorMaster.findUnique({ where: { id: vendorId }, select: { handlesLargeScaleProjects: true } });
     const baseWhere: any = {
       vendor_id: vendorId,
       is_deleted: false,
-      status_id: readyDispatchStatus.id,
+      ...instanceAwareStageWhere(vendor?.handlesLargeScaleProjects === true, "Type 11", [readyDispatchStatus.id]),
       activity_status: { in: ["onGoing", "lostApproval"] },
     };
 

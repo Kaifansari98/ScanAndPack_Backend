@@ -1,3 +1,4 @@
+import { moveProductionInstanceToReady } from "./instanceReadyToDispatch";
 import logger from "../../../../src/utils/logger";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
@@ -1172,12 +1173,17 @@ export class PostProductionService {
     leadId: number,
     updatedBy: number,
     baseUrl: string,
+    instanceId?: number,
   ) {
     // ==========================
     // TRANSACTIONAL CORE
     // ==========================
 
     const result = await prisma.$transaction(async (tx) => {
+      await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+      const vendor = await tx.vendorMaster.findUnique({
+        where: { id: vendorId }, select: { handlesLargeScaleProjects: true },
+      });
       // 1️⃣ Fetch Ready To Dispatch status (Type 11)
       const readyToDispatchStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: vendorId, tag: "Type 11" },
@@ -1196,6 +1202,8 @@ export class PostProductionService {
         select: {
           id: true,
           status_id: true,
+          statusType: { select: { tag: true } },
+          activity_status: true,
           account_id: true,
           lead_code: true,
           firstname: true,
@@ -1205,6 +1213,24 @@ export class PostProductionService {
 
       if (!currentLead) {
         throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+      }
+
+      if (vendor?.handlesLargeScaleProjects) {
+        if (currentLead.activity_status !== "onGoing") {
+          throw Object.assign(new Error("This lead is not active"), { statusCode: 409 });
+        }
+        const transition = await moveProductionInstanceToReady(
+          tx, vendorId, leadId, instanceId, updatedBy, readyToDispatchStatus.id, currentLead.statusType.tag,
+        );
+        if (transition.changed && currentLead.account_id) {
+          await createLeadLog(tx, {
+            vendor_id: vendorId, lead_id: leadId, account_id: currentLead.account_id,
+            instance_id: transition.instance.id,
+            action: `Instance "${transition.instance.title}" moved to Ready To Dispatch stage`,
+            action_type: "STATUS_CHANGE", created_by: updatedBy,
+          });
+        }
+        return { updatedLead: currentLead, leadMeta: currentLead, ...transition };
       }
 
       // 3️⃣ Update lead status only if it is not already in Ready To Dispatch.
@@ -1255,8 +1281,12 @@ export class PostProductionService {
       return {
         updatedLead,
         leadMeta: currentLead,
+        instance: null,
+        changed: updateResult.count > 0,
       };
     });
+
+    if (!result.changed) return result.instance ?? result.updatedLead;
 
     // ==========================
     // COMMUNICATION LAYER
@@ -1275,7 +1305,7 @@ export class PostProductionService {
 
       if (!salesExecRole) {
         logger.warn("Sales Executive role not configured", { vendorId });
-        return result.updatedLead;
+        return result.instance ?? result.updatedLead;
       }
 
       // 6️⃣ Fetch mapped Sales Executives
@@ -1296,7 +1326,7 @@ export class PostProductionService {
         logger.info("No Sales Executive mapped for Ready To Dispatch", {
           leadId,
         });
-        return result.updatedLead;
+        return result.instance ?? result.updatedLead;
       }
 
       // 7️⃣ Fetch Sales Executive user profiles
@@ -1323,9 +1353,7 @@ export class PostProductionService {
       const leadCode =
         leadMeta.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-      const leadName = `${leadMeta.firstname ?? ""} ${
-        leadMeta.lastname ?? ""
-      }`.trim();
+      const leadName = `${leadMeta.firstname ?? ""} ${leadMeta.lastname ?? ""}${result.instance ? ` — ${result.instance.title}` : ""}`.trim();
 
       const markedBy = actor?.user_name ?? "Factory Team";
 
@@ -1335,7 +1363,7 @@ export class PostProductionService {
         year: "numeric",
       });
 
-      const firstInstance = await prisma.leadProductStructureInstance.findFirst({
+      const firstInstance = result.instance ?? await prisma.leadProductStructureInstance.findFirst({
         where: { lead_id: leadId, vendor_id: vendorId },
         select: { id: true },
         orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
@@ -1418,14 +1446,14 @@ export class PostProductionService {
       });
 
       // Safety guard
-      if (!lead) return result.updatedLead;
+      if (!lead) return result.instance ?? result.updatedLead;
 
-      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}${result.instance ? ` — ${result.instance.title}` : ""}`.trim();
 
       const leadCode =
         lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-      const adminFirstInstance = await prisma.leadProductStructureInstance.findFirst({
+      const adminFirstInstance = result.instance ?? await prisma.leadProductStructureInstance.findFirst({
         where: { lead_id: leadId, vendor_id: lead.vendor_id },
         select: { id: true },
         orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
@@ -1468,6 +1496,6 @@ export class PostProductionService {
       });
     }
 
-    return result.updatedLead;
+    return result.instance ?? result.updatedLead;
   }
 }

@@ -1,3 +1,4 @@
+import { instanceAwareStageWhere, instanceStageEligibility } from "../production/stages/instanceStage";
 import { prisma } from "../../prisma/client";
 import { NotificationService } from "../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../notification/adminRecipients.service";
@@ -167,6 +168,8 @@ export class BookingStageService {
         select: {
           id: true,
           is_archived: true,
+          stage_status_id: true,
+          stageStatus: { select: { id: true, tag: true } },
           title: true,
           description: true,
           quantity_index: true,
@@ -2357,6 +2360,7 @@ export class BookingStageService {
         });
 
         const instanceAnd: any[] = [
+          ...(vendorForFeature?.handlesLargeScaleProjects ? [instanceStageEligibility("Type 10")] : []),
           { is_tech_check_completed: true },
           { is_order_login_completed: true },
         ];
@@ -2449,7 +2453,7 @@ export class BookingStageService {
         : {}),
       is_deleted: false,
       ...BookingStageService.draftVisibilityFilter(tag),
-      ...(statusIds !== null && { status_id: { in: statusIds } }),
+      ...(statusIds !== null && instanceAwareStageWhere(vendorForFeature?.handlesLargeScaleProjects === true, tag, statusIds)),
       ...(materialIssueReadyOnly &&
         (vendorForFeature?.handlesLargeScaleProjects === true
           ? {
@@ -2467,7 +2471,7 @@ export class BookingStageService {
                 },
               },
             })),
-      ...(shouldExcludeLaterStageTags && {
+      ...(shouldExcludeLaterStageTags && !vendorForFeature?.handlesLargeScaleProjects && {
         statusType: {
           vendor_id: vendorId,
           tag: { notIn: excludedProductionStageTags },
@@ -4817,7 +4821,7 @@ export class BookingStageService {
 
     const vendorForFeature = await prisma.vendorMaster.findUnique({
       where: { id: vendorId },
-      select: { is_online_lead_feature_enabled: true },
+      select: { is_online_lead_feature_enabled: true, handlesLargeScaleProjects: true },
     });
     const isOnlineLeadFeatureEnabled =
       vendorForFeature?.is_online_lead_feature_enabled === true;
@@ -5334,6 +5338,7 @@ export class BookingStageService {
           });
 
           const instanceAnd: any[] = [
+          ...(vendorForFeature?.handlesLargeScaleProjects ? [instanceStageEligibility("Type 10")] : []),
             { is_tech_check_completed: true },
             { is_order_login_completed: true },
           ];
@@ -5397,8 +5402,8 @@ export class BookingStageService {
         vendor_id: vendorId,
         is_deleted: false,
         ...BookingStageService.draftVisibilityFilter(tag),
-        status_id: { in: statusIds },
-        statusType: shouldExcludeLaterStageTags
+        ...instanceAwareStageWhere(vendorForFeature?.handlesLargeScaleProjects === true, tag, statusIds),
+        statusType: shouldExcludeLaterStageTags && !vendorForFeature?.handlesLargeScaleProjects
           ? {
               vendor_id: vendorId,
               tag: { notIn: excludedProductionStageTags },
@@ -5623,8 +5628,8 @@ export class BookingStageService {
       is_deleted: false,
       ...BookingStageService.draftVisibilityFilter(tag),
       vendor_id: vendorId,
-      status_id: { in: statusIds },
-      statusType: shouldExcludeLaterStageTags
+      ...instanceAwareStageWhere(vendorForFeature?.handlesLargeScaleProjects === true, tag, statusIds),
+      statusType: shouldExcludeLaterStageTags && !vendorForFeature?.handlesLargeScaleProjects
         ? {
             vendor_id: vendorId,
             tag: { notIn: excludedProductionStageTags },
