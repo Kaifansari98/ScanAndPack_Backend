@@ -6534,24 +6534,75 @@ export const getTraceTraceDashboard = async (
       });
     }
 
-    // ── 2. Fetch all mappings ONCE ─────────────────────────────────────────
-    const mappings = machines.length
-      ? await prisma.cutListMachineMapping.findMany({
-          where: {
-            vendor_id,
-            project_id: { in: projectIds },
-            expected_in: true,
+    // ── 2. Fetch all mappings and cutlists ONCE ─────────────────────────
+    const [mappings, cutLists] = await Promise.all([
+      machines.length
+        ? prisma.cutListMachineMapping.findMany({
+            where: {
+              vendor_id,
+              project_id: { in: projectIds },
+              expected_in: true,
+            },
+            select: {
+              id: true,
+              project_id: true,
+              machine_id: true,
+              cut_list_id: true,
+              sequence_no: true,
+              actual_in_at: true,
+              box_id: true,
+              qty: true,
+            },
+          })
+        : [],
+      prisma.cutList.findMany({
+        where: {
+          vendor_id,
+          project_id: { in: projectIds },
+          status: "Active",
+        },
+        select: {
+          id: true,
+          project_id: true,
+          qty: true,
+          scan_pack_validate: true,
+          include_in_packing: true,
+          category: {
+            select: {
+              scan_pack_validate: true,
+            },
           },
-          select: {
-            id: true,
-            project_id: true,
-            machine_id: true,
-            cut_list_id: true,
-            sequence_no: true,
-            actual_in_at: true,
-          },
-        })
-      : [];
+        },
+      }),
+    ]);
+
+    const isManualCutListItem = (c: {
+      scan_pack_validate?: boolean | null;
+      category?: { scan_pack_validate?: boolean | null } | null;
+    }) => {
+      if (c.scan_pack_validate === false) return true;
+      if (
+        c.scan_pack_validate === null &&
+        c.category?.scan_pack_validate === false
+      )
+        return true;
+      return false;
+    };
+
+    const manualCutListsByProject = new Map<
+      number,
+      (typeof cutLists)[number][]
+    >();
+    const manualCutListIdSet = new Set<number>();
+
+    for (const c of cutLists) {
+      if (isManualCutListItem(c)) {
+        manualCutListIdSet.add(c.id);
+        const list = manualCutListsByProject.get(c.project_id) ?? [];
+        list.push(c);
+        manualCutListsByProject.set(c.project_id, list);
+      }
+    }
 
     type Mapping = (typeof mappings)[number];
 
@@ -6586,8 +6637,6 @@ export const getTraceTraceDashboard = async (
     // ── 3. Group mappings in memory ────────────────────────────────────────
     const rowsByProjectMachine = new Map<string, Mapping[]>();
     const rowsByProjectCutList = new Map<string, Mapping[]>();
-    const assignedCountByProjectMachine = new Map<string, number>();
-    const scannedCountByProjectMachine = new Map<string, number>();
 
     for (const row of mappings) {
       const pmKey = projectMachineKey(row.project_id, row.machine_id);
@@ -6595,18 +6644,6 @@ export const getTraceTraceDashboard = async (
 
       pushToMap(rowsByProjectMachine, pmKey, row);
       pushToMap(rowsByProjectCutList, pcKey, row);
-
-      assignedCountByProjectMachine.set(
-        pmKey,
-        (assignedCountByProjectMachine.get(pmKey) ?? 0) + 1,
-      );
-
-      if (row.actual_in_at !== null) {
-        scannedCountByProjectMachine.set(
-          pmKey,
-          (scannedCountByProjectMachine.get(pmKey) ?? 0) + 1,
-        );
-      }
     }
 
     // Sort each cut_list flow by sequence number once
@@ -6639,53 +6676,129 @@ export const getTraceTraceDashboard = async (
 
     // ── 4. Build dashboard without DB calls inside loops ───────────────────
     const buildProjectStatus = (project: (typeof projects)[number]) => {
+      const projectManualCutLists =
+        manualCutListsByProject.get(project.id) ?? [];
+
       const machineStatuses: MachineStatus[] = machines
         .map((machine, index): MachineStatus | null => {
           const pmKey = projectMachineKey(project.id, machine.id);
 
           const rowsAtMachine = rowsByProjectMachine.get(pmKey) ?? [];
-          const assigned = rowsAtMachine.length;
+          if (rowsAtMachine.length === 0) return null;
 
-          if (assigned === 0) return null;
-
-          const scanned = scannedCountByProjectMachine.get(pmKey) ?? 0;
+          const isPackaging =
+            machine.machine_type_id === 18 ||
+            (machine.machine_name && /pack/i.test(machine.machine_name));
 
           const machineSequenceNo = machine.sequence_no ?? 0;
-          const isQCStation =
-            machine.machine_type_id === 17 || machine.machine_type_id === 18;
+          const isQCStation = machine.machine_type_id === 17 || isPackaging;
 
+          let assigned = 0;
           let total = 0;
+          let scanned = 0;
 
-          if (index === 0) {
-            // First machine: all assigned rows are eligible
-            total = assigned;
-          } else {
-            let eligible = 0;
+          if (isPackaging) {
+            // Normal Cutlist items (panels)
+            const normalRows = rowsAtMachine.filter(
+              (row) =>
+                row.cut_list_id !== null &&
+                row.cut_list_id !== undefined &&
+                !manualCutListIdSet.has(row.cut_list_id),
+            );
 
-            for (const row of rowsAtMachine) {
-              const lastPriorRow = getLastPriorRow(
-                project.id,
-                row.cut_list_id,
-                machineSequenceNo,
-              );
+            const assignedNormal = normalRows.reduce(
+              (sum, row) => sum + Math.max(1, Number(row.qty ?? 1)),
+              0,
+            );
 
-              if (isQCStation) {
-                // QC rule:
-                // 1. If prior machine exists, previous machine must be scanned
-                // 2. If no prior machine exists, QC-only item is eligible
+            let eligibleNormal = 0;
+            let scannedNormal = 0;
+
+            if (index === 0) {
+              eligibleNormal = assignedNormal;
+            } else {
+              for (const row of normalRows) {
+                const lastPriorRow =
+                  row.cut_list_id !== null && row.cut_list_id !== undefined
+                    ? getLastPriorRow(
+                        project.id,
+                        row.cut_list_id,
+                        machineSequenceNo,
+                      )
+                    : null;
                 if (!lastPriorRow || lastPriorRow.actual_in_at !== null) {
-                  eligible++;
+                  eligibleNormal += Math.max(1, Number(row.qty ?? 1));
                 }
-              } else {
-                // Normal machine rule:
-                // Previous assigned machine must exist and be scanned
-                if (lastPriorRow?.actual_in_at !== null) {
-                  eligible++;
+                if (row.actual_in_at !== null || row.box_id !== null) {
+                  scannedNormal += Math.max(1, Number(row.qty ?? 1));
                 }
               }
             }
 
-            total = eligible;
+            // Manual Cutlist items (hardware / scan_pack_validate = false)
+            let manualTotal = 0;
+            let manualScanned = 0;
+
+            for (const manualItem of projectManualCutLists) {
+              const itemTotal = Math.max(0, Number(manualItem.qty || 0));
+              manualTotal += itemTotal;
+
+              const itemPacked = rowsAtMachine
+                .filter(
+                  (row) =>
+                    row.cut_list_id === manualItem.id &&
+                    (row.box_id !== null || row.actual_in_at !== null),
+                )
+                .reduce(
+                  (sum, row) => sum + Math.max(0, Number(row.qty ?? 0)),
+                  0,
+                );
+
+              manualScanned += Math.min(itemTotal, itemPacked);
+            }
+
+            assigned = assignedNormal + manualTotal;
+            total = eligibleNormal + manualTotal;
+            scanned = scannedNormal + manualScanned;
+          } else {
+            // Normal machine rule
+            assigned = rowsAtMachine.reduce(
+              (sum, row) => sum + Math.max(1, Number(row.qty ?? 1)),
+              0,
+            );
+
+            scanned = rowsAtMachine.reduce((sum, row) => {
+              if (row.actual_in_at !== null) {
+                return sum + Math.max(1, Number(row.qty ?? 1));
+              }
+              return sum;
+            }, 0);
+
+            if (index === 0) {
+              total = assigned;
+            } else {
+              let eligible = 0;
+              for (const row of rowsAtMachine) {
+                const lastPriorRow = getLastPriorRow(
+                  project.id,
+                  row.cut_list_id,
+                  machineSequenceNo,
+                );
+
+                const rowQty = Math.max(1, Number(row.qty ?? 1));
+
+                if (isQCStation) {
+                  if (!lastPriorRow || lastPriorRow.actual_in_at !== null) {
+                    eligible += rowQty;
+                  }
+                } else {
+                  if (lastPriorRow?.actual_in_at !== null) {
+                    eligible += rowQty;
+                  }
+                }
+              }
+              total = eligible;
+            }
           }
 
           const pending = Math.max(0, total - scanned);
@@ -6703,20 +6816,15 @@ export const getTraceTraceDashboard = async (
         })
         .filter((status): status is MachineStatus => status !== null);
 
-      const firstMachine = machines[0];
-      const lastMachine = machines[machines.length - 1];
+      const firstMachineStatus = machineStatuses[0];
+      const lastMachineStatus = machineStatuses[machineStatuses.length - 1];
 
-      const total_panels = firstMachine
-        ? (assignedCountByProjectMachine.get(
-            projectMachineKey(project.id, firstMachine.id),
-          ) ?? 0)
-        : 0;
+      const total_panels = Math.max(
+        firstMachineStatus?.assigned ?? 0,
+        lastMachineStatus?.total ?? 0,
+      );
 
-      const panels_scanned = lastMachine
-        ? (scannedCountByProjectMachine.get(
-            projectMachineKey(project.id, lastMachine.id),
-          ) ?? 0)
-        : 0;
+      const panels_scanned = lastMachineStatus?.scanned ?? 0;
 
       return {
         project_id: project.id,
@@ -15590,25 +15698,55 @@ export const getProjectItemTrackingService = async (
     ),
   ).sort((a, b) => a.localeCompare(b));
 
+  type CandidateMapping =
+    (typeof candidateCutLists)[number]["cutListMachineMapping"][number];
+
   const allUnitRows: any[] = [];
 
   for (const item of candidateCutLists) {
-    const rawMappings = item.cutListMachineMapping as MappingRow[];
+    const rawMappings = item.cutListMachineMapping as CandidateMapping[];
 
-    // Expand helper for multi-quantity mapping rows (e.g. manual packing for hardware items)
-    const expandMappingRowsByQty = (rows: MappingRow[]): MappingRow[] => {
-      const expanded: MappingRow[] = [];
-      for (const row of rows) {
+    const itemQty = Math.max(1, Number(item.qty || 1));
+
+    // Build unit mappings: packed/scanned mappings first up to itemQty, then placeholder mappings up to itemQty
+    const buildUnitMappings = (
+      rows: CandidateMapping[],
+    ): CandidateMapping[] => {
+      const packedMappings: CandidateMapping[] = [];
+      const placeholderMappings: CandidateMapping[] = [];
+
+      for (const r of rows) {
+        if (r.box_id !== null || r.boxMaster || r.actual_in_at !== null) {
+          packedMappings.push(r);
+        } else {
+          placeholderMappings.push(r);
+        }
+      }
+
+      packedMappings.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
+      placeholderMappings.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
+
+      const expanded: CandidateMapping[] = [];
+
+      for (const row of packedMappings) {
         const rowQty = Math.max(1, Number(row.qty ?? 1));
-        for (let i = 0; i < rowQty; i++) {
+        for (let i = 0; i < rowQty && expanded.length < itemQty; i++) {
           expanded.push(row);
         }
       }
+
+      for (const row of placeholderMappings) {
+        const rowQty = Math.max(1, Number(row.qty ?? 1));
+        for (let i = 0; i < rowQty && expanded.length < itemQty; i++) {
+          expanded.push(row);
+        }
+      }
+
       return expanded;
     };
 
     // Group mappings by machine to assign to units
-    const byMachine = new Map<number, MappingRow[]>();
+    const byMachine = new Map<number, CandidateMapping[]>();
     for (const m of rawMappings) {
       const mId = m.machine_id ?? m.machine?.id;
       if (mId) {
@@ -15619,20 +15757,20 @@ export const getProjectItemTrackingService = async (
       }
     }
 
-    const expandedByMachine = new Map<number, MappingRow[]>();
+    const expandedByMachine = new Map<number, CandidateMapping[]>();
     for (const [mId, mMappings] of byMachine) {
-      expandedByMachine.set(mId, expandMappingRowsByQty(mMappings));
+      expandedByMachine.set(mId, buildUnitMappings(mMappings));
     }
 
     // Identify packaging mappings across all machines for this cutlist item
     const rawPackagingMappings = rawMappings.filter((m) =>
       Boolean(
         m.box_id ||
-        m.boxMaster ||
-        (m.machine?.machine_name && /pack/i.test(m.machine.machine_name)),
+          m.boxMaster ||
+          (m.machine?.machine_name && /pack/i.test(m.machine.machine_name)),
       ),
     );
-    const packagingMappings = expandMappingRowsByQty(rawPackagingMappings);
+    const packagingMappings = buildUnitMappings(rawPackagingMappings);
 
     const targetMappings = query.machineId
       ? (expandedByMachine.get(query.machineId) ?? [])
@@ -15640,18 +15778,8 @@ export const getProjectItemTrackingService = async (
         ? packagingMappings
         : [];
 
-    // A cutlist item with qty > 1 is expanded so each unit (panel) is on its own row.
-    // If item.qty is 2, it produces 2 separate rows (Piece 1 of 2, Piece 2 of 2).
-    const itemQty = Math.max(1, Number(item.qty || 1));
-    const unitCount = query.machineId
-      ? Math.max(itemQty, targetMappings.length)
-      : query.isDispatch
-        ? Math.max(itemQty, packagingMappings.length)
-        : Math.max(
-            itemQty,
-            ...Array.from(expandedByMachine.values()).map((r) => r.length),
-            0,
-          );
+    // Each cutlist item has exactly itemQty units (panels/pieces).
+    const unitCount = itemQty;
 
     for (let u = 0; u < unitCount; u++) {
       const targetMapping = targetMappings[u] ?? null;
@@ -15674,7 +15802,13 @@ export const getProjectItemTrackingService = async (
       const boxStatus = bMaster?.box_status ?? null;
       const boxSeq = bMaster?.sequence_no ?? null;
 
-      const isUnitScannedAtTarget = Boolean(targetMapping?.actual_in_at);
+      const isTargetPackaging =
+        Boolean(targetMapping?.box_id) ||
+        /pack/i.test(targetMapping?.machine?.machine_name ?? "");
+
+      const isUnitScannedAtTarget = Boolean(
+        targetMapping?.actual_in_at || (isTargetPackaging && bId !== null),
+      );
 
       // Build machine summaries for this unit
       const unitMachines: any[] = [];
@@ -15684,8 +15818,11 @@ export const getProjectItemTrackingService = async (
         const mObj = mappingForUnit?.machine ?? fallbackMapping?.machine;
         if (!mObj) continue;
 
-        const mScanned = Boolean(mappingForUnit?.actual_in_at);
         const mIsPackaging = /pack/i.test(mObj.machine_name);
+        const mScanned = Boolean(
+          mappingForUnit?.actual_in_at ||
+            (mIsPackaging && (mappingForUnit?.box_id || bId !== null)),
+        );
 
         unitMachines.push({
           machine_id: mId,
