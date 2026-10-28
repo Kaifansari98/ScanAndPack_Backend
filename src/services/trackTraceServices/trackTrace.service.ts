@@ -14066,7 +14066,9 @@ export const getManualPackingItemsService = async (
         effectiveMaxQty === 0
           ? "Pending QC"
           : pendingQty === 0
-            ? "Packed"
+            ? isRoutedToQc && qcPassedQty < projectTotalQty
+              ? "Pending QC"
+              : "Packed"
             : packedQty > 0
               ? "Partially Packed"
               : "Pending",
