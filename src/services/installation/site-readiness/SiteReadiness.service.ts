@@ -22,6 +22,24 @@ interface SiteReadinessPayload {
   created_by: number;
 }
 
+/** Large-scale vendors keep Site Readiness (checklist + photos) per product instance. */
+async function assertInstanceOfLead(
+  vendorId: number,
+  leadId: number,
+  instanceId: number | null,
+) {
+  if (!instanceId) return;
+  const instance = await prisma.leadProductStructureInstance.findFirst({
+    where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+    select: { id: true },
+  });
+  if (!instance) {
+    throw Object.assign(new Error("Instance not found for this lead"), {
+      statusCode: 404,
+    });
+  }
+}
+
 export class SiteReadinessService {
   private static leadSuperAdminApprovalLockInService =
     new LeadSuperAdminApprovalLockInService();
@@ -158,12 +176,15 @@ export class SiteReadinessService {
     vendorId: number,
     leadId: number,
     payload: any,
+    instanceId: number | null = null,
   ) {
     const entries = Array.isArray(payload) ? payload : [payload];
+    await assertInstanceOfLead(vendorId, leadId, instanceId);
 
     const dataToInsert = entries.map((item) => ({
       vendor_id: vendorId,
       lead_id: leadId,
+      instance_id: instanceId,
       account_id: item.account_id,
       type: item.type,
       remark: item.remark || null,
@@ -189,11 +210,13 @@ export class SiteReadinessService {
     vendorId: number,
     leadId?: number,
     accountId?: number,
+    instanceId: number | null = null,
   ) {
     const where: any = { vendor_id: vendorId };
 
     if (leadId) where.lead_id = leadId;
     if (accountId) where.account_id = accountId;
+    if (instanceId) where.instance_id = instanceId;
 
     const records = await prisma.siteReadiness.findMany({
       where,
@@ -231,6 +254,7 @@ export class SiteReadinessService {
     vendorId: number,
     leadId: number,
     payload: any,
+    instanceId: number | null = null,
   ) {
     const entries = Array.isArray(payload) ? payload : [payload];
     const updatedRecords: any[] = [];
@@ -243,7 +267,13 @@ export class SiteReadinessService {
       }
 
       const updated = await prisma.siteReadiness.update({
-        where: { id: item.id, vendor_id: vendorId, lead_id: leadId },
+        where: {
+          id: item.id,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          // An instance's checklist can only update its own answers.
+          ...(instanceId ? { instance_id: instanceId } : {}),
+        },
         data: {
           remark: item.remark ?? undefined,
           value: item.value ?? undefined,
@@ -269,12 +299,14 @@ export class SiteReadinessService {
     accountId: number | null,
     userId: number,
     files: { originalName: string; sysName: string }[],
+    instanceId: number | null = null,
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
         new Error("vendorId, leadId and userId are required"),
         { statusCode: 400 },
       );
+    await assertInstanceOfLead(vendorId, leadId, instanceId);
 
     // 🔹 Get DocType for Current Site Photos (Type 19)
     const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
@@ -301,6 +333,7 @@ export class SiteReadinessService {
           account_id: accountId,
           created_by: userId,
           doc_type_id: sitePhotoDocType.id, // Type 19 → Current Site Photos (Site Readiness)
+          product_structure_instance_id: instanceId,
         },
       });
 
@@ -311,7 +344,11 @@ export class SiteReadinessService {
   }
 
   // ✅ Get Current Site Photos at Site Readiness
-  async getCurrentSitePhotosAtSiteReadiness(vendorId: number, leadId: number) {
+  async getCurrentSitePhotosAtSiteReadiness(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
         statusCode: 400,
@@ -328,13 +365,14 @@ export class SiteReadinessService {
         { statusCode: 404 },
       );
 
-    // 🔹 Fetch all uploaded Current Site Photos for this lead
+    // 🔹 Fetch uploaded Current Site Photos for this lead (or one of its instances)
     const documents = await prisma.leadDocuments.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
         is_deleted: false,
+        ...(instanceId ? { product_structure_instance_id: instanceId } : {}),
       },
       orderBy: { created_at: "desc" },
     });
@@ -356,7 +394,11 @@ export class SiteReadinessService {
    *  1. At least one Current Site Photo exists (doc_type = "Type 19")
    *  2. All current site readiness questions have a Yes or No answer
    */
-  async checkSiteReadinessCompletion(vendorId: number, leadId: number) {
+  async checkSiteReadinessCompletion(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     if (!vendorId || !leadId) {
       throw Object.assign(new Error("vendorId and leadId are required"), {
         statusCode: 400,
@@ -383,6 +425,7 @@ export class SiteReadinessService {
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
         is_deleted: false,
+        ...(instanceId ? { product_structure_instance_id: instanceId } : {}),
       },
     });
 
@@ -393,6 +436,7 @@ export class SiteReadinessService {
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
+        ...(instanceId ? { instance_id: instanceId } : {}),
       },
       select: {
         id: true,

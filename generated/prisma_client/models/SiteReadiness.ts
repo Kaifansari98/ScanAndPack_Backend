@@ -31,6 +31,7 @@ export type SiteReadinessAvgAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   created_by: number | null
   updated_by: number | null
 }
@@ -40,6 +41,7 @@ export type SiteReadinessSumAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   created_by: number | null
   updated_by: number | null
 }
@@ -49,6 +51,7 @@ export type SiteReadinessMinAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   type: string | null
   remark: string | null
   value: boolean | null
@@ -63,6 +66,7 @@ export type SiteReadinessMaxAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   type: string | null
   remark: string | null
   value: boolean | null
@@ -77,6 +81,7 @@ export type SiteReadinessCountAggregateOutputType = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id: number
   type: number
   remark: number
   value: number
@@ -93,6 +98,7 @@ export type SiteReadinessAvgAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   created_by?: true
   updated_by?: true
 }
@@ -102,6 +108,7 @@ export type SiteReadinessSumAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   created_by?: true
   updated_by?: true
 }
@@ -111,6 +118,7 @@ export type SiteReadinessMinAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   type?: true
   remark?: true
   value?: true
@@ -125,6 +133,7 @@ export type SiteReadinessMaxAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   type?: true
   remark?: true
   value?: true
@@ -139,6 +148,7 @@ export type SiteReadinessCountAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   type?: true
   remark?: true
   value?: true
@@ -240,6 +250,7 @@ export type SiteReadinessGroupByOutputType = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id: number | null
   type: string
   remark: string | null
   value: boolean | null
@@ -277,6 +288,7 @@ export type SiteReadinessWhereInput = {
   vendor_id?: Prisma.IntFilter<"SiteReadiness"> | number
   account_id?: Prisma.IntFilter<"SiteReadiness"> | number
   lead_id?: Prisma.IntFilter<"SiteReadiness"> | number
+  instance_id?: Prisma.IntNullableFilter<"SiteReadiness"> | number | null
   type?: Prisma.StringFilter<"SiteReadiness"> | string
   remark?: Prisma.StringNullableFilter<"SiteReadiness"> | string | null
   value?: Prisma.BoolNullableFilter<"SiteReadiness"> | boolean | null
@@ -287,6 +299,7 @@ export type SiteReadinessWhereInput = {
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   site_readiness_photos?: Prisma.LeadDocumentsListRelationFilter
@@ -297,6 +310,7 @@ export type SiteReadinessOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   value?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -307,6 +321,7 @@ export type SiteReadinessOrderByWithRelationInput = {
   account?: Prisma.AccountMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
+  instance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   site_readiness_photos?: Prisma.LeadDocumentsOrderByRelationAggregateInput
@@ -320,6 +335,7 @@ export type SiteReadinessWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"SiteReadiness"> | number
   account_id?: Prisma.IntFilter<"SiteReadiness"> | number
   lead_id?: Prisma.IntFilter<"SiteReadiness"> | number
+  instance_id?: Prisma.IntNullableFilter<"SiteReadiness"> | number | null
   type?: Prisma.StringFilter<"SiteReadiness"> | string
   remark?: Prisma.StringNullableFilter<"SiteReadiness"> | string | null
   value?: Prisma.BoolNullableFilter<"SiteReadiness"> | boolean | null
@@ -330,6 +346,7 @@ export type SiteReadinessWhereUniqueInput = Prisma.AtLeast<{
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   site_readiness_photos?: Prisma.LeadDocumentsListRelationFilter
@@ -340,6 +357,7 @@ export type SiteReadinessOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   value?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -362,6 +380,7 @@ export type SiteReadinessScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"SiteReadiness"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"SiteReadiness"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"SiteReadiness"> | number
+  instance_id?: Prisma.IntNullableWithAggregatesFilter<"SiteReadiness"> | number | null
   type?: Prisma.StringWithAggregatesFilter<"SiteReadiness"> | string
   remark?: Prisma.StringNullableWithAggregatesFilter<"SiteReadiness"> | string | null
   value?: Prisma.BoolNullableWithAggregatesFilter<"SiteReadiness"> | boolean | null
@@ -380,6 +399,7 @@ export type SiteReadinessCreateInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteReadinessInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSiteReadinessInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteReadinessInput
   site_readiness_photos?: Prisma.LeadDocumentsCreateNestedManyWithoutSite_readiness_photosInput
@@ -390,6 +410,7 @@ export type SiteReadinessUncheckedCreateInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -409,6 +430,7 @@ export type SiteReadinessUpdateInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSiteReadinessCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSiteReadinessUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   site_readiness_photos?: Prisma.LeadDocumentsUpdateManyWithoutSite_readiness_photosNestedInput
@@ -419,6 +441,7 @@ export type SiteReadinessUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -434,6 +457,7 @@ export type SiteReadinessCreateManyInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -456,6 +480,7 @@ export type SiteReadinessUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -480,6 +505,7 @@ export type SiteReadinessCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   value?: Prisma.SortOrder
@@ -494,6 +520,7 @@ export type SiteReadinessAvgOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
 }
@@ -503,6 +530,7 @@ export type SiteReadinessMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   value?: Prisma.SortOrder
@@ -517,6 +545,7 @@ export type SiteReadinessMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   value?: Prisma.SortOrder
@@ -531,6 +560,7 @@ export type SiteReadinessSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
 }
@@ -783,6 +813,48 @@ export type SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedIn
   deleteMany?: Prisma.SiteReadinessScalarWhereInput | Prisma.SiteReadinessScalarWhereInput[]
 }
 
+export type SiteReadinessCreateNestedManyWithoutInstanceInput = {
+  create?: Prisma.XOR<Prisma.SiteReadinessCreateWithoutInstanceInput, Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput> | Prisma.SiteReadinessCreateWithoutInstanceInput[] | Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput | Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput[]
+  createMany?: Prisma.SiteReadinessCreateManyInstanceInputEnvelope
+  connect?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+}
+
+export type SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput = {
+  create?: Prisma.XOR<Prisma.SiteReadinessCreateWithoutInstanceInput, Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput> | Prisma.SiteReadinessCreateWithoutInstanceInput[] | Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput | Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput[]
+  createMany?: Prisma.SiteReadinessCreateManyInstanceInputEnvelope
+  connect?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+}
+
+export type SiteReadinessUpdateManyWithoutInstanceNestedInput = {
+  create?: Prisma.XOR<Prisma.SiteReadinessCreateWithoutInstanceInput, Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput> | Prisma.SiteReadinessCreateWithoutInstanceInput[] | Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput | Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput[]
+  upsert?: Prisma.SiteReadinessUpsertWithWhereUniqueWithoutInstanceInput | Prisma.SiteReadinessUpsertWithWhereUniqueWithoutInstanceInput[]
+  createMany?: Prisma.SiteReadinessCreateManyInstanceInputEnvelope
+  set?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  disconnect?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  delete?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  connect?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  update?: Prisma.SiteReadinessUpdateWithWhereUniqueWithoutInstanceInput | Prisma.SiteReadinessUpdateWithWhereUniqueWithoutInstanceInput[]
+  updateMany?: Prisma.SiteReadinessUpdateManyWithWhereWithoutInstanceInput | Prisma.SiteReadinessUpdateManyWithWhereWithoutInstanceInput[]
+  deleteMany?: Prisma.SiteReadinessScalarWhereInput | Prisma.SiteReadinessScalarWhereInput[]
+}
+
+export type SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput = {
+  create?: Prisma.XOR<Prisma.SiteReadinessCreateWithoutInstanceInput, Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput> | Prisma.SiteReadinessCreateWithoutInstanceInput[] | Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput | Prisma.SiteReadinessCreateOrConnectWithoutInstanceInput[]
+  upsert?: Prisma.SiteReadinessUpsertWithWhereUniqueWithoutInstanceInput | Prisma.SiteReadinessUpsertWithWhereUniqueWithoutInstanceInput[]
+  createMany?: Prisma.SiteReadinessCreateManyInstanceInputEnvelope
+  set?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  disconnect?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  delete?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  connect?: Prisma.SiteReadinessWhereUniqueInput | Prisma.SiteReadinessWhereUniqueInput[]
+  update?: Prisma.SiteReadinessUpdateWithWhereUniqueWithoutInstanceInput | Prisma.SiteReadinessUpdateWithWhereUniqueWithoutInstanceInput[]
+  updateMany?: Prisma.SiteReadinessUpdateManyWithWhereWithoutInstanceInput | Prisma.SiteReadinessUpdateManyWithWhereWithoutInstanceInput[]
+  deleteMany?: Prisma.SiteReadinessScalarWhereInput | Prisma.SiteReadinessScalarWhereInput[]
+}
+
 export type SiteReadinessCreateWithoutVendorInput = {
   type: string
   remark?: string | null
@@ -792,6 +864,7 @@ export type SiteReadinessCreateWithoutVendorInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteReadinessInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSiteReadinessInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessUpdatedInput
   site_readiness_photos?: Prisma.LeadDocumentsCreateNestedManyWithoutSite_readiness_photosInput
 }
@@ -800,6 +873,7 @@ export type SiteReadinessUncheckedCreateWithoutVendorInput = {
   id?: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -844,6 +918,7 @@ export type SiteReadinessScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"SiteReadiness"> | number
   account_id?: Prisma.IntFilter<"SiteReadiness"> | number
   lead_id?: Prisma.IntFilter<"SiteReadiness"> | number
+  instance_id?: Prisma.IntNullableFilter<"SiteReadiness"> | number | null
   type?: Prisma.StringFilter<"SiteReadiness"> | string
   remark?: Prisma.StringNullableFilter<"SiteReadiness"> | string | null
   value?: Prisma.BoolNullableFilter<"SiteReadiness"> | boolean | null
@@ -861,6 +936,7 @@ export type SiteReadinessCreateWithoutCreatedByInput = {
   updated_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteReadinessInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSiteReadinessInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteReadinessInput
   site_readiness_photos?: Prisma.LeadDocumentsCreateNestedManyWithoutSite_readiness_photosInput
@@ -871,6 +947,7 @@ export type SiteReadinessUncheckedCreateWithoutCreatedByInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -899,6 +976,7 @@ export type SiteReadinessCreateWithoutUpdatedByInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteReadinessInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSiteReadinessInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteReadinessInput
   site_readiness_photos?: Prisma.LeadDocumentsCreateNestedManyWithoutSite_readiness_photosInput
 }
@@ -908,6 +986,7 @@ export type SiteReadinessUncheckedCreateWithoutUpdatedByInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -967,6 +1046,7 @@ export type SiteReadinessCreateWithoutLeadInput = {
   updated_at?: Date | string
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteReadinessInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessCreatedInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteReadinessInput
   site_readiness_photos?: Prisma.LeadDocumentsCreateNestedManyWithoutSite_readiness_photosInput
@@ -976,6 +1056,7 @@ export type SiteReadinessUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
   account_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1020,6 +1101,7 @@ export type SiteReadinessCreateWithoutAccountInput = {
   updated_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSiteReadinessInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteReadinessInput
   site_readiness_photos?: Prisma.LeadDocumentsCreateNestedManyWithoutSite_readiness_photosInput
@@ -1029,6 +1111,7 @@ export type SiteReadinessUncheckedCreateWithoutAccountInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1074,6 +1157,7 @@ export type SiteReadinessCreateWithoutSite_readiness_photosInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutSiteReadinessInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSiteReadinessInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteReadinessInput
 }
@@ -1083,6 +1167,7 @@ export type SiteReadinessUncheckedCreateWithoutSite_readiness_photosInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1113,10 +1198,66 @@ export type SiteReadinessUpdateManyWithWhereWithoutSite_readiness_photosInput = 
   data: Prisma.XOR<Prisma.SiteReadinessUpdateManyMutationInput, Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosInput>
 }
 
+export type SiteReadinessCreateWithoutInstanceInput = {
+  type: string
+  remark?: string | null
+  value?: boolean | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutSiteReadinessInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSiteReadinessInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSiteReadinessUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteReadinessInput
+  site_readiness_photos?: Prisma.LeadDocumentsCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type SiteReadinessUncheckedCreateWithoutInstanceInput = {
+  id?: number
+  vendor_id: number
+  account_id: number
+  lead_id: number
+  type: string
+  remark?: string | null
+  value?: boolean | null
+  created_by: number
+  updated_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  site_readiness_photos?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type SiteReadinessCreateOrConnectWithoutInstanceInput = {
+  where: Prisma.SiteReadinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.SiteReadinessCreateWithoutInstanceInput, Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput>
+}
+
+export type SiteReadinessCreateManyInstanceInputEnvelope = {
+  data: Prisma.SiteReadinessCreateManyInstanceInput | Prisma.SiteReadinessCreateManyInstanceInput[]
+  skipDuplicates?: boolean
+}
+
+export type SiteReadinessUpsertWithWhereUniqueWithoutInstanceInput = {
+  where: Prisma.SiteReadinessWhereUniqueInput
+  update: Prisma.XOR<Prisma.SiteReadinessUpdateWithoutInstanceInput, Prisma.SiteReadinessUncheckedUpdateWithoutInstanceInput>
+  create: Prisma.XOR<Prisma.SiteReadinessCreateWithoutInstanceInput, Prisma.SiteReadinessUncheckedCreateWithoutInstanceInput>
+}
+
+export type SiteReadinessUpdateWithWhereUniqueWithoutInstanceInput = {
+  where: Prisma.SiteReadinessWhereUniqueInput
+  data: Prisma.XOR<Prisma.SiteReadinessUpdateWithoutInstanceInput, Prisma.SiteReadinessUncheckedUpdateWithoutInstanceInput>
+}
+
+export type SiteReadinessUpdateManyWithWhereWithoutInstanceInput = {
+  where: Prisma.SiteReadinessScalarWhereInput
+  data: Prisma.XOR<Prisma.SiteReadinessUpdateManyMutationInput, Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceInput>
+}
+
 export type SiteReadinessCreateManyVendorInput = {
   id?: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1135,6 +1276,7 @@ export type SiteReadinessUpdateWithoutVendorInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSiteReadinessCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSiteReadinessUpdatedNestedInput
   site_readiness_photos?: Prisma.LeadDocumentsUpdateManyWithoutSite_readiness_photosNestedInput
 }
@@ -1143,6 +1285,7 @@ export type SiteReadinessUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1157,6 +1300,7 @@ export type SiteReadinessUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1171,6 +1315,7 @@ export type SiteReadinessCreateManyCreatedByInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1184,6 +1329,7 @@ export type SiteReadinessCreateManyUpdatedByInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1200,6 +1346,7 @@ export type SiteReadinessUpdateWithoutCreatedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSiteReadinessUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   site_readiness_photos?: Prisma.LeadDocumentsUpdateManyWithoutSite_readiness_photosNestedInput
@@ -1210,6 +1357,7 @@ export type SiteReadinessUncheckedUpdateWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1224,6 +1372,7 @@ export type SiteReadinessUncheckedUpdateManyWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1241,6 +1390,7 @@ export type SiteReadinessUpdateWithoutUpdatedByInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSiteReadinessCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   site_readiness_photos?: Prisma.LeadDocumentsUpdateManyWithoutSite_readiness_photosNestedInput
 }
@@ -1250,6 +1400,7 @@ export type SiteReadinessUncheckedUpdateWithoutUpdatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1264,6 +1415,7 @@ export type SiteReadinessUncheckedUpdateManyWithoutUpdatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1276,6 +1428,7 @@ export type SiteReadinessCreateManyLeadInput = {
   id?: number
   vendor_id: number
   account_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1293,6 +1446,7 @@ export type SiteReadinessUpdateWithoutLeadInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSiteReadinessCreatedNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSiteReadinessUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   site_readiness_photos?: Prisma.LeadDocumentsUpdateManyWithoutSite_readiness_photosNestedInput
@@ -1302,6 +1456,7 @@ export type SiteReadinessUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1316,6 +1471,7 @@ export type SiteReadinessUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1329,6 +1485,7 @@ export type SiteReadinessCreateManyAccountInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  instance_id?: number | null
   type: string
   remark?: string | null
   value?: boolean | null
@@ -1346,6 +1503,7 @@ export type SiteReadinessUpdateWithoutAccountInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSiteReadinessCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSiteReadinessUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   site_readiness_photos?: Prisma.LeadDocumentsUpdateManyWithoutSite_readiness_photosNestedInput
@@ -1355,6 +1513,7 @@ export type SiteReadinessUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1369,6 +1528,7 @@ export type SiteReadinessUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1387,11 +1547,70 @@ export type SiteReadinessUpdateWithoutSite_readiness_photosInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSiteReadinessCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSiteReadinessUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
 }
 
 export type SiteReadinessUncheckedUpdateWithoutSite_readiness_photosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type SiteReadinessCreateManyInstanceInput = {
+  id?: number
+  vendor_id: number
+  account_id: number
+  lead_id: number
+  type: string
+  remark?: string | null
+  value?: boolean | null
+  created_by: number
+  updated_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type SiteReadinessUpdateWithoutInstanceInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  value?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSiteReadinessCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutSiteReadinessUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteReadinessNestedInput
+  site_readiness_photos?: Prisma.LeadDocumentsUpdateManyWithoutSite_readiness_photosNestedInput
+}
+
+export type SiteReadinessUncheckedUpdateWithoutInstanceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1403,9 +1622,10 @@ export type SiteReadinessUncheckedUpdateWithoutSite_readiness_photosInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  site_readiness_photos?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
 }
 
-export type SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosInput = {
+export type SiteReadinessUncheckedUpdateManyWithoutInstanceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1455,6 +1675,7 @@ export type SiteReadinessSelect<ExtArgs extends runtime.Types.Extensions.Interna
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   type?: boolean
   remark?: boolean
   value?: boolean
@@ -1465,6 +1686,7 @@ export type SiteReadinessSelect<ExtArgs extends runtime.Types.Extensions.Interna
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.SiteReadiness$instanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.SiteReadiness$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   site_readiness_photos?: boolean | Prisma.SiteReadiness$site_readiness_photosArgs<ExtArgs>
@@ -1476,6 +1698,7 @@ export type SiteReadinessSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   type?: boolean
   remark?: boolean
   value?: boolean
@@ -1486,6 +1709,7 @@ export type SiteReadinessSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.SiteReadiness$instanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.SiteReadiness$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["siteReadiness"]>
@@ -1495,6 +1719,7 @@ export type SiteReadinessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   type?: boolean
   remark?: boolean
   value?: boolean
@@ -1505,6 +1730,7 @@ export type SiteReadinessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.SiteReadiness$instanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.SiteReadiness$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["siteReadiness"]>
@@ -1514,6 +1740,7 @@ export type SiteReadinessSelectScalar = {
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   type?: boolean
   remark?: boolean
   value?: boolean
@@ -1523,11 +1750,12 @@ export type SiteReadinessSelectScalar = {
   updated_at?: boolean
 }
 
-export type SiteReadinessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "account_id" | "lead_id" | "type" | "remark" | "value" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["siteReadiness"]>
+export type SiteReadinessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "account_id" | "lead_id" | "instance_id" | "type" | "remark" | "value" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["siteReadiness"]>
 export type SiteReadinessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.SiteReadiness$instanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.SiteReadiness$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   site_readiness_photos?: boolean | Prisma.SiteReadiness$site_readiness_photosArgs<ExtArgs>
@@ -1537,6 +1765,7 @@ export type SiteReadinessIncludeCreateManyAndReturn<ExtArgs extends runtime.Type
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.SiteReadiness$instanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.SiteReadiness$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -1544,6 +1773,7 @@ export type SiteReadinessIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.SiteReadiness$instanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.SiteReadiness$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -1554,6 +1784,7 @@ export type $SiteReadinessPayload<ExtArgs extends runtime.Types.Extensions.Inter
     account: Prisma.$AccountMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
+    instance: Prisma.$LeadProductStructureInstancePayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     site_readiness_photos: Prisma.$LeadDocumentsPayload<ExtArgs>[]
@@ -1563,6 +1794,7 @@ export type $SiteReadinessPayload<ExtArgs extends runtime.Types.Extensions.Inter
     vendor_id: number
     account_id: number
     lead_id: number
+    instance_id: number | null
     type: string
     remark: string | null
     value: boolean | null
@@ -1967,6 +2199,7 @@ export interface Prisma__SiteReadinessClient<T, Null = never, ExtArgs extends ru
   account<T extends Prisma.AccountMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AccountMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  instance<T extends Prisma.SiteReadiness$instanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SiteReadiness$instanceArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.SiteReadiness$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SiteReadiness$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   site_readiness_photos<T extends Prisma.SiteReadiness$site_readiness_photosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SiteReadiness$site_readiness_photosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2003,6 +2236,7 @@ export interface SiteReadinessFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"SiteReadiness", 'Int'>
   readonly account_id: Prisma.FieldRef<"SiteReadiness", 'Int'>
   readonly lead_id: Prisma.FieldRef<"SiteReadiness", 'Int'>
+  readonly instance_id: Prisma.FieldRef<"SiteReadiness", 'Int'>
   readonly type: Prisma.FieldRef<"SiteReadiness", 'String'>
   readonly remark: Prisma.FieldRef<"SiteReadiness", 'String'>
   readonly value: Prisma.FieldRef<"SiteReadiness", 'Boolean'>
@@ -2408,6 +2642,25 @@ export type SiteReadinessDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many SiteReadinesses to delete.
    */
   limit?: number
+}
+
+/**
+ * SiteReadiness.instance
+ */
+export type SiteReadiness$instanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadProductStructureInstance
+   */
+  select?: Prisma.LeadProductStructureInstanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadProductStructureInstance
+   */
+  omit?: Prisma.LeadProductStructureInstanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadProductStructureInstanceInclude<ExtArgs> | null
+  where?: Prisma.LeadProductStructureInstanceWhereInput
 }
 
 /**
