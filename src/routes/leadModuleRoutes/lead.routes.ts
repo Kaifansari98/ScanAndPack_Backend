@@ -58,15 +58,18 @@ import {
   fetchAllProductStructureTypes,
   editProductStructureParent,
   removeProductStructureType,
+  toggleProductStructureStatus,
 } from "../../controllers/leadModuleControllers/productStructureType.controller";
 import {
   createProductSubStructure,
   fetchAllProductSubStructures,
+  toggleProductSubStructureStatus,
 } from "../../controllers/leadModuleControllers/productSubStructure.controller";
 import {
   createProductItemCode,
   editProductItemCode,
   fetchAllProductItemCodes,
+  toggleProductItemCodeStatus,
 } from "../../controllers/leadModuleControllers/productItemCode.controller";
 import { uploadLeadSitePhotos } from "../../utils/wasabiClient";
 import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
@@ -366,6 +369,22 @@ leadsRouter.patch(
 leadsRouter.delete(
   "/delete-productStructure-type/:id",
   removeProductStructureType
+);
+leadsRouter.patch(
+  "/update-productStructure-status/:id",
+  toggleProductStructureStatus
+);
+leadsRouter.patch(
+  "/update-product-structure-status/:id",
+  toggleProductStructureStatus
+);
+leadsRouter.patch(
+  "/update-product-sub-structure-status/:id",
+  toggleProductSubStructureStatus
+);
+leadsRouter.patch(
+  "/update-product-item-code-status/:id",
+  toggleProductItemCodeStatus
 );
 leadsRouter.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
 leadsRouter.delete("/delete-source-type/:id", removeSourceType);

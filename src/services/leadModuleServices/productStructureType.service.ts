@@ -67,19 +67,21 @@ export const getAllProductStructureTypes = async (vendor_id: number): Promise<Pr
     }
 
     const types = await prisma.productStructure.findMany({
-        where: { vendor_id: vendor_id, status: "active" },
+        where: { vendor_id: vendor_id },
         include: {
             productType: {
                 select: {
                     id: true,
                     type: true,
+                    status: true,
                 },
             },
         },
-    })
+        orderBy: { id: "asc" },
+    });
 
     console.log("[SERVICE] Found productStructure types", { count: types.length });
-  return types as ProductStructureType[];
+    return types as ProductStructureType[];
 };
 
 export const deleteProductStructureType = async (id: number): Promise<boolean> => {
@@ -115,5 +117,35 @@ export const updateProductStructureTypeParent = async (
     });
 
     console.log("[SERVICE] ProductStructure parent updated successfully", updated);
+    return updated as ProductStructureType;
+};
+
+export const updateProductStructureStatus = async (
+    id: number,
+    status: string
+): Promise<ProductStructureType> => {
+    console.log("[SERVICE] updateProductStructureStatus called", { id, status });
+
+    const existing = await prisma.productStructure.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] productStructure not found for status update", { id });
+        throw new Error("productStructure not found");
+    }
+
+    const updated = await prisma.productStructure.update({
+        where: { id },
+        data: { status },
+        include: {
+            productType: {
+                select: {
+                    id: true,
+                    type: true,
+                    status: true,
+                },
+            },
+        },
+    });
+
+    console.log("[SERVICE] ProductStructure status updated successfully", updated);
     return updated as ProductStructureType;
 };
