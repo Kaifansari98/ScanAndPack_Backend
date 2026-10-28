@@ -835,6 +835,8 @@ export interface AssignTaskFMInput {
   assignee_user_id: number;
   created_by: number;
   baseUrl?: string;
+  /** Large-scale vendors: the product instance the task (and stage move) is for. */
+  instance_id?: number | null;
 }
 
 export interface AssignTaskBookingInput {

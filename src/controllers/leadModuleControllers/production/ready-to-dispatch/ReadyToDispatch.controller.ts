@@ -240,7 +240,10 @@ export class ReadyToDispatchController {
         });
       }
 
-      const conflicts = await service.getSiteReadinessTaskConflicts(leadId);
+      const conflicts = await service.getSiteReadinessTaskConflicts(
+        leadId,
+        Number(req.query.instance_id) || null
+      );
 
       return res.status(200).json({
         success: true,
@@ -265,7 +268,8 @@ export class ReadyToDispatchController {
     logger.info("[CONTROLLER] assignTaskSiteReadiness called");
     try {
       const leadId = Number(req.params.leadId);
-      const { task_type, due_date, remark, user_id, created_by } = req.body;
+      const { task_type, due_date, remark, user_id, created_by, instance_id } =
+        req.body;
 
       if (!leadId || !task_type || !due_date || !user_id) {
         return res.status(400).json({
@@ -294,6 +298,7 @@ export class ReadyToDispatchController {
         remark,
         assignee_user_id: Number(user_id),
         created_by: Number(actorId),
+        instance_id: Number(instance_id) || null,
       });
 
       try {
@@ -324,11 +329,14 @@ export class ReadyToDispatchController {
                 select: { user_name: true },
               })
             : Promise.resolve(null),
-          prisma.leadProductStructureInstance.findFirst({
-            where: { lead_id: leadId, vendor_id: result.lead.vendor_id },
-            select: { id: true },
-            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
-          }),
+          // Link to the task's own instance; otherwise the lead's first one.
+          result.task.instance_id
+            ? Promise.resolve({ id: result.task.instance_id })
+            : prisma.leadProductStructureInstance.findFirst({
+                where: { lead_id: leadId, vendor_id: result.lead.vendor_id },
+                select: { id: true },
+                orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+              }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
