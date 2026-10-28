@@ -440,6 +440,7 @@ export class SiteReadinessController {
         leadId,
         updated_by,
         baseUrl,
+        Number(req.body.instance_id) || null,
       );
 
       return res
@@ -455,9 +456,10 @@ export class SiteReadinessController {
         "[SiteReadinessController] moveLeadToDispatchPlanning Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(ApiResponse.error(error.message || "Internal server error", statusCode));
     }
   }
 }
