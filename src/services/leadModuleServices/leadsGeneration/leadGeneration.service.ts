@@ -1536,15 +1536,16 @@ export const assignDesignerToLead = async (
               : {}),
           },
           {
-            ...(lead.franchise_id ? { franchise_id: lead.franchise_id } : {}),
-            ...(vendor?.is_this_vendor_is_custom_usertype_only === true
+            ...(lead.franchise_id
               ? {
-                user_type: {
-                  user_type: {
-                    equals: "custom",
-                    mode: "insensitive",
-                  },
-                },
+                  OR: [
+                    { franchise_id: lead.franchise_id },
+                    { franchise_id: null },
+                  ],
+                }
+              : {}),
+            OR: [
+              {
                 userPrivilegeMappings: {
                   some: {
                     is_allowed: true,
@@ -1554,15 +1555,20 @@ export const assignDesignerToLead = async (
                     },
                   },
                 },
-              }
-              : {
-                user_type: {
-                  user_type: {
-                    equals: "designer",
-                    mode: "insensitive",
-                  },
-                },
-              }),
+              },
+              ...(vendor?.is_this_vendor_is_custom_usertype_only !== true
+                ? [
+                    {
+                      user_type: {
+                        user_type: {
+                          equals: "designer",
+                          mode: "insensitive",
+                        },
+                      },
+                    },
+                  ]
+                : []),
+            ],
           },
         ],
       },
@@ -3493,14 +3499,47 @@ export const getSalesExecutivesByVendor = async (
       options?.assigneeUserType?.trim().toLowerCase() ?? null;
 
     if (normalizedAssigneeUserType === "designer") {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: vendorId },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      });
+
       const designers = await prisma.userMaster.findMany({
         where: {
           vendor_id: vendorId,
           status: "active",
           ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
-          user_type: {
-            user_type: { equals: "designer", mode: "insensitive" },
-          },
+          OR: [
+            {
+              user_type: {
+                user_type: { equals: "super-admin", mode: "insensitive" },
+              },
+            },
+            ...(options?.requiredPrivilegeCode
+              ? [
+                  {
+                    userPrivilegeMappings: {
+                      some: {
+                        is_allowed: true,
+                        privilege: {
+                          code: options.requiredPrivilegeCode,
+                          is_active: true,
+                        },
+                      },
+                    },
+                  },
+                ]
+              : []),
+            ...(vendor?.is_this_vendor_is_custom_usertype_only !== true
+              ? [
+                  {
+                    user_type: {
+                      user_type: { equals: "designer", mode: "insensitive" },
+                    },
+                  },
+                ]
+              : []),
+          ],
         },
         include: {
           user_type: true,
@@ -3552,24 +3591,25 @@ export const getSalesExecutivesByVendor = async (
                     user_type: { in: ["super-admin"] },
                   },
                 },
-                {
-                  user_type: {
-                    user_type: { equals: "custom", mode: "insensitive" },
-                  },
-                  ...(options?.requiredPrivilegeCode
-                    ? {
-                      userPrivilegeMappings: {
-                        some: {
-                          is_allowed: true,
-                          privilege: {
-                            code: options.requiredPrivilegeCode,
-                            is_active: true,
+                ...(options?.requiredPrivilegeCode
+                  ? [
+                      {
+                        userPrivilegeMappings: {
+                          some: {
+                            is_allowed: true,
+                            privilege: {
+                              code: options.requiredPrivilegeCode,
+                              is_active: true,
+                            },
                           },
                         },
                       },
-                    }
-                    : {}),
-                },
+                    ]
+                  : [
+                      {
+                        user_type: { equals: "custom", mode: "insensitive" },
+                      },
+                    ]),
               ],
             },
           ],
