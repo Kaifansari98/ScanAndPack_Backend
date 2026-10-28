@@ -45,6 +45,7 @@ export class UnderInstallationStageController {
           leadId,
           updated_by,
           baseUrl,
+          Number(req.body.instance_id) || null,
         );
 
       return res
@@ -60,9 +61,12 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] moveLeadToUnderInstallation Error:",
         error,
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode),
+        );
     }
   }
 

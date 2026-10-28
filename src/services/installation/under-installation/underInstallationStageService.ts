@@ -3,6 +3,7 @@ import { resolveMiscTask } from "./resolveMiscTask";
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
+import { DispatchStageService } from "../dispatch/DispatchStage.service";
 import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
@@ -142,7 +143,41 @@ export class UnderInstallationStageService {
     leadId: number,
     updatedBy: number,
     baseUrl: string,
+    instanceId: number | null = null,
   ) {
+    // Large-scale vendors move one product instance at a time, and only once its
+    // own Dispatch (details, boxes, documents) is complete.
+    const largeScaleVendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true },
+    });
+    const isLargeScale = largeScaleVendor?.handlesLargeScaleProjects === true;
+    if (isLargeScale) {
+      if (!instanceId) {
+        throw Object.assign(
+          new Error("Select an instance to move to Under Installation"),
+          { statusCode: 400 },
+        );
+      }
+      const readiness = await new DispatchStageService().checkReadyForPostDispatch(
+        vendorId,
+        leadId,
+        instanceId,
+      );
+      if (!readiness.readyForPostDispatch) {
+        throw Object.assign(
+          new Error(`Complete Dispatch for this instance first. ${readiness.message}`),
+          { statusCode: 409 },
+        );
+      }
+    }
+
+    let movedInstance: {
+      id: number;
+      title: string;
+      dispatch_date: Date | null;
+    } | null = null;
+
     // ==========================
     // CORE TRANSACTION LAYER
     // ==========================
@@ -151,12 +186,47 @@ export class UnderInstallationStageService {
       // 1️⃣ Validate Lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
-        select: { id: true, vendor_id: true, account_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          statusType: { select: { tag: true } },
+        },
       });
 
       if (!lead) throw new Error(`Lead ${leadId} not found`);
       if (lead.vendor_id !== vendorId)
         throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      const instance = isLargeScale
+        ? await tx.leadProductStructureInstance.findFirst({
+            where: {
+              id: instanceId!,
+              lead_id: leadId,
+              vendor_id: vendorId,
+              is_archived: false,
+            },
+            select: {
+              id: true,
+              title: true,
+              dispatch_date: true,
+              stage_status_id: true,
+              stageStatus: { select: { tag: true } },
+            },
+          })
+        : null;
+      if (isLargeScale) {
+        if (!instance) {
+          throw Object.assign(new Error("Instance not found for this lead"), {
+            statusCode: 404,
+          });
+        }
+        if ((instance.stageStatus?.tag ?? lead.statusType?.tag) !== "Type 14") {
+          throw Object.assign(new Error("This instance is not in Dispatch"), {
+            statusCode: 409,
+          });
+        }
+      }
 
       // 2️⃣ Fetch Under Installation Status
       const toStatus = await tx.statusTypeMaster.findFirst({
@@ -167,35 +237,81 @@ export class UnderInstallationStageService {
       if (!toStatus)
         throw new Error(`Under Installation Stage (Type 15) not configured`);
 
-      // 3️⃣ Update Lead Status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: lead.id },
-        data: {
-          status_id: toStatus.id,
-          updated_by: updatedBy,
-          updated_at: new Date(),
-        },
-      });
+      // 3️⃣ Update Status
+      let updatedLead;
+      if (instance) {
+        // Large-scale: only this instance moves; the lead's own status stays as it is.
+        const dispatchStatus = await tx.statusTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: "Type 14" },
+          select: { id: true },
+        });
+        await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: { stage_status_id: toStatus.id, updated_by: updatedBy },
+        });
+        await tx.instanceStageHistory.create({
+          data: {
+            instance_id: instance.id,
+            vendor_id: vendorId,
+            from_status_id:
+              instance.stage_status_id ?? dispatchStatus?.id ?? null,
+            to_status_id: toStatus.id,
+            created_by: updatedBy,
+          },
+        });
+        updatedLead = await tx.leadMaster.findUniqueOrThrow({
+          where: { id: lead.id },
+        });
+        movedInstance = {
+          id: instance.id,
+          title: instance.title,
+          dispatch_date: instance.dispatch_date,
+        };
+      } else {
+        updatedLead = await tx.leadMaster.update({
+          where: { id: lead.id },
+          data: {
+            status_id: toStatus.id,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+          },
+        });
 
-      await ensureLeadStatusLog(tx, {
-        vendorId,
-        leadId: lead.id,
-        accountId: lead.account_id,
-        statusId: toStatus.id,
-        createdBy: updatedBy,
-      });
+        await ensureLeadStatusLog(tx, {
+          vendorId,
+          leadId: lead.id,
+          accountId: lead.account_id,
+          statusId: toStatus.id,
+          createdBy: updatedBy,
+        });
+      }
 
       // 4️⃣ Activity Log
       await createLeadLog(tx, {
         vendor_id: vendorId,
         lead_id: lead.id,
         account_id: lead.account_id!,
-        action: "Lead moved to Under Installation stage.",
+        action: instance
+          ? `Instance "${instance.title}" moved to Under Installation stage.`
+          : "Lead moved to Under Installation stage.",
         action_type: "UPDATE",
         created_by: updatedBy,
+        instance_id: instance?.id,
       });
 
-      // 5️⃣ Close Dispatch Planning Task (if any)
+      // 5️⃣ Close Dispatch Planning Task (if any) — the instance's own task for
+      // large-scale vendors; a lead-level one only when it is the lead's single
+      // instance (tasks created before instance-level dispatch).
+      let instanceTaskScope: Prisma.UserLeadTaskWhereInput = {};
+      if (instance) {
+        const instanceCount = await tx.leadProductStructureInstance.count({
+          where: { lead_id: leadId, vendor_id: vendorId, is_archived: false },
+        });
+        instanceTaskScope =
+          instanceCount === 1
+            ? { OR: [{ instance_id: instance.id }, { instance_id: null }] }
+            : { instance_id: instance.id };
+      }
       const dispatchTask = await tx.userLeadTask.findFirst({
         where: {
           lead_id: leadId,
@@ -203,6 +319,7 @@ export class UnderInstallationStageService {
           task_type: "Dispatch",
           lead_stage: "dispatch-planning-stage",
           status: "open",
+          ...instanceTaskScope,
         },
       });
 
@@ -235,11 +352,22 @@ export class UnderInstallationStageService {
           action: "Dispatch preparation task marked as Completed.",
           action_type: "UPDATE",
           created_by: updatedBy,
+          instance_id: instance?.id,
         });
       }
 
-      return updatedLead;
+      return {
+        ...updatedLead,
+        instance_id: instance?.id ?? null,
+        instance_title: instance?.title ?? null,
+      };
     });
+
+    const moved = movedInstance as {
+      id: number;
+      title: string;
+      dispatch_date: Date | null;
+    } | null;
 
     // ===============================
     // UNDER INSTALLATION NOTIFICATION
@@ -268,7 +396,11 @@ export class UnderInstallationStageService {
           select: { user_name: true },
         }),
         prisma.leadProductStructureInstance.findFirst({
-          where: { lead_id: leadId, vendor_id: vendorId },
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            ...(moved ? { id: moved.id } : {}),
+          },
           select: { id: true },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
@@ -276,7 +408,8 @@ export class UnderInstallationStageService {
 
       if (!lead) return result;
 
-      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+      const baseLeadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+      const leadName = moved ? `${baseLeadName} (${moved.title})` : baseLeadName;
       const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
       const dispatchedBy = actor?.user_name ?? "System";
       const dispatchedAt = new Date().toLocaleString("en-IN", {
@@ -285,7 +418,8 @@ export class UnderInstallationStageService {
         year: "numeric",
       });
       const franchiseId = lead.franchise_id ?? null;
-      const stageTag = lead.statusType?.tag;
+      // A moved instance is Under Installation even though the lead's status is unchanged.
+      const stageTag = moved ? "Type 15" : lead.statusType?.tag;
 
       // Build redirect URL using STAGE_PATH_BY_TAG + instance_id
       const uiBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
@@ -384,10 +518,11 @@ export class UnderInstallationStageService {
         );
 
         const supervisorUser = siteSupervisorMapping?.user ?? null;
-        const smallOrderRedirectPath = `/dashboard/installation/under-installation/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderRedirectPath = `/dashboard/installation/under-installation/details/${leadId}?accountId=${lead.account_id}${moved ? `&instance_id=${moved.id}` : ""}`;
         const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
-        const dispatchDateStr = lead.dispatch_date
-          ? new Date(lead.dispatch_date).toLocaleString("en-IN", {
+        const dispatchDate = moved ? moved.dispatch_date : lead.dispatch_date;
+        const dispatchDateStr = dispatchDate
+          ? new Date(dispatchDate).toLocaleString("en-IN", {
               day: "2-digit",
               month: "short",
               year: "numeric",
