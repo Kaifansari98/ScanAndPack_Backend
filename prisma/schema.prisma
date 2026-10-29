@@ -1442,6 +1442,7 @@ model LeadRequirementMaterialMapping {
 
 model CarcassTypeMaster {
   id                     Int                          @id @default(autoincrement())
+  status                 String                       @default("active")
   name                   String
   vendor_id              Int
   can_do_fast_production Boolean                      @default(true)
@@ -1453,6 +1454,7 @@ model CarcassTypeMaster {
 
 model CarcasMaterialMaster {
   id           Int                           @id @default(autoincrement())
+  status       String                        @default("active")
   name         String
   vendor_id    Int
   vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1462,6 +1464,7 @@ model CarcasMaterialMaster {
 
 model CarcassMaterialFinishMaster {
   id                 Int                          @id @default(autoincrement())
+  status             String                       @default("active")
   name               String
   carcas_material_id Int
   material           CarcasMaterialMaster         @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
@@ -1470,6 +1473,7 @@ model CarcassMaterialFinishMaster {
 
 model ShutterTypeMaster {
   id                   Int                          @id @default(autoincrement())
+  status               String                       @default("active")
   name                 String
   vendor_id            Int
   leadMappings         LeadShutterMaterialMapping[]
@@ -1489,6 +1493,7 @@ model ShutterSubTypeMaster {
 
 model ShutterMaterialMaster {
   id           Int                           @id @default(autoincrement())
+  status       String                        @default("active")
   name         String
   vendor_id    Int
   leadMappings LeadShutterMaterialMapping[]
@@ -1499,6 +1504,7 @@ model ShutterMaterialMaster {
 
 model ShutterOuterFinishMaster {
   id                  Int                          @id @default(autoincrement())
+  status              String                       @default("active")
   name                String
   shutter_material_id Int
   leadMappings        LeadShutterMaterialMapping[]
@@ -1507,6 +1513,7 @@ model ShutterOuterFinishMaster {
 
 model ShutterInnerFinishMaster {
   id                  Int                          @id @default(autoincrement())
+  status              String                       @default("active")
   name                String
   shutter_material_id Int
   leadMappings        LeadShutterMaterialMapping[]
@@ -1515,6 +1522,7 @@ model ShutterInnerFinishMaster {
 
 model HardwareTypeMaster {
   id                  Int                        @id @default(autoincrement())
+  status              String                     @default("active")
   name                String
   vendor_id           Int
   vendor              VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1525,6 +1533,7 @@ model HardwareTypeMaster {
 
 model HardwareItemMaster {
   id                  Int                        @id @default(autoincrement())
+  status              String                     @default("active")
   name                String
   hardware_type_id    Int
   inScope             Boolean                    @default(true)
@@ -1535,6 +1544,7 @@ model HardwareItemMaster {
 
 model HardwareItemOptionMaster {
   id               Int                   @id @default(autoincrement())
+  status           String                @default("active")
   hardware_type_id Int
   hardware_item_id Int
   name             String
@@ -1581,6 +1591,7 @@ model LeadHardwareMapping {
 
 model LightCarcasTypeMaster {
   id         Int                     @id @default(autoincrement())
+  status     String                  @default("active")
   vendor_id  Int
   type       String
   is_active  Boolean                 @default(true)
@@ -1593,6 +1604,7 @@ model LightCarcasTypeMaster {
 
 model LightCarcasUnitMaster {
   id                   Int                          @id @default(autoincrement())
+  status               String                       @default("active")
   vendor_id            Int
   type                 String
   light_carcas_type_id Int
@@ -1638,6 +1650,7 @@ model LeadLightCarcasUnitMapping {
 
 model OtherAppliancesMaster {
   id             Int                          @id @default(autoincrement())
+  status         String                       @default("active")
   vendor_id      Int
   article_number String
   description    String

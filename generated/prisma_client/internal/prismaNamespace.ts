@@ -19020,6 +19020,7 @@ export type LeadRequirementMaterialMappingScalarFieldEnum = (typeof LeadRequirem
 
 export const CarcassTypeMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id',
   can_do_fast_production: 'can_do_fast_production'
@@ -19030,6 +19031,7 @@ export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFi
 
 export const CarcasMaterialMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
@@ -19039,6 +19041,7 @@ export type CarcasMaterialMasterScalarFieldEnum = (typeof CarcasMaterialMasterSc
 
 export const CarcassMaterialFinishMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   carcas_material_id: 'carcas_material_id'
 } as const
@@ -19048,6 +19051,7 @@ export type CarcassMaterialFinishMasterScalarFieldEnum = (typeof CarcassMaterial
 
 export const ShutterTypeMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
@@ -19066,6 +19070,7 @@ export type ShutterSubTypeMasterScalarFieldEnum = (typeof ShutterSubTypeMasterSc
 
 export const ShutterMaterialMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
@@ -19075,6 +19080,7 @@ export type ShutterMaterialMasterScalarFieldEnum = (typeof ShutterMaterialMaster
 
 export const ShutterOuterFinishMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   shutter_material_id: 'shutter_material_id'
 } as const
@@ -19084,6 +19090,7 @@ export type ShutterOuterFinishMasterScalarFieldEnum = (typeof ShutterOuterFinish
 
 export const ShutterInnerFinishMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   shutter_material_id: 'shutter_material_id'
 } as const
@@ -19093,6 +19100,7 @@ export type ShutterInnerFinishMasterScalarFieldEnum = (typeof ShutterInnerFinish
 
 export const HardwareTypeMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
@@ -19102,6 +19110,7 @@ export type HardwareTypeMasterScalarFieldEnum = (typeof HardwareTypeMasterScalar
 
 export const HardwareItemMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   hardware_type_id: 'hardware_type_id',
   inScope: 'inScope'
@@ -19112,6 +19121,7 @@ export type HardwareItemMasterScalarFieldEnum = (typeof HardwareItemMasterScalar
 
 export const HardwareItemOptionMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   hardware_type_id: 'hardware_type_id',
   hardware_item_id: 'hardware_item_id',
   name: 'name'
@@ -19146,6 +19156,7 @@ export type LeadHardwareMappingScalarFieldEnum = (typeof LeadHardwareMappingScal
 
 export const LightCarcasTypeMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   vendor_id: 'vendor_id',
   type: 'type',
   is_active: 'is_active',
@@ -19157,6 +19168,7 @@ export type LightCarcasTypeMasterScalarFieldEnum = (typeof LightCarcasTypeMaster
 
 export const LightCarcasUnitMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   vendor_id: 'vendor_id',
   type: 'type',
   light_carcas_type_id: 'light_carcas_type_id',
@@ -19191,6 +19203,7 @@ export type LeadLightCarcasUnitMappingScalarFieldEnum = (typeof LeadLightCarcasU
 
 export const OtherAppliancesMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   vendor_id: 'vendor_id',
   article_number: 'article_number',
   description: 'description',

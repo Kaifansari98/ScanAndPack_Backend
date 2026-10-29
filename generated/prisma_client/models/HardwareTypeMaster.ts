@@ -38,18 +38,21 @@ export type HardwareTypeMasterSumAggregateOutputType = {
 
 export type HardwareTypeMasterMinAggregateOutputType = {
   id: number | null
+  status: string | null
   name: string | null
   vendor_id: number | null
 }
 
 export type HardwareTypeMasterMaxAggregateOutputType = {
   id: number | null
+  status: string | null
   name: string | null
   vendor_id: number | null
 }
 
 export type HardwareTypeMasterCountAggregateOutputType = {
   id: number
+  status: number
   name: number
   vendor_id: number
   _all: number
@@ -68,18 +71,21 @@ export type HardwareTypeMasterSumAggregateInputType = {
 
 export type HardwareTypeMasterMinAggregateInputType = {
   id?: true
+  status?: true
   name?: true
   vendor_id?: true
 }
 
 export type HardwareTypeMasterMaxAggregateInputType = {
   id?: true
+  status?: true
   name?: true
   vendor_id?: true
 }
 
 export type HardwareTypeMasterCountAggregateInputType = {
   id?: true
+  status?: true
   name?: true
   vendor_id?: true
   _all?: true
@@ -173,6 +179,7 @@ export type HardwareTypeMasterGroupByArgs<ExtArgs extends runtime.Types.Extensio
 
 export type HardwareTypeMasterGroupByOutputType = {
   id: number
+  status: string
   name: string
   vendor_id: number
   _count: HardwareTypeMasterCountAggregateOutputType | null
@@ -202,6 +209,7 @@ export type HardwareTypeMasterWhereInput = {
   OR?: Prisma.HardwareTypeMasterWhereInput[]
   NOT?: Prisma.HardwareTypeMasterWhereInput | Prisma.HardwareTypeMasterWhereInput[]
   id?: Prisma.IntFilter<"HardwareTypeMaster"> | number
+  status?: Prisma.StringFilter<"HardwareTypeMaster"> | string
   name?: Prisma.StringFilter<"HardwareTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"HardwareTypeMaster"> | number
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -212,6 +220,7 @@ export type HardwareTypeMasterWhereInput = {
 
 export type HardwareTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -225,6 +234,7 @@ export type HardwareTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.HardwareTypeMasterWhereInput | Prisma.HardwareTypeMasterWhereInput[]
   OR?: Prisma.HardwareTypeMasterWhereInput[]
   NOT?: Prisma.HardwareTypeMasterWhereInput | Prisma.HardwareTypeMasterWhereInput[]
+  status?: Prisma.StringFilter<"HardwareTypeMaster"> | string
   name?: Prisma.StringFilter<"HardwareTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"HardwareTypeMaster"> | number
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -235,6 +245,7 @@ export type HardwareTypeMasterWhereUniqueInput = Prisma.AtLeast<{
 
 export type HardwareTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   _count?: Prisma.HardwareTypeMasterCountOrderByAggregateInput
@@ -249,11 +260,13 @@ export type HardwareTypeMasterScalarWhereWithAggregatesInput = {
   OR?: Prisma.HardwareTypeMasterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HardwareTypeMasterScalarWhereWithAggregatesInput | Prisma.HardwareTypeMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"HardwareTypeMaster"> | number
+  status?: Prisma.StringWithAggregatesFilter<"HardwareTypeMaster"> | string
   name?: Prisma.StringWithAggregatesFilter<"HardwareTypeMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"HardwareTypeMaster"> | number
 }
 
 export type HardwareTypeMasterCreateInput = {
+  status?: string
   name: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutHardwareTypesInput
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutHardwareTypeInput
@@ -263,6 +276,7 @@ export type HardwareTypeMasterCreateInput = {
 
 export type HardwareTypeMasterUncheckedCreateInput = {
   id?: number
+  status?: string
   name: string
   vendor_id: number
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutHardwareTypeInput
@@ -271,6 +285,7 @@ export type HardwareTypeMasterUncheckedCreateInput = {
 }
 
 export type HardwareTypeMasterUpdateInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHardwareTypesNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutHardwareTypeNestedInput
@@ -280,6 +295,7 @@ export type HardwareTypeMasterUpdateInput = {
 
 export type HardwareTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutHardwareTypeNestedInput
@@ -289,16 +305,19 @@ export type HardwareTypeMasterUncheckedUpdateInput = {
 
 export type HardwareTypeMasterCreateManyInput = {
   id?: number
+  status?: string
   name: string
   vendor_id: number
 }
 
 export type HardwareTypeMasterUpdateManyMutationInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type HardwareTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -315,6 +334,7 @@ export type HardwareTypeMasterOrderByRelationAggregateInput = {
 
 export type HardwareTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
 }
@@ -326,12 +346,14 @@ export type HardwareTypeMasterAvgOrderByAggregateInput = {
 
 export type HardwareTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
 }
 
 export type HardwareTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
 }
@@ -431,6 +453,7 @@ export type HardwareTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput = 
 }
 
 export type HardwareTypeMasterCreateWithoutVendorInput = {
+  status?: string
   name: string
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutHardwareTypeInput
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterCreateNestedManyWithoutHardwareTypeInput
@@ -439,6 +462,7 @@ export type HardwareTypeMasterCreateWithoutVendorInput = {
 
 export type HardwareTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
+  status?: string
   name: string
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutHardwareTypeInput
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterUncheckedCreateNestedManyWithoutHardwareTypeInput
@@ -476,11 +500,13 @@ export type HardwareTypeMasterScalarWhereInput = {
   OR?: Prisma.HardwareTypeMasterScalarWhereInput[]
   NOT?: Prisma.HardwareTypeMasterScalarWhereInput | Prisma.HardwareTypeMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"HardwareTypeMaster"> | number
+  status?: Prisma.StringFilter<"HardwareTypeMaster"> | string
   name?: Prisma.StringFilter<"HardwareTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"HardwareTypeMaster"> | number
 }
 
 export type HardwareTypeMasterCreateWithoutHardwareItemsInput = {
+  status?: string
   name: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutHardwareTypesInput
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutHardwareTypeInput
@@ -489,6 +515,7 @@ export type HardwareTypeMasterCreateWithoutHardwareItemsInput = {
 
 export type HardwareTypeMasterUncheckedCreateWithoutHardwareItemsInput = {
   id?: number
+  status?: string
   name: string
   vendor_id: number
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutHardwareTypeInput
@@ -512,6 +539,7 @@ export type HardwareTypeMasterUpdateToOneWithWhereWithoutHardwareItemsInput = {
 }
 
 export type HardwareTypeMasterUpdateWithoutHardwareItemsInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHardwareTypesNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutHardwareTypeNestedInput
@@ -520,6 +548,7 @@ export type HardwareTypeMasterUpdateWithoutHardwareItemsInput = {
 
 export type HardwareTypeMasterUncheckedUpdateWithoutHardwareItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutHardwareTypeNestedInput
@@ -527,6 +556,7 @@ export type HardwareTypeMasterUncheckedUpdateWithoutHardwareItemsInput = {
 }
 
 export type HardwareTypeMasterCreateWithoutHardwareItemOptionsInput = {
+  status?: string
   name: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutHardwareTypesInput
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutHardwareTypeInput
@@ -535,6 +565,7 @@ export type HardwareTypeMasterCreateWithoutHardwareItemOptionsInput = {
 
 export type HardwareTypeMasterUncheckedCreateWithoutHardwareItemOptionsInput = {
   id?: number
+  status?: string
   name: string
   vendor_id: number
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutHardwareTypeInput
@@ -558,6 +589,7 @@ export type HardwareTypeMasterUpdateToOneWithWhereWithoutHardwareItemOptionsInpu
 }
 
 export type HardwareTypeMasterUpdateWithoutHardwareItemOptionsInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHardwareTypesNestedInput
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutHardwareTypeNestedInput
@@ -566,6 +598,7 @@ export type HardwareTypeMasterUpdateWithoutHardwareItemOptionsInput = {
 
 export type HardwareTypeMasterUncheckedUpdateWithoutHardwareItemOptionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutHardwareTypeNestedInput
@@ -573,6 +606,7 @@ export type HardwareTypeMasterUncheckedUpdateWithoutHardwareItemOptionsInput = {
 }
 
 export type HardwareTypeMasterCreateWithoutLeadMappingsInput = {
+  status?: string
   name: string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutHardwareTypesInput
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterCreateNestedManyWithoutHardwareTypeInput
@@ -581,6 +615,7 @@ export type HardwareTypeMasterCreateWithoutLeadMappingsInput = {
 
 export type HardwareTypeMasterUncheckedCreateWithoutLeadMappingsInput = {
   id?: number
+  status?: string
   name: string
   vendor_id: number
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterUncheckedCreateNestedManyWithoutHardwareTypeInput
@@ -604,6 +639,7 @@ export type HardwareTypeMasterUpdateToOneWithWhereWithoutLeadMappingsInput = {
 }
 
 export type HardwareTypeMasterUpdateWithoutLeadMappingsInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHardwareTypesNestedInput
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterUpdateManyWithoutHardwareTypeNestedInput
@@ -612,6 +648,7 @@ export type HardwareTypeMasterUpdateWithoutLeadMappingsInput = {
 
 export type HardwareTypeMasterUncheckedUpdateWithoutLeadMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterUncheckedUpdateManyWithoutHardwareTypeNestedInput
@@ -620,10 +657,12 @@ export type HardwareTypeMasterUncheckedUpdateWithoutLeadMappingsInput = {
 
 export type HardwareTypeMasterCreateManyVendorInput = {
   id?: number
+  status?: string
   name: string
 }
 
 export type HardwareTypeMasterUpdateWithoutVendorInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutHardwareTypeNestedInput
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterUpdateManyWithoutHardwareTypeNestedInput
@@ -632,6 +671,7 @@ export type HardwareTypeMasterUpdateWithoutVendorInput = {
 
 export type HardwareTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutHardwareTypeNestedInput
   hardwareItemOptions?: Prisma.HardwareItemOptionMasterUncheckedUpdateManyWithoutHardwareTypeNestedInput
@@ -640,6 +680,7 @@ export type HardwareTypeMasterUncheckedUpdateWithoutVendorInput = {
 
 export type HardwareTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -694,6 +735,7 @@ export type HardwareTypeMasterCountOutputTypeCountHardwareItemsArgs<ExtArgs exte
 
 export type HardwareTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   name?: boolean
   vendor_id?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -705,6 +747,7 @@ export type HardwareTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.In
 
 export type HardwareTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   name?: boolean
   vendor_id?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -712,6 +755,7 @@ export type HardwareTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
 
 export type HardwareTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   name?: boolean
   vendor_id?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -719,11 +763,12 @@ export type HardwareTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
 
 export type HardwareTypeMasterSelectScalar = {
   id?: boolean
+  status?: boolean
   name?: boolean
   vendor_id?: boolean
 }
 
-export type HardwareTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "vendor_id", ExtArgs["result"]["hardwareTypeMaster"]>
+export type HardwareTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "name" | "vendor_id", ExtArgs["result"]["hardwareTypeMaster"]>
 export type HardwareTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   leadMappings?: boolean | Prisma.HardwareTypeMaster$leadMappingsArgs<ExtArgs>
@@ -748,6 +793,7 @@ export type $HardwareTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    status: string
     name: string
     vendor_id: number
   }, ExtArgs["result"]["hardwareTypeMaster"]>
@@ -1178,6 +1224,7 @@ export interface Prisma__HardwareTypeMasterClient<T, Null = never, ExtArgs exten
  */
 export interface HardwareTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"HardwareTypeMaster", 'Int'>
+  readonly status: Prisma.FieldRef<"HardwareTypeMaster", 'String'>
   readonly name: Prisma.FieldRef<"HardwareTypeMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"HardwareTypeMaster", 'Int'>
 }

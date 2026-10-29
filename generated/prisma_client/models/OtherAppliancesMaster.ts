@@ -38,6 +38,7 @@ export type OtherAppliancesMasterSumAggregateOutputType = {
 
 export type OtherAppliancesMasterMinAggregateOutputType = {
   id: number | null
+  status: string | null
   vendor_id: number | null
   article_number: string | null
   description: string | null
@@ -47,6 +48,7 @@ export type OtherAppliancesMasterMinAggregateOutputType = {
 
 export type OtherAppliancesMasterMaxAggregateOutputType = {
   id: number | null
+  status: string | null
   vendor_id: number | null
   article_number: string | null
   description: string | null
@@ -56,6 +58,7 @@ export type OtherAppliancesMasterMaxAggregateOutputType = {
 
 export type OtherAppliancesMasterCountAggregateOutputType = {
   id: number
+  status: number
   vendor_id: number
   article_number: number
   description: number
@@ -77,6 +80,7 @@ export type OtherAppliancesMasterSumAggregateInputType = {
 
 export type OtherAppliancesMasterMinAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   article_number?: true
   description?: true
@@ -86,6 +90,7 @@ export type OtherAppliancesMasterMinAggregateInputType = {
 
 export type OtherAppliancesMasterMaxAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   article_number?: true
   description?: true
@@ -95,6 +100,7 @@ export type OtherAppliancesMasterMaxAggregateInputType = {
 
 export type OtherAppliancesMasterCountAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   article_number?: true
   description?: true
@@ -191,6 +197,7 @@ export type OtherAppliancesMasterGroupByArgs<ExtArgs extends runtime.Types.Exten
 
 export type OtherAppliancesMasterGroupByOutputType = {
   id: number
+  status: string
   vendor_id: number
   article_number: string
   description: string
@@ -223,6 +230,7 @@ export type OtherAppliancesMasterWhereInput = {
   OR?: Prisma.OtherAppliancesMasterWhereInput[]
   NOT?: Prisma.OtherAppliancesMasterWhereInput | Prisma.OtherAppliancesMasterWhereInput[]
   id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
+  status?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   vendor_id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
   article_number?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
@@ -234,6 +242,7 @@ export type OtherAppliancesMasterWhereInput = {
 
 export type OtherAppliancesMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -248,6 +257,7 @@ export type OtherAppliancesMasterWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OtherAppliancesMasterWhereInput | Prisma.OtherAppliancesMasterWhereInput[]
   OR?: Prisma.OtherAppliancesMasterWhereInput[]
   NOT?: Prisma.OtherAppliancesMasterWhereInput | Prisma.OtherAppliancesMasterWhereInput[]
+  status?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   vendor_id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
   article_number?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
@@ -259,6 +269,7 @@ export type OtherAppliancesMasterWhereUniqueInput = Prisma.AtLeast<{
 
 export type OtherAppliancesMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -276,6 +287,7 @@ export type OtherAppliancesMasterScalarWhereWithAggregatesInput = {
   OR?: Prisma.OtherAppliancesMasterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OtherAppliancesMasterScalarWhereWithAggregatesInput | Prisma.OtherAppliancesMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"OtherAppliancesMaster"> | number
+  status?: Prisma.StringWithAggregatesFilter<"OtherAppliancesMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"OtherAppliancesMaster"> | number
   article_number?: Prisma.StringWithAggregatesFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringWithAggregatesFilter<"OtherAppliancesMaster"> | string
@@ -284,6 +296,7 @@ export type OtherAppliancesMasterScalarWhereWithAggregatesInput = {
 }
 
 export type OtherAppliancesMasterCreateInput = {
+  status?: string
   article_number: string
   description: string
   created_at?: Date | string
@@ -294,6 +307,7 @@ export type OtherAppliancesMasterCreateInput = {
 
 export type OtherAppliancesMasterUncheckedCreateInput = {
   id?: number
+  status?: string
   vendor_id: number
   article_number: string
   description: string
@@ -303,6 +317,7 @@ export type OtherAppliancesMasterUncheckedCreateInput = {
 }
 
 export type OtherAppliancesMasterUpdateInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -313,6 +328,7 @@ export type OtherAppliancesMasterUpdateInput = {
 
 export type OtherAppliancesMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -323,6 +339,7 @@ export type OtherAppliancesMasterUncheckedUpdateInput = {
 
 export type OtherAppliancesMasterCreateManyInput = {
   id?: number
+  status?: string
   vendor_id: number
   article_number: string
   description: string
@@ -331,6 +348,7 @@ export type OtherAppliancesMasterCreateManyInput = {
 }
 
 export type OtherAppliancesMasterUpdateManyMutationInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -339,6 +357,7 @@ export type OtherAppliancesMasterUpdateManyMutationInput = {
 
 export type OtherAppliancesMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -358,6 +377,7 @@ export type OtherAppliancesMasterOrderByRelationAggregateInput = {
 
 export type OtherAppliancesMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -372,6 +392,7 @@ export type OtherAppliancesMasterAvgOrderByAggregateInput = {
 
 export type OtherAppliancesMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -381,6 +402,7 @@ export type OtherAppliancesMasterMaxOrderByAggregateInput = {
 
 export type OtherAppliancesMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   article_number?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -461,6 +483,7 @@ export type OtherAppliancesMasterUpdateOneWithoutLeadMappingsNestedInput = {
 }
 
 export type OtherAppliancesMasterCreateWithoutVendorInput = {
+  status?: string
   article_number: string
   description: string
   created_at?: Date | string
@@ -470,6 +493,7 @@ export type OtherAppliancesMasterCreateWithoutVendorInput = {
 
 export type OtherAppliancesMasterUncheckedCreateWithoutVendorInput = {
   id?: number
+  status?: string
   article_number: string
   description: string
   created_at?: Date | string
@@ -508,6 +532,7 @@ export type OtherAppliancesMasterScalarWhereInput = {
   OR?: Prisma.OtherAppliancesMasterScalarWhereInput[]
   NOT?: Prisma.OtherAppliancesMasterScalarWhereInput | Prisma.OtherAppliancesMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
+  status?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   vendor_id?: Prisma.IntFilter<"OtherAppliancesMaster"> | number
   article_number?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
   description?: Prisma.StringFilter<"OtherAppliancesMaster"> | string
@@ -516,6 +541,7 @@ export type OtherAppliancesMasterScalarWhereInput = {
 }
 
 export type OtherAppliancesMasterCreateWithoutLeadMappingsInput = {
+  status?: string
   article_number: string
   description: string
   created_at?: Date | string
@@ -525,6 +551,7 @@ export type OtherAppliancesMasterCreateWithoutLeadMappingsInput = {
 
 export type OtherAppliancesMasterUncheckedCreateWithoutLeadMappingsInput = {
   id?: number
+  status?: string
   vendor_id: number
   article_number: string
   description: string
@@ -549,6 +576,7 @@ export type OtherAppliancesMasterUpdateToOneWithWhereWithoutLeadMappingsInput = 
 }
 
 export type OtherAppliancesMasterUpdateWithoutLeadMappingsInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -558,6 +586,7 @@ export type OtherAppliancesMasterUpdateWithoutLeadMappingsInput = {
 
 export type OtherAppliancesMasterUncheckedUpdateWithoutLeadMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -567,6 +596,7 @@ export type OtherAppliancesMasterUncheckedUpdateWithoutLeadMappingsInput = {
 
 export type OtherAppliancesMasterCreateManyVendorInput = {
   id?: number
+  status?: string
   article_number: string
   description: string
   created_at?: Date | string
@@ -574,6 +604,7 @@ export type OtherAppliancesMasterCreateManyVendorInput = {
 }
 
 export type OtherAppliancesMasterUpdateWithoutVendorInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -583,6 +614,7 @@ export type OtherAppliancesMasterUpdateWithoutVendorInput = {
 
 export type OtherAppliancesMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -592,6 +624,7 @@ export type OtherAppliancesMasterUncheckedUpdateWithoutVendorInput = {
 
 export type OtherAppliancesMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   article_number?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -631,6 +664,7 @@ export type OtherAppliancesMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs ex
 
 export type OtherAppliancesMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   article_number?: boolean
   description?: boolean
@@ -643,6 +677,7 @@ export type OtherAppliancesMasterSelect<ExtArgs extends runtime.Types.Extensions
 
 export type OtherAppliancesMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   article_number?: boolean
   description?: boolean
@@ -653,6 +688,7 @@ export type OtherAppliancesMasterSelectCreateManyAndReturn<ExtArgs extends runti
 
 export type OtherAppliancesMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   article_number?: boolean
   description?: boolean
@@ -663,6 +699,7 @@ export type OtherAppliancesMasterSelectUpdateManyAndReturn<ExtArgs extends runti
 
 export type OtherAppliancesMasterSelectScalar = {
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   article_number?: boolean
   description?: boolean
@@ -670,7 +707,7 @@ export type OtherAppliancesMasterSelectScalar = {
   type?: boolean
 }
 
-export type OtherAppliancesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "article_number" | "description" | "created_at" | "type", ExtArgs["result"]["otherAppliancesMaster"]>
+export type OtherAppliancesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "vendor_id" | "article_number" | "description" | "created_at" | "type", ExtArgs["result"]["otherAppliancesMaster"]>
 export type OtherAppliancesMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadMappings?: boolean | Prisma.OtherAppliancesMaster$leadMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -691,6 +728,7 @@ export type $OtherAppliancesMasterPayload<ExtArgs extends runtime.Types.Extensio
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    status: string
     vendor_id: number
     article_number: string
     description: string
@@ -1122,6 +1160,7 @@ export interface Prisma__OtherAppliancesMasterClient<T, Null = never, ExtArgs ex
  */
 export interface OtherAppliancesMasterFieldRefs {
   readonly id: Prisma.FieldRef<"OtherAppliancesMaster", 'Int'>
+  readonly status: Prisma.FieldRef<"OtherAppliancesMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"OtherAppliancesMaster", 'Int'>
   readonly article_number: Prisma.FieldRef<"OtherAppliancesMaster", 'String'>
   readonly description: Prisma.FieldRef<"OtherAppliancesMaster", 'String'>

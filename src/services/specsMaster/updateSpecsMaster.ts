@@ -67,3 +67,20 @@ export async function updateSpecsMaster(vendorId: number, kind: string, id: numb
     return updated;
   });
 }
+
+/** Marks one or more entries of a specs master active / inactive (scoped to the vendor). */
+export async function updateSpecsMasterStatus(vendorId: number, kind: string, ids: unknown, status: unknown) {
+  const config = Object.prototype.hasOwnProperty.call(masters, kind) ? masters[kind] : undefined;
+  if (!config) return fail("Invalid specification master");
+  if (status !== "active" && status !== "inactive") return fail("status must be either 'active' or 'inactive'");
+  const entryIds = Array.isArray(ids) ? [...new Set(ids.map(Number))] : [];
+  if (entryIds.length === 0 || !entryIds.every(id => Number.isSafeInteger(id) && id > 0)) return fail("ids must be a non-empty list of IDs");
+
+  const model = (prisma as any)[config.model];
+  const scope = config.parent ? { [config.parent.relation]: { vendor_id: vendorId } } : { vendor_id: vendorId };
+  const where = { id: { in: entryIds }, ...scope };
+  const found = await model.count({ where });
+  if (found !== entryIds.length) return fail("Specification master not found", 404);
+  await model.updateMany({ where, data: { status } });
+  return { ids: entryIds, status };
+}

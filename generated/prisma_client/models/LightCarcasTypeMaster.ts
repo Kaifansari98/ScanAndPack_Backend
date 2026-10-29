@@ -38,6 +38,7 @@ export type LightCarcasTypeMasterSumAggregateOutputType = {
 
 export type LightCarcasTypeMasterMinAggregateOutputType = {
   id: number | null
+  status: string | null
   vendor_id: number | null
   type: string | null
   is_active: boolean | null
@@ -46,6 +47,7 @@ export type LightCarcasTypeMasterMinAggregateOutputType = {
 
 export type LightCarcasTypeMasterMaxAggregateOutputType = {
   id: number | null
+  status: string | null
   vendor_id: number | null
   type: string | null
   is_active: boolean | null
@@ -54,6 +56,7 @@ export type LightCarcasTypeMasterMaxAggregateOutputType = {
 
 export type LightCarcasTypeMasterCountAggregateOutputType = {
   id: number
+  status: number
   vendor_id: number
   type: number
   is_active: number
@@ -74,6 +77,7 @@ export type LightCarcasTypeMasterSumAggregateInputType = {
 
 export type LightCarcasTypeMasterMinAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   type?: true
   is_active?: true
@@ -82,6 +86,7 @@ export type LightCarcasTypeMasterMinAggregateInputType = {
 
 export type LightCarcasTypeMasterMaxAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   type?: true
   is_active?: true
@@ -90,6 +95,7 @@ export type LightCarcasTypeMasterMaxAggregateInputType = {
 
 export type LightCarcasTypeMasterCountAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   type?: true
   is_active?: true
@@ -185,6 +191,7 @@ export type LightCarcasTypeMasterGroupByArgs<ExtArgs extends runtime.Types.Exten
 
 export type LightCarcasTypeMasterGroupByOutputType = {
   id: number
+  status: string
   vendor_id: number
   type: string
   is_active: boolean
@@ -216,6 +223,7 @@ export type LightCarcasTypeMasterWhereInput = {
   OR?: Prisma.LightCarcasTypeMasterWhereInput[]
   NOT?: Prisma.LightCarcasTypeMasterWhereInput | Prisma.LightCarcasTypeMasterWhereInput[]
   id?: Prisma.IntFilter<"LightCarcasTypeMaster"> | number
+  status?: Prisma.StringFilter<"LightCarcasTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"LightCarcasTypeMaster"> | number
   type?: Prisma.StringFilter<"LightCarcasTypeMaster"> | string
   is_active?: Prisma.BoolFilter<"LightCarcasTypeMaster"> | boolean
@@ -226,6 +234,7 @@ export type LightCarcasTypeMasterWhereInput = {
 
 export type LightCarcasTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -239,6 +248,7 @@ export type LightCarcasTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.LightCarcasTypeMasterWhereInput | Prisma.LightCarcasTypeMasterWhereInput[]
   OR?: Prisma.LightCarcasTypeMasterWhereInput[]
   NOT?: Prisma.LightCarcasTypeMasterWhereInput | Prisma.LightCarcasTypeMasterWhereInput[]
+  status?: Prisma.StringFilter<"LightCarcasTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"LightCarcasTypeMaster"> | number
   type?: Prisma.StringFilter<"LightCarcasTypeMaster"> | string
   is_active?: Prisma.BoolFilter<"LightCarcasTypeMaster"> | boolean
@@ -249,6 +259,7 @@ export type LightCarcasTypeMasterWhereUniqueInput = Prisma.AtLeast<{
 
 export type LightCarcasTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -265,6 +276,7 @@ export type LightCarcasTypeMasterScalarWhereWithAggregatesInput = {
   OR?: Prisma.LightCarcasTypeMasterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LightCarcasTypeMasterScalarWhereWithAggregatesInput | Prisma.LightCarcasTypeMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"LightCarcasTypeMaster"> | number
+  status?: Prisma.StringWithAggregatesFilter<"LightCarcasTypeMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"LightCarcasTypeMaster"> | number
   type?: Prisma.StringWithAggregatesFilter<"LightCarcasTypeMaster"> | string
   is_active?: Prisma.BoolWithAggregatesFilter<"LightCarcasTypeMaster"> | boolean
@@ -272,6 +284,7 @@ export type LightCarcasTypeMasterScalarWhereWithAggregatesInput = {
 }
 
 export type LightCarcasTypeMasterCreateInput = {
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -281,6 +294,7 @@ export type LightCarcasTypeMasterCreateInput = {
 
 export type LightCarcasTypeMasterUncheckedCreateInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   is_active?: boolean
@@ -289,6 +303,7 @@ export type LightCarcasTypeMasterUncheckedCreateInput = {
 }
 
 export type LightCarcasTypeMasterUpdateInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -298,6 +313,7 @@ export type LightCarcasTypeMasterUpdateInput = {
 
 export type LightCarcasTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -307,6 +323,7 @@ export type LightCarcasTypeMasterUncheckedUpdateInput = {
 
 export type LightCarcasTypeMasterCreateManyInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   is_active?: boolean
@@ -314,6 +331,7 @@ export type LightCarcasTypeMasterCreateManyInput = {
 }
 
 export type LightCarcasTypeMasterUpdateManyMutationInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -321,6 +339,7 @@ export type LightCarcasTypeMasterUpdateManyMutationInput = {
 
 export type LightCarcasTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -339,6 +358,7 @@ export type LightCarcasTypeMasterOrderByRelationAggregateInput = {
 
 export type LightCarcasTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -352,6 +372,7 @@ export type LightCarcasTypeMasterAvgOrderByAggregateInput = {
 
 export type LightCarcasTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -360,6 +381,7 @@ export type LightCarcasTypeMasterMaxOrderByAggregateInput = {
 
 export type LightCarcasTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
@@ -433,6 +455,7 @@ export type LightCarcasTypeMasterUpdateOneRequiredWithoutUnitsNestedInput = {
 }
 
 export type LightCarcasTypeMasterCreateWithoutVendorInput = {
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -441,6 +464,7 @@ export type LightCarcasTypeMasterCreateWithoutVendorInput = {
 
 export type LightCarcasTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -478,6 +502,7 @@ export type LightCarcasTypeMasterScalarWhereInput = {
   OR?: Prisma.LightCarcasTypeMasterScalarWhereInput[]
   NOT?: Prisma.LightCarcasTypeMasterScalarWhereInput | Prisma.LightCarcasTypeMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"LightCarcasTypeMaster"> | number
+  status?: Prisma.StringFilter<"LightCarcasTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"LightCarcasTypeMaster"> | number
   type?: Prisma.StringFilter<"LightCarcasTypeMaster"> | string
   is_active?: Prisma.BoolFilter<"LightCarcasTypeMaster"> | boolean
@@ -485,6 +510,7 @@ export type LightCarcasTypeMasterScalarWhereInput = {
 }
 
 export type LightCarcasTypeMasterCreateWithoutUnitsInput = {
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -493,6 +519,7 @@ export type LightCarcasTypeMasterCreateWithoutUnitsInput = {
 
 export type LightCarcasTypeMasterUncheckedCreateWithoutUnitsInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   is_active?: boolean
@@ -516,6 +543,7 @@ export type LightCarcasTypeMasterUpdateToOneWithWhereWithoutUnitsInput = {
 }
 
 export type LightCarcasTypeMasterUpdateWithoutUnitsInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -524,6 +552,7 @@ export type LightCarcasTypeMasterUpdateWithoutUnitsInput = {
 
 export type LightCarcasTypeMasterUncheckedUpdateWithoutUnitsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -532,12 +561,14 @@ export type LightCarcasTypeMasterUncheckedUpdateWithoutUnitsInput = {
 
 export type LightCarcasTypeMasterCreateManyVendorInput = {
   id?: number
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
 }
 
 export type LightCarcasTypeMasterUpdateWithoutVendorInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -546,6 +577,7 @@ export type LightCarcasTypeMasterUpdateWithoutVendorInput = {
 
 export type LightCarcasTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -554,6 +586,7 @@ export type LightCarcasTypeMasterUncheckedUpdateWithoutVendorInput = {
 
 export type LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -592,6 +625,7 @@ export type LightCarcasTypeMasterCountOutputTypeCountUnitsArgs<ExtArgs extends r
 
 export type LightCarcasTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   is_active?: boolean
@@ -603,6 +637,7 @@ export type LightCarcasTypeMasterSelect<ExtArgs extends runtime.Types.Extensions
 
 export type LightCarcasTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   is_active?: boolean
@@ -612,6 +647,7 @@ export type LightCarcasTypeMasterSelectCreateManyAndReturn<ExtArgs extends runti
 
 export type LightCarcasTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   is_active?: boolean
@@ -621,13 +657,14 @@ export type LightCarcasTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runti
 
 export type LightCarcasTypeMasterSelectScalar = {
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   is_active?: boolean
   created_at?: boolean
 }
 
-export type LightCarcasTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "is_active" | "created_at", ExtArgs["result"]["lightCarcasTypeMaster"]>
+export type LightCarcasTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "vendor_id" | "type" | "is_active" | "created_at", ExtArgs["result"]["lightCarcasTypeMaster"]>
 export type LightCarcasTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   units?: boolean | Prisma.LightCarcasTypeMaster$unitsArgs<ExtArgs>
@@ -648,6 +685,7 @@ export type $LightCarcasTypeMasterPayload<ExtArgs extends runtime.Types.Extensio
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    status: string
     vendor_id: number
     type: string
     is_active: boolean
@@ -1078,6 +1116,7 @@ export interface Prisma__LightCarcasTypeMasterClient<T, Null = never, ExtArgs ex
  */
 export interface LightCarcasTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"LightCarcasTypeMaster", 'Int'>
+  readonly status: Prisma.FieldRef<"LightCarcasTypeMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"LightCarcasTypeMaster", 'Int'>
   readonly type: Prisma.FieldRef<"LightCarcasTypeMaster", 'String'>
   readonly is_active: Prisma.FieldRef<"LightCarcasTypeMaster", 'Boolean'>
