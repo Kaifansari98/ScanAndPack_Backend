@@ -3,6 +3,8 @@
 --   SkirtingCarcassLegsMaster      -> HardwareItemMaster
 --   SkirtingCarcassLegsColorMaster -> HardwareItemOptionMaster
 
+BEGIN;
+
 -- Tables
 ALTER TABLE "CarcassLegsMaster" RENAME TO "HardwareTypeMaster";
 ALTER TABLE "SkirtingCarcassLegsMaster" RENAME TO "HardwareItemMaster";
@@ -40,3 +42,5 @@ ALTER TABLE "LeadHardwareMapping" RENAME CONSTRAINT "LeadHardwareMapping_skirtin
 ALTER INDEX "LeadHardwareMapping_carcass_legs_id_idx" RENAME TO "LeadHardwareMapping_hardware_type_id_idx";
 ALTER INDEX "LeadHardwareMapping_skirting_carcass_legs_id_idx" RENAME TO "LeadHardwareMapping_hardware_item_id_idx";
 ALTER INDEX "LeadHardwareMapping_skirting_carcass_legs_color_id_idx" RENAME TO "LeadHardwareMapping_hardware_item_option_id_idx";
+
+COMMIT;
