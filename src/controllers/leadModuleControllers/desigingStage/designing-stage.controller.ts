@@ -45,6 +45,66 @@ const isValidMeetingTime = (value?: string): boolean =>
   typeof value === "string" && meetingTimePattern.test(value);
 
 export class DesigingStageController {
+  /**
+   * Meeting file names. Custom-usertype vendors get M<n>-<ClientName>-<MeetingDate>.<ext>,
+   * numbered across all of the lead's meeting files; other vendors keep the original name.
+   */
+  private static async buildMeetingDocNames(
+    vendorId: number,
+    leadId: number,
+    meetingDate: Date | string,
+    files: Express.Multer.File[],
+  ): Promise<string[]> {
+    const originalNames = files.map((file) => file.originalname);
+    if (files.length === 0) return originalNames;
+
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_this_vendor_is_custom_usertype_only: true },
+    });
+    if (vendor?.is_this_vendor_is_custom_usertype_only !== true) return originalNames;
+
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { firstname: true, lastname: true },
+    });
+    const clientNameSegment = sanitizeFilename(
+      `${lead?.firstname ?? ""}${lead?.lastname ?? ""}` || "Client",
+    )
+      .replace(/_+/g, "_")
+      .slice(0, 50);
+
+    const parsedDate = new Date(meetingDate);
+    const date = Number.isNaN(parsedDate.getTime()) ? new Date() : parsedDate;
+    const dateSegment = [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0"),
+    ].join("-");
+
+    const mappedDocs = await prisma.leadDesignMeetingDocumentsMapping.findMany({
+      where: { vendor_id: vendorId, lead_id: leadId },
+      select: { document_id: true },
+    });
+    const existingDocs = await prisma.leadDocuments.findMany({
+      where: {
+        id: { in: mappedDocs.map((doc) => doc.document_id) },
+        is_deleted: false,
+      },
+      select: { doc_og_name: true },
+    });
+    let nextRevision =
+      existingDocs.reduce((maxRevision, doc) => {
+        const match = doc.doc_og_name?.match(/^M(\d+)-/i);
+        return match ? Math.max(maxRevision, Number(match[1])) : maxRevision;
+      }, -1) + 1;
+
+    return files.map((file) => {
+      const extension = path.extname(file.originalname || "");
+      return `M${nextRevision++}-${clientNameSegment}-${dateSegment}${extension}`;
+    });
+  }
+
   private static normalizeSpecItemCodeId(value: number | null | undefined) {
     return value ?? -1;
   }
@@ -741,20 +801,27 @@ export class DesigingStageController {
       }
 
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
+      const docNames = await DesigingStageController.buildMeetingDocNames(
+        Number(vendorId),
+        Number(leadId),
+        date,
+        files,
+      );
 
-      for (const file of files) {
+      for (const [index, file] of files.entries()) {
+        const docName = docNames[index];
         const sysName = await uploadToWasabiMeetingDocsFile(
           file.path,
           Number(vendorId),
           Number(leadId),
-          file.originalname,
+          docName,
           file.mimetype,
         );
 
         await fs.unlink(file.path);
 
-        uploadedFiles.push({ originalName: file.originalname, sysName });
-        logs.push({ fileUploaded: file.originalname, sysName });
+        uploadedFiles.push({ originalName: docName, sysName });
+        logs.push({ fileUploaded: docName, sysName });
       }
 
       const { meeting, documents, mapping } = await prisma.$transaction(
@@ -956,19 +1023,30 @@ export class DesigingStageController {
           .json({ success: false, message: "No files uploaded" });
 
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
+      const meetingForName = await prisma.leadDesignMeeting.findFirst({
+        where: { id: Number(meetingId), vendor_id: Number(vendorId) },
+        select: { date: true },
+      });
+      const docNames = await DesigingStageController.buildMeetingDocNames(
+        Number(vendorId),
+        Number(leadId),
+        meetingForName?.date ?? new Date(),
+        files,
+      );
 
-      for (const file of files) {
+      for (const [index, file] of files.entries()) {
+        const docName = docNames[index];
         const sysName = await uploadToWasabiMeetingDocsFile(
           file.path,
           Number(vendorId),
           Number(leadId),
-          file.originalname,
+          docName,
           file.mimetype,
         );
 
         await fs.unlink(file.path);
 
-        uploadedFiles.push({ originalName: file.originalname, sysName });
+        uploadedFiles.push({ originalName: docName, sysName });
       }
 
       const { uploadedDocs } = await prisma.$transaction(async (tx) => {
@@ -2549,7 +2627,8 @@ export class DesigingStageController {
             });
             nextRevision =
               existingFDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^F(\d+)-/i);
+                // FSM-<n>- (current) or F<n>- (older uploads), so numbering continues.
+                const match = doc.doc_og_name?.match(/^(?:FSM-|F)(\d+)-/i);
                 const revision = match ? Number(match[1]) : -1;
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)
@@ -2565,7 +2644,7 @@ export class DesigingStageController {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
                   const extension = path.extname(file.originalname || "");
-                  const renamedOriginalName = `F${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  const renamedOriginalName = `FSM-${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
                   nextRevision += 1;
                   return renamedOriginalName;
                 })()
@@ -2894,20 +2973,27 @@ export class DesigingStageController {
 
       // 5️⃣ Upload new files if provided
       if (files.length > 0) {
-        for (const file of files) {
+        const docNames = await DesigingStageController.buildMeetingDocNames(
+          Number(vendorId),
+          existingMeeting.lead_id,
+          updatedMeeting.date,
+          files,
+        );
+        for (const [index, file] of files.entries()) {
+          const docName = docNames[index];
           // Upload to Wasabi
           const sysName = await uploadToWasabiMeetingDocs(
             file.buffer,
             Number(vendorId),
             existingMeeting.lead_id,
-            file.originalname,
+            docName,
           );
-          logs.push({ fileUploaded: file.originalname, sysName });
+          logs.push({ fileUploaded: docName, sysName });
 
           // Create LeadDocument
           const doc = await prisma.leadDocuments.create({
             data: {
-              doc_og_name: file.originalname,
+              doc_og_name: docName,
               doc_sys_name: sysName,
               vendor_id: Number(vendorId),
               lead_id: existingMeeting.lead_id,
