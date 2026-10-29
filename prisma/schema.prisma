@@ -2000,8 +2000,15 @@ model LeadProductStructureInstance {
   driver_number                              String?                         @db.VarChar(50)
   vehicle_no                                 String?                         @db.VarChar(100)
   dispatch_remark                            String?                         @db.VarChar(2000)
-  // Under Installation (large-scale vendors start installation per instance)
+  // Under Installation (large-scale vendors run installation per instance)
   actual_installation_start_date             DateTime?
+  expected_installation_end_date             DateTime?
+  is_carcass_installation_completed          Boolean?                        @default(false)
+  carcass_installation_completion_date       DateTime?
+  is_shutter_installation_completed          Boolean?                        @default(false)
+  shutter_installation_completion_date       DateTime?
+  installerMappings                          InstallerUserMapping[]
+  installationUpdates                        InstallationUpdate[]
   product_item_code_id                       Int?
   quantity                                   Int?
   sub_product_structure_id                   Int?
@@ -2873,6 +2880,7 @@ model InstallerUserMapping {
   account_id    Int
   lead_id       Int
   installer_id  Int
+  instance_id   Int?
   assigned_by   Int
   assigned_date DateTime            @default(now())
   account       AccountMaster       @relation(fields: [account_id], references: [id], onDelete: Cascade)
@@ -2880,6 +2888,9 @@ model InstallerUserMapping {
   installer     InstallerUserMaster @relation(fields: [installer_id], references: [id], onDelete: Cascade)
   lead          LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   vendor        VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  instance      LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
+
+  @@index([lead_id, instance_id])
 }
 
 model InstallationUpdate {
@@ -2887,6 +2898,7 @@ model InstallationUpdate {
   vendor_id   Int
   account_id  Int
   lead_id     Int
+  instance_id Int?
   update_date DateTime
   remark      String?                       @db.VarChar(2000)
   created_by  Int
@@ -2895,7 +2907,10 @@ model InstallationUpdate {
   createdBy   UserMaster                    @relation(fields: [created_by], references: [id], onDelete: Cascade)
   lead        LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   vendor      VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  instance    LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
   documents   InstallationUpdateDocuments[]
+
+  @@index([lead_id, instance_id])
 }
 
 model InstallationUpdateDocuments {

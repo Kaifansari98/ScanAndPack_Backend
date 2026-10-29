@@ -19392,6 +19392,11 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   vehicle_no: 'vehicle_no',
   dispatch_remark: 'dispatch_remark',
   actual_installation_start_date: 'actual_installation_start_date',
+  expected_installation_end_date: 'expected_installation_end_date',
+  is_carcass_installation_completed: 'is_carcass_installation_completed',
+  carcass_installation_completion_date: 'carcass_installation_completion_date',
+  is_shutter_installation_completed: 'is_shutter_installation_completed',
+  shutter_installation_completion_date: 'shutter_installation_completion_date',
   product_item_code_id: 'product_item_code_id',
   quantity: 'quantity',
   sub_product_structure_id: 'sub_product_structure_id'
@@ -20038,6 +20043,7 @@ export const InstallerUserMappingScalarFieldEnum = {
   account_id: 'account_id',
   lead_id: 'lead_id',
   installer_id: 'installer_id',
+  instance_id: 'instance_id',
   assigned_by: 'assigned_by',
   assigned_date: 'assigned_date'
 } as const
@@ -20050,6 +20056,7 @@ export const InstallationUpdateScalarFieldEnum = {
   vendor_id: 'vendor_id',
   account_id: 'account_id',
   lead_id: 'lead_id',
+  instance_id: 'instance_id',
   update_date: 'update_date',
   remark: 'remark',
   created_by: 'created_by',

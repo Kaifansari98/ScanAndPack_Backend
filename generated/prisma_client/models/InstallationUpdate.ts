@@ -31,6 +31,7 @@ export type InstallationUpdateAvgAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   created_by: number | null
 }
 
@@ -39,6 +40,7 @@ export type InstallationUpdateSumAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   created_by: number | null
 }
 
@@ -47,6 +49,7 @@ export type InstallationUpdateMinAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   update_date: Date | null
   remark: string | null
   created_by: number | null
@@ -58,6 +61,7 @@ export type InstallationUpdateMaxAggregateOutputType = {
   vendor_id: number | null
   account_id: number | null
   lead_id: number | null
+  instance_id: number | null
   update_date: Date | null
   remark: string | null
   created_by: number | null
@@ -69,6 +73,7 @@ export type InstallationUpdateCountAggregateOutputType = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id: number
   update_date: number
   remark: number
   created_by: number
@@ -82,6 +87,7 @@ export type InstallationUpdateAvgAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   created_by?: true
 }
 
@@ -90,6 +96,7 @@ export type InstallationUpdateSumAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   created_by?: true
 }
 
@@ -98,6 +105,7 @@ export type InstallationUpdateMinAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   update_date?: true
   remark?: true
   created_by?: true
@@ -109,6 +117,7 @@ export type InstallationUpdateMaxAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   update_date?: true
   remark?: true
   created_by?: true
@@ -120,6 +129,7 @@ export type InstallationUpdateCountAggregateInputType = {
   vendor_id?: true
   account_id?: true
   lead_id?: true
+  instance_id?: true
   update_date?: true
   remark?: true
   created_by?: true
@@ -218,6 +228,7 @@ export type InstallationUpdateGroupByOutputType = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id: number | null
   update_date: Date
   remark: string | null
   created_by: number
@@ -252,6 +263,7 @@ export type InstallationUpdateWhereInput = {
   vendor_id?: Prisma.IntFilter<"InstallationUpdate"> | number
   account_id?: Prisma.IntFilter<"InstallationUpdate"> | number
   lead_id?: Prisma.IntFilter<"InstallationUpdate"> | number
+  instance_id?: Prisma.IntNullableFilter<"InstallationUpdate"> | number | null
   update_date?: Prisma.DateTimeFilter<"InstallationUpdate"> | Date | string
   remark?: Prisma.StringNullableFilter<"InstallationUpdate"> | string | null
   created_by?: Prisma.IntFilter<"InstallationUpdate"> | number
@@ -260,6 +272,7 @@ export type InstallationUpdateWhereInput = {
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   documents?: Prisma.InstallationUpdateDocumentsListRelationFilter
 }
 
@@ -268,6 +281,7 @@ export type InstallationUpdateOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   update_date?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -276,6 +290,7 @@ export type InstallationUpdateOrderByWithRelationInput = {
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  instance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
   documents?: Prisma.InstallationUpdateDocumentsOrderByRelationAggregateInput
 }
 
@@ -287,6 +302,7 @@ export type InstallationUpdateWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"InstallationUpdate"> | number
   account_id?: Prisma.IntFilter<"InstallationUpdate"> | number
   lead_id?: Prisma.IntFilter<"InstallationUpdate"> | number
+  instance_id?: Prisma.IntNullableFilter<"InstallationUpdate"> | number | null
   update_date?: Prisma.DateTimeFilter<"InstallationUpdate"> | Date | string
   remark?: Prisma.StringNullableFilter<"InstallationUpdate"> | string | null
   created_by?: Prisma.IntFilter<"InstallationUpdate"> | number
@@ -295,6 +311,7 @@ export type InstallationUpdateWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   documents?: Prisma.InstallationUpdateDocumentsListRelationFilter
 }, "id">
 
@@ -303,6 +320,7 @@ export type InstallationUpdateOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrderInput | Prisma.SortOrder
   update_date?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -322,6 +340,7 @@ export type InstallationUpdateScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"InstallationUpdate"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"InstallationUpdate"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"InstallationUpdate"> | number
+  instance_id?: Prisma.IntNullableWithAggregatesFilter<"InstallationUpdate"> | number | null
   update_date?: Prisma.DateTimeWithAggregatesFilter<"InstallationUpdate"> | Date | string
   remark?: Prisma.StringNullableWithAggregatesFilter<"InstallationUpdate"> | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"InstallationUpdate"> | number
@@ -336,6 +355,7 @@ export type InstallationUpdateCreateInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationUpdatesCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationUpdatesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationUpdatesInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutInstallationUpdatesInput
   documents?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutInstallationUpdateInput
 }
 
@@ -344,6 +364,7 @@ export type InstallationUpdateUncheckedCreateInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -359,6 +380,7 @@ export type InstallationUpdateUpdateInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationUpdatesCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutInstallationUpdatesNestedInput
   documents?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutInstallationUpdateNestedInput
 }
 
@@ -367,6 +389,7 @@ export type InstallationUpdateUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -379,6 +402,7 @@ export type InstallationUpdateCreateManyInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -396,6 +420,7 @@ export type InstallationUpdateUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -417,6 +442,7 @@ export type InstallationUpdateCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   update_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -428,6 +454,7 @@ export type InstallationUpdateAvgOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
 
@@ -436,6 +463,7 @@ export type InstallationUpdateMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   update_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -447,6 +475,7 @@ export type InstallationUpdateMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   update_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -458,6 +487,7 @@ export type InstallationUpdateSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
 
@@ -634,6 +664,48 @@ export type InstallationUpdateUncheckedUpdateManyWithoutAccountNestedInput = {
   deleteMany?: Prisma.InstallationUpdateScalarWhereInput | Prisma.InstallationUpdateScalarWhereInput[]
 }
 
+export type InstallationUpdateCreateNestedManyWithoutInstanceInput = {
+  create?: Prisma.XOR<Prisma.InstallationUpdateCreateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput> | Prisma.InstallationUpdateCreateWithoutInstanceInput[] | Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput | Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput[]
+  createMany?: Prisma.InstallationUpdateCreateManyInstanceInputEnvelope
+  connect?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+}
+
+export type InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput = {
+  create?: Prisma.XOR<Prisma.InstallationUpdateCreateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput> | Prisma.InstallationUpdateCreateWithoutInstanceInput[] | Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput | Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput[]
+  createMany?: Prisma.InstallationUpdateCreateManyInstanceInputEnvelope
+  connect?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+}
+
+export type InstallationUpdateUpdateManyWithoutInstanceNestedInput = {
+  create?: Prisma.XOR<Prisma.InstallationUpdateCreateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput> | Prisma.InstallationUpdateCreateWithoutInstanceInput[] | Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput | Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput[]
+  upsert?: Prisma.InstallationUpdateUpsertWithWhereUniqueWithoutInstanceInput | Prisma.InstallationUpdateUpsertWithWhereUniqueWithoutInstanceInput[]
+  createMany?: Prisma.InstallationUpdateCreateManyInstanceInputEnvelope
+  set?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  disconnect?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  delete?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  connect?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  update?: Prisma.InstallationUpdateUpdateWithWhereUniqueWithoutInstanceInput | Prisma.InstallationUpdateUpdateWithWhereUniqueWithoutInstanceInput[]
+  updateMany?: Prisma.InstallationUpdateUpdateManyWithWhereWithoutInstanceInput | Prisma.InstallationUpdateUpdateManyWithWhereWithoutInstanceInput[]
+  deleteMany?: Prisma.InstallationUpdateScalarWhereInput | Prisma.InstallationUpdateScalarWhereInput[]
+}
+
+export type InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput = {
+  create?: Prisma.XOR<Prisma.InstallationUpdateCreateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput> | Prisma.InstallationUpdateCreateWithoutInstanceInput[] | Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput[]
+  connectOrCreate?: Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput | Prisma.InstallationUpdateCreateOrConnectWithoutInstanceInput[]
+  upsert?: Prisma.InstallationUpdateUpsertWithWhereUniqueWithoutInstanceInput | Prisma.InstallationUpdateUpsertWithWhereUniqueWithoutInstanceInput[]
+  createMany?: Prisma.InstallationUpdateCreateManyInstanceInputEnvelope
+  set?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  disconnect?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  delete?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  connect?: Prisma.InstallationUpdateWhereUniqueInput | Prisma.InstallationUpdateWhereUniqueInput[]
+  update?: Prisma.InstallationUpdateUpdateWithWhereUniqueWithoutInstanceInput | Prisma.InstallationUpdateUpdateWithWhereUniqueWithoutInstanceInput[]
+  updateMany?: Prisma.InstallationUpdateUpdateManyWithWhereWithoutInstanceInput | Prisma.InstallationUpdateUpdateManyWithWhereWithoutInstanceInput[]
+  deleteMany?: Prisma.InstallationUpdateScalarWhereInput | Prisma.InstallationUpdateScalarWhereInput[]
+}
+
 export type InstallationUpdateCreateNestedOneWithoutDocumentsInput = {
   create?: Prisma.XOR<Prisma.InstallationUpdateCreateWithoutDocumentsInput, Prisma.InstallationUpdateUncheckedCreateWithoutDocumentsInput>
   connectOrCreate?: Prisma.InstallationUpdateCreateOrConnectWithoutDocumentsInput
@@ -655,6 +727,7 @@ export type InstallationUpdateCreateWithoutVendorInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationUpdatesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationUpdatesCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationUpdatesInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutInstallationUpdatesInput
   documents?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutInstallationUpdateInput
 }
 
@@ -662,6 +735,7 @@ export type InstallationUpdateUncheckedCreateWithoutVendorInput = {
   id?: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -703,6 +777,7 @@ export type InstallationUpdateScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"InstallationUpdate"> | number
   account_id?: Prisma.IntFilter<"InstallationUpdate"> | number
   lead_id?: Prisma.IntFilter<"InstallationUpdate"> | number
+  instance_id?: Prisma.IntNullableFilter<"InstallationUpdate"> | number | null
   update_date?: Prisma.DateTimeFilter<"InstallationUpdate"> | Date | string
   remark?: Prisma.StringNullableFilter<"InstallationUpdate"> | string | null
   created_by?: Prisma.IntFilter<"InstallationUpdate"> | number
@@ -716,6 +791,7 @@ export type InstallationUpdateCreateWithoutCreatedByInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationUpdatesInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationUpdatesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationUpdatesInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutInstallationUpdatesInput
   documents?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutInstallationUpdateInput
 }
 
@@ -724,6 +800,7 @@ export type InstallationUpdateUncheckedCreateWithoutCreatedByInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_at?: Date | string
@@ -763,6 +840,7 @@ export type InstallationUpdateCreateWithoutLeadInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutInstallationUpdatesInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationUpdatesCreatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationUpdatesInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutInstallationUpdatesInput
   documents?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutInstallationUpdateInput
 }
 
@@ -770,6 +848,7 @@ export type InstallationUpdateUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
   account_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -810,6 +889,7 @@ export type InstallationUpdateCreateWithoutAccountInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationUpdatesCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationUpdatesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationUpdatesInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutInstallationUpdatesInput
   documents?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutInstallationUpdateInput
 }
 
@@ -817,6 +897,7 @@ export type InstallationUpdateUncheckedCreateWithoutAccountInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -850,6 +931,55 @@ export type InstallationUpdateUpdateManyWithWhereWithoutAccountInput = {
   data: Prisma.XOR<Prisma.InstallationUpdateUpdateManyMutationInput, Prisma.InstallationUpdateUncheckedUpdateManyWithoutAccountInput>
 }
 
+export type InstallationUpdateCreateWithoutInstanceInput = {
+  update_date: Date | string
+  remark?: string | null
+  created_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutInstallationUpdatesInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationUpdatesCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationUpdatesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationUpdatesInput
+  documents?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutInstallationUpdateInput
+}
+
+export type InstallationUpdateUncheckedCreateWithoutInstanceInput = {
+  id?: number
+  vendor_id: number
+  account_id: number
+  lead_id: number
+  update_date: Date | string
+  remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  documents?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutInstallationUpdateInput
+}
+
+export type InstallationUpdateCreateOrConnectWithoutInstanceInput = {
+  where: Prisma.InstallationUpdateWhereUniqueInput
+  create: Prisma.XOR<Prisma.InstallationUpdateCreateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput>
+}
+
+export type InstallationUpdateCreateManyInstanceInputEnvelope = {
+  data: Prisma.InstallationUpdateCreateManyInstanceInput | Prisma.InstallationUpdateCreateManyInstanceInput[]
+  skipDuplicates?: boolean
+}
+
+export type InstallationUpdateUpsertWithWhereUniqueWithoutInstanceInput = {
+  where: Prisma.InstallationUpdateWhereUniqueInput
+  update: Prisma.XOR<Prisma.InstallationUpdateUpdateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedUpdateWithoutInstanceInput>
+  create: Prisma.XOR<Prisma.InstallationUpdateCreateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedCreateWithoutInstanceInput>
+}
+
+export type InstallationUpdateUpdateWithWhereUniqueWithoutInstanceInput = {
+  where: Prisma.InstallationUpdateWhereUniqueInput
+  data: Prisma.XOR<Prisma.InstallationUpdateUpdateWithoutInstanceInput, Prisma.InstallationUpdateUncheckedUpdateWithoutInstanceInput>
+}
+
+export type InstallationUpdateUpdateManyWithWhereWithoutInstanceInput = {
+  where: Prisma.InstallationUpdateScalarWhereInput
+  data: Prisma.XOR<Prisma.InstallationUpdateUpdateManyMutationInput, Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceInput>
+}
+
 export type InstallationUpdateCreateWithoutDocumentsInput = {
   update_date: Date | string
   remark?: string | null
@@ -858,6 +988,7 @@ export type InstallationUpdateCreateWithoutDocumentsInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutInstallationUpdatesCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutInstallationUpdatesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutInstallationUpdatesInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutInstallationUpdatesInput
 }
 
 export type InstallationUpdateUncheckedCreateWithoutDocumentsInput = {
@@ -865,6 +996,7 @@ export type InstallationUpdateUncheckedCreateWithoutDocumentsInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -895,6 +1027,7 @@ export type InstallationUpdateUpdateWithoutDocumentsInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationUpdatesCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutInstallationUpdatesNestedInput
 }
 
 export type InstallationUpdateUncheckedUpdateWithoutDocumentsInput = {
@@ -902,6 +1035,7 @@ export type InstallationUpdateUncheckedUpdateWithoutDocumentsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -912,6 +1046,7 @@ export type InstallationUpdateCreateManyVendorInput = {
   id?: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -925,6 +1060,7 @@ export type InstallationUpdateUpdateWithoutVendorInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationUpdatesCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutInstallationUpdatesNestedInput
   documents?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutInstallationUpdateNestedInput
 }
 
@@ -932,6 +1068,7 @@ export type InstallationUpdateUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -943,6 +1080,7 @@ export type InstallationUpdateUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -954,6 +1092,7 @@ export type InstallationUpdateCreateManyCreatedByInput = {
   vendor_id: number
   account_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_at?: Date | string
@@ -966,6 +1105,7 @@ export type InstallationUpdateUpdateWithoutCreatedByInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutInstallationUpdatesNestedInput
   documents?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutInstallationUpdateNestedInput
 }
 
@@ -974,6 +1114,7 @@ export type InstallationUpdateUncheckedUpdateWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -985,6 +1126,7 @@ export type InstallationUpdateUncheckedUpdateManyWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -994,6 +1136,7 @@ export type InstallationUpdateCreateManyLeadInput = {
   id?: number
   vendor_id: number
   account_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -1007,6 +1150,7 @@ export type InstallationUpdateUpdateWithoutLeadInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationUpdatesCreatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutInstallationUpdatesNestedInput
   documents?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutInstallationUpdateNestedInput
 }
 
@@ -1014,6 +1158,7 @@ export type InstallationUpdateUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1025,6 +1170,7 @@ export type InstallationUpdateUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1035,6 +1181,7 @@ export type InstallationUpdateCreateManyAccountInput = {
   id?: number
   vendor_id: number
   lead_id: number
+  instance_id?: number | null
   update_date: Date | string
   remark?: string | null
   created_by: number
@@ -1048,6 +1195,7 @@ export type InstallationUpdateUpdateWithoutAccountInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationUpdatesCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutInstallationUpdatesNestedInput
   documents?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutInstallationUpdateNestedInput
 }
 
@@ -1055,6 +1203,7 @@ export type InstallationUpdateUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1065,6 +1214,52 @@ export type InstallationUpdateUncheckedUpdateWithoutAccountInput = {
 export type InstallationUpdateUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InstallationUpdateCreateManyInstanceInput = {
+  id?: number
+  vendor_id: number
+  account_id: number
+  lead_id: number
+  update_date: Date | string
+  remark?: string | null
+  created_by: number
+  created_at?: Date | string
+}
+
+export type InstallationUpdateUpdateWithoutInstanceInput = {
+  update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutInstallationUpdatesCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutInstallationUpdatesNestedInput
+  documents?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutInstallationUpdateNestedInput
+}
+
+export type InstallationUpdateUncheckedUpdateWithoutInstanceInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutInstallationUpdateNestedInput
+}
+
+export type InstallationUpdateUncheckedUpdateManyWithoutInstanceInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   update_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1108,6 +1303,7 @@ export type InstallationUpdateSelect<ExtArgs extends runtime.Types.Extensions.In
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   update_date?: boolean
   remark?: boolean
   created_by?: boolean
@@ -1116,6 +1312,7 @@ export type InstallationUpdateSelect<ExtArgs extends runtime.Types.Extensions.In
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.InstallationUpdate$instanceArgs<ExtArgs>
   documents?: boolean | Prisma.InstallationUpdate$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.InstallationUpdateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["installationUpdate"]>
@@ -1125,6 +1322,7 @@ export type InstallationUpdateSelectCreateManyAndReturn<ExtArgs extends runtime.
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   update_date?: boolean
   remark?: boolean
   created_by?: boolean
@@ -1133,6 +1331,7 @@ export type InstallationUpdateSelectCreateManyAndReturn<ExtArgs extends runtime.
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.InstallationUpdate$instanceArgs<ExtArgs>
 }, ExtArgs["result"]["installationUpdate"]>
 
 export type InstallationUpdateSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1140,6 +1339,7 @@ export type InstallationUpdateSelectUpdateManyAndReturn<ExtArgs extends runtime.
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   update_date?: boolean
   remark?: boolean
   created_by?: boolean
@@ -1148,6 +1348,7 @@ export type InstallationUpdateSelectUpdateManyAndReturn<ExtArgs extends runtime.
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.InstallationUpdate$instanceArgs<ExtArgs>
 }, ExtArgs["result"]["installationUpdate"]>
 
 export type InstallationUpdateSelectScalar = {
@@ -1155,18 +1356,20 @@ export type InstallationUpdateSelectScalar = {
   vendor_id?: boolean
   account_id?: boolean
   lead_id?: boolean
+  instance_id?: boolean
   update_date?: boolean
   remark?: boolean
   created_by?: boolean
   created_at?: boolean
 }
 
-export type InstallationUpdateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "account_id" | "lead_id" | "update_date" | "remark" | "created_by" | "created_at", ExtArgs["result"]["installationUpdate"]>
+export type InstallationUpdateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "account_id" | "lead_id" | "instance_id" | "update_date" | "remark" | "created_by" | "created_at", ExtArgs["result"]["installationUpdate"]>
 export type InstallationUpdateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.InstallationUpdate$instanceArgs<ExtArgs>
   documents?: boolean | Prisma.InstallationUpdate$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.InstallationUpdateCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1175,12 +1378,14 @@ export type InstallationUpdateIncludeCreateManyAndReturn<ExtArgs extends runtime
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.InstallationUpdate$instanceArgs<ExtArgs>
 }
 export type InstallationUpdateIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  instance?: boolean | Prisma.InstallationUpdate$instanceArgs<ExtArgs>
 }
 
 export type $InstallationUpdatePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1190,6 +1395,7 @@ export type $InstallationUpdatePayload<ExtArgs extends runtime.Types.Extensions.
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    instance: Prisma.$LeadProductStructureInstancePayload<ExtArgs> | null
     documents: Prisma.$InstallationUpdateDocumentsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1197,6 +1403,7 @@ export type $InstallationUpdatePayload<ExtArgs extends runtime.Types.Extensions.
     vendor_id: number
     account_id: number
     lead_id: number
+    instance_id: number | null
     update_date: Date
     remark: string | null
     created_by: number
@@ -1599,6 +1806,7 @@ export interface Prisma__InstallationUpdateClient<T, Null = never, ExtArgs exten
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  instance<T extends Prisma.InstallationUpdate$instanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallationUpdate$instanceArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   documents<T extends Prisma.InstallationUpdate$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InstallationUpdate$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdateDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1633,6 +1841,7 @@ export interface InstallationUpdateFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"InstallationUpdate", 'Int'>
   readonly account_id: Prisma.FieldRef<"InstallationUpdate", 'Int'>
   readonly lead_id: Prisma.FieldRef<"InstallationUpdate", 'Int'>
+  readonly instance_id: Prisma.FieldRef<"InstallationUpdate", 'Int'>
   readonly update_date: Prisma.FieldRef<"InstallationUpdate", 'DateTime'>
   readonly remark: Prisma.FieldRef<"InstallationUpdate", 'String'>
   readonly created_by: Prisma.FieldRef<"InstallationUpdate", 'Int'>
@@ -2035,6 +2244,25 @@ export type InstallationUpdateDeleteManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many InstallationUpdates to delete.
    */
   limit?: number
+}
+
+/**
+ * InstallationUpdate.instance
+ */
+export type InstallationUpdate$instanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadProductStructureInstance
+   */
+  select?: Prisma.LeadProductStructureInstanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadProductStructureInstance
+   */
+  omit?: Prisma.LeadProductStructureInstanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadProductStructureInstanceInclude<ExtArgs> | null
+  where?: Prisma.LeadProductStructureInstanceWhereInput
 }
 
 /**
