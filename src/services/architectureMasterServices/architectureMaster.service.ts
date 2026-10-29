@@ -9,7 +9,7 @@ export class ArchitectureMasterService {
   async createArchitectureMaster(data: {
     vendorId: string | number;
     name: string;
-    email: string;
+    email?: string;
     mobile: string;
     alt_mobile?: string;
     is_active?: boolean;
@@ -20,9 +20,9 @@ export class ArchitectureMasterService {
       data: {
         vendorId: Number(data.vendorId),
         name: data.name,
-        email: data.email,
+        email: data.email?.trim() || "",
         mobile: data.mobile,
-        alt_mobile: data.alt_mobile,
+        alt_mobile: data.alt_mobile?.trim() || null,
         isActive: data.is_active ?? true,
         createdBy,
       },
@@ -283,12 +283,10 @@ export class ArchitectureMasterService {
 
     // Verify required headers exist
     const hasNameHeader = headers.some(k => k.includes("name"));
-    const hasEmailHeader = headers.some(k => k.includes("email"));
-    const hasMobileHeader = headers.some(k => k.includes("mobile") || (k.includes("contact") && !k.includes("alt")));
+    const hasMobileHeader = headers.some(k => !k.includes("alt") && (k.includes("mobile") || k.includes("contact")));
 
     const missingHeaders = [];
     if (!hasNameHeader) missingHeaders.push("name");
-    if (!hasEmailHeader) missingHeaders.push("email");
     if (!hasMobileHeader) missingHeaders.push("contact");
 
     if (missingHeaders.length > 0) {
@@ -305,7 +303,7 @@ export class ArchitectureMasterService {
       rowIndex++;
       const nameKey = Object.keys(row).find(k => k.includes("name"));
       const emailKey = Object.keys(row).find(k => k.includes("email"));
-      const mobileKey = Object.keys(row).find(k => k.includes("mobile") || (k.includes("contact") && !k.includes("alt")));
+      const mobileKey = Object.keys(row).find(k => !k.includes("alt") && (k.includes("mobile") || k.includes("contact")));
       const altMobileKey = Object.keys(row).find(
         k => k.includes("alt") || k.includes("alternate")
       );
@@ -328,9 +326,7 @@ export class ArchitectureMasterService {
       }
 
       // 2. Email validation
-      if (!email) {
-        errors.push(`Row ${rowIndex}: Email is required`);
-      } else {
+      if (email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
           errors.push(`Row ${rowIndex}: Invalid Email format (${email})`);
@@ -420,7 +416,7 @@ export class ArchitectureMasterService {
       const normalizedEmail = dataRow.email.trim().toLowerCase();
       const normalizedMobile = dataRow.mobile.trim();
 
-      if (existingEmails.has(normalizedEmail)) {
+      if (normalizedEmail && existingEmails.has(normalizedEmail)) {
         skippedRows.push({
           row: dataRow,
           reason: `Architect with email ${dataRow.email} already exists`,
@@ -436,7 +432,7 @@ export class ArchitectureMasterService {
         continue;
       }
 
-      if (seenEmails.has(normalizedEmail)) {
+      if (normalizedEmail && seenEmails.has(normalizedEmail)) {
         skippedRows.push({
           row: dataRow,
           reason: `Duplicate email ${dataRow.email} found in uploaded file`,
@@ -465,7 +461,7 @@ export class ArchitectureMasterService {
           },
         });
         createdArchitects.push(newArch);
-        seenEmails.add(normalizedEmail);
+        if (normalizedEmail) seenEmails.add(normalizedEmail);
         seenMobiles.add(normalizedMobile);
       } catch (err: any) {
         if (err?.code === "P2002") {

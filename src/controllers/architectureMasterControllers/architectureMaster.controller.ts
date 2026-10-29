@@ -13,8 +13,8 @@ export class ArchitectureMasterController {
       const { vendorId, name, email, mobile, alt_mobile, is_active } = req.body;
       
       // Basic validation
-      if (!name || !email || !mobile) {
-        return res.status(400).json(ApiResponse.validationError("Name, email, and mobile are required"));
+      if (!name || !mobile) {
+        return res.status(400).json(ApiResponse.validationError("Name and mobile are required"));
       }
 
       // We might want to use req.user for created_by if auth middleware sets it
