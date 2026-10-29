@@ -612,7 +612,7 @@ export type VendorMasterWhereInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
   carcasMaterials?: Prisma.CarcasMaterialMasterListRelationFilter
-  carcassLegs?: Prisma.CarcassLegsMasterListRelationFilter
+  hardwareTypes?: Prisma.HardwareTypeMasterListRelationFilter
   carcassTypes?: Prisma.CarcassTypeMasterListRelationFilter
   categoryNamingStructures?: Prisma.CategoryNamingStructureListRelationFilter
   clientBankAccounts?: Prisma.ClientBankDetailListRelationFilter
@@ -837,7 +837,7 @@ export type VendorMasterOrderByWithRelationInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterOrderByRelationAggregateInput
   broadcasts?: Prisma.BroadcastMasterOrderByRelationAggregateInput
   carcasMaterials?: Prisma.CarcasMaterialMasterOrderByRelationAggregateInput
-  carcassLegs?: Prisma.CarcassLegsMasterOrderByRelationAggregateInput
+  hardwareTypes?: Prisma.HardwareTypeMasterOrderByRelationAggregateInput
   carcassTypes?: Prisma.CarcassTypeMasterOrderByRelationAggregateInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureOrderByRelationAggregateInput
   clientBankAccounts?: Prisma.ClientBankDetailOrderByRelationAggregateInput
@@ -1065,7 +1065,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   broadcastCategories?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
   carcasMaterials?: Prisma.CarcasMaterialMasterListRelationFilter
-  carcassLegs?: Prisma.CarcassLegsMasterListRelationFilter
+  hardwareTypes?: Prisma.HardwareTypeMasterListRelationFilter
   carcassTypes?: Prisma.CarcassTypeMasterListRelationFilter
   categoryNamingStructures?: Prisma.CategoryNamingStructureListRelationFilter
   clientBankAccounts?: Prisma.ClientBankDetailListRelationFilter
@@ -1403,7 +1403,7 @@ export type VendorMasterCreateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -1627,7 +1627,7 @@ export type VendorMasterUncheckedCreateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -1848,7 +1848,7 @@ export type VendorMasterUpdateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -2072,7 +2072,7 @@ export type VendorMasterUncheckedUpdateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -3151,18 +3151,18 @@ export type VendorMasterUpdateOneRequiredWithoutShutterMaterialsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutShutterMaterialsInput, Prisma.VendorMasterUpdateWithoutShutterMaterialsInput>, Prisma.VendorMasterUncheckedUpdateWithoutShutterMaterialsInput>
 }
 
-export type VendorMasterCreateNestedOneWithoutCarcassLegsInput = {
-  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassLegsInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassLegsInput>
-  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutCarcassLegsInput
+export type VendorMasterCreateNestedOneWithoutHardwareTypesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutHardwareTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHardwareTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutHardwareTypesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
 }
 
-export type VendorMasterUpdateOneRequiredWithoutCarcassLegsNestedInput = {
-  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassLegsInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassLegsInput>
-  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutCarcassLegsInput
-  upsert?: Prisma.VendorMasterUpsertWithoutCarcassLegsInput
+export type VendorMasterUpdateOneRequiredWithoutHardwareTypesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutHardwareTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHardwareTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutHardwareTypesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutHardwareTypesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutCarcassLegsInput, Prisma.VendorMasterUpdateWithoutCarcassLegsInput>, Prisma.VendorMasterUncheckedUpdateWithoutCarcassLegsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutHardwareTypesInput, Prisma.VendorMasterUpdateWithoutHardwareTypesInput>, Prisma.VendorMasterUncheckedUpdateWithoutHardwareTypesInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutLeadHardwareMappingsInput = {
@@ -5138,7 +5138,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -5361,7 +5361,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -5597,7 +5597,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -5820,7 +5820,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -6040,7 +6040,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -6263,7 +6263,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -6499,7 +6499,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -6722,7 +6722,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -6942,7 +6942,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -7165,7 +7165,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -7401,7 +7401,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -7624,7 +7624,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -7844,7 +7844,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -8067,7 +8067,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -8303,7 +8303,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -8526,7 +8526,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -8746,7 +8746,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -8969,7 +8969,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -9205,7 +9205,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -9428,7 +9428,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -9648,7 +9648,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -9871,7 +9871,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -10107,7 +10107,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -10330,7 +10330,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -10550,7 +10550,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -10773,7 +10773,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -11009,7 +11009,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -11232,7 +11232,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -11452,7 +11452,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -11675,7 +11675,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -11911,7 +11911,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -12134,7 +12134,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -12354,7 +12354,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -12577,7 +12577,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -12813,7 +12813,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -13036,7 +13036,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -13255,7 +13255,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -13478,7 +13478,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -13714,7 +13714,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -13937,7 +13937,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -14158,7 +14158,7 @@ export type VendorMasterCreateWithoutFactoryOutRevertLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -14381,7 +14381,7 @@ export type VendorMasterUncheckedCreateWithoutFactoryOutRevertLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -14617,7 +14617,7 @@ export type VendorMasterUpdateWithoutFactoryOutRevertLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -14840,7 +14840,7 @@ export type VendorMasterUncheckedUpdateWithoutFactoryOutRevertLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -15060,7 +15060,7 @@ export type VendorMasterCreateWithoutBoxUnpackLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -15283,7 +15283,7 @@ export type VendorMasterUncheckedCreateWithoutBoxUnpackLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -15519,7 +15519,7 @@ export type VendorMasterUpdateWithoutBoxUnpackLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -15742,7 +15742,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxUnpackLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -15962,7 +15962,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -16185,7 +16185,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -16421,7 +16421,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -16644,7 +16644,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -16864,7 +16864,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -17087,7 +17087,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -17323,7 +17323,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -17546,7 +17546,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -17766,7 +17766,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -17989,7 +17989,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -18225,7 +18225,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -18448,7 +18448,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -18668,7 +18668,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
@@ -18891,7 +18891,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19127,7 +19127,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
@@ -19350,7 +19350,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19570,7 +19570,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -19793,7 +19793,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -20029,7 +20029,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -20252,7 +20252,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -20472,7 +20472,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -20695,7 +20695,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -20931,7 +20931,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -21154,7 +21154,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -21374,7 +21374,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -21597,7 +21597,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -21833,7 +21833,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -22056,7 +22056,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -22276,7 +22276,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -22499,7 +22499,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -22735,7 +22735,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -22958,7 +22958,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -23178,7 +23178,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -23401,7 +23401,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -23637,7 +23637,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -23860,7 +23860,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -24080,7 +24080,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -24303,7 +24303,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -24539,7 +24539,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -24762,7 +24762,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -24982,7 +24982,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -25205,7 +25205,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -25441,7 +25441,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -25664,7 +25664,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -25884,7 +25884,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -26107,7 +26107,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -26343,7 +26343,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -26566,7 +26566,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -26786,7 +26786,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -27009,7 +27009,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -27245,7 +27245,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -27468,7 +27468,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -27688,7 +27688,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -27911,7 +27911,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -28147,7 +28147,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -28370,7 +28370,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -28590,7 +28590,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -28813,7 +28813,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -29049,7 +29049,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -29272,7 +29272,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -29491,7 +29491,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -29714,7 +29714,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -29950,7 +29950,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -30173,7 +30173,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -30394,7 +30394,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -30617,7 +30617,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -30853,7 +30853,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -31076,7 +31076,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -31296,7 +31296,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -31519,7 +31519,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -31755,7 +31755,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -31978,7 +31978,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -32198,7 +32198,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -32421,7 +32421,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -32657,7 +32657,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -32880,7 +32880,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -33100,7 +33100,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -33323,7 +33323,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -33559,7 +33559,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -33782,7 +33782,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -34002,7 +34002,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -34225,7 +34225,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -34461,7 +34461,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -34684,7 +34684,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -34904,7 +34904,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -35127,7 +35127,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -35363,7 +35363,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -35586,7 +35586,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -35806,7 +35806,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
@@ -36029,7 +36029,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36265,7 +36265,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
@@ -36488,7 +36488,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36707,7 +36707,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -36930,7 +36930,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -37166,7 +37166,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -37389,7 +37389,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -37610,7 +37610,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -37833,7 +37833,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -38069,7 +38069,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -38292,7 +38292,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -38512,7 +38512,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -38735,7 +38735,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -38971,7 +38971,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -39194,7 +39194,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -39349,7 +39349,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   walkinUploads?: Prisma.WalkinLeadUploadUncheckedUpdateManyWithoutVendorNestedInput
 }
 
-export type VendorMasterCreateWithoutCarcassLegsInput = {
+export type VendorMasterCreateWithoutHardwareTypesInput = {
   site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name: string
   vendor_code: string
@@ -39570,7 +39570,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   walkinUploads?: Prisma.WalkinLeadUploadCreateNestedManyWithoutVendorInput
 }
 
-export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
+export type VendorMasterUncheckedCreateWithoutHardwareTypesInput = {
   site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: number
   vendor_name: string
@@ -39792,23 +39792,23 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   walkinUploads?: Prisma.WalkinLeadUploadUncheckedCreateNestedManyWithoutVendorInput
 }
 
-export type VendorMasterCreateOrConnectWithoutCarcassLegsInput = {
+export type VendorMasterCreateOrConnectWithoutHardwareTypesInput = {
   where: Prisma.VendorMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassLegsInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassLegsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutHardwareTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHardwareTypesInput>
 }
 
-export type VendorMasterUpsertWithoutCarcassLegsInput = {
-  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutCarcassLegsInput, Prisma.VendorMasterUncheckedUpdateWithoutCarcassLegsInput>
-  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassLegsInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassLegsInput>
+export type VendorMasterUpsertWithoutHardwareTypesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutHardwareTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutHardwareTypesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutHardwareTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHardwareTypesInput>
   where?: Prisma.VendorMasterWhereInput
 }
 
-export type VendorMasterUpdateToOneWithWhereWithoutCarcassLegsInput = {
+export type VendorMasterUpdateToOneWithWhereWithoutHardwareTypesInput = {
   where?: Prisma.VendorMasterWhereInput
-  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutCarcassLegsInput, Prisma.VendorMasterUncheckedUpdateWithoutCarcassLegsInput>
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutHardwareTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutHardwareTypesInput>
 }
 
-export type VendorMasterUpdateWithoutCarcassLegsInput = {
+export type VendorMasterUpdateWithoutHardwareTypesInput = {
   site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -40029,7 +40029,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   walkinUploads?: Prisma.WalkinLeadUploadUpdateManyWithoutVendorNestedInput
 }
 
-export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
+export type VendorMasterUncheckedUpdateWithoutHardwareTypesInput = {
   site_readiness_questions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -40316,7 +40316,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -40539,7 +40539,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -40775,7 +40775,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -40998,7 +40998,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -41218,7 +41218,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -41441,7 +41441,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -41677,7 +41677,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -41900,7 +41900,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -42120,7 +42120,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -42343,7 +42343,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -42579,7 +42579,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -42802,7 +42802,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -43022,7 +43022,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -43245,7 +43245,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -43481,7 +43481,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -43704,7 +43704,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -43924,7 +43924,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -44147,7 +44147,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -44383,7 +44383,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -44606,7 +44606,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -44826,7 +44826,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -45049,7 +45049,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -45285,7 +45285,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -45508,7 +45508,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -45728,7 +45728,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -45951,7 +45951,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -46187,7 +46187,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -46410,7 +46410,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -46630,7 +46630,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -46853,7 +46853,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -47089,7 +47089,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -47312,7 +47312,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -47532,7 +47532,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -47755,7 +47755,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -47991,7 +47991,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -48214,7 +48214,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -48434,7 +48434,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -48657,7 +48657,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -48893,7 +48893,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -49116,7 +49116,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -49336,7 +49336,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -49559,7 +49559,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -49795,7 +49795,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -50018,7 +50018,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -50238,7 +50238,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -50461,7 +50461,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -50697,7 +50697,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -50920,7 +50920,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -51140,7 +51140,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -51363,7 +51363,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -51599,7 +51599,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -51822,7 +51822,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -52042,7 +52042,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -52265,7 +52265,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -52501,7 +52501,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -52724,7 +52724,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -52944,7 +52944,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -53167,7 +53167,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -53403,7 +53403,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -53626,7 +53626,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -53846,7 +53846,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -54069,7 +54069,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -54305,7 +54305,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -54528,7 +54528,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -54748,7 +54748,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -54971,7 +54971,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -55207,7 +55207,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -55430,7 +55430,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -55650,7 +55650,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -55873,7 +55873,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -56109,7 +56109,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -56332,7 +56332,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -56552,7 +56552,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -56775,7 +56775,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -57011,7 +57011,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -57234,7 +57234,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -57454,7 +57454,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -57677,7 +57677,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -57913,7 +57913,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -58136,7 +58136,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -58356,7 +58356,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -58579,7 +58579,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -58815,7 +58815,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -59038,7 +59038,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -59258,7 +59258,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -59481,7 +59481,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -59717,7 +59717,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -59940,7 +59940,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -60160,7 +60160,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -60383,7 +60383,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -60619,7 +60619,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -60842,7 +60842,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -61062,7 +61062,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -61285,7 +61285,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -61521,7 +61521,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -61744,7 +61744,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -61964,7 +61964,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -62187,7 +62187,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -62423,7 +62423,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -62646,7 +62646,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -62866,7 +62866,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -63089,7 +63089,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -63325,7 +63325,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -63548,7 +63548,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -63768,7 +63768,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -63991,7 +63991,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -64227,7 +64227,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -64450,7 +64450,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -64670,7 +64670,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -64893,7 +64893,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -65129,7 +65129,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -65352,7 +65352,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -65571,7 +65571,7 @@ export type VendorMasterCreateWithoutInstanceStageHistoryInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -65794,7 +65794,7 @@ export type VendorMasterUncheckedCreateWithoutInstanceStageHistoryInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -66030,7 +66030,7 @@ export type VendorMasterUpdateWithoutInstanceStageHistoryInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -66253,7 +66253,7 @@ export type VendorMasterUncheckedUpdateWithoutInstanceStageHistoryInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -66474,7 +66474,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -66697,7 +66697,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -66933,7 +66933,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -67156,7 +67156,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -67376,7 +67376,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -67599,7 +67599,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -67835,7 +67835,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -68058,7 +68058,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -68278,7 +68278,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -68501,7 +68501,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -68737,7 +68737,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -68960,7 +68960,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -69180,7 +69180,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -69403,7 +69403,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -69639,7 +69639,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -69862,7 +69862,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -70082,7 +70082,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -70305,7 +70305,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -70541,7 +70541,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -70764,7 +70764,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -70984,7 +70984,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -71207,7 +71207,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -71443,7 +71443,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -71666,7 +71666,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -71886,7 +71886,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -72109,7 +72109,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -72345,7 +72345,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -72568,7 +72568,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -72788,7 +72788,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -73011,7 +73011,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -73247,7 +73247,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -73470,7 +73470,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -73690,7 +73690,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -73913,7 +73913,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -74149,7 +74149,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -74372,7 +74372,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -74592,7 +74592,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -74815,7 +74815,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -75051,7 +75051,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -75274,7 +75274,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -75494,7 +75494,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -75717,7 +75717,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -75953,7 +75953,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -76176,7 +76176,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -76396,7 +76396,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -76619,7 +76619,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -76855,7 +76855,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -77078,7 +77078,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -77298,7 +77298,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -77521,7 +77521,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -77757,7 +77757,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -77980,7 +77980,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -78200,7 +78200,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -78423,7 +78423,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -78659,7 +78659,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -78882,7 +78882,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -79102,7 +79102,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -79325,7 +79325,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -79561,7 +79561,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -79784,7 +79784,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -80004,7 +80004,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -80227,7 +80227,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -80463,7 +80463,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -80686,7 +80686,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -80906,7 +80906,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -81129,7 +81129,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -81365,7 +81365,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -81588,7 +81588,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -81808,7 +81808,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -82031,7 +82031,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -82267,7 +82267,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -82490,7 +82490,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -82710,7 +82710,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -82933,7 +82933,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -83169,7 +83169,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -83392,7 +83392,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -83612,7 +83612,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -83835,7 +83835,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -84071,7 +84071,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -84294,7 +84294,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -84514,7 +84514,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -84737,7 +84737,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -84973,7 +84973,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -85196,7 +85196,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -85416,7 +85416,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -85639,7 +85639,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -85875,7 +85875,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -86098,7 +86098,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -86318,7 +86318,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -86541,7 +86541,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -86777,7 +86777,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -87000,7 +87000,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -87220,7 +87220,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -87443,7 +87443,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -87679,7 +87679,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -87902,7 +87902,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -88122,7 +88122,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -88345,7 +88345,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -88581,7 +88581,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -88804,7 +88804,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -89024,7 +89024,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -89247,7 +89247,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -89483,7 +89483,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -89706,7 +89706,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -89926,7 +89926,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -90149,7 +90149,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -90385,7 +90385,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -90608,7 +90608,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -90828,7 +90828,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -91051,7 +91051,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -91287,7 +91287,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -91510,7 +91510,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -91730,7 +91730,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -91953,7 +91953,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -92189,7 +92189,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -92412,7 +92412,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -92632,7 +92632,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -92855,7 +92855,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -93091,7 +93091,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -93314,7 +93314,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -93534,7 +93534,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -93757,7 +93757,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -93993,7 +93993,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -94216,7 +94216,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -94436,7 +94436,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -94659,7 +94659,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -94895,7 +94895,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -95118,7 +95118,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -95338,7 +95338,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -95561,7 +95561,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -95797,7 +95797,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -96020,7 +96020,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -96240,7 +96240,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -96463,7 +96463,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -96699,7 +96699,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -96922,7 +96922,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -97142,7 +97142,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -97365,7 +97365,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -97601,7 +97601,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -97824,7 +97824,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -98043,7 +98043,7 @@ export type VendorMasterCreateWithoutMachineCostDescriptionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -98266,7 +98266,7 @@ export type VendorMasterUncheckedCreateWithoutMachineCostDescriptionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -98502,7 +98502,7 @@ export type VendorMasterUpdateWithoutMachineCostDescriptionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -98725,7 +98725,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineCostDescriptionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -98946,7 +98946,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -99169,7 +99169,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -99405,7 +99405,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -99628,7 +99628,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -99848,7 +99848,7 @@ export type VendorMasterCreateWithoutCutlistHeadersMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -100071,7 +100071,7 @@ export type VendorMasterUncheckedCreateWithoutCutlistHeadersMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -100307,7 +100307,7 @@ export type VendorMasterUpdateWithoutCutlistHeadersMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -100530,7 +100530,7 @@ export type VendorMasterUncheckedUpdateWithoutCutlistHeadersMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -100750,7 +100750,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -100973,7 +100973,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -101209,7 +101209,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -101432,7 +101432,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -101652,7 +101652,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -101875,7 +101875,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -102111,7 +102111,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -102334,7 +102334,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -102554,7 +102554,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -102777,7 +102777,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -103013,7 +103013,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -103236,7 +103236,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -103456,7 +103456,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -103679,7 +103679,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -103915,7 +103915,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -104138,7 +104138,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -104358,7 +104358,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -104581,7 +104581,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -104817,7 +104817,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -105040,7 +105040,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -105260,7 +105260,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -105483,7 +105483,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -105719,7 +105719,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -105942,7 +105942,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -106162,7 +106162,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -106385,7 +106385,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -106621,7 +106621,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -106844,7 +106844,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -107064,7 +107064,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -107287,7 +107287,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -107523,7 +107523,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -107746,7 +107746,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -107966,7 +107966,7 @@ export type VendorMasterCreateWithoutStateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -108188,7 +108188,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -108492,7 +108492,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -108715,7 +108715,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -108951,7 +108951,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -109174,7 +109174,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -109394,7 +109394,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -109617,7 +109617,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -109853,7 +109853,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -110076,7 +110076,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -110296,7 +110296,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -110519,7 +110519,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -110755,7 +110755,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -110978,7 +110978,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -111198,7 +111198,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -111421,7 +111421,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -111657,7 +111657,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -111880,7 +111880,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -112100,7 +112100,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -112323,7 +112323,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -112559,7 +112559,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -112782,7 +112782,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -113002,7 +113002,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
@@ -113225,7 +113225,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
   clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -113461,7 +113461,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
@@ -113684,7 +113684,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
   clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -113904,7 +113904,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -114127,7 +114127,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -114363,7 +114363,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -114586,7 +114586,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -114805,7 +114805,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -115028,7 +115028,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -115264,7 +115264,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -115487,7 +115487,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -115708,7 +115708,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -115931,7 +115931,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -116167,7 +116167,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -116390,7 +116390,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -116610,7 +116610,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -116833,7 +116833,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -117069,7 +117069,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -117292,7 +117292,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -117512,7 +117512,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -117735,7 +117735,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -117971,7 +117971,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -118194,7 +118194,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -118414,7 +118414,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -118637,7 +118637,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -118873,7 +118873,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -119096,7 +119096,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -119316,7 +119316,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -119539,7 +119539,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -119775,7 +119775,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -119998,7 +119998,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -120218,7 +120218,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -120441,7 +120441,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -120677,7 +120677,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -120900,7 +120900,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -121120,7 +121120,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -121343,7 +121343,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -121579,7 +121579,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -121802,7 +121802,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -122022,7 +122022,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -122245,7 +122245,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -122481,7 +122481,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -122704,7 +122704,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -122924,7 +122924,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -123147,7 +123147,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -123383,7 +123383,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -123606,7 +123606,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -123826,7 +123826,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -124049,7 +124049,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -124285,7 +124285,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -124508,7 +124508,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -124728,7 +124728,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -124951,7 +124951,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -125187,7 +125187,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -125410,7 +125410,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -125630,7 +125630,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -125853,7 +125853,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -126089,7 +126089,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -126312,7 +126312,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -126532,7 +126532,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -126755,7 +126755,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -126991,7 +126991,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -127214,7 +127214,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -127434,7 +127434,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -127657,7 +127657,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -127893,7 +127893,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -128116,7 +128116,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -128336,7 +128336,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -128559,7 +128559,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -128795,7 +128795,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -129018,7 +129018,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -129238,7 +129238,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -129461,7 +129461,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -129697,7 +129697,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -129920,7 +129920,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -130140,7 +130140,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -130363,7 +130363,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -130599,7 +130599,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -130822,7 +130822,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -131042,7 +131042,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -131265,7 +131265,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -131501,7 +131501,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -131724,7 +131724,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -131944,7 +131944,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -132167,7 +132167,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -132403,7 +132403,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -132626,7 +132626,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -132846,7 +132846,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -133069,7 +133069,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -133305,7 +133305,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -133528,7 +133528,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -133747,7 +133747,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -133970,7 +133970,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -134206,7 +134206,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -134429,7 +134429,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -134649,7 +134649,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -134872,7 +134872,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -135108,7 +135108,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -135331,7 +135331,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -135552,7 +135552,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -135775,7 +135775,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -136011,7 +136011,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -136234,7 +136234,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -136454,7 +136454,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -136677,7 +136677,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -136913,7 +136913,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -137136,7 +137136,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -137356,7 +137356,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -137579,7 +137579,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -137815,7 +137815,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -138038,7 +138038,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -138257,7 +138257,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -138480,7 +138480,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -138716,7 +138716,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -138939,7 +138939,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -139159,7 +139159,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -139382,7 +139382,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -139618,7 +139618,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -139841,7 +139841,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -140061,7 +140061,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -140284,7 +140284,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -140520,7 +140520,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -140743,7 +140743,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -140963,7 +140963,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -141186,7 +141186,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -141422,7 +141422,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -141645,7 +141645,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -141866,7 +141866,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -142089,7 +142089,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -142325,7 +142325,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -142548,7 +142548,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -142768,7 +142768,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -142991,7 +142991,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -143227,7 +143227,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -143450,7 +143450,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -143670,7 +143670,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -143893,7 +143893,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -144129,7 +144129,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -144352,7 +144352,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -144572,7 +144572,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -144795,7 +144795,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -145031,7 +145031,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -145254,7 +145254,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -145474,7 +145474,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -145697,7 +145697,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -145933,7 +145933,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -146156,7 +146156,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -146376,7 +146376,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -146599,7 +146599,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -146835,7 +146835,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -147058,7 +147058,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -147278,7 +147278,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -147501,7 +147501,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -147737,7 +147737,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -147960,7 +147960,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -148180,7 +148180,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -148403,7 +148403,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -148639,7 +148639,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -148862,7 +148862,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -149082,7 +149082,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -149305,7 +149305,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -149541,7 +149541,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -149764,7 +149764,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -149983,7 +149983,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -150206,7 +150206,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -150442,7 +150442,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -150665,7 +150665,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -150886,7 +150886,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -151109,7 +151109,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -151345,7 +151345,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -151568,7 +151568,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -151788,7 +151788,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -152011,7 +152011,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -152247,7 +152247,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -152470,7 +152470,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -152690,7 +152690,7 @@ export type VendorMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -152913,7 +152913,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInp
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -153149,7 +153149,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -153372,7 +153372,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInp
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -153592,7 +153592,7 @@ export type VendorMasterCreateWithoutWalkinQuestionnairesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -153815,7 +153815,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinQuestionnairesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -154051,7 +154051,7 @@ export type VendorMasterUpdateWithoutWalkinQuestionnairesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -154274,7 +154274,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -154494,7 +154494,7 @@ export type VendorMasterCreateWithoutWalkinResponsesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -154717,7 +154717,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinResponsesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -154953,7 +154953,7 @@ export type VendorMasterUpdateWithoutWalkinResponsesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -155176,7 +155176,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinResponsesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -155396,7 +155396,7 @@ export type VendorMasterCreateWithoutWalkinUploadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -155619,7 +155619,7 @@ export type VendorMasterUncheckedCreateWithoutWalkinUploadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -155855,7 +155855,7 @@ export type VendorMasterUpdateWithoutWalkinUploadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -156078,7 +156078,7 @@ export type VendorMasterUncheckedUpdateWithoutWalkinUploadsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -156297,7 +156297,7 @@ export type VendorMasterCreateWithoutTime_zone_masterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -156520,7 +156520,7 @@ export type VendorMasterUncheckedCreateWithoutTime_zone_masterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -156766,7 +156766,7 @@ export type VendorMasterCreateWithoutAttendancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -156989,7 +156989,7 @@ export type VendorMasterUncheckedCreateWithoutAttendancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -157225,7 +157225,7 @@ export type VendorMasterUpdateWithoutAttendancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -157448,7 +157448,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendancesInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -157668,7 +157668,7 @@ export type VendorMasterCreateWithoutAttendance_logsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
@@ -157891,7 +157891,7 @@ export type VendorMasterUncheckedCreateWithoutAttendance_logsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
@@ -158127,7 +158127,7 @@ export type VendorMasterUpdateWithoutAttendance_logsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -158350,7 +158350,7 @@ export type VendorMasterUncheckedUpdateWithoutAttendance_logsInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -158624,7 +158624,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -158846,7 +158846,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -159172,7 +159172,7 @@ export type VendorMasterUpdateWithoutTime_zone_masterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
@@ -159395,7 +159395,7 @@ export type VendorMasterUncheckedUpdateWithoutTime_zone_masterInput = {
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
-  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  hardwareTypes?: Prisma.HardwareTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
   clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
@@ -159625,7 +159625,7 @@ export type VendorMasterCountOutputType = {
   broadcastCategories: number
   broadcasts: number
   carcasMaterials: number
-  carcassLegs: number
+  hardwareTypes: number
   carcassTypes: number
   categoryNamingStructures: number
   clientBankAccounts: number
@@ -159797,7 +159797,7 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   broadcastCategories?: boolean | VendorMasterCountOutputTypeCountBroadcastCategoriesArgs
   broadcasts?: boolean | VendorMasterCountOutputTypeCountBroadcastsArgs
   carcasMaterials?: boolean | VendorMasterCountOutputTypeCountCarcasMaterialsArgs
-  carcassLegs?: boolean | VendorMasterCountOutputTypeCountCarcassLegsArgs
+  hardwareTypes?: boolean | VendorMasterCountOutputTypeCountHardwareTypesArgs
   carcassTypes?: boolean | VendorMasterCountOutputTypeCountCarcassTypesArgs
   categoryNamingStructures?: boolean | VendorMasterCountOutputTypeCountCategoryNamingStructuresArgs
   clientBankAccounts?: boolean | VendorMasterCountOutputTypeCountClientBankAccountsArgs
@@ -160071,8 +160071,8 @@ export type VendorMasterCountOutputTypeCountCarcasMaterialsArgs<ExtArgs extends 
 /**
  * VendorMasterCountOutputType without action
  */
-export type VendorMasterCountOutputTypeCountCarcassLegsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CarcassLegsMasterWhereInput
+export type VendorMasterCountOutputTypeCountHardwareTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HardwareTypeMasterWhereInput
 }
 
 /**
@@ -161215,7 +161215,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   broadcastCategories?: boolean | Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>
   broadcasts?: boolean | Prisma.VendorMaster$broadcastsArgs<ExtArgs>
   carcasMaterials?: boolean | Prisma.VendorMaster$carcasMaterialsArgs<ExtArgs>
-  carcassLegs?: boolean | Prisma.VendorMaster$carcassLegsArgs<ExtArgs>
+  hardwareTypes?: boolean | Prisma.VendorMaster$hardwareTypesArgs<ExtArgs>
   carcassTypes?: boolean | Prisma.VendorMaster$carcassTypesArgs<ExtArgs>
   categoryNamingStructures?: boolean | Prisma.VendorMaster$categoryNamingStructuresArgs<ExtArgs>
   clientBankAccounts?: boolean | Prisma.VendorMaster$clientBankAccountsArgs<ExtArgs>
@@ -161557,7 +161557,7 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   broadcastCategories?: boolean | Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>
   broadcasts?: boolean | Prisma.VendorMaster$broadcastsArgs<ExtArgs>
   carcasMaterials?: boolean | Prisma.VendorMaster$carcasMaterialsArgs<ExtArgs>
-  carcassLegs?: boolean | Prisma.VendorMaster$carcassLegsArgs<ExtArgs>
+  hardwareTypes?: boolean | Prisma.VendorMaster$hardwareTypesArgs<ExtArgs>
   carcassTypes?: boolean | Prisma.VendorMaster$carcassTypesArgs<ExtArgs>
   categoryNamingStructures?: boolean | Prisma.VendorMaster$categoryNamingStructuresArgs<ExtArgs>
   clientBankAccounts?: boolean | Prisma.VendorMaster$clientBankAccountsArgs<ExtArgs>
@@ -161742,7 +161742,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     broadcastCategories: Prisma.$BroadcastCategoryMasterPayload<ExtArgs>[]
     broadcasts: Prisma.$BroadcastMasterPayload<ExtArgs>[]
     carcasMaterials: Prisma.$CarcasMaterialMasterPayload<ExtArgs>[]
-    carcassLegs: Prisma.$CarcassLegsMasterPayload<ExtArgs>[]
+    hardwareTypes: Prisma.$HardwareTypeMasterPayload<ExtArgs>[]
     carcassTypes: Prisma.$CarcassTypeMasterPayload<ExtArgs>[]
     categoryNamingStructures: Prisma.$CategoryNamingStructurePayload<ExtArgs>[]
     clientBankAccounts: Prisma.$ClientBankDetailPayload<ExtArgs>[]
@@ -162360,7 +162360,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   broadcastCategories<T extends Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastCategoryMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcasts<T extends Prisma.VendorMaster$broadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$broadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   carcasMaterials<T extends Prisma.VendorMaster$carcasMaterialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$carcasMaterialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarcasMaterialMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  carcassLegs<T extends Prisma.VendorMaster$carcassLegsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$carcassLegsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarcassLegsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  hardwareTypes<T extends Prisma.VendorMaster$hardwareTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$hardwareTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HardwareTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   carcassTypes<T extends Prisma.VendorMaster$carcassTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$carcassTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarcassTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   categoryNamingStructures<T extends Prisma.VendorMaster$categoryNamingStructuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$categoryNamingStructuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryNamingStructurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clientBankAccounts<T extends Prisma.VendorMaster$clientBankAccountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$clientBankAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientBankDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -163375,27 +163375,27 @@ export type VendorMaster$carcasMaterialsArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
- * VendorMaster.carcassLegs
+ * VendorMaster.hardwareTypes
  */
-export type VendorMaster$carcassLegsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type VendorMaster$hardwareTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the CarcassLegsMaster
+   * Select specific fields to fetch from the HardwareTypeMaster
    */
-  select?: Prisma.CarcassLegsMasterSelect<ExtArgs> | null
+  select?: Prisma.HardwareTypeMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the CarcassLegsMaster
+   * Omit specific fields from the HardwareTypeMaster
    */
-  omit?: Prisma.CarcassLegsMasterOmit<ExtArgs> | null
+  omit?: Prisma.HardwareTypeMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CarcassLegsMasterInclude<ExtArgs> | null
-  where?: Prisma.CarcassLegsMasterWhereInput
-  orderBy?: Prisma.CarcassLegsMasterOrderByWithRelationInput | Prisma.CarcassLegsMasterOrderByWithRelationInput[]
-  cursor?: Prisma.CarcassLegsMasterWhereUniqueInput
+  include?: Prisma.HardwareTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.HardwareTypeMasterWhereInput
+  orderBy?: Prisma.HardwareTypeMasterOrderByWithRelationInput | Prisma.HardwareTypeMasterOrderByWithRelationInput[]
+  cursor?: Prisma.HardwareTypeMasterWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.CarcassLegsMasterScalarFieldEnum | Prisma.CarcassLegsMasterScalarFieldEnum[]
+  distinct?: Prisma.HardwareTypeMasterScalarFieldEnum | Prisma.HardwareTypeMasterScalarFieldEnum[]
 }
 
 /**

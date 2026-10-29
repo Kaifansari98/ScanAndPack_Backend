@@ -9,9 +9,9 @@ import {
   ShutterType,
   ShutterMaterial,
   ShutterMaterialFinish,
-  CarcassLegs,
-  SkirtingCarcassLegs,
-  SkirtingCarcassLegsColor,
+  HardwareType,
+  HardwareItem,
+  HardwareItemOption,
   LightCarcasType,
   LightCarcasUnit,
   OtherAppliances,
@@ -596,143 +596,143 @@ export const bulkUploadShutterMaterialFinishes = async (
   };
 };
 
-export const getAllCarcassLegs = async (
+export const getAllHardwareTypes = async (
   vendor_id: number,
-): Promise<CarcassLegs[]> => {
+): Promise<HardwareType[]> => {
   await ensureVendorExists(vendor_id);
 
-  const legs = await prisma.carcassLegsMaster.findMany({
+  const hardwareTypes = await prisma.hardwareTypeMaster.findMany({
     where: { vendor_id },
     orderBy: { name: "asc" },
   });
 
-  return legs as CarcassLegs[];
+  return hardwareTypes as HardwareType[];
 };
 
-export const createCarcassLegs = async (
+export const createHardwareType = async (
   vendor_id: number,
   name: string,
-): Promise<CarcassLegs> => {
+): Promise<HardwareType> => {
   await ensureVendorExists(vendor_id);
 
-  const legs = await prisma.carcassLegsMaster.create({
+  const hardwareType = await prisma.hardwareTypeMaster.create({
     data: { vendor_id, name },
   });
 
-  return legs as CarcassLegs;
+  return hardwareType as HardwareType;
 };
 
-export const getSkirtingCarcassLegs = async (
-  carcass_legs_id: number,
-): Promise<SkirtingCarcassLegs[]> => {
-  const legs = await prisma.carcassLegsMaster.findUnique({
-    where: { id: carcass_legs_id },
+export const getHardwareItems = async (
+  hardware_type_id: number,
+): Promise<HardwareItem[]> => {
+  const hardwareType = await prisma.hardwareTypeMaster.findUnique({
+    where: { id: hardware_type_id },
     select: { id: true },
   });
 
-  if (!legs) {
-    throw new Error("Invalid carcass_legs_id");
+  if (!hardwareType) {
+    throw new Error("Invalid hardware_type_id");
   }
 
-  const skirtings = await prisma.skirtingCarcassLegsMaster.findMany({
-    where: { carcass_legs_id },
+  const hardwareItems = await prisma.hardwareItemMaster.findMany({
+    where: { hardware_type_id },
     orderBy: { name: "asc" },
   });
 
-  return skirtings as SkirtingCarcassLegs[];
+  return hardwareItems as HardwareItem[];
 };
 
-export const createSkirtingCarcassLegs = async (
-  carcass_legs_id: number,
+export const createHardwareItem = async (
+  hardware_type_id: number,
   name: string,
   inScope: boolean,
-): Promise<SkirtingCarcassLegs> => {
-  const legs = await prisma.carcassLegsMaster.findUnique({
-    where: { id: carcass_legs_id },
+): Promise<HardwareItem> => {
+  const hardwareType = await prisma.hardwareTypeMaster.findUnique({
+    where: { id: hardware_type_id },
     select: { id: true },
   });
 
-  if (!legs) {
-    throw new Error("Invalid carcass_legs_id");
+  if (!hardwareType) {
+    throw new Error("Invalid hardware_type_id");
   }
 
-  const skirting = await prisma.skirtingCarcassLegsMaster.create({
-    data: { carcass_legs_id, name, inScope },
+  const hardwareItem = await prisma.hardwareItemMaster.create({
+    data: { hardware_type_id, name, inScope },
   });
 
-  return skirting as SkirtingCarcassLegs;
+  return hardwareItem as HardwareItem;
 };
 
-export const getAllSkirtingCarcassLegsForVendor = async (
+export const getAllHardwareItemsForVendor = async (
   vendor_id: number,
-): Promise<SkirtingCarcassLegs[]> => {
+): Promise<HardwareItem[]> => {
   await ensureVendorExists(vendor_id);
 
-  const skirtings = await prisma.skirtingCarcassLegsMaster.findMany({
-    where: { carcassLegs: { vendor_id } },
-    include: { carcassLegs: { select: { id: true, name: true } } },
+  const hardwareItems = await prisma.hardwareItemMaster.findMany({
+    where: { hardwareType: { vendor_id } },
+    include: { hardwareType: { select: { id: true, name: true } } },
     orderBy: { name: "asc" },
   });
 
-  return skirtings as SkirtingCarcassLegs[];
+  return hardwareItems as HardwareItem[];
 };
 
-export const getSkirtingCarcassLegsColors = async (
-  skirting_carcass_legs_id: number,
-): Promise<SkirtingCarcassLegsColor[]> => {
-  const skirting = await prisma.skirtingCarcassLegsMaster.findUnique({
-    where: { id: skirting_carcass_legs_id },
+export const getHardwareItemOptions = async (
+  hardware_item_id: number,
+): Promise<HardwareItemOption[]> => {
+  const hardwareItem = await prisma.hardwareItemMaster.findUnique({
+    where: { id: hardware_item_id },
     select: { id: true },
   });
 
-  if (!skirting) {
-    throw new Error("Invalid skirting_carcass_legs_id");
+  if (!hardwareItem) {
+    throw new Error("Invalid hardware_item_id");
   }
 
-  const colors = await prisma.skirtingCarcassLegsColorMaster.findMany({
-    where: { skirting_carcass_legs_id },
-    orderBy: { color: "asc" },
+  const options = await prisma.hardwareItemOptionMaster.findMany({
+    where: { hardware_item_id },
+    orderBy: { name: "asc" },
   });
 
-  return colors as SkirtingCarcassLegsColor[];
+  return options as HardwareItemOption[];
 };
 
-export const createSkirtingCarcassLegsColor = async (
-  carcass_legs_id: number,
-  skirting_carcass_legs_id: number,
-  color: string,
-): Promise<SkirtingCarcassLegsColor> => {
-  const skirting = await prisma.skirtingCarcassLegsMaster.findUnique({
-    where: { id: skirting_carcass_legs_id },
-    select: { id: true, carcass_legs_id: true },
+export const createHardwareItemOption = async (
+  hardware_type_id: number,
+  hardware_item_id: number,
+  name: string,
+): Promise<HardwareItemOption> => {
+  const hardwareItem = await prisma.hardwareItemMaster.findUnique({
+    where: { id: hardware_item_id },
+    select: { id: true, hardware_type_id: true },
   });
 
-  if (!skirting || skirting.carcass_legs_id !== carcass_legs_id) {
-    throw new Error("Invalid carcass_legs_id or skirting_carcass_legs_id");
+  if (!hardwareItem || hardwareItem.hardware_type_id !== hardware_type_id) {
+    throw new Error("Invalid hardware_type_id or hardware_item_id");
   }
 
-  const colorEntry = await prisma.skirtingCarcassLegsColorMaster.create({
-    data: { carcass_legs_id, skirting_carcass_legs_id, color },
+  const optionEntry = await prisma.hardwareItemOptionMaster.create({
+    data: { hardware_type_id, hardware_item_id, name },
   });
 
-  return colorEntry as SkirtingCarcassLegsColor;
+  return optionEntry as HardwareItemOption;
 };
 
-export const getAllSkirtingCarcassLegsColorsForVendor = async (
+export const getAllHardwareItemOptionsForVendor = async (
   vendor_id: number,
-): Promise<SkirtingCarcassLegsColor[]> => {
+): Promise<HardwareItemOption[]> => {
   await ensureVendorExists(vendor_id);
 
-  const colors = await prisma.skirtingCarcassLegsColorMaster.findMany({
-    where: { carcassLegs: { vendor_id } },
-    include: { skirtingCarcassLegs: { select: { id: true, name: true } } },
-    orderBy: { color: "asc" },
+  const options = await prisma.hardwareItemOptionMaster.findMany({
+    where: { hardwareType: { vendor_id } },
+    include: { hardwareItem: { select: { id: true, name: true } } },
+    orderBy: { name: "asc" },
   });
 
-  return colors as SkirtingCarcassLegsColor[];
+  return options as HardwareItemOption[];
 };
 
-export const bulkUploadSkirtingCarcassLegsColors = async (
+export const bulkUploadHardwareItemOptions = async (
   vendor_id: number,
   fileBuffer: any,
   isCsv: boolean,
@@ -776,71 +776,71 @@ export const bulkUploadSkirtingCarcassLegsColors = async (
   // Carcass Legs / Skirting / Skirting Color headers are still accepted.
   const isOptionHeader = (h: string) =>
     h.includes("option") || h.includes("color");
-  const legsKey = headers.find(
+  const hardwareTypeKey = headers.find(
     (h) => h.includes("hardware type") || h.includes("legs"),
   );
-  const skirtingKey = headers.find(
+  const hardwareItemKey = headers.find(
     (h) =>
       !isOptionHeader(h) &&
       (h.includes("hardware item") || h.includes("skirting")),
   );
-  const colorKey = headers.find(isOptionHeader);
+  const optionKey = headers.find(isOptionHeader);
 
   const missingHeaders: string[] = [];
-  if (!legsKey) missingHeaders.push("Hardware Type");
-  if (!skirtingKey) missingHeaders.push("Hardware Item");
-  if (!colorKey) missingHeaders.push("Hardware Item Options");
+  if (!hardwareTypeKey) missingHeaders.push("Hardware Type");
+  if (!hardwareItemKey) missingHeaders.push("Hardware Item");
+  if (!optionKey) missingHeaders.push("Hardware Item Options");
   if (missingHeaders.length > 0) {
     throw new Error(
       `Required columns are missing in the sheet: ${missingHeaders.join(", ")}`,
     );
   }
 
-  const [existingLegs, existingSkirtings, existingColors] = await Promise.all([
-    prisma.carcassLegsMaster.findMany({
+  const [existingHardwareType, existingHardwareItems, existingOptions] = await Promise.all([
+    prisma.hardwareTypeMaster.findMany({
       where: { vendor_id },
       select: { id: true, name: true },
     }),
-    prisma.skirtingCarcassLegsMaster.findMany({
-      where: { carcassLegs: { vendor_id } },
-      select: { id: true, name: true, carcass_legs_id: true },
+    prisma.hardwareItemMaster.findMany({
+      where: { hardwareType: { vendor_id } },
+      select: { id: true, name: true, hardware_type_id: true },
     }),
-    prisma.skirtingCarcassLegsColorMaster.findMany({
-      where: { carcassLegs: { vendor_id } },
-      select: { id: true, color: true, skirting_carcass_legs_id: true },
+    prisma.hardwareItemOptionMaster.findMany({
+      where: { hardwareType: { vendor_id } },
+      select: { id: true, name: true, hardware_item_id: true },
     }),
   ]);
 
-  const legsMap = new Map<string, number>(
-    existingLegs.map((l) => [l.name.trim().toLowerCase(), l.id]),
+  const hardwareTypeMap = new Map<string, number>(
+    existingHardwareType.map((l) => [l.name.trim().toLowerCase(), l.id]),
   );
-  const skirtingMap = new Map<string, number>(
-    existingSkirtings.map((s) => [
-      `${s.carcass_legs_id}::${s.name.trim().toLowerCase()}`,
+  const hardwareItemMap = new Map<string, number>(
+    existingHardwareItems.map((s) => [
+      `${s.hardware_type_id}::${s.name.trim().toLowerCase()}`,
       s.id,
     ]),
   );
-  const colorKeySet = new Set<string>(
-    existingColors.map(
-      (c) => `${c.skirting_carcass_legs_id}::${c.color.trim().toLowerCase()}`,
+  const optionKeySet = new Set<string>(
+    existingOptions.map(
+      (o) => `${o.hardware_item_id}::${o.name.trim().toLowerCase()}`,
     ),
   );
 
   const skippedRows: Array<{ row: Record<string, string>; reason: string }> =
     [];
-  let legsCreated = 0;
-  let skirtingsCreated = 0;
-  let colorsCreated = 0;
+  let hardwareTypeCreated = 0;
+  let hardwareItemsCreated = 0;
+  let optionsCreated = 0;
 
   let rowIndex = 1;
   for (const row of rows) {
     rowIndex++;
 
-    const legsName = (row[legsKey!] || "").trim();
-    const skirtingName = (row[skirtingKey!] || "").trim();
-    const colorValue = (row[colorKey!] || "").trim();
+    const hardwareTypeName = (row[hardwareTypeKey!] || "").trim();
+    const hardwareItemName = (row[hardwareItemKey!] || "").trim();
+    const optionValue = (row[optionKey!] || "").trim();
 
-    if (!legsName || !skirtingName) {
+    if (!hardwareTypeName || !hardwareItemName) {
       skippedRows.push({
         row,
         reason: `Row ${rowIndex}: Hardware Type and Hardware Item are required`,
@@ -848,59 +848,59 @@ export const bulkUploadSkirtingCarcassLegsColors = async (
       continue;
     }
 
-    const legsLower = legsName.toLowerCase();
-    let legsId = legsMap.get(legsLower);
-    if (!legsId) {
-      const createdLegs = await prisma.carcassLegsMaster.create({
-        data: { vendor_id, name: legsName },
+    const hardwareTypeLower = hardwareTypeName.toLowerCase();
+    let hardwareTypeId = hardwareTypeMap.get(hardwareTypeLower);
+    if (!hardwareTypeId) {
+      const createdHardwareType = await prisma.hardwareTypeMaster.create({
+        data: { vendor_id, name: hardwareTypeName },
       });
-      legsId = createdLegs.id;
-      legsMap.set(legsLower, legsId);
-      legsCreated++;
+      hardwareTypeId = createdHardwareType.id;
+      hardwareTypeMap.set(hardwareTypeLower, hardwareTypeId);
+      hardwareTypeCreated++;
     }
 
-    const skirtingLower = skirtingName.toLowerCase();
-    const skirtingDedupeKey = `${legsId}::${skirtingLower}`;
-    let skirtingId = skirtingMap.get(skirtingDedupeKey);
-    if (!skirtingId) {
-      const createdSkirting = await prisma.skirtingCarcassLegsMaster.create({
-        data: { carcass_legs_id: legsId, name: skirtingName },
+    const hardwareItemLower = hardwareItemName.toLowerCase();
+    const hardwareItemDedupeKey = `${hardwareTypeId}::${hardwareItemLower}`;
+    let hardwareItemId = hardwareItemMap.get(hardwareItemDedupeKey);
+    if (!hardwareItemId) {
+      const createdHardwareItem = await prisma.hardwareItemMaster.create({
+        data: { hardware_type_id: hardwareTypeId, name: hardwareItemName },
       });
-      skirtingId = createdSkirting.id;
-      skirtingMap.set(skirtingDedupeKey, skirtingId);
-      skirtingsCreated++;
+      hardwareItemId = createdHardwareItem.id;
+      hardwareItemMap.set(hardwareItemDedupeKey, hardwareItemId);
+      hardwareItemsCreated++;
     }
 
-    if (!colorValue) {
+    if (!optionValue) {
       continue;
     }
 
-    const colorLower = colorValue.toLowerCase();
-    const colorDedupeKey = `${skirtingId}::${colorLower}`;
-    if (colorKeySet.has(colorDedupeKey)) {
+    const optionLower = optionValue.toLowerCase();
+    const optionDedupeKey = `${hardwareItemId}::${optionLower}`;
+    if (optionKeySet.has(optionDedupeKey)) {
       skippedRows.push({
         row,
-        reason: `Row ${rowIndex}: Hardware Item Option "${colorValue}" already exists for hardware item "${skirtingName}"`,
+        reason: `Row ${rowIndex}: Hardware Item Option "${optionValue}" already exists for hardware item "${hardwareItemName}"`,
       });
       continue;
     }
 
-    await prisma.skirtingCarcassLegsColorMaster.create({
+    await prisma.hardwareItemOptionMaster.create({
       data: {
-        carcass_legs_id: legsId,
-        skirting_carcass_legs_id: skirtingId,
-        color: colorValue,
+        hardware_type_id: hardwareTypeId,
+        hardware_item_id: hardwareItemId,
+        name: optionValue,
       },
     });
-    colorKeySet.add(colorDedupeKey);
-    colorsCreated++;
+    optionKeySet.add(optionDedupeKey);
+    optionsCreated++;
   }
 
   return {
-    typesCreated: legsCreated,
-    materialsCreated: skirtingsCreated,
-    finishesCreated: colorsCreated,
-    successCount: colorsCreated,
+    typesCreated: hardwareTypeCreated,
+    materialsCreated: hardwareItemsCreated,
+    finishesCreated: optionsCreated,
+    successCount: optionsCreated,
     skippedCount: skippedRows.length,
     skippedRows,
   };

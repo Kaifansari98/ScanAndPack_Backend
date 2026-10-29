@@ -96,9 +96,9 @@ export const ModelName = {
   ShutterSubTypeMaster: 'ShutterSubTypeMaster',
   ShutterMaterialMaster: 'ShutterMaterialMaster',
   ShutterMaterialFinishMaster: 'ShutterMaterialFinishMaster',
-  CarcassLegsMaster: 'CarcassLegsMaster',
-  SkirtingCarcassLegsMaster: 'SkirtingCarcassLegsMaster',
-  SkirtingCarcassLegsColorMaster: 'SkirtingCarcassLegsColorMaster',
+  HardwareTypeMaster: 'HardwareTypeMaster',
+  HardwareItemMaster: 'HardwareItemMaster',
+  HardwareItemOptionMaster: 'HardwareItemOptionMaster',
   LeadHardwareMapping: 'LeadHardwareMapping',
   LightCarcasTypeMaster: 'LightCarcasTypeMaster',
   LightCarcasUnitMaster: 'LightCarcasUnitMaster',
@@ -1156,42 +1156,42 @@ export const ShutterMaterialFinishMasterScalarFieldEnum = {
 export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterialFinishMasterScalarFieldEnum)[keyof typeof ShutterMaterialFinishMasterScalarFieldEnum]
 
 
-export const CarcassLegsMasterScalarFieldEnum = {
+export const HardwareTypeMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
 
-export type CarcassLegsMasterScalarFieldEnum = (typeof CarcassLegsMasterScalarFieldEnum)[keyof typeof CarcassLegsMasterScalarFieldEnum]
+export type HardwareTypeMasterScalarFieldEnum = (typeof HardwareTypeMasterScalarFieldEnum)[keyof typeof HardwareTypeMasterScalarFieldEnum]
 
 
-export const SkirtingCarcassLegsMasterScalarFieldEnum = {
+export const HardwareItemMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  carcass_legs_id: 'carcass_legs_id',
+  hardware_type_id: 'hardware_type_id',
   inScope: 'inScope'
 } as const
 
-export type SkirtingCarcassLegsMasterScalarFieldEnum = (typeof SkirtingCarcassLegsMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsMasterScalarFieldEnum]
+export type HardwareItemMasterScalarFieldEnum = (typeof HardwareItemMasterScalarFieldEnum)[keyof typeof HardwareItemMasterScalarFieldEnum]
 
 
-export const SkirtingCarcassLegsColorMasterScalarFieldEnum = {
+export const HardwareItemOptionMasterScalarFieldEnum = {
   id: 'id',
-  carcass_legs_id: 'carcass_legs_id',
-  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
-  color: 'color'
+  hardware_type_id: 'hardware_type_id',
+  hardware_item_id: 'hardware_item_id',
+  name: 'name'
 } as const
 
-export type SkirtingCarcassLegsColorMasterScalarFieldEnum = (typeof SkirtingCarcassLegsColorMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsColorMasterScalarFieldEnum]
+export type HardwareItemOptionMasterScalarFieldEnum = (typeof HardwareItemOptionMasterScalarFieldEnum)[keyof typeof HardwareItemOptionMasterScalarFieldEnum]
 
 
 export const LeadHardwareMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  carcass_legs_id: 'carcass_legs_id',
-  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
-  skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
+  hardware_type_id: 'hardware_type_id',
+  hardware_item_id: 'hardware_item_id',
+  hardware_item_option_id: 'hardware_item_option_id',
   note: 'note',
   created_at: 'created_at',
   created_by: 'created_by',

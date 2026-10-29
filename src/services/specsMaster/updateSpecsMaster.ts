@@ -9,9 +9,9 @@ const masters: Record<string, Config> = {
   "shutter-type": { model: "shutterTypeMaster", field: "name" },
   "shutter-material": { model: "shutterMaterialMaster", field: "name" },
   "shutter-material-finish": { model: "shutterMaterialFinishMaster", field: "name", parent: { field: "shutter_material_id", model: "shutterMaterialMaster", relation: "material" } },
-  "carcass-legs": { model: "carcassLegsMaster", field: "name" },
-  "skirting-carcass-legs": { model: "skirtingCarcassLegsMaster", field: "name", parent: { field: "carcass_legs_id", model: "carcassLegsMaster", relation: "carcassLegs" } },
-  "skirting-carcass-legs-color": { model: "skirtingCarcassLegsColorMaster", field: "color", parent: { field: "carcass_legs_id", model: "carcassLegsMaster", relation: "carcassLegs" } },
+  "hardware-type": { model: "hardwareTypeMaster", field: "name" },
+  "hardware-item": { model: "hardwareItemMaster", field: "name", parent: { field: "hardware_type_id", model: "hardwareTypeMaster", relation: "hardwareType" } },
+  "hardware-item-option": { model: "hardwareItemOptionMaster", field: "name", parent: { field: "hardware_type_id", model: "hardwareTypeMaster", relation: "hardwareType" } },
   "light-carcas-type": { model: "lightCarcasTypeMaster", field: "type" },
   "light-carcas-unit": { model: "lightCarcasUnitMaster", field: "type", parent: { field: "light_carcas_type_id", model: "lightCarcasTypeMaster", relation: "lightCarcasType" } },
   "other-appliances": { model: "otherAppliancesMaster", field: "article_number" },
@@ -38,17 +38,17 @@ export async function updateSpecsMaster(vendorId: number, kind: string, id: numb
       data[config.parent.field] = parentId;
       duplicateScope[config.parent.field] = parentId;
     }
-    if (kind === "skirting-carcass-legs") {
+    if (kind === "hardware-item") {
       if (typeof input.inScope !== "boolean") return fail("inScope must be a boolean");
       data.inScope = input.inScope;
     }
-    if (kind === "skirting-carcass-legs-color") {
-      const skirtingId = Number(input.skirting_carcass_legs_id);
-      if (!Number.isSafeInteger(skirtingId) || skirtingId <= 0) return fail("Select a valid hardware item");
-      const skirting = await tx.skirtingCarcassLegsMaster.findFirst({ where: { id: skirtingId, carcass_legs_id: Number(data.carcass_legs_id) } });
-      if (!skirting) return fail("Hardware item does not belong to the selected hardware type");
-      data.skirting_carcass_legs_id = skirtingId;
-      duplicateScope.skirting_carcass_legs_id = skirtingId;
+    if (kind === "hardware-item-option") {
+      const hardwareItemId = Number(input.hardware_item_id);
+      if (!Number.isSafeInteger(hardwareItemId) || hardwareItemId <= 0) return fail("Select a valid hardware item");
+      const hardwareItem = await tx.hardwareItemMaster.findFirst({ where: { id: hardwareItemId, hardware_type_id: Number(data.hardware_type_id) } });
+      if (!hardwareItem) return fail("Hardware item does not belong to the selected hardware type");
+      data.hardware_item_id = hardwareItemId;
+      duplicateScope.hardware_item_id = hardwareItemId;
     }
     if (kind === "other-appliances") {
       if (!Object.values(OtherApplianceType).includes(input.type as OtherApplianceType)) return fail("Invalid appliance type");
@@ -60,8 +60,8 @@ export async function updateSpecsMaster(vendorId: number, kind: string, id: numb
     const duplicate = await model.findFirst({ where: { ...duplicateScope, id: { not: id }, [config.field]: { equals: value, mode: "insensitive" } } });
     if (duplicate) return fail("An entry with this value already exists under the selected parent/type", 409);
     const updated = await model.update({ where: { id }, data });
-    if (kind === "skirting-carcass-legs" && data.carcass_legs_id !== existing.carcass_legs_id) {
-      await tx.skirtingCarcassLegsColorMaster.updateMany({ where: { skirting_carcass_legs_id: id }, data: { carcass_legs_id: Number(data.carcass_legs_id) } });
+    if (kind === "hardware-item" && data.hardware_type_id !== existing.hardware_type_id) {
+      await tx.hardwareItemOptionMaster.updateMany({ where: { hardware_item_id: id }, data: { hardware_type_id: Number(data.hardware_type_id) } });
     }
     return updated;
   });

@@ -167,28 +167,28 @@ export interface ShutterMaterial {
   finishes?: ShutterMaterialFinish[];
 }
 
-export interface SkirtingCarcassLegsColor {
+export interface HardwareItemOption {
   id: number;
-  carcass_legs_id: number;
-  skirting_carcass_legs_id: number;
-  color: string;
-  skirtingCarcassLegs?: { id: number; name: string };
+  hardware_type_id: number;
+  hardware_item_id: number;
+  name: string;
+  hardwareItem?: { id: number; name: string };
 }
 
-export interface SkirtingCarcassLegs {
+export interface HardwareItem {
   id: number;
   name: string;
-  carcass_legs_id: number;
+  hardware_type_id: number;
   inScope: boolean;
-  colors?: SkirtingCarcassLegsColor[];
-  carcassLegs?: { id: number; name: string };
+  hardwareItemOptions?: HardwareItemOption[];
+  hardwareType?: { id: number; name: string };
 }
 
-export interface CarcassLegs {
+export interface HardwareType {
   id: number;
   name: string;
   vendor_id: number;
-  skirtings?: SkirtingCarcassLegs[];
+  hardwareItems?: HardwareItem[];
 }
 
 export interface LightCarcasUnit {

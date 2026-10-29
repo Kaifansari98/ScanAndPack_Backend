@@ -75,7 +75,7 @@ model VendorMaster {
   broadcastCategories                          BroadcastCategoryMaster[]                      @relation("VendorBroadcastCategories")
   broadcasts                                   BroadcastMaster[]                              @relation("VendorBroadcasts")
   carcasMaterials                              CarcasMaterialMaster[]
-  carcassLegs                                  CarcassLegsMaster[]
+  hardwareTypes                                HardwareTypeMaster[]
   carcassTypes                                 CarcassTypeMaster[]
   categoryNamingStructures                     CategoryNamingStructure[]
   clientBankAccounts                           ClientBankDetail[]
@@ -1501,43 +1501,43 @@ model ShutterMaterialFinishMaster {
   material            ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
 }
 
-model CarcassLegsMaster {
-  id           Int                              @id @default(autoincrement())
-  name         String
-  vendor_id    Int
-  vendor       VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  leadMappings LeadHardwareMapping[]
-  colors       SkirtingCarcassLegsColorMaster[]
-  skirtings    SkirtingCarcassLegsMaster[]
+model HardwareTypeMaster {
+  id                  Int                        @id @default(autoincrement())
+  name                String
+  vendor_id           Int
+  vendor              VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadMappings        LeadHardwareMapping[]
+  hardwareItemOptions HardwareItemOptionMaster[]
+  hardwareItems       HardwareItemMaster[]
 }
 
-model SkirtingCarcassLegsMaster {
-  id              Int                              @id @default(autoincrement())
-  name            String
-  carcass_legs_id Int
-  inScope         Boolean                          @default(true)
-  leadMappings    LeadHardwareMapping[]
-  colors          SkirtingCarcassLegsColorMaster[]
-  carcassLegs     CarcassLegsMaster                @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+model HardwareItemMaster {
+  id                  Int                        @id @default(autoincrement())
+  name                String
+  hardware_type_id    Int
+  inScope             Boolean                    @default(true)
+  leadMappings        LeadHardwareMapping[]
+  hardwareItemOptions HardwareItemOptionMaster[]
+  hardwareType        HardwareTypeMaster         @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
 }
 
-model SkirtingCarcassLegsColorMaster {
-  id                       Int                       @id @default(autoincrement())
-  carcass_legs_id          Int
-  skirting_carcass_legs_id Int
-  color                    String
-  leadMappings             LeadHardwareMapping[]
-  carcassLegs              CarcassLegsMaster         @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
-  skirtingCarcassLegs      SkirtingCarcassLegsMaster @relation(fields: [skirting_carcass_legs_id], references: [id], onDelete: Cascade)
+model HardwareItemOptionMaster {
+  id               Int                   @id @default(autoincrement())
+  hardware_type_id Int
+  hardware_item_id Int
+  name             String
+  leadMappings     LeadHardwareMapping[]
+  hardwareType     HardwareTypeMaster    @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
+  hardwareItem     HardwareItemMaster    @relation(fields: [hardware_item_id], references: [id], onDelete: Cascade)
 }
 
 model LeadHardwareMapping {
   id                             Int                             @id @default(autoincrement())
   vendor_id                      Int
   lead_id                        Int
-  carcass_legs_id                Int
-  skirting_carcass_legs_id       Int
-  skirting_carcass_legs_color_id Int?
+  hardware_type_id               Int
+  hardware_item_id               Int
+  hardware_item_option_id        Int?
   note                           String?
   created_at                     DateTime                        @default(now())
   created_by                     Int
@@ -1550,19 +1550,19 @@ model LeadHardwareMapping {
   is_deleted_item                Boolean                         @default(false)
   amended_remark                 String?
   deleted_remark                 String?
-  carcassLegs                    CarcassLegsMaster               @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+  hardwareType                   HardwareTypeMaster              @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
   createdBy                      UserMaster                      @relation("LeadHardwareMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                           LeadMaster                      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  skirtingCarcassLegsColor       SkirtingCarcassLegsColorMaster? @relation(fields: [skirting_carcass_legs_color_id], references: [id], onDelete: Cascade)
-  skirtingCarcassLegs            SkirtingCarcassLegsMaster       @relation(fields: [skirting_carcass_legs_id], references: [id], onDelete: Cascade)
+  hardwareItemOption             HardwareItemOptionMaster?       @relation(fields: [hardware_item_option_id], references: [id], onDelete: Cascade)
+  hardwareItem                   HardwareItemMaster              @relation(fields: [hardware_item_id], references: [id], onDelete: Cascade)
   LeadSpecificationsMaster       LeadSpecificationsMaster        @relation(fields: [specs_id], references: [id], onDelete: Cascade)
   vendor                         VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([lead_id])
-  @@index([carcass_legs_id])
-  @@index([skirting_carcass_legs_id])
-  @@index([skirting_carcass_legs_color_id])
+  @@index([hardware_type_id])
+  @@index([hardware_item_id])
+  @@index([hardware_item_option_id])
   @@index([created_by])
   @@index([specs_id])
 }

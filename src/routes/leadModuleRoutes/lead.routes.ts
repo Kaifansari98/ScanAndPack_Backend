@@ -114,15 +114,15 @@ import {
   addShutterMaterialFinish,
   fetchAllShutterMaterialFinishesForVendor,
   uploadShutterMaterialFinishes,
-  fetchAllCarcassLegs,
-  addCarcassLegs,
-  fetchSkirtingCarcassLegs,
-  addSkirtingCarcassLegs,
-  fetchAllSkirtingCarcassLegsForVendor,
-  fetchSkirtingCarcassLegsColors,
-  addSkirtingCarcassLegsColor,
-  fetchAllSkirtingCarcassLegsColorsForVendor,
-  uploadSkirtingCarcassLegsColors,
+  fetchAllHardwareTypes,
+  addHardwareType,
+  fetchHardwareItems,
+  addHardwareItem,
+  fetchAllHardwareItemsForVendor,
+  fetchHardwareItemOptions,
+  addHardwareItemOption,
+  fetchAllHardwareItemOptionsForVendor,
+  uploadHardwareItemOptions,
   fetchAllLightCarcasTypes,
   addLightCarcasType,
   fetchLightCarcasUnits,
@@ -278,33 +278,33 @@ leadsRouter.post(
   excelUpload.single("file"),
   uploadShutterMaterialFinishes,
 );
-leadsRouter.get("/get-all-carcass-legs/:vendor_id", fetchAllCarcassLegs);
-leadsRouter.post("/create-carcass-legs", addCarcassLegs);
+leadsRouter.get("/get-all-hardware-types/:vendor_id", fetchAllHardwareTypes);
+leadsRouter.post("/create-hardware-type", addHardwareType);
 leadsRouter.get(
-  "/get-skirting-carcass-legs/:carcass_legs_id",
-  fetchSkirtingCarcassLegs,
+  "/get-hardware-items/:hardware_type_id",
+  fetchHardwareItems,
 );
 leadsRouter.get(
-  "/get-all-skirting-carcass-legs/:vendor_id",
-  fetchAllSkirtingCarcassLegsForVendor,
+  "/get-all-hardware-items/:vendor_id",
+  fetchAllHardwareItemsForVendor,
 );
-leadsRouter.post("/create-skirting-carcass-legs", addSkirtingCarcassLegs);
+leadsRouter.post("/create-hardware-item", addHardwareItem);
 leadsRouter.get(
-  "/get-skirting-carcass-legs-colors/:skirting_carcass_legs_id",
-  fetchSkirtingCarcassLegsColors,
+  "/get-hardware-item-options/:hardware_item_id",
+  fetchHardwareItemOptions,
 );
 leadsRouter.get(
-  "/get-all-skirting-carcass-legs-colors/:vendor_id",
-  fetchAllSkirtingCarcassLegsColorsForVendor,
+  "/get-all-hardware-item-options/:vendor_id",
+  fetchAllHardwareItemOptionsForVendor,
 );
 leadsRouter.post(
-  "/create-skirting-carcass-legs-color",
-  addSkirtingCarcassLegsColor,
+  "/create-hardware-item-option",
+  addHardwareItemOption,
 );
 leadsRouter.post(
-  "/upload-skirting-carcass-legs-color",
+  "/upload-hardware-item-options",
   excelUpload.single("file"),
-  uploadSkirtingCarcassLegsColors,
+  uploadHardwareItemOptions,
 );
 leadsRouter.get(
   "/get-all-light-carcas-types/:vendor_id",

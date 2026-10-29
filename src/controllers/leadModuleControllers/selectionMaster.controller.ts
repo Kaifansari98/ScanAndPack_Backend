@@ -22,15 +22,15 @@ import {
   createShutterMaterialFinish,
   getAllShutterMaterialFinishesForVendor,
   bulkUploadShutterMaterialFinishes,
-  getAllCarcassLegs,
-  createCarcassLegs,
-  getSkirtingCarcassLegs,
-  createSkirtingCarcassLegs,
-  getAllSkirtingCarcassLegsForVendor,
-  getSkirtingCarcassLegsColors,
-  createSkirtingCarcassLegsColor,
-  getAllSkirtingCarcassLegsColorsForVendor,
-  bulkUploadSkirtingCarcassLegsColors,
+  getAllHardwareTypes,
+  createHardwareType,
+  getHardwareItems,
+  createHardwareItem,
+  getAllHardwareItemsForVendor,
+  getHardwareItemOptions,
+  createHardwareItemOption,
+  getAllHardwareItemOptionsForVendor,
+  bulkUploadHardwareItemOptions,
   getAllLightCarcasTypes,
   createLightCarcasType,
   getLightCarcasUnits,
@@ -366,19 +366,19 @@ export const uploadShutterMaterialFinishes = async (
   }
 };
 
-export const fetchAllCarcassLegs = async (req: Request, res: Response) => {
+export const fetchAllHardwareTypes = async (req: Request, res: Response) => {
   try {
     const vendor_id = getVendorId(req, res);
     if (!vendor_id) return;
 
-    const legs = await getAllCarcassLegs(vendor_id);
-    return res.status(200).json({ success: true, data: legs });
+    const hardwareTypes = await getAllHardwareTypes(vendor_id);
+    return res.status(200).json({ success: true, data: hardwareTypes });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const addCarcassLegs = async (req: Request, res: Response) => {
+export const addHardwareType = async (req: Request, res: Response) => {
   try {
     const { vendor_id, name } = req.body;
 
@@ -388,31 +388,31 @@ export const addCarcassLegs = async (req: Request, res: Response) => {
         .json({ success: false, error: "vendor_id and name are required" });
     }
 
-    const legs = await createCarcassLegs(Number(vendor_id), name);
-    return res.status(201).json({ success: true, data: legs });
+    const hardwareType = await createHardwareType(Number(vendor_id), name);
+    return res.status(201).json({ success: true, data: hardwareType });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchSkirtingCarcassLegs = async (
+export const fetchHardwareItems = async (
   req: Request,
   res: Response,
 ) => {
   try {
-    const carcass_legs_id = Number(req.params.carcass_legs_id);
-    if (!carcass_legs_id) {
-      return res.status(400).json({ error: "carcass_legs_id is required" });
+    const hardware_type_id = Number(req.params.hardware_type_id);
+    if (!hardware_type_id) {
+      return res.status(400).json({ error: "hardware_type_id is required" });
     }
 
-    const skirtings = await getSkirtingCarcassLegs(carcass_legs_id);
-    return res.status(200).json({ success: true, data: skirtings });
+    const hardwareItems = await getHardwareItems(hardware_type_id);
+    return res.status(200).json({ success: true, data: hardwareItems });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchAllSkirtingCarcassLegsForVendor = async (
+export const fetchAllHardwareItemsForVendor = async (
   req: Request,
   res: Response,
 ) => {
@@ -420,59 +420,59 @@ export const fetchAllSkirtingCarcassLegsForVendor = async (
     const vendor_id = getVendorId(req, res);
     if (!vendor_id) return;
 
-    const skirtings = await getAllSkirtingCarcassLegsForVendor(vendor_id);
-    return res.status(200).json({ success: true, data: skirtings });
+    const hardwareItems = await getAllHardwareItemsForVendor(vendor_id);
+    return res.status(200).json({ success: true, data: hardwareItems });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const addSkirtingCarcassLegs = async (req: Request, res: Response) => {
+export const addHardwareItem = async (req: Request, res: Response) => {
   try {
-    const { carcass_legs_id, name, inScope } = req.body;
+    const { hardware_type_id, name, inScope } = req.body;
 
-    if (!carcass_legs_id || !name) {
+    if (!hardware_type_id || !name) {
       return res.status(400).json({
         success: false,
-        error: "carcass_legs_id and name are required",
+        error: "hardware_type_id and name are required",
       });
     }
 
-    const skirting = await createSkirtingCarcassLegs(
-      Number(carcass_legs_id),
+    const hardwareItem = await createHardwareItem(
+      Number(hardware_type_id),
       name,
       inScope !== false,
     );
-    return res.status(201).json({ success: true, data: skirting });
+    return res.status(201).json({ success: true, data: hardwareItem });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchSkirtingCarcassLegsColors = async (
+export const fetchHardwareItemOptions = async (
   req: Request,
   res: Response,
 ) => {
   try {
-    const skirting_carcass_legs_id = Number(
-      req.params.skirting_carcass_legs_id,
+    const hardware_item_id = Number(
+      req.params.hardware_item_id,
     );
-    if (!skirting_carcass_legs_id) {
+    if (!hardware_item_id) {
       return res
         .status(400)
-        .json({ error: "skirting_carcass_legs_id is required" });
+        .json({ error: "hardware_item_id is required" });
     }
 
-    const colors = await getSkirtingCarcassLegsColors(
-      skirting_carcass_legs_id,
+    const options = await getHardwareItemOptions(
+      hardware_item_id,
     );
-    return res.status(200).json({ success: true, data: colors });
+    return res.status(200).json({ success: true, data: options });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchAllSkirtingCarcassLegsColorsForVendor = async (
+export const fetchAllHardwareItemOptionsForVendor = async (
   req: Request,
   res: Response,
 ) => {
@@ -480,40 +480,40 @@ export const fetchAllSkirtingCarcassLegsColorsForVendor = async (
     const vendor_id = getVendorId(req, res);
     if (!vendor_id) return;
 
-    const colors = await getAllSkirtingCarcassLegsColorsForVendor(vendor_id);
-    return res.status(200).json({ success: true, data: colors });
+    const options = await getAllHardwareItemOptionsForVendor(vendor_id);
+    return res.status(200).json({ success: true, data: options });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const addSkirtingCarcassLegsColor = async (
+export const addHardwareItemOption = async (
   req: Request,
   res: Response,
 ) => {
   try {
-    const { carcass_legs_id, skirting_carcass_legs_id, color } = req.body;
+    const { hardware_type_id, hardware_item_id, name } = req.body;
 
-    if (!carcass_legs_id || !skirting_carcass_legs_id || !color) {
+    if (!hardware_type_id || !hardware_item_id || !name) {
       return res.status(400).json({
         success: false,
         error:
-          "carcass_legs_id, skirting_carcass_legs_id and color are required",
+          "hardware_type_id, hardware_item_id and name are required",
       });
     }
 
-    const colorEntry = await createSkirtingCarcassLegsColor(
-      Number(carcass_legs_id),
-      Number(skirting_carcass_legs_id),
-      color,
+    const optionEntry = await createHardwareItemOption(
+      Number(hardware_type_id),
+      Number(hardware_item_id),
+      name,
     );
-    return res.status(201).json({ success: true, data: colorEntry });
+    return res.status(201).json({ success: true, data: optionEntry });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const uploadSkirtingCarcassLegsColors = async (
+export const uploadHardwareItemOptions = async (
   req: Request,
   res: Response,
 ) => {
@@ -537,7 +537,7 @@ export const uploadSkirtingCarcassLegsColors = async (
     const isCsv =
       file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
 
-    const result = await bulkUploadSkirtingCarcassLegsColors(
+    const result = await bulkUploadHardwareItemOptions(
       vendor_id,
       file.buffer,
       isCsv,

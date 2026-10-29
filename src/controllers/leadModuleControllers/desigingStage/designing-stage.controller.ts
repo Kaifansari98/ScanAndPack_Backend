@@ -3889,9 +3889,9 @@ export class DesigingStageController {
               is_approved: true,
               is_amended: true,
               is_deleted_item: true,
-              carcassLegs: { select: { name: true } },
-              skirtingCarcassLegs: { select: { name: true, inScope: true } },
-              skirtingCarcassLegsColor: { select: { color: true } },
+              hardwareType: { select: { name: true } },
+              hardwareItem: { select: { name: true, inScope: true } },
+              hardwareItemOption: { select: { name: true } },
               note: true,
             },
           },
@@ -4054,9 +4054,9 @@ export class DesigingStageController {
               },
               LeadHardwareMapping: {
                 select: {
-                  carcass_legs_id: true,
-                  skirting_carcass_legs_id: true,
-                  skirting_carcass_legs_color_id: true,
+                  hardware_type_id: true,
+                  hardware_item_id: true,
+                  hardware_item_option_id: true,
                   note: true,
                 },
               },
@@ -4179,10 +4179,10 @@ export class DesigingStageController {
                   vendor_id: Number(vendorId),
                   lead_id: Number(leadId),
                   specs_id: createdSpecification.id,
-                  carcass_legs_id: mapping.carcass_legs_id,
-                  skirting_carcass_legs_id: mapping.skirting_carcass_legs_id,
-                  skirting_carcass_legs_color_id:
-                    mapping.skirting_carcass_legs_color_id,
+                  hardware_type_id: mapping.hardware_type_id,
+                  hardware_item_id: mapping.hardware_item_id,
+                  hardware_item_option_id:
+                    mapping.hardware_item_option_id,
                   note: mapping.note,
                   created_by: Number(created_by),
                 }),
@@ -4809,11 +4809,11 @@ export class DesigingStageController {
           specs_id: specsId,
         },
         include: {
-          carcassLegs: { select: { id: true, name: true } },
-          skirtingCarcassLegs: {
+          hardwareType: { select: { id: true, name: true } },
+          hardwareItem: {
             select: { id: true, name: true, inScope: true },
           },
-          skirtingCarcassLegsColor: { select: { id: true, color: true } },
+          hardwareItemOption: { select: { id: true, name: true } },
         },
         orderBy: { id: "asc" },
       });
@@ -4839,10 +4839,10 @@ export class DesigingStageController {
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
       const specsId = Number(req.body.specs_id);
-      const carcassLegsId = Number(req.body.carcass_legs_id);
-      const skirtingCarcassLegsId = Number(req.body.skirting_carcass_legs_id);
-      const skirtingCarcassLegsColorId = req.body.skirting_carcass_legs_color_id
-        ? Number(req.body.skirting_carcass_legs_color_id)
+      const hardwareTypeId = Number(req.body.hardware_type_id);
+      const hardwareItemId = Number(req.body.hardware_item_id);
+      const hardwareItemOptionId = req.body.hardware_item_option_id
+        ? Number(req.body.hardware_item_option_id)
         : null;
       const note =
         typeof req.body.note === "string" && req.body.note.trim().length > 0
@@ -4857,14 +4857,14 @@ export class DesigingStageController {
         !vendorId ||
         !leadId ||
         !specsId ||
-        !carcassLegsId ||
-        !skirtingCarcassLegsId ||
+        !hardwareTypeId ||
+        !hardwareItemId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, carcass_legs_id, skirting_carcass_legs_id and created_by are required",
+            "vendor_id, lead_id, specs_id, hardware_type_id, hardware_item_id and created_by are required",
         });
       }
 
@@ -4878,9 +4878,9 @@ export class DesigingStageController {
         vendor_id: vendorId,
         lead_id: leadId,
         specs_id: specsId,
-        carcass_legs_id: carcassLegsId,
-        skirting_carcass_legs_id: skirtingCarcassLegsId,
-        skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
+        hardware_type_id: hardwareTypeId,
+        hardware_item_id: hardwareItemId,
+        hardware_item_option_id: hardwareItemOptionId,
         note,
         created_by: createdBy,
         ...reviewStateData,
@@ -4891,9 +4891,9 @@ export class DesigingStageController {
           vendor_id: vendorId,
           lead_id: leadId,
           specs_id: specsId,
-          carcass_legs_id: carcassLegsId,
-          skirting_carcass_legs_id: skirtingCarcassLegsId,
-          skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
+          hardware_type_id: hardwareTypeId,
+          hardware_item_id: hardwareItemId,
+          hardware_item_option_id: hardwareItemOptionId,
           ...(id ? { NOT: { id } } : {}),
         },
         select: { id: true },
@@ -4908,11 +4908,11 @@ export class DesigingStageController {
       }
 
       const includeShape = {
-        carcassLegs: { select: { id: true, name: true } },
-        skirtingCarcassLegs: {
+        hardwareType: { select: { id: true, name: true } },
+        hardwareItem: {
           select: { id: true, name: true, inScope: true },
         },
-        skirtingCarcassLegsColor: { select: { id: true, color: true } },
+        hardwareItemOption: { select: { id: true, name: true } },
       };
 
       const mapping = id
