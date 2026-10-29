@@ -776,7 +776,21 @@ export class UnderInstallationStageService {
     leadId: number,
     updatedBy: number,
     actualInstallationStartDate: Date,
+    instanceId: number | null = null,
   ) {
+    // Large-scale vendors start installation one product instance at a time.
+    const largeScaleVendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true },
+    });
+    const isLargeScale = largeScaleVendor?.handlesLargeScaleProjects === true;
+    if (isLargeScale && !instanceId) {
+      throw Object.assign(
+        new Error("Select an instance to start installation"),
+        { statusCode: 400 },
+      );
+    }
+
     return prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
@@ -787,6 +801,79 @@ export class UnderInstallationStageService {
       if (!lead) throw new Error(`Lead ${leadId} not found`);
       if (lead.vendor_id !== vendorId)
         throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      if (isLargeScale) {
+        const instance = await tx.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId!,
+            lead_id: leadId,
+            vendor_id: vendorId,
+            is_archived: false,
+          },
+          select: {
+            id: true,
+            title: true,
+            actual_installation_start_date: true,
+            stage_status_id: true,
+            stageStatus: { select: { tag: true } },
+          },
+        });
+        if (!instance) {
+          throw Object.assign(new Error("Instance not found for this lead"), {
+            statusCode: 404,
+          });
+        }
+        if (instance.stageStatus?.tag !== "Type 15") {
+          throw Object.assign(
+            new Error("This instance is not in Under Installation"),
+            { statusCode: 409 },
+          );
+        }
+        if (instance.actual_installation_start_date) {
+          throw Object.assign(
+            new Error("Installation has already been started for this instance"),
+            { statusCode: 409 },
+          );
+        }
+
+        const updatedInstance = await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: {
+            actual_installation_start_date: actualInstallationStartDate,
+            updated_by: updatedBy,
+          },
+          select: { id: true, actual_installation_start_date: true },
+        });
+
+        await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          action: `Installation has been started for instance "${instance.title}"`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
+          // The lead's own status stays behind; log against the instance's stage.
+          stage_id: instance.stage_status_id ?? undefined,
+          instance_id: instance.id,
+        });
+
+        logger.info("[SERVICE] Actual installation start date set for instance", {
+          lead_id: lead.id,
+          instance_id: instance.id,
+          vendor_id: vendorId,
+          updated_by: updatedBy,
+        });
+
+        return {
+          id: lead.id,
+          vendor_id: vendorId,
+          account_id: lead.account_id,
+          instance_id: updatedInstance.id,
+          actual_installation_start_date:
+            updatedInstance.actual_installation_start_date,
+        };
+      }
 
       // 2️⃣ Update date
       const updatedLead = await tx.leadMaster.update({
@@ -828,7 +915,11 @@ export class UnderInstallationStageService {
   /**
    * ✅ Get Under Installation details for a lead
    */
-  static async getUnderInstallationDetails(vendorId: number, leadId: number) {
+  static async getUnderInstallationDetails(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId },
       select: {
@@ -846,6 +937,24 @@ export class UnderInstallationStageService {
       throw new Error(
         `Lead ${leadId} not found or doesn't belong to vendor ${vendorId}`,
       );
+
+    // Per-instance installation: the start date lives on the instance.
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+        select: { id: true, actual_installation_start_date: true },
+      });
+      if (!instance) {
+        throw Object.assign(new Error("Instance not found for this lead"), {
+          statusCode: 404,
+        });
+      }
+      return {
+        ...lead,
+        instance_id: instance.id,
+        actual_installation_start_date: instance.actual_installation_start_date,
+      };
+    }
 
     return lead;
   }
