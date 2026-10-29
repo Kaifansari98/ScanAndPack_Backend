@@ -3881,6 +3881,7 @@ export class DesigingStageController {
               shutterType: { select: { name: true } },
               shutterMaterial: { select: { name: true } },
               shutterOuterFinish: { select: { name: true } },
+              shutterInnerFinish: { select: { name: true } },
             },
           },
           LeadHardwareMapping: {
@@ -4050,6 +4051,7 @@ export class DesigingStageController {
                   shutter_type_id: true,
                   shutter_material_id: true,
                   shutter_outer_finish_id: true,
+                  shutter_inner_finish_id: true,
                 },
               },
               LeadHardwareMapping: {
@@ -4166,6 +4168,8 @@ export class DesigingStageController {
                   shutter_material_id: mapping.shutter_material_id,
                   shutter_outer_finish_id:
                     mapping.shutter_outer_finish_id,
+                  shutter_inner_finish_id:
+                    mapping.shutter_inner_finish_id,
                   created_by: Number(created_by),
                 }),
               ),
@@ -4660,6 +4664,7 @@ export class DesigingStageController {
           shutterType: { select: { id: true, name: true } },
           shutterMaterial: { select: { id: true, name: true } },
           shutterOuterFinish: { select: { id: true, name: true } },
+          shutterInnerFinish: { select: { id: true, name: true } },
         },
         orderBy: { id: "asc" },
       });
@@ -4693,6 +4698,10 @@ export class DesigingStageController {
       const shutterOuterFinishId = Number(
         req.body.shutter_outer_finish_id,
       );
+      // Optional: a material may have no inner finishes.
+      const shutterInnerFinishId = req.body.shutter_inner_finish_id
+        ? Number(req.body.shutter_inner_finish_id)
+        : null;
       const createdBy = Number(req.body.created_by);
       const reviewStateData = DesigingStageController.buildReviewStateData(
         req.body,
@@ -4720,6 +4729,23 @@ export class DesigingStageController {
         createdBy,
       );
 
+      if (shutterInnerFinishId !== null) {
+        const innerFinish = await prisma.shutterInnerFinishMaster.findFirst({
+          where: {
+            id: shutterInnerFinishId,
+            shutter_material_id: shutterMaterialId,
+          },
+          select: { id: true },
+        });
+        if (!innerFinish) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "The selected shutter inner finish does not belong to the selected shutter material.",
+          });
+        }
+      }
+
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -4727,6 +4753,7 @@ export class DesigingStageController {
         shutter_type_id: shutterTypeId,
         shutter_material_id: shutterMaterialId,
         shutter_outer_finish_id: shutterOuterFinishId,
+        shutter_inner_finish_id: shutterInnerFinishId,
         created_by: createdBy,
         ...reviewStateData,
       };
@@ -4740,6 +4767,7 @@ export class DesigingStageController {
             shutter_type_id: shutterTypeId,
             shutter_material_id: shutterMaterialId,
             shutter_outer_finish_id: shutterOuterFinishId,
+            shutter_inner_finish_id: shutterInnerFinishId,
             ...(id ? { NOT: { id } } : {}),
           },
           select: { id: true },
@@ -4749,7 +4777,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This shutter type, material, and finish combination already exists for this specification.",
+            "This shutter type, material, and finishes combination already exists for this specification.",
         });
       }
 
@@ -4761,6 +4789,7 @@ export class DesigingStageController {
               shutterType: { select: { id: true, name: true } },
               shutterMaterial: { select: { id: true, name: true } },
               shutterOuterFinish: { select: { id: true, name: true } },
+              shutterInnerFinish: { select: { id: true, name: true } },
             },
           })
         : await prisma.leadShutterMaterialMapping.create({
@@ -4769,6 +4798,7 @@ export class DesigingStageController {
               shutterType: { select: { id: true, name: true } },
               shutterMaterial: { select: { id: true, name: true } },
               shutterOuterFinish: { select: { id: true, name: true } },
+              shutterInnerFinish: { select: { id: true, name: true } },
             },
           });
 

@@ -872,6 +872,7 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
   shutter_outer_finish_id: 'shutter_outer_finish_id',
+  shutter_inner_finish_id: 'shutter_inner_finish_id',
   created_at: 'created_at',
   created_by: 'created_by',
   specs_id: 'specs_id',

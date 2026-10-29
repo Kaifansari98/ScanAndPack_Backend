@@ -1101,6 +1101,7 @@ model LeadShutterMaterialMapping {
   shutter_type_id            Int
   shutter_material_id        Int
   shutter_outer_finish_id    Int
+  shutter_inner_finish_id    Int?
   created_at                 DateTime                    @default(now())
   created_by                 Int
   specs_id                   Int
@@ -1115,6 +1116,7 @@ model LeadShutterMaterialMapping {
   createdBy                  UserMaster                  @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                       LeadMaster                  @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   shutterOuterFinish         ShutterOuterFinishMaster    @relation(fields: [shutter_outer_finish_id], references: [id], onDelete: Cascade)
+  shutterInnerFinish         ShutterInnerFinishMaster?   @relation(fields: [shutter_inner_finish_id], references: [id], onDelete: SetNull)
   shutterMaterial            ShutterMaterialMaster       @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
   shutterType                ShutterTypeMaster           @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
   LeadSpecificationsMaster   LeadSpecificationsMaster    @relation(fields: [specs_id], references: [id], onDelete: Cascade)
@@ -1125,6 +1127,7 @@ model LeadShutterMaterialMapping {
   @@index([shutter_type_id])
   @@index([shutter_material_id])
   @@index([shutter_outer_finish_id])
+  @@index([shutter_inner_finish_id])
   @@index([created_by])
   @@index([specs_id])
 }
@@ -1503,10 +1506,11 @@ model ShutterOuterFinishMaster {
 }
 
 model ShutterInnerFinishMaster {
-  id                  Int                   @id @default(autoincrement())
+  id                  Int                          @id @default(autoincrement())
   name                String
   shutter_material_id Int
-  material            ShutterMaterialMaster @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
+  leadMappings        LeadShutterMaterialMapping[]
+  material            ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
 }
 
 model HardwareTypeMaster {
