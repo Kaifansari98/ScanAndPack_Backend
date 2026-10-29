@@ -285,78 +285,49 @@ export class ClientApprovalService {
         select: { is_this_vendor_is_custom_usertype_only: true },
       });
 
-      const useCustomUsersOnly =
-        vendor?.is_this_vendor_is_custom_usertype_only === true;
+      const moveOrderLoginPrivilegeCode =
+        "production.tech_check.tech_check_action.move_to_order_login_action";
 
-      let backendUsers;
-
-      if (useCustomUsersOnly) {
-        backendUsers = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
+      const backendUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          OR: [
+            {
               user_type: {
-                equals: "custom",
-                mode: "insensitive",
+                user_type: { equals: "super-admin", mode: "insensitive" },
               },
             },
-            userPrivilegeMappings: {
-              some: {
-                is_allowed: true,
-                privilege: {
-                  code: "production.order_login.order_login_details.enable_disable",
-                  is_active: true,
+            {
+              userPrivilegeMappings: {
+                some: {
+                  is_allowed: true,
+                  privilege: {
+                    code: moveOrderLoginPrivilegeCode,
+                    is_active: true,
+                  },
                 },
               },
             },
-          },
-          include: {
-            user_type: true,
-            documents: true,
-          },
-          orderBy: {
-            created_at: "desc",
-          },
-        });
-      } else {
-        // First, find the user type ID for 'backend'
-        const BackendUserType = await prisma.userTypeMaster.findFirst({
-          where: {
-            user_type: {
-              equals: "backend",
-              mode: "insensitive",
-            },
-          },
-        });
+            ...(vendor?.is_this_vendor_is_custom_usertype_only !== true
+              ? [
+                  {
+                    user_type: { equals: "backend", mode: "insensitive" as const },
+                  },
+                ]
+              : []),
+          ],
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
 
-        if (!BackendUserType) {
-          console.log("[SERVICE] Backend user type not found");
-          return [];
-        }
-
-        console.log(
-          `[SERVICE] Found BackendUserType type ID: ${BackendUserType.id}`
-        );
-
-        // Fetch all users with backend role for the specified vendor
-        backendUsers = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            user_type_id: BackendUserType.id,
-            status: "active",
-          },
-          include: {
-            user_type: true,
-            documents: true,
-          },
-          orderBy: {
-            created_at: "desc",
-          },
-        });
-      }
-
-      console.log(`[SERVICE] Found ${backendUsers.length} Site Supervisors`);
+      console.log(`[SERVICE] Found ${backendUsers.length} Backend Users`);
 
       // Transform the data to match our interface
       const transformedData: BackendData[] = backendUsers.map((user) => ({

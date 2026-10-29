@@ -3752,6 +3752,13 @@ export const getSalesExecutivesByVendor = async (
     }
 
     if (normalizedAssigneeUserType === "custom") {
+      const privilegeCodes = options?.requiredPrivilegeCode
+        ? options.requiredPrivilegeCode
+            .split(",")
+            .map((c) => c.trim())
+            .filter(Boolean)
+        : [];
+
       const customUsers = await prisma.userMaster.findMany({
         where: {
           vendor_id: vendorId,
@@ -3764,17 +3771,17 @@ export const getSalesExecutivesByVendor = async (
               OR: [
                 {
                   user_type: {
-                    user_type: { in: ["super-admin"] },
+                    user_type: { equals: "super-admin", mode: "insensitive" },
                   },
                 },
-                ...(options?.requiredPrivilegeCode
+                ...(privilegeCodes.length > 0
                   ? [
                       {
                         userPrivilegeMappings: {
                           some: {
                             is_allowed: true,
                             privilege: {
-                              code: options.requiredPrivilegeCode,
+                              code: { in: privilegeCodes },
                               is_active: true,
                             },
                           },

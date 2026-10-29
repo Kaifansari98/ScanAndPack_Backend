@@ -416,6 +416,7 @@ export const getProductMasterService = async (
         orderBy: { id: "desc" },
         select: {
           id: true,
+          vendor_id: true,
           item_id: true,
           product_name: true,
           article_code: true,
