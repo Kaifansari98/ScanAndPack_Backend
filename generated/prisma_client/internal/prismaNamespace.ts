@@ -441,7 +441,8 @@ export const ModelName = {
   ShutterTypeMaster: 'ShutterTypeMaster',
   ShutterSubTypeMaster: 'ShutterSubTypeMaster',
   ShutterMaterialMaster: 'ShutterMaterialMaster',
-  ShutterMaterialFinishMaster: 'ShutterMaterialFinishMaster',
+  ShutterOuterFinishMaster: 'ShutterOuterFinishMaster',
+  ShutterInnerFinishMaster: 'ShutterInnerFinishMaster',
   HardwareTypeMaster: 'HardwareTypeMaster',
   HardwareItemMaster: 'HardwareItemMaster',
   HardwareItemOptionMaster: 'HardwareItemOptionMaster',
@@ -648,7 +649,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectLocationProductQuantity" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "factoryOutRevertLog" | "boxUnpackLog" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "leadScopedActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "processBriefMachineMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "hardwareTypeMaster" | "hardwareItemMaster" | "hardwareItemOptionMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadB2BDocument" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "instanceStageHistory" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "miscellaneousFollowup" | "miscellaneousReorderInstancesMaterialMapping" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineCostDescription" | "machineMaster" | "cutlistHeadersMapping" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "categoryNamingStructure" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "b2BRequirementTypeMaster" | "leadB2BRequirementTypeMapping" | "leadOtherAppliancesRemarkMapping" | "userTypePrivilegeMapping" | "online_lead_call_log" | "online_lead_followup_status" | "online_lead_history" | "online_lead_store_log" | "online_leads" | "telecaller_campaign_leads" | "leadBillingAddress" | "metaLead" | "boxItemDeleteLog" | "productsRequiredForProduction" | "metaWebhook" | "cutListRuleMaster" | "cutListRuleConditionGroup" | "cutListRuleCondition" | "cutListRuleAction" | "ruleFieldMaster" | "ruleActionMaster" | "siteSupervisorFranchiseMapping" | "wixStudioDataCapture" | "walkinLeadQuestionnaire" | "walkinLeadResponse" | "walkinLeadUpload" | "time_zone_master" | "attendance" | "attendance_logs"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectLocationProductQuantity" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "factoryOutRevertLog" | "boxUnpackLog" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "leadScopedActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "processBriefMachineMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterOuterFinishMaster" | "shutterInnerFinishMaster" | "hardwareTypeMaster" | "hardwareItemMaster" | "hardwareItemOptionMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadB2BDocument" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "instanceStageHistory" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "miscellaneousFollowup" | "miscellaneousReorderInstancesMaterialMapping" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineCostDescription" | "machineMaster" | "cutlistHeadersMapping" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "categoryNamingStructure" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "b2BRequirementTypeMaster" | "leadB2BRequirementTypeMapping" | "leadOtherAppliancesRemarkMapping" | "userTypePrivilegeMapping" | "online_lead_call_log" | "online_lead_followup_status" | "online_lead_history" | "online_lead_store_log" | "online_leads" | "telecaller_campaign_leads" | "leadBillingAddress" | "metaLead" | "boxItemDeleteLog" | "productsRequiredForProduction" | "metaWebhook" | "cutListRuleMaster" | "cutListRuleConditionGroup" | "cutListRuleCondition" | "cutListRuleAction" | "ruleFieldMaster" | "ruleActionMaster" | "siteSupervisorFranchiseMapping" | "wixStudioDataCapture" | "walkinLeadQuestionnaire" | "walkinLeadResponse" | "walkinLeadUpload" | "time_zone_master" | "attendance" | "attendance_logs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3908,77 +3909,151 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ShutterMaterialFinishMaster: {
-      payload: Prisma.$ShutterMaterialFinishMasterPayload<ExtArgs>
-      fields: Prisma.ShutterMaterialFinishMasterFieldRefs
+    ShutterOuterFinishMaster: {
+      payload: Prisma.$ShutterOuterFinishMasterPayload<ExtArgs>
+      fields: Prisma.ShutterOuterFinishMasterFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ShutterMaterialFinishMasterFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload> | null
+          args: Prisma.ShutterOuterFinishMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ShutterMaterialFinishMasterFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>
+          args: Prisma.ShutterOuterFinishMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>
         }
         findFirst: {
-          args: Prisma.ShutterMaterialFinishMasterFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload> | null
+          args: Prisma.ShutterOuterFinishMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ShutterMaterialFinishMasterFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>
+          args: Prisma.ShutterOuterFinishMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>
         }
         findMany: {
-          args: Prisma.ShutterMaterialFinishMasterFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>[]
+          args: Prisma.ShutterOuterFinishMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>[]
         }
         create: {
-          args: Prisma.ShutterMaterialFinishMasterCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>
+          args: Prisma.ShutterOuterFinishMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>
         }
         createMany: {
-          args: Prisma.ShutterMaterialFinishMasterCreateManyArgs<ExtArgs>
+          args: Prisma.ShutterOuterFinishMasterCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ShutterMaterialFinishMasterCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>[]
+          args: Prisma.ShutterOuterFinishMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>[]
         }
         delete: {
-          args: Prisma.ShutterMaterialFinishMasterDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>
+          args: Prisma.ShutterOuterFinishMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>
         }
         update: {
-          args: Prisma.ShutterMaterialFinishMasterUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>
+          args: Prisma.ShutterOuterFinishMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>
         }
         deleteMany: {
-          args: Prisma.ShutterMaterialFinishMasterDeleteManyArgs<ExtArgs>
+          args: Prisma.ShutterOuterFinishMasterDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ShutterMaterialFinishMasterUpdateManyArgs<ExtArgs>
+          args: Prisma.ShutterOuterFinishMasterUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ShutterMaterialFinishMasterUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>[]
+          args: Prisma.ShutterOuterFinishMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>[]
         }
         upsert: {
-          args: Prisma.ShutterMaterialFinishMasterUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterMaterialFinishMasterPayload>
+          args: Prisma.ShutterOuterFinishMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterOuterFinishMasterPayload>
         }
         aggregate: {
-          args: Prisma.ShutterMaterialFinishMasterAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateShutterMaterialFinishMaster>
+          args: Prisma.ShutterOuterFinishMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShutterOuterFinishMaster>
         }
         groupBy: {
-          args: Prisma.ShutterMaterialFinishMasterGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ShutterMaterialFinishMasterGroupByOutputType>[]
+          args: Prisma.ShutterOuterFinishMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterOuterFinishMasterGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ShutterMaterialFinishMasterCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ShutterMaterialFinishMasterCountAggregateOutputType> | number
+          args: Prisma.ShutterOuterFinishMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterOuterFinishMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ShutterInnerFinishMaster: {
+      payload: Prisma.$ShutterInnerFinishMasterPayload<ExtArgs>
+      fields: Prisma.ShutterInnerFinishMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShutterInnerFinishMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShutterInnerFinishMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ShutterInnerFinishMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShutterInnerFinishMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ShutterInnerFinishMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ShutterInnerFinishMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ShutterInnerFinishMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShutterInnerFinishMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ShutterInnerFinishMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>
+        }
+        update: {
+          args: Prisma.ShutterInnerFinishMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShutterInnerFinishMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShutterInnerFinishMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShutterInnerFinishMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShutterInnerFinishMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterInnerFinishMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ShutterInnerFinishMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShutterInnerFinishMaster>
+        }
+        groupBy: {
+          args: Prisma.ShutterInnerFinishMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterInnerFinishMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShutterInnerFinishMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterInnerFinishMasterCountAggregateOutputType> | number
         }
       }
     }
@@ -18720,7 +18795,7 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
-  shutter_material_finish_id: 'shutter_material_finish_id',
+  shutter_outer_finish_id: 'shutter_outer_finish_id',
   created_at: 'created_at',
   created_by: 'created_by',
   specs_id: 'specs_id',
@@ -18997,13 +19072,22 @@ export const ShutterMaterialMasterScalarFieldEnum = {
 export type ShutterMaterialMasterScalarFieldEnum = (typeof ShutterMaterialMasterScalarFieldEnum)[keyof typeof ShutterMaterialMasterScalarFieldEnum]
 
 
-export const ShutterMaterialFinishMasterScalarFieldEnum = {
+export const ShutterOuterFinishMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
   shutter_material_id: 'shutter_material_id'
 } as const
 
-export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterialFinishMasterScalarFieldEnum)[keyof typeof ShutterMaterialFinishMasterScalarFieldEnum]
+export type ShutterOuterFinishMasterScalarFieldEnum = (typeof ShutterOuterFinishMasterScalarFieldEnum)[keyof typeof ShutterOuterFinishMasterScalarFieldEnum]
+
+
+export const ShutterInnerFinishMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  shutter_material_id: 'shutter_material_id'
+} as const
+
+export type ShutterInnerFinishMasterScalarFieldEnum = (typeof ShutterInnerFinishMasterScalarFieldEnum)[keyof typeof ShutterInnerFinishMasterScalarFieldEnum]
 
 
 export const HardwareTypeMasterScalarFieldEnum = {
@@ -23783,7 +23867,8 @@ export type GlobalOmitConfig = {
   shutterTypeMaster?: Prisma.ShutterTypeMasterOmit
   shutterSubTypeMaster?: Prisma.ShutterSubTypeMasterOmit
   shutterMaterialMaster?: Prisma.ShutterMaterialMasterOmit
-  shutterMaterialFinishMaster?: Prisma.ShutterMaterialFinishMasterOmit
+  shutterOuterFinishMaster?: Prisma.ShutterOuterFinishMasterOmit
+  shutterInnerFinishMaster?: Prisma.ShutterInnerFinishMasterOmit
   hardwareTypeMaster?: Prisma.HardwareTypeMasterOmit
   hardwareItemMaster?: Prisma.HardwareItemMasterOmit
   hardwareItemOptionMaster?: Prisma.HardwareItemOptionMasterOmit

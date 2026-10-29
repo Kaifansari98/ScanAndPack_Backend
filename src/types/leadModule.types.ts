@@ -153,7 +153,14 @@ export interface CarcasMaterial {
   finishes?: CarcasMaterialFinish[];
 }
 
-export interface ShutterMaterialFinish {
+export interface ShutterOuterFinish {
+  id: number;
+  name: string;
+  shutter_material_id: number;
+  material?: { id: number; name: string };
+}
+
+export interface ShutterInnerFinish {
   id: number;
   name: string;
   shutter_material_id: number;
@@ -164,7 +171,8 @@ export interface ShutterMaterial {
   id: number;
   name: string;
   vendor_id: number;
-  finishes?: ShutterMaterialFinish[];
+  outerFinishes?: ShutterOuterFinish[];
+  innerFinishes?: ShutterInnerFinish[];
 }
 
 export interface HardwareItemOption {

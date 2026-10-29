@@ -3880,7 +3880,7 @@ export class DesigingStageController {
               is_deleted_item: true,
               shutterType: { select: { name: true } },
               shutterMaterial: { select: { name: true } },
-              shutterMaterialFinish: { select: { name: true } },
+              shutterOuterFinish: { select: { name: true } },
             },
           },
           LeadHardwareMapping: {
@@ -4049,7 +4049,7 @@ export class DesigingStageController {
                 select: {
                   shutter_type_id: true,
                   shutter_material_id: true,
-                  shutter_material_finish_id: true,
+                  shutter_outer_finish_id: true,
                 },
               },
               LeadHardwareMapping: {
@@ -4164,8 +4164,8 @@ export class DesigingStageController {
                   specs_id: createdSpecification.id,
                   shutter_type_id: mapping.shutter_type_id,
                   shutter_material_id: mapping.shutter_material_id,
-                  shutter_material_finish_id:
-                    mapping.shutter_material_finish_id,
+                  shutter_outer_finish_id:
+                    mapping.shutter_outer_finish_id,
                   created_by: Number(created_by),
                 }),
               ),
@@ -4659,7 +4659,7 @@ export class DesigingStageController {
         include: {
           shutterType: { select: { id: true, name: true } },
           shutterMaterial: { select: { id: true, name: true } },
-          shutterMaterialFinish: { select: { id: true, name: true } },
+          shutterOuterFinish: { select: { id: true, name: true } },
         },
         orderBy: { id: "asc" },
       });
@@ -4690,8 +4690,8 @@ export class DesigingStageController {
       const specsId = Number(req.body.specs_id);
       const shutterTypeId = Number(req.body.shutter_type_id);
       const shutterMaterialId = Number(req.body.shutter_material_id);
-      const shutterMaterialFinishId = Number(
-        req.body.shutter_material_finish_id,
+      const shutterOuterFinishId = Number(
+        req.body.shutter_outer_finish_id,
       );
       const createdBy = Number(req.body.created_by);
       const reviewStateData = DesigingStageController.buildReviewStateData(
@@ -4704,13 +4704,13 @@ export class DesigingStageController {
         !specsId ||
         !shutterTypeId ||
         !shutterMaterialId ||
-        !shutterMaterialFinishId ||
+        !shutterOuterFinishId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, shutter_type_id, shutter_material_id, shutter_material_finish_id and created_by are required",
+            "vendor_id, lead_id, specs_id, shutter_type_id, shutter_material_id, shutter_outer_finish_id and created_by are required",
         });
       }
 
@@ -4726,7 +4726,7 @@ export class DesigingStageController {
         specs_id: specsId,
         shutter_type_id: shutterTypeId,
         shutter_material_id: shutterMaterialId,
-        shutter_material_finish_id: shutterMaterialFinishId,
+        shutter_outer_finish_id: shutterOuterFinishId,
         created_by: createdBy,
         ...reviewStateData,
       };
@@ -4739,7 +4739,7 @@ export class DesigingStageController {
             specs_id: specsId,
             shutter_type_id: shutterTypeId,
             shutter_material_id: shutterMaterialId,
-            shutter_material_finish_id: shutterMaterialFinishId,
+            shutter_outer_finish_id: shutterOuterFinishId,
             ...(id ? { NOT: { id } } : {}),
           },
           select: { id: true },
@@ -4760,7 +4760,7 @@ export class DesigingStageController {
             include: {
               shutterType: { select: { id: true, name: true } },
               shutterMaterial: { select: { id: true, name: true } },
-              shutterMaterialFinish: { select: { id: true, name: true } },
+              shutterOuterFinish: { select: { id: true, name: true } },
             },
           })
         : await prisma.leadShutterMaterialMapping.create({
@@ -4768,7 +4768,7 @@ export class DesigingStageController {
             include: {
               shutterType: { select: { id: true, name: true } },
               shutterMaterial: { select: { id: true, name: true } },
-              shutterMaterialFinish: { select: { id: true, name: true } },
+              shutterOuterFinish: { select: { id: true, name: true } },
             },
           });
 

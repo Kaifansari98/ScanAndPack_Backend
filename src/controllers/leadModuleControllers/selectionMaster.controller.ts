@@ -18,10 +18,14 @@ import {
   createShutterSubType,
   getAllShutterMaterials,
   createShutterMaterial,
-  getShutterMaterialFinishes,
-  createShutterMaterialFinish,
-  getAllShutterMaterialFinishesForVendor,
-  bulkUploadShutterMaterialFinishes,
+  getShutterOuterFinishes,
+  createShutterOuterFinish,
+  getAllShutterOuterFinishesForVendor,
+  bulkUploadShutterOuterFinishes,
+  getShutterInnerFinishes,
+  createShutterInnerFinish,
+  getAllShutterInnerFinishesForVendor,
+  bulkUploadShutterInnerFinishes,
   getAllHardwareTypes,
   createHardwareType,
   getHardwareItems,
@@ -278,7 +282,7 @@ export const addShutterMaterial = async (req: Request, res: Response) => {
   }
 };
 
-export const fetchShutterMaterialFinishes = async (
+export const fetchShutterOuterFinishes = async (
   req: Request,
   res: Response,
 ) => {
@@ -290,14 +294,14 @@ export const fetchShutterMaterialFinishes = async (
         .json({ error: "shutter_material_id is required" });
     }
 
-    const finishes = await getShutterMaterialFinishes(shutter_material_id);
+    const finishes = await getShutterOuterFinishes(shutter_material_id);
     return res.status(200).json({ success: true, data: finishes });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchAllShutterMaterialFinishesForVendor = async (
+export const fetchAllShutterOuterFinishesForVendor = async (
   req: Request,
   res: Response,
 ) => {
@@ -305,14 +309,14 @@ export const fetchAllShutterMaterialFinishesForVendor = async (
     const vendor_id = getVendorId(req, res);
     if (!vendor_id) return;
 
-    const finishes = await getAllShutterMaterialFinishesForVendor(vendor_id);
+    const finishes = await getAllShutterOuterFinishesForVendor(vendor_id);
     return res.status(200).json({ success: true, data: finishes });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const addShutterMaterialFinish = async (req: Request, res: Response) => {
+export const addShutterOuterFinish = async (req: Request, res: Response) => {
   try {
     const { shutter_material_id, name } = req.body;
 
@@ -323,7 +327,7 @@ export const addShutterMaterialFinish = async (req: Request, res: Response) => {
       });
     }
 
-    const finish = await createShutterMaterialFinish(
+    const finish = await createShutterOuterFinish(
       Number(shutter_material_id),
       name,
     );
@@ -333,7 +337,7 @@ export const addShutterMaterialFinish = async (req: Request, res: Response) => {
   }
 };
 
-export const uploadShutterMaterialFinishes = async (
+export const uploadShutterOuterFinishes = async (
   req: Request,
   res: Response,
 ) => {
@@ -357,7 +361,97 @@ export const uploadShutterMaterialFinishes = async (
     const isCsv =
       file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
 
-    const result = await bulkUploadShutterMaterialFinishes(
+    const result = await bulkUploadShutterOuterFinishes(
+      vendor_id,
+      file.buffer,
+      isCsv,
+    );
+    return res.status(200).json({ success: true, data: result });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchShutterInnerFinishes = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const shutter_material_id = Number(req.params.shutter_material_id);
+    if (!shutter_material_id) {
+      return res
+        .status(400)
+        .json({ error: "shutter_material_id is required" });
+    }
+
+    const finishes = await getShutterInnerFinishes(shutter_material_id);
+    return res.status(200).json({ success: true, data: finishes });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchAllShutterInnerFinishesForVendor = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const finishes = await getAllShutterInnerFinishesForVendor(vendor_id);
+    return res.status(200).json({ success: true, data: finishes });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addShutterInnerFinish = async (req: Request, res: Response) => {
+  try {
+    const { shutter_material_id, name } = req.body;
+
+    if (!shutter_material_id || !name) {
+      return res.status(400).json({
+        success: false,
+        error: "shutter_material_id and name are required",
+      });
+    }
+
+    const finish = await createShutterInnerFinish(
+      Number(shutter_material_id),
+      name,
+    );
+    return res.status(201).json({ success: true, data: finish });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const uploadShutterInnerFinishes = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, error: "CSV or XLSX file is required" });
+    }
+
+    const vendor_id = Number(
+      req.body.vendor_id || req.body.vendorId || req.params.vendor_id,
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const isCsv =
+      file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+    const result = await bulkUploadShutterInnerFinishes(
       vendor_id,
       file.buffer,
       isCsv,

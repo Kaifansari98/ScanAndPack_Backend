@@ -95,7 +95,8 @@ export const ModelName = {
   ShutterTypeMaster: 'ShutterTypeMaster',
   ShutterSubTypeMaster: 'ShutterSubTypeMaster',
   ShutterMaterialMaster: 'ShutterMaterialMaster',
-  ShutterMaterialFinishMaster: 'ShutterMaterialFinishMaster',
+  ShutterOuterFinishMaster: 'ShutterOuterFinishMaster',
+  ShutterInnerFinishMaster: 'ShutterInnerFinishMaster',
   HardwareTypeMaster: 'HardwareTypeMaster',
   HardwareItemMaster: 'HardwareItemMaster',
   HardwareItemOptionMaster: 'HardwareItemOptionMaster',
@@ -870,7 +871,7 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
-  shutter_material_finish_id: 'shutter_material_finish_id',
+  shutter_outer_finish_id: 'shutter_outer_finish_id',
   created_at: 'created_at',
   created_by: 'created_by',
   specs_id: 'specs_id',
@@ -1147,13 +1148,22 @@ export const ShutterMaterialMasterScalarFieldEnum = {
 export type ShutterMaterialMasterScalarFieldEnum = (typeof ShutterMaterialMasterScalarFieldEnum)[keyof typeof ShutterMaterialMasterScalarFieldEnum]
 
 
-export const ShutterMaterialFinishMasterScalarFieldEnum = {
+export const ShutterOuterFinishMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
   shutter_material_id: 'shutter_material_id'
 } as const
 
-export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterialFinishMasterScalarFieldEnum)[keyof typeof ShutterMaterialFinishMasterScalarFieldEnum]
+export type ShutterOuterFinishMasterScalarFieldEnum = (typeof ShutterOuterFinishMasterScalarFieldEnum)[keyof typeof ShutterOuterFinishMasterScalarFieldEnum]
+
+
+export const ShutterInnerFinishMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  shutter_material_id: 'shutter_material_id'
+} as const
+
+export type ShutterInnerFinishMasterScalarFieldEnum = (typeof ShutterInnerFinishMasterScalarFieldEnum)[keyof typeof ShutterInnerFinishMasterScalarFieldEnum]
 
 
 export const HardwareTypeMasterScalarFieldEnum = {

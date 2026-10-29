@@ -110,10 +110,14 @@ import {
   addShutterSubType,
   fetchAllShutterMaterials,
   addShutterMaterial,
-  fetchShutterMaterialFinishes,
-  addShutterMaterialFinish,
-  fetchAllShutterMaterialFinishesForVendor,
-  uploadShutterMaterialFinishes,
+  fetchShutterOuterFinishes,
+  addShutterOuterFinish,
+  fetchAllShutterOuterFinishesForVendor,
+  uploadShutterOuterFinishes,
+  fetchShutterInnerFinishes,
+  addShutterInnerFinish,
+  fetchAllShutterInnerFinishesForVendor,
+  uploadShutterInnerFinishes,
   fetchAllHardwareTypes,
   addHardwareType,
   fetchHardwareItems,
@@ -265,18 +269,32 @@ leadsRouter.get(
 );
 leadsRouter.post("/create-shutter-material", addShutterMaterial);
 leadsRouter.get(
-  "/get-shutter-material-finishes/:shutter_material_id",
-  fetchShutterMaterialFinishes,
+  "/get-shutter-outer-finishes/:shutter_material_id",
+  fetchShutterOuterFinishes,
 );
 leadsRouter.get(
-  "/get-all-shutter-material-finishes/:vendor_id",
-  fetchAllShutterMaterialFinishesForVendor,
+  "/get-all-shutter-outer-finishes/:vendor_id",
+  fetchAllShutterOuterFinishesForVendor,
 );
-leadsRouter.post("/create-shutter-material-finish", addShutterMaterialFinish);
+leadsRouter.post("/create-shutter-outer-finish", addShutterOuterFinish);
 leadsRouter.post(
-  "/upload-shutter-material-finish",
+  "/upload-shutter-outer-finish",
   excelUpload.single("file"),
-  uploadShutterMaterialFinishes,
+  uploadShutterOuterFinishes,
+);
+leadsRouter.get(
+  "/get-shutter-inner-finishes/:shutter_material_id",
+  fetchShutterInnerFinishes,
+);
+leadsRouter.get(
+  "/get-all-shutter-inner-finishes/:vendor_id",
+  fetchAllShutterInnerFinishesForVendor,
+);
+leadsRouter.post("/create-shutter-inner-finish", addShutterInnerFinish);
+leadsRouter.post(
+  "/upload-shutter-inner-finish",
+  excelUpload.single("file"),
+  uploadShutterInnerFinishes,
 );
 leadsRouter.get("/get-all-hardware-types/:vendor_id", fetchAllHardwareTypes);
 leadsRouter.post("/create-hardware-type", addHardwareType);

@@ -238,10 +238,15 @@ export type ShutterSubTypeMaster = Prisma.ShutterSubTypeMasterModel
  */
 export type ShutterMaterialMaster = Prisma.ShutterMaterialMasterModel
 /**
- * Model ShutterMaterialFinishMaster
+ * Model ShutterOuterFinishMaster
  * 
  */
-export type ShutterMaterialFinishMaster = Prisma.ShutterMaterialFinishMasterModel
+export type ShutterOuterFinishMaster = Prisma.ShutterOuterFinishMasterModel
+/**
+ * Model ShutterInnerFinishMaster
+ * 
+ */
+export type ShutterInnerFinishMaster = Prisma.ShutterInnerFinishMasterModel
 /**
  * Model HardwareTypeMaster
  * 

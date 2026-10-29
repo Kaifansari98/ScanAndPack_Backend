@@ -8,7 +8,8 @@ import {
   HandleType,
   ShutterType,
   ShutterMaterial,
-  ShutterMaterialFinish,
+  ShutterOuterFinish,
+  ShutterInnerFinish,
   HardwareType,
   HardwareItem,
   HardwareItemOption,
@@ -386,9 +387,9 @@ export const createShutterMaterial = async (
   return material as ShutterMaterial;
 };
 
-export const getShutterMaterialFinishes = async (
+export const getShutterOuterFinishes = async (
   shutter_material_id: number,
-): Promise<ShutterMaterialFinish[]> => {
+): Promise<ShutterOuterFinish[]> => {
   const material = await prisma.shutterMaterialMaster.findUnique({
     where: { id: shutter_material_id },
     select: { id: true },
@@ -398,18 +399,18 @@ export const getShutterMaterialFinishes = async (
     throw new Error("Invalid shutter_material_id");
   }
 
-  const finishes = await prisma.shutterMaterialFinishMaster.findMany({
+  const finishes = await prisma.shutterOuterFinishMaster.findMany({
     where: { shutter_material_id },
     orderBy: { name: "asc" },
   });
 
-  return finishes as ShutterMaterialFinish[];
+  return finishes as ShutterOuterFinish[];
 };
 
-export const createShutterMaterialFinish = async (
+export const createShutterOuterFinish = async (
   shutter_material_id: number,
   name: string,
-): Promise<ShutterMaterialFinish> => {
+): Promise<ShutterOuterFinish> => {
   const material = await prisma.shutterMaterialMaster.findUnique({
     where: { id: shutter_material_id },
     select: { id: true },
@@ -419,28 +420,28 @@ export const createShutterMaterialFinish = async (
     throw new Error("Invalid shutter_material_id");
   }
 
-  const finish = await prisma.shutterMaterialFinishMaster.create({
+  const finish = await prisma.shutterOuterFinishMaster.create({
     data: { shutter_material_id, name },
   });
 
-  return finish as ShutterMaterialFinish;
+  return finish as ShutterOuterFinish;
 };
 
-export const getAllShutterMaterialFinishesForVendor = async (
+export const getAllShutterOuterFinishesForVendor = async (
   vendor_id: number,
-): Promise<ShutterMaterialFinish[]> => {
+): Promise<ShutterOuterFinish[]> => {
   await ensureVendorExists(vendor_id);
 
-  const finishes = await prisma.shutterMaterialFinishMaster.findMany({
+  const finishes = await prisma.shutterOuterFinishMaster.findMany({
     where: { material: { vendor_id } },
     include: { material: { select: { id: true, name: true } } },
     orderBy: { name: "asc" },
   });
 
-  return finishes as ShutterMaterialFinish[];
+  return finishes as ShutterOuterFinish[];
 };
 
-export const bulkUploadShutterMaterialFinishes = async (
+export const bulkUploadShutterOuterFinishes = async (
   vendor_id: number,
   fileBuffer: any,
   isCsv: boolean,
@@ -489,7 +490,7 @@ export const bulkUploadShutterMaterialFinishes = async (
   const missingHeaders: string[] = [];
   if (!typeKey) missingHeaders.push("Shutter Type");
   if (!materialKey) missingHeaders.push("Shutter Material");
-  if (!finishKey) missingHeaders.push("Shutter Material Finish");
+  if (!finishKey) missingHeaders.push("Shutter Outer Finish");
   if (missingHeaders.length > 0) {
     throw new Error(
       `Required columns are missing in the sheet: ${missingHeaders.join(", ")}`,
@@ -506,7 +507,7 @@ export const bulkUploadShutterMaterialFinishes = async (
         where: { vendor_id },
         select: { id: true, name: true },
       }),
-      prisma.shutterMaterialFinishMaster.findMany({
+      prisma.shutterOuterFinishMaster.findMany({
         where: { material: { vendor_id } },
         select: { id: true, name: true, shutter_material_id: true },
       }),
@@ -541,7 +542,7 @@ export const bulkUploadShutterMaterialFinishes = async (
     if (!typeName || !materialName || !finishName) {
       skippedRows.push({
         row,
-        reason: `Row ${rowIndex}: Shutter Type, Shutter Material and Shutter Material Finish are all required`,
+        reason: `Row ${rowIndex}: Shutter Type, Shutter Material and Shutter Outer Finish are all required`,
       });
       continue;
     }
@@ -574,12 +575,222 @@ export const bulkUploadShutterMaterialFinishes = async (
     if (finishKeySet.has(finishDedupeKey)) {
       skippedRows.push({
         row,
-        reason: `Row ${rowIndex}: Shutter Material Finish "${finishName}" already exists for material "${materialName}"`,
+        reason: `Row ${rowIndex}: Shutter Outer Finish "${finishName}" already exists for material "${materialName}"`,
       });
       continue;
     }
 
-    await prisma.shutterMaterialFinishMaster.create({
+    await prisma.shutterOuterFinishMaster.create({
+      data: { shutter_material_id: materialId, name: finishName },
+    });
+    finishKeySet.add(finishDedupeKey);
+    finishesCreated++;
+  }
+
+  return {
+    typesCreated,
+    materialsCreated,
+    finishesCreated,
+    successCount: finishesCreated,
+    skippedCount: skippedRows.length,
+    skippedRows,
+  };
+};
+
+export const getShutterInnerFinishes = async (
+  shutter_material_id: number,
+): Promise<ShutterInnerFinish[]> => {
+  const material = await prisma.shutterMaterialMaster.findUnique({
+    where: { id: shutter_material_id },
+    select: { id: true },
+  });
+
+  if (!material) {
+    throw new Error("Invalid shutter_material_id");
+  }
+
+  const finishes = await prisma.shutterInnerFinishMaster.findMany({
+    where: { shutter_material_id },
+    orderBy: { name: "asc" },
+  });
+
+  return finishes as ShutterInnerFinish[];
+};
+
+export const createShutterInnerFinish = async (
+  shutter_material_id: number,
+  name: string,
+): Promise<ShutterInnerFinish> => {
+  const material = await prisma.shutterMaterialMaster.findUnique({
+    where: { id: shutter_material_id },
+    select: { id: true },
+  });
+
+  if (!material) {
+    throw new Error("Invalid shutter_material_id");
+  }
+
+  const finish = await prisma.shutterInnerFinishMaster.create({
+    data: { shutter_material_id, name },
+  });
+
+  return finish as ShutterInnerFinish;
+};
+
+export const getAllShutterInnerFinishesForVendor = async (
+  vendor_id: number,
+): Promise<ShutterInnerFinish[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const finishes = await prisma.shutterInnerFinishMaster.findMany({
+    where: { material: { vendor_id } },
+    include: { material: { select: { id: true, name: true } } },
+    orderBy: { name: "asc" },
+  });
+
+  return finishes as ShutterInnerFinish[];
+};
+
+export const bulkUploadShutterInnerFinishes = async (
+  vendor_id: number,
+  fileBuffer: any,
+  isCsv: boolean,
+) => {
+  await ensureVendorExists(vendor_id);
+
+  const workbook = new ExcelJS.Workbook();
+  if (isCsv) {
+    const stream = Readable.from(fileBuffer);
+    await workbook.csv.read(stream);
+  } else {
+    await workbook.xlsx.load(fileBuffer);
+  }
+
+  const worksheet = workbook.worksheets[0];
+  if (!worksheet) {
+    throw new Error("No sheets found in the file");
+  }
+
+  const headers: string[] = [];
+  const rows: Record<string, string>[] = [];
+
+  worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+    if (rowNumber === 1) {
+      row.eachCell({ includeEmpty: true }, (cell) => {
+        headers.push(getCellValue(cell.value).trim().toLowerCase());
+      });
+    } else {
+      const rowData: Record<string, string> = {};
+      row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+        const headerName = headers[colNumber - 1];
+        if (headerName) {
+          rowData[headerName] = getCellValue(cell.value).trim();
+        }
+      });
+      rows.push(rowData);
+    }
+  });
+
+  const typeKey = headers.find((h) => h.includes("type"));
+  const materialKey = headers.find(
+    (h) => h.includes("material") && !h.includes("finish"),
+  );
+  const finishKey = headers.find((h) => h.includes("finish"));
+
+  const missingHeaders: string[] = [];
+  if (!typeKey) missingHeaders.push("Shutter Type");
+  if (!materialKey) missingHeaders.push("Shutter Material");
+  if (!finishKey) missingHeaders.push("Shutter Inner Finish");
+  if (missingHeaders.length > 0) {
+    throw new Error(
+      `Required columns are missing in the sheet: ${missingHeaders.join(", ")}`,
+    );
+  }
+
+  const [existingTypes, existingMaterials, existingFinishes] =
+    await Promise.all([
+      prisma.shutterTypeMaster.findMany({
+        where: { vendor_id },
+        select: { id: true, name: true },
+      }),
+      prisma.shutterMaterialMaster.findMany({
+        where: { vendor_id },
+        select: { id: true, name: true },
+      }),
+      prisma.shutterInnerFinishMaster.findMany({
+        where: { material: { vendor_id } },
+        select: { id: true, name: true, shutter_material_id: true },
+      }),
+    ]);
+
+  const typeMap = new Map<string, number>(
+    existingTypes.map((t) => [t.name.trim().toLowerCase(), t.id]),
+  );
+  const materialMap = new Map<string, number>(
+    existingMaterials.map((m) => [m.name.trim().toLowerCase(), m.id]),
+  );
+  const finishKeySet = new Set<string>(
+    existingFinishes.map(
+      (f) => `${f.shutter_material_id}::${f.name.trim().toLowerCase()}`,
+    ),
+  );
+
+  const skippedRows: Array<{ row: Record<string, string>; reason: string }> =
+    [];
+  let typesCreated = 0;
+  let materialsCreated = 0;
+  let finishesCreated = 0;
+
+  let rowIndex = 1;
+  for (const row of rows) {
+    rowIndex++;
+
+    const typeName = (row[typeKey!] || "").trim();
+    const materialName = (row[materialKey!] || "").trim();
+    const finishName = (row[finishKey!] || "").trim();
+
+    if (!typeName || !materialName || !finishName) {
+      skippedRows.push({
+        row,
+        reason: `Row ${rowIndex}: Shutter Type, Shutter Material and Shutter Inner Finish are all required`,
+      });
+      continue;
+    }
+
+    const typeLower = typeName.toLowerCase();
+    const materialLower = materialName.toLowerCase();
+    const finishLower = finishName.toLowerCase();
+
+    let typeId = typeMap.get(typeLower);
+    if (!typeId) {
+      const createdType = await prisma.shutterTypeMaster.create({
+        data: { vendor_id, name: typeName },
+      });
+      typeId = createdType.id;
+      typeMap.set(typeLower, typeId);
+      typesCreated++;
+    }
+
+    let materialId = materialMap.get(materialLower);
+    if (!materialId) {
+      const createdMaterial = await prisma.shutterMaterialMaster.create({
+        data: { vendor_id, name: materialName },
+      });
+      materialId = createdMaterial.id;
+      materialMap.set(materialLower, materialId);
+      materialsCreated++;
+    }
+
+    const finishDedupeKey = `${materialId}::${finishLower}`;
+    if (finishKeySet.has(finishDedupeKey)) {
+      skippedRows.push({
+        row,
+        reason: `Row ${rowIndex}: Shutter Inner Finish "${finishName}" already exists for material "${materialName}"`,
+      });
+      continue;
+    }
+
+    await prisma.shutterInnerFinishMaster.create({
       data: { shutter_material_id: materialId, name: finishName },
     });
     finishKeySet.add(finishDedupeKey);
