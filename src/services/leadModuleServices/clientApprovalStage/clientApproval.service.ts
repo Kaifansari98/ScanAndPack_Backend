@@ -760,76 +760,49 @@ export class ClientApprovalService {
         select: { is_this_vendor_is_custom_usertype_only: true },
       });
 
-      const useCustomUsersOnly =
-        vendor?.is_this_vendor_is_custom_usertype_only === true;
+      const techCheckPrivilegeCode =
+        "production.tech_check.tech_check_action.tech_check_workflow_action";
 
-      let techCheckUsers;
-
-      if (useCustomUsersOnly) {
-        techCheckUsers = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
+      const techCheckUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          OR: [
+            {
               user_type: {
-                equals: "custom",
-                mode: "insensitive",
+                user_type: { equals: "super-admin", mode: "insensitive" },
               },
             },
-            userPrivilegeMappings: {
-              some: {
-                is_allowed: true,
-                privilege: {
-                  code: "production.tech_check.tech_check_action.tech_check_workflow_action",
-                  is_active: true,
+            {
+              userPrivilegeMappings: {
+                some: {
+                  is_allowed: true,
+                  privilege: {
+                    code: techCheckPrivilegeCode,
+                    is_active: true,
+                  },
                 },
               },
             },
-          },
-          include: {
-            user_type: true,
-            documents: true,
-          },
-          orderBy: {
-            created_at: "desc",
-          },
-        });
-      } else {
-        // 1. Find the user type ID for 'tech-check'
-        const techCheckUserType = await prisma.userTypeMaster.findFirst({
-          where: {
-            user_type: {
-              equals: "tech-check",
-              mode: "insensitive",
-            },
-          },
-        });
-
-        if (!techCheckUserType) {
-          console.log("[SERVICE] Tech-Check user type not found");
-          return [];
-        }
-
-        console.log(
-          `[SERVICE] Found Tech-Check user type ID: ${techCheckUserType.id}`
-        );
-
-        // 2. Fetch all users with tech-check role for the specified vendor
-        techCheckUsers = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            user_type_id: techCheckUserType.id,
-            status: "active",
-          },
-          include: {
-            user_type: true,
-            documents: true,
-          },
-          orderBy: {
-            created_at: "desc",
-          },
-        });
-      }
+            ...(vendor?.is_this_vendor_is_custom_usertype_only !== true
+              ? [
+                  {
+                    user_type: {
+                      user_type: { equals: "tech-check", mode: "insensitive" as const },
+                    },
+                  },
+                ]
+              : []),
+          ],
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
 
       console.log(`[SERVICE] Found ${techCheckUsers.length} Tech-Check Users`);
 
