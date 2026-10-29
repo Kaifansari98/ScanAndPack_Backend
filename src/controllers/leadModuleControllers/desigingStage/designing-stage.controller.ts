@@ -4903,7 +4903,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This carcass legs, skirting, and color combination already exists for this specification.",
+            "This hardware type, hardware item, and option combination already exists for this specification.",
         });
       }
 

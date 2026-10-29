@@ -772,16 +772,24 @@ export const bulkUploadSkirtingCarcassLegsColors = async (
     }
   });
 
-  const legsKey = headers.find((h) => h.includes("legs"));
-  const skirtingKey = headers.find(
-    (h) => h.includes("skirting") && !h.includes("color"),
+  // Hardware Type / Hardware Item / Hardware Item Options; the older
+  // Carcass Legs / Skirting / Skirting Color headers are still accepted.
+  const isOptionHeader = (h: string) =>
+    h.includes("option") || h.includes("color");
+  const legsKey = headers.find(
+    (h) => h.includes("hardware type") || h.includes("legs"),
   );
-  const colorKey = headers.find((h) => h.includes("color"));
+  const skirtingKey = headers.find(
+    (h) =>
+      !isOptionHeader(h) &&
+      (h.includes("hardware item") || h.includes("skirting")),
+  );
+  const colorKey = headers.find(isOptionHeader);
 
   const missingHeaders: string[] = [];
-  if (!legsKey) missingHeaders.push("Carcass Legs");
-  if (!skirtingKey) missingHeaders.push("Skirting");
-  if (!colorKey) missingHeaders.push("Skirting Color");
+  if (!legsKey) missingHeaders.push("Hardware Type");
+  if (!skirtingKey) missingHeaders.push("Hardware Item");
+  if (!colorKey) missingHeaders.push("Hardware Item Options");
   if (missingHeaders.length > 0) {
     throw new Error(
       `Required columns are missing in the sheet: ${missingHeaders.join(", ")}`,
@@ -835,7 +843,7 @@ export const bulkUploadSkirtingCarcassLegsColors = async (
     if (!legsName || !skirtingName) {
       skippedRows.push({
         row,
-        reason: `Row ${rowIndex}: Carcass Legs and Skirting are required`,
+        reason: `Row ${rowIndex}: Hardware Type and Hardware Item are required`,
       });
       continue;
     }
@@ -872,7 +880,7 @@ export const bulkUploadSkirtingCarcassLegsColors = async (
     if (colorKeySet.has(colorDedupeKey)) {
       skippedRows.push({
         row,
-        reason: `Row ${rowIndex}: Skirting Color "${colorValue}" already exists for skirting "${skirtingName}"`,
+        reason: `Row ${rowIndex}: Hardware Item Option "${colorValue}" already exists for hardware item "${skirtingName}"`,
       });
       continue;
     }

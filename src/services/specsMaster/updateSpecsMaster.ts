@@ -44,9 +44,9 @@ export async function updateSpecsMaster(vendorId: number, kind: string, id: numb
     }
     if (kind === "skirting-carcass-legs-color") {
       const skirtingId = Number(input.skirting_carcass_legs_id);
-      if (!Number.isSafeInteger(skirtingId) || skirtingId <= 0) return fail("Select a valid skirting");
+      if (!Number.isSafeInteger(skirtingId) || skirtingId <= 0) return fail("Select a valid hardware item");
       const skirting = await tx.skirtingCarcassLegsMaster.findFirst({ where: { id: skirtingId, carcass_legs_id: Number(data.carcass_legs_id) } });
-      if (!skirting) return fail("Skirting does not belong to the selected carcass legs");
+      if (!skirting) return fail("Hardware item does not belong to the selected hardware type");
       data.skirting_carcass_legs_id = skirtingId;
       duplicateScope.skirting_carcass_legs_id = skirtingId;
     }
