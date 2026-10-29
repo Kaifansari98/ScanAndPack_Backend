@@ -1010,6 +1010,7 @@ export const updateScannedItem = async (
       orderBy: [{ cut_list_id: "asc" }, { id: "asc" }],
       select: {
         id: true,
+        qty: true,
         sequence_no: true,
         cut_list_id: true,
         project_id: true,
@@ -1188,6 +1189,7 @@ export const updateScannedItem = async (
         cut_list_id: true,
         machine_id: true,
         sequence_no: true,
+        qty: true,
         actual_in_at: true,
         machine: {
           select: {
@@ -1240,7 +1242,8 @@ export const updateScannedItem = async (
           if (flowMapping.actual_in_at) {
             previousMachineScannedQuantity.set(
               previousMachineKey,
-              previousMachineScannedQuantity.get(previousMachineKey)! + 1,
+              previousMachineScannedQuantity.get(previousMachineKey)! +
+                Math.max(1, Number(flowMapping.qty ?? 1)),
             );
           }
         }
@@ -1261,7 +1264,10 @@ export const updateScannedItem = async (
               flowMapping.sequence_no === item.sequence_no &&
               flowMapping.actual_in_at !== null
             ) {
-              currentMachineScannedQuantity += 1;
+              currentMachineScannedQuantity += Math.max(
+                1,
+                Number(flowMapping.qty ?? 1),
+              );
             }
           }
 
@@ -1550,17 +1556,22 @@ export const updateScannedItem = async (
         }
       }
 
-      const scannedAtLocation = await prisma.cutListMachineMapping.count({
-        where: {
-          project_id: eligibleMapping.project_id,
-          vendor_id,
-          cut_list_id,
-          project_location_product_quantity_id: locationAllocation.id,
-          actual_in_at: {
-            not: null,
+      const scannedAtLocationResult =
+        await prisma.cutListMachineMapping.aggregate({
+          where: {
+            project_id: eligibleMapping.project_id,
+            vendor_id,
+            cut_list_id,
+            project_location_product_quantity_id: locationAllocation.id,
+            actual_in_at: {
+              not: null,
+            },
           },
-        },
-      });
+          _sum: { qty: true },
+        });
+      const scannedAtLocation = Number(
+        scannedAtLocationResult._sum.qty ?? 0,
+      );
       let maximumItemQty = Number.MAX_SAFE_INTEGER;
 
       if (eligibleMapping.project.packing_type !== PackingType.CUSTOM_GROUP) {
@@ -1960,6 +1971,7 @@ export const updateScannedItem = async (
                 select: {
                   id: true,
                   cut_list_id: true,
+                  qty: true,
                   project_location_product_quantity_id: true,
                   projectLocationProductQuantity: {
                     select: {
@@ -1992,7 +2004,8 @@ export const updateScannedItem = async (
                   scansByLocation.get(locKey) ?? new Map<number, number>();
                 counts.set(
                   scan.cut_list_id,
-                  (counts.get(scan.cut_list_id) ?? 0) + 1,
+                  (counts.get(scan.cut_list_id) ?? 0) +
+                    Math.max(1, Number(scan.qty ?? 1)),
                 );
                 scansByLocation.set(locKey, counts);
               }
@@ -2257,7 +2270,7 @@ export const updateScannedItem = async (
                 candidate.cutListMachineMapping.reduce(
                   (quantity, mapping) =>
                     mapping.cut_list_id === cut_list_id
-                      ? quantity + 1
+                      ? quantity + Math.max(1, Number(mapping.qty ?? 1))
                       : quantity,
                   0,
                 );

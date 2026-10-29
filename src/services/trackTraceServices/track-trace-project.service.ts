@@ -1570,6 +1570,7 @@ export const createProjectService_old = async (
           cutListId,
           machine,
           quantity,
+          singleQuantityMapping = false,
           perItemWeight,
           ruleId,
         }: {
@@ -1580,10 +1581,12 @@ export const createProjectService_old = async (
             sequence_no: number | null;
           };
           quantity: number;
+          singleQuantityMapping?: boolean;
           perItemWeight: number;
           ruleId?: number | null;
         }) => {
-          for (let i = 0; i < quantity; i++) {
+          const mappingCount = singleQuantityMapping ? 1 : quantity;
+          for (let i = 0; i < mappingCount; i++) {
             cutListMachineMappingRows.push({
               cut_list_id: cutListId,
               machine_id: machine.id,
@@ -1594,6 +1597,7 @@ export const createProjectService_old = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              qty: singleQuantityMapping ? quantity : 1,
               rule_id: ruleId ?? null,
               /*
               |--------------------------------------------------------------------------
@@ -1737,6 +1741,7 @@ export const createProjectService_old = async (
                 cutListId: row.id,
                 machine: scanMachine,
                 quantity,
+                singleQuantityMapping: true,
                 perItemWeight,
               });
             }
@@ -1746,6 +1751,7 @@ export const createProjectService_old = async (
                 cutListId: row.id,
                 machine: packMachine,
                 quantity,
+                singleQuantityMapping: true,
                 perItemWeight,
               });
             }
@@ -2633,6 +2639,7 @@ export const createProjectService = async (
           cutListId,
           machine,
           quantity,
+          singleQuantityMapping = false,
           perItemWeight,
           ruleId,
         }: {
@@ -2643,10 +2650,12 @@ export const createProjectService = async (
             sequence_no: number | null;
           };
           quantity: number;
+          singleQuantityMapping?: boolean;
           perItemWeight: number;
           ruleId?: number | null;
         }) => {
-          for (let i = 0; i < quantity; i++) {
+          const mappingCount = singleQuantityMapping ? 1 : quantity;
+          for (let i = 0; i < mappingCount; i++) {
             cutListMachineMappingRows.push({
               cut_list_id: cutListId,
               machine_id: machine.id,
@@ -2657,6 +2666,7 @@ export const createProjectService = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              qty: singleQuantityMapping ? quantity : 1,
               rule_id: ruleId ?? null,
               /*
               |--------------------------------------------------------------------------
@@ -2844,6 +2854,7 @@ export const createProjectService = async (
                   cutListId: row.id,
                   machine: scanMachine,
                   quantity,
+                  singleQuantityMapping: true,
                   perItemWeight,
                 });
               }
@@ -2857,6 +2868,7 @@ export const createProjectService = async (
                     cutListId: row.id,
                     machine: packMachine,
                     quantity,
+                    singleQuantityMapping: true,
                     perItemWeight,
                   });
                 }
