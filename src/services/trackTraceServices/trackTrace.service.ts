@@ -4449,6 +4449,7 @@ export const getCutListMachine = async (
         select: {
           id: true,
           machine_id: true,
+          qty: true,
           sequence_no: true,
           actual_in_at: true,
           actual_out_at: true,
@@ -4503,7 +4504,6 @@ export const getCutListMachine = async (
       };
     }
 
-    
     // Populate machine assignment and scan status from mappings
     for (const mapping of cutListMachineMapping as any[]) {
       const machineCode = machineCodeById.get(mapping.machine_id);
@@ -4518,33 +4518,34 @@ export const getCutListMachine = async (
       const existingCell = row[machineCode];
       const prevScannedCount = existingCell?.scanned_count || 0;
       const prevTotal = existingCell?.total_mappings || 0;
+      // Scan-and-pack items are stored as one mapping per piece. Manual/hardware
+      // items are stored as one mapping per machine with their quantity on the
+      // mapping row, so both representations must contribute their quantity.
+      const mappingQty = Math.max(1, Number(mapping.qty ?? 1));
+
+      const cutListQty = Math.max(1, Number(cutList.qty) || 1);
+      const newScanned = prevScannedCount + (isScanned ? mappingQty : 0);
+      const newTotal = prevTotal + mappingQty;
+
+      // Prefer the packed / scanned mapping row for metadata (mapping_id, box_id, scanned_at)
+      const preferMapping =
+        isScanned ||
+        existingCell?.mapping_id == null ||
+        (!existingCell?.box_id && mapping.box_id != null);
 
       row[machineCode] = {
         assigned: true,
         machineId: mapping.machine_id,
-        mapping_id: existingCell?.mapping_id ?? mapping.id,
+        mapping_id: preferMapping ? mapping.id : existingCell?.mapping_id,
         machine_type_id: existingCell?.machine_type_id ?? null,
-        scanned: prevScannedCount + (isScanned ? 1 : 0),
-        total: prevTotal + 1,
-        scanned_count: prevScannedCount + (isScanned ? 1 : 0),
-        total_mappings: prevTotal + 1,
-        scanned_at: existingCell?.scanned_at || mapping.actual_in_at,
-        box_id: existingCell?.box_id || mapping.box_id,
+        scanned: Math.min(cutListQty, newScanned),
+        total: Math.min(cutListQty, newTotal),
+        scanned_count: Math.min(cutListQty, newScanned),
+        total_mappings: Math.min(cutListQty, newTotal),
+        scanned_at: preferMapping ? (mapping.actual_in_at || existingCell?.scanned_at) : existingCell?.scanned_at,
+        box_id: mapping.box_id || existingCell?.box_id,
       };
     }
-
-    // Mark assigned machines. There is one mapping per piece, so also count
-    // how many pieces have been scanned at each machine.
-    cutList.cutListMachineMapping.forEach((mapping) => {
-      const code = mapping.machine?.machine_code;
-      if (!code) return;
-      const cell = row[code]?.assigned
-        ? row[code]
-        : { assigned: true, machineId: mapping.machine.id, total: 0, scanned: 0 };
-      cell.total += 1;
-      if (mapping.actual_in_at || mapping.actual_out_at) cell.scanned += 1;
-      row[code] = cell;
-    });
 
     return row;
   });
@@ -4682,6 +4683,8 @@ export const assignMachine = async (payload: CutListSavePayload) => {
           id: true,
           qty: true,
           lead_id: true,
+          scan_pack_validate: true,
+          category: { select: { scan_pack_validate: true } },
         },
       });
 
@@ -4730,13 +4733,22 @@ export const assignMachine = async (payload: CutListSavePayload) => {
         status: string;
         created_by: number;
         expected_in: boolean;
+        qty: number;
       }[] = [];
 
       for (const cutListRow of newCutListRows) {
         const qty = Number(cutListRow.qty) || 1;
         const lead_id = Number(cutListRow.lead_id) || null;
+        const isManualItem =
+          cutListRow.scan_pack_validate === false ||
+          (cutListRow.scan_pack_validate == null &&
+            cutListRow.category?.scan_pack_validate === false);
 
-        for (let i = 0; i < qty; i++) {
+        // Scan-and-pack items are represented one row per piece. Hardware and
+        // other manual items use one mapping row per machine and carry their
+        // full quantity on that row.
+        const mappingCount = isManualItem ? 1 : qty;
+        for (let i = 0; i < mappingCount; i++) {
           mappingData.push({
             cut_list_id: cutListRow.id,
             machine_id: payload.machine_id,
@@ -4747,6 +4759,7 @@ export const assignMachine = async (payload: CutListSavePayload) => {
             status: "Pending",
             created_by: Number(payload.created_by),
             expected_in: true,
+            qty: isManualItem ? qty : 1,
           });
         }
       }
@@ -5106,7 +5119,25 @@ export const updateCutListQty = async (payload: UpdateCutListQtyPayload) => {
         mappingsByMachine.set(mapping.machine_id, list);
       }
 
-      if (newQty < oldQty) {
+      // Manual/hardware items use one mapping row per machine. Keep the first
+      // row, move the full quantity onto it, and remove legacy per-piece rows.
+      if (!isCurrentScanAndPack) {
+        for (const machineRows of mappingsByMachine.values()) {
+          const [first, ...legacyRows] = machineRows;
+          if (!first) continue;
+
+          await tx.cutListMachineMapping.update({
+            where: { id: first.id },
+            data: { qty: newQty },
+          });
+
+          if (legacyRows.length > 0) {
+            await tx.cutListMachineMapping.deleteMany({
+              where: { id: { in: legacyRows.map((row) => row.id) } },
+            });
+          }
+        }
+      } else if (newQty < oldQty) {
         const idsToDelete: number[] = [];
         for (const machineRows of mappingsByMachine.values()) {
           idsToDelete.push(...machineRows.slice(newQty).map((r) => r.id));
@@ -5133,6 +5164,7 @@ export const updateCutListQty = async (payload: UpdateCutListQtyPayload) => {
               status: "Pending",
               created_by: cutListItem.created_by,
               expected_in: true,
+                qty: 1,
               rule_id: template.rule_id,
               weight: template.weight,
             });
@@ -6819,12 +6851,27 @@ export const getTraceTraceDashboard = async (
       const firstMachineStatus = machineStatuses[0];
       const lastMachineStatus = machineStatuses[machineStatuses.length - 1];
 
-      const total_panels = Math.max(
-        firstMachineStatus?.assigned ?? 0,
-        lastMachineStatus?.total ?? 0,
+      // Physical panels count (excluding loose manual hardware items)
+      const normalCutLists = cutLists.filter(
+        (c) => c.project_id === project.id && !manualCutListIdSet.has(c.id),
       );
+      const normalPanelsCount = normalCutLists.reduce(
+        (sum, c) => sum + Math.max(0, Number(c.qty || 0)),
+        0,
+      );
+      const total_panels =
+        normalPanelsCount || (firstMachineStatus?.assigned ?? 0);
 
-      const panels_scanned = lastMachineStatus?.scanned ?? 0;
+      // Panels packed at final packaging station
+      const panels_scanned = normalCutLists.reduce((sum, c) => {
+        const itemRows = rowsByProjectCutList.get(projectCutListKey(project.id, c.id)) ?? [];
+        const isPacked = itemRows.some(
+          (r) =>
+            (r.box_id !== null || r.actual_in_at !== null) &&
+            machines.find((mac) => mac.id === r.machine_id)?.machine_type_id === 18,
+        );
+        return sum + (isPacked ? Math.max(0, Number(c.qty || 0)) : 0);
+      }, 0);
 
       return {
         project_id: project.id,
@@ -15093,6 +15140,42 @@ export const addManualPackingItemService = async (
               in_operator: true,
             },
           });
+        }
+
+        /*
+          |--------------------------------------------------------------------------
+          | Deduct packed quantity from any pending placeholder mappings (box_id: null)
+          | to avoid duplicate unassigned rows in CutListMachineMapping
+          |--------------------------------------------------------------------------
+          */
+        let remainingToDeduct = qty;
+        const placeholderRows = await tx.cutListMachineMapping.findMany({
+          where: {
+            cut_list_id,
+            project_id,
+            vendor_id,
+            machine_id: packagingMachine.id,
+            box_id: null,
+          },
+          orderBy: { id: "asc" },
+        });
+
+        for (const placeholder of placeholderRows) {
+          if (remainingToDeduct <= 0) break;
+          const pQty = Math.max(1, Number(placeholder.qty || 1));
+          if (pQty <= remainingToDeduct) {
+            remainingToDeduct -= pQty;
+            await tx.cutListMachineMapping.delete({
+              where: { id: placeholder.id },
+            });
+          } else {
+            await tx.cutListMachineMapping.update({
+              where: { id: placeholder.id },
+              data: { qty: pQty - remainingToDeduct },
+            });
+            remainingToDeduct = 0;
+            break;
+          }
         }
 
         /*

@@ -1711,12 +1711,45 @@ export const createProjectService_old = async (
 
           const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
 
+          const isManualHardwareItem =
+            scanPackByCategory?.get(itemCategoryName) === false;
+
           /*
           |--------------------------------------------------------------------------
-          | Type 4 — Skip machine mapping
+          | Type 4 — Skip non-packaging mappings
           |--------------------------------------------------------------------------
           */
           if (hasType4) {
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Manual Hardware items — Route to QC Station (17) and Packaging (18) only
+          |--------------------------------------------------------------------------
+          */
+          if (isManualHardwareItem) {
+            const scanMachine = getMachine(17, true);
+            const packMachine = getMachine(18, true);
+
+            if (scanMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: scanMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
+
+            if (packMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: packMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
+
             continue;
           }
 
@@ -2771,6 +2804,67 @@ export const createProjectService = async (
             },
           });
 
+          const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
+
+          const hasType4 = categoryTypeIds.includes(4);
+          const hasType3 = categoryTypeIds.includes(3);
+          const hasType1Or2 = categoryTypeIds.some(
+            (typeId) => typeId === 1 || typeId === 2
+          );
+
+          const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
+
+          const isManualHardwareItem =
+            categoryConfig?.scan_pack_validate === false ||
+            row.scan_pack_validate === false;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Type 4 — Skip non-packaging mappings
+          |--------------------------------------------------------------------------
+          */
+          if (hasType4) {
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Hardware / Manual packing items — Route to QC Station and Packaging
+          |--------------------------------------------------------------------------
+          | Items with scan_pack_validate = false are manual hardware/accessories.
+          | They do not pass through panel cutting, edge banding, or CNC machines,
+          | but they route to the QC Station (17) and Packaging Station (18).
+          |--------------------------------------------------------------------------
+          */
+          if (isManualHardwareItem) {
+            if (isScanPackEnabled) {
+              const scanMachine = getMachine(17, true);
+              if (scanMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: scanMachine,
+                  quantity,
+                  perItemWeight,
+                });
+              }
+
+              const shouldPack =
+                !categoryConfig || categoryConfig.include_in_packing !== false;
+              if (shouldPack) {
+                const packMachine = getMachine(18, true);
+                if (packMachine) {
+                  pushMachineMappingRows({
+                    cutListId: row.id,
+                    machine: packMachine,
+                    quantity,
+                    perItemWeight,
+                  });
+                }
+              }
+            }
+            continue;
+          }
+
           if (assignWoodworkRules) {
             const assignments = assignWoodworkRules({
               ...row,
@@ -2792,37 +2886,7 @@ export const createProjectService = async (
             continue;
           }
 
-          const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
-
-          const hasType4 = categoryTypeIds.includes(4);
-          const hasType3 = categoryTypeIds.includes(3);
-          const hasType1Or2 = categoryTypeIds.some(
-            (typeId) => typeId === 1 || typeId === 2
-          );
-
-          const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
-
-          /*
-          |--------------------------------------------------------------------------
-          | Existing categoryTypeIds logic for non-packaging machines only
-          |--------------------------------------------------------------------------
-          | IMPORTANT:
-          | machine type 18 is NOT controlled by categoryTypeIds.
-          |
-          | Type 4:
-          |   skip non-packaging mappings only.
-          |   Packaging type 18 is still evaluated separately below.
-          |
-          | Type 3:
-          |   machine 17 only when Scan & Pack is enabled.
-          |
-          | Normal:
-          |   T&T machines only when Track & Trace is enabled.
-          |   machine 17 only when Scan & Pack is enabled.
-          |--------------------------------------------------------------------------
-          */
-
-          if (targetFabrication === FabricationType.WOODWORK && !hasType4) {
+          if (targetFabrication === FabricationType.WOODWORK) {
             /*
             |--------------------------------------------------------------------------
             | Type 3 — Scan validation machine 17 only
@@ -4253,81 +4317,101 @@ export const previewCutlistMachineMappingService = async (
       const categoryConfig = categoryMasterMap.get(itemCategoryName) ?? null;
       const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
 
+      const isManualHardwareItem =
+        categoryConfig?.scan_pack_validate === false ||
+        item.scan_pack_validate === false;
+
+      const hasType4 = categoryTypeIds.includes(4);
+
       const shouldInsertPackagingMachineMapping =
         !categoryConfig ||
         (categoryConfig.include_in_packing === true &&
           categoryConfig.scan_pack_validate === true);
 
-      if (assignWoodworkRules) {
-        try {
-          const assignments = assignWoodworkRules({
-            ...item,
-            length: Number(item.length || item.l1 || 0),
-            width: Number(item.width || item.l2 || 0),
-            thickness: Number(item.thickness || item.l3 || 0),
-            unique_code: item.unique_code || item.barcode1 || "",
-            weight: Number(item.weight || 0),
-            has_edge_banding: hasEdgeBanding,
-            category_name: item.category_name || item.categoryName || "",
-            category_id: categoryConfig?.id ?? null,
-            item_name: item.item_name || item.name || "",
-            group_name: item.group_name || item.groupName || "",
-            material_details: item.material_details || item.articleCode || "",
-          });
-          for (const assignment of assignments) {
-            if (assignment?.machine?.id) {
-              assignedMachineIds.add(assignment.machine.id);
-            }
-          }
-        } catch (ruleErr: any) {
-          logger.warn("preview rule evaluation error for item", {
-            rowIndex,
-            error: ruleErr.message,
-          });
-        }
-      } else {
-        const hasType4 = categoryTypeIds.includes(4);
-        const hasType3 = categoryTypeIds.includes(3);
-        const hasType1Or2 = categoryTypeIds.some(
-          (typeId) => typeId === 1 || typeId === 2
-        );
-        const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
+      if (hasType4) {
+        // Type 4: Skip non-packaging mappings (packaging checked below)
+      } else if (isManualHardwareItem) {
+        // Hardware items: auto-route to QC Station (17) and Packaging (18)
+        if (isScanPackEnabled) {
+          const scanMachine = getMachine(17);
+          if (scanMachine) assignedMachineIds.add(scanMachine.id);
 
-        if (targetFabrication === FabricationType.WOODWORK && !hasType4) {
-          if (hasType3 && !isNormalFlow) {
-            if (isScanPackEnabled) {
-              const scanMachine = getMachine(17);
-              if (scanMachine) assignedMachineIds.add(scanMachine.id);
-            }
-          } else {
-            if (isTrackTraceEnabled) {
-              if (hasEdgeBanding) {
-                const edgeBandingMachine = getMachine(11);
-                if (edgeBandingMachine) assignedMachineIds.add(edgeBandingMachine.id);
-              }
-
-              const cuttingMachine = getMachine(3);
-              if (cuttingMachine) assignedMachineIds.add(cuttingMachine.id);
-
-              const thickness = Number(item.thickness || item.l3 || 0);
-              if (thickness > 9) {
-                const cncMachine = getMachine(7);
-                if (cncMachine) assignedMachineIds.add(cncMachine.id);
-              }
-            }
-
-            if (isScanPackEnabled) {
-              const scanMachine = getMachine(17);
-              if (scanMachine) assignedMachineIds.add(scanMachine.id);
-            }
+          const shouldPack =
+            !categoryConfig || categoryConfig.include_in_packing !== false;
+          if (shouldPack) {
+            const packMachine = getMachine(18);
+            if (packMachine) assignedMachineIds.add(packMachine.id);
           }
         }
+      } else if (assignWoodworkRules) {
+          try {
+            const assignments = assignWoodworkRules({
+              ...item,
+              length: Number(item.length || item.l1 || 0),
+              width: Number(item.width || item.l2 || 0),
+              thickness: Number(item.thickness || item.l3 || 0),
+              unique_code: item.unique_code || item.barcode1 || "",
+              weight: Number(item.weight || 0),
+              has_edge_banding: hasEdgeBanding,
+              category_name: item.category_name || item.categoryName || "",
+              category_id: categoryConfig?.id ?? null,
+              item_name: item.item_name || item.name || "",
+              group_name: item.group_name || item.groupName || "",
+              material_details: item.material_details || item.articleCode || "",
+            });
+            for (const assignment of assignments) {
+              if (assignment?.machine?.id) {
+                assignedMachineIds.add(assignment.machine.id);
+              }
+            }
+          } catch (ruleErr: any) {
+            logger.warn("preview rule evaluation error for item", {
+              rowIndex,
+              error: ruleErr.message,
+            });
+          }
+        } else {
+          const hasType3 = categoryTypeIds.includes(3);
+          const hasType1Or2 = categoryTypeIds.some(
+            (typeId) => typeId === 1 || typeId === 2
+          );
+          const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
 
-        if (isScanPackEnabled && shouldInsertPackagingMachineMapping) {
-          const packMachine = getMachine(18);
-          if (packMachine) assignedMachineIds.add(packMachine.id);
+          if (targetFabrication === FabricationType.WOODWORK) {
+            if (hasType3 && !isNormalFlow) {
+              if (isScanPackEnabled) {
+                const scanMachine = getMachine(17);
+                if (scanMachine) assignedMachineIds.add(scanMachine.id);
+              }
+            } else {
+              if (isTrackTraceEnabled) {
+                if (hasEdgeBanding) {
+                  const edgeBandingMachine = getMachine(11);
+                  if (edgeBandingMachine) assignedMachineIds.add(edgeBandingMachine.id);
+                }
+
+                const cuttingMachine = getMachine(3);
+                if (cuttingMachine) assignedMachineIds.add(cuttingMachine.id);
+
+                const thickness = Number(item.thickness || item.l3 || 0);
+                if (thickness > 9) {
+                  const cncMachine = getMachine(7);
+                  if (cncMachine) assignedMachineIds.add(cncMachine.id);
+                }
+              }
+
+              if (isScanPackEnabled) {
+                const scanMachine = getMachine(17);
+                if (scanMachine) assignedMachineIds.add(scanMachine.id);
+              }
+            }
+          }
+
+          if (isScanPackEnabled && shouldInsertPackagingMachineMapping) {
+            const packMachine = getMachine(18);
+            if (packMachine) assignedMachineIds.add(packMachine.id);
+          }
         }
-      }
 
       const machineAssignments: Record<string, boolean> = {};
       const assignedMachineCodes: string[] = [];
