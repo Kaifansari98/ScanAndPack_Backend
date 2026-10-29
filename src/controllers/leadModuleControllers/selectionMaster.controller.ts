@@ -26,6 +26,7 @@ import {
   createHardwareType,
   getHardwareItems,
   createHardwareItem,
+  createHardwareItems,
   getAllHardwareItemsForVendor,
   getHardwareItemOptions,
   createHardwareItemOption,
@@ -429,7 +430,29 @@ export const fetchAllHardwareItemsForVendor = async (
 
 export const addHardwareItem = async (req: Request, res: Response) => {
   try {
-    const { hardware_type_id, name, inScope } = req.body;
+    const { hardware_type_id, hardware_type_ids, name, inScope } = req.body;
+
+    // Several hardware types: the same item is created once under each of them.
+    if (Array.isArray(hardware_type_ids)) {
+      const ids = hardware_type_ids.map(Number);
+      if (
+        !name ||
+        ids.length === 0 ||
+        !ids.every((id) => Number.isSafeInteger(id) && id > 0)
+      ) {
+        return res.status(400).json({
+          success: false,
+          error: "hardware_type_ids and name are required",
+        });
+      }
+
+      const hardwareItems = await createHardwareItems(
+        ids,
+        name,
+        inScope !== false,
+      );
+      return res.status(201).json({ success: true, data: hardwareItems });
+    }
 
     if (!hardware_type_id || !name) {
       return res.status(400).json({

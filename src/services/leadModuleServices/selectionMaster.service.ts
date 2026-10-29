@@ -663,6 +663,36 @@ export const createHardwareItem = async (
   return hardwareItem as HardwareItem;
 };
 
+/** Creates the same hardware item under several hardware types at once (all or nothing). */
+export const createHardwareItems = async (
+  hardware_type_ids: number[],
+  name: string,
+  inScope: boolean,
+): Promise<HardwareItem[]> => {
+  const ids = [...new Set(hardware_type_ids)];
+  const hardwareTypes = await prisma.hardwareTypeMaster.findMany({
+    where: { id: { in: ids } },
+    select: { id: true, vendor_id: true },
+  });
+
+  if (
+    hardwareTypes.length !== ids.length ||
+    new Set(hardwareTypes.map((t) => t.vendor_id)).size !== 1
+  ) {
+    throw new Error("Invalid hardware_type_ids");
+  }
+
+  const hardwareItems = await prisma.$transaction(
+    ids.map((hardware_type_id) =>
+      prisma.hardwareItemMaster.create({
+        data: { hardware_type_id, name, inScope },
+      }),
+    ),
+  );
+
+  return hardwareItems as HardwareItem[];
+};
+
 export const getAllHardwareItemsForVendor = async (
   vendor_id: number,
 ): Promise<HardwareItem[]> => {
