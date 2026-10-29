@@ -748,6 +748,43 @@ export const createHardwareItemOption = async (
   return optionEntry as HardwareItemOption;
 };
 
+/** Adds the same option to several hardware items at once (all or nothing). */
+export const createHardwareItemOptions = async (
+  hardware_item_ids: number[],
+  name: string,
+): Promise<HardwareItemOption[]> => {
+  const ids = [...new Set(hardware_item_ids)];
+  const hardwareItems = await prisma.hardwareItemMaster.findMany({
+    where: { id: { in: ids } },
+    select: {
+      id: true,
+      hardware_type_id: true,
+      hardwareType: { select: { vendor_id: true } },
+    },
+  });
+
+  if (
+    hardwareItems.length !== ids.length ||
+    new Set(hardwareItems.map((item) => item.hardwareType.vendor_id)).size !== 1
+  ) {
+    throw new Error("Invalid hardware_item_ids");
+  }
+
+  const options = await prisma.$transaction(
+    hardwareItems.map((item) =>
+      prisma.hardwareItemOptionMaster.create({
+        data: {
+          hardware_type_id: item.hardware_type_id,
+          hardware_item_id: item.id,
+          name,
+        },
+      }),
+    ),
+  );
+
+  return options as HardwareItemOption[];
+};
+
 export const getAllHardwareItemOptionsForVendor = async (
   vendor_id: number,
 ): Promise<HardwareItemOption[]> => {

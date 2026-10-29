@@ -30,6 +30,7 @@ import {
   getAllHardwareItemsForVendor,
   getHardwareItemOptions,
   createHardwareItemOption,
+  createHardwareItemOptions,
   getAllHardwareItemOptionsForVendor,
   bulkUploadHardwareItemOptions,
   getAllLightCarcasTypes,
@@ -515,7 +516,26 @@ export const addHardwareItemOption = async (
   res: Response,
 ) => {
   try {
-    const { hardware_type_id, hardware_item_id, name } = req.body;
+    const { hardware_type_id, hardware_item_id, hardware_item_ids, name } =
+      req.body;
+
+    // Several hardware items: the option is added to each (its type comes from the item).
+    if (Array.isArray(hardware_item_ids)) {
+      const ids = hardware_item_ids.map(Number);
+      if (
+        !name ||
+        ids.length === 0 ||
+        !ids.every((id) => Number.isSafeInteger(id) && id > 0)
+      ) {
+        return res.status(400).json({
+          success: false,
+          error: "hardware_item_ids and name are required",
+        });
+      }
+
+      const options = await createHardwareItemOptions(ids, name);
+      return res.status(201).json({ success: true, data: options });
+    }
 
     if (!hardware_type_id || !hardware_item_id || !name) {
       return res.status(400).json({
